@@ -89,7 +89,9 @@ La relazione tra unione, intersezione e insieme complementare è data dalle legg
 
 $$
 (A \cup B)^c = A^c \cap B^c,
-$$ $$
+$$ 
+
+$$
 (A \cap B)^c = A^c \cup B^c.
 $$
 
