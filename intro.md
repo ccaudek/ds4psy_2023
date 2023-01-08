@@ -1,10 +1,16 @@
-# Benvenuti
+<div align="center">
 
-Questo è il sito web per "Data Science per psicologi". Viene qui presentato il materiale delle lezioni dell'insegnamento di _Psicometria B000286_ (A.A. 2022/2023) rivolto agli studenti del primo anno del Corso di Laurea in Scienze e Tecniche Psicologiche dell'Università degli Studi di Firenze. Lo scopo di questo insegnamento è quello di fornire agli studenti un'introduzione all'analisi dei dati psicologici. Le conoscenze/competenze che verranno sviluppate in questo insegnamento sono quelle della _Data Science_ applicata alla psicologia, ovvero, un insieme di conoscenze/competenze che si pongono all'intersezione tra psicologia, statistica e informatica.
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/ccaudek/ds4psy_2023">![GitHub last update](https://img.shields.io/github/last-commit/ccaudek/ds4psy_2023?color=blue&label=last%20update)</a>
+
+</div>
+
+# Benvenuti
 
 ```{admonition} Work in Progress
 Coming Soon – Sito in costruzione
 ```
+
+Questo è il sito web per "Data Science per psicologi". Viene qui presentato il materiale didattico dell'insegnamento di _Psicometria_ (A.A. 2022/2023) rivolto agli studenti del primo anno del Corso di Laurea in Scienze e Tecniche Psicologiche dell'Università degli Studi di Firenze.
 
 ## License
 
