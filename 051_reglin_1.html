@@ -1,0 +1,840 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduzione &#8212; ds4psy</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regressione lineare bivariata" href="052_reglin_2.html" />
+    <link rel="prev" title="Inferenza su una media" href="050_normal_normal_mod.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4psy</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Benvenuti
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nozioni di base
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="001_key_notions.html">
+   Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="005_measurement.html">
+   La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="007_freq_distr.html">
+   Analisi esplorativa dei dati
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="011_loc_scale.html">
+   Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="012_correlation.html">
+   Le relazioni tra variabili
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="013_eda_quickstart.html">
+   Introduzione alla data analisi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="014_dice.html">
+   Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_intro_prob.html">
+   La logica dell’incerto
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="016_conditional_prob.html">
+   Probabilità condizionata: significato, teoremi, eventi indipendenti
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="017_bayes_theorem.html">
+   Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="018_expval_var.html">
+   Indici di posizione, di varianza e di associazione di variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="019_joint_prob.html">
+   Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="020_density_func.html">
+   La densità di probabilità
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="022_discr_rv_distr.html">
+   Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="023_cont_rv_distr.html">
+   Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="024_likelihood.html">
+   La verosimiglianza
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_intro_bayes.html">
+   Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="026_subj_prop.html">
+   Pensare ad una proporzione in termini soggettivi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="029_conjugate_families.html">
+   Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="030_balance_prior_post.html">
+   L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="036_metropolis.html">
+   Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="040_beta_binomial.html">
+   Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="041_mcmc_diagnostics.html">
+   Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="045_summarize_posterior.html">
+   Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="046_bayesian_prediction.html">
+   La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="050_normal_normal_mod.html">
+   Inferenza su una media
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="052_reglin_2.html">
+   Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="053_reglin_3.html">
+   Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="054_reglin_4.html">
+   Confronto tra le medie di due gruppi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="220_intro_frequentist.html">
+   Legge dei grandi numeri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="221_conf_interv.html">
+   Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="226_test_ipotesi.html">
+   Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="228_limiti_stat_frequentista.html">
+   Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="230_s_m_errors.html">
+   Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a03_set_theory.html">
+   Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus_notation.html">
+   Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F051_reglin_1.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/051_reglin_1.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#la-funzione-lineare">
+   La funzione lineare
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#una-media-per-ciascuna-osservazione">
+   Una media per ciascuna osservazione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relazione-lineare-tra-la-media-y-mid-x-e-il-predittore">
+   Relazione lineare tra la media
+   <span class="math notranslate nohighlight">
+    \(y \mid x\)
+   </span>
+   e il predittore
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-modello-lineare">
+   Il modello lineare
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assunzioni">
+     Assunzioni
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduzione</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#la-funzione-lineare">
+   La funzione lineare
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#una-media-per-ciascuna-osservazione">
+   Una media per ciascuna osservazione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relazione-lineare-tra-la-media-y-mid-x-e-il-predittore">
+   Relazione lineare tra la media
+   <span class="math notranslate nohighlight">
+    \(y \mid x\)
+   </span>
+   e il predittore
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-modello-lineare">
+   Il modello lineare
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assunzioni">
+     Assunzioni
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="introduzione">
+<span id="sec-regr-intro"></span><h1>Introduzione<a class="headerlink" href="#introduzione" title="Permalink to this headline">#</a></h1>
+<p>Il fine primario dei ricercatori è quello di scoprire associazioni tra variabili e di fare confronti fra condizioni sperimentali. Nel caso della psicologia, il ricercatore vuole descrivere le relazioni tra i costrutti psicologici e le relazioni tra fenomeni psicologici e non psicologici (sociali, economici, storici, …). Abbiamo già visto come la correlazione di Pearson sia uno strumento adatto a descrivere le relazioni tra variabili. Infatti, la correlazione ci informa sulla direzione e sull’intensità della <em>relazione lineare</em> tra due variabili. Tuttavia, la correlazione non è sufficiente, in quanto il ricercatore ha a disposizione solo i dati di un campione, mentre vorrebbe descrivere la relazione tra le variabili nella popolazione. A causa della variabilità campionaria, le proprietà dei campioni sono necessariamente diverse da quelle della popolazione: ciò che si può osservare nella popolazione potrebbe non emergere nel campione e, al contrario, il campione può manifestare caratteristiche che non sono presenti nella popolazione. È dunque necessario chiarire, dal punto di vista statistico, il legame che intercorre tra le proprietà del campione e le proprietà della popolazione da cui esso è stato estratto. Questo è l’obiettivo del modello di regressione lineare. Tale modello utilizza la funzione matematica più semplice per descrivere la relazione fra due variabili, ovvero la funzione lineare. In questo Capitolo vedremo come il modello di regressione lineare possa essere usato per fare inferenza sulla relazione tra variabili. Inizieremo a descrivere le proprietà geometriche della funzione lineare per poi utilizzare questa semplice funzione per costruire un modello statistico secondo un approccio bayesiano.</p>
+<section id="la-funzione-lineare">
+<h2>La funzione lineare<a class="headerlink" href="#la-funzione-lineare" title="Permalink to this headline">#</a></h2>
+<p>Iniziamo con un ripasso sulla funzione di lineare. Si chiama <em>funzione lineare</em> una funzione del tipo</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = a + b x,
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> sono delle costanti. Il grafico di tale funzione è una retta di cui il parametro <span class="math notranslate nohighlight">\(b\)</span> è detto <em>coefficiente angolare</em> e il parametro <span class="math notranslate nohighlight">\(a\)</span> è detto <em>intercetta</em> con l’asse delle <span class="math notranslate nohighlight">\(y\)</span> [infatti, la retta interseca l’asse <span class="math notranslate nohighlight">\(y\)</span> nel punto <span class="math notranslate nohighlight">\((0,a)\)</span>, se <span class="math notranslate nohighlight">\(b \neq 0\)</span>].</p>
+<p>Per assegnare un’interpretazione geometrica alle costanti <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> si consideri la funzione</p>
+<div class="math notranslate nohighlight">
+\[
+y = b x.
+\]</div>
+<p>Tale funzione rappresenta un caso particolare, ovvero quello della <em>proporzionalità diretta</em> tra <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>. Il caso generale della linearità</p>
+<div class="math notranslate nohighlight">
+\[
+y = a + b x
+\]</div>
+<p>non fa altro che sommare una costante <span class="math notranslate nohighlight">\(a\)</span> a ciascuno dei valori <span class="math notranslate nohighlight">\(y = b x\)</span>. Nella funzione lineare <span class="math notranslate nohighlight">\(y = a + b x\)</span>, se <span class="math notranslate nohighlight">\(b\)</span> è positivo allora <span class="math notranslate nohighlight">\(y\)</span> aumenta al crescere di <span class="math notranslate nohighlight">\(x\)</span>; se <span class="math notranslate nohighlight">\(b\)</span> è negativo <span class="math notranslate nohighlight">\(y\)</span> diminuisce al crescere di <span class="math notranslate nohighlight">\(x\)</span>; se <span class="math notranslate nohighlight">\(b=0\)</span> la retta è orizzontale, ovvero <span class="math notranslate nohighlight">\(y\)</span> non muta al variare di <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Consideriamo ora più in dettaglio il coefficiente <span class="math notranslate nohighlight">\(b\)</span>. Si consideri un punto <span class="math notranslate nohighlight">\(x_0\)</span> e un incremento arbitrario <span class="math notranslate nohighlight">\(\varepsilon\)</span>, come indicato nella &#64;fig-linearfunction. Le differenze <span class="math notranslate nohighlight">\(\Delta x = (x_0 + \varepsilon) - x_0\)</span> e <span class="math notranslate nohighlight">\(\Delta y = f(x_0 + \varepsilon) - f(x_0)\)</span> sono detti <em>incrementi</em> di <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>. Il coefficiente angolare <span class="math notranslate nohighlight">\(b\)</span> è uguale al rapporto</p>
+<div class="math notranslate nohighlight">
+\[
+b = \frac{\Delta y}{\Delta x} = \frac{f(x_0 + \varepsilon) - f(x_0)}{(x_0 + \varepsilon) - x_0},
+\]</div>
+<p>indipendentemente dalla grandezza degli incrementi <span class="math notranslate nohighlight">\(\Delta x\)</span> e <span class="math notranslate nohighlight">\(\Delta y\)</span>. Il modo più semplice per assegnare un’interpretazione geometrica al coefficiente angolare (o pendenza) della retta è quello di porre <span class="math notranslate nohighlight">\(\Delta x = 1\)</span>. In tali circostanze, <span class="math notranslate nohighlight">\(b = \Delta y\)</span>.</p>
+<p><img alt="La funzione lineare ." src="_images/linear_function.png" /></p>
+<p>Possiamo dunque dire che la pendenza <span class="math notranslate nohighlight">\(b\)</span> di un retta è uguale all’incremento <span class="math notranslate nohighlight">\(\Delta y\)</span> associato ad un incremento unitario nella <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</section>
+<section id="una-media-per-ciascuna-osservazione">
+<h2>Una media per ciascuna osservazione<a class="headerlink" href="#una-media-per-ciascuna-osservazione" title="Permalink to this headline">#</a></h2>
+<p>In precedenza abbiamo visto come stimare i parametri di un modello bayesiano nel quale le osservazioni sono indipendenti e identicamente distribuite secondo una densità gaussiana,</p>
+<div class="math notranslate nohighlight" id="equation-eq-normalsamplingmodel">
+<span class="eqno">(74)<a class="headerlink" href="#equation-eq-normalsamplingmodel" title="Permalink to this equation">#</a></span>\[
+Y_i \stackrel{i.i.d.}{\sim} \mathcal{N}(\mu, \sigma), \quad i = 1, \dots, n.
+\]</div>
+<p>Il modello dell’eq. <a class="reference internal" href="#equation-eq-normalsamplingmodel">(74)</a> assume che ogni <span class="math notranslate nohighlight">\(Y_i\)</span> sia la realizzazione di una v.c. distribuita come <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma^2)\)</span>. Da un punto di vista bayesiano, questo modello può essere implementato assegnando delle distribuzioni a priori ai parametri <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> e generando la verosimiglianza in base ai dati osservati.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Y_i \mid \mu, \sigma &amp; \stackrel{iid}{\sim} \mathcal{N}(\mu, \sigma^2)\notag\\
+\mu    &amp; \sim \mathcal{N}(\mu_0, \tau^2) \notag\\
+\sigma &amp; \sim \mbox{Cauchy}(x_0, \gamma) \notag
+\end{align}
+\end{split}\]</div>
+<p>Con queste informazioni, possono poi essere trovate le distribuzioni a posteriori dei parametri <span id="id1">[<a class="reference internal" href="z_biblio.html#id71" title="Andrew Gelman, Jennifer Hill, and Aki Vehtari. Regression and other stories. Cambridge University Press, 2020.">GHV20</a>]</span>. Vediamo ora come sia possibile estendere questo modello bayesiano in modo che possa descrivere la relazione <em>lineare</em> tra due variabili.</p>
+</section>
+<section id="relazione-lineare-tra-la-media-y-mid-x-e-il-predittore">
+<h2>Relazione lineare tra la media <span class="math notranslate nohighlight">\(y \mid x\)</span> e il predittore<a class="headerlink" href="#relazione-lineare-tra-la-media-y-mid-x-e-il-predittore" title="Permalink to this headline">#</a></h2>
+<p>Il ricercatore si trova spesso nella condizione in cui osserva altre variabili di interesse associate a ciascuna risposta <span class="math notranslate nohighlight">\(y_i\)</span>. Chiamiamo <span class="math notranslate nohighlight">\(x\)</span> una di tali variabili. Nel contesto del modello di regressione, la variabile <span class="math notranslate nohighlight">\(x\)</span> viene chiamata <em>predittore</em> (o <em>variabile indipendente</em>), in quanto il ricercatore è tipicamente interessato a predire <span class="math notranslate nohighlight">\(y_i\)</span> a partire dal valore assunto da <span class="math notranslate nohighlight">\(x_i\)</span>. Chiediamoci dunque come si può estende il modello dell’eq. <a class="reference internal" href="#equation-eq-normalsamplingmodel">(74)</a> per lo studio della relazione tra <span class="math notranslate nohighlight">\(y_i\)</span> e <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>L’eq. <a class="reference internal" href="#equation-eq-normalsamplingmodel">(74)</a> assume una media <span class="math notranslate nohighlight">\(\mu\)</span> comune per tutte le osservazioni <span class="math notranslate nohighlight">\(Y_i\)</span>. Dal momento che desideriamo introdurre una nuova variabile <span class="math notranslate nohighlight">\(x_i\)</span> che assume un diverso valore per ciascuna osservazione <span class="math notranslate nohighlight">\(y_i\)</span>, l’eq. <a class="reference internal" href="#equation-eq-normalsamplingmodel">(74)</a> può essere modificata così da sostituire alla media comune <span class="math notranslate nohighlight">\(\mu\)</span> una media <span class="math notranslate nohighlight">\(\mu_i\)</span> specifica a ciascuna <span class="math notranslate nohighlight">\(i\)</span>-esima osservazione:</p>
+<div class="math notranslate nohighlight" id="equation-eq-normalsamplinglinearmodel">
+<span class="eqno">(75)<a class="headerlink" href="#equation-eq-normalsamplinglinearmodel" title="Permalink to this equation">#</a></span>\[
+Y_i \mid \mu_i, \sigma \stackrel{ind}{\sim} \mathcal{N}(\mu_i, \sigma), \quad i = 1, \dots, n.
+\]</div>
+<p>Si noti che le osservazioni <span class="math notranslate nohighlight">\(Y_1, \dots, Y_n\)</span> non sono più <em>identicamente distribuite</em> poiché hanno medie diverse, ma sono ancora indipendenti come indicato dalla notazione <code class="docutils literal notranslate"><span class="pre">ind</span></code> posta sopra il simbolo <span class="math notranslate nohighlight">\(\sim\)</span> nell’eq. <a class="reference internal" href="#equation-eq-normalsamplinglinearmodel">(75)</a>.</p>
+<p>L’eq. <a class="reference internal" href="#equation-eq-normalsamplinglinearmodel">(75)</a> afferma che ciascuna osservazione <span class="math notranslate nohighlight">\(Y_i\)</span> è estratta a caso dalla corrispondente distribuzione <span class="math notranslate nohighlight">\(\mathcal{N}(\mu_i, \sigma)\)</span>. Al fine di potere descrivere la relazione tra il predittore <span class="math notranslate nohighlight">\(x_i\)</span> e la risposta <span class="math notranslate nohighlight">\(Y_i\)</span>, il modello di regressione assume che la media della distribuzione da cui abbiamo estratto <span class="math notranslate nohighlight">\(Y_i\)</span>, ovvero <span class="math notranslate nohighlight">\(\mu_i\)</span>, sia una funzione lineare del predittore <span class="math notranslate nohighlight">\(x_i\)</span>, ovvero</p>
+<div class="math notranslate nohighlight" id="equation-eq-regmodel">
+<span class="eqno">(76)<a class="headerlink" href="#equation-eq-regmodel" title="Permalink to this equation">#</a></span>\[
+\mu_i = \beta_0 + \beta_ 1 x_i, \quad i = 1, \dots, n.
+\]</div>
+<p>Nell’eq. <a class="reference internal" href="#equation-eq-regmodel">(76)</a>, ciascuna <span class="math notranslate nohighlight">\(x_i\)</span> è una costante nota (ecco perché viene usata una lettera minuscola per la <span class="math notranslate nohighlight">\(x\)</span>) e <span class="math notranslate nohighlight">\(\beta_0\)</span> e <span class="math notranslate nohighlight">\(\beta_ 1\)</span> sono parametri incogniti. Questi parametri rappresentano l’intercetta e la pendenza della retta di regressione e sono delle variabili casuali.<a class="footnote-reference brackets" href="#reglin1-1" id="id2">1</a> L’inferenza bayesiana procede assegnando una distribuzione a priori a <span class="math notranslate nohighlight">\(\beta_0\)</span> e a <span class="math notranslate nohighlight">\(\beta_1\)</span>, trovando la verosimiglianza dei dati e calcolando la distribuzione a priori dei parametri <span class="math notranslate nohighlight">\(\beta_0\)</span> e a <span class="math notranslate nohighlight">\(\beta_1\)</span>.</p>
+<p>Nel modello dell’eq. <a class="reference internal" href="#equation-eq-regmodel">(76)</a>, la funzione lineare <span class="math notranslate nohighlight">\(\beta_0 + \beta_1 x_i\)</span> è interpretata come il valore atteso della <span class="math notranslate nohighlight">\(Y_i\)</span> per ciascun valore <span class="math notranslate nohighlight">\(x_i\)</span>. L’intercetta <span class="math notranslate nohighlight">\(\beta_0\)</span> rappresenta il valore atteso della <span class="math notranslate nohighlight">\(Y_i\)</span> quando <span class="math notranslate nohighlight">\(x_i = 0\)</span>. La pendenza <span class="math notranslate nohighlight">\(\beta_1\)</span> rappresenta l’incremento atteso della <span class="math notranslate nohighlight">\(Y_i\)</span> quando <span class="math notranslate nohighlight">\(x_i\)</span> aumenta di un’unità.</p>
+<p>È importante notare che la relazione lineare dell’eq. <a class="reference internal" href="#equation-eq-normalsamplinglinearmodel">(75)</a> di parametri <span class="math notranslate nohighlight">\(\beta_0\)</span> e <span class="math notranslate nohighlight">\(\beta_1\)</span> descrive l’associazione tra <em>la media</em> <span class="math notranslate nohighlight">\(\mu_i\)</span> e il predittore <span class="math notranslate nohighlight">\(x_i\)</span>. In altri termini, tale relazione lineare fornisce una predizione sul valore atteso <span class="math notranslate nohighlight">\(\mu_i\)</span>, non sul valore <em>effettivo</em> di ciascuna osservazione <span class="math notranslate nohighlight">\(Y_i\)</span>.</p>
+</section>
+<section id="il-modello-lineare">
+<h2>Il modello lineare<a class="headerlink" href="#il-modello-lineare" title="Permalink to this headline">#</a></h2>
+<p>Sostituendo l’eq. <a class="reference internal" href="#equation-eq-regmodel">(76)</a> nell’eq. <a class="reference internal" href="#equation-eq-normalsamplinglinearmodel">(75)</a> otteniamo il modello lineare:</p>
+<div class="math notranslate nohighlight" id="equation-eq-samplinglinearmodel">
+<span class="eqno">(77)<a class="headerlink" href="#equation-eq-samplinglinearmodel" title="Permalink to this equation">#</a></span>\[
+Y_i \mid \beta_0, \beta_ 1, \sigma \stackrel{ind}{\sim} \mathcal{N}(\beta_0 + \beta_ 1 x_i, \sigma), \quad i = 1, \dots, n.
+\]</div>
+<p>L’eq. <a class="reference internal" href="#equation-eq-samplinglinearmodel">(77)</a> è dunque un caso speciale del modello di campionamento Normale, dove le <span class="math notranslate nohighlight">\(Y_i\)</span> seguono indipendentemente una densità Normale di media (<span class="math notranslate nohighlight">\(\beta_0 + \beta_ 1 x_i\)</span>) specifica per ciascuna osservazione, con una deviazione standard (<span class="math notranslate nohighlight">\(\sigma\)</span>) comune a tutte le osservazioni. Poiché include un solo predittore (<span class="math notranslate nohighlight">\(x\)</span>), questo modello è chiamato <em>modello di regressione lineare bivariato</em>.</p>
+<section id="assunzioni">
+<h3>Assunzioni<a class="headerlink" href="#assunzioni" title="Permalink to this headline">#</a></h3>
+<p>Il modello statistico bivariato della regressione lineare assume che la variabile <span class="math notranslate nohighlight">\(x\)</span> sia fissa per disegno – in altre parole, assume che i valori <span class="math notranslate nohighlight">\(x\)</span> restano immutati tra campioni diversi. Potendo ipotizzare infiniti campioni tutti con gli stessi valori <span class="math notranslate nohighlight">\(x\)</span>, in corrispondenza di ciascun valore <span class="math notranslate nohighlight">\(x_i\)</span> il modello ipotizza che vi sia una distribuzione di valori <span class="math notranslate nohighlight">\(y\)</span>. A ciascun valore <span class="math notranslate nohighlight">\(x_i\)</span>, con <span class="math notranslate nohighlight">\(i = 1, 2, \dots, n\)</span>, corrisponde una distribuzione di valori <span class="math notranslate nohighlight">\(y\)</span> condizionati a <span class="math notranslate nohighlight">\(x_i\)</span>, <span class="math notranslate nohighlight">\(p(y \mid x_i)\)</span>.</p>
+<p>Il modello statistico di regressione lineare assume che le distribuzioni condizionate <span class="math notranslate nohighlight">\(p(y \mid x_i)\)</span> sono</p>
+<div class="math notranslate nohighlight">
+\[
+y_i \sim \mathcal{N}(\mu_i, \sigma),
+\]</div>
+<p>(assunzione di <em>normalità</em>), laddove</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_i = \mathbb{E}(y \mid x_i) = \alpha + \beta x_i.
+\]</div>
+<p>L’equazione precedente descrive l’assunzione di <em>linearità</em>.</p>
+<p>Si noti che il parametro <span class="math notranslate nohighlight">\(\sigma\)</span> non ha un pedice: questo significa che il modello ipotizza una dispersione costante delle distribuzioni <span class="math notranslate nohighlight">\(p(y \mid x_i), \forall i\)</span>. Tale assunzione va sotto il nome di <em>omoschedasticità</em>.</p>
+<p>Se questa è la struttura della popolazione, possiamo pensare ad un campione casuale di ampiezza <span class="math notranslate nohighlight">\(n\)</span> come ad una serie di coppie <span class="math notranslate nohighlight">\(x_i, y_i\)</span>, con <span class="math notranslate nohighlight">\(i = 1, \dots, n\)</span>, nelle quali i valori <span class="math notranslate nohighlight">\(x\)</span> sono fissi per disegno e ciascun valore <span class="math notranslate nohighlight">\(y_i\)</span> è una realizzazione della variabile casuale <span class="math notranslate nohighlight">\(Y = y_i \mid X = x_i\)</span>. Questa è l’ultima assunzione del modello statistico lineare: l’<em>indipendenza</em>. In maniera equivalente possiamo dire che gli <em>errori</em> <span class="math notranslate nohighlight">\(\varepsilon_i = y_i - \hat{y}_i = y_i - (\beta_0 + \beta_1 x_i)\)</span> sono variabili casuali distribuite secondo la legge Normale di parametri <span class="math notranslate nohighlight">\(\mathcal{N}(0, \sigma)\)</span>.</p>
+</section>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>Il modello di regressione lineare bivariato viene usato per descrivere la relazione lineare tra due variabili <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>, e per determinare il segno e l’intensità di tale relazione. Inoltre, il modello di regressione lineare consente di prevedere il valore della variabile dipendente <span class="math notranslate nohighlight">\(Y\)</span> in base al valore assunto dalla variabile indipendente <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="reglin1-1"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>Una notazione alternativa per tali parametri è <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, anziché <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span>.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="050_normal_normal_mod.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Inferenza su una media</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="052_reglin_2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regressione lineare bivariata</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

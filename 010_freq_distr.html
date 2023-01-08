@@ -1,0 +1,1541 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Analisi esplorativa dei dati &#8212; ds4psy</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Indici di posizione e di scala" href="015_loc_scale.html" />
+    <link rel="prev" title="La misurazione in psicologia" href="005_measurement.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4psy</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Benvenuti
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nozioni di base
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="001_key_notions.html">
+   Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="005_measurement.html">
+   La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Analisi esplorativa dei dati
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_loc_scale.html">
+   Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="020_correlation.html">
+   Le relazioni tra variabili
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_eda_quickstart.html">
+   Introduzione alla data analisi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="030_ndarray.html">
+   Gli array nel modulo NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="035_pandas.html">
+   Comandi utili in Pandas
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="105_dice.html">
+   Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110_intro_prob.html">
+   La logica dell’incerto
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="115_conditional_prob.html">
+   Probabilità condizionata: significato, teoremi, eventi indipendenti
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="120_bayes_theorem.html">
+   Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="125_expval_var.html">
+   Indici di posizione, di varianza e di associazione di variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="130_joint_prob.html">
+   Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="135_density_func.html">
+   La densità di probabilità
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="205_discr_rv_distr.html">
+   Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210_cont_rv_distr.html">
+   Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215_rng.html">
+   Generazione di numeri casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="225_likelihood.html">
+   La verosimiglianza
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="305_intro_bayes.html">
+   Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="310_subj_prop.html">
+   Pensare ad una proporzione in termini soggettivi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="315_conjugate_families.html">
+   Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="320_balance_prior_post.html">
+   L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="325_metropolis.html">
+   Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="330_beta_binomial.html">
+   Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="335_mcmc_diagnostics.html">
+   Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="340_summarize_posterior.html">
+   Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="345_bayesian_prediction.html">
+   La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="350_normal_normal_mod.html">
+   Inferenza bayesiana su una media
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="355_groups_comparison.html">
+   Confronto tra due (o più) gruppi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="400_reglin_1.html">
+   Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405_reglin_2.html">
+   Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="410_reglin_3.html">
+   Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="415_reglin_4.html">
+   Confronto tra le medie di due gruppi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="420_reglin_ppc.html">
+   Posterior Predictive Checks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="500_intro_frequentist.html">
+   Legge dei grandi numeri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="505_conf_interv.html">
+   Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="510_test_ipotesi.html">
+   Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="515_limiti_stat_frequentista.html">
+   Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="520_s_m_errors.html">
+   Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a03_set_theory.html">
+   Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus_notation.html">
+   Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/010_freq_distr.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F010_freq_distr.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/010_freq_distr.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#un-excursus-storico">
+   Un excursus storico
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#riassumere-i-dati">
+   Riassumere i dati
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#i-dati-grezzi">
+   I dati grezzi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distribuzioni-di-frequenze">
+   Distribuzioni di frequenze
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distribuzioni-congiunte">
+     Distribuzioni congiunte
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#istogramma">
+   Istogramma
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kernel-density-plot">
+   Kernel density plot
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forma-di-una-distribuzione">
+   Forma di una distribuzione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#indici-di-posizione">
+   Indici di posizione
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quantili">
+     Quantili
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mostrare-i-dati">
+   Mostrare i dati
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diagramma-a-scatola">
+     Diagramma a scatola
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#grafico-a-violino">
+     Grafico a violino
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l-eccellenza-grafica">
+     L’eccellenza grafica
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Analisi esplorativa dei dati</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#un-excursus-storico">
+   Un excursus storico
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#riassumere-i-dati">
+   Riassumere i dati
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#i-dati-grezzi">
+   I dati grezzi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distribuzioni-di-frequenze">
+   Distribuzioni di frequenze
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distribuzioni-congiunte">
+     Distribuzioni congiunte
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#istogramma">
+   Istogramma
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kernel-density-plot">
+   Kernel density plot
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forma-di-una-distribuzione">
+   Forma di una distribuzione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#indici-di-posizione">
+   Indici di posizione
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quantili">
+     Quantili
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mostrare-i-dati">
+   Mostrare i dati
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diagramma-a-scatola">
+     Diagramma a scatola
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#grafico-a-violino">
+     Grafico a violino
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l-eccellenza-grafica">
+     L’eccellenza grafica
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="analisi-esplorativa-dei-dati">
+<span id="freq-distr-notebook"></span><h1>Analisi esplorativa dei dati<a class="headerlink" href="#analisi-esplorativa-dei-dati" title="Permalink to this headline">#</a></h1>
+<p>Le analisi esplorative dei dati e la statistica descrittiva costituiscono la prima fase dell’analisi dei dati psicologici. Consentono di capire come i dati sono distribuiti, ci aiutano ad individuare le osservazioni anomale e gli errori di tabulazione. Consentono di riassumere le distribuzioni dei dati mediante indici sintetici. Consentono di visualizzare e di studiare le relazioni tra le variabili. In questo Capitolo, dopo avere presentato gli obiettivi dell’analisi esplorative dei dati, discuteremo il problema della descrizione numerica e della rappresentazione grafica delle distribuzioni di frequenza.</p>
+<p>Le analisi esplorative dei dati sono indispensabili per condurre in modo corretto una qualsiasi analisi statistica, dal livello base a quello avanzato. Si parla di <em>analisi descrittiva dei dati</em> se l’obiettivo è quello di descrivere le caratteristiche di un campione; si parla di <em>analisi esplorativa dei dati</em> (<em>Exploratory Data Analysis</em> o EDA) se l’obiettivo è quello di esplorare i dati alla ricerca di nuove informazioni e relazioni tra variabili. Questa distinzione, seppur importante a livello teorico, nella pratica è più fumosa perché spesso entrambe le situazioni si verificano contemporaneamente nella stessa indagine statistica e le metodologie di analisi che si utilizzano sono molto simili. È ovvio che è necessario usare un software sia per il calcolo delle statistiche descrittive che per l’analisi esplorativa dei dati. In questo capitolo dunque le descrizioni dei concetti di base della EDA saranno sempre accompagnate con le istruzioni Python necessarie per calcolare in pratica le quantità discusse.</p>
+<section id="un-excursus-storico">
+<h2>Un excursus storico<a class="headerlink" href="#un-excursus-storico" title="Permalink to this headline">#</a></h2>
+<p>Nel 1907 Francis Galton, cugino di Charles Darwin, matematico e statistico autodidatta, geografo, esploratore, teorico della dattiloscopia (ovvero, dell’uso delle impronte digitali a fini identificativi) e dell’eugenetica, scrisse una lettera alla rivista scientifica Nature sulla sua visita alla <em>Fat Stock and Poultry Exhibition</em> di Plymouth. Lì vide alcuni membri del pubblico partecipare ad un gioco il cui scopo era quello di indovinare il peso della carcassa di un grande bue che era appena stato scuoiato. Galton si procurò i 787 dei biglietti che erano stati compilati dal pubblico e considerò il valore medio di 547 kg come la “scelta democratica” dei partecipanti, in quanto “ogni altra stima era stata giudicata troppo alta o troppo bassa dalla maggioranza dei votanti”. Il punto interessante è che il peso corretto di 543 kg si dimostrò essere molto simile alla “scelta democratica” basata sulle stime dei 787 partecipanti. Galton intitolò la sua lettera a Nature <em>Vox Populi</em> (voce del popolo), ma questo processo decisionale è ora meglio conosciuto come la “saggezza delle folle” (<em>wisdom of crowds</em>). Possiamo dire che, nel suo articolo del 1907, Galton effettuò quello che ora chiamiamo un riepilogo dei dati, ovvero calcolò un indice sintetico a partire da un insieme di dati. In questo capitolo esamineremo le tecniche che sono state sviluppate nel secolo successivo per riassumere le grandi masse di dati con cui sempre più spesso ci dobbiamo confrontare. Vedremo come calcolare e interpretare gli indici di posizione e di dispersione, discuteremo le distribuzioni di frequenze e le relazioni tra variabili. Vedremo inoltre quali sono le tecniche di visualizzazione che ci consentono di rappresentare questi sommari dei dati mediante dei grafici.</p>
+</section>
+<section id="riassumere-i-dati">
+<h2>Riassumere i dati<a class="headerlink" href="#riassumere-i-dati" title="Permalink to this headline">#</a></h2>
+<p>Prima di entrare nei dettagli, iniziamo con una considerazione generale. Quando riassumiamo i dati, è ovvio che, necessariamente, buttiamo via delle informazioni. Potremmo dunque chiederci: è una buona idea procedere in questo modo? Non sarebbe meglio conservare, oltre a ciò che viene trasmesso dagli indici riassuntivi della statistica descrittiva, le informazioni specifiche di ciascun soggetto che partecipa ad un esperimento psicologico? Che dire poi delle informazioni che descrivono come sono stati raccolti i dati, come l’ora del giorno o l’umore del partecipante? Tutte queste informazioni vengono perdute quando riassumiamo i dati. La risposta alla domanda ipotetica che ci siamo posti è che, in generale, <em>non è una buona idea</em> conservare tutti i dettagli di ciò che conosciamo. È molto più utile riassumere le informazioni a disposizione perché una tale semplificazione consente i processi di generalizzazione.</p>
+<p>In un contesto letterario, l’importanza della generalizzazione è stata sottolineata da Jorge Luis Borges nel suo racconto “Funes o della memoria” <span id="id1">[<a class="reference internal" href="z_biblio.html#id3" title="Jorge Luis Borges. Funes, o della memoria. Melis, A.(Trad). Finzioni. Milano: Adelphi, 1944.">Bor44</a>]</span>. In questo racconto, Borges descrive un individuo che perde la capacità di dimenticare e si concentra sulla relazione tra generalizzazione e pensiero:</p>
+<blockquote>
+<div><p>Pensare è dimenticare una differenza, generalizzare, astrarre. Nel mondo troppo pieno di Funes, c’erano solo dettagli.</p>
+</div></blockquote>
+<p>Come possiamo ben immaginare, la vita di Funes non è facile. Se facciamo riferimento alla psicologia, possiamo dire che gli psicologi hanno studiato a lungo l’utilità della generalizzazione per il pensiero. Un esempio è fornito dal fenomeno della formazione dei concetti e lo psicologo che viene in mente a questo proposito è sicuramente Eleanor Rosch, la quale ha studiato i principi di base della categorizzazione <span id="id2">[<a class="reference internal" href="z_biblio.html#id2" title="Eleanor H Rosch. Natural categories. Cognitive Psychology, 4(3):328–350, 1973.">Ros73</a>]</span>. Come è stato illustrato dalle ricerche di Eleanor Rosch, i concetti ci forniscono uno strumento potente per organizzare le nostre conoscenze. Siamo in grado di riconoscere facilmente i diversi esemplare di un concetto – per esempio, “gli uccelli” – anche se i singoli esemplari che fanno parte della categoria sono molto diversi tra loro (l’aquila, il gabbiano, il pettirosso). Inoltre, l’uso dei concetti, cioè la generalizzazione, è utile perché ci consente di fare previsioni sulle proprietà dei singoli esemplari che appartengono ad una categoria, anche se non abbiamo mai avuto un’esperienza diretta con essi – per esempio, possiamo fare la predizione che tutti gli uccelli possono volare e mangiare vermi, ma non possono guidare un’automobile o parlare in inglese. Queste previsioni non sono sempre corrette, ma sono molto utili.</p>
+<p>In un certo senso, potremmo dire che le statistiche descrittive ci fornisco l’analogo dei “prototipi” che, secondo Eleanor Rosch, stanno alla base del processo psicologico di creazione dei concetti. Un prototipo è l’esemplare più rappresentativo di una categoria. Per analogia, una statistica descrittiva come la media, ad esempio, può essere intesa come l’osservazione “tipica”. Conoscere il “valore tipico” di un insieme di dati (quale la media o la mediana) è molto utile per quello che ci dice delle altre osservazioni (che sarebbe troppo oneroso elencare): ciò che il valore tipo di una distribuzione ci dice è che le altre osservazioni “assomigliano” al valore tipico. Quindi, con un unico indice riusciamo a catturare ciò che molteplici osservazioni “hanno in comune”. Ovviamente, questa “somiglianza” ha dei limiti e vedremo anche come descrivere in forma sintetica il concetto complementare, ovvero quello della “differenza” tra le osservazioni.</p>
+<p>La statistica descrittiva ci fornisce gli strumenti per riassumere, in una forma visiva o numerica, i dati che abbiamo raccolto. Le rappresentazioni grafiche più usate della statistica descrittiva sono gli istogrammi, i diagrammi a dispersione o i box-plot, e gli indici sintetici più comuni sono la media, la mediana, la varianza e la deviazione standard. Questi sono gli strumenti di base della <em>data science</em>.</p>
+</section>
+<section id="i-dati-grezzi">
+<h2>I dati grezzi<a class="headerlink" href="#i-dati-grezzi" title="Permalink to this headline">#</a></h2>
+<p>Per introdurre i principali strumenti della statistica descrittiva considereremo qui i dati raccolti da <span id="id3">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Questi ricercatori hanno studiato le aspettative negative quale meccanismo chiave nel mantenimento e nella reiterazione della depressione. In questo studio, <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> si sono chiesti se individui depressi maturano delle aspettative accurate sul loro umore futuro, oppure se tali aspettative sono distorte negativamente. In uno degli studi riportati viene esaminato un campione costituito da 30 soggetti con almeno un episodio depressivo maggiore e un campione di 37 controlli sani. Gli autori hanno misurato il livello depressivo con il <em>Beck Depression Inventory</em> (BDI-II). Questi sono i dati che considereremo qui.</p>
+<p>Iniziamo a porci una semplice domanda: vogliamo conoscere il livello di depressione, misurato dalla scala BDI-II, nel campione di soggetti esaminati da <span id="id5">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. La risposta più semplice a tale domanda consiste semplicemente nell’elencare i valori BDI-II del campione.</p>
+<p>Iniziamo dunque a leggere i dati in Python. Se il file <code class="docutils literal notranslate"><span class="pre">data.mood.csv</span></code> si trova nella cartella <code class="docutils literal notranslate"><span class="pre">data</span></code> contenuta nella <em>working directory</em>, allora possiamo usare le istruzioni seguenti.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">2023</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
+<span class="c1"># cwd = os.getcwd()</span>
+<span class="c1"># print(cwd)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/data.mood.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Stampo il nome delle colonne del DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;esm_id&#39;</span><span class="p">,</span><span class="s1">&#39;group&#39;</span><span class="p">,</span><span class="s1">&#39;bdi&#39;</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>esm_id</th>
+      <th>group</th>
+      <th>bdi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>10</td>
+      <td>mdd</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10</td>
+      <td>mdd</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>mdd</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10</td>
+      <td>mdd</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>10</td>
+      <td>mdd</td>
+      <td>25.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>C’è un solo valore BDI-II per ciascun soggetto ma tale valore viene ripetuto tante volte quante volte sono le righe del DataFrame associate ad ogni soggetto (ciascuna riga corrisponde ad una prova diversa su altre variabili).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1188, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>È dunque necessario trasformare il DataFrame in modo tale da avere un’unica riga per ciascun soggetto, ovvero un unico valore BDI-II per soggetto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(67, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>esm_id</th>
+      <th>group</th>
+      <th>bdi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>10</td>
+      <td>mdd</td>
+      <td>25.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>9</td>
+      <td>mdd</td>
+      <td>30.0</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>6</td>
+      <td>mdd</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>7</td>
+      <td>mdd</td>
+      <td>35.0</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>12</td>
+      <td>mdd</td>
+      <td>44.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Esaminiamo i dati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ctl</th>
+      <td>36.0</td>
+      <td>1.6</td>
+      <td>2.7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>mdd</th>
+      <td>30.0</td>
+      <td>30.9</td>
+      <td>6.6</td>
+      <td>19.0</td>
+      <td>26.0</td>
+      <td>30.0</td>
+      <td>35.0</td>
+      <td>44.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Per semplicità, presentiamo i valori BDI-II ordinati dal più piccolo al più grande.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 2.0 2.0 2.0 2.0 3.0 3.0 3.0 5.0 7.0 9.0 12.0 19.0 22.0 22.0 24.0 25.0 25.0 26.0 26.0 26.0 27.0 27.0 28.0 28.0 30.0 30.0 30.0 31.0 31.0 33.0 33.0 34.0 35.0 35.0 35.0 36.0 39.0 41.0 43.0 43.0 44.0 nan
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(67, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Escludo il dato mancante.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">])]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(66, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 2.0 2.0 2.0 2.0 3.0 3.0 3.0 5.0 7.0 9.0 12.0 19.0 22.0 22.0 24.0 25.0 25.0 26.0 26.0 26.0 27.0 27.0 28.0 28.0 30.0 30.0 30.0 31.0 31.0 33.0 33.0 34.0 35.0 35.0 35.0 36.0 39.0 41.0 43.0 43.0 44.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>È chiaro però che i dati grezzi sono di difficile lettura – e se abbiamo grandi masse di dati (un caso molto comune in psicologia) ogni “lettura” diretta dei dati grezzi è impossibile. Nella sezione successiva vedremo come sia possibile creare una rappresentazione sintetica e, soprattutto, comprensibile dei dati grezzi.</p>
+</section>
+<section id="distribuzioni-di-frequenze">
+<h2>Distribuzioni di frequenze<a class="headerlink" href="#distribuzioni-di-frequenze" title="Permalink to this headline">#</a></h2>
+<p>Uno dei modi che ci consentono di effettuare una sintesi dei dati è quello di generare una <em>distribuzione di frequenze</em>.</p>
+<p>Una distribuzione di frequenze è un riepilogo del conteggio della frequenza con cui le modalità osservate in un insieme di dati si verificano in un intervallo di valori.</p>
+<p>In altre parole, la distribuzione di frequenze della variabile <span class="math notranslate nohighlight">\(X\)</span> corrisponde all’insieme delle frequenze assegnate a ciascun possibile valore di <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>Per creare una distribuzione di frequenze possiamo procedere effettuando una partizione delle modalità della variabile di interesse in <span class="math notranslate nohighlight">\(m\)</span> classi (denotate con <span class="math notranslate nohighlight">\(\Delta_i\)</span>) tra loro disgiunte. In tale partizione, la classe <span class="math notranslate nohighlight">\(i\)</span>-esima coincide con un intervallo di valori aperto a destra <span class="math notranslate nohighlight">\([a_i, b_i)\)</span> o aperto a sinistra <span class="math notranslate nohighlight">\((a_i, b_i]\)</span>. Ad ogni classe <span class="math notranslate nohighlight">\(\Delta_i\)</span> avente <span class="math notranslate nohighlight">\(a_i\)</span> e <span class="math notranslate nohighlight">\(b_i\)</span> come limite inferiore e superiore associamo l’ampiezza <span class="math notranslate nohighlight">\(b_i - a_i\)</span> (non necessariamente uguale per ogni classe) e il valore centrale <span class="math notranslate nohighlight">\(\bar{x}_i\)</span>. La scelta delle classi è arbitraria, ma è buona norma non definire classi con un numero troppo piccolo (<span class="math notranslate nohighlight">\(&lt; 5\)</span>) di osservazioni. Poiché ogni elemento dell’insieme <span class="math notranslate nohighlight">\(\{x_i\}_{i=1}^n\)</span> appartiene ad una ed una sola classe <span class="math notranslate nohighlight">\(\Delta_i\)</span>, possiamo calcolare le quantità elencate di seguito.</p>
+<ul class="simple">
+<li><p>La <em>frequenza assoluta</em> <span class="math notranslate nohighlight">\(n_i\)</span> di ciascuna classe, ovvero il numero di osservazioni che ricadono nella classe <span class="math notranslate nohighlight">\(\Delta_i\)</span>.</p>
+<ul>
+<li><p>Proprietà: <span class="math notranslate nohighlight">\(n_1 + n_2 + \dots + n_m = n\)</span>.</p></li>
+</ul>
+</li>
+<li><p>La <em>frequenza relativa</em> <span class="math notranslate nohighlight">\(f_i = n_i/n\)</span> di ciascuna classe.</p>
+<ul>
+<li><p>Proprietà: <span class="math notranslate nohighlight">\(f_1+f_2+\dots+f_m =1\)</span>.</p></li>
+</ul>
+</li>
+<li><p>La <em>frequenza cumulata</em> <span class="math notranslate nohighlight">\(N_i\)</span>, ovvero il numero totale delle osservazioni che ricadono nelle classi fino alla <span class="math notranslate nohighlight">\(i\)</span>-esima compresa: <span class="math notranslate nohighlight">\(N_i = \sum_{i=1}^m n_i.\)</span></p></li>
+<li><p>La <em>frequenza cumulata relativa</em> <span class="math notranslate nohighlight">\(F_i\)</span>, ovvero <span class="math notranslate nohighlight">\(F_i = f_1+f_2+\dots+f_m = \frac{N_i}{n} = \frac{1}{n} \sum_{i=1}^m f_i.\)</span></p></li>
+</ul>
+<p>Poniamoci ora il problema di calcolare la distribuzione di frequenza assoluta e la distribuzione di frequenza relativa per i valori del BDI-II del campione di <span id="id6">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<p>Aggiungo a <code class="docutils literal notranslate"><span class="pre">df</span></code> una colonna che contiene una variabile categoriale che classifica ciascuna osservazione in una delle quattro classi definite sopra.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi_class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">,</span> <span class="mf">19.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="n">include_lowest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      esm_id group   bdi       bdi_class
+1         10   mdd  25.0    (19.5, 28.5]
+15         9   mdd  30.0    (28.5, 45.0]
+30         6   mdd  26.0    (19.5, 28.5]
+46         7   mdd  35.0    (28.5, 45.0]
+65        12   mdd  44.0    (28.5, 45.0]
+...      ...   ...   ...             ...
+1105      99   ctl   0.0  (-0.001, 13.5]
+1121     100   ctl   2.0  (-0.001, 13.5]
+1133     104   ctl   0.0  (-0.001, 13.5]
+1152     103   ctl   0.0  (-0.001, 13.5]
+1171     102   ctl   1.0  (-0.001, 13.5]
+
+[66 rows x 4 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_tab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">)</span> 
+<span class="n">my_tab</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>col_0</th>
+      <th>count</th>
+    </tr>
+    <tr>
+      <th>bdi_class</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>(-0.001, 13.5]</th>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>(13.5, 19.5]</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>(19.5, 28.5]</th>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>(28.5, 45.0]</th>
+      <td>17</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="distribuzioni-congiunte">
+<h3>Distribuzioni congiunte<a class="headerlink" href="#distribuzioni-congiunte" title="Permalink to this headline">#</a></h3>
+<p>Insiemi di variabili possono anche avere distribuzioni di frequenze, dette <em>distribuzioni congiunte</em>. La distribuzione congiunta di un insieme di variabili <span class="math notranslate nohighlight">\(V\)</span> è l’insieme delle frequenze di ogni possibile combinazione di valori delle variabili in <span class="math notranslate nohighlight">\(V\)</span>. Ad esempio, se <span class="math notranslate nohighlight">\(V\)</span> è un insieme di due variabili, <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>, ciascuna delle quali può assumere due valori, 1 e 2, allora una possibile distribuzione congiunta di frequenze relative per <span class="math notranslate nohighlight">\(V\)</span> è <span class="math notranslate nohighlight">\(f(X = 1, Y = 1) = 0.2\)</span>, <span class="math notranslate nohighlight">\(f(X = 1, Y = 2) = 0.1\)</span>, <span class="math notranslate nohighlight">\(f(X = 2, Y = 1) = 0.5\)</span>, <span class="math notranslate nohighlight">\(f(X = 2, Y = 2) = 0.2\)</span>. Proprio come con le distribuzioni di frequenze relative di una singola variabile, le frequenze relative di una distribuzione congiunta devono sommare a 1.</p>
+</section>
+</section>
+<section id="istogramma">
+<h2>Istogramma<a class="headerlink" href="#istogramma" title="Permalink to this headline">#</a></h2>
+<p>I dati sintetizzati in una distribuzione di frequenze possono essere rappresentati graficamente in un istogramma. Un istogramma si costruisce riportando sulle ascisse i limiti delle classi <span class="math notranslate nohighlight">\(\Delta_i\)</span> e sulle ordinate i valori della funzione costante a tratti</p>
+<div class="math notranslate nohighlight">
+\[
+\varphi_n(x)= \frac{f_i}{b_i-a_i}, \quad x\in \Delta_i,\, i=1, \dots, m
+\]</div>
+<p>che misura la <em>densità della frequenza relativa</em> della variabile <span class="math notranslate nohighlight">\(X\)</span> nella classe <span class="math notranslate nohighlight">\(\Delta_i\)</span>, ovvero il rapporto fra la frequenza relativa <span class="math notranslate nohighlight">\(f_i\)</span> e l’ampiezza (<span class="math notranslate nohighlight">\(b_i - a_i\)</span>) della classe. In questo modo il rettangolo dell’istogramma associato alla classe <span class="math notranslate nohighlight">\(\Delta_i\)</span> avrà un’area proporzionale alla frequenza relativa <span class="math notranslate nohighlight">\(f_i\)</span>. Si noti che l’area totale dell’istogramma delle frequenze relative è data della somma delle aree dei singoli rettangoli e quindi vale 1.0.</p>
+<p>Usiamo ora Python per costruire un istogramma per i valori BDI-II riportati da <span id="id7">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<p>Con i quattro intervalli individuati dai cut-off del BDI-II creo ora una prima versione dell’istogramma – si notino le frequenze assolute sull’asse delle ordinate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_bins</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">,</span> <span class="mf">19.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mi">44</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">stat</span> <span class="o">=</span> <span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bdi_bins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;bdi&#39;, ylabel=&#39;Count&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/010_freq_distr_23_1.png" src="_images/010_freq_distr_23_1.png" />
+</div>
+</div>
+<p>Una versione alternativa dello stesso grafico è la seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="n">bdi_bins</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> 
+  <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/010_freq_distr_25_0.png" src="_images/010_freq_distr_25_0.png" />
+</div>
+</div>
+<p>Poniamo ora, sull’asse <em>x</em>, le densità.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">stat</span> <span class="o">=</span> <span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bdi_bins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;bdi&#39;, ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/010_freq_distr_27_1.png" src="_images/010_freq_distr_27_1.png" />
+</div>
+</div>
+<p>Anche se nel caso presente è sensato usare ampiezze diverse per gli intervalli delle classi, in generale gli istogrammi si costruiscono utilizzando intervalli riportati sulle ascisse con un’ampiezza uguale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">stat</span> <span class="o">=</span> <span class="s2">&quot;density&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;bdi&#39;, ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/010_freq_distr_29_1.png" src="_images/010_freq_distr_29_1.png" />
+</div>
+</div>
+</section>
+<section id="kernel-density-plot">
+<h2>Kernel density plot<a class="headerlink" href="#kernel-density-plot" title="Permalink to this headline">#</a></h2>
+<p>Il confronto tra le figure precedenti rende chiaro il limite dell’istogramma: il profilo dell’istogramma è arbitrario, in quanto dipende dal numero e dall’ampiezza delle classi. Questo rende difficile l’interpretazione.</p>
+<p>Il problema precedente può essere alleviato utilizzando una rappresentazione alternativa della distribuzione di frequenza, ovvero la stima della densità della frequenza dei dati (detta anche stima <em>kernel di densità</em>). Un modo semplice per pensare a tale rappresentazione, che in inglese va sotto il nome di <em>kernel density plot</em> (cioè i grafici basati sulla stima kernel di densità), è quello di immaginare un grande campione di dati, in modo che diventi possibile definire un enorme numero di classi di equivalenza di ampiezza molto piccola, le quali non risultino vuote. In tali circostanze, la funzione di densità empirica non è altro che il profilo <em>lisciato</em> dell’istogramma. La stessa idea si applica anche quando il campione è piccolo. In tali circostanze, invece di raccogliere le osservazioni in barre come negli istogrammi, lo stimatore di densità kernel colloca una piccola “gobba” (<em>bump</em>), determinata da un fattore <span class="math notranslate nohighlight">\(K\)</span> (kernel) e da un parametro <span class="math notranslate nohighlight">\(h\)</span> di smussamento detto ampiezza di banda (<em>bandwidth</em>), in corrispondenza di ogni osservazione, quindi somma le gobbe risultanti generando una curva smussata.</p>
+<p>L’interpretazione che possiamo attribuire al kernel density plot è simile a quella che viene assegnata agli istogrammi: l’area sottesa al kernel density plot in un certo intervallo rappresenta la proporzione di casi della distribuzione che hanno valori compresi in quell’intervallo.</p>
+<p>Aggiungiamo all’istogramma dei valori BDI-II di <span id="id8">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> un kernel density plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;BDI-II&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/corrado/opt/anaconda3/envs/bambi_env/lib/python3.8/site-packages/seaborn/axisgrid.py:208: UserWarning: This figure was using a layout engine that is incompatible with subplots_adjust and/or tight_layout; not calling subplots_adjust.
+  self._figure.subplots_adjust(right=right)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 24.166999999999994, &#39;BDI-II&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 900x400 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/010_freq_distr_31_3.png" src="_images/010_freq_distr_31_3.png" />
+</div>
+</div>
+</section>
+<section id="forma-di-una-distribuzione">
+<h2>Forma di una distribuzione<a class="headerlink" href="#forma-di-una-distribuzione" title="Permalink to this headline">#</a></h2>
+<p>In generale, la forma di una distribuzione descrive come i dati si distribuiscono intorno ai valori centrali. Distinguiamo tra distribuzioni simmetriche e asimmetriche, e tra distribuzioni unimodali o multimodali. Un’illustrazione grafica è fornita nella &#64;fig-shape-distr. Nel pannello 1 la distribuzione è unimodale con asimmetria negativa; nel pannello 2 la distribuzione è unimodale con asimmetria positiva; nel pannello 3 la distribuzione è simmetrica e unimodale; nel pannello 4 la distribuzione è bimodale.</p>
+<p><img alt="" src="_images/shape_distribution.png" /></p>
+<p>Il kernel density plot dei valori BDI-II nel campione di <span id="id9">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> è bimodale. Ciò indica che le osservazioni della distribuzione si addensano in due cluster ben distinti: un gruppo di osservazioni tende ad avere valori BDI-II bassi, mentre l’altro gruppo tende ad avere BDI-II alti. Questi due cluster di osservazioni corrispondono al gruppo di controllo e al gruppo clinico nel campione di dati esaminato da <span id="id10">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+</section>
+<section id="indici-di-posizione">
+<h2>Indici di posizione<a class="headerlink" href="#indici-di-posizione" title="Permalink to this headline">#</a></h2>
+<section id="quantili">
+<h3>Quantili<a class="headerlink" href="#quantili" title="Permalink to this headline">#</a></h3>
+<p>La descrizione della distribuzione dei valori BDI-II di <span id="id11">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> può essere facilitata dalla determinazione di alcuni valori caratteristici che sintetizzano le informazioni contenute nella distribuzione di frequenze. Si dicono <em>quantili</em> (o <em>frattili</em>) quei valori caratteristici che hanno le seguenti proprietà. I <em>quartili</em> sono quei valori che ripartiscono i dati <span class="math notranslate nohighlight">\(x_i\)</span> in quattro parti ugualmente numerose (pari ciascuna al 25% del totale). Il primo quartile, <span class="math notranslate nohighlight">\(q_1\)</span>, lascia alla sua sinistra il 25% del campione pensato come una fila ordinata (a destra quindi il 75%). Il secondo quartile <span class="math notranslate nohighlight">\(q_2\)</span> lascia a sinistra il 50% del campione (a destra quindi il 50%). Esso viene anche chiamato <em>mediana</em>. Il terzo quartile lascia a sinistrail 75% del campione (a destra quindi il 25%). Secondo lo stesso criterio, si dicono <em>decili</em> i quantili di ordine <span class="math notranslate nohighlight">\(p\)</span> multiplo di 0.10 e <em>percentili</em> i quantili di ordine <span class="math notranslate nohighlight">\(p\)</span> multiplo di 0.01.</p>
+<p>Come si calcolano i quantili? Consideriamo la definizione di quantile <em>non interpolato</em> di ordine <span class="math notranslate nohighlight">\(p\)</span> <span class="math notranslate nohighlight">\((0 &lt; p &lt; 1)\)</span>. Si procede innanzitutto ordinando i dati in ordine crescente, <span class="math notranslate nohighlight">\(\{x_1, x_2, \dots, x_n\}\)</span>. Ci sono poi due possibilità. Se il valore <span class="math notranslate nohighlight">\(np\)</span> non è intero, sia <span class="math notranslate nohighlight">\(k\)</span> l’intero tale che <span class="math notranslate nohighlight">\(k &lt; np &lt; k + 1\)</span> – ovvero, la parte intera di <span class="math notranslate nohighlight">\(np\)</span>. Allora <span class="math notranslate nohighlight">\(q_p = x_{k+1}.\)</span> Se <span class="math notranslate nohighlight">\(np = k\)</span> con <span class="math notranslate nohighlight">\(k\)</span> intero, allora <span class="math notranslate nohighlight">\(q_p = \frac{1}{2}(x_{k} + x_{k+1}).\)</span> Se vogliamo calcolare il primo quartile <span class="math notranslate nohighlight">\(q_1\)</span>, ad esempio, utilizziamo <span class="math notranslate nohighlight">\(p = 0.25\)</span>. Dovendo calcolare gli altri quantili basta sostituire a <span class="math notranslate nohighlight">\(p\)</span> il valore appropriato.</p>
+<p>Gli indici di posizione, tra le altre cose, hanno un ruolo importante, ovvero vengono utilizzati per creare una rappresentazione grafica di una distribuzione di valori che è molto popolare e può essere usata in alternativa ad un istogramma (in realtà vedremo poi come possa essere combinata con un istogramma). Tale rappresentazione va sotto il nome di box-plot.
+ì
+Per fare un esempio, consideriamo i nove soggetti del campione clinico di <span id="id12">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> che hanno riportato un unico episodio di depressione maggiore. Per tali soggetti i valori ordinati del BDI-II (per semplicità li chiameremo <span class="math notranslate nohighlight">\(x\)</span>) sono i seguenti: 19, 26, 27, 28, 28, 33, 33, 41, 43. Per il calcolo del secondo quartile (non interpolato), ovvero per il calcolo della mediana, dobbiamo considerare la quantità <span class="math notranslate nohighlight">\(np = 9 \cdot 0.5 = 4.5\)</span>, non intero. Quindi, <span class="math notranslate nohighlight">\(q_1 = x_{4 + 1} = 27\)</span>. Per il calcolo del quantile (non interpolato) di ordine <span class="math notranslate nohighlight">\(p = 2/3\)</span> dobbiamo considerare la quantità <span class="math notranslate nohighlight">\(np = 9 \cdot 2/3 = 6\)</span>, intero. Quindi, <span class="math notranslate nohighlight">\(q_{\frac{2}{3}} = \frac{1}{2} (x_{6} + x_{7}) = \frac{1}{2} (33 + 33) = 33\)</span>.</p>
+<p>Usiamo <code class="docutils literal notranslate"><span class="pre">numpy</span></code> per trovare la soluzione dell’esercizio precedente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">19</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">43</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="mostrare-i-dati">
+<h2>Mostrare i dati<a class="headerlink" href="#mostrare-i-dati" title="Permalink to this headline">#</a></h2>
+<section id="diagramma-a-scatola">
+<h3>Diagramma a scatola<a class="headerlink" href="#diagramma-a-scatola" title="Permalink to this headline">#</a></h3>
+<p>Il <em>diagramma a scatola</em> (o box plot) è uno strumento grafico utile al fine di ottenere informazioni circa la dispersione e l’eventuale simmetria o asimmetria di una distribuzione. Per costruire un box-plot si rappresenta sul piano cartesiano un rettangolo (cioè la “scatola”) di altezza arbitraria la cui base corrisponde alla dist intanza interquartile (IQR = <span class="math notranslate nohighlight">\(q_{0.75} - q_{0.25}\)</span>). La linea interna alla scatola rappresenta la mediana <span class="math notranslate nohighlight">\(q_{0.5}\)</span>. Si tracciano poi ai lati della scatola due segmenti di retta i cui estremi sono detti “valore adiacente” inferiore e superiore. Il valore adiacente inferiore è il valore più piccolo tra le osservazioni che risulta maggiore o uguale al primo quartile meno la distanza corrispondente a 1.5 volte la distanza interquartile. Il valore adiacente superiore è il valore più grande tra le osservazioni che risulta minore o uguale a <span class="math notranslate nohighlight">\(Q_3+1.5\)</span> IQR. I valori esterni ai valori adiacenti (chiamati <em>valori anomali</em>) vengono rappresentati individualmente nel box plot per meglio evidenziarne la presenza e la posizione.</p>
+<p><img alt="" src="_images/boxplot.png" /></p>
+<p>Utilizziamo un box-plot per rappresentare graficamente la distribuzione dei punteggi BDI-II nel gruppo dei pazienti e nel gruppo di controllo usandi i dati di <span id="id13">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;bdi&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;group&#39;, ylabel=&#39;bdi&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/010_freq_distr_38_1.png" src="_images/010_freq_distr_38_1.png" />
+</div>
+</div>
+<p>Un risultato migliore si ottiene mostrando anche i dati grezzi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Group&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;BDI-II&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;BDI-II&#39;)
+</pre></div>
+</div>
+<img alt="_images/010_freq_distr_40_1.png" src="_images/010_freq_distr_40_1.png" />
+</div>
+</div>
+</section>
+<section id="grafico-a-violino">
+<h3>Grafico a violino<a class="headerlink" href="#grafico-a-violino" title="Permalink to this headline">#</a></h3>
+<p>I grafici a violino (violin plot) prendono lo spunto dai box-plot ma riportano il profilo di densità dei valori osservati sotto forma di kernel density plot. La forma tipica di questi grafici, quella che dà loro il nome, deriva dal fatto che il kernel density plot dei dati è riportato simmetricamente da entrambi i lati della distribuzione. Ad un violin plot possono essere sovrapposti al bisogno un boxplot o un grafico a punti (dotplot), a testimonianza del fatto che è possibile integrare diverse visualizzazioni dei dati.</p>
+<p>Un violin plot per i valori BDI-II di ciascuno dei due gruppi di soggetti esaminati da <span id="id14">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> è fornito di seguito. La linea curva simmetrica è l’istogramma lisciato (<em>kernel density plot</em>) che abbiamo descritto in precedenza. In questa rappresentazione del violin plot, al suo interno, è stato collocato un box plot. Per completezza, al violin plot abbiamo anche sovrapposto un grafico a punti (dotplot).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">);</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Group&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;BDI-II&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;BDI-II&#39;)
+</pre></div>
+</div>
+<img alt="_images/010_freq_distr_42_1.png" src="_images/010_freq_distr_42_1.png" />
+</div>
+</div>
+</section>
+<section id="l-eccellenza-grafica">
+<h3>L’eccellenza grafica<a class="headerlink" href="#l-eccellenza-grafica" title="Permalink to this headline">#</a></h3>
+<p>Non c’è un unico modo “corretto” per la rappresentazione grafica dei dati. Ciascuno dei grafici che abbiamo discusso in precedenza ha i suoi pregi e i suoi difetti. Un ricercatore che ha molto influenzato il modo in cui viene realizzata la visualizzazione dei dati scientifici è Edward Tufte, soprannominato dal New York Times il “Leonardo da Vinci dei dati.” Secondo Tufte, “l’eccellenza nella grafica consiste nel comunicare idee complesse in modo chiaro, preciso ed efficiente”. Nella visualizzazione delle informazioni, l‘“eccellenza grafica” ha l’obiettivo di comunicare al lettore il maggior numero di idee nella maniera più diretta e semplice possibile. Secondo <span id="id15">Tufte [<a class="reference internal" href="z_biblio.html#id92" title="Edward R. Tufte. The visual display of quantitative information. Graphics press Cheshire, CT, 2001.">Tuf01</a>]</span>, le rappresentazioni grafiche dovrebbero:</p>
+<ol class="simple">
+<li><p>mostrare i dati;</p></li>
+<li><p>indurre l’osservatore a riflettere sulla sostanza piuttosto che sulla progettazione grafica, o qualcos’altro;</p></li>
+<li><p>evitare di distorcere quanto i dati stanno comunicando (“integrità grafica”);</p></li>
+<li><p>presentare molte informazioni in forma succinta;</p></li>
+<li><p>rivelare la coerenza tra le molte dimensioni dei dati;</p></li>
+<li><p>incoraggiare l’osservatore a confrontare differenti sottoinsiemi di dati;</p></li>
+<li><p>rivelare i dati a diversi livelli di dettaglio, da una visione ampia alla struttura di base;</p></li>
+<li><p>servire ad uno scopo preciso (descrizione, esplorazione, o la risposta a qualche domanda);</p></li>
+<li><p>essere fortemente integrate con le descrizioni statistiche e verbali dei dati fornite nel testo.</p></li>
+</ol>
+<p>Per l’esempio discusso sopra, il boxplot e il violin plot dei dati di <span id="id16">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> mostrano entrambi che la distribuzione dei dati è all’incirca simmetrica nel gruppo clinico mentre nel gruppo di controllo c’è un’asimmetria positiva. Tra le due rappresentazioni grafiche, però, il violin plot offre la rappresentazione dei grafica dei dati più completa, compatta e comprensibile. Il seguente <a class="reference external" href="https://www.biostat.wisc.edu/~kbroman/presentations/graphs2018.pdf">link</a> fornisce alcune illustrazioni dei principi elencati sopra.</p>
+</section>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>Una distribuzione è una rappresentazione del modo in cui le diverse modalità di una variabile si distribuiscono nelle unità statistiche che compongono il campione o la popolazione oggetto di studio. Il modo più diretto per trasmettere descrivere le proprietà della distribuzione di una variabile discreta è quello di fornire una rappresentazione grafica della distribuzione di frequenza. In seguito vedremo la corrispondente rappresentazione che viene usata nel caso delle variabili continue.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="005_measurement.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">La misurazione in psicologia</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="015_loc_scale.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Indici di posizione e di scala</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

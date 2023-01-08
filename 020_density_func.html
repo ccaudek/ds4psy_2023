@@ -1,0 +1,1034 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>La densità di probabilità &#8212; ds4psy</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Distribuzioni di v.c. discrete" href="022_discr_rv_distr.html" />
+    <link rel="prev" title="Probabilità congiunta" href="019_joint_prob.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4psy</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Benvenuti
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nozioni di base
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="001_key_notions.html">
+   Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="005_measurement.html">
+   La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="007_freq_distr.html">
+   Analisi esplorativa dei dati
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="011_loc_scale.html">
+   Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="012_correlation.html">
+   Le relazioni tra variabili
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="013_eda_quickstart.html">
+   Introduzione alla data analisi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="014_dice.html">
+   Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_intro_prob.html">
+   La logica dell’incerto
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="016_conditional_prob.html">
+   Probabilità condizionata: significato, teoremi, eventi indipendenti
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="017_bayes_theorem.html">
+   Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="018_expval_var.html">
+   Indici di posizione, di varianza e di associazione di variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="019_joint_prob.html">
+   Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   La densità di probabilità
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="022_discr_rv_distr.html">
+   Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="023_cont_rv_distr.html">
+   Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="024_likelihood.html">
+   La verosimiglianza
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_intro_bayes.html">
+   Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="026_subj_prop.html">
+   Pensare ad una proporzione in termini soggettivi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="029_conjugate_families.html">
+   Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="030_balance_prior_post.html">
+   L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="036_metropolis.html">
+   Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="040_beta_binomial.html">
+   Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="041_mcmc_diagnostics.html">
+   Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="045_summarize_posterior.html">
+   Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="046_bayesian_prediction.html">
+   La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="050_normal_normal_mod.html">
+   Inferenza su una media
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="051_reglin_1.html">
+   Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="052_reglin_2.html">
+   Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="053_reglin_3.html">
+   Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="054_reglin_4.html">
+   Confronto tra le medie di due gruppi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="220_intro_frequentist.html">
+   Legge dei grandi numeri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="221_conf_interv.html">
+   Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="226_test_ipotesi.html">
+   Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="228_limiti_stat_frequentista.html">
+   Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="230_s_m_errors.html">
+   Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a03_set_theory.html">
+   Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus_notation.html">
+   Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/020_density_func.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F020_density_func.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/020_density_func.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spinner-e-variabili-casuali-continue-uniformi">
+   Spinner e variabili casuali continue uniformi
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distribuzione-uniforme">
+     Distribuzione uniforme
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#il-paradosso-delle-variabili-casuali-continue">
+     Il paradosso delle variabili casuali continue
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dagli-istogrammi-alle-densita">
+   Dagli istogrammi alle densità
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#funzione-di-densita-di-probabilita">
+   Funzione di densità di probabilità
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#la-funzione-di-ripartizione-per-una-variabile-casuale-continua">
+   La funzione di ripartizione per una variabile casuale continua
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#media-e-mediana">
+   Media e mediana
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>La densità di probabilità</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spinner-e-variabili-casuali-continue-uniformi">
+   Spinner e variabili casuali continue uniformi
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distribuzione-uniforme">
+     Distribuzione uniforme
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#il-paradosso-delle-variabili-casuali-continue">
+     Il paradosso delle variabili casuali continue
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dagli-istogrammi-alle-densita">
+   Dagli istogrammi alle densità
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#funzione-di-densita-di-probabilita">
+   Funzione di densità di probabilità
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#la-funzione-di-ripartizione-per-una-variabile-casuale-continua">
+   La funzione di ripartizione per una variabile casuale continua
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#media-e-mediana">
+   Media e mediana
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="la-densita-di-probabilita">
+<span id="sec-intro-density-function"></span><h1>La densità di probabilità<a class="headerlink" href="#la-densita-di-probabilita" title="Permalink to this headline">#</a></h1>
+<p>Finora abbiamo considerato solo variabili casuali discrete, cioè variabili che assumono solo valori interi. Ma cosa succede se vogliamo usare variabili casuali per rappresentare lunghezze, o volumi, o distanze, o una qualsiasi delle altre proprietà continue nel mondo fisico o psicologico? È necessario generalizzare l’approccio usato finora.</p>
+<p>Le variabili casuali continue assumono valori reali. L’insieme dei numeri reali è <em>non numerabile</em> perché è più grande dell’insieme degli interi.<a class="footnote-reference brackets" href="#density-func-1" id="id1">1</a> Le leggi della probabilità sono le stesse per le variabili casuali discrete e quelle continue. La nozione di funzione di massa di probabilità, invece, deve essere sostituita dal suo equivalente continuo, ovvero la <em>funzione di densità di probabilità</em>. Lo scopo di questo capitolo è quello di chiarire il significato di questa nozione.</p>
+<section id="spinner-e-variabili-casuali-continue-uniformi">
+<h2>Spinner e variabili casuali continue uniformi<a class="headerlink" href="#spinner-e-variabili-casuali-continue-uniformi" title="Permalink to this headline">#</a></h2>
+<p>Consideriamo il seguente esperimento casuale. Facciamo ruotare ad alta velocità uno spinner simmetrico imperniato su un goniometro e osserviamo la posizione in cui si ferma (individuata dall’angolo acuto con segno tra il suo asse e l’asse orizzontale del goniometro). Chiamiamo <span class="math notranslate nohighlight">\(\Theta\)</span> la variabile casuale “pendenza dello spinner”. Nella trattazione seguente useremo i gradi e, di conseguenza, <span class="math notranslate nohighlight">\(\Theta \in [0, 360]\)</span>.</p>
+<p>Cosa implica per <span class="math notranslate nohighlight">\(\Theta\)</span> dire che lo spinner è simmetrico? Possiamo dire che, in ciascuna prova, la rotazione dello spinner produce un angolo qualunque da 0 a 360 gradi. In altri termini, un valore <span class="math notranslate nohighlight">\(\Theta\)</span> compreso tra 0 e 36 gradi ha la stessa probabilità di essere osservato di un valore <span class="math notranslate nohighlight">\(\Theta\)</span> compreso tra 200 e 236 gradi. Inoltre, poiché 36 gradi è un decimo del percorso intorno al cerchio, la probabilità di ottenere un qualsiasi intervallo di 36 gradi sarà sempre uguale al 10%. Ovvero <span class="math notranslate nohighlight">\(P(0 \leq \Theta \leq 36) \ = \ \frac{1}{10}\)</span> e <span class="math notranslate nohighlight">\(P(200 \leq \Theta \leq 236) \ = \ \frac{1}{10}\)</span>.</p>
+<p>È importante notare che le probabilità precedenti non si riferiscono al fatto che <span class="math notranslate nohighlight">\(\Theta\)</span> assume uno specifico valore, ma piuttosto all’evento di osservare <span class="math notranslate nohighlight">\(\Theta\)</span> in un intervallo di valori. In generale, la probabilità che la pendenza <span class="math notranslate nohighlight">\(\Theta\)</span> dello spinner cada in intervallo è la frazione del cerchio rappresentata dall’intervallo, cioè,</p>
+<div class="math notranslate nohighlight">
+\[
+P(\theta_1 \leq \Theta \leq \theta_2) = \frac{\theta_2 - \theta_1}{360}, \qquad 0 \leq \theta_1 \leq \theta_2 \leq 360.
+\]</div>
+<p>Nel caso di una variabile casuale continua, come l’angolo dello spinner, dunque, è facile capire come si può assegnare una probabilità all’evento per cui la v.c. assuma un valore compreso in un intervallo.</p>
+<section id="distribuzione-uniforme">
+<h3>Distribuzione uniforme<a class="headerlink" href="#distribuzione-uniforme" title="Permalink to this headline">#</a></h3>
+<p>L’esempio dello spinner descrive il “meccanismo generatore dei dati” della v.c. continua più semplice, ovvero la la distribuzione continua uniforme. In teoria della probabilità, la distribuzione continua uniforme è una distribuzione di probabilità continua che è uniforme su un insieme, ovvero che attribuisce la stessa probabilità a tutti i punti appartenenti ad un dato intervallo [a,b] contenuto nell’insieme.</p>
+<p>La distribuzione uniforme continua definita sull’intervallo <span class="math notranslate nohighlight">\({\displaystyle S=[a,b]\subset \mathbb {R}}\)</span> viene denotata con <span class="math notranslate nohighlight">\({\displaystyle {\mathcal {U}}(a,b)={\mathcal {U}}([a,b])}\)</span>. La sua densità di probabilità è</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{b-a}, \quad a \leq x \leq b
+\]</div>
+<p>e 0 altrimenti. (<a class="reference external" href="https://it.wikipedia.org/wiki/Distribuzione_continua_uniforme">Wikipedia</a>)</p>
+<p>Svolgiamo un piccolo esercizio con Python in cui, per continuare il nostro esempio dello spinner, consideriamom una <span class="math notranslate nohighlight">\(\mathcal {U}(0, 360)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">360</span>
+<span class="n">size</span><span class="o">=</span><span class="mi">4000</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+
+<span class="n">continuous_uniform_distribution</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+<span class="n">continuous_uniform_pdf</span> <span class="o">=</span> <span class="n">continuous_uniform_distribution</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">continuous_uniform_pdf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Densità&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/020_density_func_3_0.png" src="_images/020_density_func_3_0.png" />
+</div>
+</div>
+<p>Generiamo 10,000 valori casuali di una v.c. <span class="math notranslate nohighlight">\(\Theta \sim \mathcal {U}(0, 360)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’istogramma delle 10,000 realizzazioni di <span class="math notranslate nohighlight">\(\Theta\)</span> è il seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Theta ~ U[0, 360]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Densità&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribuzione uniforme&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/020_density_func_7_0.png" src="_images/020_density_func_7_0.png" />
+</div>
+</div>
+<p>È chiaro che, all’aumentare del numero delle realizzazioni <span class="math notranslate nohighlight">\(\Theta\)</span>, il profilo dell’istogramma tenderà a diventare una linea retta. Ciò significa che la funzione di densità di una variabile casuale uniforme continua è una costante: <span class="math notranslate nohighlight">\(f(\Theta) = c\)</span>.</p>
+<p>Dalla figura precedente vediamo che l’area sottesa alla funzione di densità è <span class="math notranslate nohighlight">\((b - a)\cdot c\)</span>. Dato che tale area deve essere unitaria, ovvero, <span class="math notranslate nohighlight">\((b - a) \cdot c = 1\)</span>, possiamo trovare <span class="math notranslate nohighlight">\(c\)</span> dividendo entrambi i termini per <span class="math notranslate nohighlight">\(b - a\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+c  = \frac{\displaystyle{1}}{\displaystyle b - a}.
+\]</div>
+<p>Ovvero, se <span class="math notranslate nohighlight">\(\Theta \sim \mathcal{U}(a, b)\)</span>, allora</p>
+<div class="math notranslate nohighlight">
+\[
+p_{\Theta}(\theta) = \mathcal{U}(\theta \mid a, b),
+\]</div>
+<p>laddove</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{U}(\theta \mid a, b) = \frac{1}{b - a}.
+\]</div>
+<p>In conclusione, la densità di una variabile casuale uniforme continua non dipende da <span class="math notranslate nohighlight">\(\theta\)</span> – è costante e identica per ogni possibile valore <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Il valore atteso di <span class="math notranslate nohighlight">\(X \sim \mathcal {U}(a,b)\)</span> è dato da</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E} = \frac{b - a}{2}.
+\]</div>
+<p>Nel caso della presente simulazione otteniamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>181.56346500049742
+</pre></div>
+</div>
+</div>
+</div>
+<p>Svolgiamo un altro semplice esercizio. Consideriamo una variabile casuale uniforme <span class="math notranslate nohighlight">\(X\)</span> definita sull’intervallo [0, 100]. Poniamoci il problema di trovare la probabilità <span class="math notranslate nohighlight">\(P(20 &lt; X &lt; 60)\)</span>.</p>
+<p>Per trovare la soluzione è sufficiente calcolare l’area di un rettangolo di base <span class="math notranslate nohighlight">\(60 - 20 = 40\)</span> e di altezza 1/100. La probabilità cercata è dunque <span class="math notranslate nohighlight">\(P(20 &lt; X &lt; 60) = 40 \cdot 0.01 = 0.4\)</span>.</p>
+</section>
+<section id="il-paradosso-delle-variabili-casuali-continue">
+<h3>Il paradosso delle variabili casuali continue<a class="headerlink" href="#il-paradosso-delle-variabili-casuali-continue" title="Permalink to this headline">#</a></h3>
+<p>Chiediamoci ora quale sia la probabilità che la v.c. continua assuma uno specifico valore. Consideriamo, ad esempio, una pendenza dello spinner <em>esattamente</em> uguale a 36 gradi (ovvero, 36.000000000000000000). Qual è la probabilità di osservare esattamente questo specifico valore? Paradossalmente, la risposta è zero:</p>
+<div class="math notranslate nohighlight">
+\[
+P(\Theta = 36) = 0.
+\]</div>
+<p>Infatti, se la probabilità di un qualunque valore fosse maggiore di zero, ogni altro possibile valore dovrebbe avere la stessa probabilità, dato che abbiamo assunto che tutti i valori <span class="math notranslate nohighlight">\(\Theta\)</span> sono egualmente probabili. Ma se poi andiamo a sommare tutte queste probabilità il totale diventerà maggiore di uno, il che non è possibile.</p>
+<p>Nel caso delle variabili casuali continue dobbiamo dunque rinunciare a qualcosa, e quel qualcosa è l’idea che, in una distribuzione continua, ciascun valore puntuale della variabile casuale possa avere una massa di probabilità maggiore di zero. Il paradosso sorge perché una realizzazione della variabile casuale continua produce sempre un qualche numero, ma ciscuno di tali numeri ha una probabilità nulla.</p>
+<p>Le variabili casuali continue, dunque non hanno una massa di probabilità. Invece, una massa di probabilità viene assegnata alla realizzazione della variabile casuale in un intervallo di valori.</p>
+</section>
+</section>
+<section id="dagli-istogrammi-alle-densita">
+<h2>Dagli istogrammi alle densità<a class="headerlink" href="#dagli-istogrammi-alle-densita" title="Permalink to this headline">#</a></h2>
+<p>Le considerazioni precedenti ci fanno capire che non esiste l’equivalente di una funzione di massa di probabilità per le variabili casuali continue. Esiste invece una <em>funzione di densità di probabilità</em> la quale, nei termini di una simulazione, può essere concepita nel modo seguente: avendo a disposizione un numero enorme di casi, quando l’intervallo <span class="math notranslate nohighlight">\(\Delta\)</span> di ciascuna classe <span class="math notranslate nohighlight">\(\rightarrow\)</span> 0, il profilo dell’istogramma delle frequenze delle classi di ampiezza <span class="math notranslate nohighlight">\(\Delta\)</span> tenderà a diventare una curva continua. Tale curva continua <span class="math notranslate nohighlight">\(f(x)\)</span> è detta funzione di densità di probabilità.</p>
+<p>In un istogramma, l’area di ciascuna barra è proporzionale alla frequenza relativa delle osservazioni in quel’intervallo. Perché tutti gli intervalli hanno la stessa ampiezza, anche l’altezza di ciascuna barra sarà proporzionale alla frequenza relativa delle osservazioni in quel’intervallo.</p>
+<p>Nella simulazione, possiamo pensare all’area di ciascuna barra dell’istogramma come alla stima della probabilità che la variabile casuale assuma un valore compreso nell’intervallo considerato. All’aumentare del numero <span class="math notranslate nohighlight">\(M\)</span> di osservazioni, le probabilità stimate si avvicinano sempre di più ai veri valori della probabilità. All’aumentare del numero degli intervalli (quando l’ampiezza <span class="math notranslate nohighlight">\(\Delta\)</span> dell’intervallo <span class="math notranslate nohighlight">\(\rightarrow\)</span> 0), il profilo dell’istogramma tende a diventare una curva continua. Tale curva continua è appunto la funzione di densità di probabilità della variabile casuale.</p>
+<p>Nella statistica descrittiva abbiamo già incontrato una rappresentazione che ha lo stesso significato della funzione di densità, ovvero il <em>kernel density plot</em>. La stima della densità del kernel (KDE), infatti, è un metodo non parametrico per stimare la funzione di densità di probabilità di una variabile casuale.</p>
+<p>Per fare un esempio, generiamo 50 valori dalla distribuzione del quoziente di intelligenza. Stampiamo i primi 5 valori.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">μ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([106.42081814, 120.30603767, 108.17077694,  69.24511741,
+        88.08326229])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Creiamo ora un istogramma a cui sovrapponiamo la funzione di densità Normale con parametri corrispondenti alla media e deviazione standard del campione. Con poche osservazioni, non c’è una buona corrispondenza tra l’istogramma e la curva continua che abbiamo chiamato “funzione di densità”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">mu</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+  
+<span class="c1"># Plot the histogram.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+  
+<span class="c1"># Plot the PDF.</span>
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+  
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Media e deviazione standard: </span><span class="si">{:.2f}</span><span class="s2"> e </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+  
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/020_density_func_16_0.png" src="_images/020_density_func_16_0.png" />
+</div>
+</div>
+<p>Ora aumentiamo il numero di osservazioni. In questo caso consideriamo 20,000 valori del QI. Generiamo dunque una figura simile alla precedente, solo considerando un campione di dati più grande.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">μ</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+
+<span class="n">mu</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+  
+<span class="c1"># Plot the histogram.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+  
+<span class="c1"># Plot the PDF.</span>
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+  
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Media e deviazione standard: </span><span class="si">{:.2f}</span><span class="s2"> e </span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+  
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/020_density_func_18_0.png" src="_images/020_density_func_18_0.png" />
+</div>
+</div>
+<p>Ora vediamo che c’è una corrispondenza molto buona tra il profilo dell’istogramma e la curva continua. Questo ci consente la seguente interpretazione: la funzione di densità è una curva che approssima il profilo di un istogramma, quando consideriamo un grande numero di osservazioni. In altre parole, una funzione di densità non è altro che un (profilo di un) istogramma nel caso di un numero infinito di osservazioni e intervalli di ampiezza <span class="math notranslate nohighlight">\(\Delta\)</span> infinitamente piccoli.</p>
+<p>In un istogramma, l’area di ciascuna barra è proporzionale alla frequenza relativa delle osservazioni in quel’intervallo. Perché tutti gli intervalli hanno la stessa ampiezza, anche l’altezza di ciascuna barra sarà proporzionale alla frequenza relativa delle osservazioni in quel’intervallo.</p>
+<p>Nella simulazione, possiamo pensare all’area di ciascuna barra dell’istogramma come alla stima della probabilità che la variabile casuale assuma un valore compreso nell’intervallo considerato. All’aumentare del numero <span class="math notranslate nohighlight">\(M\)</span> di osservazioni, le probabilità stimate si avvicinano sempre di più ai veri valori della probabilità. All’aumentare del numero degli intervalli (quando l’ampiezza <span class="math notranslate nohighlight">\(\Delta\)</span> dell’intervallo <span class="math notranslate nohighlight">\(\rightarrow\)</span> 0), il profilo dell’istogramma tende a diventare una curva continua. Tale curva continua è la funzione di densità di probabilità della variabile casuale.</p>
+<p>Nella statistica descrittiva abbiamo già incontrato una rappresentazione che ha lo stesso significato della funzione di densità, ovvero il <em>kernel density plot</em>. La stima della densità del kernel (KDE), infatti, è un metodo non parametrico per stimare la funzione di densità di probabilità di una variabile casuale.</p>
+</section>
+<section id="funzione-di-densita-di-probabilita">
+<h2>Funzione di densità di probabilità<a class="headerlink" href="#funzione-di-densita-di-probabilita" title="Permalink to this headline">#</a></h2>
+<p>Da un punto di vista matematico, l’intuizione precedente si può esprimere nel modo seguente.</p>
+<p>Per descrivere le probabilità che possono essere associate ad una variabile casuale continua <span class="math notranslate nohighlight">\(X\)</span> è necessario definire una funzione <span class="math notranslate nohighlight">\(p(X)\)</span> che deve soddisfare le seguenti due proprietà:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(x) \geq 0, \forall x\)</span>, ovvero, l’ordinata della funzione di densità è 0 o positiva;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} p(x) \,\operatorname {d}\!x = 1\)</span>, ovvero, l’area sottesa dalla <span class="math notranslate nohighlight">\(p(x)\)</span> è unitaria<a class="footnote-reference brackets" href="#density-func-3" id="id2">2</a>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(a &lt; x &lt; b) = \int_a^b p(x) \,\operatorname {d}\!x\)</span>, se <span class="math notranslate nohighlight">\(a \leq b\)</span>, ovvero, l’area sottesa dalla <span class="math notranslate nohighlight">\(p(y)\)</span> tra due punti <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> corrisponde alla probabilità che la v.c. <span class="math notranslate nohighlight">\(x\)</span> assuma un valore compresto tra questi due estremi.</p></li>
+</ul>
+<p><em>Interpretazione.</em> È possibile che <span class="math notranslate nohighlight">\(p(x) &gt; 1\)</span>, quindi una densità di probabilità non può essere interpretata come una probabilità. Piuttosto, la densità <span class="math notranslate nohighlight">\(p(x)\)</span> può essere utilizzata per confrontare la credibilità relativa che può essere assegnata a diversi valori <span class="math notranslate nohighlight">\(x\)</span>. Considerata una variabile casuale <span class="math notranslate nohighlight">\(X\)</span> di cui è disponibile un insieme di realizzazioni, possiamo dire che, se consideriamo due valori <span class="math notranslate nohighlight">\(x_k\)</span> e <span class="math notranslate nohighlight">\(x_l\)</span> con <span class="math notranslate nohighlight">\(p(x_k) &gt; p(x_l)\)</span>, allora possiamo concludere che è più credibile, in termini relativi, osservare realizzazioni <span class="math notranslate nohighlight">\(X\)</span> nell’intorno di <span class="math notranslate nohighlight">\(x_k\)</span> piuttosto che nell’intorno di <span class="math notranslate nohighlight">\(x_l\)</span>.</p>
+</section>
+<section id="la-funzione-di-ripartizione-per-una-variabile-casuale-continua">
+<h2>La funzione di ripartizione per una variabile casuale continua<a class="headerlink" href="#la-funzione-di-ripartizione-per-una-variabile-casuale-continua" title="Permalink to this headline">#</a></h2>
+<p>Per le variabili casuali continue, la funzione di ripartizione (ovvero, la distribuzione cumulativa) è definita esattamente come nel caso delle variabili casuali discrete:</p>
+<div class="math notranslate nohighlight">
+\[
+F_{\Theta}(\theta) = P(\Theta \leq \theta).
+\]</div>
+<p>Cioè, è la probabilità che la variabile casuale <span class="math notranslate nohighlight">\(\Theta\)</span> assuma un valore minore di o uguale a <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Come nel caso discreto, la funzione di ripartizione di una v.c. continua può essere utilizzata per calcolare la probabilità che la v.c. assuma valori in un certo intervallo.</p>
+</section>
+<section id="media-e-mediana">
+<h2>Media e mediana<a class="headerlink" href="#media-e-mediana" title="Permalink to this headline">#</a></h2>
+<p>Concludiamo questo capitolo con alcune considerazioni relative al contronto tra la media (valore atteso) e la mediana, nel caso di variabili casuali continue.</p>
+<p>Per distribuzioni simmetriche, sappiamo che la media e la mediana sono uguali. Chiediamoci ora cosa succede, nel caso di variabili casuali continue, nel caso di distribuzioni asimmetriche.</p>
+<p>La mediana indica il punto in cui la “massa totale” della distribuzione è suddivisa in due porzioni uguali. Nel caso della densità di probabilità, ciascuna di queste porzioni rappresenta un’area uguale, <span class="math notranslate nohighlight">\(A_1 = A_2 = 1/2\)</span> poiché l’area totale sottesa alla funzione di densità è 1 per definizione.</p>
+<p><img alt="Qual è la differenza tra mediana e media in una funzione di densità?" src="_images/median_mean.png" /></p>
+<p>La figura precedente mostra come differiscono i due concetti di mediana (indicata dalla linea verticale) e media (indicata dal “punto di equilibrio” triangolare). A sinistra, per una densità di probabilità simmetrica, la media e la mediana coincidono. A destra, una piccola porzione della distribuzione è stata spostata all’estremo destro. Questa modifica non ha influito sulla posizione della mediana, poiché le aree a destra e a sinistra della linea verticale sono ancora uguali. In altri termini, la mediana, <span class="math notranslate nohighlight">\(x_m\)</span>, divide l’area sottesa alla funzione di densità in due porzioni uguali:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^{x_m} p(x) dx = \int_{x_m}^{-\infty} p(x) dx = \frac{1}{2}.
+\]</div>
+<p>Segue da tale definizione che la mediana è il valore <span class="math notranslate nohighlight">\(x\)</span> per il quale la distribuzione cumulativa soddisfa</p>
+<div class="math notranslate nohighlight">
+\[
+F(x_m) = \frac{1}{2}.
+\]</div>
+<p>Tuttavia, il fatto che una parte della massa sia stata allontanata verso destra porta a uno spostamento della media della distribuzione, per compensare tale cambiamento. In altre parole, la media contiene più informazioni sulla distribuzione “spaziale” delle osservazioni, rispetto alla mediana. Ciò deriva dal fatto che la media della distribuzione (il valore atteso) è una “somma” – cioè è un integrale – di termini cha hanno la forma <span class="math notranslate nohighlight">\(x p(x) \Delta x\)</span>. Quindi la posizione lungo l’asse <span class="math notranslate nohighlight">\(x\)</span>, ovvero <span class="math notranslate nohighlight">\(x\)</span>, e non solo la “massa”, <span class="math notranslate nohighlight">\(p(x) \Delta x\)</span>, influenza il contributo che le componenti della distribuzione hanno sulla media.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="density-func-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Georg Cantor dimostrò che era impossibile mappare uno a uno i reali negli interi, dimostrando così che l’insieme dei reali è non numerabile.</p>
+</dd>
+<dt class="label" id="density-func-3"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Per quel che riguarda la notazione dell’integrale, ovvero <span class="math notranslate nohighlight">\(\int_x \,\operatorname {d}\!x\)</span>, rimando alla discussione di S.P. Thompson: <a class="reference external" href="https://calculusmadeeasy.org/1.html">https://calculusmadeeasy.org/1.html</a></p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="019_joint_prob.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Probabilità congiunta</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="022_discr_rv_distr.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Distribuzioni di v.c. discrete</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1404 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Approssimazione della distribuzione a posteriori &#8212; ds4psy</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Markov Chain Monte Carlo per l’inferenza bayesiana" href="040_beta_binomial.html" />
+    <link rel="prev" title="L’influenza della distribuzione a priori" href="030_balance_prior_post.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4psy</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Benvenuti
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nozioni di base
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="001_key_notions.html">
+   Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="005_measurement.html">
+   La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="007_freq_distr.html">
+   Analisi esplorativa dei dati
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="011_loc_scale.html">
+   Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="012_correlation.html">
+   Le relazioni tra variabili
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="013_eda_quickstart.html">
+   Introduzione alla data analisi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="014_dice.html">
+   Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_intro_prob.html">
+   La logica dell’incerto
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="016_conditional_prob.html">
+   Probabilità condizionata: significato, teoremi, eventi indipendenti
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="017_bayes_theorem.html">
+   Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="018_expval_var.html">
+   Indici di posizione, di varianza e di associazione di variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="019_joint_prob.html">
+   Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="020_density_func.html">
+   La densità di probabilità
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="022_discr_rv_distr.html">
+   Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="023_cont_rv_distr.html">
+   Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="024_likelihood.html">
+   La verosimiglianza
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_intro_bayes.html">
+   Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="026_subj_prop.html">
+   Pensare ad una proporzione in termini soggettivi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="029_conjugate_families.html">
+   Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="030_balance_prior_post.html">
+   L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="040_beta_binomial.html">
+   Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="041_mcmc_diagnostics.html">
+   Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="045_summarize_posterior.html">
+   Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="046_bayesian_prediction.html">
+   La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="050_normal_normal_mod.html">
+   Inferenza su una media
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="051_reglin_1.html">
+   Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="052_reglin_2.html">
+   Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="053_reglin_3.html">
+   Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="054_reglin_4.html">
+   Confronto tra le medie di due gruppi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="220_intro_frequentist.html">
+   Legge dei grandi numeri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="221_conf_interv.html">
+   Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="226_test_ipotesi.html">
+   Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="228_limiti_stat_frequentista.html">
+   Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="230_s_m_errors.html">
+   Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a03_set_theory.html">
+   Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus_notation.html">
+   Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/036_metropolis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F036_metropolis.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/036_metropolis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-basato-su-griglia">
+   Metodo basato su griglia
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modello-beta-binomiale">
+     Modello Beta-Binomiale
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-monte-carlo">
+   Metodo Monte Carlo
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integrazione-di-monte-carlo">
+     Integrazione di Monte Carlo
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#campionamento-dalla-distribuzione-a-posteriori">
+     Campionamento dalla distribuzione a posteriori
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-algoritmo-di-metropolis">
+   L’algoritmo di Metropolis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#un-applicazione-empirica">
+     Un’applicazione empirica
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagnostiche-della-soluzione-mcmc">
+   Diagnostiche della soluzione MCMC
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stazionarieta">
+     Stazionarietà
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#autocorrelazione">
+       Autocorrelazione
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-di-convergenza">
+     Test di convergenza
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Approssimazione della distribuzione a posteriori</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-basato-su-griglia">
+   Metodo basato su griglia
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modello-beta-binomiale">
+     Modello Beta-Binomiale
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-monte-carlo">
+   Metodo Monte Carlo
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integrazione-di-monte-carlo">
+     Integrazione di Monte Carlo
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#campionamento-dalla-distribuzione-a-posteriori">
+     Campionamento dalla distribuzione a posteriori
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-algoritmo-di-metropolis">
+   L’algoritmo di Metropolis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#un-applicazione-empirica">
+     Un’applicazione empirica
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagnostiche-della-soluzione-mcmc">
+   Diagnostiche della soluzione MCMC
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stazionarieta">
+     Stazionarietà
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#autocorrelazione">
+       Autocorrelazione
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-di-convergenza">
+     Test di convergenza
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="approssimazione-della-distribuzione-a-posteriori">
+<span id="cap-metropolis"></span><h1>Approssimazione della distribuzione a posteriori<a class="headerlink" href="#approssimazione-della-distribuzione-a-posteriori" title="Permalink to this headline">#</a></h1>
+<p>In generale, in un problema bayesiano i dati <span class="math notranslate nohighlight">\(y\)</span> provengono da una densità <span class="math notranslate nohighlight">\(p(y \mid \theta)\)</span> e al parametro <span class="math notranslate nohighlight">\(\theta\)</span> viene assegnata una densità a priori <span class="math notranslate nohighlight">\(p(\theta)\)</span>. Dopo avere osservato i dati <span class="math notranslate nohighlight">\(Y = y\)</span>, la funzione di verosimiglianza è uguale a <span class="math notranslate nohighlight">\(\mathcal{L}(\theta) = p(y \mid \theta)\)</span> e la densità a posteriori diventa</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta \mid y) = \frac{p(y \mid \theta) p(\theta)}{p(y)}. 
+\]</div>
+<p>È dunque necessario calcolare l’<em>evidenza</em> <span class="math notranslate nohighlight">\(p(y)\)</span>. Per fare questo è necessario risolvere il seguente integrale in cui si integra su tutti i possibili valori <span class="math notranslate nohighlight">\(\theta\)</span> dei parametri:</p>
+<div class="math notranslate nohighlight">
+\[
+p(y) = \int_{\theta} p(y \mid \theta) p(\theta) \,\operatorname {d}\! \theta. 
+\]</div>
+<p>Il problema fondamentale consiste nella difficoltà di valutare analiticamente tale integrale. Se vogliamo trovare la distribuzione a posteriori con metodi analitici, dobbiamo ricorrere all’impiego di distribuzioni a priori coniugate, come abbiamo fatto nello schema beta-binomiale. Per quanto “semplice” in termini formali, la scelta di distribuzioni a priori coniugate limita di molto le possibili scelte del ricercatore. Inoltre, non è sempre sensato, dal punto di vista teorico, utilizzare tali distribuzioni per la stima dei parametri di interesse. Il mancato ricorso all’impiego delle distribuzioni a priori coniugate richiede necessariamente il computo dell’espressione a denominatore della formula di Bayes che solo in rare occasioni può essere ottenuta per via analitica. In altre parole, è possibile ottenere analiticamenre la distribuzione a posteriori solo per alcune specifiche combinazioni di distribuzioni a priori e verosimiglianza, il che limita considerevolmente la flessibilità della modellizzazione.</p>
+<p>Per questa ragione, la strada principale che viene seguita nella modellistica bayesiana è quella che porta a determinare la distribuzione a posteriori non per via analitica, ma bensì mediante metodi di approssimazione numerica. La simulazione fornisce dunque la strategia generale del calcolo bayesiano. A questo fine vengono principalmente usati i metodi di campionamento Monte Carlo basati su Catena di Markov (MCMC). Tali metodi costituiscono una potente e praticabile alternativa per la costruzione della distribuzione a posteriori per modelli complessi e consentono di decidere quali distribuzioni a priori e quali distribuzioni di verosimiglianza usare sulla base di considerazioni teoriche soltanto, senza dovere preoccuparsi di altri vincoli.</p>
+<p>Dato che è basata su metodi computazionalmente intensivi, la stima numerica della funzione a posteriori può essere svolta soltanto mediante software. In anni recenti i metodi Bayesiani di analisi dei dati sono diventati sempre più popolari proprio perché la potenza di calcolo necessaria per svolgere tali calcoli è ora alla portata di tutti. Questo non era vero solo pochi decenni fa.</p>
+<p>In questo capitolo descriviamo due metodi che possono essere usati come mezzo per calcolare la distribuzione a posteriori quando la distribuzione a priori coniugata non è applicabile.</p>
+<ul class="simple">
+<li><p><em>metodi basati su griglia:</em> dove, sebbene non sia disponibile alcuna formula algebrica in forma chiusa, le proprietà della distribuzione a posteriori possono essere calcolate con una precisione arbitraria;</p></li>
+<li><p><em>metodi Monte Carlo:</em> dove, utilizzando appropriate funzioni di numeri casuali, viene generato un grande campione di osservazioni della distribuzione a posteriori per poi stimare empiricamente la proprietà di interesse in base al campione così ottenuto.</p></li>
+</ul>
+<section id="metodo-basato-su-griglia">
+<h2>Metodo basato su griglia<a class="headerlink" href="#metodo-basato-su-griglia" title="Permalink to this headline">#</a></h2>
+<p>Il metodo basato su griglia (<em>grid-based</em>) è un metodo numerico esatto basato su una griglia di punti uniformemente spaziati. Anche se la maggior parte dei parametri è continua (ovvero, in linea di principio ciascun parametro può assumere un numero infinito di valori), possiamo ottenere un’eccellente approssimazione della distribuzione a posteriori considerando solo una griglia finita di valori dei parametri. Con un tale metodo, dunque, la densità di probabilità a posteriori può essere approssimata tramite le densità di probabilità calcolate in ciascuna cella della griglia.</p>
+<p>Il metodo basato su griglia si sviluppa in quattro fasi:</p>
+<ul class="simple">
+<li><p>fissare una griglia discreta di possibili valori <span class="math notranslate nohighlight">\(\theta\)</span>;</p></li>
+<li><p>valutare la distribuzione a priori <span class="math notranslate nohighlight">\(p(\theta)\)</span> e la funzione di verosimiglianza <span class="math notranslate nohighlight">\(p(y \mid \theta)\)</span> in corrispondenza di ciascun valore <span class="math notranslate nohighlight">\(\theta\)</span> della griglia;</p></li>
+<li><p>ottenere un’approssimazione discreta della densità a posteriori:</p>
+<ul>
+<li><p>per ciascun valore <span class="math notranslate nohighlight">\(\theta\)</span> della griglia, calcolare il prodotto <span class="math notranslate nohighlight">\(p(\theta) p(y \mid \theta)\)</span>;</p></li>
+<li><p>normalizzare i prodotti così ottenuti in modo tale che la loro somma sia 1;</p></li>
+</ul>
+</li>
+<li><p>selezionare <span class="math notranslate nohighlight">\(n\)</span> valori casuali della griglia in modo tale da ottenere un campione casuale delle densità a posteriori normalizzate.</p></li>
+</ul>
+<p>È possibile migliorare l’approssimazione aumentando il numero di punti della griglia. Infatti utilizzando un numero infinito di punti si otterrebbe la descrizione esatta della distribuzione a posteriori, dovendo però pagare il costo dell’utilizzo di infinite risorse di calcolo. Il limite maggiore dell’approccio basato su griglia è proprio questo: al crescere della dimensionalità <span class="math notranslate nohighlight">\(n\)</span> dello spazio dei parametri, i punti della griglia necessari per avere una buona stima crescono esponenzialmente con <span class="math notranslate nohighlight">\(n\)</span>, rendendo questo metodo inattuabile per problemi complessi.</p>
+<section id="modello-beta-binomiale">
+<h3>Modello Beta-Binomiale<a class="headerlink" href="#modello-beta-binomiale" title="Permalink to this headline">#</a></h3>
+<p>Per fare un esempio, utilizziamo il metodo basato su griglia nel caso dello schema beta-binomiale di cui conosciamo la soluzione esatta. Esaminiamo nuovamente i dati di <span id="id1">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>: 23 “successi” in 30 prove Bernoulliane indipendenti.</p>
+<p>Imponendo alla distribuzione a priori su <span class="math notranslate nohighlight">\(\theta\)</span> (probabilità di successo in una singola prova, laddove per “successo” si intende una aspettativa distorta negativamente dell’umore futuro) una <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span> per descrivere la nostra incertezza sul parametro prima di avere osservato i dati, il modello diventa:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Y \mid \theta &amp; \sim Bin(n = 30, \theta), \notag\\
+\theta &amp; \sim Beta(2, 10).\notag
+\end{align}
+\end{split}\]</div>
+<p>In queste circostanze, l’aggiornamento bayesiano produce una distribuzione a posteriori Beta di parametri 25 (<span class="math notranslate nohighlight">\(y + \alpha\)</span> = 23 + 2) e 17 (<span class="math notranslate nohighlight">\(n - y + \beta\)</span> = 30 - 23 + 10):</p>
+<div class="math notranslate nohighlight">
+\[
+\theta \mid (y = 23) \sim Beta(25, 17).\notag
+\]</div>
+<p>Per approssimare una tale distribuzione a posteriori, scriviamo una funzione che produce l’approssimazione della distribuzione a posteriori basata su griglia usando la procedura descritta nel capitolo precedente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">beta</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">statsmodels.graphics</span> <span class="kn">import</span> <span class="n">tsaplots</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">2023</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posterior_grid_approx</span><span class="p">(</span><span class="n">grid_points</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">success</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># define grid</span>
+    <span class="n">p_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">grid_points</span><span class="p">)</span>
+
+    <span class="c1"># define prior</span>
+    <span class="n">unstd_prior</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">p_grid</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">prior</span> <span class="o">=</span> <span class="n">unstd_prior</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">unstd_prior</span><span class="p">)</span>
+
+    <span class="c1"># compute likelihood at each point in the grid</span>
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">p_grid</span><span class="p">)</span>
+
+    <span class="c1"># compute product of likelihood and prior</span>
+    <span class="n">unstd_posterior</span> <span class="o">=</span> <span class="n">likelihood</span> <span class="o">*</span> <span class="n">prior</span>
+
+    <span class="c1"># standardize the posterior, so it sums to 1</span>
+    <span class="n">posterior</span> <span class="o">=</span> <span class="n">unstd_posterior</span> <span class="o">/</span> <span class="n">unstd_posterior</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">p_grid</span><span class="p">,</span> <span class="n">posterior</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fissiamo una griglia di <span class="math notranslate nohighlight">\(n = 1000\)</span> valori equispaziati. Usando la funzione precedente, creaiamo un grafico della stima della distribuzione a posteriori a cui è stata sovrapposta l’esatta distribuzione a posteriori <span class="math notranslate nohighlight">\(Beta(25, 17)\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">w</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">30</span>
+<span class="n">p_grid</span><span class="p">,</span> <span class="n">posterior</span> <span class="o">=</span> <span class="n">posterior_grid_approx</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_grid</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y = </span><span class="si">{}</span><span class="se">\n</span><span class="s1">n = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span>
+       <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Beta(25, 17)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Probabilità di un&#39;aspettativa negativa&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Densità&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribuzione a posteriori&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/036_metropolis_4_0.png" src="_images/036_metropolis_4_0.png" />
+</div>
+</div>
+<p>In conclusione, il metodo basato su griglia è molto intuitivo e non richiede particolari competenze di programmazione per essere implementato. Inoltre, fornisce un risultato che, per tutti gli scopi pratici, può essere considerato come un campione casuale estratto da <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span>. Tuttavia, anche se tale metodo fornisce risultati accuratissimi, esso ha un uso limitato. A causa della <em>maledizione della dimensionalità</em><a class="footnote-reference brackets" href="#posterior-sim-1" id="id2">1</a>, tale metodo può solo essere usato nel caso di semplici modelli statistici, con non più di due parametri. Nella pratica concreta tale metodo viene dunque sostituito da altre tecniche più efficienti in quanto, anche nei più comuni modelli utilizzati in psicologia, vengono solitamente stimati centinaia se non migliaia di parametri.</p>
+</section>
+</section>
+<section id="metodo-monte-carlo">
+<h2>Metodo Monte Carlo<a class="headerlink" href="#metodo-monte-carlo" title="Permalink to this headline">#</a></h2>
+<p>I metodi più ampiamente adottati nell’analisi bayesiana per la costruzione della distribuzione a posteriori per modelli complessi sono i metodi di campionamento MCMC. Tali metodi consentono al ricercatore di decidere quali distribuzioni a priori e quali distribuzioni di verosimiglianza usare sulla base di considerazioni teoriche soltanto, senza doversi preoccupare di altri vincoli. Dato che è basata su metodi computazionalmente intensivi, la stima numerica MCMC della funzione a posteriori può essere svolta soltanto mediante software. In anni recenti i metodi Bayesiani di analisi dei dati sono diventati sempre più popolari proprio perché la potenza di calcolo necessaria per svolgere tali calcoli è ora alla portata di tutti. Questo non era vero solo pochi decenni fa.</p>
+<section id="integrazione-di-monte-carlo">
+<h3>Integrazione di Monte Carlo<a class="headerlink" href="#integrazione-di-monte-carlo" title="Permalink to this headline">#</a></h3>
+<p>Il termine Monte Carlo si riferisce al fatto che la computazione fa ricorso ad un ripetuto campionamento casuale attraverso la generazione di sequenze di numeri casuali. Una delle sue applicazioni più potenti è il calcolo degli integrali mediante simulazione numerica. Un’illustrazione è fornita dal seguente esempio. Supponiamo di essere in grado di estrarre campioni casuali dalla distribuzione continua <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span> di media <span class="math notranslate nohighlight">\(\mu\)</span>. Se possiamo ottenere una sequenza di realizzazioni indipendenti</p>
+<div class="math notranslate nohighlight">
+\[
+\theta^{(1)}, \theta^{(2)},\dots, \theta^{(T)} \overset{\text{iid}}{\sim} p(\theta \mid y)
+\]</div>
+<p>allora diventa possibile calcolare</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(\theta \mid y) = \int \theta p(\theta \mid y) \,\operatorname {d}\!\theta \approx \frac{1}{T} \sum_{i=1}^T \theta^{(t)}.
+\]</div>
+<p>In altre parole, l’aspettazione teorica di <span class="math notranslate nohighlight">\(\theta\)</span> può essere approssimata dalla media campionaria di un insieme di realizzazioni indipendenti ricavate da <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span>. Per la Legge Forte dei Grandi Numeri, l’approssimazione diventa arbitrariamente esatta per <span class="math notranslate nohighlight">\(T \rightarrow \infty\)</span>.<a class="footnote-reference brackets" href="#posterior-sim-2" id="id3">2</a></p>
+<p>Quello che è stato detto sopra non è altro che un modo sofisticato per dire che, se vogliamo calcolare un’approssimazione del valore atteso di una variabile casuale, non dobbiamo fare altro che la media aritmetica di un grande numero di realizzazioni indipendenti della variabile casuale. Come è facile intuire, l’approssimazione migliora al crescere del numero dei dati che abbiamo a disposizione.</p>
+<p>Un’altra importante funzione di <span class="math notranslate nohighlight">\(\theta\)</span> è la funzione indicatore, <span class="math notranslate nohighlight">\(I(l &lt; \theta &lt; u)\)</span>, che assume valore 1 se <span class="math notranslate nohighlight">\(\theta\)</span> giace nell’intervallo <span class="math notranslate nohighlight">\((l, u)\)</span> e 0 altrimenti. Il valore di aspettazione di <span class="math notranslate nohighlight">\(I(l &lt; \theta &lt; u)\)</span> rispetto a <span class="math notranslate nohighlight">\(p(\theta)\)</span> dà la probabilità che <span class="math notranslate nohighlight">\(\theta\)</span> rientri nell’intervallo specificato, <span class="math notranslate nohighlight">\(Pr(l &lt; \theta &lt; u)\)</span>. Anche questa probabilità può essere approssimato usando l’integrazione Monte Carlo, ovvero prendendo la media campionaria del valore della funzione indicatore per ogni realizzazione <span class="math notranslate nohighlight">\(\theta^{(t)}\)</span>. È semplice vedere come</p>
+<div class="math notranslate nohighlight">
+\[
+Pr(l &lt; \theta &lt; u) \approx \frac{\text{numero di realizzazioni } \theta^{(t)} \in (l, u)}{T}.
+\]</div>
+<p>Abbiamo fornito qui alcuni accenni relativi all’integrazione di Monte Carlo perché, nell’analisi bayesiana, il metodo Monte Carlo viene usato per ottenere un’approssimazione della distribuzione a posteriori, quando tale distribuzione non può essere calcolata con metodi analitici. In altre parole, il metodo Monte Carlo consente di ottenere un gran numero di valori <span class="math notranslate nohighlight">\(\theta\)</span> che, nelle circostanze ideali, avrà una distribuzione identica alla distribuzione a posteriori <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span>.</p>
+</section>
+<section id="campionamento-dalla-distribuzione-a-posteriori">
+<h3>Campionamento dalla distribuzione a posteriori<a class="headerlink" href="#campionamento-dalla-distribuzione-a-posteriori" title="Permalink to this headline">#</a></h3>
+<p>Poniamoci ora il problema di approssimare la distribuzione a posteriori con una simulazione. Consideriamo nuovamente i dati di <span id="id4">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> (ovvero, 23 “successi” in 30 prove Bernoulliane) e, come in precedenza, assumiamo per <span class="math notranslate nohighlight">\(\theta\)</span> una distribuzione a priori <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span>.</p>
+<p>In tali circostanze, la distribuzione a posteriori può essere ottenuta analiticamente tramite lo schema beta-binomiale ed è una <span class="math notranslate nohighlight">\(Beta(25, 17)\)</span>. Se vogliamo conoscere il valore della media a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span>, il risultato esatto è</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{\theta}_{post} = \frac{\alpha}{\alpha + \beta} = \frac{25}{25 + 17} \approx 0.5952.
+\]</div>
+<p>È anche possibile ottenere il valore della media a posteriori con una simulazione numerica. Conoscendo la forma della la distribuzione a posteriori, possiamo estrarre un campione di osservazioni da una <span class="math notranslate nohighlight">\(Beta(25, 17)\)</span> per poi calcolare la media delle osservazioni ottenute. Con poche osservazioni (diciamo 10) otteniamo un risultato molto approssimato.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">beta</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5922150569351978 0.5660603096447175 0.5814740691405981 0.5539749050409133 0.4646997341897151 0.5519658154808674 0.6573330850391264 0.6459812610658355 0.5389911356760883 0.6592222472571225
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5811917619470183
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’approssimazione migliora all’aumentare del numero di osservazioni.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5952190191720479
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso si può dire delle altre statistiche descrittive: moda, varianza, eccetera.</p>
+<p>Questa simulazione, detta di Monte Carlo, produce il risultato desiderato perché</p>
+<ul class="simple">
+<li><p>sappiamo che la distribuzione a posteriori è una <span class="math notranslate nohighlight">\(Beta(25, 17)\)</span>,</p></li>
+<li><p>è possibile usare le funzioni Python per estrarre campioni casuali da una tale distribuzione.</p></li>
+</ul>
+<p>Tuttavia, capita raramente di usare una distribuzione a priori coniugata alla verosimiglianza. Quindi, in generale, le due condizioni descritte sopra non si applicano. Ad esempio, nel caso di una verosimiglianza binomiale e di una distribuzione a priori gaussiana, la distribuzione a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta \mid y) = \frac{\mathrm{e}^{-(\theta - 1 / 2)^2} \theta^y (1 - \theta)^{n - y}} {\int_0^1 \mathrm{e}^{-(t - 1 / 2)^2} t^y (1 - t)^{n - y} dt}.
+\]</div>
+<p>Una tale distribuzione non è implementata in Python; dunque non possiamo usare Python per ottenere campioni casuali da una tale distribuzione.</p>
+<p>In tali circostanze, però, è possibile ottenere ottenere un campione causale dalla distribuzione a posteriori procedendo in un altro modo. Questo risultato si ottiene utilizzando i metodi Monte Carlo basati su Catena di Markov (MCMC). I metodi MCMC, di cui l’algoritmo Metropolis è un caso particolare e ne rappresenta il primo esempio, sono una classe di algoritmi che consentono di ottenere campioni casuali da una distribuzione a posteriori <em>senza dovere conoscere la rappresentazione analitica di una tale distribuzione</em>.<a class="footnote-reference brackets" href="#posterior-sim-3" id="id5">3</a> Le tecniche MCMC sono il metodo computazionale maggiormente usato per risolvere i problemi dell’inferenza bayesiana.</p>
+</section>
+</section>
+<section id="l-algoritmo-di-metropolis">
+<h2>L’algoritmo di Metropolis<a class="headerlink" href="#l-algoritmo-di-metropolis" title="Permalink to this headline">#</a></h2>
+<p>L’idea di base dell’algoritmo <span id="id6">[<a class="reference internal" href="z_biblio.html#id87" title="Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, and Edward Teller. Equation of state calculations by fast computing machines. The Journal of Chemical Physics, 21(6):1087-1092, 1953.">MRR+53</a>]</span> è campionare dalla distribuzione a posteriori combinando una “ricerca casuale” (l’aspetto Monte Carlo) con un meccanismo per “saltare” in modo intelligente, ma in un modo che alla fine non dipende da dove siamo partiti (una proprietà della Catena di Markov). Quindi i metodi Markov Chain Monte Carlo possono essere descritti come delle ricerche senza memoria (ovvero, senza distorsioni sistematiche) eseguite con dei “salti” intelligenti.</p>
+<p>L’algoritmo Metropolis segue il seguente schema.</p>
+<ul class="simple">
+<li><p>Iniziare l’algoritmo nella posizione corrente nello spazio dei parametri.</p></li>
+<li><p>Proporre un “salto” in una nuova posizione nello spazio dei parametri.</p></li>
+<li><p>Accettare o rifiutare il salto in modo probabilistico, utilizzando le informazioni precedenti e i dati disponibili.</p></li>
+<li><p>Se il salto viene accettato, spostarsi nella nuova posizione e tornare al passaggio 1.</p></li>
+<li><p>Se il salto viene rifiutato, restare nell’attuale posizione e tornare al passaggio 1.</p></li>
+<li><p>Dopo che si è verificato un determinato numero di salti, restituire tutte le posizioni accettate.</p></li>
+</ul>
+<p>Un’illustrazione visiva di come si svolge il processo di “esplorazione” dello spazio dei parametri dell’algoritmo Metropolis è fornita in questo post: <a class="reference external" href="https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/">https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/</a>. La principale differenza tra i vari algoritmi MCMC risiede nel modo in cui si salta e nel modo in cui decide se saltare.</p>
+<p>Esaminiamo più in dettaglio l’algoritmo Metropolis.</p>
+<ul class="simple">
+<li><p>Si inizia con un punto arbitrario <span class="math notranslate nohighlight">\(\theta^{(1)}\)</span>; quindi il primo valore <span class="math notranslate nohighlight">\(\theta^{(1)}\)</span> della catena di Markov può corrispondere semplicemente ad un valore a caso tra i valori possibili del parametro.</p></li>
+<li><p>Per ogni passo successivo della catena, <span class="math notranslate nohighlight">\(m + 1\)</span>, si estrae un valore candidato <span class="math notranslate nohighlight">\(\theta'\)</span> da una distribuzione proposta: <span class="math notranslate nohighlight">\(\theta' \sim \Pi(\theta)\)</span>. La distribuzione proposta può essere qualunque distribuzione, anche se, idealmente, è meglio che sia simile alla distribuzione a posteriori. In pratica, però, la distribuzione a posteriori è sconosciuta e quindi il valore <span class="math notranslate nohighlight">\(\theta'\)</span> viene estratto a caso da una qualche distribuzione simmetrica centrata sul valore corrente <span class="math notranslate nohighlight">\(\theta^{(m)}\)</span> del parametro. Nell’esempio presente useremo la gaussiana quale distribuzione proposta. La distribuzione proposta gaussiana sarà centrata sul valore corrente della catena e avrà una deviazione standard appropriata: <span class="math notranslate nohighlight">\(\theta' \sim \mathcal{N}(\theta^{(m)}, \sigma)\)</span>. In pratica, questo significa che, se <span class="math notranslate nohighlight">\(\sigma\)</span> è piccola, il valore candidato <span class="math notranslate nohighlight">\(\theta'\)</span> sarà simile al valore corrente <span class="math notranslate nohighlight">\(\theta^{(m)}\)</span>.</p></li>
+<li><p>Si calcola il rapporto <span class="math notranslate nohighlight">\(r\)</span> tra il posteriore del parametro proposto <span class="math notranslate nohighlight">\(\theta'\)</span> e il posteriore del parametro corrente <span class="math notranslate nohighlight">\(\theta^{(m)}\)</span>. Si noti che, utilizzando la regola di Bayes, l’&#64;eq-ratio-metropolis cancella la costante di normalizzazione, <span class="math notranslate nohighlight">\(p(Y)\)</span>, dal rapporto. Il lato destro di quest’ultima uguaglianza contiene solo le verosimiglianze e i priori, entrambi facilmente calcolabili.</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-eq-ratio-metropolis">
+<span class="eqno">(65)<a class="headerlink" href="#equation-eq-ratio-metropolis" title="Permalink to this equation">#</a></span>\[
+r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \theta') p(\theta')}{p(Y)}}{\frac{p(y \mid \theta^{(m)}) p(\theta^{(m)})}{p(Y)}} 
+= \frac{p(y \mid \theta') p(\theta')}{p(y \mid \theta^{(m)}) p(\theta^{(m)})}.
+\]</div>
+<ul class="simple">
+<li><p>Si decide se accettare il candidato <span class="math notranslate nohighlight">\(\theta'\)</span> oppure se rigettarlo e estrarre un nuovo valore dalla distribuzione proposta. Possiamo pensare al rapporto <span class="math notranslate nohighlight">\(r\)</span> come alla risposta alla seguente domanda: alla luce dei dati, quale stima di <span class="math notranslate nohighlight">\(\theta\)</span> è più credibile, il valore candidato o il valore corrente? Se <span class="math notranslate nohighlight">\(r\)</span> è maggiore di 1, ciò significa che il candidato è più credibile del valore corrente; dunque se <span class="math notranslate nohighlight">\(r\)</span> è maggiore di 1 il candidato viene sempre accettato. Altrimenti, si decide di accettare il candidato con una probabilità minore di 1, ovvero non sempre, ma soltanto con una probabilità uguale ad <span class="math notranslate nohighlight">\(r\)</span>. Se <span class="math notranslate nohighlight">\(r\)</span> è uguale a 0.10, ad esempio, questo significa che la credibilità a posteriori del valore candidato è 10 volte più piccola della credibilità a posteriori del valore corrente. Dunque, il valore candidato verrà accettato solo nel 10% dei casi. Come conseguenza di questa strategia di scelta, l’algoritmo Metropolis ottiene un campione casuale dalla distribuzione a posteriori, dato che la probabilità di accettare il valore candidato è proporzionale alla densità del candidato nella distribuzione a posteriori. Dal punto di vista algoritmico, tale procedura viene implementata confrontando il rapporto <span class="math notranslate nohighlight">\(r\)</span> con un valore estratto a caso da una distribuzione uniforme <span class="math notranslate nohighlight">\(Unif(0, 1)\)</span>. Se <span class="math notranslate nohighlight">\(r &gt; u \sim Unif(0, 1)\)</span>, allora il candidato <span class="math notranslate nohighlight">\(\theta'\)</span> viene accettato e la catena si muove in quella nuova posizione, ovvero <span class="math notranslate nohighlight">\(\theta^{(m+1)} = \theta'\)</span>. Altrimenti <span class="math notranslate nohighlight">\(\theta^{(m+1)} = \theta^{(m)}\)</span> e si estrae un nuovo candidato dalla distribuzione proposta.</p></li>
+<li><p>Il passaggio finale dell’algoritmo calcola l’<em>accettanza</em> in una specifica esecuzione dell’algoritmo, ovvero la proporzione di candidati <span class="math notranslate nohighlight">\(\theta'\)</span> che sono stati accettati quali valori successivi della catena.</p></li>
+</ul>
+<p>L’algoritmo Metropolis prende come input il numero <span class="math notranslate nohighlight">\(T\)</span> di passi da simulare, la deviazione standard <span class="math notranslate nohighlight">\(\sigma\)</span> della distribuzione proposta e la densità a priori, e ritorna come output la sequenza <span class="math notranslate nohighlight">\(\theta^{(1)}, \theta^{(2)}, \dots, \theta^{(T)}\)</span>. La chiave del successo dell’algoritmo Metropolis è il numero di passi fino a che la catena approssima la stazionarietà. Tipicamente i primi da 1000 a 5000 elementi sono scartati. Dopo un certo periodo <span class="math notranslate nohighlight">\(k\)</span> (detto di <em>burn-in</em>), la catena di Markov converge ad una variabile casuale che è distribuita secondo la distribuzione a posteriori (stazionarietà). In altre parole, i campioni del vettore <span class="math notranslate nohighlight">\(\left(\theta^{(k+1)}, \theta^{(k+2)}, \dots, \theta^{(T)}\right)\)</span> diventano campioni di <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span>.</p>
+<section id="un-applicazione-empirica">
+<h3>Un’applicazione empirica<a class="headerlink" href="#un-applicazione-empirica" title="Permalink to this headline">#</a></h3>
+<p>Implementiamo ora l’algoritmo Metropolis per trovare la distribuzione a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span> per i dati di <span id="id7">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> (23 successi in 30 prove Bernoulliane), imponendo su <span class="math notranslate nohighlight">\(\theta\)</span> una <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span>. Nell’implementazione che verrà qui presentata, l’algoritmo Metropolis richiede l’uso delle seguenti funzioni.</p>
+<p><strong>Verosimiglianza.</strong> Useremo una funzione di verosimiglianza binomiale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">23</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="k">return</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Distribuzione a priori.</strong> In questo esempio, la distribuzione a priori (che è scelta solo per motivi didattici ed è priva di qualsiasi motivazione di altra natura) è una <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_prior</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Distribuzione a posteriori.</strong> La distribuzione a posteriori è data dal prodotto della distribuzione a priori e della verosimiglianza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_posterior</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">get_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">get_prior</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Distribuzione proposta.</strong> Per implementare l’algoritmo Metropolis utilizzeremo una distribuzione proposta gaussiana. Il valore candidato sarà dunque un valore selezionato a caso da una gaussiana di parametri <span class="math notranslate nohighlight">\(\mu\)</span> uguale al valore corrente nella catena e <span class="math notranslate nohighlight">\(\sigma = 0.9\)</span>. In questo esempio, la deviazione standard <span class="math notranslate nohighlight">\(\sigma\)</span> è stata scelta empiricamente in modo tale da ottenere una accettanza adeguata. L’accettanza ottimale è pari a circa 0.20/0.30 — se l’accettanza è troppo grande, l’algoritmo esplora uno spazio troppo ristretto della distribuzione a posteriori.<a class="footnote-reference brackets" href="#posterior-sim-4" id="id8">4</a> Nella funzione ho anche inserito un controllo che impone al valore candidato di essere incluso nell’intervallo [0, 1], com’è necessario per il valore di una proporzione.<a class="footnote-reference brackets" href="#posterior-sim-5" id="id9">5</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_proposal</span><span class="p">(</span><span class="n">p_current</span><span class="p">,</span> <span class="n">proposal_width</span><span class="p">):</span>
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">proposal</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">p_current</span><span class="p">,</span> <span class="n">proposal_width</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">proposal</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">proposal</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">proposal</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’algoritmo Metropolis viene implementato nella funzione seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sampler</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p_init</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">proposal_width</span><span class="o">=</span><span class="mf">.1</span><span class="p">):</span>
+    <span class="n">p_current</span> <span class="o">=</span> <span class="n">p_init</span>
+    <span class="n">posterior</span> <span class="o">=</span> <span class="p">[</span><span class="n">p_current</span><span class="p">]</span>
+    <span class="n">acceptance</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samples</span><span class="p">):</span>
+        <span class="c1"># Suggest new position</span>
+        <span class="n">proposal</span> <span class="o">=</span> <span class="n">get_proposal</span><span class="p">(</span><span class="n">p_current</span><span class="p">,</span> <span class="n">proposal_width</span><span class="p">)</span>
+        <span class="c1"># Accept proposal?</span>
+        <span class="n">p_accept</span> <span class="o">=</span> <span class="n">get_posterior</span><span class="p">(</span><span class="n">proposal</span><span class="p">)</span> <span class="o">/</span> <span class="n">get_posterior</span><span class="p">(</span><span class="n">p_current</span><span class="p">)</span>
+        <span class="n">accept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p_accept</span>
+        <span class="k">if</span> <span class="n">accept</span><span class="p">:</span>
+            <span class="c1"># Update position</span>
+            <span class="n">p_current</span> <span class="o">=</span> <span class="n">proposal</span>
+            <span class="n">acceptance</span> <span class="o">=</span> <span class="n">acceptance</span> <span class="o">+</span><span class="mi">1</span>
+        <span class="n">posterior</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_current</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">acceptance</span><span class="o">/</span><span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">posterior</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Utilizzo ora il campionatore <code class="docutils literal notranslate"><span class="pre">sampler()</span></code>, per generare una sequenza (catena) di valori <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acceptance</span><span class="p">,</span> <span class="n">posterior</span> <span class="o">=</span> <span class="n">sampler</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">p_init</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">proposal_width</span><span class="o">=</span><span class="mf">.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esamino l’accettanza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acceptance</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2486
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il valore trovato conferma la bontà della deviazione standard (<span class="math notranslate nohighlight">\(\sigma\)</span> = 0.9) scelta per la distribuzione proposta.</p>
+<p>La lista <code class="docutils literal notranslate"><span class="pre">posterior</span></code> contiene 10,000 valori di una catena di Markov. Escludo i primi 5000 valori considerati come burn-in e considero i restanti 5,000 valori come un campione casuale estratto dalla distribuzione a posteriori <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span>.</p>
+<p>Mediante i valori della catena così ottenuta è facile trovare una stima a posteriori del parametro <span class="math notranslate nohighlight">\(\theta\)</span>. Per esempio, posso trovare la stima della media a posteriori.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">5001</span><span class="p">:</span><span class="mi">10000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5930180187846664
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oppure posso calcolare la deviazione standard dell’approssimazione numerica della distribuzione a posteriori.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">5001</span><span class="p">:</span><span class="mi">10000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07488633184222122
+</pre></div>
+</div>
+</div>
+</div>
+<p>Visualizziamo un <em>trace plot</em> dei valori della catena di Markov.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">5001</span><span class="p">:</span><span class="mi">10000</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;theta&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/036_metropolis_31_0.png" src="_images/036_metropolis_31_0.png" />
+</div>
+</div>
+<p>Nella figura, l’istogramma descrive i valori <span class="math notranslate nohighlight">\(\theta\)</span> prodotti dall’algoritmo Metropolis mentre la linea continua descrive la distribuzione a posteriori ottenuta per via analitica, ovvero una <span class="math notranslate nohighlight">\(Beta(25, 17)\)</span>. La figura indica che la catena converge alla corretta distribuzione a posteriori.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">5001</span><span class="p">:</span><span class="mi">10000</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;estimated posterior&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+                <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
+       <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Beta(25, 17)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9694844e80&gt;]
+</pre></div>
+</div>
+<img alt="_images/036_metropolis_33_1.png" src="_images/036_metropolis_33_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">5001</span><span class="p">:</span><span class="mi">10000</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">hdi_prob</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hdi_2.5%</th>
+      <th>hdi_97.5%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>x</th>
+      <td>0.59</td>
+      <td>0.07</td>
+      <td>0.45</td>
+      <td>0.73</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La figura precedente si può generare con più facilità usando <code class="docutils literal notranslate"><span class="pre">az.plot_posterior()</span></code>. La curva che rappresenta l’intera distribuzione a posteriori e viene calcolata utilizzando la stima della densità del kernel (KDE) che serve a “lisciare” l’istogramma.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">5001</span><span class="p">:</span><span class="mi">10000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: title={&#39;center&#39;: &#39;x&#39;}&gt;
+</pre></div>
+</div>
+<img alt="_images/036_metropolis_36_1.png" src="_images/036_metropolis_36_1.png" />
+</div>
+</div>
+<p>L’HDI è una scelta comune nelle statistiche bayesiane e valori arrotondati come 50% o 95% sono molto popolari. Ma ArviZ utilizza il 94% come valore predefinito, come mostrato nella figura precedente. La ragione di questa scelta è che il 94% è vicino al valore ampiamente utilizzato del 95%, ma è anche diverso da questo, così da servire da “amichevole promemoria” che non c’è niente di speciale nella soglia del 5%. Idealmente sarebbe opportuno scegliere un valore che si adatti alle specifiche esigenze dell’analisi statistica che si sta svolgendo, o almeno riconoscere che si sta usando un valore arbitrario.</p>
+<p>L’algoritmo descritto in questo capitolo è di <span id="id10">[<a class="reference internal" href="z_biblio.html#id87" title="Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, and Edward Teller. Equation of state calculations by fast computing machines. The Journal of Chemical Physics, 21(6):1087-1092, 1953.">MRR+53</a>]</span>. Un miglioramento di <span id="id11">[<a class="reference internal" href="z_biblio.html#id86" title="W. Keith Hastings. Monte Carlo sampling methods using Markov chains and their applications. Biometrika, 57(1):97-109, 1970.">Has70</a>]</span> ha portato all’algoritmo Metropolis-Hastings. Il campionatore di Gibbs è dovuto a <span id="id12">[<a class="reference internal" href="z_biblio.html#id85" title="Stuart Geman and Donald Geman. Stochastic relaxation, Gibbs distributions, and the Bayesian restoration of images. IEEE Transactions on pattern analysis and machine intelligence, 6:721-741, 1984.">GG84</a>]</span>. L’approccio hamiltoniano Monte Carlo è dovuto a <span id="id13">[<a class="reference internal" href="z_biblio.html#id128" title="Simon Duane, Anthony D Kennedy, Brian J Pendleton, and Duncan Roweth. Hybrid monte carlo. Physics letters B, 195(2):216–222, 1987.">DKPR87</a>]</span> e il No-U-Turn Sampler (NUTS) è dovuto a <span id="id14">[<a class="reference internal" href="z_biblio.html#id127" title="Matthew D Hoffman, Andrew Gelman, and others. The no-u-turn sampler: adaptively setting path lengths in hamiltonian monte carlo. Journal of Machine Learning Research, 15(1):1593–1623, 2014.">HG+14</a>]</span>. Un’introduzione matematicamente intuitiva all’algoritmo Metropolis è data da <span id="id15">[<a class="reference internal" href="z_biblio.html#id90" title="John Kruschke. Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan. Academic Press, 2014.">Kru14</a>]</span>.</p>
+</section>
+</section>
+<section id="diagnostiche-della-soluzione-mcmc">
+<h2>Diagnostiche della soluzione MCMC<a class="headerlink" href="#diagnostiche-della-soluzione-mcmc" title="Permalink to this headline">#</a></h2>
+<p>In questo capitolo abbiamo illustrato l’esecuzione di una singola catena di Markov in cui si parte un unico valore iniziale e si raccolgono i valori simulati da molte iterazioni. È possibile però che i valori di una catena siano influenzati dalla scelta del valore iniziale. Quindi una raccomandazione generale è di eseguire l’algoritmo Metropolis più volte utilizzando diversi valori di partenza. In questo caso, si avranno più catene di Markov. Confrontando le proprietà delle diverse catene si esplora la sensibilità dell’inferenza alla scelta del valore di partenza. I software MCMC consentono sempre all’utente di specificare diversi valori di partenza e di generare molteplici catene di Markov.</p>
+<section id="stazionarieta">
+<h3>Stazionarietà<a class="headerlink" href="#stazionarieta" title="Permalink to this headline">#</a></h3>
+<p>Un punto importante da verificare è se il campionatore ha raggiunto la sua distribuzione stazionaria. La convergenza di una catena di Markov alla distribuzione stazionaria viene detta “mixing”.</p>
+<section id="autocorrelazione">
+<h4>Autocorrelazione<a class="headerlink" href="#autocorrelazione" title="Permalink to this headline">#</a></h4>
+<p>Informazioni sul “mixing” della catena di Markov sono fornite dall’autocorrelazione. L’autocorrelazione misura la correlazione tra i valori successivi di una catena di Markov. Il valore <span class="math notranslate nohighlight">\(m\)</span>-esimo della serie ordinata viene confrontato con un altro valore ritardato di una quantità <span class="math notranslate nohighlight">\(k\)</span> (dove <span class="math notranslate nohighlight">\(k\)</span> è l’entità del ritardo) per verificare quanto si correli al variare di <span class="math notranslate nohighlight">\(k\)</span>. L’autocorrelazione di ordine 1 (<em>lag 1</em>) misura la correlazione tra valori successivi della catena di Markow (cioè, la correlazione tra <span class="math notranslate nohighlight">\(\theta^{(m)}\)</span> e <span class="math notranslate nohighlight">\(\theta^{(m-1)}\)</span>); l’autocorrelazione di ordine 2 (<em>lag 2</em>) misura la correlazione tra valori della catena di Markow separati da due “passi” (cioè, la correlazione tra <span class="math notranslate nohighlight">\(\theta^{(m)}\)</span> e <span class="math notranslate nohighlight">\(\theta^{(m-2)}\)</span>); e così via.</p>
+<p>L’autocorrelazione di ordine <span class="math notranslate nohighlight">\(k\)</span> è data da <span class="math notranslate nohighlight">\(\rho_k\)</span> e può essere stimata come:</p>
+<div class="math notranslate nohighlight" id="equation-eq-autocor">
+<span class="eqno">(66)<a class="headerlink" href="#equation-eq-autocor" title="Permalink to this equation">#</a></span>\[\begin{split}
+\begin{align}
+\rho_k &amp;= \frac{Cov(\theta_m, \theta_{m+k})}{Var(\theta_m)}\notag\\
+&amp;= \frac{\sum_{m=1}^{n-k}(\theta_m - \bar{\theta})(\theta_{m-k} - \bar{\theta})}{\sum_{m=1}^{n-k}(\theta_m - \bar{\theta})^2} \qquad\text{con }\quad \bar{\theta} = \frac{1}{n}\sum_{m=1}^{n}\theta_m.
+\end{align}
+\end{split}\]</div>
+<p>Per fare un esempio pratico, simuliamo dei dati autocorrelati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">22</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">51</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22 24 25 25 28 29 34 37 40 44 51 48 47 50 51
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’autocorrelazione di ordine 1 è semplicemente la correlazione tra ciascun elemento e quello successivo nella sequenza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">acf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1.        ,  0.83174224,  0.65632458,  0.49105012,  0.27863962,
+        0.03102625, -0.16527446, -0.30369928, -0.40095465, -0.45823389,
+       -0.45047733, -0.36933174])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nell’esempio, il vettore <code class="docutils literal notranslate"><span class="pre">x</span></code> è una sequenza temporale di 15 elementi. Il vettore <span class="math notranslate nohighlight">\(x'\)</span> include gli elementi con gli indici da 0 a 13 nella sequenza originaria, mentre il vettore <span class="math notranslate nohighlight">\(x''\)</span> include gli elementi 1:14. Gli elementi delle coppie ordinate dei due vettori avranno dunque gli indici <span class="math notranslate nohighlight">\((0, 1)\)</span>, <span class="math notranslate nohighlight">\((1, 2), (2, 3), \dots (13, 14)\)</span> degli elementi della sequenza originaria. La correlazione di Pearson tra i vettori <span class="math notranslate nohighlight">\(x'\)</span> e <span class="math notranslate nohighlight">\(x''\)</span> corrisponde all’autocorrelazione di ordine 1 della serie temporale.</p>
+<p>Nell’output precedente</p>
+<ul class="simple">
+<li><p>0.83174224 è l’autocorrelazione di ordine 1 (lag = 1),</p></li>
+<li><p>0.65632458 è l’autocorrelazione di ordine 2 (lag = 2),</p></li>
+<li><p>0.49105012 è l’autocorrelazione di ordine 3 (lag = 3),</p></li>
+<li><p>ecc.</p></li>
+</ul>
+<p>È possibile specificare il numero di ritardi (<em>lag</em>) da utilizzare con l’argomento <code class="docutils literal notranslate"><span class="pre">nlags</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">acf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.        , 0.83174224, 0.65632458, 0.49105012, 0.27863962])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possiamo creare un grafico della funzione di autocorrelazione (correlogramma) per una serie temporale in Python usando la funzione <code class="docutils literal notranslate"><span class="pre">tsaplots.plot_acf()</span></code> dalla libreria <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tsaplots</span><span class="o">.</span><span class="n">plot_acf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="mi">9</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/036_metropolis_46_0.png" src="_images/036_metropolis_46_0.png" />
+</div>
+</div>
+<p>Il correlogramma è uno strumento grafico usato per la valutazione della tendenza di una catena di Markov nel tempo. Il correlogramma si costruisce a partire dall’autocorrelazione <span class="math notranslate nohighlight">\(\rho_k\)</span> di una catena di Markov in funzione del ritardo <span class="math notranslate nohighlight">\(k\)</span> con cui l’autocorrelazione è calcolata: nel grafico ogni barretta verticale riporta il valore dell’autocorrelazione (sull’asse delle ordinate) in funzione del ritardo (sull’asse delle ascisse).</p>
+<p>In situazioni ottimali l’autocorrelazione diminuisce rapidamente ed è effettivamente pari a 0 per piccoli lag. Ciò indica che i valori della catena di Markov che si trovano a più di soli pochi passi di distanza gli uni dagli altri non risultano associati tra loro, il che fornisce una conferma del “mixing” della catena di Markov, ossia della convergenza alla distribuzione stazionaria. Nelle analisi bayesiane, una delle strategie che consentono di ridurre l’autocorrelazione è quella di assottigliare l’output immagazzinando solo ogni <span class="math notranslate nohighlight">\(m\)</span>-esimo punto dopo il periodo di burn-in. Una tale strategia va sotto il nome di <em>thinning</em>.</p>
+</section>
+</section>
+<section id="test-di-convergenza">
+<h3>Test di convergenza<a class="headerlink" href="#test-di-convergenza" title="Permalink to this headline">#</a></h3>
+<p>Un test di convergenza può essere svolto in maniera grafica mediante le tracce delle serie temporali (<em>trace plot</em>), cioè il grafico dei valori simulati rispetto al numero di iterazioni. Se la catena è in uno stato stazionario le tracce mostrano assenza di periodicità nel tempo e ampiezza costante, senza tendenze visibili o andamenti degni di nota. Un esempio di <em>trace plot</em> è fornito nella &#64;fig-sim-markov-chain-zetsche (destra).</p>
+<p>Ci sono inoltre alcuni test che permettono di verificare la stazionarietà del campionatore dopo un dato punto. Uno è il test di Geweke che suddivide il campione, dopo aver rimosso un periodo di burn in, in due parti. Se la catena è in uno stato stazionario, le medie dei due campioni dovrebbero essere uguali. Un test modificato, chiamato Geweke z-score, utilizza un test <span class="math notranslate nohighlight">\(z\)</span> per confrontare i due subcampioni ed il risultante test statistico, se ad esempio è più alto di 2, indica che la media della serie sta ancora muovendosi da un punto ad un altro e quindi è necessario un periodo di burn-in più lungo.</p>
+</section>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>In generale, la distribuzione a posteriori dei parametri di un modello statistico non può essere determinata per via analitica. Tale problema viene invece affrontato facendo ricorso ad una classe di algoritmi per il campionamento da distribuzioni di probabilità che sono estremamente onerosi dal punto di vista computazionale e che possono essere utilizzati nelle applicazioni pratiche solo grazie alla potenza di calcolo dei moderni computer. Lo sviluppo di software che rendono sempre più semplice l’uso dei metodi MCMC, insieme all’incremento della potenza di calcolo dei computer, ha contribuito a rendere sempre più popolare il metodo dell’inferenza bayesiana che, in questo modo, può essere estesa a problemi di qualunque grado di complessità.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="posterior-sim-1"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>Per capire cosa sia la maledizione della dimensionalità, supponiamo di utilizzare una griglia di 100 punti equispaziati. Nel caso di un solo parametro, è necessario calcolare 100 valori. Per due parametri devono essere calcolari <span class="math notranslate nohighlight">\(100^2\)</span> valori. Ma già per 10 parametri è necessario calcolare <span class="math notranslate nohighlight">\(10^{10}\)</span> valori – è facile capire che una tale quantità di calcoli è troppo grande anche per un computer molto potente. Per modelli che richiedono la stima di un numero non piccolo di parametri è dunque necessario procedere in un altro modo.</p>
+</dd>
+<dt class="label" id="posterior-sim-2"><span class="brackets"><a class="fn-backref" href="#id3">2</a></span></dt>
+<dd><p>L’integrazione Monte Carlo può essere utilizzata anche per la valutazione di integrali più complessi.</p>
+</dd>
+<dt class="label" id="posterior-sim-3"><span class="brackets"><a class="fn-backref" href="#id5">3</a></span></dt>
+<dd><p>In termini più formali, si può dire che i metodi MCMC consentono di costruire sequenze di punti (detti catene di Markov) nello spazio dei parametri le cui densità sono proporzionali alla distribuzione a posteriori. In altre parole, dopo aver simulato un grande numero di passi della catena si possono usare i valori così generati come se fossero un campione casuale della distribuzione a posteriori. Un’introduzione alle catene di Markov è fornita in Appendice.</p>
+</dd>
+<dt class="label" id="posterior-sim-4"><span class="brackets"><a class="fn-backref" href="#id8">4</a></span></dt>
+<dd><p>L’accettanza dipende dalla distribuzione proposta: in generale, tanto più la distribuzione proposta è simile alla distribuzione target, tanto più alta diventa l’accettanza.</p>
+</dd>
+<dt class="label" id="posterior-sim-5"><span class="brackets"><a class="fn-backref" href="#id9">5</a></span></dt>
+<dd><p>Si possono trovare implementazioni più eleganti di quella presentata qui. Il presente esercizio ha solo lo scopo di illustrare la logica soggiacente all’algoritmo Metropolis; non ci preoccupiamo di trovare un’implementazione efficente dell’algoritmo.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="030_balance_prior_post.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">L’influenza della distribuzione a priori</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="040_beta_binomial.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Markov Chain Monte Carlo per l’inferenza bayesiana</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

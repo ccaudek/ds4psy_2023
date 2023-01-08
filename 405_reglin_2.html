@@ -1,0 +1,1873 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Regressione lineare bivariata &#8212; ds4psy</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regressione lineare con PyMC" href="410_reglin_3.html" />
+    <link rel="prev" title="Introduzione" href="400_reglin_1.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4psy</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Benvenuti
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nozioni di base
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="001_key_notions.html">
+   Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="005_measurement.html">
+   La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="010_freq_distr.html">
+   Analisi esplorativa dei dati
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_loc_scale.html">
+   Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="020_correlation.html">
+   Le relazioni tra variabili
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_eda_quickstart.html">
+   Introduzione alla data analisi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="030_ndarray.html">
+   Gli array nel modulo NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="035_pandas.html">
+   Comandi utili in Pandas
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="105_dice.html">
+   Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110_intro_prob.html">
+   La logica dell’incerto
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="115_conditional_prob.html">
+   Probabilità condizionata: significato, teoremi, eventi indipendenti
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="120_bayes_theorem.html">
+   Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="125_expval_var.html">
+   Indici di posizione, di varianza e di associazione di variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="130_joint_prob.html">
+   Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="135_density_func.html">
+   La densità di probabilità
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="205_discr_rv_distr.html">
+   Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210_cont_rv_distr.html">
+   Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215_rng.html">
+   Generazione di numeri casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="225_likelihood.html">
+   La verosimiglianza
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="305_intro_bayes.html">
+   Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="310_subj_prop.html">
+   Pensare ad una proporzione in termini soggettivi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="315_conjugate_families.html">
+   Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="320_balance_prior_post.html">
+   L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="325_metropolis.html">
+   Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="330_beta_binomial.html">
+   Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="335_mcmc_diagnostics.html">
+   Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="340_summarize_posterior.html">
+   Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="345_bayesian_prediction.html">
+   La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="350_normal_normal_mod.html">
+   Inferenza bayesiana su una media
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="355_groups_comparison.html">
+   Confronto tra due (o più) gruppi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="400_reglin_1.html">
+   Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="410_reglin_3.html">
+   Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="415_reglin_4.html">
+   Confronto tra le medie di due gruppi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="420_reglin_ppc.html">
+   Posterior Predictive Checks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="500_intro_frequentist.html">
+   Legge dei grandi numeri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="505_conf_interv.html">
+   Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="510_test_ipotesi.html">
+   Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="515_limiti_stat_frequentista.html">
+   Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="520_s_m_errors.html">
+   Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a03_set_theory.html">
+   Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus_notation.html">
+   Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/405_reglin_2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F405_reglin_2.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/405_reglin_2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stima-dei-coefficienti-di-regressione">
+   Stima dei coefficienti di regressione
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trasformazione-dei-dati">
+     Trasformazione dei dati
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#il-metodo-dei-minimi-quadrati">
+     Il metodo dei minimi quadrati
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l-errore-standard-della-regressione">
+     L’errore standard della regressione
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#indice-di-determinazione">
+   Indice di determinazione
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inferenza-sul-modello-di-regressione">
+     Inferenza sul modello di regressione
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   Watermark
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Regressione lineare bivariata</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stima-dei-coefficienti-di-regressione">
+   Stima dei coefficienti di regressione
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trasformazione-dei-dati">
+     Trasformazione dei dati
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#il-metodo-dei-minimi-quadrati">
+     Il metodo dei minimi quadrati
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#l-errore-standard-della-regressione">
+     L’errore standard della regressione
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#indice-di-determinazione">
+   Indice di determinazione
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inferenza-sul-modello-di-regressione">
+     Inferenza sul modello di regressione
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   Watermark
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="regressione-lineare-bivariata">
+<span id="reglin-2-notebook"></span><h1>Regressione lineare bivariata<a class="headerlink" href="#regressione-lineare-bivariata" title="Permalink to this headline">#</a></h1>
+<p>In questo capitolo verrà discusso il modello di regressione bivariata, ovvero il modello che, mediante una relazione lineare, predice una variabile continua <span class="math notranslate nohighlight">\(y\)</span> a partire da un solo predittore continuo <span class="math notranslate nohighlight">\(x\)</span>. Ciò corrisponde ad adattare ai dati (<span class="math notranslate nohighlight">\(x_i, y_i\)</span>) la retta di regressione <span class="math notranslate nohighlight">\(y_i = a + bx_i + e_i\)</span>, con <span class="math notranslate nohighlight">\(i=1, \dots, n\)</span>. Usando dei dati reali, vedremo come stimare i coefficienti di regressione <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span>, e come essi possono essere interpretati. Vedremo anche come descrivere la bontà di adattamento del modello ai dati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span> 
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">statistics</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nell’esempio che discuteremo verranno usati i dati <code class="docutils literal notranslate"><span class="pre">kidiq</span></code> <span id="id1">[<a class="reference internal" href="z_biblio.html#id71" title="Andrew Gelman, Jennifer Hill, and Aki Vehtari. Regression and other stories. Cambridge University Press, 2020.">GHV20</a>]</span>:</p>
+<blockquote>
+<div><p>Data from a survey of adult American women and their children (a subsample from the National Longitudinal Survey of Youth).</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>kid_score Child’s IQ score</p></li>
+<li><p>mom_hs Indicator for whether the mother has a high school degree</p></li>
+<li><p>mom_iq Mother’s IQ score</p></li>
+<li><p>mom_age Mother’s age</p></li>
+</ul>
+<p>Esamineremo la relazione tra l’intelligenza del bambino (<code class="docutils literal notranslate"><span class="pre">kid_score</span></code>) e l’intelligenza della madre (<code class="docutils literal notranslate"><span class="pre">mom_iq</span></code>). Ci chiederemo se, e in che misura, l’intelligenza della madre sia in grado di predire l’intelligenza del bambino. Per iniziare, leggiamo i dati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kidiq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;data/kidiq.dta&#39;</span><span class="p">)</span>
+<span class="n">kidiq</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>kid_score</th>
+      <th>mom_hs</th>
+      <th>mom_iq</th>
+      <th>mom_work</th>
+      <th>mom_age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>65</td>
+      <td>1.0</td>
+      <td>121.117529</td>
+      <td>4</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>98</td>
+      <td>1.0</td>
+      <td>89.361882</td>
+      <td>4</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>85</td>
+      <td>1.0</td>
+      <td>115.443165</td>
+      <td>4</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>83</td>
+      <td>1.0</td>
+      <td>99.449639</td>
+      <td>3</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>115</td>
+      <td>1.0</td>
+      <td>92.745710</td>
+      <td>4</td>
+      <td>27</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Un diagramma a dispersione per i dati di questo campione suggerisce la presenza di un’associazione positiva tra l’intelligenza del bambino (<code class="docutils literal notranslate"><span class="pre">kid_score</span></code>) e l’intelligenza della madre (<code class="docutils literal notranslate"><span class="pre">mom_iq</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Quoziente di intelligenza della madre&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Quoziente di intelligenza del bambino&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/405_reglin_2_6_0.png" src="_images/405_reglin_2_6_0.png" />
+</div>
+</div>
+<p>Il modello di regressione lineare descrive questa associazione mediante una retta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="c1">#obtain m (slope) and b(intercept) of linear regression line</span>
+<span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#add linear regression line to scatterplot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Quoziente di intelligenza della madre&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Quoziente di intelligenza del bambino&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Quoziente di intelligenza del bambino&#39;)
+</pre></div>
+</div>
+<img alt="_images/405_reglin_2_8_1.png" src="_images/405_reglin_2_8_1.png" />
+</div>
+</div>
+<p>Ci sono però infinite rette che, in linea di principio, possono essere usate per “approssimare” la nube di punti nel diagramma a dispersione. È dunque necessario introdurre dei vincoli per selezionare una di queste possibili rette. Il vincolo che viene introdotto dal modello di regressione è quello di costringere la retta a passare per il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="c1">#obtain m (slope) and b(intercept) of linear regression line</span>
+<span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#add linear regression line to scatterplot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kidiq</span><span class="o">.</span><span class="n">mom_iq</span><span class="p">)],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kidiq</span><span class="o">.</span><span class="n">kid_score</span><span class="p">)],</span> <span class="n">s</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Quoziente di intelligenza della madre&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Quoziente di intelligenza del bambino&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Quoziente di intelligenza del bambino&#39;)
+</pre></div>
+</div>
+<img alt="_images/405_reglin_2_10_1.png" src="_images/405_reglin_2_10_1.png" />
+</div>
+</div>
+<p>Una retta che passa per il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span> (evidenziato in rosso nella figura precedente) ha delle desiderabili proprietà statistiche che verranno descritte in seguito.</p>
+<p>Il campione è costituito da <span class="math notranslate nohighlight">\(n\)</span> coppie di osservazioni (<span class="math notranslate nohighlight">\(x, y\)</span>). Per ciascuna coppia di valori <span class="math notranslate nohighlight">\(x_i, y_i\)</span>, il modello di regressione si aspetta che il valore <span class="math notranslate nohighlight">\(y_i\)</span> sia associato al corrispondente valore <span class="math notranslate nohighlight">\(x_i\)</span> come indicato dalla seguente equazione:</p>
+<p>\begin{equation}
+y_i = a + b x_i + e_i.
+\end{equation}</p>
+<p>I valori <span class="math notranslate nohighlight">\(y_i\)</span> corrispondono, nell’esempio che stiamo discutendo, alla variabile <code class="docutils literal notranslate"><span class="pre">kid_score</span></code>. I primi 10 valori della variabile <span class="math notranslate nohighlight">\(y\)</span> sono i seguenti:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     65
+1     98
+2     85
+3     83
+4    115
+5     98
+6     69
+7    106
+8    102
+9     95
+Name: kid_score, dtype: int32
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per fare riferimento a ciascuna osservazione usiamo l’indice <span class="math notranslate nohighlight">\(i\)</span>. Quindi, ad esempio, <span class="math notranslate nohighlight">\(y_3\)</span> è uguale a</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il modello di regressione bivariata, descritto dall’equazione precedente, ci dice che ciascun valore <span class="math notranslate nohighlight">\(y\)</span> è dato dalla somma di due componenti: una componente deterministica e una componente aleatoria. Consideriamo il primo valore <span class="math notranslate nohighlight">\(y\)</span> del campione. Per esso, il modello di regressione diventa</p>
+<div class="math notranslate nohighlight">
+\[
+y_1 = a + b x_1 + e_1,
+\]</div>
+<p>laddove <span class="math notranslate nohighlight">\(a + b x_1\)</span> è la componente deterministica, denotata con <span class="math notranslate nohighlight">\(\hat{y}\)</span>, e <span class="math notranslate nohighlight">\(e_1\)</span> è la componente aleatoria.</p>
+<p>La componente deterministica è la <em>componente</em> di ciascun valore <span class="math notranslate nohighlight">\(y_i\)</span> che è possibile prevedere conoscendo <span class="math notranslate nohighlight">\(x_i\)</span>. Tuttavia, non è possibile prevedere <em>perfettamente</em> i valori <span class="math notranslate nohighlight">\(y\)</span> – ciò si verificherebbe soltanto se tutti punti del diagramma a dispersione fossero disposti su una retta. Ma non lo sono mai nella pratica concreta: la retta è solo un’approssimazione della relazione lineare tra <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>. Pertanto, conoscendo <span class="math notranslate nohighlight">\(x_i\)</span> possiamo solo prevedere una porzione (o “componente”) del corrispondente valore <span class="math notranslate nohighlight">\(y_i\)</span>.</p>
+<p>Cosa significa che possiamo prevedere solo una componente di ciascuna osservazione <span class="math notranslate nohighlight">\(y_i\)</span>? Significa che il valore osservato <span class="math notranslate nohighlight">\(y_i\)</span> sarà diverso dal valore <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> previsto dal modello. Ciascun valore osservato <span class="math notranslate nohighlight">\(y_i\)</span> sarà dunque dato dalla seguente somma: <span class="math notranslate nohighlight">\(y_i = \hat{y}_i + e_i\)</span>, laddove <span class="math notranslate nohighlight">\(e_i\)</span>, detto “residuo” è la componente di <span class="math notranslate nohighlight">\(y_i\)</span> non predicibile dal modello lineare.</p>
+<p>Ci possiamo dunque porre due domande:</p>
+<ul class="simple">
+<li><p>come è possibile trovare i coefficienti <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> che consentono di predire una componente della <span class="math notranslate nohighlight">\(y\)</span> conoscendo la <span class="math notranslate nohighlight">\(x\)</span>?</p></li>
+<li><p>quant’è grande la porzione della <span class="math notranslate nohighlight">\(y\)</span> che può essere predetta conoscendo <span class="math notranslate nohighlight">\(x\)</span>? In altre parole, quant’è accurata la predizione della <span class="math notranslate nohighlight">\(y\)</span> fornita dal modello di regressione lineare?</p></li>
+</ul>
+<p>Rispondere a tali due domanda definisce i primi due obiettivi del modello statistico della regressione lineare. Il terzo obiettivo è quello dell’inferenza, ovvero quello di capire che relazioni ci sono tra la relazione tra <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span> osservata nel campione e la la relazione tra le due variabili nella popolazione.</p>
+<section id="stima-dei-coefficienti-di-regressione">
+<h2>Stima dei coefficienti di regressione<a class="headerlink" href="#stima-dei-coefficienti-di-regressione" title="Permalink to this headline">#</a></h2>
+<p>Iniziamo con il primo obiettivo, ovvero quello di trovare i coefficienti <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> che consentono di predire una componente di ciascuna osservazione <span class="math notranslate nohighlight">\(y\)</span> conoscendo <span class="math notranslate nohighlight">\(x\)</span>. Quindi, nel caso presente, ci chiediamo quanto segue. Il primo bambino del campione ha un QI uguale a 65. Sua madre ha un QI di 121.12. Qual è la predizione migliore del QI del bambino che possiamo ottenere conoscendo il QI della madre?</p>
+<p>È chiaro, guardando i dati del campione, che non c’è una corrispondenza perfetta tra QI della madre e QI del bambino, tutt’altro! Infatti, se guardiamo il diagramma di dispersione ci rendiamo conto che i punti sono piuttosto lontani dalla retta che abbiamo sovrapposto alla nube di punti <span class="math notranslate nohighlight">\(x_i, y_i\)</span>. Tuttavia, il diagramma di dispersione ci suggerisce che, al di là del rumore, c’è comunque una relazione tra le due variabili. Il nostro obiettivo è trovare un metodo quantitativo per descrivere una tale relazione.</p>
+<p>Abbiamo detto che è possibile prevedere una componente di <span class="math notranslate nohighlight">\(y_i\)</span> conoscendo <span class="math notranslate nohighlight">\(x_i\)</span>. La componente <span class="math notranslate nohighlight">\(y_i\)</span> predicibile da <span class="math notranslate nohighlight">\(x_i\)</span> viene denotata da <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> e, nei termini del modello di regressione lineare è uguale a</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y}_i = a_i + bx_i.
+\]</div>
+<p>L’equazione precedente è un’<em>equazione lineare</em> e, dal punto di vista geometrico, corrisponde ad una retta. Ci sono infinite equazioni che, in linea di principio, possiamo usare per descrivere la relazione tra <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>. Abbiamo scelto la relazione lineare perché è la più semplice. Se guardiamo il diagramma di dispersione, infatti, non ci sono ragioni per descrivere la relazione tra il QI del bambino e il QI della madre con qualche curva, anziché con una retta. In altri campioni, una curva potrebbe essere più sensata di una retta, quale descrizione della relazione <em>media</em> tra <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>, ma non nel caso presente. Ricordiamo il principio del rasoio di Occam (ovvero, il principio che sta alla base del pensiero scientifico moderno): se un modello semplice funziona, non c’è ragione di usare un modello più complesso.</p>
+<p>Dunque, abbiamo capito che vogliamo descrivere la <em>relazione media</em> tra <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span> con una retta, ovvero, mediante l’equazione lineare</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y}_i = a + b x_i.
+\]</div>
+<p>L’equazione precedente ci dice che il modello lineare <span class="math notranslate nohighlight">\(a + b x_i\)</span> <em>non è in grado di prevedere completamente</em> i valori <span class="math notranslate nohighlight">\(y_i\)</span>. Questo, in generale, non è mai possibile (ovvero, è possibile solo in un caso specifico che, nella realtà empirica, non si verifica mai). L’equazione precedente ci dice che possiamo prevedere solo una componente di ciascuna osservazione <span class="math notranslate nohighlight">\(y_i\)</span>, ovvero quella componente che abbiamo denotato con <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>. La componente che non possiamo prevedere con l’equazione <span class="math notranslate nohighlight">\(a + b x_i\)</span> viene detta <em>residuo</em> e si denota con <span class="math notranslate nohighlight">\(e_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+e_i = y_i - \hat{y}_i = y_i - (a + bx_i).
+\]</div>
+<p>Dal punto di vista geometrico, la componente erratica del modello, <span class="math notranslate nohighlight">\(e_i\)</span>, corrisponde alla distanza verticale tra ciascun punto del diagramma a dispersione e la retta di regressione <span class="math notranslate nohighlight">\(a + bx\)</span>. Diciamo che <em>scomponiamo</em> il valore di ciascuna osservazione <span class="math notranslate nohighlight">\(y_i\)</span> in due componenti nel senso che</p>
+<div class="math notranslate nohighlight">
+\[
+y_i = \hat{y}_i + e_i = (a + bx_i) + e_i. 
+\]</div>
+<p>Il primo obiettivo del modello di regressione è quello di trovare i coefficienti dell’equazione</p>
+<div class="math notranslate nohighlight">
+\[
+ a + b x_i
+ \]</div>
+<p>che consente di trovare <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> conoscendo <span class="math notranslate nohighlight">\(x_i\)</span>. Questi due coefficienti sono detti <em>coefficienti di regressione</em>.</p>
+<p>Per trovare i coefficienti di regressione dobbiamo introdurre dei vincoli per limitare lo spazio delle possibili soluzioni. Il primo di tali vincoli è stato introdotto in precedenza: vogliamo che la retta <span class="math notranslate nohighlight">\(\hat{y}_i = a + b x_i\)</span> passi per il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span>. Il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span> corrisponde al <em>baricentro</em> del diagramma a dispersione.</p>
+<p>Ci sono però infinite rette che passano per i punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span>. Tutte queste rette soddisfano la seguente proprietà:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^n e_i = 0,
+\]</div>
+<p>ovvero, fanno in modo che la somma dei residui (positivi, per i punti che si trovano al di sopra della retta di regressione, negativi, per punti che si trovano al di sotto della retta di regressione) sia uguale a zero.</p>
+<p>Questo significa che non possiamo selezionare una tra le infinite rette che passano per il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span> usando il criterio che ci porta a scegliere la retta che rende la più piccola possibile (ovvero, minimizza) la somma dei residui. Infatti, tutte le rette passanti per il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span> soddisfano questo requisito (rendono uguale a zero la somma dei residui). Dunque, dobbiamo trovare qualche altri criterio per scegliere una tra le infinite rette che passano per il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span>.</p>
+<p>Il criterio che viene normalmente scelto è quello di <em>minimizzare la somma dei quadrati dei residui</em> <span class="math notranslate nohighlight">\((y_i - \hat{y}_i)^2\)</span>. In altri termini, vogliamo trovare i coefficienti <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> tali per cui la quantità</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^{n}{(y_i - (a + b x_i))^2}
+\]</div>
+<p>assume il suo valore minimo. I coefficienti <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> che soddisfano questa proprietà si chiamano <em>coefficienti dei minimi quadrati</em>.</p>
+<p>Questo problema ha una soluzione analitica. La soluzione analitica si trova riconoscendo il fatto che l’equazione precedente definisce una superficie e il problema diventa quello di trovare il punto di minimo di questa superficie. Per trovare la soluzione ci si deve rendere conto che il punto cercato è quello per cui il piano tangente alla superficie (nelle due direzioni <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span>) è piatto (le tangenti nelle due direzioni sono uguali a zero). Rendere uguale a zero la tangente ad una curva significa porre uguali a zero la derivata della curva. Nel caso presente, abbiamo una superficie, dunque due tangenti ortogonali e quindi abbiamo il problema di rendere uguali a zero le derivate parziali rispetto ad <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span>. Così facendo si definisce un sistema di equazioni lineari con due incognite, <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span>. La soluzione di tali equazioni, che si chiamano <em>equazioni normali</em>, è la seguente:</p>
+<div class="math notranslate nohighlight">
+\[
+a = \bar{y} - b \bar{x},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+b = \frac{Cov(x, y)}{Var(x)}.
+\]</div>
+<p>Le due precedenti equazioni corrispondono alla <em>stima dei minimi quadrati</em> dei coefficienti di regressione della retta che minimizza la somma dei quadrati dei residui.</p>
+<p>Nel caso dell’esempio presente, tali coefficienti sono uguali a:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cov_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> 
+<span class="n">var_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">cov_xy</span> <span class="o">/</span> <span class="n">var_x</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.609974571730785
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">])</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.799777849962986
+</pre></div>
+</div>
+</div>
+</div>
+<p>Verifichiamo i risultati trovati usando funzione <code class="docutils literal notranslate"><span class="pre">optimize.curve_fit</span></code>. Questa è una funzione molto potente, in quanto può adattarsi non solo alle funzioni lineari, ma anche alle funzioni non lineari. Qui la usiamo per la retta di regressione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span>
+    <span class="k">return</span> <span class="n">y</span>
+  
+<span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">xdata</span> <span class="o">=</span> <span class="n">kidiq</span><span class="o">.</span><span class="n">mom_iq</span><span class="p">,</span> <span class="n">ydata</span> <span class="o">=</span> <span class="n">kidiq</span><span class="o">.</span><span class="n">kid_score</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([25.7997779 ,  0.60997457])
+</pre></div>
+</div>
+</div>
+</div>
+<p>In precedenza abbiamo soltanto accennato al problema di come si possono trovano i coefficienti dei minimi quadrati; ritorneremo su questo punto in seguito, con una simulazione. Per ora, chiediamoci cosa significano i due coefficienti che abbiamo appena trovato.</p>
+<p>Il coefficiente <span class="math notranslate nohighlight">\(a\)</span> si chiama <em>intercetta</em>. L’intercetta, all’interno del diagramma a dispersione, specifica il punto in cui la retta di regressione interseca l’asse <span class="math notranslate nohighlight">\(y\)</span> del sistema di assi cartesiani.</p>
+<p>Nel caso presente questo valore non è di alcun interesse, perché corrisponde al valore della retta di regressione quando <span class="math notranslate nohighlight">\(x = 0\)</span>, ovvero quando l’intelligenza della madre è uguale a 0. Vedremo in seguito come, trasformando i dati, è possibile assegnare al coefficiente <span class="math notranslate nohighlight">\(a\)</span> un’interpretazione più utile. Per ora mi limito a fornire l’interpretazione del coefficiente.</p>
+<p>Passando a <span class="math notranslate nohighlight">\(b\)</span>, possiamo dire che questo secondo coefficiente va sotto il nome di <em>pendenza</em> della retta di regressione. Ovvero ci dice di quanto aumenta (se <span class="math notranslate nohighlight">\(b\)</span> è positivo) o diminuisce (se <span class="math notranslate nohighlight">\(b\)</span> è negativo) la retta di regressione in corrispondenza di un aumento di 1 punto della variabile <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Nel caso presente, il coefficiente <span class="math notranslate nohighlight">\(b\)</span> ci dice che, se il QI delle madri aumenta di 1 punto, il QI dei bambini aumenta <strong>in media</strong> di 0.61 punti.</p>
+<p>È importante capire cosa significa che, in base ai risultati della regressione, <span class="math notranslate nohighlight">\(y\)</span> aumenta <em>in media</em> di <span class="math notranslate nohighlight">\(b\)</span> punti per ciascun aumento unitario di <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Il modello statistico di regressione <em>ipotizza</em> che, per ciascun valore osservato <span class="math notranslate nohighlight">\(x\)</span> (per esempio, il valore del QI della prima madre del campione, ovvero <span class="math notranslate nohighlight">\(x = 121.11753\)</span>) ci sia una distribuzione di valori <span class="math notranslate nohighlight">\(y\)</span> nella popolazione, di cui solo uno è stato osservato nel campione. Possiamo facilmente capire che, se consideriamo tutte le madri con QI di 121.12, il punteggio del QI dei loro figli non sia costante, ma assuma tanti valori possibili. Questa distribuzione di valori possibili si chiama distribuzione <span class="math notranslate nohighlight">\(y\)</span> condizionata a <span class="math notranslate nohighlight">\(x\)</span>, ovvero <span class="math notranslate nohighlight">\(p(y \mid x_i)\)</span>.</p>
+<p>Il modello statistico della regressione lineare non può in alcun modo prevedere il valore assunto da ciascuna delle possibili osservazioni che fanno parte della distribuzione <span class="math notranslate nohighlight">\(p(y \mid x_i)\)</span>. Il modello della regressione lineare ha un obiettivo più limitato, ovvero si propone di prevedere <em>le medie</em> delle distribuzioni <span class="math notranslate nohighlight">\(p(y \mid x_i)\)</span> conoscendo i valori <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Dunque, quando il coefficiente <span class="math notranslate nohighlight">\(b\)</span> è uguale a 0.61, questo significa che il modello di regressione predice che <em>la medie</em> della distribuzione condizionata <span class="math notranslate nohighlight">\(p(y \mid x_i)\)</span> aumenta di 0.61 punti se la variabile <span class="math notranslate nohighlight">\(x\)</span> (QI delle madri) aumenta di un punto. Questo significa che il modello di regressione non fa una predizione sul punteggio di ciascun valore <span class="math notranslate nohighlight">\(y_i\)</span> (in funzione di <span class="math notranslate nohighlight">\(x\)</span>), ma solo della media delle distribuzioni condizionate <span class="math notranslate nohighlight">\(p(y \mid x_i)\)</span> di cui il valore osservato <span class="math notranslate nohighlight">\(y_i\)</span> è una realizzazione casuale.</p>
+<p>Possiamo dire la stessa cosa con parole diverse dicendo che il modello di regressione fa delle predizioni sulla componente deterministica di ciascuna osservazione. È più semplice capire questo aspetto se rappresentiamo in maniera grafica la componente “deterministica” <span class="math notranslate nohighlight">\(\hat{y}_i = a + b x_i\)</span> predetta dal modello di regressione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f82f7b331c0&gt;]
+</pre></div>
+</div>
+<img alt="_images/405_reglin_2_21_1.png" src="_images/405_reglin_2_21_1.png" />
+</div>
+</div>
+<p>Il diagramma precedente presenta ciascun valore <span class="math notranslate nohighlight">\(\hat{y}_i = a + b x_i\)</span> in funzione di <span class="math notranslate nohighlight">\(x_i\)</span>. Si vede che i valori predetti dal modello di regressione sono i punti che stanno sulla retta di regressione.</p>
+<p>In precedenza abbiamo detto che il residuo, ovvero la componente di ciascuna osservazione <span class="math notranslate nohighlight">\(y_i\)</span> che non viene predetta dal modello di regressione, corrisponde alla <em>distanza verticale</em> tra il valore <span class="math notranslate nohighlight">\(y_i\)</span> osservato e il valore <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> predetto dal modello di regressione:</p>
+<div class="math notranslate nohighlight">
+\[
+e_i = y_i - (a + b x_i).
+\]</div>
+<p>Nel caso nella prima osservazione, ad esempio abbiamo:</p>
+<div class="math notranslate nohighlight">
+\[
+y_1 = (a + b x_1) + e_1
+\]</div>
+<p>Consideriamo il punteggio osservato del QI del primo bambino.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per questo punteggio, il valore predetto dal modello di regressione è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99.67839048842711
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per questa osservazione, il residuo (ovvero, l’errore che compiamo utilizzando il modello di regression per predire il QI del bambino) è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-34.67839048842711
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per tutte le osservazioni abbiamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">])</span>
+<span class="n">res</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     -34.678390
+1      17.691747
+2     -11.217173
+3      -3.461529
+4      32.627697
+         ...    
+429    16.427159
+430    -6.521552
+431   -33.661788
+432     3.120144
+433   -11.461993
+Length: 434, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>È una proprietà del modello di regressione (calcolato con il metodo dei minimi quadrati) che la somma dei residui sia uguale a zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3.183231456205249e-12
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ciò significa che ciascuno dei valore osservato <span class="math notranslate nohighlight">\(y_i\)</span> viene scomposto dal modello di regressione in due componenti. La componente deterministica <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>, predicibile da <span class="math notranslate nohighlight">\(x_i\)</span>, è <span class="math notranslate nohighlight">\(\hat{y}_i = a + b x_i\)</span>. Il residuo è <span class="math notranslate nohighlight">\(e_i = y_i - \hat{y}_i\)</span>. La somma della componente deterministica e della componente erratica, ovviamente, riproduce il valore osservato.</p>
+<section id="trasformazione-dei-dati">
+<h3>Trasformazione dei dati<a class="headerlink" href="#trasformazione-dei-dati" title="Permalink to this headline">#</a></h3>
+<p>In generale, per variabili a livello di scala ad intervalli, non è possibile assegnare un’interpretazione utile all’intercetta del modello di regressione lineare. L’intercetta ci dice infatti qual è il valore atteso della <span class="math notranslate nohighlight">\(y\)</span> quando <span class="math notranslate nohighlight">\(x = 0\)</span>. Ma, se la variabile <span class="math notranslate nohighlight">\(x\)</span> è misurata su scala ad intervalli, il valore <span class="math notranslate nohighlight">\(x = 0\)</span> è arbitrario e non corrisponde “all’assenza di intensità” della variabile <span class="math notranslate nohighlight">\(x\)</span>. Un valore pari a 0 del QI della madre non vuol dire che l’intelligenza della madre sia nulla (un’affermazione, questa, che è difficile da capire), ma semplicemente che il punteggio del test usato per misurare il QI della madre assume valore 0 (qualcosa che, comunque, in pratica non succederà mai). Quindi è di poco interesse sapere qual è il valore medio del QI del bambino quando test usato per misurare il QI della madre ha valore 0. Per potere fornire all’intercetta del modello di regressione un’interpretazione più utile dobbiamo trasformare le osservazioni <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Esprimiamo <span class="math notranslate nohighlight">\(x\)</span> come differenza dalla media. Chiamiamo questa nuova variabile <span class="math notranslate nohighlight">\(xd\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;xd&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">])</span>
+<span class="n">kidiq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>kid_score</th>
+      <th>mom_hs</th>
+      <th>mom_iq</th>
+      <th>mom_work</th>
+      <th>mom_age</th>
+      <th>xd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>65</td>
+      <td>1.0</td>
+      <td>121.117529</td>
+      <td>4</td>
+      <td>27</td>
+      <td>21.117529</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>98</td>
+      <td>1.0</td>
+      <td>89.361882</td>
+      <td>4</td>
+      <td>25</td>
+      <td>-10.638118</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>85</td>
+      <td>1.0</td>
+      <td>115.443165</td>
+      <td>4</td>
+      <td>27</td>
+      <td>15.443165</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>83</td>
+      <td>1.0</td>
+      <td>99.449639</td>
+      <td>3</td>
+      <td>25</td>
+      <td>-0.550361</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>115</td>
+      <td>1.0</td>
+      <td>92.745710</td>
+      <td>4</td>
+      <td>27</td>
+      <td>-7.254290</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>429</th>
+      <td>94</td>
+      <td>0.0</td>
+      <td>84.877412</td>
+      <td>4</td>
+      <td>21</td>
+      <td>-15.122588</td>
+    </tr>
+    <tr>
+      <th>430</th>
+      <td>76</td>
+      <td>1.0</td>
+      <td>92.990392</td>
+      <td>4</td>
+      <td>23</td>
+      <td>-7.009608</td>
+    </tr>
+    <tr>
+      <th>431</th>
+      <td>50</td>
+      <td>0.0</td>
+      <td>94.859708</td>
+      <td>2</td>
+      <td>24</td>
+      <td>-5.140292</td>
+    </tr>
+    <tr>
+      <th>432</th>
+      <td>88</td>
+      <td>1.0</td>
+      <td>96.856624</td>
+      <td>2</td>
+      <td>21</td>
+      <td>-3.143376</td>
+    </tr>
+    <tr>
+      <th>433</th>
+      <td>70</td>
+      <td>1.0</td>
+      <td>91.253336</td>
+      <td>2</td>
+      <td>25</td>
+      <td>-8.746664</td>
+    </tr>
+  </tbody>
+</table>
+<p>434 rows × 6 columns</p>
+</div></div></div>
+</div>
+<p>Se ora usiamo le coppie di osservazioni <span class="math notranslate nohighlight">\((xd_i, y_i)\)</span>, il diagramma a dispersione assume la forma seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;xd&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;xd&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;xd&#39;</span><span class="p">],</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;xd&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Quoziente di intelligenza della madre (scarti dalla media)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Quoziente di intelligenza del bambino&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Quoziente di intelligenza del bambino&#39;)
+</pre></div>
+</div>
+<img alt="_images/405_reglin_2_35_1.png" src="_images/405_reglin_2_35_1.png" />
+</div>
+</div>
+<p>Quello che abbiamo fatto è stato di <em>traslare rigidamente</em> la nube di punti sul piano cartesiano di una quantità pari alla distanza tra <span class="math notranslate nohighlight">\(\bar{x}\)</span> e l’origine. Dunque, le <em>relazioni spaziali</em> tra i punti del diagramma a dispersione restano immutate. Di conseguenza, la pendenza della retta di regressione calcolata sui dati trasformati è uguale a quella che si trova nel caso dei dati non trasformati. Ciò che cambia è solo il valore dell’intercetta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">kidiq</span><span class="o">.</span><span class="n">xd</span><span class="p">,</span> <span class="n">kidiq</span><span class="o">.</span><span class="n">kid_score</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">intercept</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">slope</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(86.79723502304148, 0.6099745717307852)
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’intercetta corrisponde al punto sull’asse <span class="math notranslate nohighlight">\(y\)</span> dove la retta di regressione interseca l’ordinata. Ma, nel caso dei dati trasformati, dato che abbiamo traslato i punti di una quantità pari a <span class="math notranslate nohighlight">\(x - \bar{x}\)</span>, il valore <span class="math notranslate nohighlight">\(xd = 0\)</span> corrisponde a <span class="math notranslate nohighlight">\(x = \bar{x}\)</span> nel caso dei dati grezzi. Dunque, per i dati trasformati <span class="math notranslate nohighlight">\(xd_i, y_i\)</span>, l’intercetta corrisponderà al valore atteso della <span class="math notranslate nohighlight">\(y\)</span> in corrispondenza del valore medio della variabile <span class="math notranslate nohighlight">\(x\)</span> sulla scala dei dati non trasformati (ovvero <span class="math notranslate nohighlight">\(\bar{x}\)</span>). In altre parole, l’intercetta del modello di regressione lineare calcolata sui dati trasformati corrisponde al QI medio dei bambini in corrispondenza del QI medio delle madri.</p>
+</section>
+<section id="il-metodo-dei-minimi-quadrati">
+<h3>Il metodo dei minimi quadrati<a class="headerlink" href="#il-metodo-dei-minimi-quadrati" title="Permalink to this headline">#</a></h3>
+<p>Ora che abbiamo visto come interpretare il coefficienti di regressione, chiediamoci come vengono calcolati. La procedura generale è stata brevemente descritta in precedenza. Vediamo ora come si giunge alla conclusione descritta sopra usando una simulazione.</p>
+<p>Il problema è di trovare i valori <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span> tali per cui la quantità <span class="math notranslate nohighlight">\(\sum_{i=1}^{n}{(y_i - (a + b x_i))^2}\)</span> assume il valore minore possibile. Questo è un problema di minimizzazione rispetto a due parametri. Per dare un’idea di come si fa, semplifichiamo il problema e supponiamo che uno dei due parametri sia noto, ad esempio <span class="math notranslate nohighlight">\(a\)</span>, così ci resta una sola incognita.</p>
+<p>Credo una griglia di valori <code class="docutils literal notranslate"><span class="pre">b_grid</span></code> possibili, ad esempio:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Definisco una funzione che calcola la quantità <span class="math notranslate nohighlight">\(\sum_{i=1}^{n}{(y_i - (a + b x_i))^2}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sse</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcolo la somma degli errori quadratici per ciascun possibile valore <code class="docutils literal notranslate"><span class="pre">b_grid</span></code>, fissando <span class="math notranslate nohighlight">\(a = 25.79978\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">25.79978</span>
+<span class="n">sse_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">sse</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">],</span> <span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">b_grid</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esaminiamo il risultato ottenuto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b_grid</span><span class="p">,</span> <span class="n">sse_vals</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Valori possibili del coefficiente b&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;SSE&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;SSE&#39;)
+</pre></div>
+</div>
+<img alt="_images/405_reglin_2_45_1.png" src="_images/405_reglin_2_45_1.png" />
+</div>
+</div>
+<p>Il risultato ottenuto con la simulazione riproduce quello ottenuto per via analitica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s1">&#39;x&#39;</span> <span class="p">:</span> <span class="n">b_grid</span><span class="p">,</span>
+  <span class="s1">&#39;y&#39;</span> <span class="p">:</span> <span class="n">sse_vals</span>
+<span class="p">})</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000</td>
+      <td>1.795165e+06</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.001</td>
+      <td>1.789756e+06</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.002</td>
+      <td>1.784356e+06</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.003</td>
+      <td>1.778965e+06</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.004</td>
+      <td>1.773583e+06</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>0.996</td>
+      <td>8.053831e+05</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>0.997</td>
+      <td>8.088135e+05</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>0.998</td>
+      <td>8.122527e+05</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>0.999</td>
+      <td>8.157008e+05</td>
+    </tr>
+    <tr>
+      <th>1000</th>
+      <td>1.000</td>
+      <td>8.191578e+05</td>
+    </tr>
+  </tbody>
+</table>
+<p>1001 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">df</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>610</th>
+      <td>0.61</td>
+      <td>144137.339359</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Una simulazione simile, ma computazionalmente più complessa, può essere usata per stimare simultaneamente entrambi i coefficienti del modello lineare. Ci siamo limitati qui ad una <em>proof of concept</em> del caso più semplice.</p>
+</section>
+<section id="l-errore-standard-della-regressione">
+<h3>L’errore standard della regressione<a class="headerlink" href="#l-errore-standard-della-regressione" title="Permalink to this headline">#</a></h3>
+<p>Il secondo obiettivo del modello statistico di regressione lineare è quello di stabilire <em>quanto sia grande la componente</em> <span class="math notranslate nohighlight">\(y\)</span> predicibile da <span class="math notranslate nohighlight">\(x\)</span>, per ciascuna osservazione. Un indice assoluto della bontà di adattamento è fornito dalla deviazione standard dei residui, <span class="math notranslate nohighlight">\(s_e\)</span>, chiamata anche <em>errore standard della stima</em>. Uno stimatore non distorto della varianza dei residui nella popolazione è dato da</p>
+<div class="math notranslate nohighlight">
+\[
+s^2_e = \frac{1}{n-2}\sum e_i^2
+\]</div>
+<p>e quindi l’errore standard della stima sarà</p>
+<div class="math notranslate nohighlight">
+\[
+s_e = \sqrt{\frac{1}{n-2}\sum e_i^2}.
+\]</div>
+<p>Si noti che questa è la stessa formula della varianza (dato che la media dei residui è zero), tranne per il fatto che al denominatore abbiamo <span class="math notranslate nohighlight">\(n-2\)</span>. Dato che, per calcolare <span class="math notranslate nohighlight">\(\hat{y}\)</span> abbiamo usato due coefficienti (<span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span>), si dice che “abbiamo perso due gradi di libertà”.</p>
+<p>Dato che <span class="math notranslate nohighlight">\(s_e\)</span> possiede la stessa unità di misura della variabile <span class="math notranslate nohighlight">\(y\)</span>, l’errore standard della stima può essere considerato come una sorta di “residuo medio.” – usando la stessa interpretazione che diamo alla deviazione standard in generale. Si noti che la formula precedente non fornisce la “deviazione standard dei residui nel campione” (quella formula avrebbe <span class="math notranslate nohighlight">\(n\)</span> al denominatore). Invece, fornisce una <em>stima</em> della deviazione standard dei residui nella popolazione da cui il campione è stato estratto.</p>
+<p>Verifichiamo quanto detto con i dati a disposizione. I residui possono essere trovati nel modo seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">kidiq</span><span class="o">.</span><span class="n">kid_score</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">kidiq</span><span class="o">.</span><span class="n">mom_iq</span><span class="p">)</span>
+<span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1    17.691744
+2   -11.217175
+3    -3.461531
+4    32.627695
+5     6.382843
+6   -41.521043
+7     3.864879
+8    26.414384
+9    11.208066
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcolo il residuo medio, prendendo il valore assoluto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.46860267547228
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’errore standard della regressione è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.2661227922994
+</pre></div>
+</div>
+</div>
+</div>
+<p>I due numeri certamente non sono uguali, ma possiamo dire che hanno lo stesso ordine di grandezza.</p>
+</section>
+</section>
+<section id="indice-di-determinazione">
+<h2>Indice di determinazione<a class="headerlink" href="#indice-di-determinazione" title="Permalink to this headline">#</a></h2>
+<p>Un importante risultato dei minimi quadrati riguarda la cosiddetta <em>scomposizione della devianza</em> mediante la quale si definisce l’indice di determinazione, il quale fornisce una misura relativa della bontà di adattamento del modello di regressione ai dati del campione. Per una generica osservazione <span class="math notranslate nohighlight">\(x_i, y_i\)</span>, la variazione di <span class="math notranslate nohighlight">\(y_i\)</span> rispetto alla media <span class="math notranslate nohighlight">\(\bar{y}\)</span> può essere descritta come la somma di due componenti: il residuo <span class="math notranslate nohighlight">\(e_i=y_i- \hat{y}_i\)</span> e lo scarto di <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> rispetto alla media <span class="math notranslate nohighlight">\(\bar{y}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+y_i - \bar{y} = (y_i- \hat{y}_i) + (\hat{y}_i - \bar{y}) = e_i + (\hat{y}_i - \bar{y}).
+\]</div>
+<p>Se consideriamo tutte le osservazioni, la devianza delle <span class="math notranslate nohighlight">\(y\)</span> può essere scomposta nel seguente modo:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+ \sum (y_i - \bar{y})^2 &amp;= \sum \left[ e_i + (\hat{y}_i - \bar{y})
+ \right]^2 
+ = \sum e_i^2 + \sum (\hat{y}_i - \bar{y})^2 + 2 \sum e_i (\hat{y}_i -
+ \bar{y}) \notag
+\end{align}
+\]</div>
+<p>Per i vincoli imposti sul modello statistico di regressione, il doppio prodotto si annulla, infatti</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\sum e_i (\hat{y}_i - \bar{y}) &amp;= \sum e_i \hat{y}_i - \bar{y}\sum e_i = \sum e_i (a + b x_i) \notag \\
+&amp;= a \sum e_i + b \sum e_i x_i = 0 \notag
+\end{align}
+\end{split}\]</div>
+<p>Il termine <span class="math notranslate nohighlight">\(b \sum e_i x_i\)</span> è uguale a zero perché, come vedremo in seguito, i coefficienti di regressione vengono calcolati in modo tale da rendere nulla <span class="math notranslate nohighlight">\(Cov(e, x)\)</span>. Di conseguenza, il termine precedente deve essere nullo.</p>
+<p>Possiamo dunque concludere che la devianza totale (<span class="math notranslate nohighlight">\(dev_T\)</span>) si scompone nella somma di devianza d’errore (o devianza non spiegata) (<span class="math notranslate nohighlight">\(dev_E\)</span>) e devianza di regressione (o devianza spiegata) (<span class="math notranslate nohighlight">\(dev_T\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\underbrace{\sum_{i=1}^n (y_i - \bar{y})^2}_{\tiny{\text{Devianza
+totale}}} &amp;= \underbrace{\sum_{i=1}^n e_i^2}_{\tiny{\text{Devianza
+di dispersione}}} + \underbrace{\sum_{i=1}^n  (\hat{y}_i -
+\bar{y})^2}_{\tiny{\text{Devianza di regressione}}} \notag
+\end{align}
+\]</div>
+<p>La devianza di regressione, <span class="math notranslate nohighlight">\(dev_R = dev_T - dev_E\)</span>, indica dunque la riduzione degli errori al quadrato che è imputabile alla regressione lineare. Il rapporto <span class="math notranslate nohighlight">\(dev_R/dev_T\)</span>, detto <em>indice di determinazione</em>, esprime tale riduzione degli errori in termini proporzionali e definisce il coefficiente di correlazione al quadrato:</p>
+<div class="math notranslate nohighlight">
+\[
+R^2 = \frac{dev_R}{dev_T} = 1 - \frac{dev_E}{dev_T}.
+\]</div>
+<p>Quando l’insieme di tutte le deviazioni della <span class="math notranslate nohighlight">\(y\)</span> dalla media è spiegato dall’insieme di tutte le deviazioni della variabile teorica <span class="math notranslate nohighlight">\(\hat{y}\)</span> dalla media, si ha che l’adattamento (o accostamento) del modello al campione di dati è perfetto, la devianza residua è nulla ed <span class="math notranslate nohighlight">\(r^2 = 1\)</span>; nel caso opposto, la variabilità totale coincide con quella residua, per cui <span class="math notranslate nohighlight">\(r^2 = 0\)</span>. Tra questi due estremi, <span class="math notranslate nohighlight">\(r\)</span> indica l’intensità della relazione lineare tra le due variabili e <span class="math notranslate nohighlight">\(r^2\)</span>, con <span class="math notranslate nohighlight">\(0 \leq r^2 \leq 1\)</span>, esprime la porzione della devianza totale della <span class="math notranslate nohighlight">\(y\)</span> che è spiegata dalla regressione lineare sulla <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Per l’esempio in discussione abbiamo quanto segue. La devianza totale è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dev_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">kidiq</span><span class="o">.</span><span class="n">kid_score</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kidiq</span><span class="o">.</span><span class="n">kid_score</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dev_t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>180386.15668202768
+</pre></div>
+</div>
+</div>
+</div>
+<p>La devianza spiegata è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dev_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">kidiq</span><span class="o">.</span><span class="n">mom_iq</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kidiq</span><span class="o">.</span><span class="n">kid_score</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dev_r</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36248.820197060355
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’indice di determinazione è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R2</span> <span class="o">=</span> <span class="n">dev_r</span> <span class="o">/</span> <span class="n">dev_t</span>
+<span class="nb">round</span><span class="p">(</span><span class="n">R2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.201
+</pre></div>
+</div>
+</div>
+</div>
+<p>Verifichiamo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;mom_iq&#39;</span><span class="p">])</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">kidiq</span><span class="p">[</span><span class="s1">&#39;kid_score&#39;</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">res</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>kid_score</td>    <th>  R-squared:         </th> <td>   0.201</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.199</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   108.6</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 08 Jan 2023</td> <th>  Prob (F-statistic):</th> <td>7.66e-23</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>10:39:54</td>     <th>  Log-Likelihood:    </th> <td> -1875.6</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   434</td>      <th>  AIC:               </th> <td>   3755.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   432</td>      <th>  BIC:               </th> <td>   3763.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+     <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>  <td>   25.7998</td> <td>    5.917</td> <td>    4.360</td> <td> 0.000</td> <td>   14.169</td> <td>   37.430</td>
+</tr>
+<tr>
+  <th>mom_iq</th> <td>    0.6100</td> <td>    0.059</td> <td>   10.423</td> <td> 0.000</td> <td>    0.495</td> <td>    0.725</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 7.545</td> <th>  Durbin-Watson:     </th> <td>   1.645</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.023</td> <th>  Jarque-Bera (JB):  </th> <td>   7.735</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td>-0.324</td> <th>  Prob(JB):          </th> <td>  0.0209</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.919</td> <th>  Cond. No.          </th> <td>    682.</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>Il risultato ottenuto si può interpretare dicendo che circa il 20% della variabilità dei punteggi del QI dei bambini può essere predetto conoscendo il QI delle madri.</p>
+<section id="inferenza-sul-modello-di-regressione">
+<h3>Inferenza sul modello di regressione<a class="headerlink" href="#inferenza-sul-modello-di-regressione" title="Permalink to this headline">#</a></h3>
+<p>La discussione precedente era tutta basata sulla trattazione “classica” del modello lineare, ovvero una trattazione basata sulle stime di massima verosimiglianza (se <span class="math notranslate nohighlight">\(y \sim \mathcal{N}(\alpha + \beta x, \sigma)\)</span>, allora le stime dei minimi quadrati coincidono con le stime di massima verosimiglianza). In altre parole, nella discussione precedente non abbiamo considerato in alcun modo le distribuzioni a priori dei parametri <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>. I risultati precedenti si confermano, in un contesto bayesiano, se e solo se imponiamo sui parametri delle distribuzioni a priori non informative (cioè, uniformi). In tali circostanze, le stime di massima verosimiglianza risultano identiche al massimo a posteriori bayesiano.</p>
+<p>Detto questo, il tema dell’inferenza viene trattato dall’approccio frequentista costruendo la “distribuzione campionaria” dei parametri (ovvero la distribuzione dei valori che i parametri otterrebbero in infiniti campioni casuali (<span class="math notranslate nohighlight">\(x, y\)</span>) di ampiezza <span class="math notranslate nohighlight">\(n\)</span> estratti dalla medesima popolazione) e poi calcolando gli errori standard dei parametri e gli intervalli di fiducia dei parametri. Una domanda frequente è, per esempio, se la pendenza della retta di regressione sia maggiore di zero. Per rispondere a tale domanda l’approccio frequentista calcola l’intervallo di fiducia al 95% per il parametro <span class="math notranslate nohighlight">\(\beta\)</span>. Se tale intervallo non include lo zero, e se il limite inferiore di tale intervallo è maggiore di zero, allora si conclude, con un grado di confidenza del 95%, che il vero parametro <span class="math notranslate nohighlight">\(\beta\)</span> nella popolazione è maggiore di zero. Ovvero, si conclude che vi sono evidenze di un’associazione lineare positiva tra <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Alla stessa conclusione si può arrivare calcolando, in un ottica bayesiana, l’intervallo di credibilità al 95% per il parametro <span class="math notranslate nohighlight">\(\beta\)</span>. I due intervalli sono identici se usiamo una distribuzione a priori piatta. Sono invece diversi se usiamo una distribuzione a priori debolmente informativa, oppure informativa.</p>
+<p>Solitamente si usa una distribuzione a priori debolmente informativa centrata sullo zero. In tali circostanze, l’uso della distribuzione a priori ha solo un effetto di <em>regolarizzazione</em>, ovvero di riduzione del peso delle osservazioni estreme – un tale risultato statistico è molto desiderabile, ma è difficile da ottenere in un contesto frequentista. Vedremo nel prossimo capitolo come può essere svolta l’inferenza sui coefficienti del modello di regressione lineare in un contesto bayesiano.</p>
+</section>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>Il modello lineare bivariato viene usato per descrivere la relazione tra due variabili e per determinare il segno e l’intensità di tale relazione. Inoltre, il modello lineare ci consente di prevedere il valore della variabile dipendente in base al valore assunto dalla variabile indipendente.</p>
+</section>
+<section id="watermark">
+<h2>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w -p pytensor
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jan 08 2023
+
+Python implementation: CPython
+Python version       : 3.8.15
+IPython version      : 8.7.0
+
+pytensor: 2.8.10
+
+arviz      : 0.14.0
+pandas     : 1.5.2
+scipy      : 1.9.3
+matplotlib : 3.6.2
+numpy      : 1.24.0
+statsmodels: 0.13.5
+seaborn    : 0.12.1
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="400_reglin_1.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduzione</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="410_reglin_3.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regressione lineare con PyMC</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

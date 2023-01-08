@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Il teorema di Bayes &#8212; ds4psy</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Indici di posizione, di varianza e di associazione di variabili casuali" href="125_expval_var.html" />
+    <link rel="prev" title="Probabilità condizionata: significato, teoremi, eventi indipendenti" href="115_conditional_prob.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4psy</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Benvenuti
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nozioni di base
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="001_key_notions.html">
+   Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="005_measurement.html">
+   La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="010_freq_distr.html">
+   Analisi esplorativa dei dati
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_loc_scale.html">
+   Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="020_correlation.html">
+   Le relazioni tra variabili
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_eda_quickstart.html">
+   Introduzione alla data analisi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="030_ndarray.html">
+   Gli array nel modulo NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="035_pandas.html">
+   Comandi utili in Pandas
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="105_dice.html">
+   Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110_intro_prob.html">
+   La logica dell’incerto
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="115_conditional_prob.html">
+   Probabilità condizionata: significato, teoremi, eventi indipendenti
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="125_expval_var.html">
+   Indici di posizione, di varianza e di associazione di variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="130_joint_prob.html">
+   Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="135_density_func.html">
+   La densità di probabilità
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="205_discr_rv_distr.html">
+   Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210_cont_rv_distr.html">
+   Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215_rng.html">
+   Generazione di numeri casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="225_likelihood.html">
+   La verosimiglianza
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="305_intro_bayes.html">
+   Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="310_subj_prop.html">
+   Pensare ad una proporzione in termini soggettivi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="315_conjugate_families.html">
+   Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="320_balance_prior_post.html">
+   L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="325_metropolis.html">
+   Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="330_beta_binomial.html">
+   Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="335_mcmc_diagnostics.html">
+   Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="340_summarize_posterior.html">
+   Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="345_bayesian_prediction.html">
+   La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="350_normal_normal_mod.html">
+   Inferenza bayesiana su una media
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="355_groups_comparison.html">
+   Confronto tra due (o più) gruppi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="400_reglin_1.html">
+   Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405_reglin_2.html">
+   Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="410_reglin_3.html">
+   Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="415_reglin_4.html">
+   Confronto tra le medie di due gruppi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="420_reglin_ppc.html">
+   Posterior Predictive Checks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="500_intro_frequentist.html">
+   Legge dei grandi numeri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="505_conf_interv.html">
+   Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="510_test_ipotesi.html">
+   Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="515_limiti_stat_frequentista.html">
+   Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="520_s_m_errors.html">
+   Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a03_set_theory.html">
+   Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus_notation.html">
+   Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/120_bayes_theorem.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F120_bayes_theorem.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/120_bayes_theorem.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definizione">
+   Definizione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aggiornamento-bayesiano">
+   Aggiornamento bayesiano
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Il teorema di Bayes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#definizione">
+   Definizione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aggiornamento-bayesiano">
+   Aggiornamento bayesiano
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
+   Commenti e considerazioni finali
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="il-teorema-di-bayes">
+<span id="bayes-theorem-notebook"></span><h1>Il teorema di Bayes<a class="headerlink" href="#il-teorema-di-bayes" title="Permalink to this headline">#</a></h1>
+<p>Il teorema di Bayes assume un ruolo fondamentale nell’interpretazione soggettivista della probabilità perchè descrive l’aggiornamento della credenza che si aveva nel verificarsi dell’ipotesi <span class="math notranslate nohighlight">\(H\)</span> (quantificata con la probabilità assegnata all’ipotesi) in conseguenza del verificarsi dell’evidenza <span class="math notranslate nohighlight">\(E\)</span>.</p>
+<section id="definizione">
+<h2>Definizione<a class="headerlink" href="#definizione" title="Permalink to this headline">#</a></h2>
+<div class="admonition-teorema admonition">
+<p class="admonition-title">Teorema</p>
+<p>Sia <span class="math notranslate nohighlight">\((H_i)_{i\geq 1}\)</span> una partizione dell’evento certo <span class="math notranslate nohighlight">\(\Omega\)</span> e sia <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span> un evento tale che <span class="math notranslate nohighlight">\(P(E) &gt; 0\)</span>, allora, per <span class="math notranslate nohighlight">\(i = 1, \dots, \infty\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bayes2">
+<span class="eqno">(18)<a class="headerlink" href="#equation-eq-bayes2" title="Permalink to this equation">#</a></span>\[
+{\mbox{P}}(H_i \mid E) = \frac{{\mbox{P}}(E \mid H_i){\mbox{P}}(H_i)}{\sum_{j=1}^{\infty}{\mbox{P}}(H_j)P(E \mid H_j)}.
+\]</div>
+</div>
+<p>L’eq. <a class="reference internal" href="#equation-eq-bayes2">(18)</a> contiene tre concetti fondamentali. I primi due distinguono il grado di fiducia precedente al verificarsi dell’evidenza <span class="math notranslate nohighlight">\(E\)</span> da quello successivo al verificarsi dell’evidenza <span class="math notranslate nohighlight">\(E\)</span>. Pertanto, dati gli eventi <span class="math notranslate nohighlight">\(H, E \subseteq \Omega,\)</span> si definisce</p>
+<ul class="simple">
+<li><p><em>probabilità a priori</em>, <span class="math notranslate nohighlight">\(P(H)\)</span>, la probabilità attribuita al verificarsi dell’ipotesi <span class="math notranslate nohighlight">\(H\)</span> prima di sapere che si è verificato l’evento <span class="math notranslate nohighlight">\(E\)</span>;</p></li>
+<li><p><em>probabilità a posteriori</em>, <span class="math notranslate nohighlight">\(P(H \mid E)\)</span>, la probabilità assegnata ad <span class="math notranslate nohighlight">\(H\)</span> una volta che sia noto <span class="math notranslate nohighlight">\(E\)</span>, ovvero l’aggiornamento della probabilità a priori alla luce della nuova evidenza <span class="math notranslate nohighlight">\(E\)</span>.</p></li>
+</ul>
+<p>Il terzo concetto definisce la probabilità che ha l’evento <span class="math notranslate nohighlight">\(E\)</span> di verificarsi quando è vera l’ipotesi <span class="math notranslate nohighlight">\(H\)</span>, ovvero la probabilità dell’evidenza in base all’ipotesi. Pertanto, dati gli eventi <span class="math notranslate nohighlight">\(H, E \subseteq \Omega\)</span> si definisce</p>
+<ul class="simple">
+<li><p><em>verosimiglianza</em> di <span class="math notranslate nohighlight">\(H\)</span> dato <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(P(E \mid H)\)</span>, la probabilità condizionata che si verifichi <span class="math notranslate nohighlight">\(E\)</span>, se è vera <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+</ul>
+<p>Si noti che, per il calcolo della quantità a denominatore dell’eq. <a class="reference internal" href="#equation-eq-bayes2">(18)</a>, si ricorre al teorema della probabilità assoluta.</p>
+<p>Consideriamo il seguente problema. Posta una partizione dell’evento certo <span class="math notranslate nohighlight">\(\Omega\)</span> in due soli eventi che chiamiamo ipotesi <span class="math notranslate nohighlight">\(H_1\)</span> e <span class="math notranslate nohighlight">\(H_2\)</span>, supponiamo conosciute le probabilità a priori <span class="math notranslate nohighlight">\(P(H_1)\)</span> e <span class="math notranslate nohighlight">\(P(H_2)\)</span>. Consideriamo un terzo evento <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span> con probabilità non nulla di cui si conosce la verosimiglianza, ovvero si conoscono le probabilità condizionate <span class="math notranslate nohighlight">\({\mbox{P}}(E \mid H_1)\)</span> e <span class="math notranslate nohighlight">\(P(E \mid H_2)\)</span>. Supponendo che si sia verificato l’evento <span class="math notranslate nohighlight">\(E\)</span>, vogliamo conoscere le probabilità a posteriori delle ipotesi, ovvero <span class="math notranslate nohighlight">\(P(H_1 \mid E)\)</span> e <span class="math notranslate nohighlight">\(P(H_2 \mid E)\)</span>. La figura rappresenta una partizione dell’evento certo in due eventi chiamati ‘ipotesi’; l’evidenza <span class="math notranslate nohighlight">\(E\)</span> è un sottoinsieme dello spazio campione.</p>
+<a class="reference internal image-reference" href="_images/bayes_theorem.png"><img alt="_images/bayes_theorem.png" class="align-center" src="_images/bayes_theorem.png" style="height: 300px;" /></a>
+<p>Per trovare le probabilità cercate scriviamo:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+P(H_1 \mid E) &amp;= \frac{P(E \cap H_1)}{P(E)}\notag\\
+              &amp;= \frac{P(E \mid H_1) P(H_1)}{P(E)}.
+\end{split}
+\end{split}\]</div>
+<p>Sapendo che <span class="math notranslate nohighlight">\(E = (E \cap H_1) \cup (E \cap H_2)\)</span> e che <span class="math notranslate nohighlight">\(H_1\)</span> e <span class="math notranslate nohighlight">\(H_2\)</span> sono eventi disgiunti, ovvero <span class="math notranslate nohighlight">\(H_1 \cap H_2 = \emptyset\)</span>, ne segue che possiamo calcolare <span class="math notranslate nohighlight">\({\mbox{P}}(E)\)</span> utilizzando il teorema della probabilità assoluta:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+P(E) &amp;= P(E \cap H_1) + P(E \cap H_2)\notag\\
+     &amp;= P(E \mid H_1)P(H_1) + P(E \mid H_2)P(H_2).
+\end{split}
+\end{split}\]</div>
+<p>Sostituendo tale risultato nella formula precedente otteniamo:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bayes1">
+<span class="eqno">(19)<a class="headerlink" href="#equation-eq-bayes1" title="Permalink to this equation">#</a></span>\[
+P(H_1 \mid E) = \frac{P(E \mid H_1)P(H_1)}{P(E \mid H_1)P(H_1) + P(E \mid H_2)P(H_2)}.
+\]</div>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Un lettore attento si sarà reso conto che, in precedenza, abbiamo già applicato il teorema di Bayes quando abbiamo risolto sulla mammografia e cancro al sento. In quel caso, le due ipotesi erano “malattia presente”, che possiamo denotare con <span class="math notranslate nohighlight">\(M\)</span>, e “malattia assente”, <span class="math notranslate nohighlight">\(M^\complement\)</span>. L’evidenza <span class="math notranslate nohighlight">\(E\)</span> era costituita dal risultato positivo al test, ovvero <span class="math notranslate nohighlight">\(+\)</span>. Con questa notazione l’eq. <a class="reference internal" href="#equation-eq-bayes1">(19)</a> diventa:</p>
+<div class="math notranslate nohighlight">
+\[
+P(M \mid +) = \frac{P(+ \mid M) P(M)}{P(+ \mid M) P(M) + P(+ \mid M^\complement) P(M^\complement)}
+\]</div>
+<p>Inserendo i dati dell’esercizio nella formula precedente, otteniamo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P(M \mid +) &amp;= \frac{0.9 \cdot 0.01}{0.9 \cdot 0.01 + 0.1 \cdot 0.99} \notag\\
+&amp;= \frac{9}{108} \notag\\
+&amp;\approx 0.083.\notag
+\end{align}
+\end{split}\]</div>
+</div>
+</section>
+<section id="aggiornamento-bayesiano">
+<h2>Aggiornamento bayesiano<a class="headerlink" href="#aggiornamento-bayesiano" title="Permalink to this headline">#</a></h2>
+<p>Il teorema di Bayes rende esplicito il motivo per cui la probabilità non possa essere pensata come uno stato oggettivo, quanto piuttosto come un’inferenza soggettiva e condizionata. Il denominatore del membro di destra dell’eq. <a class="reference internal" href="#equation-eq-bayes2">(18)</a> è un semplice fattore di normalizzazione. Nel numeratore compaiono invece due quantità: <span class="math notranslate nohighlight">\(P(H_i\)</span>) e <span class="math notranslate nohighlight">\(P(E \mid H_i)\)</span>. La probabilità <span class="math notranslate nohighlight">\(P(H_i)\)</span> è la probabilità <em>probabilità a priori</em> (<em>prior</em>) dell’ipotesi <span class="math notranslate nohighlight">\(H_i\)</span> e rappresenta l’informazione che l’agente bayesiano possiede a proposito dell’ipotesi <span class="math notranslate nohighlight">\(H_i\)</span>. Diremo che <span class="math notranslate nohighlight">\(P(H_i)\)</span> codifica il grado di fiducia che l’agente ripone in <span class="math notranslate nohighlight">\(H_i\)</span> precedentemente al verificarsi dell’evidenza <span class="math notranslate nohighlight">\(E\)</span>. Nell’interpretazione bayesiana, <span class="math notranslate nohighlight">\(P(H_i)\)</span> rappresenta un giudizio personale dell’agente e non esistono criteri esterni che possano determinare se tale giudizio sia coretto o meno. La probabilità condizionata <span class="math notranslate nohighlight">\(P(E \mid H_i)\)</span> rappresenta invece la verosimiglianza di <span class="math notranslate nohighlight">\(H_i\)</span> dato <span class="math notranslate nohighlight">\(E\)</span> e descrive la plausibilità che si verifichi l’evento <span class="math notranslate nohighlight">\(E\)</span> se è vera l’ipotesi <span class="math notranslate nohighlight">\(H_i\)</span>. Il teorema di Bayes descrive la regola che l’agente deve seguire per aggiornare il suo grado di fiducia nell’ipotesi <span class="math notranslate nohighlight">\(H_i\)</span> alla luce del verificarsi dell’evento <span class="math notranslate nohighlight">\(E\)</span>. La <span class="math notranslate nohighlight">\(P(H_i \mid E)\)</span> è chiamata probabilità a posteriori dato che rappresenta la nuova probabilità che l’agente assegna all’ipotesi <span class="math notranslate nohighlight">\(H_i\)</span> affinché rimanga consistente con le nuove informazioni fornitegli da <span class="math notranslate nohighlight">\(E\)</span>.</p>
+<p>La probabilità a posteriori dipende sia dall’evidenza <span class="math notranslate nohighlight">\(E\)</span>, sia dalla conoscenza a priori dell’agente <span class="math notranslate nohighlight">\(P(H_i)\)</span>. È dunque chiaro come non abbia senso parlare di una probabilità oggettiva: per il teorema di Bayes la probabilità è definita condizionatamente alla probabilità a priori, la quale a sua volta, per definizione, è un’assegnazione soggettiva. Ne segue pertanto che ogni probabilità deve essere considerata come una rappresentazione del grado di fiducia soggettiva dell’agente.</p>
+<p>Dato che ogni assegnazione probabilistica rappresenta uno stato di conoscenza e che ciascun particolare stato di conoscenza è arbitrario, un accordo tra agenti diversi non è richiesto. Ciò nonostante, la teoria delle probabilità ci fornisce uno strumento che, alla luce di nuove evidenze, consente di aggiornare in un modo razionale il grado di fiducia che attribuiamo ad un’ipotesi, via via che nuove evidenze vengono raccolte, in modo tale da formulare un’ipotesi a posteriori la quale non è mai definitiva, ma può sempre essere aggiornata in base alle nuove evidenze disponibili. Questo processo si chiama <em>aggiornamento bayesiano</em>.</p>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>La riflessione epistemologica contemporanea ha ampiamente messo in luce come la conoscenza non possa essere identificata con la certezza, ovvero con la garanzia razionale della verità. Da ciò deriva che qualunque giudizio deve necessariamente essere inteso come una decisione presa in condizioni d’incertezza. Stando così le cose, non si può più considerare la logica deduttiva, modellata sulle forme della dimostrazione matematica, come quella più adeguata al ragionamento scientifico. La ricerca scientifica ha invece bisogno di una <em>logica dell’incertezza</em> e questa viene fornita dalla teoria delle probabilità e, specialmente, da quello schema di inferenza noto come teorema di Bayes. È proprio in questi termini che può essere compresa quella rivoluzione metodologica contemporanea che, tra le altre cose, si è posta il problema di porre rimedio alla <em>crisi della replicabilità dei risultati della ricerca</em> <span id="id1">[<a class="reference internal" href="z_biblio.html#id67" title="John PA Ioannidis. Why most published research findings are false. PLoS medicine, 2(8):e124, 2005.">Ioa05</a>]</span> che sta affligendo molti ambiti della ricerca scientifica, inclusa la psicologia. Per un approfondimento a questo tema rimando, nuovamente, al testo <em>Bernoulli’s fallacy</em> di <span id="id2">[<a class="reference internal" href="z_biblio.html#id15" title="Aubrey Clayton. Bernoulli's Fallacy: Statistical Illogic and the Crisis of Modern Science. Columbia University Press, 2021.">Cla21</a>]</span>.</p>
+<p>In questo capitolo abbiamo descritto il teorema di Bayes facendo riferimento alle variabili casuali discrete. Il caso discreto, tuttavia, nonostante la sua apparente semplicità matematica, è il più contro-intuitivo. È molto più “naturale”, in termini psicologici, pensare al teorema di Bayes facendo riferimento alle variabili casuali continue. Questo sarà l’oggetto del capitolo <span class="xref std std-ref">sec-bayes-workflow</span>.
+$$</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="115_conditional_prob.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Probabilità condizionata: significato, teoremi, eventi indipendenti</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="125_expval_var.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Indici di posizione, di varianza e di associazione di variabili casuali</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

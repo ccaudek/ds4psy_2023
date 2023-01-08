@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Indici di posizione, di varianza e di associazione di variabili casuali &#8212; ds4psy</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Probabilità congiunta" href="130_joint_prob.html" />
+    <link rel="prev" title="Il teorema di Bayes" href="120_bayes_theorem.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4psy</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Benvenuti
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Nozioni di base
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="001_key_notions.html">
+   Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="005_measurement.html">
+   La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="010_freq_distr.html">
+   Analisi esplorativa dei dati
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_loc_scale.html">
+   Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="020_correlation.html">
+   Le relazioni tra variabili
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_eda_quickstart.html">
+   Introduzione alla data analisi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="030_ndarray.html">
+   Gli array nel modulo NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="035_pandas.html">
+   Comandi utili in Pandas
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="105_dice.html">
+   Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110_intro_prob.html">
+   La logica dell’incerto
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="115_conditional_prob.html">
+   Probabilità condizionata: significato, teoremi, eventi indipendenti
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="120_bayes_theorem.html">
+   Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Indici di posizione, di varianza e di associazione di variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="130_joint_prob.html">
+   Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="135_density_func.html">
+   La densità di probabilità
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="205_discr_rv_distr.html">
+   Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210_cont_rv_distr.html">
+   Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215_rng.html">
+   Generazione di numeri casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="225_likelihood.html">
+   La verosimiglianza
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="305_intro_bayes.html">
+   Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="310_subj_prop.html">
+   Pensare ad una proporzione in termini soggettivi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="315_conjugate_families.html">
+   Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="320_balance_prior_post.html">
+   L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="325_metropolis.html">
+   Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="330_beta_binomial.html">
+   Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="335_mcmc_diagnostics.html">
+   Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="340_summarize_posterior.html">
+   Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="345_bayesian_prediction.html">
+   La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="350_normal_normal_mod.html">
+   Inferenza bayesiana su una media
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="355_groups_comparison.html">
+   Confronto tra due (o più) gruppi
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="400_reglin_1.html">
+   Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405_reglin_2.html">
+   Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="410_reglin_3.html">
+   Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="415_reglin_4.html">
+   Confronto tra le medie di due gruppi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="420_reglin_ppc.html">
+   Posterior Predictive Checks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="500_intro_frequentist.html">
+   Legge dei grandi numeri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="505_conf_interv.html">
+   Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="510_test_ipotesi.html">
+   Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="515_limiti_stat_frequentista.html">
+   Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="520_s_m_errors.html">
+   Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a03_set_theory.html">
+   Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus_notation.html">
+   Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/125_expval_var.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F125_expval_var.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/125_expval_var.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#valore-atteso">
+   Valore atteso
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretazione">
+     Interpretazione
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proprieta-del-valore-atteso">
+     Proprietà del valore atteso
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variabili-casuali-continue">
+     Variabili casuali continue
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#moda">
+       Moda
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#varianza">
+   Varianza
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formula-alternativa-per-la-varianza">
+     Formula alternativa per la varianza
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Variabili casuali continue
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deviazione-standard">
+   Deviazione standard
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standardizzazione">
+   Standardizzazione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#momenti-di-variabili-casuali">
+   Momenti di variabili casuali
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#covarianza">
+   Covarianza
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correlazione">
+   Correlazione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proprieta">
+   Proprietà
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#incorrelazione">
+     Incorrelazione
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusioni">
+   Conclusioni
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Indici di posizione, di varianza e di associazione di variabili casuali</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#valore-atteso">
+   Valore atteso
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretazione">
+     Interpretazione
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proprieta-del-valore-atteso">
+     Proprietà del valore atteso
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variabili-casuali-continue">
+     Variabili casuali continue
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#moda">
+       Moda
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#varianza">
+   Varianza
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formula-alternativa-per-la-varianza">
+     Formula alternativa per la varianza
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Variabili casuali continue
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deviazione-standard">
+   Deviazione standard
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standardizzazione">
+   Standardizzazione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#momenti-di-variabili-casuali">
+   Momenti di variabili casuali
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#covarianza">
+   Covarianza
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correlazione">
+   Correlazione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#proprieta">
+   Proprietà
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#incorrelazione">
+     Incorrelazione
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusioni">
+   Conclusioni
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="indici-di-posizione-di-varianza-e-di-associazione-di-variabili-casuali">
+<h1>Indici di posizione, di varianza e di associazione di variabili casuali<a class="headerlink" href="#indici-di-posizione-di-varianza-e-di-associazione-di-variabili-casuali" title="Permalink to this headline">#</a></h1>
+<p>Spesso risulta utile fornire una rappresentazione sintetica della distribuzione di una variabile casuale attraverso degli indicatori caratteristici piuttosto che fare riferimento ad una sua rappresentazione completa mediante la funzione di ripartizione, o la funzione di massa o di densità di probabilità. Una descrizione più sintetica di una variabile casuale, tramite pochi valori, ci consente di cogliere le caratteristiche essenziali della distribuzione, quali: la posizione, cioè il baricentro della distribuzione di probabilità; la variabilità, cioè la dispersione della distribuzione di probabilità attorno ad un centro; la forma della distribuzione di probabilità, considerando la simmetria e la curtosi (pesantezza delle code). In questo Capitolo introdurremo quegli indici sintetici che descrivono il centro di una distribuzione di probabilità e la sua variabilità.</p>
+<section id="valore-atteso">
+<h2>Valore atteso<a class="headerlink" href="#valore-atteso" title="Permalink to this headline">#</a></h2>
+<p>Quando vogliamo conoscere il comportamento tipico di una variabile casuale spesso vogliamo sapere qual è il suo “valore tipico”. La nozione di “valore tipico”, tuttavia, è ambigua. Infatti, essa può essere definita in almeno tre modi diversi:</p>
+<ul class="simple">
+<li><p>la <em>media</em> (somma dei valori divisa per il numero dei valori),</p></li>
+<li><p>la <em>mediana</em> (il valore centrale della distribuzione, quando la variabile è ordinata in senso crescente o decrescente),</p></li>
+<li><p>la <em>moda</em> (il valore che ricorre più spesso).</p></li>
+</ul>
+<p>Per esempio, la media di <span class="math notranslate nohighlight">\(\{3, 1, 4, 1, 5\}\)</span> è <span class="math notranslate nohighlight">\(\frac{3+1+4+1+5}{5} = 2.8\)</span>, la mediana è <span class="math notranslate nohighlight">\(3\)</span> e la moda è <span class="math notranslate nohighlight">\(1\)</span>. Tuttavia, la teoria delle probabilità si occupa di variabili casuali piuttosto che di sequenze di numeri. Diventa dunque necessario precisare che cosa intendiamo per “valore tipico” quando facciamo riferimento alle variabili casuali. Giungiamo così alla seguente definizione.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Sia <span class="math notranslate nohighlight">\(Y\)</span> è una variabile casuale discreta che assume i valori <span class="math notranslate nohighlight">\(y_1, \dots, y_n\)</span> con distribuzione <span class="math notranslate nohighlight">\(P(Y = y_i) = p(y_i)\)</span>. Per definizione il <em>valore atteso</em> di <span class="math notranslate nohighlight">\(Y\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}(Y)\)</span>, è</p>
+<div class="math notranslate nohighlight" id="equation-eq-expval-discr">
+<span class="eqno">(20)<a class="headerlink" href="#equation-eq-expval-discr" title="Permalink to this equation">#</a></span>\[
+\mathbb{E}(Y) = \sum_{i=1}^n y_i \cdot p(y_i).
+\]</div>
+</div>
+<p>A parole: il valore atteso (o speranza matematica, o aspettazione, o valor medio) di una variabile casuale è definito come la somma di tutti i valori che la variabile casuale può prendere, ciascuno pesato dalla probabilità con cui il valore è preso.</p>
+<p>Per fare un esempio, calcoliamo il valore atteso della variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> corrispondente al lancio di una moneta equilibrata (testa: <em>Y</em> = 1; croce: <em>Y</em> = 0):</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y) = \sum_{i=1}^{2} y_i \cdot P(y_i) = 0 \cdot \frac{1}{5} + 1 \cdot \frac{1}{5} = 0.5.
+\]</div>
+<p>Si calcoli il valore atteso della variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> corrispondente ai punti ottenuti dal lancio di un dado equilibrato.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y) = \sum_{i=1}^{6} y_i \cdot P(y_i) = 1 \cdot \frac{1}{6} + 2 \cdot \frac{1}{6} + \dots + 6 \cdot \frac{1}{6} = \frac{21}{6} = 3.5.
+\]</div>
+<section id="interpretazione">
+<h3>Interpretazione<a class="headerlink" href="#interpretazione" title="Permalink to this headline">#</a></h3>
+<p>Che interpretazione può essere assegnata alla nozione di valore atteso? Bruno de Finetti adottò lo stesso termine di <em>previsione</em> (e lo stesso simbolo) tanto per la probabilità che per il valore atteso. Si può pertanto dire che, dal punto di vista bayesiano, il valore atteso è l’estensione naturale della nozione di probabilità soggettiva.</p>
+</section>
+<section id="proprieta-del-valore-atteso">
+<h3>Proprietà del valore atteso<a class="headerlink" href="#proprieta-del-valore-atteso" title="Permalink to this headline">#</a></h3>
+<p>La proprietà più importante del valore atteso è la linearità: il valore atteso di una somma di variabili casuali è uguale alla somma dei lori rispettivi valori attesi:</p>
+<div class="math notranslate nohighlight" id="equation-eq-prop-expval-linearity">
+<span class="eqno">(21)<a class="headerlink" href="#equation-eq-prop-expval-linearity" title="Permalink to this equation">#</a></span>\[
+\mathbb{E}(X + Y) = \mathbb{E}(X) + \mathbb{E}(Y).
+\]</div>
+<p>L’eq. <a class="reference internal" href="#equation-eq-prop-expval-linearity">(21)</a> sembra ragionevole quando <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono indipendenti, ma è anche vera quando <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono associati. Abbiamo anche che</p>
+<div class="math notranslate nohighlight" id="equation-eq-prop-expval-const">
+<span class="eqno">(22)<a class="headerlink" href="#equation-eq-prop-expval-const" title="Permalink to this equation">#</a></span>\[
+\mathbb{E}(cY) = c \mathbb{E}(Y).
+\]</div>
+<p>L’eq. <a class="reference internal" href="#equation-eq-prop-expval-const">(22)</a> ci dice che possiamo estrarre una costante dall’operatore di valore atteso. Tale proprietà si estende a qualunque numero di variabili casuali. Infine, se due variabili casuali <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono indipendenti, abbiamo che</p>
+<div class="math notranslate nohighlight" id="equation-eq-expval-prod-ind-rv">
+<span class="eqno">(23)<a class="headerlink" href="#equation-eq-expval-prod-ind-rv" title="Permalink to this equation">#</a></span>\[
+\mathbb{E}(X Y) = \mathbb{E}(X) \mathbb{E}(Y). 
+\]</div>
+<p>Facciamo un esempio. Si considerino le seguenti variabili casuali: <span class="math notranslate nohighlight">\(Y\)</span>, ovvero il numero che si ottiene dal lancio di un dado equilibrato, e <span class="math notranslate nohighlight">\(Y\)</span>, il numero di teste prodotto dal lancio di una moneta equilibrata. Si trovi il valore atteso di <span class="math notranslate nohighlight">\(X+Y\)</span>.</p>
+<p>Per risolvere il problema iniziamo a costruire lo spazio campionario dell’esperimento casuale consistente nel lancio di un dado e di una moneta.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x /\ y\)</span></p></th>
+<th class="text-align:center head"><p>1</p></th>
+<th class="text-align:center head"><p>2</p></th>
+<th class="text-align:center head"><p>3</p></th>
+<th class="text-align:center head"><p>4</p></th>
+<th class="text-align:center head"><p>5</p></th>
+<th class="text-align:center head"><p>6</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>(0, 1)</p></td>
+<td class="text-align:center"><p>(0, 2)</p></td>
+<td class="text-align:center"><p>(0, 3)</p></td>
+<td class="text-align:center"><p>(0, 4)</p></td>
+<td class="text-align:center"><p>(0, 5)</p></td>
+<td class="text-align:center"><p>(0, 6)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>(1, 1)</p></td>
+<td class="text-align:center"><p>(1, 2)</p></td>
+<td class="text-align:center"><p>(1, 3)</p></td>
+<td class="text-align:center"><p>(1, 4)</p></td>
+<td class="text-align:center"><p>(1, 5)</p></td>
+<td class="text-align:center"><p>(1, 6)</p></td>
+</tr>
+</tbody>
+</table>
+<p>ovvero</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x /\ y\)</span></p></th>
+<th class="text-align:center head"><p>1</p></th>
+<th class="text-align:center head"><p>2</p></th>
+<th class="text-align:center head"><p>3</p></th>
+<th class="text-align:center head"><p>4</p></th>
+<th class="text-align:center head"><p>5</p></th>
+<th class="text-align:center head"><p>6</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>4</p></td>
+<td class="text-align:center"><p>5</p></td>
+<td class="text-align:center"><p>6</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>4</p></td>
+<td class="text-align:center"><p>5</p></td>
+<td class="text-align:center"><p>6</p></td>
+<td class="text-align:center"><p>7</p></td>
+</tr>
+</tbody>
+</table>
+<p>Il risultato del lancio del dado è indipendente dal risultato del lancio della moneta. Pertanto, ciascun evento elementare dello spazio campionario avrà la stessa probabilità di verificarsi, ovvero <span class="math notranslate nohighlight">\(P(\omega) = \frac{1}{12}\)</span>. Il valore atteso di <span class="math notranslate nohighlight">\(X+Y\)</span> è dunque uguale a:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(X+Y) = 1 \cdot \frac{1}{12} + 2 \cdot \frac{1}{12} + \dots + 7 \cdot \frac{1}{12} = 4.0.
+\]</div>
+<p>Possiamo ottenere lo stesso risultato usanlo l’&#64;eq-prop-expval-linearity:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(X+Y) = \mathbb{E}(X) + E(Y) = 3.5 + 0.5 = 4.0.
+\]</div>
+<p>Facciamo un altro esempio. Si considerino le variabili casuali <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> definite nel caso del lancio di tre monete equilibrate, dove <span class="math notranslate nohighlight">\(X\)</span> conta il numero delle teste nei tre lanci e <span class="math notranslate nohighlight">\(Y\)</span> conta il numero delle teste al primo lancio. Si calcoli il valore atteso del prodotto delle variabili casuali <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>La distribuzione di probabilità congiunta <span class="math notranslate nohighlight">\(P(X, Y)\)</span> è fornita nella tabella seguente.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x /\ y\)</span></p></th>
+<th class="text-align:center head"><p>0</p></th>
+<th class="text-align:center head"><p>1</p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(p(Y)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1/8</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1/8</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>1</p></td>
+<td class="text-align:center"><p>2/8</p></td>
+<td class="text-align:center"><p>1/8</p></td>
+<td class="text-align:center"><p>3/8</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>2</p></td>
+<td class="text-align:center"><p>1/8</p></td>
+<td class="text-align:center"><p>2/8</p></td>
+<td class="text-align:center"><p>3/8</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>3</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:center"><p>1/8</p></td>
+<td class="text-align:center"><p>1/8</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(p(y)\)</span></p></td>
+<td class="text-align:center"><p>4/8</p></td>
+<td class="text-align:center"><p>4/8</p></td>
+<td class="text-align:center"><p>1.0</p></td>
+</tr>
+</tbody>
+</table>
+<p>Il calcolo del valore atteso di <span class="math notranslate nohighlight">\(XY\)</span> si riduce a</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(XY) = 1 \cdot \frac{1}{8} + 2 \cdot \frac{2}{8} + 3 \cdot \frac{1}{8} = 1.0.
+\]</div>
+<p>Si noti che le variabili casuali <span class="math notranslate nohighlight">\(Y\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> non sono indipendenti. Dunque non possiamo usare l’&#64;eq-expval-prod-ind-rv. Infatti, il valore atteso di <span class="math notranslate nohighlight">\(X\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(X) = 1 \cdot \frac{3}{8} + 2 \cdot \frac{3}{8} + 3 \cdot \frac{1}{8} = 1.5
+\]</div>
+<p>e il valore atteso di <span class="math notranslate nohighlight">\(Y\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y) = 0 \cdot \frac{4}{8} + 1 \cdot \frac{4}{8} = 0.5.
+\]</div>
+<p>Perciò</p>
+<div class="math notranslate nohighlight">
+\[
+1.5 \cdot 0.5 \neq 1.0.
+\]</div>
+<p>In altri termini, se <span class="math notranslate nohighlight">\(\mathbb{E}(X Y) \neq \mathbb{E}(X) \mathbb{E}(Y)\)</span>, allora le variabili causuali <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> non sono indipendenti (cioè sono associate).</p>
+</section>
+<section id="variabili-casuali-continue">
+<h3>Variabili casuali continue<a class="headerlink" href="#variabili-casuali-continue" title="Permalink to this headline">#</a></h3>
+<p>Nel caso di una variabile casuale continua <span class="math notranslate nohighlight">\(Y\)</span> il valore atteso diventa:</p>
+<div class="math notranslate nohighlight" id="equation-eq-def-ev-rv-cont">
+<span class="eqno">(24)<a class="headerlink" href="#equation-eq-def-ev-rv-cont" title="Permalink to this equation">#</a></span>\[
+\mathbb{E}(Y) = \int_{-\infty}^{+\infty} y p(y) \,\operatorname{d}\!y.
+\]</div>
+<p>Anche in questo caso il valore atteso è una media ponderata della <span class="math notranslate nohighlight">\(y\)</span>, nella quale ciascun possibile valore <span class="math notranslate nohighlight">\(y\)</span> è ponderato per il corrispondente valore della densità <span class="math notranslate nohighlight">\(p(y)\)</span>. Possiamo leggere l’integrale pensando che <span class="math notranslate nohighlight">\(y\)</span> rappresenti l’ampiezza delle barre infinitamente strette di un istogramma, con la densità <span class="math notranslate nohighlight">\(p(y)\)</span> che corrisponde all’altezza di tali barre e la notazione <span class="math notranslate nohighlight">\(\int_{-\infty}^{+\infty}\)</span> che corrisponde ad una somma.<a class="footnote-reference brackets" href="#expval-var-1" id="id1">1</a></p>
+<section id="moda">
+<h4>Moda<a class="headerlink" href="#moda" title="Permalink to this headline">#</a></h4>
+<p>Un’altra misura di tendenza centrale delle variabili casuali continue è la moda. La moda di <span class="math notranslate nohighlight">\(Y\)</span> individua il valore <span class="math notranslate nohighlight">\(y\)</span> più plausibile, ovvero il valore <span class="math notranslate nohighlight">\(y\)</span> che massimizza la funzione di densità <span class="math notranslate nohighlight">\(p(y)\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-def-mode">
+<span class="eqno">(25)<a class="headerlink" href="#equation-eq-def-mode" title="Permalink to this equation">#</a></span>\[
+Mo(Y) = argmax_y p(y).
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La notazione <span class="math notranslate nohighlight">\(argmax_y p(y)\)</span> significa: il valore <span class="math notranslate nohighlight">\(y\)</span> tale per cui la funzione <span class="math notranslate nohighlight">\(p(y)\)</span> assume il suo valore massimo.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="varianza">
+<h2>Varianza<a class="headerlink" href="#varianza" title="Permalink to this headline">#</a></h2>
+<p>La seconda più importante proprietà di una variabile casuale, dopo che conosciamo il suo valore atteso, è la <em>varianza</em>.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Se <span class="math notranslate nohighlight">\(Y\)</span> è una variabile casuale discreta con distribuzione <span class="math notranslate nohighlight">\(p(y)\)</span>, per definizione la varianza di <span class="math notranslate nohighlight">\(Y\)</span>, <span class="math notranslate nohighlight">\(\mathbb{V}(Y)\)</span>, è</p>
+<div class="math notranslate nohighlight" id="equation-eq-def-var-rv">
+<span class="eqno">(26)<a class="headerlink" href="#equation-eq-def-var-rv" title="Permalink to this equation">#</a></span>\[
+\mathbb{V}(Y) = \mathbb{E}\Big[\big(Y - \mathbb{E}(Y)\big)^2\Big].
+\]</div>
+</div>
+<p>A parole: la varianza è la deviazione media quadratica della variabile dalla sua media.<a class="footnote-reference brackets" href="#expval-var-2" id="id2">2</a> Se denotiamo <span class="math notranslate nohighlight">\(\mathbb{E}(Y) = \mu\)</span>, la varianza <span class="math notranslate nohighlight">\(\mathbb{V}(Y)\)</span> diventa il valore atteso di <span class="math notranslate nohighlight">\((Y - \mu)^2\)</span>.</p>
+<p>Consideriamo un esempio. Posta <span class="math notranslate nohighlight">\(S\)</span> uguale alla somma dei punti ottenuti nel lancio di due dadi equilibrati, si calcoli la varianza di <span class="math notranslate nohighlight">\(S\)</span>.</p>
+<p>La variabile casuale <span class="math notranslate nohighlight">\(S\)</span> ha la seguente distribuzione di probabilità:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(s\)</span></p></th>
+<th class="text-align:center head"><p>2</p></th>
+<th class="text-align:center head"><p>3</p></th>
+<th class="text-align:center head"><p>4</p></th>
+<th class="text-align:center head"><p>5</p></th>
+<th class="text-align:center head"><p>6</p></th>
+<th class="text-align:center head"><p>7</p></th>
+<th class="text-align:center head"><p>8</p></th>
+<th class="text-align:center head"><p>9</p></th>
+<th class="text-align:center head"><p>10</p></th>
+<th class="text-align:center head"><p>11</p></th>
+<th class="text-align:center head"><p>12</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(P(S = s)\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{1}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{2}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{3}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{4}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{5}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{6}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{5}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{4}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{3}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{2}{36}\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\frac{1}{36}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Essendo <span class="math notranslate nohighlight">\(\mathbb{E}(S) = 7\)</span>, la varianza diventa</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathbb{V}(S) &amp;= \sum \left(s - \mathbb{E}(S)\right)^2 \cdot P(s) \notag\\
+&amp;= (2 - 7)^2 \cdot 0.0278 + (3-7)^2 \cdot 0.0556 + \dots + (12 - 7)^2 \cdot 0.0278 \notag\\
+&amp;= 5.8333.\notag
+\end{align}
+\end{split}\]</div>
+<section id="formula-alternativa-per-la-varianza">
+<h3>Formula alternativa per la varianza<a class="headerlink" href="#formula-alternativa-per-la-varianza" title="Permalink to this headline">#</a></h3>
+<p>C’è un modo più semplice per calcolare la varianza:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathbb{E}\Big[\big(Y - \mathbb{E}(Y)\big)^2\Big] &amp;= \mathbb{E}\big(Y^2 - 2Y\mathbb{E}(Y) + \mathbb{E}(Y)^2\big)\notag\\
+&amp;= \mathbb{E}(Y^2) - 2\mathbb{E}(Y)\mathbb{E}(Y) + \mathbb{E}(Y)^2,
+\end{align}
+\end{split}\]</div>
+<p>dato che <span class="math notranslate nohighlight">\(\mathbb{E}(Y)\)</span> è una costante. Pertanto</p>
+<div class="math notranslate nohighlight" id="equation-eq-def-alt-var-rv">
+<span class="eqno">(27)<a class="headerlink" href="#equation-eq-def-alt-var-rv" title="Permalink to this equation">#</a></span>\[
+\mathbb{V}(Y) = \mathbb{E}(Y^2) - \big(\mathbb{E}(Y) \big)^2.
+\]</div>
+<p>A parole: la varianza è la media dei quadrati meno il quadrato della media della variabile.</p>
+<p>Facciamo un esempio. Consideriamo la variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> che corrisponde al numero di teste che si osservano nel lancio di una moneta truccata con probabilità di testa uguale a 0.8. Si trovi la varianza di <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>Il valore atteso di <span class="math notranslate nohighlight">\(Y\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y) = 0 \cdot 0.2 + 1 \cdot 0.8 = 0.8.
+\]</div>
+<p>Usando la formula tradizionale della varianza otteniamo:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{V}(Y) = (0 - 0.8)^2 \cdot 0.2 + (1 - 0.8)^2 \cdot 0.8 = 0.16.
+\]</div>
+<p>Lo stesso risultato si trova con la formula alternativa della varianza. Il valore atteso di <span class="math notranslate nohighlight">\(Y^2\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y^2) = 0^2 \cdot 0.2 + 1^2 \cdot 0.8 = 0.8.
+\]</div>
+<p>e la varianza diventa</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{V}(Y) = \mathbb{E}(Y^2) - \big(\mathbb{E}(Y) \big)^2 = 0.8 - 0.8^2 = 0.16.
+\]</div>
+</section>
+<section id="id3">
+<h3>Variabili casuali continue<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>Nel caso di una variabile casuale continua <span class="math notranslate nohighlight">\(Y\)</span>, la varianza diventa:</p>
+<div class="math notranslate nohighlight" id="equation-eq-def-var-rv-cont">
+<span class="eqno">(28)<a class="headerlink" href="#equation-eq-def-var-rv-cont" title="Permalink to this equation">#</a></span>\[
+\mathbb{V}(Y) = \int_{-\infty}^{+\infty} \large[y - \mathbb{E}(Y)\large]^2 p(y) \,\operatorname {d}\!y.
+\]</div>
+<p>Come nel caso discreto, la varianza di una v.c. continua <span class="math notranslate nohighlight">\(Y\)</span> misura approssimativamente la distanza al quadrato tipica o prevista dei possibili valori <span class="math notranslate nohighlight">\(y\)</span> dalla loro media.</p>
+</section>
+</section>
+<section id="deviazione-standard">
+<h2>Deviazione standard<a class="headerlink" href="#deviazione-standard" title="Permalink to this headline">#</a></h2>
+<p>Quando lavoriamo con le varianze, i termini sono innalzati al quadrato e quindi i numeri possono diventare molto grandi (o molto piccoli). Per trasformare nuovamente i valori nell’unità di misura della scala originaria si prende la radice quadrata. Il valore risultante viene chiamato <em>deviazione standard</em> e solitamente è denotato dalla lettera greca <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Si definisce scarto quadratico medio (o deviazione standard o scarto tipo) la radice quadrata della varianza:</p>
+<div class="math notranslate nohighlight" id="equation-eq-def-sd">
+<span class="eqno">(29)<a class="headerlink" href="#equation-eq-def-sd" title="Permalink to this equation">#</a></span>\[
+\sigma_Y = \sqrt{\mathbb{V}(Y)}.
+\]</div>
+</div>
+<p>Come nella statistica descrittiva, la deviazione standard di una variabile casuale misura approssimativamente la distanza tipica o prevista dei possibili valori <span class="math notranslate nohighlight">\(y\)</span> dalla loro media.</p>
+<p>Per i dadi equilibrati dell’esemio precedebte, la deviazione standard della variabile casuale <span class="math notranslate nohighlight">\(S\)</span> è uguale a <span class="math notranslate nohighlight">\(\sqrt{5.833} = 2.415\)</span>.</p>
+</section>
+<section id="standardizzazione">
+<h2>Standardizzazione<a class="headerlink" href="#standardizzazione" title="Permalink to this headline">#</a></h2>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Data una variabile casuale <span class="math notranslate nohighlight">\(Y\)</span>, si dice <em>variabile standardizzata</em> di <span class="math notranslate nohighlight">\(Y\)</span> l’espressione</p>
+<div class="math notranslate nohighlight" id="equation-eq-standardization">
+<span class="eqno">(30)<a class="headerlink" href="#equation-eq-standardization" title="Permalink to this equation">#</a></span>\[
+Z = \frac{Y - \mathbb{E}(Y)}{\sigma_Y}.
+\]</div>
+</div>
+<p>Solitamente, una variabile standardizzata viene denotata con la lettera <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+</section>
+<section id="momenti-di-variabili-casuali">
+<h2>Momenti di variabili casuali<a class="headerlink" href="#momenti-di-variabili-casuali" title="Permalink to this headline">#</a></h2>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Si chiama <em>momento</em> di ordine <span class="math notranslate nohighlight">\(q\)</span> di una v.c. <span class="math notranslate nohighlight">\(X\)</span>, dotata di densità <span class="math notranslate nohighlight">\(p(x)\)</span>, la quantità</p>
+<div class="math notranslate nohighlight" id="equation-eq-moments-cont">
+<span class="eqno">(31)<a class="headerlink" href="#equation-eq-moments-cont" title="Permalink to this equation">#</a></span>\[
+\mathbb{E}(X^q) = \int_{-\infty}^{+\infty} x^q p(x) \; dx.
+\]</div>
+<p>Se <span class="math notranslate nohighlight">\(X\)</span> è una v.c. discreta, i suoi momenti valgono:</p>
+<div class="math notranslate nohighlight" id="equation-eq-moments-discr">
+<span class="eqno">(32)<a class="headerlink" href="#equation-eq-moments-discr" title="Permalink to this equation">#</a></span>\[
+\mathbb{E}(X^q) = \sum_i x_i^q P(x_i).
+\]</div>
+</div>
+<p>I momenti sono importanti parametri indicatori di certe proprietà di <span class="math notranslate nohighlight">\(X\)</span>. I più noti sono senza dubbio quelli per <span class="math notranslate nohighlight">\(q = 1\)</span> e <span class="math notranslate nohighlight">\(q = 2\)</span>. Il momento del primo ordine corrisponde al valore atteso di <span class="math notranslate nohighlight">\(X\)</span>. Spesso i momenti di ordine superiore al primo vengono calcolati rispetto al valor medio di <span class="math notranslate nohighlight">\(X\)</span>, operando una traslazione <span class="math notranslate nohighlight">\(x_0 = x − \mathbb{E}(X)\)</span> che individua lo scarto dalla media. Ne deriva che il momento centrale di ordine 2 corrisponde alla varianza.</p>
+</section>
+<section id="covarianza">
+<h2>Covarianza<a class="headerlink" href="#covarianza" title="Permalink to this headline">#</a></h2>
+<p>La covarianza quantifica la tendenza delle variabili casuali <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> a “variare assieme”. Per esempio, l’altezza e il peso delle giraffe producono una covarianza positiva perché all’aumentare di una di queste due quantità tende ad aumentare anche l’altra. La covarianza misura la forza e la direzione del legame lineare tra due variabili casuali <span class="math notranslate nohighlight">\(X\)</span> ed <span class="math notranslate nohighlight">\(Y\)</span>. Si utilizza la notazione <span class="math notranslate nohighlight">\(Cov(X,Y)=\sigma_{xy}\)</span>.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Date due variabili casuali <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>, chiamiamo covarianza tra <span class="math notranslate nohighlight">\(X\)</span> ed <span class="math notranslate nohighlight">\(Y\)</span> il numero</p>
+<div class="math notranslate nohighlight" id="equation-eq-cov-def-rv">
+<span class="eqno">(33)<a class="headerlink" href="#equation-eq-cov-def-rv" title="Permalink to this equation">#</a></span>\[
+Cov(X,Y) = \mathbb{E}\Bigl(\bigl(X - \mathbb{E}(X)\bigr) \bigl(Y - \mathbb{E}(Y)\bigr)\Bigr),
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> e <span class="math notranslate nohighlight">\(\mathbb{E}(Y)\)</span> sono i valori attesi di <span class="math notranslate nohighlight">\(X\)</span> ed <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+</div>
+<p>In maniera esplicita,</p>
+<div class="math notranslate nohighlight" id="equation-eq-cov-def">
+<span class="eqno">(34)<a class="headerlink" href="#equation-eq-cov-def" title="Permalink to this equation">#</a></span>\[
+Cov(X,Y) = \sum_{(x,y) \in \Omega} (x - \mu_X) (y - \mu_Y) f(x, y).
+\]</div>
+<p>La definizione è analoga, algebricamente, a quella di varianza e risulta infatti</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{V}(x) = Cov(X, X)
+\]</div>
+<p>e</p>
+<div class="math notranslate nohighlight" id="equation-eq-cov-vc-alt">
+<span class="eqno">(35)<a class="headerlink" href="#equation-eq-cov-vc-alt" title="Permalink to this equation">#</a></span>\[
+Cov(X,Y) = \mathbb{E}(XY) - \mathbb{E}(Y)\mathbb{E}(X).
+\]</div>
+<div class="admonition-dimostrazione admonition">
+<p class="admonition-title">Dimostrazione</p>
+<p>L’eq. <a class="reference internal" href="#equation-eq-cov-vc-alt">(35)</a> si ricava nel modo seguente:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Cov(X,Y) &amp;= \mathbb{E}\Bigl(\bigl(X-\mathbb{E}(X)\bigr) \bigl(Y-\mathbb{E}(Y)\bigr)\Bigr)\notag\\
+          %&amp;= \mathbb{E}(XY) - \mathbb{E}(Y)X -\mathbb{E}(X)Y + \mathbb{E}(X)\mathbb{E}(Y) )\notag\\
+          &amp;= \mathbb{E}(XY) - \mathbb{E}(Y)\mathbb{E}(X) - \mathbb{E}(X)\mathbb{E}(Y) + \mathbb{E}(X)\mathbb{E}(Y)\notag\\
+          &amp;= \mathbb{E}(XY) - \mathbb{E}(Y)\mathbb{E}(X)\notag.
+\end{align}
+\end{split}\]</div>
+</div>
+<p>Per fare un esempio, consideriamo le variabili casuali definite nell’&#64;exr-exp-val-discr-4. Si calcoli la covarianza di <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>Abbiamo che <span class="math notranslate nohighlight">\(\mu_X = 1.5\)</span> e <span class="math notranslate nohighlight">\(\mu_Y = 0.5\)</span>. Ne segue che la covarianza di <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> è:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Cov(X,Y) &amp;= \sum_{(x,y) \in \Omega} (x - \mu_X) (y - \mu_Y) f(x, y)\notag\\
+&amp;= (0-1.5)(0-0.5)\cdot \frac{1}{8} + (0-1.5)(1-0.5) \cdot 0 \\
+   &amp;\qquad + (1-1.5)(0-0.5)\cdot \frac{2}{8} + (1-1.5)(1-0.5) \cdot \frac{1}{8} \notag\\
+    &amp;\qquad+ (2-1.5)(0-0.5) \cdot \frac{1}{8} + (2-1.5)(1-0.5) \cdot \frac{2}{8} \\
+   &amp;\qquad+ (3-1.5)(0-0.5) \cdot 0 +  (3-1.5)(1-0.5)\cdot\frac{1}{8} \notag\\
+   &amp;= \frac{1}{4}. \notag
+ \end{align}
+\end{split}\]</div>
+<p>Lo stesso risultato può essere trovato usando l’&#64;eq-cov_vc_alt. Iniziamo a calcolare il valore atteso del prodotto <span class="math notranslate nohighlight">\(XY\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(XY) = 0 \cdot\frac{4}{8} + 1 \cdot\frac{1}{8} + 2 \cdot\frac{2}{8} + 3 \cdot\frac{1}{8} = 1.0.
+\]</div>
+<p>Dunque, la covarianza tra <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> diventa</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+Cov(X,Y) &amp;= \mathbb{E}(XY) - \mathbb{E}(X)\mathbb{E}(Y)\notag\\
+ &amp;= 1 -  1.5\cdot 0.5 \notag\\
+ &amp;= 0.25.\notag
+\end{align}
+\end{split}\]</div>
+</section>
+<section id="correlazione">
+<h2>Correlazione<a class="headerlink" href="#correlazione" title="Permalink to this headline">#</a></h2>
+<p>La covarianza dipende dall’unità di misura delle due variabili e quindi non consente di stabilire l’intensità della relazione. Una misura standardizzata della relazione che intercorre fra due variabili è invece rappresentata dalla correlazione. La correlazione si ottiene dividendo la covarianza per le deviazioni standard delle due variabili aleatorie.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Il coefficiente di correlazione tra <span class="math notranslate nohighlight">\(X\)</span> ed <span class="math notranslate nohighlight">\(Y\)</span> è il numero definito da</p>
+<div class="math notranslate nohighlight" id="equation-eq-cor-rv-def">
+<span class="eqno">(36)<a class="headerlink" href="#equation-eq-cor-rv-def" title="Permalink to this equation">#</a></span>\[
+\rho(X,Y) =\frac{Cov(X,Y)}{\sqrt{\mathbb{V}(X)\mathbb{V}(Y)}}.
+\]</div>
+</div>
+<p>Si può anche scrivere <span class="math notranslate nohighlight">\(\rho_{X,Y}\)</span> al posto di <span class="math notranslate nohighlight">\(\rho(X,Y)\)</span>.</p>
+<p>Il coefficiente di correlazione <span class="math notranslate nohighlight">\(\rho_{xy}\)</span> è un numero puro, cioè non dipende dall’unità di misura delle variabili, e assume valori compresi tra -1 e +1.</p>
+</section>
+<section id="proprieta">
+<h2>Proprietà<a class="headerlink" href="#proprieta" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>La covarianza tra una variabile aleatoria <span class="math notranslate nohighlight">\(X\)</span> e una costante <span class="math notranslate nohighlight">\(c\)</span> è nulla: <span class="math notranslate nohighlight">\(Cov(c,X) = 0;\)</span></p></li>
+<li><p>la covarianza è simmetrica: <span class="math notranslate nohighlight">\(Cov(X,Y) = Cov(Y,X);\)</span></p></li>
+<li><p>vale <span class="math notranslate nohighlight">\(-1 \leq \rho(X,Y) \leq 1;\)</span></p></li>
+<li><p>la correlazione non dipende dall’unità di misura: <span class="math notranslate nohighlight">\(\rho(aX, bY) = \rho(X,Y), \quad \forall a, b &gt; 0;\)</span></p></li>
+<li><p>se <span class="math notranslate nohighlight">\(Y = a + bX\)</span> è una funzione lineare di <span class="math notranslate nohighlight">\(X\)</span> con costanti <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span>, allora <span class="math notranslate nohighlight">\(\rho(X,Y) = \pm 1\)</span>, a seconda del segno di <span class="math notranslate nohighlight">\(b\)</span>;</p></li>
+<li><p>la covarianza tra <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>, ciascuna moltiplicata per una costante, è uguale al prodotto delle costanti per la covarianza tra <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>: <span class="math notranslate nohighlight">\(Cov(aX,bY) = ab \;Cov(X,Y)\)</span>;</p></li>
+<li><p>vale <span class="math notranslate nohighlight">\(\mathbb{V}(X \pm Y) = \mathbb{V}(X) + \mathbb{V}(Y) \pm 2 \cdot Cov(X,Y)\)</span>;</p></li>
+<li><p>vale <span class="math notranslate nohighlight">\(Cov(X + Y, Z) = Cov(X,Z) + Cov(Y,Z);\)</span></p></li>
+<li><p>per una sequenza di variabili aleatorie <span class="math notranslate nohighlight">\(X_1, \dots, X_n\)</span>, si ha $<span class="math notranslate nohighlight">\(\mathbb{V}\left( \sum_{i=1}^n X_i\right) = \sum_{i=1}^n \mathbb{V}(X_i) + 2\sum_{i,j: i&lt;j}cov(X_i, X_j);\)</span>$</p></li>
+<li><p>vale <span class="math notranslate nohighlight">\(Cov\left(\sum_{i=1}^n a_i X_i, \sum_{j=1}^m b_jY_j\right) = \sum_{i=1}^n \sum_{j=1}^m a_j b_jCov(X_j, Y_j);\)</span></p></li>
+<li><p>se <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span> sono indipendenti, allora $<span class="math notranslate nohighlight">\(Cov\left(\sum_{i=1}^n a_i X_i, \sum_{j=1}^n b_jX_j\right) = \sum_{i=1}^n a_i b_i \mathbb{V}(X_i).\)</span>$</p></li>
+</ul>
+<section id="incorrelazione">
+<h3>Incorrelazione<a class="headerlink" href="#incorrelazione" title="Permalink to this headline">#</a></h3>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Si dice che <span class="math notranslate nohighlight">\(X\)</span> ed <span class="math notranslate nohighlight">\(Y\)</span> sono incorrelate, o linermente indipendenti, se la loro covarianza è nulla,</p>
+<div class="math notranslate nohighlight" id="equation-eq-incorrelation-def">
+<span class="eqno">(37)<a class="headerlink" href="#equation-eq-incorrelation-def" title="Permalink to this equation">#</a></span>\[
+\sigma_{XY} = \mathbb{E} \big[(X - \mu_X) (y-\mu_u) \big] = 0,
+\]</div>
+<p>che si può anche scrivere come</p>
+<div class="math notranslate nohighlight">
+\[
+\rho_{XY} = 0, \quad \mathbb{E}(XY) = \mathbb{E}(X) \mathbb{E}(Y).
+\]</div>
+</div>
+<p>Si introduce così un secondo tipo di indipendenza, più debole, dopo quello di indipendenza stocastica. Viceversa, però, se <span class="math notranslate nohighlight">\(Cov(X, Y) = 0\)</span>, non è detto che <span class="math notranslate nohighlight">\(X\)</span> ed <span class="math notranslate nohighlight">\(Y\)</span> siano indipendenti.</p>
+<p>Quale esempio, siano <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> due variabili aleatorie discrete avente una distribuzione di massa di probabilità congiunta pari a</p>
+<div class="math notranslate nohighlight">
+\[
+f_{XY}(x,y) = \frac{1}{4} \quad (x,y) \in \{(0,0), (1,1), (1, -1), (2,0) \}
+\]</div>
+<p>e zero altrimenti. Le due variabili aleatorie <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono mutuamente indipendenti?</p>
+<p>La distribuzione marginale della <span class="math notranslate nohighlight">\(X\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+X = 0, \quad  P_X = 1/4, \\
+X = 1, \quad P_X = 2/4, \\
+X = 2, \quad P_X = 1/4.
+\end{cases}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(X) = 0 \frac{1}{4} + 1 \frac{2}{4} + 2 \frac{1}{4} = 1.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(X^2) = 0^2 \frac{1}{4} + 1^2 \frac{2}{4} + 2^2 \frac{1}{4} = \frac{3}{2}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{V}(X) = \frac{3}{2} - 1^2 = \frac{1}{2}.
+\]</div>
+<p>La distribuzione marginale della <span class="math notranslate nohighlight">\(Y\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+Y = -1, \quad  P_Y = 1/4, \\
+Y = 0, \quad P_Y = 2/4, \\
+Y = 1, \quad P_Y = 1/4.
+\end{cases}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y) = 0 \frac{2}{4} + 1 \frac{1}{4} + (-1) \frac{1}{4} = 0.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y^2) = 0^2 \frac{2}{4} + 1^2 \frac{1}{4} + (-1)^2 \frac{1}{4} = \frac{1}{2}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{V}(X) = \frac{1}{2} - 0^2 = \frac{1}{2}.
+\]</div>
+<p>Calcoliamo ora la covarianza tra <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(XY) = \sum_x\sum_y xy f_{XY} (x,y) =
+(0\cdot 0)\frac{1}{4} +
+(1\cdot 1)\frac{1}{4} +
+(1\cdot -1)\frac{1}{4} +
+(2\cdot 0)\frac{1}{4} = 0.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Cov(X,Y) = \mathbb{E}(XY) - \mathbb{E}(X)\mathbb{E}(Y) = 0 - 1\cdot0 = 0.
+\]</div>
+<p>Quindi le due variabili aleatorie hanno covarianza pari a zero. Tuttavia, esse non sono indipendenti, in quanto non è vero che</p>
+<div class="math notranslate nohighlight">
+\[
+f_{XY} (x,y) = f_X(x) f_Y(y)
+\]</div>
+<p>per tutti gli <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>In conclusione, anche se la condizione di indipendenza implica una covarianza nulla, l’esempio precedente mostra come l’inverso non sia necessariamente vero: la covarianza può essere zero anche se due variabili casuali non sono indipendenti.</p>
+</section>
+</section>
+<section id="conclusioni">
+<h2>Conclusioni<a class="headerlink" href="#conclusioni" title="Permalink to this headline">#</a></h2>
+<p>La densità di probabilità congiunta bivariata tiene simultaneamente conto del comportamento di due variabili casuali <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> e di come esse si influenzano. Se <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono legate linearmente, allora il coefficiente di correlazione</p>
+<div class="math notranslate nohighlight">
+\[
+\rho = \frac{Cov(X, Y)}{\sigma_X \sigma_Y}\notag
+\]</div>
+<p>fornisce l’indice maggiormente utilizzato per descrivere l’intensità e il segno dell’associazione lineare. Nel caso di un’associazione lineare perfetta, <span class="math notranslate nohighlight">\(Y = a + bX\)</span>, avremo <span class="math notranslate nohighlight">\(\rho = 1\)</span> con <span class="math notranslate nohighlight">\(b\)</span> positivo ed <span class="math notranslate nohighlight">\(\rho = -1\)</span> con <span class="math notranslate nohighlight">\(b\)</span> negativo. Se il coefficiente di correlazione è pari a 0 le variabili si dicono incorrelate. Condizione sufficiente (ma non necessaria) affinché <span class="math notranslate nohighlight">\(\rho = 0\)</span> è che le due variabili siano tra loro indipendenti.</p>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="expval-var-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Per il significato della notazione di integrale, si veda la &#64;sec-calculus.</p>
+</dd>
+<dt class="label" id="expval-var-2"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Data una variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> con valore atteso <span class="math notranslate nohighlight">\(\mathbb{E}(Y)\)</span>, le “distanze” tra i valori di <span class="math notranslate nohighlight">\(Y\)</span> e il valore atteso <span class="math notranslate nohighlight">\(\mathbb{E}(Y)\)</span> definiscono la variabile casuale <span class="math notranslate nohighlight">\(Y - \mathbb{E}(Y)\)</span> chiamata <em>scarto</em>, oppure <em>deviazione</em> oppure <em>variabile casuale centrata</em>. La variabile <span class="math notranslate nohighlight">\(Y - \mathbb{E}(Y)\)</span> equivale ad una traslazione di sistema di riferimento che porta il valore atteso nell’origine degli assi. Si può dimostrare facilmente che il valore atteso della variabile scarto <span class="math notranslate nohighlight">\(Y - \mathbb{E}(Y)\)</span> vale zero, dunque la media di tale variabile non può essere usata per quantificare la “dispersione” dei valori di <span class="math notranslate nohighlight">\(Y\)</span> relativamente al suo valore medio. Occorre rendere sempre positivi i valori di <span class="math notranslate nohighlight">\(Y - \mathbb{E}(Y)\)</span> e tale risultato viene ottenuto considerando la variabile casuale <span class="math notranslate nohighlight">\(\left(Y - \mathbb{E}(Y)\right)^2\)</span>.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="120_bayes_theorem.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Il teorema di Bayes</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="130_joint_prob.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Probabilità congiunta</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
