@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduzione alla data analisi" href="025_eda_quickstart.html" />
+    <link rel="next" title="Introduzione a Numpy" href="050_intro_numpy.html" />
     <link rel="prev" title="Indici di posizione e di scala" href="015_loc_scale.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -151,19 +151,36 @@ const thebe_selector_output = ".output, .cell_output"
    Le relazioni tra variabili
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data science con Python
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="025_eda_quickstart.html">
-   Introduzione alla data analisi
+  <a class="reference internal" href="050_intro_numpy.html">
+   Introduzione a Numpy
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="030_ndarray.html">
-   Gli array nel modulo NumPy
+  <a class="reference internal" href="051_intro_matplotlib.html">
+   Introduzione a matplotlib
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="035_pandas.html">
-   Comandi utili in Pandas
+  <a class="reference internal" href="052_intro_pandas.html">
+   Introduzione a pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="053_pandas_summaries.html">
+   Esaminare il DataFrame
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="055_visualization.html">
+   Visualizzazione dei dati
   </a>
  </li>
 </ul>
@@ -205,7 +222,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="135_density_func.html">
-   La densità di probabilità
+   La funzione di densità di probabilità
   </a>
  </li>
 </ul>
@@ -411,6 +428,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="a05_calculus_notation.html">
    Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a10_installation.html">
+   Installazione
   </a>
  </li>
 </ul>
@@ -693,6 +715,11 @@ title="Print to PDF"
      Commenti e considerazioni finali
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#watermark">
+     Watermark
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -788,6 +815,11 @@ title="Print to PDF"
      Commenti e considerazioni finali
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#watermark">
+     Watermark
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -801,7 +833,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="le-relazioni-tra-variabili">
-<h1>Le relazioni tra variabili<a class="headerlink" href="#le-relazioni-tra-variabili" title="Permalink to this headline">#</a></h1>
+<span id="associations-notebook"></span><h1>Le relazioni tra variabili<a class="headerlink" href="#le-relazioni-tra-variabili" title="Permalink to this headline">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="associazione-statistica">
 <h1>Associazione statistica<a class="headerlink" href="#associazione-statistica" title="Permalink to this headline">#</a></h1>
@@ -812,21 +844,27 @@ title="Print to PDF"
 <p>È chiaro che i valori delle scale BDI-II e CES-D non possono essere identici, e questo per due motivi: (1) la presenza degli errori di misurazione e (2) l’unità di misura delle due variabili. L’errore di misurazione corrompe sempre, almeno in parte, qualunque operazione di misurazione. E questo è vero specialmente in psicologia dove l’<em>attendibilità</em> (cioè, la precisione degli strumenti di misurazione è minore che in altre discipline (quali la fisica, ad esempio). Il secondo motivo per cui i valori delle scale BDI-II e CES-D non possono essere uguali è che l’unità di misura delle due scale è arbitraria. Infatti, qual è l’unità di misura della depressione? Chi può dirlo! Ma, al di là delle differenze derivanti dall’errore di misurazione e dalla differente unità di misura, ci aspettiamo che, se le due scale misurano entrambe lo stesso costrutto (la depressione), allora i valori prodotti dalle due scale dovranno essere tra loro <em>linearmente associati</em>. Per capire cosa si intende con “associazione lineare” iniziamo a guardare i dati. Per fare questo utilizziamo un diagramma a dispersione.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
-<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">8927</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Leggo i dati di <a class="reference internal" href="#sec-zetsche-scatter"><span class="std std-ref">Diagramma a dispersione</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/data.mood.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -837,6 +875,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Considero la relazione tra i punteggi BDI-II e CESD.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
@@ -845,15 +884,12 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;BDI-II&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CESD&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">cesd_sum</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">cesd_sum</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7fbf51ee5d60&gt;
-</pre></div>
-</div>
-<img alt="_images/020_correlation_3_1.png" src="_images/020_correlation_3_1.png" />
+<img alt="_images/020_correlation_7_0.png" src="_images/020_correlation_7_0.png" />
 </div>
 </div>
 <p>Dal diagramma notiamo che i dati mostrano una tendenza a disporsi attorno ad una retta – nel gergo statistico, questo fatto viene espresso dicendo che i punteggi CES-D tendono ad essere <em>linearmente associati</em> ai punteggi BDI-II. È ovvio, tuttavia, che tale relazione lineare è lungi dall’essere perfetta – se fosse perfetta, tutti i punti del diagramma a dispersione si disporrebbero esattamente lungo una retta. Si pone dunque il problema di trovare un indice numerico che descriva di quanto la nube di punti si discosta da una perfetta relazione lineare tra le due variabili, ovvero che descriva la direzione e la forza della relazione lineare tra le due variabili. Ci sono vari indici statistici che possono essere utilizzati a questo scopo.</p>
@@ -875,11 +911,40 @@ S_{XY} = \frac{1}{n} \sum_{i=1}^n(X_i - \bar{X}) (Y_i - \bar{Y}).
 <h3>Interpretazione<a class="headerlink" href="#interpretazione" title="Permalink to this headline">#</a></h3>
 <p>Per capire il significato dell’eq. <a class="reference internal" href="#equation-eq-cov-def">(10)</a>, supponiamo di dividere il grafico riportato nella sezione <a class="reference internal" href="#sec-zetsche-scatter"><span class="std std-ref">Diagramma a dispersione</span></a> in quattro quadranti definiti da una retta verticale passante per la media dei valori BDI-II e da una retta orizzontale passante per la media dei valori CES-D. Numeriamo i quadranti partendo da quello in basso a sinistra e muovendoci in senso antiorario.</p>
 <p>Se prevalgono punti nel I e III quadrante, allora la nuvola di punti avrà un andamento crescente (per cui a valori bassi di <span class="math notranslate nohighlight">\(X\)</span> tendono ad associarsi valori bassi di <span class="math notranslate nohighlight">\(Y\)</span> e a valori elevati di <span class="math notranslate nohighlight">\(X\)</span> tendono ad associarsi valori elevati di <span class="math notranslate nohighlight">\(Y\)</span>) e la covarianza avrà segno positivo. Mentre se prevalgono punti nel II e IV quadrante la nuvola di punti avrà un andamento decrescente (per cui a valori bassi di <span class="math notranslate nohighlight">\(X\)</span> tendono ad associarsi valori elevati di <span class="math notranslate nohighlight">\(Y\)</span> e a valori elevati di <span class="math notranslate nohighlight">\(X\)</span> tendono ad associarsi valori bassi di <span class="math notranslate nohighlight">\(Y\)</span>) e la covarianza avrà segno negativo. Dunque, il segno della covarianza ci informa sulla direzione della relazione lineare tra due variabili: l’associazione lineare si dice positiva se la covarianza è positiva, negativa se la covarianza è negativa.</p>
-<p>Se il segno della covarianza ci informa sulla direzione della relazione, il valore assoluto della covarianza ci dice invece ben poco. Esso, infatti, dipende dall’unità di misura delle variabili. Nel caso presente questo concetto è difficile da comprendere, dato che le due variabili in esame hanno un’unità di misura arbitraria e sconosciuta. Ma quest’idea diventa chiara se pensiamo alla relazione lineare tra l’altezza e il peso delle persone, ad esempio. La covarianza tra queste due quantità è certamente positiva, ma il valore assoluto della covarianza diventa più grande se l’altezza viene misurata in millimetri e il peso in grammi, e più piccolo se l’altezza viene misurata in metri e il peso in chilogrammi. Dato che il valore assoluto della covarianza dipende dall’unità di misura delle variabili, abbiamo bisogno di un indice di associazione lineare adimensionale. Questo indice è fornito dalla correlazione.</p>
+<p>Per i dati mostrati nel diagramma, la covarianza tra BDI-II e CESD è 207.4:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;cesd_sum&#39;</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[236.23875115, 207.42653811],
+       [207.42653811, 222.83379247]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso valore restituito da <code class="docutils literal notranslate"><span class="pre">np.cov()</span></code> si trova implementando l’eq. <a class="reference internal" href="#equation-eq-cov-def">(10)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>207.42653810835628
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="correlazione">
 <h2>Correlazione<a class="headerlink" href="#correlazione" title="Permalink to this headline">#</a></h2>
+<p>Se il segno della covarianza ci informa sulla direzione della relazione, il valore assoluto della covarianza ci dice invece ben poco. Esso, infatti, dipende dall’unità di misura delle variabili. Nel caso presente questo concetto è difficile da comprendere, dato che le due variabili in esame hanno un’unità di misura arbitraria e sconosciuta. Ma quest’idea diventa chiara se pensiamo alla relazione lineare tra l’altezza e il peso delle persone, ad esempio. La covarianza tra queste due quantità è certamente positiva, ma il valore assoluto della covarianza diventa più grande se l’altezza viene misurata in millimetri e il peso in grammi, e più piccolo se l’altezza viene misurata in metri e il peso in chilogrammi. Dato che il valore assoluto della covarianza dipende dall’unità di misura delle variabili, abbiamo bisogno di un indice di associazione lineare adimensionale. Questo indice è fornito dalla correlazione.</p>
 <p>È possibile trasformare la covarianza in modo tale da renderla immune alle trasformazioni dell’unità di misura delle variabili. Questa operazione si dice <em>standardizzazione</em> e corrisponde alla divisione della covarianza per le deviazioni standard (<span class="math notranslate nohighlight">\(s_X\)</span>, <span class="math notranslate nohighlight">\(s_Y\)</span>) delle due variabili:</p>
 <div class="math notranslate nohighlight" id="equation-eq-cor-def">
 <span class="eqno">(11)<a class="headerlink" href="#equation-eq-cor-def" title="Permalink to this equation">#</a></span>\[ 
@@ -904,7 +969,53 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 <li><p><span class="math notranslate nohighlight">\(-1 &lt; r_{XY} &lt; +1\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> presenza di una relazione lineare di intensità diversa;</p></li>
 <li><p><span class="math notranslate nohighlight">\(r_{XY} = 0\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> assenza di relazione lineare tra <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
 </ol>
-<p>Per i dati del diagramma riportato nella sezione <a class="reference internal" href="#sec-zetsche-scatter"><span class="std std-ref">Diagramma a dispersione</span></a>, la covarianza è 207.426. Il segno positivo della covarianza ci dice che tra le due variabili c’è un’associazione lineare positiva. Per capire quale sia l’intensità della relazione lineare calcoliamo la correlazione. Essendo le deviazioni standard del BDI-II e del CES-D rispettavamente uguali a 15.37 e 14.93, la correlazione diventa uguale a <span class="math notranslate nohighlight">\(\frac{207.426}{15.38 \cdot 14.93} = 0.904.\)</span> Tale valore è prossimo a 1.0, il che vuol dire che i punti del diagramma a dispersione non si discostano troppo da una retta con una pendenza positiva.</p>
+<p>Per i dati riportati nel diagramma della sezione <a class="reference internal" href="#sec-zetsche-scatter"><span class="std std-ref">Diagramma a dispersione</span></a>, la covarianza è 207.4. Il segno positivo della covarianza ci dice che tra le due variabili c’è un’associazione lineare positiva. Per capire quale sia l’intensità della relazione lineare calcoliamo la correlazione. Essendo le deviazioni standard del BDI-II e del CES-D rispettavamente uguali a 15.37 e 14.93, la correlazione diventa uguale a <span class="math notranslate nohighlight">\(\frac{207.426}{15.38 \cdot 14.93} = 0.904.\)</span> Tale valore è prossimo a 1.0, il che vuol dire che i punti del diagramma a dispersione non si discostano troppo da una retta con una pendenza positiva.</p>
+<p>Troviamo la correlazione con la funzione <code class="docutils literal notranslate"><span class="pre">corrcoef()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.90406202],
+       [0.90406202, 1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Replichiamo il risultato implementando l’eq. <a class="reference internal" href="#equation-eq-cor-def">(11)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+<span class="n">s_x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">s_y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">r_xy</span> <span class="o">=</span> <span class="n">s_xy</span> <span class="o">/</span> <span class="p">(</span><span class="n">s_x</span> <span class="o">*</span> <span class="n">s_y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r_xy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9040620189474861
+</pre></div>
+</div>
+</div>
+</div>
+<p>Un altro modo ancora per trovare la correlazione tra i punteggi BDI-II e CESD è quello di standardizzare le due variabili per poi applicare la formula della covarianza:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">z_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">z_x</span> <span class="o">*</span> <span class="n">z_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9040620189474862
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="correlazione-e-causazione">
@@ -928,15 +1039,15 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 <p class="admonition-title">Nota</p>
 <p>Si ricordi che, nel caso di una variabile ordinale, non è possibile sintetizzare le osservazioni mediante le statistiche descrittive che abbiamo descritto in precedenza, quali ad esempio la media e la varianza. È invece possibile riassumere le ossservazioni su una variabile ordinale mediante una distribuzione di frequenze per le varie modalità della risposta. Come abbiamo visto or ora, è anche possibile descrivere la direzione e la forza dell’associazione tra due variabili ordinali mediante la correlazione di Spearman.</p>
 </div>
-<p>Per fare un esempio, per due variabili arbitrarie di livello ordinale, troviamo la correlazione di Spearman.</p>
+<p>Per fare un esempio, per due variabili arbitrarie di livello di scala ordinale, troviamo la correlazione di Spearman.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SpearmanrResult(correlation=0.8207826816681233, pvalue=0.08858700531354381)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SignificanceResult(statistic=0.8207826816681233, pvalue=0.08858700531354381)
 </pre></div>
 </div>
 </div>
@@ -1122,21 +1233,46 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datasaurus_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datasaurus_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fbf52e77e50&gt;
-</pre></div>
-</div>
-<img alt="_images/020_correlation_8_1.png" src="_images/020_correlation_8_1.png" />
+<img alt="_images/020_correlation_22_0.png" src="_images/020_correlation_22_0.png" />
 </div>
 </div>
 </section>
 <section id="commenti-e-considerazioni-finali">
 <h2>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
 <p>La prima fase dell’analisi dei dati riassume i dati mediante gli strumenti della statistica descrittiva. Le tipiche domande che vengono affrontate in questa fase sono: qual è la distribuzione delle variabili di interesse? Quali relazioni rra coppie di variabili si possono osservare nel campione? Ci sono delle osservazioni ‘anomale’, ovvero estremamente discrepanti rispetto alle altre, sia quando si esaminano le statistiche descrittive univariate (ovvero, quelle che riguardano le caratteristiche di una variabile presa singolarmente), sia quando vengono esaminate le statistiche bivariate (ovvero, le statistiche che descrivono l’associazione tra le variabili)? È importante avere ben chiare le idee su questi punti prima di procedere con qualsiasi procedura statistica di tipo inferenziale. Per rispondere alle domande che abbiamo elencato sopra, ed ad altre simili, è molto utile procedere con delle rappresentazioni grafiche dei dati.</p>
+</section>
+<section id="watermark">
+<h2>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Jan 10 2023
+
+Python implementation: CPython
+Python version       : 3.10.8
+IPython version      : 8.7.0
+
+numpy     : 1.24.1
+pandas    : 1.5.2
+scipy     : 1.10.0
+seaborn   : 0.12.2
+matplotlib: 3.6.2
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -1174,10 +1310,10 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
             <p class="prev-next-title">Indici di posizione e di scala</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="025_eda_quickstart.html" title="next page">
+    <a class='right-next' id="next-link" href="050_intro_numpy.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduzione alla data analisi</p>
+        <p class="prev-next-title">Introduzione a Numpy</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

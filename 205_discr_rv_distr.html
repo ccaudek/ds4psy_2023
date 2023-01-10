@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Distribuzioni di v.c. continue" href="210_cont_rv_distr.html" />
-    <link rel="prev" title="La densità di probabilità" href="135_density_func.html" />
+    <link rel="prev" title="La funzione di densità di probabilità" href="135_density_func.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -151,19 +151,36 @@ const thebe_selector_output = ".output, .cell_output"
    Le relazioni tra variabili
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data science con Python
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="025_eda_quickstart.html">
-   Introduzione alla data analisi
+  <a class="reference internal" href="050_intro_numpy.html">
+   Introduzione a Numpy
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="030_ndarray.html">
-   Gli array nel modulo NumPy
+  <a class="reference internal" href="051_intro_matplotlib.html">
+   Introduzione a matplotlib
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="035_pandas.html">
-   Comandi utili in Pandas
+  <a class="reference internal" href="052_intro_pandas.html">
+   Introduzione a pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="053_pandas_summaries.html">
+   Esaminare il DataFrame
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="055_visualization.html">
+   Visualizzazione dei dati
   </a>
  </li>
 </ul>
@@ -205,7 +222,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="135_density_func.html">
-   La densità di probabilità
+   La funzione di densità di probabilità
   </a>
  </li>
 </ul>
@@ -411,6 +428,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="a05_calculus_notation.html">
    Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a10_installation.html">
+   Installazione
   </a>
  </li>
 </ul>
@@ -651,6 +673,11 @@ title="Print to PDF"
    Commenti e considerazioni finali
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   Watermark
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -700,6 +727,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
    Commenti e considerazioni finali
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   Watermark
   </a>
  </li>
 </ul>
@@ -782,14 +814,20 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
-
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -837,12 +875,14 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probabilità&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/205_discr_rv_distr_10_0.png" src="_images/205_discr_rv_distr_10_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 0.20122093189111467)
+</pre></div>
+</div>
+<img alt="_images/205_discr_rv_distr_11_1.png" src="_images/205_discr_rv_distr_11_1.png" />
 </div>
 </div>
 <p>Per fare un altro esempio, mostriamo qui la distribuzione di probabilità di alcune distribuzioni binomiali, per due valori di <span class="math notranslate nohighlight">\(n\)</span> e <span class="math notranslate nohighlight">\(\theta\)</span>, è fornita nella figura seguente.</p>
@@ -855,12 +895,11 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Numero y di successi&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilità&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribuzione binomiale al variare di theta&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/205_discr_rv_distr_12_0.png" src="_images/205_discr_rv_distr_12_0.png" />
+<img alt="_images/205_discr_rv_distr_13_0.png" src="_images/205_discr_rv_distr_13_0.png" />
 </div>
 </div>
 <p>Esaminiamo più attentamente l’uso di <code class="docutils literal notranslate"><span class="pre">st.binom.pmf</span></code>. Usando l’eq. <a class="reference internal" href="#equation-eq-binomialdistribution">(40)</a>,  troviamo, ad esempio, la probabilità di <span class="math notranslate nohighlight">\(y = 2\)</span> successi in <span class="math notranslate nohighlight">\(n = 4\)</span> prove Bernoulliane indipendenti con <span class="math notranslate nohighlight">\(\theta = 0.2\)</span>.</p>
@@ -984,7 +1023,7 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Probabilità&#39;)
 </pre></div>
 </div>
-<img alt="_images/205_discr_rv_distr_22_1.png" src="_images/205_discr_rv_distr_22_1.png" />
+<img alt="_images/205_discr_rv_distr_23_1.png" src="_images/205_discr_rv_distr_23_1.png" />
 </div>
 </div>
 <p>Resta da capire come generare una sequenza casuale di valori da una distribuzione Binomiale. Per fare questo, prima definiamo una variabile casuale Binomiale con determinati parametri. Per esempio, definiamo una Binomiale di ordine <span class="math notranslate nohighlight">\(n\)</span> = 5 e <span class="math notranslate nohighlight">\(p\)</span> = 0.5.</p>
@@ -1006,7 +1045,7 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 3 2 2 4 2 2 2 3 2 0 2 2 1 1 5 1 4 3 4 3 2 0 4 2 1 4 3 4 3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 1 3 3 1 2 3 3 2 3 3 0 2 3 2 2 0 2 3 3 3 2 2 3 2 4 0 2 3 3
 </pre></div>
 </div>
 </div>
@@ -1074,6 +1113,36 @@ BetaBinomial(y \mid N, \alpha, \beta) = \binom{N}{y} \frac{B(y + \alpha, N-y+\be
 <h2>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
 <p>La distribuzione binomiale è una distribuzione di probabilità discreta che descrive il numero di successi in un processo di Bernoulli, ovvero la variabile aleatoria <span class="math notranslate nohighlight">\(Y = Y_1 + \dots + Y_n\)</span> che somma <span class="math notranslate nohighlight">\(n\)</span> variabili casuali indipendenti di uguale distribuzione di Bernoulli <span class="math notranslate nohighlight">\(\mathcal{B}(\theta)\)</span>, ognuna delle quali può fornire due soli risultati: il successo con probabilità <span class="math notranslate nohighlight">\(\theta\)</span> e l’insuccesso con probabilità <span class="math notranslate nohighlight">\(1 - \theta\)</span>.</p>
 <p>La distribuzione binomiale è molto importante per le sue molte applicazioni. Nelle presenti dispense dedicate all’analisi bayesiana, è importante perché costituisce il fondamento del caso più semplice dell’<em>aggiornamento bayesiano</em>, ovvero il caso Beta-Binomiale. Il modello Beta-Binomiale fornisce un esempio paradigmatico dell’approccio bayesiano all’inferenza e sarà trattato in maniera analitica nei capitoli successivi. È dunque importante che le proprietà della distribuzione binomiale risultino ben chiare.</p>
+</section>
+<section id="watermark">
+<h2>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w -p pytensor
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Jan 10 2023
+
+Python implementation: CPython
+Python version       : 3.10.8
+IPython version      : 8.7.0
+
+pytensor: 2.8.11
+
+numpy     : 1.24.1
+pandas    : 1.5.2
+matplotlib: 3.6.2
+scipy     : 1.10.0
+seaborn   : 0.12.2
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="discr-rv-distr-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -1114,7 +1183,7 @@ BetaBinomial(y \mid N, \alpha, \beta) = \binom{N}{y} \frac{B(y + \alpha, N-y+\be
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">La densità di probabilità</p>
+            <p class="prev-next-title">La funzione di densità di probabilità</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="210_cont_rv_distr.html" title="next page">

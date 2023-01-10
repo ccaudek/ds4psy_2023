@@ -151,19 +151,36 @@ const thebe_selector_output = ".output, .cell_output"
    Le relazioni tra variabili
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data science con Python
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="025_eda_quickstart.html">
-   Introduzione alla data analisi
+  <a class="reference internal" href="050_intro_numpy.html">
+   Introduzione a Numpy
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="030_ndarray.html">
-   Gli array nel modulo NumPy
+  <a class="reference internal" href="051_intro_matplotlib.html">
+   Introduzione a matplotlib
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="035_pandas.html">
-   Comandi utili in Pandas
+  <a class="reference internal" href="052_intro_pandas.html">
+   Introduzione a pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="053_pandas_summaries.html">
+   Esaminare il DataFrame
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="055_visualization.html">
+   Visualizzazione dei dati
   </a>
  </li>
 </ul>
@@ -205,7 +222,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="135_density_func.html">
-   La densità di probabilità
+   La funzione di densità di probabilità
   </a>
  </li>
 </ul>
@@ -411,6 +428,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="a05_calculus_notation.html">
    Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a10_installation.html">
+   Installazione
   </a>
  </li>
 </ul>
@@ -840,14 +862,16 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
-<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">2023</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
-<span class="c1"># cwd = os.getcwd()</span>
-<span class="c1"># print(cwd)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1274,7 +1298,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;bdi&#39;, ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/010_freq_distr_23_1.png" src="_images/010_freq_distr_23_1.png" />
+<img alt="_images/010_freq_distr_24_1.png" src="_images/010_freq_distr_24_1.png" />
 </div>
 </div>
 <p>Una versione alternativa dello stesso grafico è la seguente.</p>
@@ -1291,7 +1315,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/010_freq_distr_25_0.png" src="_images/010_freq_distr_25_0.png" />
+<img alt="_images/010_freq_distr_26_0.png" src="_images/010_freq_distr_26_0.png" />
 </div>
 </div>
 <p>Poniamo ora, sull’asse <em>x</em>, le densità.</p>
@@ -1306,7 +1330,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;bdi&#39;, ylabel=&#39;Density&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/010_freq_distr_27_1.png" src="_images/010_freq_distr_27_1.png" />
+<img alt="_images/010_freq_distr_28_1.png" src="_images/010_freq_distr_28_1.png" />
 </div>
 </div>
 <p>Anche se nel caso presente è sensato usare ampiezze diverse per gli intervalli delle classi, in generale gli istogrammi si costruiscono utilizzando intervalli riportati sulle ascisse con un’ampiezza uguale.</p>
@@ -1321,7 +1345,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;bdi&#39;, ylabel=&#39;Density&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/010_freq_distr_29_1.png" src="_images/010_freq_distr_29_1.png" />
+<img alt="_images/010_freq_distr_30_1.png" src="_images/010_freq_distr_30_1.png" />
 </div>
 </div>
 </section>
@@ -1333,24 +1357,13 @@ title="Print to PDF"
 <p>Aggiungiamo all’istogramma dei valori BDI-II di <span id="id8">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> un kernel density plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;BDI-II&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;BDI-II&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/corrado/opt/anaconda3/envs/bambi_env/lib/python3.8/site-packages/seaborn/axisgrid.py:208: UserWarning: This figure was using a layout engine that is incompatible with subplots_adjust and/or tight_layout; not calling subplots_adjust.
-  self._figure.subplots_adjust(right=right)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 24.166999999999994, &#39;BDI-II&#39;)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 900x400 with 0 Axes&gt;
-</pre></div>
-</div>
-<img alt="_images/010_freq_distr_31_3.png" src="_images/010_freq_distr_31_3.png" />
+<img alt="_images/010_freq_distr_32_0.png" src="_images/010_freq_distr_32_0.png" />
 </div>
 </div>
 </section>
@@ -1405,7 +1418,7 @@ Per fare un esempio, consideriamo i nove soggetti del campione clinico di <span 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;group&#39;, ylabel=&#39;bdi&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/010_freq_distr_38_1.png" src="_images/010_freq_distr_38_1.png" />
+<img alt="_images/010_freq_distr_39_1.png" src="_images/010_freq_distr_39_1.png" />
 </div>
 </div>
 <p>Un risultato migliore si ottiene mostrando anche i dati grezzi.</p>
@@ -1423,7 +1436,7 @@ Per fare un esempio, consideriamo i nove soggetti del campione clinico di <span 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;BDI-II&#39;)
 </pre></div>
 </div>
-<img alt="_images/010_freq_distr_40_1.png" src="_images/010_freq_distr_40_1.png" />
+<img alt="_images/010_freq_distr_41_1.png" src="_images/010_freq_distr_41_1.png" />
 </div>
 </div>
 </section>
@@ -1445,7 +1458,7 @@ Per fare un esempio, consideriamo i nove soggetti del campione clinico di <span 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;BDI-II&#39;)
 </pre></div>
 </div>
-<img alt="_images/010_freq_distr_42_1.png" src="_images/010_freq_distr_42_1.png" />
+<img alt="_images/010_freq_distr_43_1.png" src="_images/010_freq_distr_43_1.png" />
 </div>
 </div>
 </section>
