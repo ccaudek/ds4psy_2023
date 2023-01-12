@@ -280,7 +280,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="315_conjugate_families.html">
+  <a class="reference internal" href="316_conjugate_families.html">
    29. Distribuzioni coniugate
   </a>
  </li>
@@ -1027,7 +1027,7 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 <section id="correlazione-e-causazione">
 <h2><span class="section-number">14.4. </span>Correlazione e causazione<a class="headerlink" href="#correlazione-e-causazione" title="Permalink to this headline">#</a></h2>
 <p>Facendo riferimento nuovamente al diagramma di dispersione della sezione <a class="reference internal" href="#sec-zetsche-scatter"><span class="std std-ref">Diagramma a dispersione</span></a>, possiamo dire che, in molte applicazioni (ma non nel caso presente!) l’asse <span class="math notranslate nohighlight">\(x\)</span> rappresenta una quantità nota come <em>variabile indipendente</em> e l’interesse si concentra sulla sua influenza sulla <em>variabile dipendente</em> tracciata sull’asse <span class="math notranslate nohighlight">\(y\)</span>. Ciò presuppone che sia nota la direzione in cui l’influenza causale potrebbe risiedere (<span class="math notranslate nohighlight">\(x \rightarrow y\)</span>, vs. <span class="math notranslate nohighlight">\(y \rightarrow x\)</span>).</p>
-<p>È importante però tenere bene a mente che la correlazione è soltanto un indice descrittivo della relazione lineare tra due variabili e <em>in nessun caso</em> può essere usata per inferire alcunché sulle relazioni <em>causali</em> che legano le variabili. È ben nota l’espressione: “correlazione non significa causazione”.</p>
+<p>È importante però tenere bene a mente che la correlazione è soltanto un indice descrittivo della relazione lineare tra due variabili e <em>in nessun caso</em> può essere usata per inferire alcunché sulle relazioni <em>causali</em> che legano le variabili. È ben nota l’espressione: “correlazione non significa causazione” – si veda il sito <a class="reference external" href="https://tylervigen.com/spurious-correlations">spurious correlations</a>.</p>
 </section>
 <section id="id3">
 <h2><span class="section-number">14.5. </span>Correlazione e causazione<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
@@ -1048,17 +1048,12 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 <p>Per fare un esempio, per due variabili arbitrarie di livello di scala ordinale, troviamo la correlazione di Spearman.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">st</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
-
-<span class="ne">NameError</span>: name &#39;st&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SignificanceResult(statistic=0.8207826816681233, pvalue=0.08858700531354381)
 </pre></div>
 </div>
 </div>
@@ -1249,10 +1244,7 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fd2b0bde670&gt;
-</pre></div>
-</div>
-<img alt="_images/070_correlation_22_1.png" src="_images/070_correlation_22_1.png" />
+<img alt="_images/070_correlation_22_0.png" src="_images/070_correlation_22_0.png" />
 </div>
 </div>
 </section>
@@ -1266,6 +1258,23 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
 <span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Wed Jan 11 2023
+
+Python implementation: CPython
+Python version       : 3.10.8
+IPython version      : 8.7.0
+
+pandas    : 1.5.2
+matplotlib: 3.6.2
+scipy     : 1.10.0
+numpy     : 1.24.1
+seaborn   : 0.12.2
+
+Watermark: 2.3.1
 </pre></div>
 </div>
 </div>
