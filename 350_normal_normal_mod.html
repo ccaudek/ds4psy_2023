@@ -840,21 +840,30 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">beta</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
 <span class="kn">import</span> <span class="nn">statistics</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
-<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">8927</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running on PyMC v</span><span class="si">{</span><span class="n">pm</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running on PyMC v5.0.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -913,7 +922,7 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/350_normal_normal_mod_9_0.png" src="_images/350_normal_normal_mod_9_0.png" />
+<img alt="_images/350_normal_normal_mod_10_0.png" src="_images/350_normal_normal_mod_10_0.png" />
 </div>
 </div>
 <p>Verifichiamo i risultati ottenuti sopra applicando l’eq. <code class="xref eq docutils literal notranslate"><span class="pre">eq-post-norm-mup</span></code> e l’eq. <code class="xref eq docutils literal notranslate"><span class="pre">eq-post-norm-taup2</span></code>. Definiamo una funzione che ritorna la media della distribuzione a posteriori di <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
@@ -1089,14 +1098,14 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
   <tbody>
     <tr>
       <th>mu</th>
-      <td>29.32</td>
-      <td>1.04</td>
-      <td>27.41</td>
-      <td>31.3</td>
+      <td>29.33</td>
+      <td>1.02</td>
+      <td>27.44</td>
+      <td>31.22</td>
+      <td>0.03</td>
       <td>0.02</td>
-      <td>0.02</td>
-      <td>1744.76</td>
-      <td>2652.41</td>
+      <td>1589.13</td>
+      <td>2776.81</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -1113,7 +1122,7 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/350_normal_normal_mod_25_0.png" src="_images/350_normal_normal_mod_25_0.png" />
+<img alt="_images/350_normal_normal_mod_26_0.png" src="_images/350_normal_normal_mod_26_0.png" />
 </div>
 </div>
 <p>Trovo l’intervallo di credibilità a più alta densità a posteriori (HPD) al 95%.</p>
@@ -1492,7 +1501,7 @@ Dimensions:  (hdi: 2)
 Coordinates:
   * hdi      (hdi) &lt;U6 &#x27;lower&#x27; &#x27;higher&#x27;
 Data variables:
-    mu       (hdi) float64 27.25 31.29</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-375c56b8-db95-4c64-aa53-598be1a773ca' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-375c56b8-db95-4c64-aa53-598be1a773ca' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>hdi</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-7a72d85e-8431-4d88-a06d-775b423a9550' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7a72d85e-8431-4d88-a06d-775b423a9550' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>hdi</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>&lt;U6</div><div class='xr-var-preview xr-preview'>&#x27;lower&#x27; &#x27;higher&#x27;</div><input id='attrs-0c9c8258-0f2f-4358-ac1b-c9db74ea4871' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-0c9c8258-0f2f-4358-ac1b-c9db74ea4871' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cff88415-86e8-43df-a1b3-e1f0fbaea979' class='xr-var-data-in' type='checkbox'><label for='data-cff88415-86e8-43df-a1b3-e1f0fbaea979' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>hdi_prob :</span></dt><dd>0.95</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;&lt;U6&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f8a27670-5937-4891-b7b5-df4df693d1ff' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f8a27670-5937-4891-b7b5-df4df693d1ff' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>27.25 31.29</div><input id='attrs-fbffe8a1-74e1-4649-af55-a1ddf78b882d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-fbffe8a1-74e1-4649-af55-a1ddf78b882d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-78289ed0-7013-4231-9dae-ce7531500bdd' class='xr-var-data-in' type='checkbox'><label for='data-78289ed0-7013-4231-9dae-ce7531500bdd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([27.25390901, 31.28693852])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cacf3b76-5f9a-447a-8937-47549142ea40' class='xr-section-summary-in' type='checkbox'  ><label for='section-cacf3b76-5f9a-447a-8937-47549142ea40' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>hdi</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-98c70076-97b8-4897-83e4-2aee69417776' class='xr-index-data-in' type='checkbox'/><label for='index-98c70076-97b8-4897-83e4-2aee69417776' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;object&#x27;, name=&#x27;hdi&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-15fb7dc0-9124-4eae-9432-631a51ecd506' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-15fb7dc0-9124-4eae-9432-631a51ecd506' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    mu       (hdi) float64 27.38 31.3</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-20d4460b-4f24-4f72-8d73-a475718c1e99' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-20d4460b-4f24-4f72-8d73-a475718c1e99' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>hdi</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0a602e95-366e-4360-ab50-f3e8c2bcb524' class='xr-section-summary-in' type='checkbox'  checked><label for='section-0a602e95-366e-4360-ab50-f3e8c2bcb524' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>hdi</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>&lt;U6</div><div class='xr-var-preview xr-preview'>&#x27;lower&#x27; &#x27;higher&#x27;</div><input id='attrs-1d2cf6ba-5f24-4a92-ac10-88ce4de55eeb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1d2cf6ba-5f24-4a92-ac10-88ce4de55eeb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-be187019-aba6-471e-ab9b-008090063851' class='xr-var-data-in' type='checkbox'><label for='data-be187019-aba6-471e-ab9b-008090063851' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>hdi_prob :</span></dt><dd>0.95</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;&lt;U6&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6636a015-e38a-4dc5-a190-9cab843ae948' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6636a015-e38a-4dc5-a190-9cab843ae948' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>27.38 31.3</div><input id='attrs-2c67dd43-558f-4e19-b1c8-70340b10364a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2c67dd43-558f-4e19-b1c8-70340b10364a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-24f36c7a-064c-4507-8efa-f7b8d0dcc61b' class='xr-var-data-in' type='checkbox'><label for='data-24f36c7a-064c-4507-8efa-f7b8d0dcc61b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([27.37759399, 31.30212473])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7ddd1a77-c05f-436e-a8c5-05f3a826cd33' class='xr-section-summary-in' type='checkbox'  ><label for='section-7ddd1a77-c05f-436e-a8c5-05f3a826cd33' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>hdi</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-48794ac2-ae3d-48d2-b230-45cdd77141ba' class='xr-index-data-in' type='checkbox'/><label for='index-48794ac2-ae3d-48d2-b230-45cdd77141ba' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;object&#x27;, name=&#x27;hdi&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6f3f6c49-0dec-4e24-a2c9-9bb40109a4cb' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6f3f6c49-0dec-4e24-a2c9-9bb40109a4cb' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <p>Le stime così trovate sono molto simili ai quantili di ordine 0.025 e 0.975 della distribuzione a posteriori di <span class="math notranslate nohighlight">\(\mu\)</span> ottenuta per via analitica.</p>
 <div class="cell docutils container">
@@ -1529,7 +1538,7 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/350_normal_normal_mod_31_0.png" src="_images/350_normal_normal_mod_31_0.png" />
+<img alt="_images/350_normal_normal_mod_32_0.png" src="_images/350_normal_normal_mod_32_0.png" />
 </div>
 </div>
 <p>In questo secondo caso, più realistico, il modello diventa il seguente.</p>
@@ -1600,9 +1609,9 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
 </div><div class="output text_html">
 <div>
   <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:02&lt;00:00 Sampling 4 chains, 0 divergences]
+  100.00% [8000/8000 00:01&lt;00:00 Sampling 4 chains, 2 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 17 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 14 seconds.
 </pre></div>
 </div>
 </div>
@@ -1649,24 +1658,24 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
       <th>mu</th>
       <td>29.22</td>
       <td>1.12</td>
-      <td>27.06</td>
-      <td>31.23</td>
+      <td>27.13</td>
+      <td>31.32</td>
       <td>0.02</td>
       <td>0.02</td>
-      <td>2567.68</td>
-      <td>2594.09</td>
+      <td>2757.58</td>
+      <td>2362.00</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td>7.05</td>
-      <td>0.99</td>
-      <td>5.44</td>
-      <td>9.01</td>
+      <td>7.06</td>
+      <td>1.03</td>
+      <td>5.28</td>
+      <td>8.97</td>
       <td>0.02</td>
-      <td>0.01</td>
-      <td>2638.94</td>
-      <td>2216.61</td>
+      <td>0.02</td>
+      <td>2344.99</td>
+      <td>2287.78</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -2049,8 +2058,8 @@ Dimensions:  (hdi: 2)
 Coordinates:
   * hdi      (hdi) &lt;U6 &#x27;lower&#x27; &#x27;higher&#x27;
 Data variables:
-    mu       (hdi) float64 27.12 31.46
-    sigma    (hdi) float64 5.196 8.928</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-e2fbb93a-b36d-4089-91a1-06517e5da09a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e2fbb93a-b36d-4089-91a1-06517e5da09a' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>hdi</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-a9d33c3b-fd76-46f7-ae68-d44f2deed743' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a9d33c3b-fd76-46f7-ae68-d44f2deed743' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>hdi</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>&lt;U6</div><div class='xr-var-preview xr-preview'>&#x27;lower&#x27; &#x27;higher&#x27;</div><input id='attrs-dcd1d827-9823-4724-a955-b2dfadfd6312' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-dcd1d827-9823-4724-a955-b2dfadfd6312' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0b03639b-3c45-4dc7-800a-1877b36bcb5a' class='xr-var-data-in' type='checkbox'><label for='data-0b03639b-3c45-4dc7-800a-1877b36bcb5a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>hdi_prob :</span></dt><dd>0.95</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;&lt;U6&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-8b238d03-f0a6-482a-87c5-8e981f26d949' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8b238d03-f0a6-482a-87c5-8e981f26d949' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>27.12 31.46</div><input id='attrs-959b75bc-a68e-4171-ae9e-b2d5d2fb1667' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-959b75bc-a68e-4171-ae9e-b2d5d2fb1667' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f1c57f1f-af77-4d7e-abfe-5dc8d0db76bc' class='xr-var-data-in' type='checkbox'><label for='data-f1c57f1f-af77-4d7e-abfe-5dc8d0db76bc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([27.11578401, 31.46171368])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sigma</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>5.196 8.928</div><input id='attrs-dfbaced1-80a4-46f8-a3a3-9a8450b037fb' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-dfbaced1-80a4-46f8-a3a3-9a8450b037fb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0cf88975-2714-49ef-846f-88819ba3d219' class='xr-var-data-in' type='checkbox'><label for='data-0cf88975-2714-49ef-846f-88819ba3d219' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([5.19636427, 8.92791468])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-8ea3bf72-4028-46d9-86af-741d183613dc' class='xr-section-summary-in' type='checkbox'  ><label for='section-8ea3bf72-4028-46d9-86af-741d183613dc' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>hdi</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-22403366-1356-4143-858e-033e79aba704' class='xr-index-data-in' type='checkbox'/><label for='index-22403366-1356-4143-858e-033e79aba704' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;object&#x27;, name=&#x27;hdi&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3cdce6c9-bf43-4f54-a585-a990213d7741' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-3cdce6c9-bf43-4f54-a585-a990213d7741' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    mu       (hdi) float64 27.0 31.37
+    sigma    (hdi) float64 5.246 9.11</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-55a3f84f-e396-4b4a-ad37-eef1dc20a62d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-55a3f84f-e396-4b4a-ad37-eef1dc20a62d' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>hdi</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-087805e2-a9a7-4c7b-87a0-2c9b19ec7bc7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-087805e2-a9a7-4c7b-87a0-2c9b19ec7bc7' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>hdi</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>&lt;U6</div><div class='xr-var-preview xr-preview'>&#x27;lower&#x27; &#x27;higher&#x27;</div><input id='attrs-9999c291-1e43-42ad-bebe-2c250329f03e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9999c291-1e43-42ad-bebe-2c250329f03e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7e3d15b0-26ea-4d92-9ed8-280c5e1bb2f9' class='xr-var-data-in' type='checkbox'><label for='data-7e3d15b0-26ea-4d92-9ed8-280c5e1bb2f9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>hdi_prob :</span></dt><dd>0.95</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;&lt;U6&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e3e2bfad-34bb-403a-8553-9a04df414167' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e3e2bfad-34bb-403a-8553-9a04df414167' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>27.0 31.37</div><input id='attrs-045d00c3-0164-4e81-af7d-8f3a2731f141' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-045d00c3-0164-4e81-af7d-8f3a2731f141' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5763c3fd-58e0-4f8a-b946-1f258e506cd8' class='xr-var-data-in' type='checkbox'><label for='data-5763c3fd-58e0-4f8a-b946-1f258e506cd8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([27.00306076, 31.36705873])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sigma</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>5.246 9.11</div><input id='attrs-99531fc2-7ff2-470e-a64c-c506de8dbf52' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-99531fc2-7ff2-470e-a64c-c506de8dbf52' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8f0fe6c3-a1d6-4d29-9c2e-3838a563f495' class='xr-var-data-in' type='checkbox'><label for='data-8f0fe6c3-a1d6-4d29-9c2e-3838a563f495' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([5.2458894, 9.1098802])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e1250009-a7da-4718-9787-901bba717b35' class='xr-section-summary-in' type='checkbox'  ><label for='section-e1250009-a7da-4718-9787-901bba717b35' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>hdi</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-b3db696d-d498-4bf6-86a1-ab6ac2a763dd' class='xr-index-data-in' type='checkbox'/><label for='index-b3db696d-d498-4bf6-86a1-ab6ac2a763dd' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;object&#x27;, name=&#x27;hdi&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-fd8b185a-cb6e-4d2b-b0fe-e79f6453a014' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-fd8b185a-cb6e-4d2b-b0fe-e79f6453a014' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <p>Descrivo la traccia con un <em>trace plot</em> .</p>
 <div class="cell docutils container">
@@ -2061,7 +2070,7 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/350_normal_normal_mod_40_0.png" src="_images/350_normal_normal_mod_40_0.png" />
+<img alt="_images/350_normal_normal_mod_41_0.png" src="_images/350_normal_normal_mod_41_0.png" />
 </div>
 </div>
 <p>Considerati i dati osservati e le mie ipotesi a priori sui parametri, posso dunque concludere, con un grado di certezza soggettiva del 95%, che la media della popolazione dei punteggi BDI-II dei pazienti clinici depressi è compresa nell’intervallo [27.04, 31.33].</p>
@@ -2081,7 +2090,7 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Wed Jan 11 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jan 13 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
@@ -2089,12 +2098,13 @@ IPython version      : 8.7.0
 
 pytensor: 2.8.11
 
-pandas    : 1.5.2
 arviz     : 0.14.0
-matplotlib: 3.6.2
-pymc      : 5.0.1
-numpy     : 1.24.1
+pandas    : 1.5.2
 scipy     : 1.10.0
+pymc      : 5.0.1
+seaborn   : 0.12.2
+matplotlib: 3.6.2
+numpy     : 1.24.1
 
 Watermark: 2.3.1
 </pre></div>

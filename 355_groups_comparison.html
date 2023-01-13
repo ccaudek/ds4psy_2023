@@ -651,6 +651,11 @@ title="Print to PDF"
    36.2. Confonto tra più gruppi
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   36.3. Watermark
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -680,6 +685,11 @@ title="Print to PDF"
    36.2. Confonto tra più gruppi
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   36.3. Watermark
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -701,6 +711,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">pymc</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
@@ -710,12 +722,12 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">42</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
-
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-<span class="n">az</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;arviz-darkgrid&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -927,154 +939,9 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div><div class="output text_html">
 <div>
   <progress value='16000' class='' max='16000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [16000/16000 00:05&lt;00:00 Sampling 4 chains, 0 divergences]
+  100.00% [16000/16000 00:04&lt;00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 3_000 draw iterations (4_000 + 12_000 draws total) took 22 seconds.
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">idata2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/pymc/sampling/mcmc.py:619,</span> in <span class="ni">sample</span><span class="nt">(draws, step, init, n_init, initvals, trace, chains, cores, tune, progressbar, model, random_seed, discard_tuned_samples, compute_convergence_checks, callback, jitter_max_retries, return_inferencedata, keep_warning_stat, idata_kwargs, mp_ctx, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">614</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">615</span>             <span class="s2">&quot;The number of samples is too small to check convergence reliably.&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">616</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">617</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">618</span>     <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">619</span>         <span class="n">convergence_warnings</span> <span class="o">=</span> <span class="n">run_convergence_checks</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">620</span>         <span class="n">mtrace</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">_add_warnings</span><span class="p">(</span><span class="n">convergence_warnings</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">return_inferencedata</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="c1"># By default we drop the &quot;warning&quot; stat which contains `SamplerWarning`</span>
-<span class="g g-Whitespace">    </span><span class="mi">624</span>     <span class="c1"># objects that can not be stored with `.to_netcdf()`.</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/pymc/stats/convergence.py:108,</span> in <span class="ni">run_convergence_checks</span><span class="nt">(idata, model)</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">warn</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span> <span class="n">warnings</span> <span class="o">+=</span> <span class="n">warn_divergences</span><span class="p">(</span><span class="n">idata</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">108</span> <span class="n">warnings</span> <span class="o">+=</span> <span class="n">warn_treedepth</span><span class="p">(</span><span class="n">idata</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span> <span class="k">return</span> <span class="n">warnings</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/pymc/stats/convergence.py:147,</span> in <span class="ni">warn_treedepth</span><span class="nt">(idata)</span>
-<span class="g g-Whitespace">    </span><span class="mi">145</span> <span class="n">warnings</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">treedepth</span><span class="o">.</span><span class="n">chain</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">147</span>     <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">treedepth</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="n">treedepth</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="s2">&quot;draw&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">149</span>             <span class="n">SamplerWarning</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">150</span>                 <span class="n">WarningType</span><span class="o">.</span><span class="n">TREEDEPTH</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span>             <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">155</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">156</span> <span class="k">return</span> <span class="n">warnings</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/_typed_ops.py:206,</span> in <span class="ni">DataArrayOpsMixin.__add__</span><span class="nt">(self, other)</span>
-<span class="g g-Whitespace">    </span><span class="mi">205</span> <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">206</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binary_op</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/dataarray.py:4362,</span> in <span class="ni">DataArray._binary_op</span><span class="nt">(self, other, f, reflexive)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4355</span> <span class="n">other_coords</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s2">&quot;coords&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4357</span> <span class="n">variable</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">4358</span>     <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="p">,</span> <span class="n">other_variable</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4359</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">reflexive</span>
-<span class="g g-Whitespace">   </span><span class="mi">4360</span>     <span class="k">else</span> <span class="n">f</span><span class="p">(</span><span class="n">other_variable</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variable</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4361</span> <span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">4362</span> <span class="n">coords</span><span class="p">,</span> <span class="n">indexes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">_merge_raw</span><span class="p">(</span><span class="n">other_coords</span><span class="p">,</span> <span class="n">reflexive</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4363</span> <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result_name</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">4365</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">indexes</span><span class="o">=</span><span class="n">indexes</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/coordinates.py:181,</span> in <span class="ni">Coordinates._merge_raw</span><span class="nt">(self, other, reflexive)</span>
-<span class="g g-Whitespace">    </span><span class="mi">179</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">180</span>     <span class="n">coord_list</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">reflexive</span> <span class="k">else</span> <span class="p">[</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">181</span>     <span class="n">variables</span><span class="p">,</span> <span class="n">indexes</span> <span class="o">=</span> <span class="n">merge_coordinates_without_align</span><span class="p">(</span><span class="n">coord_list</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">182</span> <span class="k">return</span> <span class="n">variables</span><span class="p">,</span> <span class="n">indexes</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/merge.py:420,</span> in <span class="ni">merge_coordinates_without_align</span><span class="nt">(objects, prioritized, exclude_dims, combine_attrs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">416</span>     <span class="n">filtered</span> <span class="o">=</span> <span class="n">collected</span>
-<span class="g g-Whitespace">    </span><span class="mi">418</span> <span class="c1"># TODO: indexes should probably be filtered in collected elements</span>
-<span class="g g-Whitespace">    </span><span class="mi">419</span> <span class="c1"># before merging them</span>
-<span class="ne">--&gt; </span><span class="mi">420</span> <span class="n">merged_coords</span><span class="p">,</span> <span class="n">merged_indexes</span> <span class="o">=</span> <span class="n">merge_collected</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">421</span>     <span class="n">filtered</span><span class="p">,</span> <span class="n">prioritized</span><span class="p">,</span> <span class="n">combine_attrs</span><span class="o">=</span><span class="n">combine_attrs</span>
-<span class="g g-Whitespace">    </span><span class="mi">422</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">423</span> <span class="n">merged_indexes</span> <span class="o">=</span> <span class="n">filter_indexes_from_coords</span><span class="p">(</span><span class="n">merged_indexes</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="n">merged_coords</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">425</span> <span class="k">return</span> <span class="n">merged_coords</span><span class="p">,</span> <span class="n">merged_indexes</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/merge.py:302,</span> in <span class="ni">merge_collected</span><span class="nt">(grouped, prioritized, compat, combine_attrs, equals)</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span> <span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">variable</span> <span class="k">for</span> <span class="n">variable</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">elements_list</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">302</span>     <span class="n">merged_vars</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">unique_variable</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">303</span>         <span class="n">name</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">compat</span><span class="p">,</span> <span class="n">equals</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">304</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">305</span> <span class="k">except</span> <span class="n">MergeError</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">306</span>     <span class="k">if</span> <span class="n">compat</span> <span class="o">!=</span> <span class="s2">&quot;minimal&quot;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">307</span>         <span class="c1"># we need more than &quot;minimal&quot; compatibility (for which</span>
-<span class="g g-Whitespace">    </span><span class="mi">308</span>         <span class="c1"># we drop conflicting coordinates)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/merge.py:149,</span> in <span class="ni">unique_variable</span><span class="nt">(name, variables, compat, equals)</span>
-<span class="g g-Whitespace">    </span><span class="mi">145</span>         <span class="k">break</span>
-<span class="g g-Whitespace">    </span><span class="mi">147</span> <span class="k">if</span> <span class="n">equals</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">148</span>     <span class="c1"># now compare values with minimum number of computes</span>
-<span class="ne">--&gt; </span><span class="mi">149</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">150</span>     <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">151</span>         <span class="n">equals</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">compat</span><span class="p">)(</span><span class="n">var</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/variable.py:563,</span> in <span class="ni">Variable.compute</span><span class="nt">(self, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">545</span> <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">546</span>     <span class="sd">&quot;&quot;&quot;Manually trigger loading of this variable&#39;s data from disk or a</span>
-<span class="g g-Whitespace">    </span><span class="mi">547</span><span class="sd">     remote source into memory and return a new variable. The original is</span>
-<span class="g g-Whitespace">    </span><span class="mi">548</span><span class="sd">     left unaltered.</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">561</span><span class="sd">     dask.array.compute</span>
-<span class="g g-Whitespace">    </span><span class="mi">562</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">563</span>     <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">564</span>     <span class="k">return</span> <span class="n">new</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/variable.py:1032,</span> in <span class="ni">Variable.copy</span><span class="nt">(self, deep, data)</span>
-<span class="g g-Whitespace">    </span><span class="mi">974</span> <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">975</span>     <span class="bp">self</span><span class="p">:</span> <span class="n">T_Variable</span><span class="p">,</span> <span class="n">deep</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">ArrayLike</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">976</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T_Variable</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">977</span>     <span class="sd">&quot;&quot;&quot;Returns a copy of this object.</span>
-<span class="g g-Whitespace">    </span><span class="mi">978</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">979</span><span class="sd">     If `deep=True`, the data array is loaded into memory and copied onto</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1030</span><span class="sd">     pandas.DataFrame.copy</span>
-<span class="g g-Whitespace">   </span><span class="mi">1031</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1032</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_copy</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="n">deep</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/variable.py:1065,</span> in <span class="ni">Variable._copy</span><span class="nt">(self, deep, data, memo)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1060</span> <span class="n">encoding</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1061</span>     <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encoding</span><span class="p">,</span> <span class="n">memo</span><span class="p">)</span> <span class="k">if</span> <span class="n">deep</span> <span class="k">else</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encoding</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1062</span> <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1064</span> <span class="c1"># note: dims is already an immutable tuple</span>
-<span class="ne">-&gt; </span><span class="mi">1065</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">ndata</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/variable.py:1082,</span> in <span class="ni">Variable._replace</span><span class="nt">(self, dims, data, attrs, encoding)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1080</span> <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="n">_default</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1081</span>     <span class="n">encoding</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_encoding</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1082</span> <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">dims</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">fastpath</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/variable.py:367,</span> in <span class="ni">Variable.__init__</span><span class="nt">(self, dims, data, attrs, encoding, fastpath)</span>
-<span class="g g-Whitespace">    </span><span class="mi">347</span> <span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">348</span><span class="sd"> Parameters</span>
-<span class="g g-Whitespace">    </span><span class="mi">349</span><span class="sd"> ----------</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">364</span><span class="sd">     unrecognized encoding items.</span>
-<span class="g g-Whitespace">    </span><span class="mi">365</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">366</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">as_compatible_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">fastpath</span><span class="o">=</span><span class="n">fastpath</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">367</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_dimensions</span><span class="p">(</span><span class="n">dims</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">368</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attrs</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">369</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encoding</span> <span class="o">=</span> <span class="kc">None</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/variable.py:659,</span> in <span class="ni">Variable._parse_dimensions</span><span class="nt">(self, dims)</span>
-<span class="g g-Whitespace">    </span><span class="mi">655</span> <span class="nd">@dims</span><span class="o">.</span><span class="n">setter</span>
-<span class="g g-Whitespace">    </span><span class="mi">656</span> <span class="k">def</span> <span class="nf">dims</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Hashable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">657</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_dims</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_dimensions</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">659</span> <span class="k">def</span> <span class="nf">_parse_dimensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dims</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Hashable</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">661</span>         <span class="n">dims</span> <span class="o">=</span> <span class="p">(</span><span class="n">dims</span><span class="p">,)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 3_000 draw iterations (4_000 + 12_000 draws total) took 17 seconds.
 </pre></div>
 </div>
 </div>
@@ -1101,7 +968,7 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f9391fe2be0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f9c675fa0b0&gt;
 </pre></div>
 </div>
 <img alt="_images/355_groups_comparison_19_1.png" src="_images/355_groups_comparison_19_1.png" />
@@ -1148,26 +1015,26 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
   <tbody>
     <tr>
       <th>mu</th>
-      <td>3706.24</td>
-      <td>39.17</td>
-      <td>3635.78</td>
-      <td>3782.02</td>
-      <td>0.36</td>
-      <td>0.25</td>
-      <td>11933.0</td>
-      <td>8522.0</td>
+      <td>3706.48</td>
+      <td>37.66</td>
+      <td>3636.33</td>
+      <td>3779.18</td>
+      <td>0.33</td>
+      <td>0.23</td>
+      <td>12998.0</td>
+      <td>8568.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td>462.75</td>
-      <td>27.44</td>
-      <td>412.36</td>
-      <td>514.97</td>
+      <td>462.70</td>
+      <td>27.62</td>
+      <td>413.10</td>
+      <td>515.63</td>
       <td>0.25</td>
       <td>0.18</td>
-      <td>11724.0</td>
-      <td>8527.0</td>
+      <td>12666.0</td>
+      <td>8648.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -1202,9 +1069,15 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
-Initializing NUTS using jitter+adapt_diag...
-Multiprocess sampling (4 chains in 4 jobs)
-NUTS: [sigma, mu]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initializing NUTS using jitter+adapt_diag...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NUTS: [sigma, mu]
 </pre></div>
 </div>
 <div class="output text_html">
@@ -1226,9 +1099,9 @@ NUTS: [sigma, mu]
 </div><div class="output text_html">
 <div>
   <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:07&lt;00:00 Sampling 4 chains, 0 divergences]
+  100.00% [8000/8000 00:05&lt;00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 21 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 20 seconds.
 </pre></div>
 </div>
 </div>
@@ -1282,74 +1155,74 @@ NUTS: [sigma, mu]
   <tbody>
     <tr>
       <th>mu[0]</th>
-      <td>3706.92</td>
-      <td>38.71</td>
-      <td>3634.98</td>
-      <td>3779.60</td>
-      <td>0.60</td>
-      <td>0.43</td>
-      <td>4107.0</td>
-      <td>2988.0</td>
+      <td>3706.63</td>
+      <td>37.65</td>
+      <td>3631.72</td>
+      <td>3773.78</td>
+      <td>0.51</td>
+      <td>0.36</td>
+      <td>5511.0</td>
+      <td>3224.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu[1]</th>
-      <td>3733.08</td>
-      <td>48.37</td>
-      <td>3646.16</td>
-      <td>3828.52</td>
-      <td>0.62</td>
-      <td>0.44</td>
-      <td>6070.0</td>
-      <td>3199.0</td>
+      <td>3733.29</td>
+      <td>47.65</td>
+      <td>3646.56</td>
+      <td>3821.91</td>
+      <td>0.70</td>
+      <td>0.49</td>
+      <td>4646.0</td>
+      <td>3217.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu[2]</th>
-      <td>5092.28</td>
-      <td>46.13</td>
-      <td>5004.85</td>
-      <td>5179.95</td>
-      <td>0.62</td>
-      <td>0.44</td>
-      <td>5599.0</td>
-      <td>3415.0</td>
+      <td>5090.93</td>
+      <td>46.83</td>
+      <td>4998.64</td>
+      <td>5174.37</td>
+      <td>0.65</td>
+      <td>0.46</td>
+      <td>5259.0</td>
+      <td>3305.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma[0]</th>
-      <td>462.28</td>
-      <td>27.23</td>
-      <td>414.13</td>
-      <td>516.16</td>
-      <td>0.38</td>
-      <td>0.27</td>
-      <td>5297.0</td>
-      <td>3376.0</td>
+      <td>462.52</td>
+      <td>26.98</td>
+      <td>414.57</td>
+      <td>514.61</td>
+      <td>0.39</td>
+      <td>0.28</td>
+      <td>4805.0</td>
+      <td>3475.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma[1]</th>
-      <td>391.34</td>
-      <td>34.06</td>
-      <td>327.88</td>
-      <td>455.10</td>
-      <td>0.47</td>
-      <td>0.34</td>
-      <td>5400.0</td>
-      <td>3213.0</td>
+      <td>391.41</td>
+      <td>33.59</td>
+      <td>335.08</td>
+      <td>460.71</td>
+      <td>0.48</td>
+      <td>0.35</td>
+      <td>4829.0</td>
+      <td>3309.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma[2]</th>
-      <td>506.59</td>
-      <td>33.10</td>
-      <td>443.29</td>
-      <td>566.71</td>
-      <td>0.44</td>
-      <td>0.31</td>
-      <td>5843.0</td>
-      <td>3404.0</td>
+      <td>506.54</td>
+      <td>32.96</td>
+      <td>446.66</td>
+      <td>567.86</td>
+      <td>0.41</td>
+      <td>0.29</td>
+      <td>6504.0</td>
+      <td>3272.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -1403,6 +1276,37 @@ NUTS: [sigma, mu]
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/355_groups_comparison_30_0.png" src="_images/355_groups_comparison_30_0.png" />
+</div>
+</div>
+</section>
+<section id="watermark">
+<h2><span class="section-number">36.3. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w -p pytensor
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jan 13 2023
+
+Python implementation: CPython
+Python version       : 3.10.8
+IPython version      : 8.7.0
+
+pytensor: 2.8.11
+
+matplotlib: 3.6.2
+numpy     : 1.24.1
+pymc      : 5.0.1
+seaborn   : 0.12.2
+arviz     : 0.14.0
+pandas    : 1.5.2
+
+Watermark: 2.3.1
+</pre></div>
+</div>
 </div>
 </div>
 </section>
