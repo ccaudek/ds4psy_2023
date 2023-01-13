@@ -801,21 +801,39 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">load_ext</span> nb_black
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 42\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
+                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 42\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <section id="esame-dei-trace-plot">
 <h2><span class="section-number">32.1. </span>Esame dei <em>trace plot</em><a class="headerlink" href="#esame-dei-trace-plot" title="Permalink to this headline">#</a></h2>
 <p>La convergenza e il “mixing” possono essere controllate mediante il <em>trace plot</em> che mostra l’andamento delle simulazioni e ci dice se stiamo effettivamente utilizzando una distribuzione limite. In generale, cerchiamo un grafico che mostri una dispersione casuale attorno a un valore medio: in tali circostanze i risultati del modello suggeriscono che le catene si mescolano bene e che le impostazioni della MCMC sono adeguate. Utilizzando il codice di <span id="id1">Martin <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id25" title="Osvaldo A Martin, Ravin Kumar, and Junpeng Lao. Bayesian Modeling and Computation in Python. CRC Press, 2022.">MKL22</a>]</span> presento qui degli esempi di buone e di cattive catene MCMC.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">good_chains</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">good_chains</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
 <span class="n">bad_chains0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">good_chains</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="mf">0.05</span><span class="p">,</span>
                                <span class="n">size</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
@@ -829,6 +847,23 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "good_chains = stats.beta.rvs(2, 5, size=(2, 2000))\nbad_chains0 = np.random.normal(np.sort(good_chains, axis=None), 0.05,\n                               size=4000).reshape(2, -1)\n\nbad_chains1 = good_chains.copy()\nfor i in np.random.randint(1900, size=4):\n    bad_chains1[i%2:,i:i+100] = np.random.beta(i, 950, size=100)\n\nchains = {\"good_chains\":good_chains,\n          \"bad_chains0\":bad_chains0,\n          \"bad_chains1\":bad_chains1}";
+                var nbb_formatted_code = "good_chains = stats.beta.rvs(2, 5, size=(2, 2000))\nbad_chains0 = np.random.normal(\n    np.sort(good_chains, axis=None), 0.05, size=4000\n).reshape(2, -1)\n\nbad_chains1 = good_chains.copy()\nfor i in np.random.randint(1900, size=4):\n    bad_chains1[i % 2 :, i : i + 100] = np.random.beta(i, 950, size=100)\n\nchains = {\n    \"good_chains\": good_chains,\n    \"bad_chains0\": bad_chains0,\n    \"bad_chains1\": bad_chains1,\n}";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -846,7 +881,22 @@ title="Print to PDF"
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_6_1.png" src="_images/335_mcmc_diagnostics_6_1.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "az.plot_trace(chains)";
+                var nbb_formatted_code = "az.plot_trace(chains)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Le cattive catene non convergono né si mescolano tra loro. Uno dei motivi per l’esecuzione di più catene è che ogni singola catena potrebbe convergere verso un target, mentre un’altra catena potrebbe convergere su un target diverso, e questo sarebbe un problema. Inoltre, catene altrimenti sane possono bloccarsi occasionalmente nel corso della serie, il che suggerirebbe la necessità di modifiche al modello o alle impostazioni del campionatore. Un altro modo per valutare la convergenza dell’algoritmo è plottando la densità della distribuzione a posteriori degli effetti stimati, per assicurarsi che si avvicini ad una classica curva a campana.</p>
 <p>In pratica, non abbiamo mai il privilegio di poter confrontare i risultati del campionamento MCMC con la corretta distribuzione a posteriori. Ecco perché la diagnostica delle catene di Markov è così importante: se vediamo trace-plots come le precedenti “bad chains”, sappiamo che non abbiamo ottenuto una approssimazione adeguata della distribuzione a posteriori. In tali circostanze possiamo ricorrere ad alcuni rimedi.</p>
@@ -882,7 +932,22 @@ title="Print to PDF"
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_8_1.png" src="_images/335_mcmc_diagnostics_8_1.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "_, axes = plt.subplots(2, 3, figsize=(12, 6), sharey=True, sharex=True)\naz.plot_ess(chains, kind=\"local\", ax=axes[0])\naz.plot_ess(chains, kind=\"quantile\", ax=axes[1])\n\nfor ax_ in axes[0]:\n    ax_.set_xlabel(\"\")\nfor ax_ in axes[1]:\n    ax_.set_title(\"\")\n\nfor ax_ in axes[:, 1:].ravel():\n    ax_.set_ylabel(\"\")\nplt.ylim(-100, 5000)";
+                var nbb_formatted_code = "_, axes = plt.subplots(2, 3, figsize=(12, 6), sharey=True, sharex=True)\naz.plot_ess(chains, kind=\"local\", ax=axes[0])\naz.plot_ess(chains, kind=\"quantile\", ax=axes[1])\n\nfor ax_ in axes[0]:\n    ax_.set_xlabel(\"\")\nfor ax_ in axes[1]:\n    ax_.set_title(\"\")\n\nfor ax_ in axes[:, 1:].ravel():\n    ax_.set_ylabel(\"\")\nplt.ylim(-100, 5000)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 <section id="autocorrelazione">
@@ -909,7 +974,22 @@ title="Print to PDF"
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_10_1.png" src="_images/335_mcmc_diagnostics_10_1.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "az.plot_autocorr(chains, combined=True)";
+                var nbb_formatted_code = "az.plot_autocorr(chains, combined=True)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 <section id="statistica-hat-r">
@@ -1289,9 +1369,24 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:      ()
 Data variables:
-    good_chains  float64 1.001
-    bad_chains0  float64 2.423
-    bad_chains1  float64 1.011</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-37147655-6f74-4d59-b939-412c1e48a8da' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-37147655-6f74-4d59-b939-412c1e48a8da' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0a6b4bd4-2d03-427f-bc7f-e7920b856ffb' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0a6b4bd4-2d03-427f-bc7f-e7920b856ffb' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-e0de0c85-e5e4-4ab4-80af-de47be493a98' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e0de0c85-e5e4-4ab4-80af-de47be493a98' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>good_chains</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.001</div><input id='attrs-c6a1bdf8-72ba-46ca-8a77-b7fa0c9ee589' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c6a1bdf8-72ba-46ca-8a77-b7fa0c9ee589' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-427c1f80-b970-489f-81fc-a8b044fa2719' class='xr-var-data-in' type='checkbox'><label for='data-427c1f80-b970-489f-81fc-a8b044fa2719' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(1.00061402)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.423</div><input id='attrs-bf742a2c-9d7e-4d4b-a341-b122b24494cd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-bf742a2c-9d7e-4d4b-a341-b122b24494cd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c8adfabf-eb12-4510-b2a7-a9ad1d23d540' class='xr-var-data-in' type='checkbox'><label for='data-c8adfabf-eb12-4510-b2a7-a9ad1d23d540' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(2.42263338)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains1</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.011</div><input id='attrs-f15fc26f-80ce-4e25-9ac3-c87c54e45e81' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f15fc26f-80ce-4e25-9ac3-c87c54e45e81' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9c9476aa-46c7-4252-9c3f-9b63dc228c02' class='xr-var-data-in' type='checkbox'><label for='data-9c9476aa-46c7-4252-9c3f-9b63dc228c02' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(1.0112872)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-442675c3-9f2b-4d8b-acec-458b067c5879' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-442675c3-9f2b-4d8b-acec-458b067c5879' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-db26d861-1acc-4055-800e-bec60112dd17' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-db26d861-1acc-4055-800e-bec60112dd17' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    good_chains  float64 1.0
+    bad_chains0  float64 2.413
+    bad_chains1  float64 1.009</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2cc0cef6-a584-4daf-91ef-108542310877' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2cc0cef6-a584-4daf-91ef-108542310877' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0082b7fb-acbd-44da-8ee1-411a7268421e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0082b7fb-acbd-44da-8ee1-411a7268421e' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-4b64937e-5419-4b5f-9bb9-353b4e9c545f' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4b64937e-5419-4b5f-9bb9-353b4e9c545f' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>good_chains</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0</div><input id='attrs-42def229-0d14-4b1b-9e8a-422755810c11' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-42def229-0d14-4b1b-9e8a-422755810c11' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ae824b2c-3471-4e8e-9684-fdce5e14f629' class='xr-var-data-in' type='checkbox'><label for='data-ae824b2c-3471-4e8e-9684-fdce5e14f629' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(1.0001199)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.413</div><input id='attrs-d6f22f93-482b-46d6-bb84-c0276691d57c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d6f22f93-482b-46d6-bb84-c0276691d57c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cf40aad2-058b-4136-99f3-b009b5a9bc4c' class='xr-var-data-in' type='checkbox'><label for='data-cf40aad2-058b-4136-99f3-b009b5a9bc4c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(2.41295371)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains1</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.009</div><input id='attrs-25e93c46-5f21-4ae7-9d2a-300b17c53cab' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-25e93c46-5f21-4ae7-9d2a-300b17c53cab' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ea042ed5-6f01-4544-8383-03290c23c3ec' class='xr-var-data-in' type='checkbox'><label for='data-ea042ed5-6f01-4544-8383-03290c23c3ec' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(1.00860007)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1e94729b-2085-4b3b-ab6e-a07315092729' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-1e94729b-2085-4b3b-ab6e-a07315092729' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-25092fb3-9f20-446d-b44d-2898052f1f83' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-25092fb3-9f20-446d-b44d-2898052f1f83' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "az.rhat(chains)";
+                var nbb_formatted_code = "az.rhat(chains)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Nell’esempio di <span id="id4">Martin <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id25" title="Osvaldo A Martin, Ravin Kumar, and Junpeng Lao. Bayesian Modeling and Computation in Python. CRC Press, 2022.">MKL22</a>]</span> vediamo come <span class="math notranslate nohighlight">\(\hat{R}\)</span> è in grado di distinguere tra le buone e le cattive catene MCMC. Mentre <code class="docutils literal notranslate"><span class="pre">bad_chains0</span></code> ha valori <span class="math notranslate nohighlight">\(\hat{R}\)</span> totalmente inadeguati, <code class="docutils literal notranslate"><span class="pre">bad_chains1</span></code> tende ad avere valori accettabili.</p>
 </section>
@@ -1677,9 +1772,24 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:      ()
 Data variables:
-    good_chains  float64 0.002532
-    bad_chains0  float64 0.1079
-    bad_chains1  float64 0.0143</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-c1c81661-e212-4f33-9f33-057d8a65dc16' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-c1c81661-e212-4f33-9f33-057d8a65dc16' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-64973fa4-6697-4f0a-8316-716dd8122bf6' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-64973fa4-6697-4f0a-8316-716dd8122bf6' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-6de8bf54-533d-414c-9eed-f383ea19a548' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6de8bf54-533d-414c-9eed-f383ea19a548' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>good_chains</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.002532</div><input id='attrs-57647681-2ef5-48ab-b84f-d420474e21de' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-57647681-2ef5-48ab-b84f-d420474e21de' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-922fe5ea-632c-4770-8ecb-4df88498ab7e' class='xr-var-data-in' type='checkbox'><label for='data-922fe5ea-632c-4770-8ecb-4df88498ab7e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.00253212)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.1079</div><input id='attrs-6e649056-05b7-4c7c-8577-945a3189c8b0' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6e649056-05b7-4c7c-8577-945a3189c8b0' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8a717d62-d1cd-445c-b7ad-0504cdee354e' class='xr-var-data-in' type='checkbox'><label for='data-8a717d62-d1cd-445c-b7ad-0504cdee354e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.10791198)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains1</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.0143</div><input id='attrs-fe69f30b-ad1d-48c8-9d02-5a743a6dff55' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-fe69f30b-ad1d-48c8-9d02-5a743a6dff55' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-04cdd690-191e-4581-af18-83913968a484' class='xr-var-data-in' type='checkbox'><label for='data-04cdd690-191e-4581-af18-83913968a484' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.0142996)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f2830c6d-7477-4083-a601-0d174520e3d9' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f2830c6d-7477-4083-a601-0d174520e3d9' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-49cf177a-b0b8-4c22-9f75-7f37abfde000' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-49cf177a-b0b8-4c22-9f75-7f37abfde000' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+    good_chains  float64 0.002487
+    bad_chains0  float64 0.108
+    bad_chains1  float64 0.01329</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-39868f36-d5eb-42b9-b5ac-ed535b109b8d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-39868f36-d5eb-42b9-b5ac-ed535b109b8d' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-71a6a793-883a-4d90-8548-590101e5710e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-71a6a793-883a-4d90-8548-590101e5710e' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-908028db-ea00-4c1d-9e5e-cbd9d1735d65' class='xr-section-summary-in' type='checkbox'  checked><label for='section-908028db-ea00-4c1d-9e5e-cbd9d1735d65' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>good_chains</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.002487</div><input id='attrs-ed4eaf03-8d22-4f6a-a742-5599accabc7f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ed4eaf03-8d22-4f6a-a742-5599accabc7f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6d0c398a-2936-4de4-b6c5-98c4092e926c' class='xr-var-data-in' type='checkbox'><label for='data-6d0c398a-2936-4de4-b6c5-98c4092e926c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.002487)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.108</div><input id='attrs-ac867f30-3457-4b65-9754-91ad5c390a40' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ac867f30-3457-4b65-9754-91ad5c390a40' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cd8ee602-70a7-4d97-9bd5-b8890fa1c913' class='xr-var-data-in' type='checkbox'><label for='data-cd8ee602-70a7-4d97-9bd5-b8890fa1c913' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.10804534)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains1</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.01329</div><input id='attrs-0379842c-65dc-4136-868c-c28034394e0d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0379842c-65dc-4136-868c-c28034394e0d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e9b57a39-dbae-4bf7-85c0-68bfd5880c17' class='xr-var-data-in' type='checkbox'><label for='data-e9b57a39-dbae-4bf7-85c0-68bfd5880c17' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.01328704)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ba125b3b-29ef-42da-b3e8-ee21c267af1e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ba125b3b-29ef-42da-b3e8-ee21c267af1e' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-6902a797-8836-4fb4-81c0-e06c72920c88' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6902a797-8836-4fb4-81c0-e06c72920c88' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "az.mcse(chains)";
+                var nbb_formatted_code = "az.mcse(chains)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1695,7 +1805,22 @@ Data variables:
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_16_1.png" src="_images/335_mcmc_diagnostics_16_1.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "az.plot_mcse(chains)";
+                var nbb_formatted_code = "az.plot_mcse(chains)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 <section id="rank-plots">
@@ -1716,7 +1841,22 @@ Data variables:
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_18_1.png" src="_images/335_mcmc_diagnostics_18_1.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "az.plot_rank(chains, kind=\"bars\")";
+                var nbb_formatted_code = "az.plot_rank(chains, kind=\"bars\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Una rappresentazione alternativa (con dei segmenti verticali al posto delle barre) è la seguente:</p>
 <div class="cell docutils container">
@@ -1733,7 +1873,22 @@ Data variables:
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_20_1.png" src="_images/335_mcmc_diagnostics_20_1.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "az.plot_rank(chains, kind=\"vlines\")";
+                var nbb_formatted_code = "az.plot_rank(chains, kind=\"vlines\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 <section id="divergenze">
@@ -1760,17 +1915,32 @@ Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
-seaborn   : 0.12.2
-matplotlib: 3.6.2
-pymc      : 5.0.1
 numpy     : 1.24.1
+matplotlib: 3.6.2
+seaborn   : 0.12.2
+pymc      : 5.0.1
 scipy     : 1.10.0
 arviz     : 0.14.0
 
 Watermark: 2.3.1
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
+                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 </section>
