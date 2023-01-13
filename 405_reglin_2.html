@@ -783,14 +783,32 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">load_ext</span> nb_black
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
+                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Nell’esempio che discuteremo verranno usati i dati <code class="docutils literal notranslate"><span class="pre">kidiq</span></code> <span id="id1">[<a class="reference internal" href="z_biblio.html#id71" title="Andrew Gelman, Jennifer Hill, and Aki Vehtari. Regression and other stories. Cambridge University Press, 2020.">GHV20</a>]</span>:</p>
 <blockquote>
@@ -879,7 +897,22 @@ title="Print to PDF"
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "kidiq = pd.read_stata('data/kidiq.dta')\nkidiq.head()";
+                var nbb_formatted_code = "kidiq = pd.read_stata(\"data/kidiq.dta\")\nkidiq.head()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Un diagramma a dispersione per i dati di questo campione suggerisce la presenza di un’associazione positiva tra l’intelligenza del bambino (<code class="docutils literal notranslate"><span class="pre">kid_score</span></code>) e l’intelligenza della madre (<code class="docutils literal notranslate"><span class="pre">mom_iq</span></code>).</p>
 <div class="cell docutils container">
@@ -893,7 +926,22 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/405_reglin_2_7_0.png" src="_images/405_reglin_2_7_0.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "_, ax = plt.subplots()\nax.plot(kidiq['mom_iq'], kidiq['kid_score'], 'o', alpha=0.4)\nax.set_xlabel(\"QI della madre\")\nax.set_ylabel(\"QI del bambino\");";
+                var nbb_formatted_code = "_, ax = plt.subplots()\nax.plot(kidiq[\"mom_iq\"], kidiq[\"kid_score\"], \"o\", alpha=0.4)\nax.set_xlabel(\"QI della madre\")\nax.set_ylabel(\"QI del bambino\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Il modello di regressione lineare descrive questa associazione mediante una retta.</p>
 <div class="cell docutils container">
@@ -911,7 +959,22 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/405_reglin_2_9_0.png" src="_images/405_reglin_2_9_0.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "_, ax = plt.subplots()\nax.plot(kidiq['mom_iq'], kidiq['kid_score'], 'o', alpha=0.4)\n#obtain m (slope) and b(intercept) of linear regression line\nb, a = np.polyfit(kidiq['mom_iq'], kidiq['kid_score'], 1)\n#add linear regression line to scatterplot \nplt.plot(kidiq['mom_iq'], a + b*kidiq['mom_iq'])\nax.set_xlabel(\"QI della madre\")\nax.set_ylabel(\"QI del bambino\");";
+                var nbb_formatted_code = "_, ax = plt.subplots()\nax.plot(kidiq[\"mom_iq\"], kidiq[\"kid_score\"], \"o\", alpha=0.4)\n# obtain m (slope) and b(intercept) of linear regression line\nb, a = np.polyfit(kidiq[\"mom_iq\"], kidiq[\"kid_score\"], 1)\n# add linear regression line to scatterplot\nplt.plot(kidiq[\"mom_iq\"], a + b * kidiq[\"mom_iq\"])\nax.set_xlabel(\"QI della madre\")\nax.set_ylabel(\"QI del bambino\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Ci sono però infinite rette che, in linea di principio, possono essere usate per “approssimare” la nube di punti nel diagramma a dispersione. È dunque necessario introdurre dei vincoli per selezionare una di queste possibili rette. Il vincolo che viene introdotto dal modello di regressione è quello di costringere la retta a passare per il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span>.</p>
 <div class="cell docutils container">
@@ -930,7 +993,22 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/405_reglin_2_11_0.png" src="_images/405_reglin_2_11_0.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "_, ax = plt.subplots()\nax.plot(kidiq['mom_iq'], kidiq['kid_score'], 'o', alpha=0.4)\n#obtain m (slope) and b(intercept) of linear regression line\nb, a = np.polyfit(kidiq['mom_iq'], kidiq['kid_score'], 1)\n#add linear regression line to scatterplot \nplt.plot(kidiq['mom_iq'], a + b*kidiq['mom_iq'])\nplt.scatter([np.mean(kidiq.mom_iq)], [np.mean(kidiq.kid_score)], s=90, c='r');\nax.set_xlabel(\"QI della madre\")\nax.set_ylabel(\"QI del bambino\");";
+                var nbb_formatted_code = "_, ax = plt.subplots()\nax.plot(kidiq[\"mom_iq\"], kidiq[\"kid_score\"], \"o\", alpha=0.4)\n# obtain m (slope) and b(intercept) of linear regression line\nb, a = np.polyfit(kidiq[\"mom_iq\"], kidiq[\"kid_score\"], 1)\n# add linear regression line to scatterplot\nplt.plot(kidiq[\"mom_iq\"], a + b * kidiq[\"mom_iq\"])\nplt.scatter([np.mean(kidiq.mom_iq)], [np.mean(kidiq.kid_score)], s=90, c=\"r\")\nax.set_xlabel(\"QI della madre\")\nax.set_ylabel(\"QI del bambino\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Una retta che passa per il punto <span class="math notranslate nohighlight">\((\bar{x}, \bar{y})\)</span> (evidenziato in rosso nella figura precedente) ha delle desiderabili proprietà statistiche che verranno descritte in seguito.</p>
 <p>Il campione è costituito da <span class="math notranslate nohighlight">\(n\)</span> coppie di osservazioni (<span class="math notranslate nohighlight">\(x, y\)</span>). Per ciascuna coppia di valori <span class="math notranslate nohighlight">\(x_i, y_i\)</span>, il modello di regressione si aspetta che il valore <span class="math notranslate nohighlight">\(y_i\)</span> sia associato al corrispondente valore <span class="math notranslate nohighlight">\(x_i\)</span> come indicato dalla seguente equazione:</p>
@@ -958,7 +1036,22 @@ y_i = a + b x_i + e_i.
 Name: kid_score, dtype: int32
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "kidiq['kid_score'][0:10]";
+                var nbb_formatted_code = "kidiq[\"kid_score\"][0:10]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Per fare riferimento a ciascuna osservazione usiamo l’indice <span class="math notranslate nohighlight">\(i\)</span>. Quindi, ad esempio, <span class="math notranslate nohighlight">\(y_3\)</span> è uguale a</p>
 <div class="cell docutils container">
@@ -971,7 +1064,22 @@ Name: kid_score, dtype: int32
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "print(kidiq['kid_score'][2])";
+                var nbb_formatted_code = "print(kidiq[\"kid_score\"][2])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Il modello di regressione bivariata, descritto dall’equazione precedente, ci dice che ciascun valore <span class="math notranslate nohighlight">\(y\)</span> è dato dalla somma di due componenti: una componente deterministica e una componente aleatoria. Consideriamo il primo valore <span class="math notranslate nohighlight">\(y\)</span> del campione. Per esso, il modello di regressione diventa</p>
 <div class="math notranslate nohighlight">
@@ -1056,7 +1164,22 @@ b = \frac{Cov(x, y)}{Var(x)}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.609974571730785
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "cov_xy = np.cov(kidiq['kid_score'], kidiq['mom_iq'], ddof=1)[0][1] \nvar_x = np.var(kidiq['mom_iq'], ddof=1)\nb = cov_xy / var_x\nb";
+                var nbb_formatted_code = "cov_xy = np.cov(kidiq[\"kid_score\"], kidiq[\"mom_iq\"], ddof=1)[0][1]\nvar_x = np.var(kidiq[\"mom_iq\"], ddof=1)\nb = cov_xy / var_x\nb";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1069,7 +1192,22 @@ b = \frac{Cov(x, y)}{Var(x)}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.799777849962986
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "a = np.mean(kidiq['kid_score']) - b*np.mean(kidiq['mom_iq'])\na";
+                var nbb_formatted_code = "a = np.mean(kidiq[\"kid_score\"]) - b * np.mean(kidiq[\"mom_iq\"])\na";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Verifichiamo i risultati trovati usando funzione <code class="docutils literal notranslate"><span class="pre">optimize.curve_fit</span></code>. Questa è una funzione molto potente, in quanto può adattarsi non solo alle funzioni lineari, ma anche alle funzioni non lineari. Qui la usiamo per la retta di regressione.</p>
 <div class="cell docutils container">
@@ -1086,7 +1224,22 @@ b = \frac{Cov(x, y)}{Var(x)}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([25.7997779 ,  0.60997457])
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "def func(x, a, b):\n    y = a + b*x\n    return y\n  \noptimize.curve_fit(func, xdata = kidiq.mom_iq, ydata = kidiq.kid_score)[0]";
+                var nbb_formatted_code = "def func(x, a, b):\n    y = a + b * x\n    return y\n\n\noptimize.curve_fit(func, xdata=kidiq.mom_iq, ydata=kidiq.kid_score)[0]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>In precedenza abbiamo soltanto accennato al problema di come si possono trovano i coefficienti dei minimi quadrati; ritorneremo su questo punto in seguito, con una simulazione. Per ora, chiediamoci cosa significano i due coefficienti che abbiamo appena trovato.</p>
 <p>Il coefficiente <span class="math notranslate nohighlight">\(a\)</span> si chiama <em>intercetta</em>. L’intercetta, all’interno del diagramma a dispersione, specifica il punto in cui la retta di regressione interseca l’asse <span class="math notranslate nohighlight">\(y\)</span> del sistema di assi cartesiani.</p>
@@ -1107,7 +1260,22 @@ b = \frac{Cov(x, y)}{Var(x)}.
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/405_reglin_2_22_0.png" src="_images/405_reglin_2_22_0.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "_, ax = plt.subplots()\nax.plot(kidiq['mom_iq'], a + b * kidiq['mom_iq'], 'o', alpha=0.4);";
+                var nbb_formatted_code = "_, ax = plt.subplots()\nax.plot(kidiq[\"mom_iq\"], a + b * kidiq[\"mom_iq\"], \"o\", alpha=0.4)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Il diagramma precedente presenta ciascun valore <span class="math notranslate nohighlight">\(\hat{y}_i = a + b x_i\)</span> in funzione di <span class="math notranslate nohighlight">\(x_i\)</span>. Si vede che i valori predetti dal modello di regressione sono i punti che stanno sulla retta di regressione.</p>
 <p>In precedenza abbiamo detto che il residuo, ovvero la componente di ciascuna osservazione <span class="math notranslate nohighlight">\(y_i\)</span> che non viene predetta dal modello di regressione, corrisponde alla <em>distanza verticale</em> tra il valore <span class="math notranslate nohighlight">\(y_i\)</span> osservato e il valore <span class="math notranslate nohighlight">\(\hat{y}_i\)</span> predetto dal modello di regressione:</p>
@@ -1131,7 +1299,22 @@ y_1 = (a + b x_1) + e_1
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "print(kidiq['kid_score'][0])";
+                var nbb_formatted_code = "print(kidiq[\"kid_score\"][0])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Per questo punteggio, il valore predetto dal modello di regressione è</p>
 <div class="cell docutils container">
@@ -1144,7 +1327,22 @@ y_1 = (a + b x_1) + e_1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99.67839048842711
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "a + b * kidiq['mom_iq'][0]";
+                var nbb_formatted_code = "a + b * kidiq[\"mom_iq\"][0]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Per questa osservazione, il residuo (ovvero, l’errore che compiamo utilizzando il modello di regression per predire il QI del bambino) è</p>
 <div class="cell docutils container">
@@ -1157,7 +1355,22 @@ y_1 = (a + b x_1) + e_1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-34.67839048842711
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "kidiq['kid_score'][0] - (a + b * kidiq['mom_iq'][0])";
+                var nbb_formatted_code = "kidiq[\"kid_score\"][0] - (a + b * kidiq[\"mom_iq\"][0])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Per tutte le osservazioni abbiamo</p>
 <div class="cell docutils container">
@@ -1182,7 +1395,22 @@ y_1 = (a + b x_1) + e_1
 Length: 434, dtype: float64
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "res = kidiq['kid_score'] - (a + b * kidiq['mom_iq'])\nres";
+                var nbb_formatted_code = "res = kidiq[\"kid_score\"] - (a + b * kidiq[\"mom_iq\"])\nres";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>È una proprietà del modello di regressione (calcolato con il metodo dei minimi quadrati) che la somma dei residui sia uguale a zero.</p>
 <div class="cell docutils container">
@@ -1195,7 +1423,22 @@ Length: 434, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-3.183231456205249e-12
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "np.sum(res)";
+                var nbb_formatted_code = "np.sum(res)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Ciò significa che ciascuno dei valore osservato <span class="math notranslate nohighlight">\(y_i\)</span> viene scomposto dal modello di regressione in due componenti. La componente deterministica <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>, predicibile da <span class="math notranslate nohighlight">\(x_i\)</span>, è <span class="math notranslate nohighlight">\(\hat{y}_i = a + b x_i\)</span>. Il residuo è <span class="math notranslate nohighlight">\(e_i = y_i - \hat{y}_i\)</span>. La somma della componente deterministica e della componente erratica, ovviamente, riproduce il valore osservato.</p>
 <section id="trasformazione-dei-dati">
@@ -1339,7 +1582,22 @@ Length: 434, dtype: float64
   </tbody>
 </table>
 <p>434 rows × 6 columns</p>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "kidiq['xd'] = kidiq['mom_iq'] - np.mean(kidiq['mom_iq'])\nkidiq";
+                var nbb_formatted_code = "kidiq[\"xd\"] = kidiq[\"mom_iq\"] - np.mean(kidiq[\"mom_iq\"])\nkidiq";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Se ora usiamo le coppie di osservazioni <span class="math notranslate nohighlight">\((xd_i, y_i)\)</span>, il diagramma a dispersione assume la forma seguente.</p>
 <div class="cell docutils container">
@@ -1355,7 +1613,22 @@ Length: 434, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/405_reglin_2_36_0.png" src="_images/405_reglin_2_36_0.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "_, ax = plt.subplots()\nax.plot(kidiq['xd'], kidiq['kid_score'], 'o', alpha=0.4)\nb, a = np.polyfit(kidiq['xd'], kidiq['kid_score'], 1)\nplt.plot(kidiq['xd'], a + b*kidiq['xd'])\nax.set_xlabel(\"QI della madre (scarti dalla media)\")\nax.set_ylabel(\"QI del bambino\");";
+                var nbb_formatted_code = "_, ax = plt.subplots()\nax.plot(kidiq[\"xd\"], kidiq[\"kid_score\"], \"o\", alpha=0.4)\nb, a = np.polyfit(kidiq[\"xd\"], kidiq[\"kid_score\"], 1)\nplt.plot(kidiq[\"xd\"], a + b * kidiq[\"xd\"])\nax.set_xlabel(\"QI della madre (scarti dalla media)\")\nax.set_ylabel(\"QI del bambino\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Quello che abbiamo fatto è stato di <em>traslare rigidamente</em> la nube di punti sul piano cartesiano di una quantità pari alla distanza tra <span class="math notranslate nohighlight">\(\bar{x}\)</span> e l’origine. Dunque, le <em>relazioni spaziali</em> tra i punti del diagramma a dispersione restano immutate. Di conseguenza, la pendenza della retta di regressione calcolata sui dati trasformati è uguale a quella che si trova nel caso dei dati non trasformati. Ciò che cambia è solo il valore dell’intercetta.</p>
 <div class="cell docutils container">
@@ -1369,7 +1642,22 @@ Length: 434, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(86.79723502304148, 0.6099745717307852)
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "result = stats.linregress(kidiq.xd, kidiq.kid_score)\nresult.intercept, result.slope";
+                var nbb_formatted_code = "result = stats.linregress(kidiq.xd, kidiq.kid_score)\nresult.intercept, result.slope";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>L’intercetta corrisponde al punto sull’asse <span class="math notranslate nohighlight">\(y\)</span> dove la retta di regressione interseca l’ordinata. Ma, nel caso dei dati trasformati, dato che abbiamo traslato i punti di una quantità pari a <span class="math notranslate nohighlight">\(x - \bar{x}\)</span>, il valore <span class="math notranslate nohighlight">\(xd = 0\)</span> corrisponde a <span class="math notranslate nohighlight">\(x = \bar{x}\)</span> nel caso dei dati grezzi. Dunque, per i dati trasformati <span class="math notranslate nohighlight">\(xd_i, y_i\)</span>, l’intercetta corrisponderà al valore atteso della <span class="math notranslate nohighlight">\(y\)</span> in corrispondenza del valore medio della variabile <span class="math notranslate nohighlight">\(x\)</span> sulla scala dei dati non trasformati (ovvero <span class="math notranslate nohighlight">\(\bar{x}\)</span>). In altre parole, l’intercetta del modello di regressione lineare calcolata sui dati trasformati corrisponde al QI medio dei bambini in corrispondenza del QI medio delle madri.</p>
 </section>
@@ -1384,6 +1672,23 @@ Length: 434, dtype: float64
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "b_grid = np.linspace(0, 1, 1001)";
+                var nbb_formatted_code = "b_grid = np.linspace(0, 1, 1001)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Definisco una funzione che calcola la quantità <span class="math notranslate nohighlight">\(\sum_{i=1}^{n}{(y_i - (a + b x_i))^2}\)</span>:</p>
 <div class="cell docutils container">
@@ -1393,6 +1698,23 @@ Length: 434, dtype: float64
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "def sse(a, b, x, y):\n  return np.sum((y - (a + b * x))**2)";
+                var nbb_formatted_code = "def sse(a, b, x, y):\n    return np.sum((y - (a + b * x)) ** 2)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Calcolo la somma degli errori quadratici per ciascun possibile valore <code class="docutils literal notranslate"><span class="pre">b_grid</span></code>, fissando <span class="math notranslate nohighlight">\(a = 25.79978\)</span>.</p>
 <div class="cell docutils container">
@@ -1402,6 +1724,23 @@ Length: 434, dtype: float64
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "a = 25.79978\nsse_vals = [sse(a, b, kidiq['mom_iq'], kidiq['kid_score']) for b in b_grid]";
+                var nbb_formatted_code = "a = 25.79978\nsse_vals = [sse(a, b, kidiq[\"mom_iq\"], kidiq[\"kid_score\"]) for b in b_grid]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Esaminiamo il risultato ottenuto.</p>
 <div class="cell docutils container">
@@ -1415,7 +1754,22 @@ Length: 434, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/405_reglin_2_46_0.png" src="_images/405_reglin_2_46_0.png" />
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "_, ax = plt.subplots()\nax.plot(b_grid, sse_vals)\nax.set_xlabel(\"Valori possibili del coefficiente b\")\nax.set_ylabel(\"SSE\");";
+                var nbb_formatted_code = "_, ax = plt.subplots()\nax.plot(b_grid, sse_vals)\nax.set_xlabel(\"Valori possibili del coefficiente b\")\nax.set_ylabel(\"SSE\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Il risultato ottenuto con la simulazione riproduce quello ottenuto per via analitica.</p>
 <div class="cell docutils container">
@@ -1510,7 +1864,22 @@ Length: 434, dtype: float64
   </tbody>
 </table>
 <p>1001 rows × 2 columns</p>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "df = pd.DataFrame({\n  'x' : b_grid,\n  'y' : sse_vals\n})\ndf";
+                var nbb_formatted_code = "df = pd.DataFrame({\"x\": b_grid, \"y\": sse_vals})\ndf";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1549,7 +1918,22 @@ Length: 434, dtype: float64
     </tr>
   </tbody>
 </table>
-</div></div></div>
+</div></div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "df[df.y == df.y.min()]";
+                var nbb_formatted_code = "df[df.y == df.y.min()]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Una simulazione simile, ma computazionalmente più complessa, può essere usata per stimare simultaneamente entrambi i coefficienti del modello lineare. Ci siamo limitati qui ad una <em>proof of concept</em> del caso più semplice.</p>
 </section>
@@ -1588,7 +1972,22 @@ s_e = \sqrt{\frac{1}{n-2}\sum e_i^2}.
 dtype: float64
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "e = kidiq.kid_score - (a + b * kidiq.mom_iq)\ne[1:10]";
+                var nbb_formatted_code = "e = kidiq.kid_score - (a + b * kidiq.mom_iq)\ne[1:10]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Calcolo il residuo medio, prendendo il valore assoluto.</p>
 <div class="cell docutils container">
@@ -1601,7 +2000,22 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.46860267547228
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "np.mean(np.abs(e))";
+                var nbb_formatted_code = "np.mean(np.abs(e))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>L’errore standard della regressione è</p>
 <div class="cell docutils container">
@@ -1614,7 +2028,22 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.2661227922994
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "np.sqrt(sum(e**2) / (len(e) - 2))";
+                var nbb_formatted_code = "np.sqrt(sum(e**2) / (len(e) - 2))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>I due numeri certamente non sono uguali, ma possiamo dire che hanno lo stesso ordine di grandezza.</p>
 </section>
@@ -1673,7 +2102,22 @@ R^2 = \frac{dev_R}{dev_T} = 1 - \frac{dev_E}{dev_T}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>180386.15668202768
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "dev_t = np.sum((kidiq.kid_score - np.mean(kidiq.kid_score))**2)\ndev_t";
+                var nbb_formatted_code = "dev_t = np.sum((kidiq.kid_score - np.mean(kidiq.kid_score)) ** 2)\ndev_t";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>La devianza spiegata è</p>
 <div class="cell docutils container">
@@ -1687,7 +2131,22 @@ R^2 = \frac{dev_R}{dev_T} = 1 - \frac{dev_E}{dev_T}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36248.820197060355
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "dev_r = np.sum(((a + b * kidiq.mom_iq) - np.mean(kidiq.kid_score))**2)\ndev_r";
+                var nbb_formatted_code = "dev_r = np.sum(((a + b * kidiq.mom_iq) - np.mean(kidiq.kid_score)) ** 2)\ndev_r";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>L’indice di determinazione è</p>
 <div class="cell docutils container">
@@ -1701,7 +2160,22 @@ R^2 = \frac{dev_R}{dev_T} = 1 - \frac{dev_E}{dev_T}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.201
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "R2 = dev_r / dev_t\nround(R2, 3)";
+                var nbb_formatted_code = "R2 = dev_r / dev_t\nround(R2, 3)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Verifichiamo.</p>
 <div class="cell docutils container">
@@ -1729,7 +2203,7 @@ R^2 = \frac{dev_R}{dev_T} = 1 - \frac{dev_E}{dev_T}.
   <th>Date:</th>             <td>Fri, 13 Jan 2023</td> <th>  Prob (F-statistic):</th> <td>7.66e-23</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>16:47:51</td>     <th>  Log-Likelihood:    </th> <td> -1875.6</td>
+  <th>Time:</th>                 <td>21:16:28</td>     <th>  Log-Likelihood:    </th> <td> -1875.6</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   434</td>      <th>  AIC:               </th> <td>   3755.</td>
@@ -1768,7 +2242,22 @@ R^2 = \frac{dev_R}{dev_T} = 1 - \frac{dev_E}{dev_T}.
 <tr>
   <th>Kurtosis:</th>      <td> 2.919</td> <th>  Cond. No.          </th> <td>    682.</td>
 </tr>
-</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div><script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "X = sm.add_constant(kidiq['mom_iq'])\nmod = sm.OLS(kidiq['kid_score'], X)\nres = mod.fit()\nres.summary()";
+                var nbb_formatted_code = "X = sm.add_constant(kidiq[\"mom_iq\"])\nmod = sm.OLS(kidiq[\"kid_score\"], X)\nres = mod.fit()\nres.summary()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Il risultato ottenuto si può interpretare dicendo che circa il 20% della variabilità dei punteggi del QI dei bambini può essere predetto conoscendo il QI delle madri.</p>
 <section id="inferenza-sul-modello-di-regressione">
@@ -1801,18 +2290,33 @@ IPython version      : 8.7.0
 
 pytensor: 2.8.11
 
-pandas     : 1.5.2
-statsmodels: 0.13.5
-scipy      : 1.10.0
+seaborn    : 0.12.2
+arviz      : 0.14.0
 numpy      : 1.24.1
 matplotlib : 3.6.2
-arviz      : 0.14.0
-seaborn    : 0.12.2
+scipy      : 1.10.0
+pandas     : 1.5.2
+statsmodels: 0.13.5
 
 Watermark: 2.3.1
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w -p pytensor";
+                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w -p pytensor";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 </section>
