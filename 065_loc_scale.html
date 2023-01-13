@@ -927,7 +927,7 @@ distribuzione è asimmetrica, o in presenza di valori anomali (<em>outlier</em>)
 In tali circostanze, la tendenza centrale della distribuzione è meglio
 rappresentata dalla mediana o dalla media spuntata (si veda più sotto).</p>
 <p>Per fare un esempio, calcoliamo la media dei valori BDI-II separatamente per ciascuno dei due
-gruppi di soggetti esaminati da <span id="id1">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+gruppi di soggetti esaminati da <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Leggo i dati, seleziono le colonne appropriate, elimino i duplicati, rimuovo </span>
@@ -971,17 +971,17 @@ dtype: int64
 <img alt="_images/065_loc_scale_7_0.png" src="_images/065_loc_scale_7_0.png" />
 </div>
 </div>
-<p>Calcolo ora le medie dei valori BDI-II nei due gruppi. Per trovare la media di un oggetto di tipo serie invoco su quest’ultimo il metodo <code class="docutils literal notranslate"><span class="pre">.mean()</span></code>, dopo avere applicato <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code>:</p>
+<p>Calcolo ora le medie dei valori BDI-II nei due gruppi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>group
-ctl     1.6
-mdd    30.9
+ctl     1.61
+mdd    30.93
 Name: bdi, dtype: float64
 </pre></div>
 </div>
@@ -1061,71 +1061,6 @@ Name: bdi, dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>Per fare un esercizio, calcolo la media manipolando i dati grezzi del gruppo <code class="docutils literal notranslate"><span class="pre">mdd</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_mdd</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;mdd&#39;</span><span class="p">][</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">bdi_mdd</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">bdi_mdd</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.0 30.0 26.0 35.0 44.0 30.0 22.0 33.0 43.0 43.0 24.0 39.0 19.0 25.0 31.0 28.0 30.0 35.0 31.0 26.0 36.0 41.0 26.0 35.0 33.0 28.0 27.0 34.0 22.0 27.0
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">bdi_mdd</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">bdi_mdd</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.933333333333334
-</pre></div>
-</div>
-</div>
-</div>
-<p>In alternativa, per selezionare le osservazioni, si può usare la sintassi seguente:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_group</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
-<span class="n">mdd_group</span> <span class="o">=</span> <span class="n">df_group</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s1">&#39;mdd&#39;</span><span class="p">)</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">mdd_group</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">mdd_group</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25.0 30.0 26.0 35.0 44.0 30.0 22.0 33.0 43.0 43.0 24.0 39.0 19.0 25.0 31.0 28.0 30.0 35.0 31.0 26.0 36.0 41.0 26.0 35.0 33.0 28.0 27.0 34.0 22.0 27.0
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="media-spuntata">
 <h3><span class="section-number">11.1.2. </span>Media spuntata<a class="headerlink" href="#media-spuntata" title="Permalink to this headline">#</a></h3>
@@ -1137,246 +1072,24 @@ poi eliminare il primo 5% e l’ultimo 5% dei dati della serie così
 ordinata. La media spuntata è data dalla media aritmetica dei dati
 rimanenti.</p>
 <p>Per fare un esempio, calcoliamo la media spuntata dei valori BDI-II per i due gruppi di
-soggetti esaminati da <span id="id2">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> escludendo il 10% dei valori
-più estremi. Iniziamo ad esaminare la numerosità di ciascun gruppo.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>group
-ctl    36
-mdd    30
-dtype: int64
-</pre></div>
-</div>
-</div>
-</div>
-<p>Seleziono i dati del gruppo <code class="docutils literal notranslate"><span class="pre">mdd</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;mdd&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>esm_id</th>
-      <th>group</th>
-      <th>bdi</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>10</td>
-      <td>mdd</td>
-      <td>25.0</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>9</td>
-      <td>mdd</td>
-      <td>30.0</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>6</td>
-      <td>mdd</td>
-      <td>26.0</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>7</td>
-      <td>mdd</td>
-      <td>35.0</td>
-    </tr>
-    <tr>
-      <th>65</th>
-      <td>12</td>
-      <td>mdd</td>
-      <td>44.0</td>
-    </tr>
-    <tr>
-      <th>83</th>
-      <td>16</td>
-      <td>mdd</td>
-      <td>30.0</td>
-    </tr>
-    <tr>
-      <th>100</th>
-      <td>21</td>
-      <td>mdd</td>
-      <td>22.0</td>
-    </tr>
-    <tr>
-      <th>119</th>
-      <td>18</td>
-      <td>mdd</td>
-      <td>33.0</td>
-    </tr>
-    <tr>
-      <th>136</th>
-      <td>20</td>
-      <td>mdd</td>
-      <td>43.0</td>
-    </tr>
-    <tr>
-      <th>151</th>
-      <td>22</td>
-      <td>mdd</td>
-      <td>43.0</td>
-    </tr>
-    <tr>
-      <th>171</th>
-      <td>23</td>
-      <td>mdd</td>
-      <td>24.0</td>
-    </tr>
-    <tr>
-      <th>191</th>
-      <td>25</td>
-      <td>mdd</td>
-      <td>39.0</td>
-    </tr>
-    <tr>
-      <th>211</th>
-      <td>24</td>
-      <td>mdd</td>
-      <td>19.0</td>
-    </tr>
-    <tr>
-      <th>283</th>
-      <td>31</td>
-      <td>mdd</td>
-      <td>25.0</td>
-    </tr>
-    <tr>
-      <th>338</th>
-      <td>30</td>
-      <td>mdd</td>
-      <td>31.0</td>
-    </tr>
-    <tr>
-      <th>358</th>
-      <td>37</td>
-      <td>mdd</td>
-      <td>28.0</td>
-    </tr>
-    <tr>
-      <th>525</th>
-      <td>48</td>
-      <td>mdd</td>
-      <td>30.0</td>
-    </tr>
-    <tr>
-      <th>561</th>
-      <td>45</td>
-      <td>mdd</td>
-      <td>35.0</td>
-    </tr>
-    <tr>
-      <th>646</th>
-      <td>55</td>
-      <td>mdd</td>
-      <td>31.0</td>
-    </tr>
-    <tr>
-      <th>666</th>
-      <td>50</td>
-      <td>mdd</td>
-      <td>26.0</td>
-    </tr>
-    <tr>
-      <th>795</th>
-      <td>63</td>
-      <td>mdd</td>
-      <td>36.0</td>
-    </tr>
-    <tr>
-      <th>811</th>
-      <td>62</td>
-      <td>mdd</td>
-      <td>41.0</td>
-    </tr>
-    <tr>
-      <th>827</th>
-      <td>65</td>
-      <td>mdd</td>
-      <td>26.0</td>
-    </tr>
-    <tr>
-      <th>846</th>
-      <td>66</td>
-      <td>mdd</td>
-      <td>35.0</td>
-    </tr>
-    <tr>
-      <th>864</th>
-      <td>68</td>
-      <td>mdd</td>
-      <td>33.0</td>
-    </tr>
-    <tr>
-      <th>903</th>
-      <td>78</td>
-      <td>mdd</td>
-      <td>28.0</td>
-    </tr>
-    <tr>
-      <th>933</th>
-      <td>80</td>
-      <td>mdd</td>
-      <td>27.0</td>
-    </tr>
-    <tr>
-      <th>953</th>
-      <td>81</td>
-      <td>mdd</td>
-      <td>34.0</td>
-    </tr>
-    <tr>
-      <th>964</th>
-      <td>85</td>
-      <td>mdd</td>
-      <td>22.0</td>
-    </tr>
-    <tr>
-      <th>981</th>
-      <td>84</td>
-      <td>mdd</td>
-      <td>27.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>Calcolo la media spuntata dei due gruppi:</p>
+soggetti esaminati da <span id="id2">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> escludendo il 10% dei valori
+più estremi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_mdd</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;mdd&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
 <span class="n">stats</span><span class="o">.</span><span class="n">trim_mean</span><span class="p">(</span><span class="n">bdi_mdd</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
-
-<span class="n">bdi_ctl</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;ctl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.625
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_ctl</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;ctl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
 <span class="n">stats</span><span class="o">.</span><span class="n">trim_mean</span><span class="p">(</span><span class="n">bdi_ctl</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1396,18 +1109,18 @@ classe con la frequenza massima (può succedere che una distribuzione
 abbia più mode; in tal caso si dice <em>multimodale</em> e questo operatore
 perde il suo significato di indice di tendenza centrale) e la <em>mediana</em>
 <span class="math notranslate nohighlight">\(\tilde{x}\)</span>.</p>
-<p>Si calcolino i quantili di ordine 0.25, 0.5 e 0.75 dei valori BDI-II per
-i due gruppi di soggetti di <span id="id3">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<p>Calcoliamo ora i quantili di ordine 0.10 e 0.90 dei valori BDI-II per
+i due gruppi di <span id="id3">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create functions to calculate 0.10 and 0.90 quantiles</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create functions to calculate 0.10 and 0.90 quantiles</span>
 <span class="k">def</span> <span class="nf">q1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.10</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">q3</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.90</span><span class="p">)</span>
 
-<span class="c1">#calculate quantiles by group</span>
+<span class="c1"># Calculate quantiles by group</span>
 <span class="n">vals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bdi&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">q1</span><span class="p">,</span> <span class="n">q3</span><span class="p">]}</span>
 <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
 </pre></div>
@@ -1521,30 +1234,28 @@ simmetriche e, anch’essa, è fortemente influenzata dai valori anomali.
 Inoltre, è espressa in un’unità di misura che è il quadrato dell’unità
 di misura dei dati originari e quindi ad essa non può essere assegnata
 un’interpretazione intuitiva.</p>
-<p>Calcoliamo ora varianza dei valori BDI-II per i dati di <span id="id4">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Applicando l’eq. <a class="reference internal" href="#equation-eq-var-descr">(11.4)</a> formula precedente, per tutto il campione abbiamo</p>
+<p>Calcoliamo la varianza dei valori BDI-II per i dati di <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Applicando l’eq. <a class="reference internal" href="#equation-eq-var-descr">(11.4)</a>, per tutto il campione abbiamo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var_bdi</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">)</span>
-<span class="nb">round</span><span class="p">(</span><span class="n">var_bdi</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>236.2388
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>236.23875114784224
 </pre></div>
 </div>
 </div>
 </div>
-<p>Più semplicemente, posso usare la funzione <code class="docutils literal notranslate"><span class="pre">np.var()</span></code>:</p>
+<p>Più semplicemente, possiamo usare la funzione <code class="docutils literal notranslate"><span class="pre">np.var()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var_bdi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">)</span>
-<span class="nb">round</span><span class="p">(</span><span class="n">var_bdi</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>236.2388
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>236.23875114784207
 </pre></div>
 </div>
 </div>
@@ -1686,8 +1397,8 @@ Otteniamo così 10 stime della varianza della popolazione del QI.</p>
 <p>Ripetiamo ora la simulazione usando un numero di iterazioni maggiore.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">scale</span> <span class="o">=</span> <span class="mi">15</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
 <span class="n">size</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">niter</span> <span class="o">=</span> <span class="mi">10000</span>
 <span class="n">random_samples</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1710,7 +1421,7 @@ Otteniamo così 10 stime della varianza della popolazione del QI.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/065_loc_scale_49_0.png" src="_images/065_loc_scale_49_0.png" />
+<img alt="_images/065_loc_scale_39_0.png" src="_images/065_loc_scale_39_0.png" />
 </div>
 </div>
 <p>La stima più verosimile della varianza del QI è dato dalla media di
@@ -1821,7 +1532,7 @@ standard è fortemente influenzata dai dati anomali, ovvero dalla
 presenza di uno o di pochi dati che sono molto più distanti dalla media
 rispetto agli altri valori della distribuzione.</p>
 <p>Per fare un esempio, calcoliamo la deviazione standard per i valori BDI-II del campione di
-<span id="id5">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<span id="id5">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
 <p>Applicando l’eq. <a class="reference internal" href="#equation-eq-sd-stimatore">(11.7)</a>, per tutto il campione abbiamo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1861,7 +1572,7 @@ dice, dunque, quanto sono distanti, in media, le singole osservazioni
 dal centro della distribuzione. Un’interpretazione più precisa del
 significato dello scarto tipo è fornita nel paragrafo successivo.</p>
 <p>Si verifichi l’interpretazione della deviazione standard fornita sopra
-usando i valori BDI-II del campione di <span id="id6">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+usando i valori BDI-II del campione di <span id="id6">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
 <p>Per questi dati la deviazione standard è</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1908,10 +1619,10 @@ campanulare (ovvero, normale) si ha che</p>
 \]</div>
 <p>Pertanto, solitamente i software restituiscono il valore MAD
 moltiplicato per una tale costante.</p>
-<p>I dati di <span id="id7">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> seguono una distribuzione bimodale, per cui
+<p>I dati di <span id="id7">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> seguono una distribuzione bimodale, per cui
 il vincolo precedente non si applica. Verifichiamo dunque il principio
 precedente usando un campione di dati estratto da una popolazione
-normale.</p>
+normale. Usiamo, ad esempio, la distribuzione <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
@@ -1920,7 +1631,7 @@ normale.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.013379849789137
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.060540775662487
 </pre></div>
 </div>
 </div>
@@ -1972,7 +1683,7 @@ discussi in quel contesto).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Jan 12 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jan 13 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
@@ -1980,11 +1691,11 @@ IPython version      : 8.7.0
 
 pytensor: 2.8.11
 
-scipy     : 1.10.0
 pandas    : 1.5.2
-seaborn   : 0.12.2
 matplotlib: 3.6.2
+scipy     : 1.10.0
 numpy     : 1.24.1
+seaborn   : 0.12.2
 
 Watermark: 2.3.1
 </pre></div>
