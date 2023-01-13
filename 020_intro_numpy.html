@@ -753,8 +753,7 @@ title="Print to PDF"
 <li><p>NumPy per i calcoli numerici,</p></li>
 <li><p>Matplotlib e Seaborn per visualizzare i dati.</p></li>
 </ul>
-<p>In questo capitolo introdurremo NumPy.</p>
-<p>NumPy è l’abbreviazione di Numerical Python: un’estensione del linguaggio pensata per il calcolo algebrico e matriciale. Numpy consente di lavorare con vettori e matrici in maniera più efficiente e veloce di quanto non si possa fare con le liste e le liste di liste (matrici) di Python. Inoltre, Numpy aggiunge una serie di funzioni matematiche di base e la possibilità di generare numeri casuali.</p>
+<p>In questo capitolo introdurremo NumPy. NumPy è l’abbreviazione di Numerical Python: un’estensione del linguaggio pensata per il calcolo algebrico e matriciale. Numpy consente di lavorare con vettori e matrici in maniera più efficiente e veloce di quanto non si possa fare con le liste e le liste di liste (matrici) di Python. Inoltre, Numpy aggiunge una serie di funzioni matematiche di base e la possibilità di generare numeri casuali.</p>
 <section id="gli-array-nel-modulo-numpy">
 <h2><span class="section-number">4.1. </span>Gli array nel modulo NumPy<a class="headerlink" href="#gli-array-nel-modulo-numpy" title="Permalink to this headline">#</a></h2>
 <p>In Python puro abbiamo a disposizione oggetti numerici (interi e a virgola mobile) e contenitori (liste, dizionari e insiemi). Numpy fornisce un nuovo tipo di dato: un array N-dimensionale (<code class="docutils literal notranslate"><span class="pre">ndarray</span></code>). Il costrutto <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> è una struttura dati <em>omogenea</em> (a differenza di una lista Python) che può avere dimensioni qualunque.</p>
@@ -997,13 +996,12 @@ contenente il numero di elementi per ogni dimensione.</p></li>
 </section>
 <section id="operazioni-sugli-array">
 <h2><span class="section-number">4.3. </span>Operazioni sugli array<a class="headerlink" href="#operazioni-sugli-array" title="Permalink to this headline">#</a></h2>
-<p>In questo insegnamento utilizzeremo soprattutto Numpy per eseguire operazioni algebriche sugli elementi di un vettore. Nel nostro caso, gli elementi di un vettore corrispondono alle misure ottenuto su una qualche variabile per le unità di osservazione (per esempio, i soggetti di un esperimento psicologico). Usando Python possiamo automatizzare le normali operazioni aritmetiche che siamo abituati a svolgere su una coppia di numeri alla volta. Con Numpy possiamo applicare una serie di operazioni aritmetiche simultaneamente su ciascun elemento di un vettore o di più vettori.</p>
-<p>Supponiamo di volere calcolare l’indice BMI:</p>
+<p>Useremo Numpy per eseguire operazioni algebriche sugli elementi di un vettore. Gli elementi del vettore corrisponderanno, per esempio, alle misure ottenute su una qualche variabile. Usando Numpy possiamo automatizzare le normali operazioni aritmetiche che siamo abituati a svolgere su una coppia di numeri. Supponiamo, ad esempio, di volere calcolare l’indice BMI:</p>
 <div class="math notranslate nohighlight">
 \[
 BMI = \frac{kg}{m^2}.
 \]</div>
-<p>Supponiamo di avere i seguenti dati di 4 individui:</p>
+<p>Supponiamo inoltre di avere raccolto i dati di 4 individui:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.62</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mf">1.55</span><span class="p">,</span> <span class="mf">1.74</span><span class="p">])</span>
@@ -1018,7 +1016,7 @@ BMI = \frac{kg}{m^2}.
 </div>
 </div>
 </div>
-<p>L’indice di massa corporea per il primo individuo è</p>
+<p>dove <code class="docutils literal notranslate"><span class="pre">m</span></code> è l’array che contiene i dati relativi all’altezza in metri dei quattro individui e <code class="docutils literal notranslate"><span class="pre">kg</span></code> è l’array che contiene i dati relativi al peso in kg. I dati sono organizzati in modo tale che il primo elemento di entrambi i vettori si riferisce alle misure del primo individuo, il secondo elemento dei due vettori si riferisce alle misure del secondo individuo, ecc. Per il primo individuo del campione, l’indice di massa corporea è</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">55.4</span> <span class="o">/</span> <span class="mf">1.62</span><span class="o">**</span><span class="mi">2</span>
@@ -1031,8 +1029,7 @@ BMI = \frac{kg}{m^2}.
 </div>
 </div>
 </div>
-<p>Si noti che non abbiamo bisogno di scrivere <code class="docutils literal notranslate"><span class="pre">55.4</span> <span class="pre">/</span> <span class="pre">(1.62**2)</span></code>: per convenzione, l’elevazione a potenza viene eseguita prima della somma e della divisione in tutti i linguaggi.</p>
-<p>Usando i dati immagazzinati nei due vettori, il BMI del primo individuo è</p>
+<p>Si noti che non abbiamo bisogno di scrivere <code class="docutils literal notranslate"><span class="pre">55.4</span> <span class="pre">/</span> <span class="pre">(1.62**2)</span></code> in quanto, in Python, l’elevazione a potenza viene eseguita prima della somma e della divisione (come in tutti i linguaggi). Usando i dati immagazzinati nei due vettori, lo stesso risultato si ottiene nel modo seguente:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
@@ -1045,11 +1042,18 @@ BMI = \frac{kg}{m^2}.
 </div>
 </div>
 </div>
-<p>Se non specifico l’indice (<code class="docutils literal notranslate"><span class="pre">[0]</span></code>), le operazioni aritmetiche verranno eseguite per ciascuna coppia di elementi corrispondenti nei due vettori:</p>
+<p>Se ora non specifichiamo l’indice (per esempio, <code class="docutils literal notranslate"><span class="pre">[0]</span></code>), le operazioni aritmetiche indicate verranno eseguite <em>per ciascuna coppia</em> di elementi corrispondenti nei due vettori:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bmi</span> <span class="o">=</span> <span class="n">kg</span> <span class="o">/</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">bmi</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Otteniamo così, con una sola istruzione, l’indice BMI dei quattro individui:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bmi</span>
 </pre></div>
 </div>
 </div>
@@ -1159,7 +1163,8 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 </div>
-<p>Questa implementazione funziona nello stesso modo sia che <code class="docutils literal notranslate"><span class="pre">x</span></code> contenga 3 elementi (come nel caso presente) sia che <code class="docutils literal notranslate"><span class="pre">x</span></code> contenga migliaia di elementi. Si noti l’uso delle parentesi tonde per specificare l’ordine di esecuzione delle operazioni. Per prima cosa calcoliamo la media degli elementi del vettore <code class="docutils literal notranslate"><span class="pre">x</span></code> usando <code class="docutils literal notranslate"><span class="pre">np.mean(x)</span></code>. Questa operazione produce uno scalare:</p>
+<p>Questa implementazione funziona nello stesso modo sia che <code class="docutils literal notranslate"><span class="pre">x</span></code> contenga 3 elementi (come nel caso presente) sia che <code class="docutils literal notranslate"><span class="pre">x</span></code> contenga migliaia di elementi. Si noti l’uso delle parentesi tonde per specificare l’ordine di esecuzione delle operazioni.</p>
+<p>Per prima cosa calcoliamo la media degli elementi del vettore <code class="docutils literal notranslate"><span class="pre">x</span></code> usando <code class="docutils literal notranslate"><span class="pre">np.mean(x)</span></code>. Questa operazione produce uno scalare:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1172,7 +1177,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 </div>
-<p>Poi eseguiamo la sottrazione <span class="math notranslate nohighlight">\(x_i - \bar{x}\)</span> per tutti gli elementi di <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
+<p>Poi eseguiamo la sottrazione <span class="math notranslate nohighlight">\(x_i - \bar{x}\)</span> per tutti gli elementi di <code class="docutils literal notranslate"><span class="pre">x</span></code> (broadcasting):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1185,7 +1190,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 </div>
-<p>Eleviamo al quadrato gli elementi di questo vettore:</p>
+<p>Eleviamo al quadrato gli elementi del vettore che abbiamo ottenuto:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
@@ -1198,7 +1203,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 </div>
-<p>Li sommiamo</p>
+<p>Sommiamo gli elementi del vettore:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -1211,7 +1216,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 </div>
-<p>Dividiamo per il numero di elementi:</p>
+<p>Dividiamo il numero ottenuto per <span class="math notranslate nohighlight">\(n\)</span>. Questa è la varianza di <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1225,7 +1230,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 </div>
-<p>Infine, prendiamo la radice quadrata:</p>
+<p>Infine, per ottenere la deviazione standard, prendiamo la radice quadrata:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
@@ -1238,7 +1243,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 </div>
-<p>Il risultato ottenuto coincide con quello trovato con la funzione <code class="docutils literal notranslate"><span class="pre">std()</span></code>:</p>
+<p>Il risultato ottenuto coincide con quello che si trova applicando la funzione <code class="docutils literal notranslate"><span class="pre">np.std()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
