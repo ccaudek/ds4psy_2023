@@ -50,9 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="15. La logica dell’incerto" href="110_intro_prob.html" />
+    <link rel="next" title="15. Definizioni e concetti di base" href="110_intro_prob.html" />
     <link rel="prev" title="12. Le relazioni tra variabili" href="070_correlation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -200,7 +202,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="110_intro_prob.html">
-   15. La logica dell’incerto
+   15. Definizioni e concetti di base
   </a>
  </li>
  <li class="toctree-l1">
@@ -640,13 +642,48 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#combinazioni">
-   14.1. Combinazioni
+  <a class="reference internal nav-link" href="#introduzione">
+   14.1. Introduzione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#principio-del-prodotto">
+   14.2. Principio del prodotto
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#principio-della-somma">
+   14.3. Principio della somma
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-modello-dell-urna">
+   14.4. Il modello dell’urna
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutazioni-semplici">
+   14.5. Permutazioni semplici
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#disposizioni-semplici">
+   14.6. Disposizioni semplici
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combinazioni-semplici">
+   14.7. Combinazioni semplici
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anticipazione">
+   14.8. Anticipazione
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#watermark">
-   14.2. Watermark
+   14.9. Watermark
   </a>
  </li>
 </ul>
@@ -669,13 +706,48 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#combinazioni">
-   14.1. Combinazioni
+  <a class="reference internal nav-link" href="#introduzione">
+   14.1. Introduzione
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#principio-del-prodotto">
+   14.2. Principio del prodotto
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#principio-della-somma">
+   14.3. Principio della somma
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-modello-dell-urna">
+   14.4. Il modello dell’urna
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permutazioni-semplici">
+   14.5. Permutazioni semplici
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#disposizioni-semplici">
+   14.6. Disposizioni semplici
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combinazioni-semplici">
+   14.7. Combinazioni semplici
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anticipazione">
+   14.8. Anticipazione
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#watermark">
-   14.2. Watermark
+   14.9. Watermark
   </a>
  </li>
 </ul>
@@ -689,11 +761,631 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="calcolo-combinatorio">
-<h1><span class="section-number">14. </span>Calcolo combinatorio<a class="headerlink" href="#calcolo-combinatorio" title="Permalink to this headline">#</a></h1>
-<p>Molto spesso gli esercizi sulla probabilità richiedono di contare in quanti modi è possibile raggruppare gli elementi di un insieme. Quel ramo della matematica che si occupa di questo problema si chiama calcolo combinatorio. Il calcolo delle probabilità nel discreto costituisce di fatto un’estensione del calcolo combinatorio. In questo insegnamento tratteremo della probabilità discreta solo per fare degli esempi semplici, ma poi ci focalizzeremo sulle variabili casuali continue, in quanto l’inferenza statistica in psicologia si occupa soprattutto di variabili di questo tipo. Alcuni concetti di base del calcolo combinatorio, tuttavia, sono utili anche per i nostri scopi. Considereremo qui i concetti di permutazione e di combinazione.</p>
-<p>Consideriamo alcuni esempi nei quali viene usato Python per risolvere dei semplici problemi di calcolo combinatorio. Questo è più che altro un esercizio per fare pratica con Python.</p>
-<p>Gli esempi sono stati ricavati dalla seguente <a class="reference external" href="https://mathforprogramming.github.io/probability/lecture04.html">pagina web</a></p>
-<p>Consideriamo l’esperimento casuale corrispondente al lancio di un dado bilanciato. Creo lo spazio campione di questo esperimento casuale.</p>
+<span id="combinatorics-notebook"></span><h1><span class="section-number">14. </span>Calcolo combinatorio<a class="headerlink" href="#calcolo-combinatorio" title="Permalink to this headline">#</a></h1>
+<section id="introduzione">
+<h2><span class="section-number">14.1. </span>Introduzione<a class="headerlink" href="#introduzione" title="Permalink to this headline">#</a></h2>
+<p>Il calcolo combinatorio si pone il problema di determinare il numero dei
+modi mediante i quali possono essere associati, secondo prefissate regole,
+gli elementi di uno stesso insieme o di più insiemi. Alcuni dei problemi del calcolo delle probabilità per essere risolti richiedono l’utilizzo dei metodi del calcolo combinatorio.</p>
+<p>In questo capitolo verranno discussi alcuni concetti del calcolo combinatorio. In particolare, verranno introdotti il principio del prodotto, il principio della somma e il modello dell’urna. Verranno inoltre descritte le nozioni di permutazione semplice, disposizione semplice e di combinazione semplice.</p>
+</section>
+<section id="principio-del-prodotto">
+<h2><span class="section-number">14.2. </span>Principio del prodotto<a class="headerlink" href="#principio-del-prodotto" title="Permalink to this headline">#</a></h2>
+<p>I metodi di base del calcolo combinatorio applicano due principi: la regola del prodotto e la regola della somma. Consideriamo il principio del prodotto.</p>
+<p>In generale, una scelta può essere fatta in più passi, poniamo <span class="math notranslate nohighlight">\(k\)</span>. Supponiamo che per ogni <span class="math notranslate nohighlight">\(i = 1, \dots, k\)</span> la scelta da compiere all’<span class="math notranslate nohighlight">\(i\)</span>-mo passo possa essere fatta in <span class="math notranslate nohighlight">\(n_i\)</span> modi. Il principio del prodotto dice che allora il numero totale di possibili scelte è il prodotto</p>
+<div class="math notranslate nohighlight">
+\[
+n_{\text{tot}} = n_1 \cdot  n_2 \cdots n_{k-1} \cdot n_k.
+\]</div>
+<p><strong>Esempio 1.</strong> In Minnesota le targhe delle automobili sono costituite da tre lettere (da A a Z) seguite da tre numeri (da 0 a 9). Qual è la proporzione di targhe che iniziano con GZN?</p>
+<p>La soluzione è data dal numero di targhe che iniziano con GZN diviso per il numero totale di targhe possibili.</p>
+<p>Il numero totale di targe è <span class="math notranslate nohighlight">\(26 \cdot 26 \cdot 26 \cdot 10 \cdot 10 \cdot 10 = 17,576,000\)</span>. Per calcolare il numero di targhe che iniziano con GZN, consideriamo le targhe che hanno la forma GZN _ _ _. Per i tre simboli mancanti ci sono <span class="math notranslate nohighlight">\(10 \cdot 10 \cdot 10\)</span> possibilità. Dunque la proporzione cercata è</p>
+<div class="math notranslate nohighlight">
+\[
+10^3/(26^3 \cdot 10^3) = 1/26^3 = 0.0000569.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="p">(</span><span class="mi">26</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.689576695493855e-05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="principio-della-somma">
+<h2><span class="section-number">14.3. </span>Principio della somma<a class="headerlink" href="#principio-della-somma" title="Permalink to this headline">#</a></h2>
+<p>Se un evento può accadere in <span class="math notranslate nohighlight">\(\vert S_1\vert\)</span> modi, un secondo evento può accadere in <span class="math notranslate nohighlight">\(\vert S_2\vert\)</span> modi, <span class="math notranslate nohighlight">\(\dots\)</span>, un ultimo evento può accadere in  <span class="math notranslate nohighlight">\(\vert S_k\vert\)</span> modi,  vi sono <span class="math notranslate nohighlight">\(\vert S_1\vert + \vert S_2\vert + \dots + \vert S_{k-1}\vert + \vert S_k\vert\)</span> modi in cui uno dei <span class="math notranslate nohighlight">\(k\)</span> eventi può accadere. In altri termini, se i sottoinsiemi <span class="math notranslate nohighlight">\(S_1, \dots, S_k\)</span>, costituiscono una partizione di <span class="math notranslate nohighlight">\(S\)</span>, allora</p>
+<div class="math notranslate nohighlight">
+\[
+\vert S_1 \cup S_2 \cup \dots \cup S_{k-1} \cup S_k \vert = \vert S_1\vert + \vert S_2\vert + \dots + \vert S_{k-1}\vert + \vert S_k\vert.
+\]</div>
+<p><strong>Esempio 2.</strong> L’urna <span class="math notranslate nohighlight">\(A\)</span> contiene <span class="math notranslate nohighlight">\(5\)</span> palline numerate da <span class="math notranslate nohighlight">\(1\)</span> a <span class="math notranslate nohighlight">\(5\)</span>, l’urna <span class="math notranslate nohighlight">\(B\)</span> contiene <span class="math notranslate nohighlight">\(6\)</span> palline numerate da <span class="math notranslate nohighlight">\(6\)</span> a <span class="math notranslate nohighlight">\(11\)</span>, l’urna <span class="math notranslate nohighlight">\(C\)</span> contiene <span class="math notranslate nohighlight">\(3\)</span> palline numerate da <span class="math notranslate nohighlight">\(12\)</span> a <span class="math notranslate nohighlight">\(14\)</span> e l’urna <span class="math notranslate nohighlight">\(D\)</span> contiene <span class="math notranslate nohighlight">\(2\)</span> palline numerate <span class="math notranslate nohighlight">\(15\)</span> e <span class="math notranslate nohighlight">\(16\)</span>. Quanti insiemi composti da due palline, ciascuna estratta da un’urna differente, si possono formare?</p>
+<p>Per la regola del prodotto, si possono formare: <span class="math notranslate nohighlight">\(30\)</span> insiemi di tipo <span class="math notranslate nohighlight">\(AB\)</span> (una pallina estratta dall’urna <span class="math notranslate nohighlight">\(A\)</span> e una estratta dall’urna <span class="math notranslate nohighlight">\(B\)</span>), <span class="math notranslate nohighlight">\(15\)</span> di tipo <span class="math notranslate nohighlight">\(AC\)</span>, <span class="math notranslate nohighlight">\(10\)</span> di tipo <span class="math notranslate nohighlight">\(AD\)</span>, <span class="math notranslate nohighlight">\(18\)</span> di tipo <span class="math notranslate nohighlight">\(BC\)</span>, <span class="math notranslate nohighlight">\(12\)</span> di tipo <span class="math notranslate nohighlight">\(BD\)</span> e <span class="math notranslate nohighlight">\(6\)</span> di tipo <span class="math notranslate nohighlight">\(CD\)</span>. Per la regola della somma, il numero di insiemi distinti che si possono formare con due palline provenienti dalle quattro urne è <span class="math notranslate nohighlight">\(30 + 15 + 10 + 18 + 12 + 6 = 91\)</span>.</p>
+</section>
+<section id="il-modello-dell-urna">
+<h2><span class="section-number">14.4. </span>Il modello dell’urna<a class="headerlink" href="#il-modello-dell-urna" title="Permalink to this headline">#</a></h2>
+<p>I problemi del calcolo combinatorio sono spesso assimilabili ad estrazioni di palline da urne che diventano così schemi o modelli delle corrispondenti situazioni considerate. Si definisce <em>modello dell’urna</em> la  procedura per cui, da un’urna contenente <span class="math notranslate nohighlight">\(n\)</span> palline, si estraggono a caso <span class="math notranslate nohighlight">\(k\)</span> palline. Le palline possono essere tutte diverse, oppure alcune palline possono essere tra loro indistinguibili. Fra le possibili modalità di estrazione hanno speciale interesse</p>
+<ul class="simple">
+<li><p>l’<em>estrazione Bernoulliana</em> di <span class="math notranslate nohighlight">\(k\)</span> palline ottenuta estraendo, una dopo l’altra, <span class="math notranslate nohighlight">\(k\)</span> palline e rimettendo ogni volta nell’urna la pallina estratta;</p></li>
+<li><p>l’<em>estrazione senza ripetizione</em> di <span class="math notranslate nohighlight">\(k\)</span> palline ottenuta estraendo, una dopo l’altra, <span class="math notranslate nohighlight">\(k\)</span> palline senza rimetterle nell’urna;</p></li>
+<li><p>l’<em>estrazione in blocco</em> di <span class="math notranslate nohighlight">\(k\)</span> palline ottenuta estraendo <span class="math notranslate nohighlight">\(k\)</span> palline simultaneamente.</p></li>
+</ul>
+<p>Per esempio, nel caso di campioni di ampiezza 2 estratti da un’urna con tre elementi <span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span>, abbiamo i seguenti quattro casi:</p>
+<ul class="simple">
+<li><p>campionamento con reimmissione tenendo conto dell’ordine di estrazione: <span class="math notranslate nohighlight">\(\{1,  1\}, \{2,  1\}, \{3,  1\}, \{1,  2\}, \{2,  2\}, \{3,  2\}, \{1,  3\}, \{2,  3\}, \{3,  3\}\)</span>;</p></li>
+<li><p>campionamento con reimmissione senza tenere conto dell’ordine di estrazione: <span class="math notranslate nohighlight">\(\{1,  1\}, \{1,  2\}, \{1,  3\}, \{2,  2\}, \{2,  3\}, \{3,  3\}\)</span>;</p></li>
+<li><p>campionamento senza reimmissione tenendo conto dell’ordine di estrazione:
+<span class="math notranslate nohighlight">\(\{1,  2\}, \{2,  1\}, \{1,  3\}, \{3,  1\}, \{2,  3\}, \{3,  2\}\)</span>;</p></li>
+<li><p>campionamento senza reimmissione e senza tenere conto dell’ordine di estrazione: <span class="math notranslate nohighlight">\(\{1 , 2\}, \{1,  3\}, \{2, 3\}\)</span>.</p></li>
+</ul>
+</section>
+<section id="permutazioni-semplici">
+<h2><span class="section-number">14.5. </span>Permutazioni semplici<a class="headerlink" href="#permutazioni-semplici" title="Permalink to this headline">#</a></h2>
+<p>Una <em>permutazione semplice</em> di elementi diversi tra loro è il risultato di uno scambio dell’ordine degli elementi di un insieme. Le permutazioni semplici si indicano con il simbolo <span class="math notranslate nohighlight">\(P_{n}\)</span>. Il modello dell’urna è quello di <span class="math notranslate nohighlight">\(n\)</span> estrazioni senza rimessa da un’urna che contiene <span class="math notranslate nohighlight">\(n\)</span> palline diverse. Il numero delle permutazioni semplici di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti è uguale a</p>
+<div class="math notranslate nohighlight" id="equation-eq-permsem">
+<span class="eqno">(14.1)<a class="headerlink" href="#equation-eq-permsem" title="Permalink to this equation">#</a></span>\[
+P_n = n!
+\]</div>
+<p>dove il simbolo <span class="math notranslate nohighlight">\(n!\)</span> si legge <span class="math notranslate nohighlight">\(n\)</span> fattoriale ed è uguale al prodotto di <span class="math notranslate nohighlight">\(n\)</span> numeri interi decrescenti a partire da <span class="math notranslate nohighlight">\(n\)</span>. Per definizione <span class="math notranslate nohighlight">\(0! = 1\)</span>.</p>
+<p><strong>Esempio 3.</strong> Consideriamo l’insieme: <span class="math notranslate nohighlight">\(A = \{a, b, c\}\)</span>. Calcoliamo il numero di permutazioni semplici.</p>
+<p>Le permutazioni semplici di <span class="math notranslate nohighlight">\(A\)</span> sono: <span class="math notranslate nohighlight">\(\{a, b, c\}\)</span>, <span class="math notranslate nohighlight">\(\{a, c, b\}\)</span>, <span class="math notranslate nohighlight">\(\{b, c, a\}\)</span>, <span class="math notranslate nohighlight">\(\{b, a, c\}\)</span>, <span class="math notranslate nohighlight">\(\{c, a, b\}\)</span>, <span class="math notranslate nohighlight">\(\{c, b, a\}\)</span>, ovvero 6. Applichiamo l’eq. <span class="xref std std-ref">eq_permsem</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
+\]</div>
+<p>Lo strumento principale che usiamo in Python per trovare le permutazioni di un insieme è una libreria specificamente progettata per iterare sugli oggetti in modi diversi, ovvero <code class="docutils literal notranslate"><span class="pre">itertools</span></code>. Importiamo le librerie necessarie.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">load_ext</span> nb_black
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
+                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Con <code class="docutils literal notranslate"><span class="pre">itertools.permutations()</span></code> generiamo le permutazioni. Per visualizzare il risultato dobbiamo trasformarlo in una tupla:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">)</span>
+<span class="n">permutations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+<span class="n">permutations</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;B&#39;, &#39;C&#39;),
+ (&#39;A&#39;, &#39;C&#39;, &#39;B&#39;),
+ (&#39;B&#39;, &#39;A&#39;, &#39;C&#39;),
+ (&#39;B&#39;, &#39;C&#39;, &#39;A&#39;),
+ (&#39;C&#39;, &#39;A&#39;, &#39;B&#39;),
+ (&#39;C&#39;, &#39;B&#39;, &#39;A&#39;))
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "permutations = it.permutations('ABC')\npermutations = tuple(permutations)\npermutations";
+                var nbb_formatted_code = "permutations = it.permutations(\"ABC\")\npermutations = tuple(permutations)\npermutations";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Possiamo ora contare quanti elementi ci sono nella tupla usando la funzione <code class="docutils literal notranslate"><span class="pre">len()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "len(permutations)";
+                var nbb_formatted_code = "len(permutations)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Oppure, applicando direttamente la formula <a class="reference internal" href="#equation-eq-permsem">(14.1)</a> possiamo usare la funzione <code class="docutils literal notranslate"><span class="pre">factorial()</span></code> contenuta nella libreria <code class="docutils literal notranslate"><span class="pre">math</span></code> di Numpy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "np.math.factorial(3)";
+                var nbb_formatted_code = "np.math.factorial(3)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p><strong>Esempio 4.</strong> Un altro esempio è costituito dagli anagrammi. Gli anagrammi  sono  le permutazioni che si ottengono da una parola variando l’ordine delle lettere. Le permutazioni semplici si applicano al caso di parole costituite da lettere tutte diverse tra loro. Ad esempio, con la parola  NUMERO si ottengono <span class="math notranslate nohighlight">\(P_6 = 6! = 6\cdot5\cdot4\cdot3\cdot2\cdot1 = 720\)</span> anagrammi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;NUMERO&#39;</span><span class="p">)</span>
+<span class="n">permutations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+<span class="n">permutations</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;E&#39;, &#39;R&#39;, &#39;O&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;E&#39;, &#39;O&#39;, &#39;R&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;R&#39;, &#39;E&#39;, &#39;O&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;R&#39;, &#39;O&#39;, &#39;E&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;O&#39;, &#39;E&#39;, &#39;R&#39;))
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "permutations = it.permutations('NUMERO')\npermutations = tuple(permutations)\npermutations[0:5]";
+                var nbb_formatted_code = "permutations = it.permutations(\"NUMERO\")\npermutations = tuple(permutations)\npermutations[0:5]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>720
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "len(permutations)";
+                var nbb_formatted_code = "len(permutations)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Oppure, applichiamo direttamente la formula <a class="reference internal" href="#equation-eq-permsem">(14.1)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>720
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "np.math.factorial(6)";
+                var nbb_formatted_code = "np.math.factorial(6)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p><strong>Esempio 5.</strong> Un altro esempio riguarda i giochi di carte. Ci sono 52! <span class="math notranslate nohighlight">\(\approx 8 \times 10^{67}\)</span> modi di ordinare un mazzo di carte da poker; questo numero è ``quasi’’ grande come il numero di atomi dell’universo che si stima essere uguale a circa <span class="math notranslate nohighlight">\(10^{80}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">52</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80658175170943878571660636856403766975289505440883277824000000000000
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "np.math.factorial(52)";
+                var nbb_formatted_code = "np.math.factorial(52)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+</section>
+<section id="disposizioni-semplici">
+<h2><span class="section-number">14.6. </span>Disposizioni semplici<a class="headerlink" href="#disposizioni-semplici" title="Permalink to this headline">#</a></h2>
+<p>Supponiamo di voler selezionare una sequenza di <span class="math notranslate nohighlight">\(k\)</span> oggetti da un insieme di <span class="math notranslate nohighlight">\(n\)</span> e che l’ordine degli oggetti abbia importanza. Si chiamano <em>disposizioni semplici</em> di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti presi a <span class="math notranslate nohighlight">\(k\)</span> a <span class="math notranslate nohighlight">\(k\)</span>  (o disposizioni della classe <span class="math notranslate nohighlight">\(k\)</span>) tutti i raggruppamenti che si possono formare con gli oggetti dati in modo che qualsiasi raggruppamento ne contenga <span class="math notranslate nohighlight">\(k\)</span> tutti distinti tra loro (ovvero, senza ripetizione) e che due raggruppamenti differiscano tra loro per qualche oggetto oppure per l’ordine secondo il quale gli oggetti si susseguono. Le disposizioni semplici della classe <span class="math notranslate nohighlight">\(k\)</span> si indicano con  <span class="math notranslate nohighlight">\(D_{n,k}\)</span>.</p>
+<p>Il modello dell’urna è quello dell’estrazione senza rimessa di <span class="math notranslate nohighlight">\(k &lt; n\)</span> palline da un’urna che contiene <span class="math notranslate nohighlight">\(n\)</span> palline diverse.</p>
+<p>Il numero delle disposizioni semplici di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti della classe <span class="math notranslate nohighlight">\(k\)</span> è uguale a</p>
+<div class="math notranslate nohighlight" id="equation-eq-disp-simple">
+<span class="eqno">(14.2)<a class="headerlink" href="#equation-eq-disp-simple" title="Permalink to this equation">#</a></span>\[
+D_{n,k} = \frac{n!}{(n-k)!}.
+\]</div>
+<p><strong>Esempio 6.</strong> Consideriamo l’insieme: <span class="math notranslate nohighlight">\(A = \{a, b, c\}\)</span>. Qual è il numero di disposizioni semplici di classe 2?</p>
+<p>Le disposizioni semplici di classe 2 sono:</p>
+<p><span class="math notranslate nohighlight">\(\{a, b\}\)</span>, <span class="math notranslate nohighlight">\(\{b, a\}\)</span>, <span class="math notranslate nohighlight">\(\{a, c\}\)</span>, <span class="math notranslate nohighlight">\(\{c, a\}\)</span>, <span class="math notranslate nohighlight">\(\{b, c\}\)</span>, <span class="math notranslate nohighlight">\(\{c, b\}\)</span>, ovvero 6.</p>
+<p>Ovvero</p>
+<div class="math notranslate nohighlight" id="equation-eq-combinations">
+<span class="eqno">(14.3)<a class="headerlink" href="#equation-eq-combinations" title="Permalink to this equation">#</a></span>\[
+D_{n,k} = \frac{n!}{(n-k)!} = 3 \cdot 2 = 6.
+\]</div>
+<p>Possiamo trovare il risultato con la seguente istruzione:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;B&#39;), (&#39;A&#39;, &#39;C&#39;), (&#39;B&#39;, &#39;A&#39;), (&#39;B&#39;, &#39;C&#39;), (&#39;C&#39;, &#39;A&#39;), (&#39;C&#39;, &#39;B&#39;))
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "tuple(it.permutations('ABC', 2))";
+                var nbb_formatted_code = "tuple(it.permutations(\"ABC\", 2))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "res = tuple(it.permutations('ABC', 2))\nlen(res)";
+                var nbb_formatted_code = "res = tuple(it.permutations(\"ABC\", 2))\nlen(res)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Oppure possiamo implementare l’eq. <a class="reference internal" href="#equation-eq-disp-simple">(14.2)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_disp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+
+<span class="n">simple_disp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "def simple_disp(n, k):\n    return np.math.factorial(n) / np.math.factorial(n - k)\n\nsimple_disp(3, 2)";
+                var nbb_formatted_code = "def simple_disp(n, k):\n    return np.math.factorial(n) / np.math.factorial(n - k)\n\n\nsimple_disp(3, 2)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+</section>
+<section id="combinazioni-semplici">
+<h2><span class="section-number">14.7. </span>Combinazioni semplici<a class="headerlink" href="#combinazioni-semplici" title="Permalink to this headline">#</a></h2>
+<p>Le <em>combinazioni semplici</em> di <span class="math notranslate nohighlight">\(n\)</span> elementi a <span class="math notranslate nohighlight">\(k\)</span> a <span class="math notranslate nohighlight">\(k\)</span> (<span class="math notranslate nohighlight">\(k \leq n\)</span>) sono tutti i sottoinsiemi di <span class="math notranslate nohighlight">\(k\)</span> elementi di un dato insieme di <span class="math notranslate nohighlight">\(n\)</span> elementi, tutti distinti tra loro. Le combinazioni semplici della classe <span class="math notranslate nohighlight">\(k\)</span> si indicano con il simbolo <span class="math notranslate nohighlight">\(C_{n,k}\)</span>. Il modello dell’urna è quello dell’estrazione senza reimmissione di <span class="math notranslate nohighlight">\(k\)</span> palline da un’urna che contiene <span class="math notranslate nohighlight">\(n\)</span> palline distinte tra loro: non c’è la ripetizione di elementi né un ordine di estrazione.</p>
+<p>Le combinazioni semplici differiscono dalle disposizioni semplici per il fatto che le disposizioni semplici tengono conto dell’ordine di estrazione mentre nelle combinazioni semplici si considerano distinti solo i raggruppamenti che differiscono almeno per un elemento. Gli elementi di ciascuna combinazione di <span class="math notranslate nohighlight">\(k\)</span> oggetti possono essere ordinati tra loro in <span class="math notranslate nohighlight">\(k!\)</span> modi diversi, per cui il numero delle combinazioni semplici è dato dal numero di disposizioni semplici <span class="math notranslate nohighlight">\(D_{n,k}\)</span> diviso per il numero di permutazioni semplici <span class="math notranslate nohighlight">\(P_k\)</span> dei <span class="math notranslate nohighlight">\(k\)</span> elementi, come indicato nell’eq. <a class="reference internal" href="#equation-eq-combsemp">(14.4)</a>. Il numero delle combinazioni semplici di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti della classe <span class="math notranslate nohighlight">\(k\)</span> è uguale a</p>
+<div class="math notranslate nohighlight" id="equation-eq-combsemp">
+<span class="eqno">(14.4)<a class="headerlink" href="#equation-eq-combsemp" title="Permalink to this equation">#</a></span>\[
+C_{n,k} = \frac{D_{n,k}}{P_k} = \frac{n!}{k!(n-k)!}.
+\]</div>
+<p>Il numero delle combinazioni semplici <span class="math notranslate nohighlight">\(C_{n,k}\)</span> è spesso indicato con il
+simbolo <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> che si legge ``<span class="math notranslate nohighlight">\(n\)</span> su <span class="math notranslate nohighlight">\(k\)</span>’’ e viene detto <em>coefficiente binomiale</em>.</p>
+<p><strong>Esempio 7.</strong> Per l’insieme <span class="math notranslate nohighlight">\(A = \{a, b, c\}\)</span> si trovino le combinazioni semplici di classe 2.</p>
+<p>Le combinazioni semplici dell’insieme <span class="math notranslate nohighlight">\(A\)</span> sono
+<span class="math notranslate nohighlight">\(\{a, b\}\)</span>, <span class="math notranslate nohighlight">\(\{a, c\}\)</span>, <span class="math notranslate nohighlight">\(\{b, c\}\)</span>, ovvero 3. Applichiamo l’eq. <a class="reference internal" href="#equation-eq-combsemp">(14.4)</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
+\]</div>
+<p>Usiamo <code class="docutils literal notranslate"><span class="pre">itertools</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_nk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">c_nk</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;B&#39;), (&#39;A&#39;, &#39;C&#39;), (&#39;B&#39;, &#39;C&#39;))
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "c_nk = tuple(it.combinations('ABC', 2))\nc_nk";
+                var nbb_formatted_code = "c_nk = tuple(it.combinations(\"ABC\", 2))\nc_nk";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">c_nk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "len(c_nk)";
+                var nbb_formatted_code = "len(c_nk)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>La soluzione si trova anche usando la funzione <code class="docutils literal notranslate"><span class="pre">comb()</span></code> della libreria <code class="docutils literal notranslate"><span class="pre">math</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 16;
+                var nbb_unformatted_code = "math.comb(3, 2)";
+                var nbb_formatted_code = "math.comb(3, 2)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p><strong>Esempio 8.</strong> Quanti gruppi di 4 si possono formare con 20 individui?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_nk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">c_nk</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((0, 1, 2, 3), (0, 1, 2, 4), (0, 1, 2, 5), (0, 1, 2, 6), (0, 1, 2, 7))
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "c_nk = tuple(it.combinations(range(20), 4))\nc_nk[0:5]";
+                var nbb_formatted_code = "c_nk = tuple(it.combinations(range(20), 4))\nc_nk[0:5]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">c_nk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4845
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 18;
+                var nbb_unformatted_code = "len(c_nk)";
+                var nbb_formatted_code = "len(c_nk)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>ovvero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4845
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 19;
+                var nbb_unformatted_code = "math.comb(20, 4)";
+                var nbb_formatted_code = "math.comb(20, 4)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+</section>
+<section id="anticipazione">
+<h2><span class="section-number">14.8. </span>Anticipazione<a class="headerlink" href="#anticipazione" title="Permalink to this headline">#</a></h2>
+<p>Aggiungo due esempi aggiuntivi. Con questi semplici esempi useremo il calcolo combinatorio per anticipare il concetto di “probabilità” che verrà sviluppato nel capitolo successivo.</p>
+<p><strong>Esempio 9.</strong> Consideriamo l’esperimento casuale corrispondente al lancio di un dado bilanciato a sei facce. L’insieme di tutti i risultati possibili si dice “spazio campione” dell’esperimento casuale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">dice1</span> <span class="k">for</span> <span class="n">dice1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
@@ -705,9 +1397,24 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6]
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 20;
+                var nbb_unformatted_code = "sample = [dice1 for dice1 in range(1,7)]\nprint(sample)";
+                var nbb_formatted_code = "sample = [dice1 for dice1 in range(1, 7)]\nprint(sample)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
-<p>Definisco l’evento ‘risultato dispari’.</p>
+<p>Definisco l’evento ‘risultato minore di 4’:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">]</span>
@@ -719,7 +1426,22 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 21;
+                var nbb_unformatted_code = "event = [roll for roll in sample if roll < 4]\nprint(event)";
+                var nbb_formatted_code = "event = [roll for roll in sample if roll < 4]\nprint(event)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Calcolo la probabilità di ottenere un numero minore di 4 quando lancio un dado bilanciato.</p>
 <div class="cell docutils container">
@@ -732,149 +1454,29 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 6
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 22;
+                var nbb_unformatted_code = "print(len(event), \"/\", len(sample))";
+                var nbb_formatted_code = "print(len(event), \"/\", len(sample))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
-<p>Creo lo spazio campione del lancio di due dadi bilanciati.</p>
+<p>Il precedente esercizio illustra il tipo di procedura che si usa negli esercizi che chiedono di trovare la probabilità di un evento utilizzando il calcolo combinatorio. Quello che abbiamo fatto (in un caso in cui non era ovviamente necessario usare Python per trovare la soluzione) è stato di contare il numero di punti dello spazio campione (<code class="docutils literal notranslate"><span class="pre">len(sample)</span></code>) e il numero di punti dello spazio campione che soddisfano la condizione enunciata dal problema (<code class="docutils literal notranslate"><span class="pre">len(event)</span></code>). Il rapporto ci dà quello che chiamiamo <em>probabilità</em>.</p>
+<p><strong>Esempio 10.</strong> Consideriamo il lancio di due dadi bilanciati a quattro facce numerate 1, 2, 3, 4. Creo lo spazio campione di questo esperimento casuale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">dice1</span><span class="p">,</span> <span class="n">dice2</span><span class="p">)</span> <span class="k">for</span> <span class="n">dice1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> \
-                        <span class="k">for</span> <span class="n">dice2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6), (4, 1), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5), (5, 6), (6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 6)]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Trovo la probabilità di ottenere almeno un 6 quando lancio due dadi.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span> <span class="ow">or</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11 / 36
-</pre></div>
-</div>
-</div>
-</div>
-<p>Probabilità di non ottenere nessun 6 quando lancio due dadi bilanciati.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> \
-    <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 / 36
-</pre></div>
-</div>
-</div>
-</div>
-<p>Probabilità che la somma dei due lanci dia 6.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 / 36
-</pre></div>
-</div>
-</div>
-</div>
-<p>Probabilità che la somma di tre lanci dia 10.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
-<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span><span class="o">==</span><span class="mi">10</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 / 216
-</pre></div>
-</div>
-</div>
-</div>
-<p>Probabilità che la somma di quattro lanci dia 13.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
-<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span><span class="o">==</span><span class="mi">13</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>140 / 1296
-</pre></div>
-</div>
-</div>
-</div>
-<p>Probabilità di ottenere solo un 6 quando lancio quattro dadi.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">):</span>
-      <span class="k">return</span> <span class="nb">len</span><span class="p">([</span><span class="n">dice</span> <span class="k">for</span> <span class="n">dice</span> <span class="ow">in</span> <span class="n">roll</span> <span class="k">if</span> <span class="n">dice</span> <span class="o">==</span> <span class="mi">6</span><span class="p">])</span>
-
-<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>500 / 1296
-</pre></div>
-</div>
-</div>
-</div>
-<p>Probabilità di ottenere quattro 6 quando lancio otto dadi.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
-      <span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
-
-<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span><span class="o">==</span><span class="mi">4</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43750 / 1679616
-</pre></div>
-</div>
-</div>
-</div>
-<section id="combinazioni">
-<h2><span class="section-number">14.1. </span>Combinazioni<a class="headerlink" href="#combinazioni" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">permutations</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Dobbiamo contare quante mani di 5 carte si possono ottenere da un mazzo di 52. La risposta è data dal numero di combinazioni (52, 5).
-Di queste, dobbiamo contare quante contengono quattro assi (ovvero, 1).
-Iniziamo a creare il mazzo di 52 carte. Creaiamo una lista di 52 elementi. Ogni elemento è una coppia di numeri: il primo indica la carta (da 1 a 5) il secondo indica il valore della carta (da 1 a 13).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">14</span><span class="p">)))</span>
-<span class="n">cards</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">die_rolls</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">die_rolls</span>
 </pre></div>
 </div>
 </div>
@@ -883,134 +1485,234 @@ Iniziamo a creare il mazzo di 52 carte. Creaiamo una lista di 52 elementi. Ogni 
  (1, 2),
  (1, 3),
  (1, 4),
- (1, 5),
- (1, 6),
- (1, 7),
- (1, 8),
- (1, 9),
- (1, 10),
- (1, 11),
- (1, 12),
- (1, 13),
  (2, 1),
  (2, 2),
  (2, 3),
  (2, 4),
- (2, 5),
- (2, 6),
- (2, 7),
- (2, 8),
- (2, 9),
- (2, 10),
- (2, 11),
- (2, 12),
- (2, 13),
  (3, 1),
  (3, 2),
  (3, 3),
  (3, 4),
- (3, 5),
- (3, 6),
- (3, 7),
- (3, 8),
- (3, 9),
- (3, 10),
- (3, 11),
- (3, 12),
- (3, 13),
  (4, 1),
  (4, 2),
  (4, 3),
- (4, 4),
- (4, 5),
- (4, 6),
- (4, 7),
- (4, 8),
- (4, 9),
- (4, 10),
- (4, 11),
- (4, 12),
- (4, 13)]
+ (4, 4)]
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 23;
+                var nbb_unformatted_code = "die_rolls = list(it.product(range(1, 5), repeat=2))\ndie_rolls";
+                var nbb_formatted_code = "die_rolls = list(it.product(range(1, 5), repeat=2))\ndie_rolls";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
-<p>Creiamo tutte le combinazioni di 5 carte che si possono estrarre dal mazzo.</p>
+<p>In questo esperimento casuale sono interessato alla somma dei punti ottenuti dai due dadi. La somma dei punti può assumere sette valori possibili:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">cards</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">results</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2598960
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, 3, 4, 5, 6, 7, 8])
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 24;
+                var nbb_unformatted_code = "results = np.arange(2, 9)\nresults";
+                var nbb_formatted_code = "results = np.arange(2, 9)\nresults";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
-<p>Esaminiamo le prime 10 mani. Si noti che il “mazzo” non è stato mescolato.</p>
+<p>Mi pongo la seguente domanda: in quanti modi diversi posso ottenere ciascuno dei possibili sette valori elencati sopra? Il valore 2 si trova solo in un punto dello spazio campione, (1, 1); il valore 3 si trova solo in due punti dello spazio campione: (1, 2), (2, 1); eccetera. Nel caso di uno spazio campione piccolo (16 elementi nel caso presente) possiamo fare questi calcoli a mano. Ma quando lo spazio campione è più grande, questo non è possibile. Usiamo dunque Python per trovare la soluzione.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span><span class="o">==</span><span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((1, 1), (1, 2), (1, 3), (1, 4), (1, 6)),
- ((1, 1), (1, 2), (1, 3), (1, 4), (1, 7)),
- ((1, 1), (1, 2), (1, 3), (1, 4), (1, 8)),
- ((1, 1), (1, 2), (1, 3), (1, 4), (1, 9)),
- ((1, 1), (1, 2), (1, 3), (1, 4), (1, 10)),
- ((1, 1), (1, 2), (1, 3), (1, 4), (1, 11)),
- ((1, 1), (1, 2), (1, 3), (1, 4), (1, 12)),
- ((1, 1), (1, 2), (1, 3), (1, 4), (1, 13)),
- ((1, 1), (1, 2), (1, 3), (1, 4), (2, 1))]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 4, 3, 2, 1])
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 25;
+                var nbb_unformatted_code = "sum(sum(rol)==results for rol in die_rolls)";
+                var nbb_formatted_code = "sum(sum(rol) == results for rol in die_rolls)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
-<p>Dobbiamo ora contare quante volte il valore 1 (il secondo valore di ogni coppia di numeri) compare in una mano.
-Per ciascuna mano, contiamo il numero di ‘1’.</p>
+<p>Esaminiamo la seguente <em>list comprehension</em>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">numval</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-      <span class="k">return</span> <span class="nb">len</span><span class="p">([</span><span class="n">card</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">hand</span> <span class="k">if</span> <span class="n">card</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Chiediamoci ora quante mani contengono quattro ‘1’.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">hand</span> <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numval</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">4</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span> <span class="o">==</span> <span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48 / 2598960
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([ True, False, False, False, False, False, False]),
+ array([False,  True, False, False, False, False, False]),
+ array([False, False,  True, False, False, False, False]),
+ array([False, False, False,  True, False, False, False]),
+ array([False,  True, False, False, False, False, False]),
+ array([False, False,  True, False, False, False, False]),
+ array([False, False, False,  True, False, False, False]),
+ array([False, False, False, False,  True, False, False]),
+ array([False, False,  True, False, False, False, False]),
+ array([False, False, False,  True, False, False, False]),
+ array([False, False, False, False,  True, False, False]),
+ array([False, False, False, False, False,  True, False]),
+ array([False, False, False,  True, False, False, False]),
+ array([False, False, False, False,  True, False, False]),
+ array([False, False, False, False, False,  True, False]),
+ array([False, False, False, False, False, False,  True])]
 </pre></div>
 </div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 26;
+                var nbb_unformatted_code = "[sum(rol) == results for rol in die_rolls]";
+                var nbb_formatted_code = "[sum(rol) == results for rol in die_rolls]";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
-</div>
+<p>L’istruzione <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">rol</span> <span class="pre">in</span> <span class="pre">die_rolls</span></code> significa “considera ciascuno degli elementi (<code class="docutils literal notranslate"><span class="pre">rol</span></code>) della lista <code class="docutils literal notranslate"><span class="pre">die_rolls</span></code>”. Ciascuno dei 16 elementi di <code class="docutils literal notranslate"><span class="pre">die_rolls</span></code> è una lista di due elementi (i punti dei due dadi). La lista <code class="docutils literal notranslate"><span class="pre">die_rolls</span></code> elenca dunque tutti i risultati possibili dell’esperimento casuale, ovvero tutti i 16 punti dello  <em>spazio campione</em>.</p>
+<p>L’espressione <code class="docutils literal notranslate"><span class="pre">sum(rol)</span></code> applica il metodo <code class="docutils literal notranslate"><span class="pre">sum()</span></code> a ciascun elemento (coppia di valori) della lista <code class="docutils literal notranslate"><span class="pre">die_rolls</span></code>.</p>
+<p>La condizione logica <code class="docutils literal notranslate"><span class="pre">sum(rol)</span> <span class="pre">==</span> <span class="pre">results</span></code> si chiede se ciascuno dei possibili risultati prodotti da <code class="docutils literal notranslate"><span class="pre">sum(rol)</span></code> sia uguale a ciascuno dei valori elencati in <code class="docutils literal notranslate"><span class="pre">results</span></code> (i possibi valori della somma dei lanci di due dadi). Questa condizione logica viene testata per tutti i possibili punti dello spazio campione (16) e per tutti i possibili risultati (7), come indicato dai valori booleani stampati sopra.</p>
+<p>Ci chiediamo, in ciascuno dei punti campione dello spazio campione se la condizione logica (somma uguale a uno dei valori possibili elencati in <code class="docutils literal notranslate"><span class="pre">results</span></code>) viene soddisfatta. La somma dei valori <code class="docutils literal notranslate"><span class="pre">True</span></code> ci dice in quanti punti dello spazio campione la somma assume ciascuno dei valori che abbiamo elencato. Se dividiamo ciascuno dei valori [1, 2, 3, 4, 3, 2, 1] per 16 (il numero totale di punti dello spazio campione), otteniamo la <em>probabilità</em> che la variabile “somma” ottenga il valore 2, il valore 3, ecc. Vedremo nel capitolo <a class="reference internal" href="110_intro_prob.html#intro-prob-notebook"><span class="std std-ref">Definizioni e concetti di base</span></a> che l’insieme di queste probabilità cosituisce quella che viene chiamata una distribuzione di massa di probabilità di una variabile casuale discreta (nel nostro caso, la somma dei punti prodotti dal lancio dei due dadi).</p>
+<p>È facile applicare questo metodo a casi più complessi. Per esempio, nel caso di due dadi bilanciati a sei facce otteniamo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">hand</span> <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">sample</span> \
-    <span class="k">if</span> <span class="n">numval</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span> <span class="ow">and</span> <span class="n">numval</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">die_rolls</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span><span class="o">==</span><span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24 / 2598960
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1])
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "die_rolls = list(it.product(range(1, 7), repeat=2))\nresults = np.arange(2, 13)\nsum(sum(rol)==results for rol in die_rolls)";
+                var nbb_formatted_code = "die_rolls = list(it.product(range(1, 7), repeat=2))\nresults = np.arange(2, 13)\nsum(sum(rol) == results for rol in die_rolls)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>La distribuzione di probabilità si trova dividendo per 36:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span><span class="o">==</span><span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">die_rolls</span><span class="p">)</span>
+<span class="n">prob</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.02777778, 0.05555556, 0.08333333, 0.11111111, 0.13888889,
+       0.16666667, 0.13888889, 0.11111111, 0.08333333, 0.05555556,
+       0.02777778])
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "prob = sum(sum(rol)==results for rol in die_rolls) / len(die_rolls)\nprob";
+                var nbb_formatted_code = "prob = sum(sum(rol) == results for rol in die_rolls) / len(die_rolls)\nprob";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">prob</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Somma dei lanci di due dadi&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilità&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/105_dice_56_0.png" src="_images/105_dice_56_0.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 29;
+                var nbb_unformatted_code = "fig, ax = plt.subplots()\n_ = plt.bar(results, prob)\nplt.xlabel('Somma dei lanci di due dadi')\nplt.ylabel('Probabilit\u00e0')\nplt.show()";
+                var nbb_formatted_code = "fig, ax = plt.subplots()\n_ = plt.bar(results, prob)\nplt.xlabel(\"Somma dei lanci di due dadi\")\nplt.ylabel(\"Probabilit\u00e0\")\nplt.show()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 <section id="watermark">
-<h2><span class="section-number">14.2. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">14.9. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -1019,16 +1721,36 @@ Per ciascuna mano, contiamo il numero di ‘1’.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Wed Jan 11 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jan 14 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
+matplotlib: 3.6.2
+seaborn   : 0.12.2
+numpy     : 1.24.1
+pandas    : 1.5.2
+
 Watermark: 2.3.1
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
+                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 </section>
 </section>
@@ -1070,7 +1792,7 @@ Watermark: 2.3.1
     <a class='right-next' id="next-link" href="110_intro_prob.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>La logica dell’incerto</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Definizioni e concetti di base</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

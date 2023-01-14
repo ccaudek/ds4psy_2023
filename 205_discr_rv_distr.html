@@ -745,7 +745,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="distribuzioni-di-v-c-discrete">
-<h1><span class="section-number">21. </span>Distribuzioni di v.c. discrete<a class="headerlink" href="#distribuzioni-di-v-c-discrete" title="Permalink to this headline">#</a></h1>
+<span id="discr-distr-notebook"></span><h1><span class="section-number">21. </span>Distribuzioni di v.c. discrete<a class="headerlink" href="#distribuzioni-di-v-c-discrete" title="Permalink to this headline">#</a></h1>
 <p>In questo Capitolo verranno esaminate le principali distribuzioni di probabilità delle variabili casuali discrete. Un esperimento casuale che può dare luogo a solo due possibili esiti (successo, insuccesso) è modellabile con una variabile casuale di Bernoulli. Una sequenza di prove di Bernoulli costituisce un processo Bernoulliano. Il numero di successi dopo <span class="math notranslate nohighlight">\(n\)</span> prove di Bernoulli corrisponde ad una variabile casuale che segue la legge binomiale. La distribuzione binomiale risulta da un insieme di prove di Bernoulli solo se il numero totale <span class="math notranslate nohighlight">\(n\)</span> è fisso per disegno. Se il numero di prove è esso stesso una variabile casuale, allora il numero di successi nella corrispondente sequenza di prove bernoulliane segue al distribuzione di Poisson. Concluderemo con la distribuzione discreta uniforme.</p>
 <section id="una-prova-bernoulliana">
 <h2><span class="section-number">21.1. </span>Una prova Bernoulliana<a class="headerlink" href="#una-prova-bernoulliana" title="Permalink to this headline">#</a></h2>
@@ -826,14 +826,32 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">load_ext</span> nb_black
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 2;
+                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
+                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p><strong>scipy</strong> contiene funzioni analitiche per una vasta gamma di distribuzioni e funzioni di massa di probabilità; le potete trovare <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">qui</a>. Per la binomiale, useremo <code class="docutils literal notranslate"><span class="pre">scipy.stats.binom</span></code>.</p>
 <p>Esistono due modi per usare <code class="docutils literal notranslate"><span class="pre">scipy</span></code> per la binomiale. È possibile prima dichiarare un oggetto che corrisponde ad una variabile casuale, ad esempio <code class="docutils literal notranslate"><span class="pre">rv</span> <span class="pre">=</span> <span class="pre">binom(n,</span> <span class="pre">theta)</span></code>, e poi chiamare <code class="docutils literal notranslate"><span class="pre">rv.pmf(y)</span></code>. Oppure si può usare la chiamata <code class="docutils literal notranslate"><span class="pre">binom.pmf(y,</span> <span class="pre">n,</span> <span class="pre">theta)</span></code>. Usiamo il secondo metodo.</p>
@@ -850,7 +868,22 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "n = 20\ntheta = 0.3\ny = np.arange(0, 15)\nprint(*y)";
+                var nbb_formatted_code = "n = 20\ntheta = 0.3\ny = np.arange(0, 15)\nprint(*y)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Trovo le probabilità associate a 0, 1, …, 14 successi in 20 prove con <span class="math notranslate nohighlight">\(p\)</span> = 0.3.</p>
 <div class="cell docutils container">
@@ -865,7 +898,22 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
        0.03081708, 0.01200665, 0.00385928, 0.00101783, 0.00021811])
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "st.binom.pmf(y, n, theta)";
+                var nbb_formatted_code = "st.binom.pmf(y, n, theta)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Rappresento graficamente la funzione di massa di probabilità.</p>
 <div class="cell docutils container">
@@ -885,8 +933,23 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 0.20122093189111467)
 </pre></div>
 </div>
-<img alt="_images/205_discr_rv_distr_11_1.png" src="_images/205_discr_rv_distr_11_1.png" />
-</div>
+<img alt="_images/205_discr_rv_distr_12_1.png" src="_images/205_discr_rv_distr_12_1.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "fig, ax = plt.subplots()\nax.plot(y, st.binom.pmf(y, n, theta), \"bo\", ms=8)\nax.vlines(y, 0, st.binom.pmf(y, n, theta), colors=\"b\", linestyles=\"-\", lw=1)\nax.set_title(f\"Funzione di massa binomiale: $n$={n}, $\\\\theta$={theta}\", loc=\"left\")\nax.set_xlabel(\"y\")\nax.set_ylabel(\"Probabilit\u00e0\")\nax.set_xlim(0, None)\nax.set_ylim(0, None)";
+                var nbb_formatted_code = "fig, ax = plt.subplots()\nax.plot(y, st.binom.pmf(y, n, theta), \"bo\", ms=8)\nax.vlines(y, 0, st.binom.pmf(y, n, theta), colors=\"b\", linestyles=\"-\", lw=1)\nax.set_title(f\"Funzione di massa binomiale: $n$={n}, $\\\\theta$={theta}\", loc=\"left\")\nax.set_xlabel(\"y\")\nax.set_ylabel(\"Probabilit\u00e0\")\nax.set_xlim(0, None)\nax.set_ylim(0, None)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Per fare un altro esempio, mostriamo qui la distribuzione di probabilità di alcune distribuzioni binomiali, per due valori di <span class="math notranslate nohighlight">\(n\)</span> e <span class="math notranslate nohighlight">\(\theta\)</span>, è fornita nella figura seguente.</p>
 <div class="cell docutils container">
@@ -902,8 +965,23 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/205_discr_rv_distr_13_0.png" src="_images/205_discr_rv_distr_13_0.png" />
-</div>
+<img alt="_images/205_discr_rv_distr_14_0.png" src="_images/205_discr_rv_distr_14_0.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 6;
+                var nbb_unformatted_code = "for theta in range(3, 10, 3):\n    y = np.arange(0, 25)\n    binom = st.binom.pmf(y, 20, 0.1*theta)\n    plt.plot(y, binom, '-o', label=\"theta = {:f}\".format(0.1*theta))\n    plt.xlabel('Numero y di successi')\n    plt.ylabel('Probabilit\u00e0')\n    plt.title(\"Distribuzione binomiale al variare di $\\\\theta$\")";
+                var nbb_formatted_code = "for theta in range(3, 10, 3):\n    y = np.arange(0, 25)\n    binom = st.binom.pmf(y, 20, 0.1 * theta)\n    plt.plot(y, binom, \"-o\", label=\"theta = {:f}\".format(0.1 * theta))\n    plt.xlabel(\"Numero y di successi\")\n    plt.ylabel(\"Probabilit\u00e0\")\n    plt.title(\"Distribuzione binomiale al variare di $\\\\theta$\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Esaminiamo più attentamente l’uso di <code class="docutils literal notranslate"><span class="pre">st.binom.pmf</span></code>. Usando l’eq. <a class="reference internal" href="#equation-eq-binomialdistribution">(21.2)</a>,  troviamo, ad esempio, la probabilità di <span class="math notranslate nohighlight">\(y = 2\)</span> successi in <span class="math notranslate nohighlight">\(n = 4\)</span> prove Bernoulliane indipendenti con <span class="math notranslate nohighlight">\(\theta = 0.2\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -951,6 +1029,23 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "n = 4\ntheta = 0.2\ny = np.arange(0, n+1)";
+                var nbb_formatted_code = "n = 4\ntheta = 0.2\ny = np.arange(0, n + 1)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -963,7 +1058,22 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.4096 0.4096 0.1536 0.0256 0.0016]
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "binomial_pmf = st.binom.pmf(y, n, theta)\nprint(binomial_pmf)";
+                var nbb_formatted_code = "binomial_pmf = st.binom.pmf(y, n, theta)\nprint(binomial_pmf)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Consideriamo un altro esempio. Lanciando <span class="math notranslate nohighlight">\(5\)</span> volte una moneta onesta, qual è la probabilità che esca testa almeno tre volte?</p>
 <div class="cell docutils container">
@@ -976,7 +1086,22 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49999999999999983
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "st.binom.pmf(3, n=5, p=0.5) + st.binom.pmf(4, n=5, p=0.5) +  st.binom.pmf(5, n=5, p=0.5)";
+                var nbb_formatted_code = "st.binom.pmf(3, n=5, p=0.5) + st.binom.pmf(4, n=5, p=0.5) + st.binom.pmf(5, n=5, p=0.5)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -988,7 +1113,22 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49999999999999983
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 10;
+                var nbb_unformatted_code = "np.sum([st.binom.pmf(k, n=5, p=0.5) for k in range(3, 6)])";
+                var nbb_formatted_code = "np.sum([st.binom.pmf(k, n=5, p=0.5) for k in range(3, 6)])";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Più facilmente, si trova la risposta usando la funzione di ripartizione <code class="docutils literal notranslate"><span class="pre">binom.cdf</span></code>.</p>
 <div class="cell docutils container">
@@ -1001,7 +1141,22 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 11;
+                var nbb_unformatted_code = "1 - st.binom.cdf(2, n=5, p=0.5)";
+                var nbb_formatted_code = "1 - st.binom.cdf(2, n=5, p=0.5)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Rappresentiamo graficamente la funzione di distribuzione per una Binomiale di ordine <span class="math notranslate nohighlight">\(n\)</span> = 5 e <span class="math notranslate nohighlight">\(\theta\)</span> = 0.5.</p>
 <div class="cell docutils container">
@@ -1020,8 +1175,23 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Probabilità&#39;)
 </pre></div>
 </div>
-<img alt="_images/205_discr_rv_distr_23_1.png" src="_images/205_discr_rv_distr_23_1.png" />
-</div>
+<img alt="_images/205_discr_rv_distr_24_1.png" src="_images/205_discr_rv_distr_24_1.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 12;
+                var nbb_unformatted_code = "_, ax = plt.subplots()\nax.plot(y, st.binom.cdf(y, n=n, p=theta))\nax.scatter(y, st.binom.cdf(y, n=n, p=theta))\nax.axhline(1, color=\"k\", alpha=0.7, linestyle=\"-.\", lw=1)\nax.set_title(f\"Funzione di ripartizione binomiale: $n$={5}, $\\\\theta$={theta}\", loc=\"left\")\nax.set_xlabel(\"y\")\nax.set_ylabel(\"Probabilit\u00e0\")";
+                var nbb_formatted_code = "_, ax = plt.subplots()\nax.plot(y, st.binom.cdf(y, n=n, p=theta))\nax.scatter(y, st.binom.cdf(y, n=n, p=theta))\nax.axhline(1, color=\"k\", alpha=0.7, linestyle=\"-.\", lw=1)\nax.set_title(\n    f\"Funzione di ripartizione binomiale: $n$={5}, $\\\\theta$={theta}\", loc=\"left\"\n)\nax.set_xlabel(\"y\")\nax.set_ylabel(\"Probabilit\u00e0\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Resta da capire come generare una sequenza casuale di valori da una distribuzione Binomiale. Per fare questo, prima definiamo una variabile casuale Binomiale con determinati parametri. Per esempio, definiamo una Binomiale di ordine <span class="math notranslate nohighlight">\(n\)</span> = 5 e <span class="math notranslate nohighlight">\(p\)</span> = 0.5.</p>
 <div class="cell docutils container">
@@ -1032,6 +1202,23 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 13;
+                var nbb_unformatted_code = "n = 5\np = 0.5\nrv = st.binom(n, p)";
+                var nbb_formatted_code = "n = 5\np = 0.5\nrv = st.binom(n, p)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <p>Possiamo poi esaminare un certo numero di realizzazioni di questa variabile casuale mediante il metodo <code class="docutils literal notranslate"><span class="pre">rvs</span></code>. Per esempio, consideriamo 30 realizzazioni della v.c. <code class="docutils literal notranslate"><span class="pre">rv</span></code>.</p>
 <div class="cell docutils container">
@@ -1042,10 +1229,25 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 3 3 3 3 1 0 2 4 4 5 2 1 2 2 1 0 4 2 2 2 3 1 2 3 3 2 2 3 3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 4 3 1 4 5 4 3 2 1 0 1 3 5 2 2 3 1 1 3 1 3 2 5 2 2 2 3 3 3
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "x = rv.rvs(30)\nprint(*x)";
+                var nbb_formatted_code = "x = rv.rvs(30)\nprint(*x)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <section id="valore-atteso-e-deviazione-standard">
 <h3><span class="section-number">21.2.1. </span>Valore atteso e deviazione standard<a class="headerlink" href="#valore-atteso-e-deviazione-standard" title="Permalink to this headline">#</a></h3>
@@ -1121,7 +1323,7 @@ BetaBinomial(y \mid N, \alpha, \beta) = \binom{N}{y} \frac{B(y + \alpha, N-y+\be
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Wed Jan 11 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jan 14 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
@@ -1129,16 +1331,31 @@ IPython version      : 8.7.0
 
 pytensor: 2.8.11
 
-seaborn   : 0.12.2
-pandas    : 1.5.2
 numpy     : 1.24.1
-matplotlib: 3.6.2
+seaborn   : 0.12.2
 scipy     : 1.10.0
+matplotlib: 3.6.2
+pandas    : 1.5.2
 
 Watermark: 2.3.1
 </pre></div>
 </div>
-</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 15;
+                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w -p pytensor";
+                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w -p pytensor";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
 </div>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
