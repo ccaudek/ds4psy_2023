@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="_static/increasing.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="24. Generazione di numeri casuali" href="215_rng.html" />
@@ -117,7 +118,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Data science con Python
+  Python
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -159,7 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Nozioni di base
+  Statistica descrittiva
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -196,13 +197,13 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="105_dice.html">
+  <a class="reference internal" href="105_combinatorics.html">
    14. Calcolo combinatorio
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="110_intro_prob.html">
-   15. La logica dell’incerto
+   15. Definizioni e concetti di base
   </a>
  </li>
  <li class="toctree-l1">
@@ -883,14 +884,8 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="distribuzioni-di-v-c-continue">
-<span id="sec-distr-rv-cont"></span><h1><span class="section-number">22. </span>Distribuzioni di v.c. continue<a class="headerlink" href="#distribuzioni-di-v-c-continue" title="Permalink to this headline">#</a></h1>
-<p>Dopo avere introdotto con una simulazione il concetto di funzione di densità nel Capitolo <a class="reference internal" href="135_density_func.html#sec-intro-density-function"><span class="std std-ref">La funzione di densità di probabilità</span></a>, prendiamo ora in esame alcune delle densità di probabilità più note. La più importante di esse è sicuramente la distribuzione Normale.</p>
-<section id="distribuzione-gaussiana">
-<h2><span class="section-number">22.1. </span>Distribuzione Gaussiana<a class="headerlink" href="#distribuzione-gaussiana" title="Permalink to this headline">#</a></h2>
-<p>Non c’è un’unica distribuzione gaussiana (o Normale): la distribuzione gaussiana è una famiglia di distribuzioni. Tali distribuzioni sono dette “gaussiane” in onore di Carl Friedrich Gauss (uno dei più grandi matematici della storia il quale, tra le altre cose, scoprì l’utilità di tale funzione di densità per descrivere gli errori di misurazione). Adolphe Quetelet, il padre delle scienze sociali quantitative, fu il primo ad applicare tale funzione di densità alle misurazioni dell’uomo. Karl Pearson usò per primo il termine “distribuzione normale” anche se ammise che questa espressione “ha lo svantaggio di indurre le persone a credere che le altre distribuzioni, in un senso o nell’altro, non siano normali.”</p>
-<section id="limite-delle-distribuzioni-binomiali">
-<h3><span class="section-number">22.1.1. </span>Limite delle distribuzioni binomiali<a class="headerlink" href="#limite-delle-distribuzioni-binomiali" title="Permalink to this headline">#</a></h3>
-<p>Iniziamo con un un breve excursus storico. Nel 1733, Abraham de Moivre notò che, aumentando il numero di prove di una distribuzione binomiale, la distribuzione risultante diventava quasi simmetrica e a forma campanulare. Con 10 prove e una probabilità di successo di 0.9, la distribuzione è chiaramente asimmetrica.</p>
+<span id="cont-rv-distr-notebook"></span><h1><span class="section-number">22. </span>Distribuzioni di v.c. continue<a class="headerlink" href="#distribuzioni-di-v-c-continue" title="Permalink to this headline">#</a></h1>
+<p>Dopo avere introdotto con una simulazione il concetto di funzione di densità nel capitolo <a class="reference internal" href="135_density_func.html#density-function-notebook"><span class="std std-ref">La funzione di densità di probabilità</span></a>, prendiamo ora in esame alcune delle densità di probabilità più note. La più importante di esse è sicuramente la distribuzione Normale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -899,6 +894,7 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
 </pre></div>
 </div>
 </div>
@@ -933,6 +929,12 @@ title="Print to PDF"
             }, 500);
             </script></div>
 </div>
+<section id="distribuzione-gaussiana">
+<h2><span class="section-number">22.1. </span>Distribuzione Gaussiana<a class="headerlink" href="#distribuzione-gaussiana" title="Permalink to this headline">#</a></h2>
+<p>Non c’è un’unica distribuzione gaussiana (o Normale): la distribuzione gaussiana è una famiglia di distribuzioni. Tali distribuzioni sono dette “gaussiane” in onore di Carl Friedrich Gauss (uno dei più grandi matematici della storia il quale, tra le altre cose, scoprì l’utilità di tale funzione di densità per descrivere gli errori di misurazione). Adolphe Quetelet, il padre delle scienze sociali quantitative, fu il primo ad applicare tale funzione di densità alle misurazioni dell’uomo. Karl Pearson usò per primo il termine “distribuzione normale” anche se ammise che questa espressione “ha lo svantaggio di indurre le persone a credere che le altre distribuzioni, in un senso o nell’altro, non siano normali.”</p>
+<section id="limite-delle-distribuzioni-binomiali">
+<h3><span class="section-number">22.1.1. </span>Limite delle distribuzioni binomiali<a class="headerlink" href="#limite-delle-distribuzioni-binomiali" title="Permalink to this headline">#</a></h3>
+<p>Iniziamo con un un breve excursus storico. Nel 1733, Abraham de Moivre notò che, aumentando il numero di prove di una distribuzione binomiale, la distribuzione risultante diventava quasi simmetrica e a forma campanulare. Con 10 prove e una probabilità di successo di 0.9, la distribuzione è chiaramente asimmetrica.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
@@ -947,7 +949,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_3_0.png" src="_images/210_cont_rv_distr_3_0.png" />
+<img alt="_images/210_cont_rv_distr_5_0.png" src="_images/210_cont_rv_distr_5_0.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 3;
@@ -985,7 +987,7 @@ title="Print to PDF"
   return _boost._binom_pdf(x, n, p)
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_5_1.png" src="_images/210_cont_rv_distr_5_1.png" />
+<img alt="_images/210_cont_rv_distr_7_1.png" src="_images/210_cont_rv_distr_7_1.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 4;
@@ -1085,7 +1087,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_11_0.png" src="_images/210_cont_rv_distr_11_0.png" />
+<img alt="_images/210_cont_rv_distr_13_0.png" src="_images/210_cont_rv_distr_13_0.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 7;
@@ -1126,7 +1128,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_12_0.png" src="_images/210_cont_rv_distr_12_0.png" />
+<img alt="_images/210_cont_rv_distr_14_0.png" src="_images/210_cont_rv_distr_14_0.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 8;
@@ -1175,10 +1177,10 @@ f(y; \mu, \sigma) = {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y -  \mu)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdc1a7ecfd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0e30b50&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_14_1.png" src="_images/210_cont_rv_distr_14_1.png" />
+<img alt="_images/210_cont_rv_distr_16_1.png" src="_images/210_cont_rv_distr_16_1.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 9;
@@ -1218,7 +1220,7 @@ P(\mu - 3\sigma &lt; Y &lt; \mu + 3\sigma) &amp;= P (-3 &lt; Z &lt; 3) \simeq 0.
 F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \mu)^2}{2\sigma^2} \right\} dy, 
 \]</div>
 <p>pertanto le probabilità <span class="math notranslate nohighlight">\(P(Y &lt; y)\)</span> vengono calcolate mediante integrazione numerica approssimata. I valori della funzione di ripartizione di una variabile casuale Normale sono dunque forniti da un software.</p>
-<p>Esaminiamo le funzioni fornite da <code class="docutils literal notranslate"><span class="pre">scipy</span></code> per la densità Normale. Il metodo <code class="docutils literal notranslate"><span class="pre">.norm.rvs()</span></code> produce un valore casuale estratto dalla distribuzione Normale specificata:</p>
+<p>Esaminiamo le funzioni fornite da <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> per la densità Normale. Il metodo <code class="docutils literal notranslate"><span class="pre">.norm.rvs()</span></code> produce un valore casuale estratto dalla distribuzione Normale specificata. Per esempio, un valore casuale dalla <span class="math notranslate nohighlight">\(\mathcal{N}(\mu = 100, \sigma = 15)\)</span> è:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -1226,7 +1228,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87.43991579348416
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>110.3535657824736
 </pre></div>
 </div>
 <script type="application/javascript">
@@ -1246,7 +1248,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
             }, 500);
             </script></div>
 </div>
-<p>Per esempio, estraiamo 10 valori casuali dalla <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span>:</p>
+<p>Estraiamo ora 10 valori a caso dalla <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qi</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -1255,7 +1257,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97.29790245969191 83.19257363882079 98.31301167163531 103.05358160824693 83.63132782172113 109.49505706446567 106.6371559973601 137.19287149855901 123.37829387994061 89.18936508610498
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97.47398019784079 69.03834998709489 69.862540722626 126.59986414390005 71.12305017835735 78.70381728352477 73.61538490438983 90.79899168699605 127.2356957878546 107.72975136318178
 </pre></div>
 </div>
 <script type="application/javascript">
@@ -1303,6 +1305,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
             }, 500);
             </script></div>
 </div>
+<p>Questa è l’area sottesa alla funzione di densità nell’intervallo <span class="math notranslate nohighlight">\([-\infty, 115]\)</span>, come indicato nella figura seguente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1315,7 +1318,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_21_0.png" src="_images/210_cont_rv_distr_21_0.png" />
+<img alt="_images/210_cont_rv_distr_24_0.png" src="_images/210_cont_rv_distr_24_0.png" />
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 13;
@@ -1333,7 +1336,42 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
             }, 500);
             </script></div>
 </div>
-<p>Per trovare la proporzione di persone nella popolazione che hanno un QI maggiore di 2 deviazioni standard dalla media troviamo l’evento complementare.</p>
+<p>Solo per fare un esempio, qui di seguito fornisco il codice Python per calcolare l’integrale che stiamo discutendo per mezzo della funzione <code class="docutils literal notranslate"><span class="pre">quad</span></code> della libreria SciPy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sig</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">sig</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">/</span><span class="n">sig</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Il risultato è&#39;</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="s1">&#39;con errore&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Il risultato è 0.841344746068543 con errore 4.0191205799653545e-10
+</pre></div>
+</div>
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 14;
+                var nbb_unformatted_code = "def gaussian(x, mu, sig):\n    return 1./(np.sqrt(2.*np.pi)*sig)*np.exp(-np.power((x - mu)/sig, 2.)/2)\n\nmu = 100\nsigma = 15\nresult, error = quad(gaussian, -1000, 115, args=(mu, sigma))\nprint('Il risultato \u00e8', result, 'con errore', error)";
+                var nbb_formatted_code = "def gaussian(x, mu, sig):\n    return (\n        1.0 / (np.sqrt(2.0 * np.pi) * sig) * np.exp(-np.power((x - mu) / sig, 2.0) / 2)\n    )\n\n\nmu = 100\nsigma = 15\nresult, error = quad(gaussian, -1000, 115, args=(mu, sigma))\nprint(\"Il risultato \u00e8\", result, \"con errore\", error)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Il risultato replica quello prodotto da <code class="docutils literal notranslate"><span class="pre">.norm.cdf()</span></code>.</p>
+<p>Per trovare la proporzione di persone nella popolazione che hanno un QI maggiore di 2 deviazioni standard dalla media consideriamo l’evento complementare:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
@@ -1346,7 +1384,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 14;
+                var nbb_cell_id = 15;
                 var nbb_unformatted_code = "1 - st.norm.cdf(130, 100, 15)";
                 var nbb_formatted_code = "1 - st.norm.cdf(130, 100, 15)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1369,10 +1407,10 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_24_0.png" src="_images/210_cont_rv_distr_24_0.png" />
+<img alt="_images/210_cont_rv_distr_29_0.png" src="_images/210_cont_rv_distr_29_0.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 15;
+                var nbb_cell_id = 16;
                 var nbb_unformatted_code = "plt.plot(x, fx)\nplt.fill_between(x, fx, where = x >= 130);";
                 var nbb_formatted_code = "plt.plot(x, fx)\nplt.fill_between(x, fx, where=x >= 130)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1387,10 +1425,10 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
             }, 500);
             </script></div>
 </div>
-<p>In maniera equivalente, possiamo usare la <em>Survival Function</em>.</p>
+<p>In maniera equivalente, possiamo usare la <em>Survival Function</em>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="mi">130</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1400,8 +1438,8 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "st.norm.sf(130,100,15)";
+                var nbb_cell_id = 17;
+                var nbb_unformatted_code = "st.norm.sf(130, 100, 15)";
                 var nbb_formatted_code = "st.norm.sf(130, 100, 15)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1415,7 +1453,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
             }, 500);
             </script></div>
 </div>
-<p>Per trovare il quantile della Normale, usiamo <code class="docutils literal notranslate"><span class="pre">ppf</span></code>. Ad esempio</p>
+<p>La funzione <code class="docutils literal notranslate"><span class="pre">ppf</span></code> restituisce il quantile della Normale. Ad esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.022750131948179195</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
@@ -1428,7 +1466,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 17;
+                var nbb_cell_id = 18;
                 var nbb_unformatted_code = "st.norm.ppf(1-0.022750131948179195, 100, 15)";
                 var nbb_formatted_code = "st.norm.ppf(1 - 0.022750131948179195, 100, 15)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1467,7 +1505,7 @@ X = a + b Y \sim \mathcal{N}(\mu_X = a+b \mu_Y, \sigma_X = \left|b\right|\sigma_
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 18;
+                var nbb_cell_id = 19;
                 var nbb_unformatted_code = "st.norm.cdf(1.8, 1.7, .1) - st.norm.cdf(1.7, 1.7, .1)";
                 var nbb_formatted_code = "st.norm.cdf(1.8, 1.7, 0.1) - st.norm.cdf(1.7, 1.7, 0.1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1494,10 +1532,10 @@ X = a + b Y \sim \mathcal{N}(\mu_X = a+b \mu_Y, \sigma_X = \left|b\right|\sigma_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_31_0.png" src="_images/210_cont_rv_distr_31_0.png" />
+<img alt="_images/210_cont_rv_distr_36_0.png" src="_images/210_cont_rv_distr_36_0.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 19;
+                var nbb_cell_id = 20;
                 var nbb_unformatted_code = "mu = 1.7\nsigma = 0.1\nx = np.linspace(mu-3*sigma, mu+3*sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where = (x >= 1.7) & (x <= 1.8));";
                 var nbb_formatted_code = "mu = 1.7\nsigma = 0.1\nx = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where=(x >= 1.7) & (x <= 1.8))";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1530,7 +1568,7 @@ z_{\text{inf}} = \frac{1.7 - 1.7}{0.1} = 0, \quad z_{\text{sup}} = \frac{1.8 - 1
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 20;
+                var nbb_cell_id = 21;
                 var nbb_unformatted_code = "st.norm.cdf(1.0, 0, 1) - st.norm.cdf(0, 0, 1)";
                 var nbb_formatted_code = "st.norm.cdf(1.0, 0, 1) - st.norm.cdf(0, 0, 1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1595,13 +1633,13 @@ f(x) = C_{\nu} x^{\nu/2-1} \exp (-x/2), \qquad \text{se } x &gt; 0,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdc1b8d1120&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0f83df0&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_35_1.png" src="_images/210_cont_rv_distr_35_1.png" />
+<img alt="_images/210_cont_rv_distr_40_1.png" src="_images/210_cont_rv_distr_40_1.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 21;
+                var nbb_cell_id = 22;
                 var nbb_unformatted_code = "x = np.arange(0, 40, 0.1)\n\nnus = [2, 4, 8, 16]\nfor nu in nus:\n    pdf = st.chi2.pdf(x, nu)\n    plt.plot(x, pdf, label=r'$\\nu$ = {}'.format(nu))\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend(loc=1)";
                 var nbb_formatted_code = "x = np.arange(0, 40, 0.1)\n\nnus = [2, 4, 8, 16]\nfor nu in nus:\n    pdf = st.chi2.pdf(x, nu)\n    plt.plot(x, pdf, label=r\"$\\nu$ = {}\".format(nu))\nplt.xlabel(\"x\")\nplt.ylabel(\"f(x)\")\nplt.legend(loc=1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1652,13 +1690,13 @@ T = \frac{Z}{\Big( \frac{W}{\nu}\Big)^{\frac{1}{2}}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdc1b8a2260&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0ffc1f0&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_37_1.png" src="_images/210_cont_rv_distr_37_1.png" />
+<img alt="_images/210_cont_rv_distr_42_1.png" src="_images/210_cont_rv_distr_42_1.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 22;
+                var nbb_cell_id = 23;
                 var nbb_unformatted_code = "x = np.arange(-5, 5, 0.1)\n\nnus = [1, 2, 5, 30]\nfor nu in nus:\n    pdf = st.t.pdf(x, nu)\n    plt.plot(x, pdf, label=r'$\\nu$ = {}'.format(nu))\nplt.plot(x, st.norm.pdf(x, 0, 1), label='N(\u03bc = 0, \u03c3 = 1)')\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend(loc=1)";
                 var nbb_formatted_code = "x = np.arange(-5, 5, 0.1)\n\nnus = [1, 2, 5, 30]\nfor nu in nus:\n    pdf = st.t.pdf(x, nu)\n    plt.plot(x, pdf, label=r\"$\\nu$ = {}\".format(nu))\nplt.plot(x, st.norm.pdf(x, 0, 1), label=\"N(\u03bc = 0, \u03c3 = 1)\")\nplt.xlabel(\"x\")\nplt.ylabel(\"f(x)\")\nplt.legend(loc=1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1712,7 +1750,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 23;
+                var nbb_cell_id = 24;
                 var nbb_unformatted_code = "import scipy.special as sc\n\nalpha = 3\nbeta = 9\nsc.beta(alpha, beta)";
                 var nbb_formatted_code = "import scipy.special as sc\n\nalpha = 3\nbeta = 9\nsc.beta(alpha, beta)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1740,7 +1778,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 24;
+                var nbb_cell_id = 25;
                 var nbb_unformatted_code = "((2) * (8 * 7 * 6 * 5 * 4 * 3 * 2)) / (11 * 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2)";
                 var nbb_formatted_code = "((2) * (8 * 7 * 6 * 5 * 4 * 3 * 2)) / (11 * 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1770,7 +1808,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 25;
+                var nbb_cell_id = 26;
                 var nbb_unformatted_code = "alpha = 3\nbeta = 9\nsc.gamma(alpha) * sc.gamma(beta) / sc.gamma(alpha + beta)";
                 var nbb_formatted_code = "alpha = 3\nbeta = 9\nsc.gamma(alpha) * sc.gamma(beta) / sc.gamma(alpha + beta)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1832,7 +1870,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 26;
+                var nbb_cell_id = 27;
                 var nbb_unformatted_code = "from scipy.integrate import quad\n\ndef integrand(p, a, b):\n    return p**(a-1) * (1-p)**(b-1)\n\na = 3\nb = 9\nresult, error = quad(integrand, 0, 1, args=(a, b))\nprint(result)";
                 var nbb_formatted_code = "from scipy.integrate import quad\n\n\ndef integrand(p, a, b):\n    return p ** (a - 1) * (1 - p) ** (b - 1)\n\n\na = 3\nb = 9\nresult, error = quad(integrand, 0, 1, args=(a, b))\nprint(result)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1866,7 +1904,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 27;
+                var nbb_cell_id = 28;
                 var nbb_unformatted_code = "import math\n\na = 3\nb = 9\n\nresult = math.gamma(a) * math.gamma(b) / math.gamma(a + b)\nprint(result)";
                 var nbb_formatted_code = "import math\n\na = 3\nb = 9\n\nresult = math.gamma(a) * math.gamma(b) / math.gamma(a + b)\nprint(result)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1894,7 +1932,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 28;
+                var nbb_cell_id = 29;
                 var nbb_unformatted_code = "sc.beta(a, b)";
                 var nbb_formatted_code = "sc.beta(a, b)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1940,13 +1978,13 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdc1b741030&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0df3be0&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_51_1.png" src="_images/210_cont_rv_distr_51_1.png" />
+<img alt="_images/210_cont_rv_distr_56_1.png" src="_images/210_cont_rv_distr_56_1.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 29;
+                var nbb_cell_id = 30;
                 var nbb_unformatted_code = "x = np.linspace(0, 1, 200)\nalphas = [.5, 5., 1., 2., 2.]\nbetas = [.5, 1., 3., 2., 5.]\nfor a, b in zip(alphas, betas):\n    pdf = st.beta.pdf(x, a, b)\n    plt.plot(x, pdf, label=r'$\\alpha$ = {}, $\\beta$ = {}'.format(a, b))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.ylim(0, 4.5)\nplt.legend(loc=9)";
                 var nbb_formatted_code = "x = np.linspace(0, 1, 200)\nalphas = [0.5, 5.0, 1.0, 2.0, 2.0]\nbetas = [0.5, 1.0, 3.0, 2.0, 5.0]\nfor a, b in zip(alphas, betas):\n    pdf = st.beta.pdf(x, a, b)\n    plt.plot(x, pdf, label=r\"$\\alpha$ = {}, $\\beta$ = {}\".format(a, b))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.ylim(0, 4.5)\nplt.legend(loc=9)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -1975,7 +2013,7 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 <div class="cell_output docutils container">
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 30;
+                var nbb_cell_id = 31;
                 var nbb_unformatted_code = "def beta_mean_mode_variance(alpha, beta):\n    mean = alpha / (alpha + beta)\n    mode = (alpha - 1) / (alpha + beta - 2)\n    variance = alpha * beta / ((alpha + beta)**2 * (alpha + beta + 1))\n    return mean, mode, variance";
                 var nbb_formatted_code = "def beta_mean_mode_variance(alpha, beta):\n    mean = alpha / (alpha + beta)\n    mode = (alpha - 1) / (alpha + beta - 2)\n    variance = alpha * beta / ((alpha + beta) ** 2 * (alpha + beta + 1))\n    return mean, mode, variance";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2006,7 +2044,7 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 31;
+                var nbb_cell_id = 32;
                 var nbb_unformatted_code = "alpha = 3\nbeta = 9\nmean, mode, variance = beta_mean_mode_variance(alpha, beta)\nprint(f'Mean: {mean}, Mode: {mode}, Variance: {variance}')";
                 var nbb_formatted_code = "alpha = 3\nbeta = 9\nmean, mode, variance = beta_mean_mode_variance(alpha, beta)\nprint(f\"Mean: {mean}, Mode: {mode}, Variance: {variance}\")";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2055,13 +2093,13 @@ f(x \mid \alpha, \beta) = \frac{1}{\pi \beta \left[1 + \left( \frac{x - \alpha}{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdc1b7438b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0df21d0&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_58_1.png" src="_images/210_cont_rv_distr_58_1.png" />
+<img alt="_images/210_cont_rv_distr_63_1.png" src="_images/210_cont_rv_distr_63_1.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 32;
+                var nbb_cell_id = 33;
                 var nbb_unformatted_code = "x = np.linspace(-5, 5, 500)\nalphas = [0., 0., 0., -2.]\nbetas = [.5, 1., 2., 1.]\nfor a, b in zip(alphas, betas):\n    pdf = st.cauchy.pdf(x, loc=a, scale=b)\n    plt.plot(x, pdf, label=r'$\\alpha$ = {}, $\\beta$ = {}'.format(a, b))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.legend(loc=1)";
                 var nbb_formatted_code = "x = np.linspace(-5, 5, 500)\nalphas = [0.0, 0.0, 0.0, -2.0]\nbetas = [0.5, 1.0, 2.0, 1.0]\nfor a, b in zip(alphas, betas):\n    pdf = st.cauchy.pdf(x, loc=a, scale=b)\n    plt.plot(x, pdf, label=r\"$\\alpha$ = {}, $\\beta$ = {}\".format(a, b))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.legend(loc=1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2115,10 +2153,10 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{x} \exp \left\{-\frac{(\log x -  \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_60_0.png" src="_images/210_cont_rv_distr_60_0.png" />
+<img alt="_images/210_cont_rv_distr_65_0.png" src="_images/210_cont_rv_distr_65_0.png" />
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 33;
+                var nbb_cell_id = 34;
                 var nbb_unformatted_code = "x = np.linspace(0, 3, 100)\nmus = [0., 0., 0.]\nsigmas = [.25, .5, 1.]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.lognorm.pdf(x, sigma, scale=np.exp(mu))\n    plt.plot(x, pdf, label=r'$\\mu$ = {}, $\\sigma$ = {}'.format(mu, sigma))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.legend(loc=1);";
                 var nbb_formatted_code = "x = np.linspace(0, 3, 100)\nmus = [0.0, 0.0, 0.0]\nsigmas = [0.25, 0.5, 1.0]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.lognorm.pdf(x, sigma, scale=np.exp(mu))\n    plt.plot(x, pdf, label=r\"$\\mu$ = {}, $\\sigma$ = {}\".format(mu, sigma))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.legend(loc=1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2148,24 +2186,24 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{x} \exp \left\{-\frac{(\log x -  \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jan 14 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jan 15 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
-scipy     : 1.10.0
-pandas    : 1.5.2
 matplotlib: 3.6.2
 seaborn   : 0.12.2
 numpy     : 1.24.1
+scipy     : 1.10.0
+pandas    : 1.5.2
 
 Watermark: 2.3.1
 </pre></div>
 </div>
 <script type="application/javascript">
             setTimeout(function() {
-                var nbb_cell_id = 34;
+                var nbb_cell_id = 35;
                 var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
                 var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
                 var nbb_cells = Jupyter.notebook.get_cells();
@@ -2233,7 +2271,7 @@ Watermark: 2.3.1
   
     By Corrado Caudek<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>
