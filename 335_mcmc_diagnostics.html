@@ -793,8 +793,9 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -802,7 +803,6 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">load_ext</span> nb_black
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
@@ -811,23 +811,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 42\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
-                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 42\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <section id="esame-dei-trace-plot">
 <h2><span class="section-number">32.1. </span>Esame dei <em>trace plot</em><a class="headerlink" href="#esame-dei-trace-plot" title="Permalink to this headline">#</a></h2>
@@ -835,36 +818,22 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">good_chains</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">))</span>
-<span class="n">bad_chains0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">good_chains</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="mf">0.05</span><span class="p">,</span>
-                               <span class="n">size</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bad_chains0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">good_chains</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4000</span>
+<span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">bad_chains1</span> <span class="o">=</span> <span class="n">good_chains</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="n">bad_chains1</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="k">2</span>:,i:i+100] = np.random.beta(i, 950, size=100)
+    <span class="n">bad_chains1</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="p">:,</span> <span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">950</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="n">chains</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;good_chains&quot;</span><span class="p">:</span><span class="n">good_chains</span><span class="p">,</span>
-          <span class="s2">&quot;bad_chains0&quot;</span><span class="p">:</span><span class="n">bad_chains0</span><span class="p">,</span>
-          <span class="s2">&quot;bad_chains1&quot;</span><span class="p">:</span><span class="n">bad_chains1</span><span class="p">}</span>
+<span class="n">chains</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;good_chains&quot;</span><span class="p">:</span> <span class="n">good_chains</span><span class="p">,</span>
+    <span class="s2">&quot;bad_chains0&quot;</span><span class="p">:</span> <span class="n">bad_chains0</span><span class="p">,</span>
+    <span class="s2">&quot;bad_chains1&quot;</span><span class="p">:</span> <span class="n">bad_chains1</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "good_chains = stats.beta.rvs(2, 5, size=(2, 2000))\nbad_chains0 = np.random.normal(np.sort(good_chains, axis=None), 0.05,\n                               size=4000).reshape(2, -1)\n\nbad_chains1 = good_chains.copy()\nfor i in np.random.randint(1900, size=4):\n    bad_chains1[i%2:,i:i+100] = np.random.beta(i, 950, size=100)\n\nchains = {\"good_chains\":good_chains,\n          \"bad_chains0\":bad_chains0,\n          \"bad_chains1\":bad_chains1}";
-                var nbb_formatted_code = "good_chains = stats.beta.rvs(2, 5, size=(2, 2000))\nbad_chains0 = np.random.normal(\n    np.sort(good_chains, axis=None), 0.05, size=4000\n).reshape(2, -1)\n\nbad_chains1 = good_chains.copy()\nfor i in np.random.randint(1900, size=4):\n    bad_chains1[i % 2 :, i : i + 100] = np.random.beta(i, 950, size=100)\n\nchains = {\n    \"good_chains\": good_chains,\n    \"bad_chains0\": bad_chains0,\n    \"bad_chains1\": bad_chains1,\n}";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -882,22 +851,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_6_1.png" src="_images/335_mcmc_diagnostics_6_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "az.plot_trace(chains)";
-                var nbb_formatted_code = "az.plot_trace(chains)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Le cattive catene non convergono né si mescolano tra loro. Uno dei motivi per l’esecuzione di più catene è che ogni singola catena potrebbe convergere verso un target, mentre un’altra catena potrebbe convergere su un target diverso, e questo sarebbe un problema. Inoltre, catene altrimenti sane possono bloccarsi occasionalmente nel corso della serie, il che suggerirebbe la necessità di modifiche al modello o alle impostazioni del campionatore. Un altro modo per valutare la convergenza dell’algoritmo è plottando la densità della distribuzione a posteriori degli effetti stimati, per assicurarsi che si avvicini ad una classica curva a campana.</p>
 <p>In pratica, non abbiamo mai il privilegio di poter confrontare i risultati del campionamento MCMC con la corretta distribuzione a posteriori. Ecco perché la diagnostica delle catene di Markov è così importante: se vediamo trace-plots come le precedenti “bad chains”, sappiamo che non abbiamo ottenuto una approssimazione adeguata della distribuzione a posteriori. In tali circostanze possiamo ricorrere ad alcuni rimedi.</p>
@@ -933,22 +887,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_8_1.png" src="_images/335_mcmc_diagnostics_8_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "_, axes = plt.subplots(2, 3, figsize=(12, 6), sharey=True, sharex=True)\naz.plot_ess(chains, kind=\"local\", ax=axes[0])\naz.plot_ess(chains, kind=\"quantile\", ax=axes[1])\n\nfor ax_ in axes[0]:\n    ax_.set_xlabel(\"\")\nfor ax_ in axes[1]:\n    ax_.set_title(\"\")\n\nfor ax_ in axes[:, 1:].ravel():\n    ax_.set_ylabel(\"\")\nplt.ylim(-100, 5000)";
-                var nbb_formatted_code = "_, axes = plt.subplots(2, 3, figsize=(12, 6), sharey=True, sharex=True)\naz.plot_ess(chains, kind=\"local\", ax=axes[0])\naz.plot_ess(chains, kind=\"quantile\", ax=axes[1])\n\nfor ax_ in axes[0]:\n    ax_.set_xlabel(\"\")\nfor ax_ in axes[1]:\n    ax_.set_title(\"\")\n\nfor ax_ in axes[:, 1:].ravel():\n    ax_.set_ylabel(\"\")\nplt.ylim(-100, 5000)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="autocorrelazione">
@@ -975,22 +914,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_10_1.png" src="_images/335_mcmc_diagnostics_10_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "az.plot_autocorr(chains, combined=True)";
-                var nbb_formatted_code = "az.plot_autocorr(chains, combined=True)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="statistica-hat-r">
@@ -1370,24 +1294,9 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:      ()
 Data variables:
-    good_chains  float64 1.0
-    bad_chains0  float64 2.413
-    bad_chains1  float64 1.009</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-2cc0cef6-a584-4daf-91ef-108542310877' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-2cc0cef6-a584-4daf-91ef-108542310877' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-0082b7fb-acbd-44da-8ee1-411a7268421e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0082b7fb-acbd-44da-8ee1-411a7268421e' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-4b64937e-5419-4b5f-9bb9-353b4e9c545f' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4b64937e-5419-4b5f-9bb9-353b4e9c545f' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>good_chains</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.0</div><input id='attrs-42def229-0d14-4b1b-9e8a-422755810c11' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-42def229-0d14-4b1b-9e8a-422755810c11' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ae824b2c-3471-4e8e-9684-fdce5e14f629' class='xr-var-data-in' type='checkbox'><label for='data-ae824b2c-3471-4e8e-9684-fdce5e14f629' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(1.0001199)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.413</div><input id='attrs-d6f22f93-482b-46d6-bb84-c0276691d57c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d6f22f93-482b-46d6-bb84-c0276691d57c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cf40aad2-058b-4136-99f3-b009b5a9bc4c' class='xr-var-data-in' type='checkbox'><label for='data-cf40aad2-058b-4136-99f3-b009b5a9bc4c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(2.41295371)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains1</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.009</div><input id='attrs-25e93c46-5f21-4ae7-9d2a-300b17c53cab' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-25e93c46-5f21-4ae7-9d2a-300b17c53cab' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ea042ed5-6f01-4544-8383-03290c23c3ec' class='xr-var-data-in' type='checkbox'><label for='data-ea042ed5-6f01-4544-8383-03290c23c3ec' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(1.00860007)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1e94729b-2085-4b3b-ab6e-a07315092729' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-1e94729b-2085-4b3b-ab6e-a07315092729' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-25092fb3-9f20-446d-b44d-2898052f1f83' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-25092fb3-9f20-446d-b44d-2898052f1f83' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "az.rhat(chains)";
-                var nbb_formatted_code = "az.rhat(chains)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+    good_chains  float64 0.9999
+    bad_chains0  float64 2.409
+    bad_chains1  float64 1.038</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-f62f5aea-c0e8-4adc-b653-c97ae82988a1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f62f5aea-c0e8-4adc-b653-c97ae82988a1' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-91382607-0cac-42f5-90bf-55121aac9f3e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-91382607-0cac-42f5-90bf-55121aac9f3e' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-e1b23574-3b30-4678-804c-54b5e1faf3b1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e1b23574-3b30-4678-804c-54b5e1faf3b1' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>good_chains</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.9999</div><input id='attrs-2f9a88e0-62f1-4932-8e71-9c8612861654' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2f9a88e0-62f1-4932-8e71-9c8612861654' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-973f6981-f2ea-4ec7-9e98-5258d791fa0a' class='xr-var-data-in' type='checkbox'><label for='data-973f6981-f2ea-4ec7-9e98-5258d791fa0a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.99991272)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.409</div><input id='attrs-8a6c8bf6-e279-4a70-a974-d0ae4bf7878f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8a6c8bf6-e279-4a70-a974-d0ae4bf7878f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f34e37e0-1298-455b-b8af-4cdf6a0ef309' class='xr-var-data-in' type='checkbox'><label for='data-f34e37e0-1298-455b-b8af-4cdf6a0ef309' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(2.40901502)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains1</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.038</div><input id='attrs-9576dd1f-0ad1-4bd1-adbb-e7e86524141b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-9576dd1f-0ad1-4bd1-adbb-e7e86524141b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d8f8f4ab-a654-424e-9be4-39491dafe9f5' class='xr-var-data-in' type='checkbox'><label for='data-d8f8f4ab-a654-424e-9be4-39491dafe9f5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(1.03812195)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e1ef6951-a81d-49f4-9be4-4c64fe39a272' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e1ef6951-a81d-49f4-9be4-4c64fe39a272' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-0274fb7c-721e-4ce2-864e-843ad7f85111' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0274fb7c-721e-4ce2-864e-843ad7f85111' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <p>Nell’esempio di <span id="id4">Martin <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id25" title="Osvaldo A Martin, Ravin Kumar, and Junpeng Lao. Bayesian Modeling and Computation in Python. CRC Press, 2022.">MKL22</a>]</span> vediamo come <span class="math notranslate nohighlight">\(\hat{R}\)</span> è in grado di distinguere tra le buone e le cattive catene MCMC. Mentre <code class="docutils literal notranslate"><span class="pre">bad_chains0</span></code> ha valori <span class="math notranslate nohighlight">\(\hat{R}\)</span> totalmente inadeguati, <code class="docutils literal notranslate"><span class="pre">bad_chains1</span></code> tende ad avere valori accettabili.</p>
 </section>
@@ -1773,24 +1682,9 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:      ()
 Data variables:
-    good_chains  float64 0.002487
-    bad_chains0  float64 0.108
-    bad_chains1  float64 0.01329</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-39868f36-d5eb-42b9-b5ac-ed535b109b8d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-39868f36-d5eb-42b9-b5ac-ed535b109b8d' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-71a6a793-883a-4d90-8548-590101e5710e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-71a6a793-883a-4d90-8548-590101e5710e' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-908028db-ea00-4c1d-9e5e-cbd9d1735d65' class='xr-section-summary-in' type='checkbox'  checked><label for='section-908028db-ea00-4c1d-9e5e-cbd9d1735d65' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>good_chains</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.002487</div><input id='attrs-ed4eaf03-8d22-4f6a-a742-5599accabc7f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ed4eaf03-8d22-4f6a-a742-5599accabc7f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6d0c398a-2936-4de4-b6c5-98c4092e926c' class='xr-var-data-in' type='checkbox'><label for='data-6d0c398a-2936-4de4-b6c5-98c4092e926c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.002487)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.108</div><input id='attrs-ac867f30-3457-4b65-9754-91ad5c390a40' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-ac867f30-3457-4b65-9754-91ad5c390a40' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cd8ee602-70a7-4d97-9bd5-b8890fa1c913' class='xr-var-data-in' type='checkbox'><label for='data-cd8ee602-70a7-4d97-9bd5-b8890fa1c913' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.10804534)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains1</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.01329</div><input id='attrs-0379842c-65dc-4136-868c-c28034394e0d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0379842c-65dc-4136-868c-c28034394e0d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e9b57a39-dbae-4bf7-85c0-68bfd5880c17' class='xr-var-data-in' type='checkbox'><label for='data-e9b57a39-dbae-4bf7-85c0-68bfd5880c17' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.01328704)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ba125b3b-29ef-42da-b3e8-ee21c267af1e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ba125b3b-29ef-42da-b3e8-ee21c267af1e' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-6902a797-8836-4fb4-81c0-e06c72920c88' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6902a797-8836-4fb4-81c0-e06c72920c88' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "az.mcse(chains)";
-                var nbb_formatted_code = "az.mcse(chains)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+    good_chains  float64 0.002651
+    bad_chains0  float64 0.1084
+    bad_chains1  float64 0.01602</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-ee6ffa3f-2b96-47ea-9d45-fbece38baa09' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ee6ffa3f-2b96-47ea-9d45-fbece38baa09' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-78eb4c98-8b2b-49d4-9fc3-033da7100f27' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-78eb4c98-8b2b-49d4-9fc3-033da7100f27' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-8b1c11fc-e6ef-4266-8c75-190eec7b2fc5' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8b1c11fc-e6ef-4266-8c75-190eec7b2fc5' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>good_chains</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.002651</div><input id='attrs-b078fe14-e27e-4177-ab14-ba65465b38c1' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b078fe14-e27e-4177-ab14-ba65465b38c1' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d22bb6a6-15be-440f-903d-9926b6bd2412' class='xr-var-data-in' type='checkbox'><label for='data-d22bb6a6-15be-440f-903d-9926b6bd2412' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.00265133)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains0</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.1084</div><input id='attrs-029bfa32-86f0-4daf-b0e4-882e6c2fac45' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-029bfa32-86f0-4daf-b0e4-882e6c2fac45' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-028d159e-0d4f-43fc-bb57-c0f25b976601' class='xr-var-data-in' type='checkbox'><label for='data-028d159e-0d4f-43fc-bb57-c0f25b976601' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.10841263)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>bad_chains1</span></div><div class='xr-var-dims'>()</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.01602</div><input id='attrs-a61d8695-0b51-4562-9a64-b8e740a98c40' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a61d8695-0b51-4562-9a64-b8e740a98c40' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dd13373d-f80a-4e09-83c8-49f87ff929f5' class='xr-var-data-in' type='checkbox'><label for='data-dd13373d-f80a-4e09-83c8-49f87ff929f5' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array(0.01602084)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-0f2716a5-01e2-43e1-b339-51e35bc97106' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0f2716a5-01e2-43e1-b339-51e35bc97106' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-d241a5ba-0657-406e-8408-5427ffeabb76' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d241a5ba-0657-406e-8408-5427ffeabb76' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1806,22 +1700,7 @@ Data variables:
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_16_1.png" src="_images/335_mcmc_diagnostics_16_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "az.plot_mcse(chains)";
-                var nbb_formatted_code = "az.plot_mcse(chains)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="rank-plots">
@@ -1842,22 +1721,7 @@ Data variables:
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_18_1.png" src="_images/335_mcmc_diagnostics_18_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "az.plot_rank(chains, kind=\"bars\")";
-                var nbb_formatted_code = "az.plot_rank(chains, kind=\"bars\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Una rappresentazione alternativa (con dei segmenti verticali al posto delle barre) è la seguente:</p>
 <div class="cell docutils container">
@@ -1874,22 +1738,7 @@ Data variables:
 </pre></div>
 </div>
 <img alt="_images/335_mcmc_diagnostics_20_1.png" src="_images/335_mcmc_diagnostics_20_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "az.plot_rank(chains, kind=\"vlines\")";
-                var nbb_formatted_code = "az.plot_rank(chains, kind=\"vlines\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="divergenze">
@@ -1910,38 +1759,23 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jan 13 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jan 15 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
 numpy     : 1.24.1
-matplotlib: 3.6.2
+arviz     : 0.14.0
 seaborn   : 0.12.2
 pymc      : 5.0.1
 scipy     : 1.10.0
-arviz     : 0.14.0
+matplotlib: 3.6.2
 
 Watermark: 2.3.1
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
-                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 </section>
