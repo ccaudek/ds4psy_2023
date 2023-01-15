@@ -896,11 +896,11 @@ Y \mid \theta &amp; \sim Bin(n = 30, \theta), \notag\\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
-<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -908,8 +908,7 @@ Y \mid \theta &amp; \sim Bin(n = 30, \theta), \notag\\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posterior_grid_approx</span><span class="p">(</span><span class="n">grid_points</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">success</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">trials</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
     <span class="c1"># define grid</span>
     <span class="n">p_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">grid_points</span><span class="p">)</span>
 
@@ -936,24 +935,27 @@ Y \mid \theta &amp; \sim Bin(n = 30, \theta), \notag\\
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">w</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">30</span>
 <span class="n">p_grid</span><span class="p">,</span> <span class="n">posterior</span> <span class="o">=</span> <span class="n">posterior_grid_approx</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_grid</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y = </span><span class="si">{}</span><span class="se">\n</span><span class="s1">n = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_grid</span><span class="p">,</span> <span class="n">posterior</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;y = </span><span class="si">{}</span><span class="se">\n</span><span class="s2">n = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
 <span class="n">a</span> <span class="o">=</span> <span class="mi">25</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">17</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
-                <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span>
-       <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Beta(25, 17)&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;r--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Beta(25, 17)&quot;</span>
+<span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Probabilità di un&#39;aspettativa negativa&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Densità&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribuzione a posteriori&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Densità&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribuzione a posteriori&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/325_metropolis_5_0.png" src="_images/325_metropolis_5_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fadecf6ef50&gt;
+</pre></div>
+</div>
+<img alt="_images/325_metropolis_5_1.png" src="_images/325_metropolis_5_1.png" />
 </div>
 </div>
 <p>In conclusione, il metodo basato su griglia è molto intuitivo e non richiede particolari competenze di programmazione per essere implementato. Inoltre, fornisce un risultato che, per tutti gli scopi pratici, può essere considerato come un campione casuale estratto da <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span>. Tuttavia, anche se tale metodo fornisce risultati accuratissimi, esso ha un uso limitato. A causa della <em>maledizione della dimensionalità</em><a class="footnote-reference brackets" href="#posterior-sim-1" id="id2">1</a>, tale metodo può solo essere usato nel caso di semplici modelli statistici, con non più di due parametri. Nella pratica concreta tale metodo viene dunque sostituito da altre tecniche più efficienti in quanto, anche nei più comuni modelli utilizzati in psicologia, vengono solitamente stimati centinaia se non migliaia di parametri.</p>
@@ -999,7 +1001,7 @@ Pr(l &lt; \theta &lt; u) \approx \frac{\text{numero di realizzazioni } \theta^{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6373040895418747 0.49909021033810747 0.7061155130694503 0.6602512826173315 0.5650594666971124 0.7505698592934731 0.730034700198045 0.6254060578816313 0.6601283691287599 0.6134950182477882
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.539162151404444 0.5550853766010103 0.5513364838938358 0.6607759433872168 0.5369631254477557 0.48405449901039166 0.5549102431541701 0.5247187452169499 0.6758605979154174 0.4717803424549292
 </pre></div>
 </div>
 </div>
@@ -1011,7 +1013,7 @@ Pr(l &lt; \theta &lt; u) \approx \frac{\text{numero di realizzazioni } \theta^{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6447454567013573
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5554647508486121
 </pre></div>
 </div>
 </div>
@@ -1024,7 +1026,7 @@ Pr(l &lt; \theta &lt; u) \approx \frac{\text{numero di realizzazioni } \theta^{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5954393674003207
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5951712161879081
 </pre></div>
 </div>
 </div>
@@ -1113,7 +1115,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_proposal</span><span class="p">(</span><span class="n">p_current</span><span class="p">,</span> <span class="n">proposal_width</span><span class="p">):</span>
     <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">proposal</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">p_current</span><span class="p">,</span> <span class="n">proposal_width</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">proposal</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">proposal</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">proposal</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">proposal</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">break</span>
     <span class="k">return</span> <span class="n">proposal</span>
 </pre></div>
@@ -1123,7 +1125,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 <p>L’algoritmo Metropolis viene implementato nella funzione seguente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sampler</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p_init</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">proposal_width</span><span class="o">=</span><span class="mf">.1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sampler</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">p_init</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">proposal_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
     <span class="n">p_current</span> <span class="o">=</span> <span class="n">p_init</span>
     <span class="n">posterior</span> <span class="o">=</span> <span class="p">[</span><span class="n">p_current</span><span class="p">]</span>
     <span class="n">acceptance</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1136,9 +1138,9 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
         <span class="k">if</span> <span class="n">accept</span><span class="p">:</span>
             <span class="c1"># Update position</span>
             <span class="n">p_current</span> <span class="o">=</span> <span class="n">proposal</span>
-            <span class="n">acceptance</span> <span class="o">=</span> <span class="n">acceptance</span> <span class="o">+</span><span class="mi">1</span>
+            <span class="n">acceptance</span> <span class="o">=</span> <span class="n">acceptance</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">posterior</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p_current</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">acceptance</span><span class="o">/</span><span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">posterior</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">acceptance</span> <span class="o">/</span> <span class="n">samples</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">posterior</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1146,7 +1148,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 <p>Utilizzo ora il campionatore <code class="docutils literal notranslate"><span class="pre">sampler()</span></code>, per generare una sequenza (catena) di valori <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acceptance</span><span class="p">,</span> <span class="n">posterior</span> <span class="o">=</span> <span class="n">sampler</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">p_init</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">proposal_width</span><span class="o">=</span><span class="mf">.9</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acceptance</span><span class="p">,</span> <span class="n">posterior</span> <span class="o">=</span> <span class="n">sampler</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">p_init</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">proposal_width</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1159,7 +1161,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2498
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2537
 </pre></div>
 </div>
 </div>
@@ -1174,7 +1176,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5936221675276093
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5953200668703926
 </pre></div>
 </div>
 </div>
@@ -1187,7 +1189,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07484951125992781
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07434591173968624
 </pre></div>
 </div>
 </div>
@@ -1197,7 +1199,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">1001</span><span class="p">:</span><span class="mi">10000</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;theta&#39;</span><span class="p">);</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;theta&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1208,14 +1210,12 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 <p>Nella figura, l’istogramma descrive i valori <span class="math notranslate nohighlight">\(\theta\)</span> prodotti dall’algoritmo Metropolis mentre la linea continua descrive la distribuzione a posteriori ottenuta per via analitica, ovvero una <span class="math notranslate nohighlight">\(Beta(25, 17)\)</span>. La figura indica che la catena converge alla corretta distribuzione a posteriori.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">1001</span><span class="p">:</span><span class="mi">10000</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;estimated posterior&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">posterior</span><span class="p">[</span><span class="mi">1001</span><span class="p">:</span><span class="mi">10000</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimated posterior&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">a</span> <span class="o">=</span> <span class="mi">25</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">17</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
-                <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span>
-       <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Beta(25, 17)&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="s2">&quot;r--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Beta(25, 17)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1257,10 +1257,10 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
   <tbody>
     <tr>
       <th>x</th>
-      <td>0.59</td>
-      <td>0.07</td>
-      <td>0.43</td>
-      <td>0.72</td>
+      <td>0.6</td>
+      <td>0.08</td>
+      <td>0.44</td>
+      <td>0.74</td>
     </tr>
   </tbody>
 </table>
@@ -1383,19 +1383,19 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jan 13 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jan 15 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
-pandas     : 1.5.2
-seaborn    : 0.12.2
-scipy      : 1.10.0
-arviz      : 0.14.0
-numpy      : 1.24.1
-statsmodels: 0.13.5
 matplotlib : 3.6.2
+arviz      : 0.14.0
+pandas     : 1.5.2
+statsmodels: 0.13.5
+scipy      : 1.10.0
+seaborn    : 0.12.2
+numpy      : 1.24.1
 
 Watermark: 2.3.1
 </pre></div>
