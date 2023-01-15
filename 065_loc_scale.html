@@ -931,12 +931,12 @@ rappresentata dalla mediana o dalla media spuntata (si veda più sotto).</p>
 gruppi di soggetti esaminati da <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Leggo i dati, seleziono le colonne appropriate, elimino i duplicati, rimuovo </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Leggo i dati, seleziono le colonne appropriate, elimino i duplicati, rimuovo</span>
 <span class="c1"># il dato mancante.</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/data.mood.csv&#39;</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;esm_id&#39;</span><span class="p">,</span><span class="s1">&#39;group&#39;</span><span class="p">,</span><span class="s1">&#39;bdi&#39;</span><span class="p">]]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">])]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/data.mood.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;esm_id&quot;</span><span class="p">,</span> <span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;bdi&quot;</span><span class="p">]]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">])]</span>
 <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
@@ -975,7 +975,7 @@ dtype: int64
 <p>Calcolo ora le medie dei valori BDI-II nei due gruppi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -991,7 +991,7 @@ Name: bdi, dtype: float64
 <p>In alternativa, posso usare il metodo <code class="docutils literal notranslate"><span class="pre">.describe()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1077,7 +1077,7 @@ soggetti esaminati da <span id="id2">Zetsche <em>et al.</em> [<a class="referenc
 più estremi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_mdd</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;mdd&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_mdd</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mdd&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
 <span class="n">stats</span><span class="o">.</span><span class="n">trim_mean</span><span class="p">(</span><span class="n">bdi_mdd</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1090,7 +1090,7 @@ più estremi.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_ctl</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;ctl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_ctl</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ctl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
 <span class="n">stats</span><span class="o">.</span><span class="n">trim_mean</span><span class="p">(</span><span class="n">bdi_ctl</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1118,12 +1118,14 @@ i due gruppi di <span id="id3">Zetsche <em>et al.</em> [<a class="reference inte
 <span class="k">def</span> <span class="nf">q1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.10</span><span class="p">)</span>
 
+
 <span class="k">def</span> <span class="nf">q3</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.90</span><span class="p">)</span>
 
+
 <span class="c1"># Calculate quantiles by group</span>
-<span class="n">vals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bdi&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">q1</span><span class="p">,</span> <span class="n">q3</span><span class="p">]}</span>
-<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;bdi&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">q1</span><span class="p">,</span> <span class="n">q3</span><span class="p">]}</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1238,7 +1240,7 @@ un’interpretazione intuitiva.</p>
 <p>Calcoliamo la varianza dei valori BDI-II per i dati di <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Applicando l’eq. <a class="reference internal" href="#equation-eq-var-descr">(11.4)</a>, per tutto il campione abbiamo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1251,7 +1253,7 @@ un’interpretazione intuitiva.</p>
 <p>Più semplicemente, possiamo usare la funzione <code class="docutils literal notranslate"><span class="pre">np.var()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bdi&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1383,7 +1385,7 @@ precedente), calcoliamo la varianza usando <span class="math notranslate nohighl
 Otteniamo così 10 stime della varianza della popolazione del QI.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># applichiamo la funzione su ciascuna riga</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># applichiamo la funzione su ciascuna riga</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x_var</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1409,7 +1411,7 @@ Otteniamo così 10 stime della varianza della popolazione del QI.</p>
     <span class="n">random_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">one_sample</span><span class="p">)</span>
 
 <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">random_samples</span><span class="p">)</span>
-<span class="n">x_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">x_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1550,7 +1552,7 @@ rispetto agli altri valori della distribuzione.</p>
 <p>Per ciascun gruppo, abbiamo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)[</span><span class="s1">&#39;bdi&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1632,7 +1634,7 @@ normale. Usiamo, ad esempio, la distribuzione <span class="math notranslate nohi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.679563606843978
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.122395554532048
 </pre></div>
 </div>
 </div>
@@ -1684,7 +1686,7 @@ discussi in quel contesto).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jan 13 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jan 15 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
@@ -1693,10 +1695,10 @@ IPython version      : 8.7.0
 pytensor: 2.8.11
 
 matplotlib: 3.6.2
-pandas    : 1.5.2
 scipy     : 1.10.0
-seaborn   : 0.12.2
 numpy     : 1.24.1
+seaborn   : 0.12.2
+pandas    : 1.5.2
 
 Watermark: 2.3.1
 </pre></div>

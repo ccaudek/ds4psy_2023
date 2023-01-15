@@ -1130,14 +1130,7 @@ dtype: float64
 <p>Gli oggetti <code class="docutils literal notranslate"><span class="pre">Series</span></code> hanno diversi metodi per svolgere comuni operazioni, per esempio per ricavare alcune statistiche descrittive:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="n">grades</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-    <span class="p">,</span> <span class="n">grades</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="p">,</span> <span class="n">grades</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-    <span class="p">,</span> <span class="n">grades</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="p">,</span> <span class="n">grades</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-    <span class="p">,</span> <span class="n">grades</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">grades</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">sum</span><span class="p">()]</span>
 </pre></div>
 </div>
 </div>
@@ -1148,7 +1141,7 @@ dtype: float64
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 11;
-                var nbb_unformatted_code = "[\n    grades.count()\n    , grades.mean()\n    , grades.min()\n    , grades.max()\n    , grades.std()\n    , grades.sum()\n]";
+                var nbb_unformatted_code = "[grades.count(), grades.mean(), grades.min(), grades.max(), grades.std(), grades.sum()]";
                 var nbb_formatted_code = "[grades.count(), grades.mean(), grades.min(), grades.max(), grades.std(), grades.sum()]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1205,12 +1198,22 @@ dtype: float64
 <p>Esistono molti modi per costruire un DataFrame. Il più semplice è quello di utilizzare un dizionario che include una o più liste o array Numpy di uguale lunghezza. Per esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Maria&#39;</span><span class="p">,</span> <span class="s1">&#39;Anna&#39;</span><span class="p">,</span> <span class="s1">&#39;Francesco&#39;</span><span class="p">,</span> <span class="s1">&#39;Cristina&#39;</span><span class="p">,</span> <span class="s1">&#39;Gianni&#39;</span><span class="p">,</span> <span class="s1">&#39;Gabriella&#39;</span><span class="p">,</span> <span class="s1">&#39;Stefano&#39;</span><span class="p">],</span>
-        <span class="s2">&quot;sex&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">],</span>
-        <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">],</span>
-        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
-        <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
-        <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">]}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Maria&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Anna&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Francesco&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Cristina&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Gianni&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Gabriella&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Stefano&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;sex&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
+    <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span>
+<span class="p">}</span>
 <span class="n">frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">frame</span>
 </pre></div>
@@ -1312,7 +1315,7 @@ dtype: float64
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 13;
-                var nbb_unformatted_code = "data = {\"name\": ['Maria', 'Anna', 'Francesco', 'Cristina', 'Gianni', 'Gabriella', 'Stefano'],\n        \"sex\": ['f', 'f', 'm', 'f', 'm', 'f', 'm'],\n        \"group\": ['a', 'b', 'a', 'b', 'b', 'c', 'a'],\n        \"x\": [1, 2, 3, 4, 5, 6, 7],\n        \"y\": [8, 9, 10, 11, 12, 13, 14],\n        \"z\": [15, 16, 17, 18, 19, 20, 21]}\nframe = pd.DataFrame(data)\nframe";
+                var nbb_unformatted_code = "data = {\n    \"name\": [\n        \"Maria\",\n        \"Anna\",\n        \"Francesco\",\n        \"Cristina\",\n        \"Gianni\",\n        \"Gabriella\",\n        \"Stefano\",\n    ],\n    \"sex\": [\"f\", \"f\", \"m\", \"f\", \"m\", \"f\", \"m\"],\n    \"group\": [\"a\", \"b\", \"a\", \"b\", \"b\", \"c\", \"a\"],\n    \"x\": [1, 2, 3, 4, 5, 6, 7],\n    \"y\": [8, 9, 10, 11, 12, 13, 14],\n    \"z\": [15, 16, 17, 18, 19, 20, 21],\n}\nframe = pd.DataFrame(data)\nframe";
                 var nbb_formatted_code = "data = {\n    \"name\": [\n        \"Maria\",\n        \"Anna\",\n        \"Francesco\",\n        \"Cristina\",\n        \"Gianni\",\n        \"Gabriella\",\n        \"Stefano\",\n    ],\n    \"sex\": [\"f\", \"f\", \"m\", \"f\", \"m\", \"f\", \"m\"],\n    \"group\": [\"a\", \"b\", \"a\", \"b\", \"b\", \"c\", \"a\"],\n    \"x\": [1, 2, 3, 4, 5, 6, 7],\n    \"y\": [8, 9, 10, 11, 12, 13, 14],\n    \"z\": [15, 16, 17, 18, 19, 20, 21],\n}\nframe = pd.DataFrame(data)\nframe";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -1332,18 +1335,18 @@ dtype: float64
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lst1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
 <span class="n">lst2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
 <span class="n">lst3</span> <span class="o">=</span> <span class="p">[</span><span class="mf">14.4</span><span class="p">,</span> <span class="mf">15.1</span><span class="p">,</span> <span class="mf">16.7</span><span class="p">,</span> <span class="mf">17.3</span><span class="p">,</span> <span class="mf">18.9</span><span class="p">,</span> <span class="mf">19.3</span><span class="p">,</span> <span class="mf">20.2</span><span class="p">]</span>
-<span class="n">lst4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">]</span>
-<span class="n">lst5</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">]</span>
-<span class="n">lst6</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Maria&#39;</span><span class="p">,</span> <span class="s1">&#39;Anna&#39;</span><span class="p">,</span> <span class="s1">&#39;Francesco&#39;</span><span class="p">,</span> <span class="s1">&#39;Cristina&#39;</span><span class="p">,</span> <span class="s1">&#39;Gianni&#39;</span><span class="p">,</span> <span class="s1">&#39;Gabriella&#39;</span><span class="p">,</span> <span class="s1">&#39;Stefano&#39;</span><span class="p">]</span>
+<span class="n">lst4</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">]</span>
+<span class="n">lst5</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">]</span>
+<span class="n">lst6</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Maria&quot;</span><span class="p">,</span> <span class="s2">&quot;Anna&quot;</span><span class="p">,</span> <span class="s2">&quot;Francesco&quot;</span><span class="p">,</span> <span class="s2">&quot;Cristina&quot;</span><span class="p">,</span> <span class="s2">&quot;Gianni&quot;</span><span class="p">,</span> <span class="s2">&quot;Gabriella&quot;</span><span class="p">,</span> <span class="s2">&quot;Stefano&quot;</span><span class="p">]</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
 
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst1</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst2</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst3</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst4</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst5</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst6</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst1</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst2</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst3</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst4</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst5</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst6</span>
 
 <span class="n">df</span>
 </pre></div>
@@ -1445,7 +1448,7 @@ dtype: float64
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 14;
-                var nbb_unformatted_code = "lst1 = [1, 2, 3, 4, 5, 6, 7]\nlst2 = [8, 9, 10, 11, 12, 13, 14]\nlst3 = [14.4, 15.1, 16.7, 17.3, 18.9, 19.3, 20.2]\nlst4 = ['a', 'b', 'a', 'b', 'b', 'c', 'a']\nlst5 = ['f', 'f', 'm', 'f', 'm', 'f', 'm']\nlst6 = ['Maria', 'Anna', 'Francesco', 'Cristina', 'Gianni', 'Gabriella', 'Stefano']\n\ndf = pd.DataFrame()\n\ndf['x'] = lst1\ndf['y'] = lst2\ndf['z'] = lst3\ndf['group'] = lst4\ndf['sex'] = lst5\ndf['name'] = lst6\n\ndf";
+                var nbb_unformatted_code = "lst1 = [1, 2, 3, 4, 5, 6, 7]\nlst2 = [8, 9, 10, 11, 12, 13, 14]\nlst3 = [14.4, 15.1, 16.7, 17.3, 18.9, 19.3, 20.2]\nlst4 = [\"a\", \"b\", \"a\", \"b\", \"b\", \"c\", \"a\"]\nlst5 = [\"f\", \"f\", \"m\", \"f\", \"m\", \"f\", \"m\"]\nlst6 = [\"Maria\", \"Anna\", \"Francesco\", \"Cristina\", \"Gianni\", \"Gabriella\", \"Stefano\"]\n\ndf = pd.DataFrame()\n\ndf[\"x\"] = lst1\ndf[\"y\"] = lst2\ndf[\"z\"] = lst3\ndf[\"group\"] = lst4\ndf[\"sex\"] = lst5\ndf[\"name\"] = lst6\n\ndf";
                 var nbb_formatted_code = "lst1 = [1, 2, 3, 4, 5, 6, 7]\nlst2 = [8, 9, 10, 11, 12, 13, 14]\nlst3 = [14.4, 15.1, 16.7, 17.3, 18.9, 19.3, 20.2]\nlst4 = [\"a\", \"b\", \"a\", \"b\", \"b\", \"c\", \"a\"]\nlst5 = [\"f\", \"f\", \"m\", \"f\", \"m\", \"f\", \"m\"]\nlst6 = [\"Maria\", \"Anna\", \"Francesco\", \"Cristina\", \"Gianni\", \"Gabriella\", \"Stefano\"]\n\ndf = pd.DataFrame()\n\ndf[\"x\"] = lst1\ndf[\"y\"] = lst2\ndf[\"z\"] = lst3\ndf[\"group\"] = lst4\ndf[\"sex\"] = lst5\ndf[\"name\"] = lst6\n\ndf";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -2104,10 +2107,7 @@ dtype: int64
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span>
 
 <span class="c1"># rename(columns={&quot;OLD_NAME&quot;: &quot;NEW_NAME&quot;})</span>
-<span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
-    <span class="s1">&#39;sex&#39;</span><span class="p">:</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="s1">&#39;year_of_the_study&#39;</span>
-    <span class="p">})</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sex&quot;</span><span class="p">:</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;year_of_the_study&quot;</span><span class="p">})</span>
 <span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2202,7 +2202,7 @@ dtype: int64
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 26;
-                var nbb_unformatted_code = "df1 = df\n\n# rename(columns={\"OLD_NAME\": \"NEW_NAME\"})\ndf1 = df1.rename(columns={\n    'sex': 'gender',\n    'year': 'year_of_the_study'\n    })\ndf1.head()";
+                var nbb_unformatted_code = "df1 = df\n\n# rename(columns={\"OLD_NAME\": \"NEW_NAME\"})\ndf1 = df1.rename(columns={\"sex\": \"gender\", \"year\": \"year_of_the_study\"})\ndf1.head()";
                 var nbb_formatted_code = "df1 = df\n\n# rename(columns={\"OLD_NAME\": \"NEW_NAME\"})\ndf1 = df1.rename(columns={\"sex\": \"gender\", \"year\": \"year_of_the_study\"})\ndf1.head()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -2706,7 +2706,7 @@ Name: 0, dtype: object
 <p>L’attributo <code class="docutils literal notranslate"><span class="pre">loc</span></code> consente di selezionare simultaneamente righe e colonne per “nome”. Il “nome” delle righe è l’indice di riga. Per esempio, visualizzo il quinto valore della colonna <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;body_mass_g&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -2717,7 +2717,7 @@ Name: 0, dtype: object
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 34;
-                var nbb_unformatted_code = "df.loc[4, 'body_mass_g']";
+                var nbb_unformatted_code = "df.loc[4, \"body_mass_g\"]";
                 var nbb_formatted_code = "df.loc[4, \"body_mass_g\"]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -2734,7 +2734,7 @@ Name: 0, dtype: object
 <p>oppure, il quinto valore delle colonne <code class="docutils literal notranslate"><span class="pre">bill_length_mm</span></code>, <code class="docutils literal notranslate"><span class="pre">bill_depth_mm</span></code>, <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -2748,7 +2748,7 @@ Name: 4, dtype: object
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 35;
-                var nbb_unformatted_code = "df.loc[4, ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm']]";
+                var nbb_unformatted_code = "df.loc[4, [\"bill_length_mm\", \"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_formatted_code = "df.loc[4, [\"bill_length_mm\", \"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -2765,7 +2765,7 @@ Name: 4, dtype: object
 <p>Visualizzo ora le prime tre righe sulle tre colonne precedenti. Si noti l’uso di <code class="docutils literal notranslate"><span class="pre">:</span></code> per definire un intervallo di valori sull’indice di riga:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -2817,7 +2817,7 @@ Name: 4, dtype: object
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 36;
-                var nbb_unformatted_code = "df.loc[0:2, ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm']]";
+                var nbb_unformatted_code = "df.loc[0:2, [\"bill_length_mm\", \"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_formatted_code = "df.loc[0:2, [\"bill_length_mm\", \"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -2834,7 +2834,7 @@ Name: 4, dtype: object
 <p>Una piccola variante della sintassi precedente si rivela molto utile. Qui, il segno di due punti (<code class="docutils literal notranslate"><span class="pre">:</span></code>) signfica “tutte le righe”:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keep_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">keep_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">keep_cols</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -2859,7 +2859,7 @@ Name: 4, dtype: object
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 37;
-                var nbb_unformatted_code = "keep_cols = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm']\nprint(df.loc[:, keep_cols])";
+                var nbb_unformatted_code = "keep_cols = [\"bill_length_mm\", \"bill_depth_mm\", \"flipper_length_mm\"]\nprint(df.loc[:, keep_cols])";
                 var nbb_formatted_code = "keep_cols = [\"bill_length_mm\", \"bill_depth_mm\", \"flipper_length_mm\"]\nprint(df.loc[:, keep_cols])";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -2880,7 +2880,7 @@ Name: 4, dtype: object
 <p>Iniziamo con un semplice esempio che riguarda una condizione sui valori di una sola colonna. Quando applichiamo un operatore logico come &gt;, &lt;, ==, != ai valori di una colonna del DataFrame, il risultato è una sequenza di valori booleani (<code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code>), uno per ogni riga nel DataFrame, che indicano se la condizione è vera o falsa per quella riga. Ad esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;island&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Torgersen&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Torgersen&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -2902,7 +2902,7 @@ Name: island, Length: 333, dtype: bool
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 38;
-                var nbb_unformatted_code = "df['island'] == 'Torgersen'";
+                var nbb_unformatted_code = "df[\"island\"] == \"Torgersen\"";
                 var nbb_formatted_code = "df[\"island\"] == \"Torgersen\"";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -2919,7 +2919,7 @@ Name: island, Length: 333, dtype: bool
 <p>Utilizzando i valori booleani che sono stati ottenuti è possibile filtrare le righe del DataFrame, ovvero, ottenere un nuovo DataFrame nel quale la condizione logica specificata è vera su tutte le righe:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;island&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Torgersen&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Torgersen&quot;</span><span class="p">]</span>
 <span class="n">df1</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -3014,7 +3014,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 39;
-                var nbb_unformatted_code = "df1 = df[df['island'] == 'Torgersen']\ndf1.head()";
+                var nbb_unformatted_code = "df1 = df[df[\"island\"] == \"Torgersen\"]\ndf1.head()";
                 var nbb_formatted_code = "df1 = df[df[\"island\"] == \"Torgersen\"]\ndf1.head()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -3031,7 +3031,7 @@ Name: island, Length: 333, dtype: bool
 <p>In maniera equivalente, possiamo scrivere:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;island&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Torgersen&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Torgersen&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3125,7 +3125,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 40;
-                var nbb_unformatted_code = "df.loc[df['island'] == 'Torgersen'].head()";
+                var nbb_unformatted_code = "df.loc[df[\"island\"] == \"Torgersen\"].head()";
                 var nbb_formatted_code = "df.loc[df[\"island\"] == \"Torgersen\"].head()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -3142,7 +3142,7 @@ Name: island, Length: 333, dtype: bool
 <p>Per combinare più condizioni logiche usiamo gli operatori <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> (e), <code class="docutils literal notranslate"><span class="pre">|</span></code> (oppure). Ad esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;island&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Torgersen&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;female&#39;</span><span class="p">)]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Torgersen&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;female&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3236,7 +3236,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 41;
-                var nbb_unformatted_code = "df.loc[(df['island'] == 'Torgersen') & (df['sex'] == 'female')].head()";
+                var nbb_unformatted_code = "df.loc[(df[\"island\"] == \"Torgersen\") & (df[\"sex\"] == \"female\")].head()";
                 var nbb_formatted_code = "df.loc[(df[\"island\"] == \"Torgersen\") & (df[\"sex\"] == \"female\")].head()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -3366,7 +3366,7 @@ Name: island, Length: 333, dtype: bool
 <p>Nel seguente esempio filtriamo le righe con la condizione logica definita sopra e selezioniamo solo due colonne:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">eval_string</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">eval_string</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3424,7 +3424,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 43;
-                var nbb_unformatted_code = "df.loc[df.eval(eval_string), ['bill_depth_mm', 'flipper_length_mm']].head()";
+                var nbb_unformatted_code = "df.loc[df.eval(eval_string), [\"bill_depth_mm\", \"flipper_length_mm\"]].head()";
                 var nbb_formatted_code = "df.loc[df.eval(eval_string), [\"bill_depth_mm\", \"flipper_length_mm\"]].head()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -3442,7 +3442,7 @@ Name: island, Length: 333, dtype: bool
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eval_string</span> <span class="o">=</span> <span class="s2">&quot;island == &#39;Torgersen&#39; &amp; sex == &#39;female&#39; &amp; year != 2009&quot;</span>
-<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">eval_string</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">eval_string</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -3555,7 +3555,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 44;
-                var nbb_unformatted_code = "eval_string = \"island == 'Torgersen' & sex == 'female' & year != 2009\"\ndf.loc[df.eval(eval_string), ['bill_depth_mm', 'flipper_length_mm']]";
+                var nbb_unformatted_code = "eval_string = \"island == 'Torgersen' & sex == 'female' & year != 2009\"\ndf.loc[df.eval(eval_string), [\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_formatted_code = "eval_string = \"island == 'Torgersen' & sex == 'female' & year != 2009\"\ndf.loc[df.eval(eval_string), [\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -3573,7 +3573,7 @@ Name: island, Length: 333, dtype: bool
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eval_string</span> <span class="o">=</span> <span class="s2">&quot;island == &#39;Torgersen&#39; &amp; sex == &#39;female&#39; &amp; year != 2009&quot;</span>
-<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">eval_string</span><span class="p">)[[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">eval_string</span><span class="p">)[[</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -3686,7 +3686,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 45;
-                var nbb_unformatted_code = "eval_string = \"island == 'Torgersen' & sex == 'female' & year != 2009\"\ndf.query(eval_string)[['bill_depth_mm', 'flipper_length_mm']]";
+                var nbb_unformatted_code = "eval_string = \"island == 'Torgersen' & sex == 'female' & year != 2009\"\ndf.query(eval_string)[[\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_formatted_code = "eval_string = \"island == 'Torgersen' & sex == 'female' & year != 2009\"\ndf.query(eval_string)[[\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -3704,7 +3704,7 @@ Name: island, Length: 333, dtype: bool
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eval_string</span> <span class="o">=</span> <span class="s2">&quot;island in [&#39;Torgersen&#39;, &#39;Dream&#39;]&quot;</span>
-<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">eval_string</span><span class="p">)[[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">eval_string</span><span class="p">)[[</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -3793,7 +3793,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 46;
-                var nbb_unformatted_code = "eval_string = \"island in ['Torgersen', 'Dream']\"\ndf.query(eval_string)[['bill_depth_mm', 'flipper_length_mm']]";
+                var nbb_unformatted_code = "eval_string = \"island in ['Torgersen', 'Dream']\"\ndf.query(eval_string)[[\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_formatted_code = "eval_string = \"island in ['Torgersen', 'Dream']\"\ndf.query(eval_string)[[\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -3810,7 +3810,7 @@ Name: island, Length: 333, dtype: bool
 <p>Il metodo <code class="docutils literal notranslate"><span class="pre">query()</span></code> può anche essere utilizzato per selezionare le righe di un DataFrame in base alle relazioni tra le colonne. Ad esempio,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;bill_length_mm &gt; 3*bill_depth_mm&#39;</span><span class="p">)[[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;bill_length_mm &gt; 3*bill_depth_mm&quot;</span><span class="p">)[[</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -3899,7 +3899,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 47;
-                var nbb_unformatted_code = "df.query('bill_length_mm > 3*bill_depth_mm')[['bill_depth_mm', 'flipper_length_mm']]";
+                var nbb_unformatted_code = "df.query(\"bill_length_mm > 3*bill_depth_mm\")[[\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_formatted_code = "df.query(\"bill_length_mm > 3*bill_depth_mm\")[[\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -3917,7 +3917,7 @@ Name: island, Length: 333, dtype: bool
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outside_var</span> <span class="o">=</span> <span class="mi">21</span>
-<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;bill_depth_mm &gt; @outside_var&#39;</span><span class="p">)[[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;bill_depth_mm &gt; @outside_var&quot;</span><span class="p">)[[</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -3980,7 +3980,7 @@ Name: island, Length: 333, dtype: bool
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 48;
-                var nbb_unformatted_code = "outside_var = 21\ndf.query('bill_depth_mm > @outside_var')[['bill_depth_mm', 'flipper_length_mm']]";
+                var nbb_unformatted_code = "outside_var = 21\ndf.query(\"bill_depth_mm > @outside_var\")[[\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_formatted_code = "outside_var = 21\ndf.query(\"bill_depth_mm > @outside_var\")[[\"bill_depth_mm\", \"flipper_length_mm\"]]";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -4189,7 +4189,7 @@ Name: island, Length: 333, dtype: bool
 <p>Trovo la media della colonna <code class="docutils literal notranslate"><span class="pre">bill_depth_mm</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -4200,7 +4200,7 @@ Name: island, Length: 333, dtype: bool
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 50;
-                var nbb_unformatted_code = "df['bill_depth_mm'].mean()";
+                var nbb_unformatted_code = "df[\"bill_depth_mm\"].mean()";
                 var nbb_formatted_code = "df[\"bill_depth_mm\"].mean()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -4217,7 +4217,7 @@ Name: island, Length: 333, dtype: bool
 <p>Per la deviazione standard uso il metodo <code class="docutils literal notranslate"><span class="pre">std()</span></code>. Si noti l’argomento opzionale <code class="docutils literal notranslate"><span class="pre">ddof</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -4228,7 +4228,7 @@ Name: island, Length: 333, dtype: bool
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 51;
-                var nbb_unformatted_code = "df['bill_length_mm'].std(ddof=1)";
+                var nbb_unformatted_code = "df[\"bill_length_mm\"].std(ddof=1)";
                 var nbb_formatted_code = "df[\"bill_length_mm\"].std(ddof=1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -4245,7 +4245,7 @@ Name: island, Length: 333, dtype: bool
 <p>La cella seguente fornisce l’indice della riga nella quale la colonna <code class="docutils literal notranslate"><span class="pre">bill_length_mm</span></code> assume il suo valore massimo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -4256,7 +4256,7 @@ Name: island, Length: 333, dtype: bool
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 52;
-                var nbb_unformatted_code = "df['bill_length_mm'].idxmax()";
+                var nbb_unformatted_code = "df[\"bill_length_mm\"].idxmax()";
                 var nbb_formatted_code = "df[\"bill_length_mm\"].idxmax()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -4273,7 +4273,7 @@ Name: island, Length: 333, dtype: bool
 <p>La colonna <code class="docutils literal notranslate"><span class="pre">species</span></code> in <code class="docutils literal notranslate"><span class="pre">df</span></code> è una variabile a livello nominale. Ottengo la distribuzione di frequenza assoluta:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -4287,7 +4287,7 @@ Name: species, dtype: int64
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 53;
-                var nbb_unformatted_code = "df['species'].value_counts()";
+                var nbb_unformatted_code = "df[\"species\"].value_counts()";
                 var nbb_formatted_code = "df[\"species\"].value_counts()";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -4304,7 +4304,7 @@ Name: species, dtype: int64
 <p>Per le frequenze relative imposto l’argomento <code class="docutils literal notranslate"><span class="pre">normalize=True</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -4318,7 +4318,7 @@ Name: species, dtype: float64
 <script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 54;
-                var nbb_unformatted_code = "print(df['species'].value_counts(normalize=True))";
+                var nbb_unformatted_code = "print(df[\"species\"].value_counts(normalize=True))";
                 var nbb_formatted_code = "print(df[\"species\"].value_counts(normalize=True))";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -4349,7 +4349,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T/ipykernel_58561/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T/ipykernel_96831/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.aggregate(summary_stats)
 </pre></div>
 </div>
@@ -4460,13 +4460,13 @@ Name: species, dtype: float64
 <p>Molto spesso vogliamo calcolare le statistiche descrittive separatamente per ciascun gruppo di osservazioni – per esempio, nel caso presente, in base alla specie. Questo risultato si ottiene con il metodo <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code>. Per esempio, ragruppo le osservazioni in funzione della specie per poi calcolare le statistiche descrittive definite in precedenza.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;species&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">summary_stats</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;species&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">summary_stats</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T/ipykernel_58561/3542210947.py:1: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
-  df.groupby([&#39;species&#39;]).aggregate(summary_stats)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T/ipykernel_96831/1526914846.py:1: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+  df.groupby([&quot;species&quot;]).aggregate(summary_stats)
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -4625,7 +4625,7 @@ Name: species, dtype: float64
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 56;
-                var nbb_unformatted_code = "df.groupby(['species']).aggregate(summary_stats)";
+                var nbb_unformatted_code = "df.groupby([\"species\"]).aggregate(summary_stats)";
                 var nbb_formatted_code = "df.groupby([\"species\"]).aggregate(summary_stats)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -4782,9 +4782,11 @@ Name: species, dtype: float64
 <p>Prestiamo attenzione alla seguente sintassi:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="s1">&#39;body_mass_g&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">]]</span>
-                         <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
-                         <span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">])</span>
+<span class="p">)</span>
 <span class="n">summary_stats</span>
 </pre></div>
 </div>
@@ -4867,7 +4869,7 @@ Name: species, dtype: float64
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 59;
-                var nbb_unformatted_code = "summary_stats = (df.loc[:, ['species', 'body_mass_g', 'flipper_length_mm']]\n                         .groupby('species')\n                         .aggregate(['mean', 'std', 'count']))\nsummary_stats";
+                var nbb_unformatted_code = "summary_stats = (\n    df.loc[:, [\"species\", \"body_mass_g\", \"flipper_length_mm\"]]\n    .groupby(\"species\")\n    .aggregate([\"mean\", \"std\", \"count\"])\n)\nsummary_stats";
                 var nbb_formatted_code = "summary_stats = (\n    df.loc[:, [\"species\", \"body_mass_g\", \"flipper_length_mm\"]]\n    .groupby(\"species\")\n    .aggregate([\"mean\", \"std\", \"count\"])\n)\nsummary_stats";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -4885,9 +4887,11 @@ Name: species, dtype: float64
 <p>È facile estendere l’esempio precedente a casi più complessi. Per esempio, possiamo analizzare simultaneamente i dati di più colonne, dopo avere ragruppato i dati in base alle modalità specificate da colonne multiple. Per l’esempio presente, calcolo le statistiche descrittive delle variabili <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code> e <code class="docutils literal notranslate"><span class="pre">bill_length_mm</span></code> separatamente per ciascuna isola e per ciascuna specie:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="s1">&#39;island&#39;</span><span class="p">,</span> <span class="s1">&#39;body_mass_g&#39;</span><span class="p">,</span> <span class="s1">&#39;bill_length_mm&#39;</span><span class="p">]]</span>
-                         <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="s1">&#39;island&#39;</span><span class="p">])</span>
-                         <span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;island&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_length_mm&quot;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;island&quot;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">])</span>
+<span class="p">)</span>
 <span class="n">summary_stats</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -4994,7 +4998,7 @@ Name: species, dtype: float64
 </div></div><script type="application/javascript">
             setTimeout(function() {
                 var nbb_cell_id = 60;
-                var nbb_unformatted_code = "summary_stats = (df.loc[:, ['species', 'island', 'body_mass_g', 'bill_length_mm']]\n                         .groupby(['species', 'island'])\n                         .aggregate(['mean', 'std', 'count']))\nsummary_stats.round(1)";
+                var nbb_unformatted_code = "summary_stats = (\n    df.loc[:, [\"species\", \"island\", \"body_mass_g\", \"bill_length_mm\"]]\n    .groupby([\"species\", \"island\"])\n    .aggregate([\"mean\", \"std\", \"count\"])\n)\nsummary_stats.round(1)";
                 var nbb_formatted_code = "summary_stats = (\n    df.loc[:, [\"species\", \"island\", \"body_mass_g\", \"bill_length_mm\"]]\n    .groupby([\"species\", \"island\"])\n    .aggregate([\"mean\", \"std\", \"count\"])\n)\nsummary_stats.round(1)";
                 var nbb_cells = Jupyter.notebook.get_cells();
                 for (var i = 0; i < nbb_cells.length; ++i) {
@@ -5026,8 +5030,8 @@ Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
-pandas: 1.5.2
 numpy : 1.24.1
+pandas: 1.5.2
 
 Watermark: 2.3.1
 </pre></div>

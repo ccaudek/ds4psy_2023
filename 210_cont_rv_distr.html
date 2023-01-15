@@ -902,7 +902,6 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">load_ext</span> nb_black
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
@@ -911,23 +910,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
-                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <section id="distribuzione-gaussiana">
 <h2><span class="section-number">22.1. </span>Distribuzione Gaussiana<a class="headerlink" href="#distribuzione-gaussiana" title="Permalink to this headline">#</a></h2>
@@ -939,46 +921,25 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="c1"># defining list of r values</span>
 <span class="n">r_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-<span class="c1"># list of pmf values</span>
-<span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_values</span> <span class="p">]</span>
-<span class="c1"># plotting the graph </span>
+<span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_values</span><span class="p">]</span>
 <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">r_values</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/210_cont_rv_distr_5_0.png" src="_images/210_cont_rv_distr_5_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "n = 10\np = 0.9\n# defining list of r values\nr_values = list(range(n + 1))\n# list of pmf values\ndist = [st.binom.pmf(r, n, p) for r in r_values ]\n# plotting the graph \n_ = plt.bar(r_values, dist)";
-                var nbb_formatted_code = "n = 10\np = 0.9\n# defining list of r values\nr_values = list(range(n + 1))\n# list of pmf values\ndist = [st.binom.pmf(r, n, p) for r in r_values]\n# plotting the graph\n_ = plt.bar(r_values, dist)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Ma se aumentiamo il numero di prove di un fattore di 100 a <em>N</em> = 1000, senza modificare la probabilità di successo di 0.9, la distribuzione assume una forma campanulare quasi simmetrica. Dunque, de Moivre scoprì che, quando <em>N</em> è grande, la funzione gaussiana (che introdurremo qui sotto), nonostante sia la densità di v.c. continue, fornisce una buona approssimazione alla funzione di massa di probabilità binomiale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.9</span>
-<span class="c1"># defining list of r values</span>
 <span class="n">r_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-<span class="c1"># list of pmf values</span>
-<span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_values</span> <span class="p">]</span>
-<span class="c1"># plotting the graph </span>
+<span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_values</span><span class="p">]</span>
 <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">r_values</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">850</span><span class="p">,</span> <span class="mi">950</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">850</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -987,23 +948,11 @@ title="Print to PDF"
   return _boost._binom_pdf(x, n, p)
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_7_1.png" src="_images/210_cont_rv_distr_7_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "n = 1000\np = 0.9\n# defining list of r values\nr_values = list(range(n + 1))\n# list of pmf values\ndist = [st.binom.pmf(r, n, p) for r in r_values ]\n# plotting the graph \n_ = plt.bar(r_values, dist)\nplt.xlim(850, 950);";
-                var nbb_formatted_code = "n = 1000\np = 0.9\n# defining list of r values\nr_values = list(range(n + 1))\n# list of pmf values\ndist = [st.binom.pmf(r, n, p) for r in r_values]\n# plotting the graph\n_ = plt.bar(r_values, dist)\nplt.xlim(850, 950)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(850.0, 950.0)
+</pre></div>
+</div>
+<img alt="_images/210_cont_rv_distr_7_2.png" src="_images/210_cont_rv_distr_7_2.png" />
+</div>
 </div>
 <p>La distribuzione Normale fu scoperta da Gauss nel 1809. Il Paragrafo successivo illustra come si possa giungere alla Normale mediante una simulazione.</p>
 </section>
@@ -1026,23 +975,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "def randomwalk(n):\n    steps = []\n    for i in range(n):\n        rand = rng.integers(1, 3)\n        if rand == 1:\n            steps.append(-rng.uniform(0, 1))\n        else:\n            steps.append(rng.uniform(0, 1))\n    walk = np.cumsum(steps)\n    return walk";
-                var nbb_formatted_code = "def randomwalk(n):\n    steps = []\n    for i in range(n):\n        rand = rng.integers(1, 3)\n        if rand == 1:\n            steps.append(-rng.uniform(0, 1))\n        else:\n            steps.append(rng.uniform(0, 1))\n    walk = np.cumsum(steps)\n    return walk";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>I valori di una singola passeggiata casuale, ad esempio, sono i seguenti.</p>
 <div class="cell docutils container">
@@ -1056,54 +988,27 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.31675833970975287 -0.48060711762298125 -0.08949756702107226 0.24331636084531227 0.43005054644902563 1.102806590463647 1.351052305093218 2.299933456926536 2.3958313925206483 2.837671058688461 2.140217558806439 2.4666904228765514 2.2465554673310653 2.3281500368732733 1.9880498519185679 1.522856698216517
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "particularWalk = randomwalk(16)\nprint(*particularWalk)";
-                var nbb_formatted_code = "particularWalk = randomwalk(16)\nprint(*particularWalk)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Alla conclusione di queste passeggiate casuali (<em>random walk</em>) non possiamo sapere con esattezza dove si troverà ciascuna persona, ma possiamo conoscere con certezza le caratteristiche della distribuzione delle mille distanze dall’origine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
     <span class="n">particularWalk</span> <span class="o">=</span> <span class="n">randomwalk</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">particularWalk</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;royalblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">particularWalk</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;royalblue&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">particularWalk</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Numero di passi&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Distanza dall&#39;origine&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">particularWalk</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Numero di passi&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Distanza dall&#39;origine&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_13_0.png" src="_images/210_cont_rv_distr_13_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "for k in range(2000):\n    particularWalk = randomwalk(16)\n    plt.plot(np.arange(16), particularWalk, color='royalblue', linewidth=0.4, alpha=0.1)\n\nplt.plot(np.arange(16), particularWalk, color='black', linewidth=0.4);\nplt.xlabel('Numero di passi')\nplt.ylabel(\"Distanza dall'origine\");";
-                var nbb_formatted_code = "for k in range(2000):\n    particularWalk = randomwalk(16)\n    plt.plot(np.arange(16), particularWalk, color=\"royalblue\", linewidth=0.4, alpha=0.1)\n\nplt.plot(np.arange(16), particularWalk, color=\"black\", linewidth=0.4)\nplt.xlabel(\"Numero di passi\")\nplt.ylabel(\"Distanza dall'origine\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &quot;Distanza dall&#39;origine&quot;)
+</pre></div>
+</div>
+<img alt="_images/210_cont_rv_distr_13_1.png" src="_images/210_cont_rv_distr_13_1.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1114,37 +1019,23 @@ title="Print to PDF"
 <span class="n">avg_distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
 <span class="n">std_distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
 
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> 
-                  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;distanze&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;royalblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">distances</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;distanze&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;royalblue&quot;</span>
+<span class="p">)</span>
 <span class="c1"># calculate the pdf</span>
 <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>  <span class="c1"># extract the endpoints for the x-axis</span>
 <span class="n">x_pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">y_pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_pdf</span><span class="p">,</span> <span class="n">avg_distances</span><span class="p">,</span> <span class="n">std_distances</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pdf</span><span class="p">,</span> <span class="n">y_pdf</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>                                                   
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Distanza percorsa (m)&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Densità&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pdf</span><span class="p">,</span> <span class="n">y_pdf</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Distanza percorsa (m)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Densità&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/210_cont_rv_distr_14_0.png" src="_images/210_cont_rv_distr_14_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "distances = []\nfor k in range(2000):\n    distances.append(randomwalk(16)[15])\n\navg_distances = np.mean(distances)\nstd_distances = np.std(distances)\n\nax = sns.histplot(distances, kde=False, stat='density', \n                  label='distanze', color='royalblue')\n# calculate the pdf\nx0, x1 = ax.get_xlim()  # extract the endpoints for the x-axis\nx_pdf = np.linspace(x0, x1, 100)\ny_pdf = st.norm.pdf(x_pdf, avg_distances, std_distances)\nax.plot(x_pdf, y_pdf, 'r', lw=2, label='pdf')                                                   \nax.legend();\nax.set(xlabel='Distanza percorsa (m)', ylabel='Densit\u00e0')\nplt.show()";
-                var nbb_formatted_code = "distances = []\nfor k in range(2000):\n    distances.append(randomwalk(16)[15])\n\navg_distances = np.mean(distances)\nstd_distances = np.std(distances)\n\nax = sns.histplot(\n    distances, kde=False, stat=\"density\", label=\"distanze\", color=\"royalblue\"\n)\n# calculate the pdf\nx0, x1 = ax.get_xlim()  # extract the endpoints for the x-axis\nx_pdf = np.linspace(x0, x1, 100)\ny_pdf = st.norm.pdf(x_pdf, avg_distances, std_distances)\nax.plot(x_pdf, y_pdf, \"r\", lw=2, label=\"pdf\")\nax.legend()\nax.set(xlabel=\"Distanza percorsa (m)\", ylabel=\"Densit\u00e0\")\nplt.show()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Per esempio, possiamo predire in maniera accurata la proporzione di persone che si sono spostate in avanti oppure all’indietro. Oppure, possiamo predire accuratamente la proporzione di persone che si troveranno ad una certa distanza dalla linea di partenza (es., a 1.5 m dall’origine). Queste predizioni sono possibili perché tali distanze si distribuiscono secondo la legge Normale (la curva rossa nel grafico precedente).</p>
 <p>Questa simulazione mostra che qualunque processo nel quale viene sommato un certo numero di valori casuali, tutti provenienti dalla medesima distribuzione, converge ad una distribuzione Normale. Non importa quale sia la forma della distribuzione di partenza: essa può essere uniforme, come nell’esempio presente, o di qualunque altro tipo. La forma della distribuzione da cui viene realizzato il campionamento determina la velocità della convergenza alla Normale. In alcuni casi la convergenza è lenta; in altri casi la convergenza è molto rapida (come nell’esempio presente).</p>
@@ -1165,38 +1056,23 @@ f(y; \mu, \sigma) = {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y -  \mu)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
 
-<span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span>
+<span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mus</span><span class="p">,</span> <span class="n">sigmas</span><span class="p">):</span>
     <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu$ = </span><span class="si">{}</span><span class="s1">, $\sigma$ = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\mu$ = </span><span class="si">{}</span><span class="s2">, $\sigma$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0e30b50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb282c84850&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_16_1.png" src="_images/210_cont_rv_distr_16_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "x = np.arange(-5, 6, 0.001)\n\nmus = [-1., -0.5, 0., 1.]\nsigmas = [0.25, 0.5, 1, 2]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.norm.pdf(x, mu, sigma)\n    plt.plot(x, pdf, label=r'$\\mu$ = {}, $\\sigma$ = {}'.format(mu, sigma))\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend(loc=1)";
-                var nbb_formatted_code = "x = np.arange(-5, 6, 0.001)\n\nmus = [-1.0, -0.5, 0.0, 1.0]\nsigmas = [0.25, 0.5, 1, 2]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.norm.pdf(x, mu, sigma)\n    plt.plot(x, pdf, label=r\"$\\mu$ = {}, $\\sigma$ = {}\".format(mu, sigma))\nplt.xlabel(\"x\")\nplt.ylabel(\"f(x)\")\nplt.legend(loc=1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <section id="concentrazione">
 <h3><span class="section-number">22.2.1. </span>Concentrazione<a class="headerlink" href="#concentrazione" title="Permalink to this headline">#</a></h3>
@@ -1228,25 +1104,10 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>110.3535657824736
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>102.77934219239197
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "st.norm.rvs(loc=100, scale=15)";
-                var nbb_formatted_code = "st.norm.rvs(loc=100, scale=15)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Estraiamo ora 10 valori a caso dalla <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span>:</p>
 <div class="cell docutils container">
@@ -1257,25 +1118,10 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>97.47398019784079 69.03834998709489 69.862540722626 126.59986414390005 71.12305017835735 78.70381728352477 73.61538490438983 90.79899168699605 127.2356957878546 107.72975136318178
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>99.86448205415172 87.17741801008079 86.90439589798254 107.1811230280173 98.93842939038613 85.51575259456104 103.98518193720541 99.2215723917815 74.80707326908723 102.62469334854964
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "qi = st.norm.rvs(loc=100, scale=15, size=10)\nprint(*qi)";
-                var nbb_formatted_code = "qi = st.norm.rvs(loc=100, scale=15, size=10)\nprint(*qi)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Per trovare la probabilità che un’osservazione estratta a caso dalla <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span> abbia un valore minore o uguale a, diciamo, 115, troviamo il valore della funzione di ripartizione (o funzione cumulativa di densità) nel punto 115.</p>
 <div class="cell docutils container">
@@ -1288,64 +1134,40 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8413447460685429
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "st.norm.cdf(115, 100, 15)";
-                var nbb_formatted_code = "st.norm.cdf(115, 100, 15)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Questa è l’area sottesa alla funzione di densità nell’intervallo <span class="math notranslate nohighlight">\([-\infty, 115]\)</span>, come indicato nella figura seguente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
 <span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span> <span class="o">=</span> <span class="n">x</span><span class="o">&lt;=</span><span class="mi">115</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">115</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_24_0.png" src="_images/210_cont_rv_distr_24_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "mu = 100\nsigma = 15\nx = np.linspace(mu-3*sigma, mu+3*sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where = x<=115);";
-                var nbb_formatted_code = "mu = 100\nsigma = 15\nx = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where=x <= 115)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fb2834722c0&gt;
+</pre></div>
+</div>
+<img alt="_images/210_cont_rv_distr_24_1.png" src="_images/210_cont_rv_distr_24_1.png" />
+</div>
 </div>
 <p>Solo per fare un esempio, qui di seguito fornisco il codice Python per calcolare l’integrale che stiamo discutendo per mezzo della funzione <code class="docutils literal notranslate"><span class="pre">quad</span></code> della libreria SciPy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sig</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="n">sig</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">/</span><span class="n">sig</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sig</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sig</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+
 
 <span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Il risultato è&#39;</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="s1">&#39;con errore&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Il risultato è&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="s2">&quot;con errore&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1353,22 +1175,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Il risultato è 0.841344746068543 con errore 4.0191205799653545e-10
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 14;
-                var nbb_unformatted_code = "def gaussian(x, mu, sig):\n    return 1./(np.sqrt(2.*np.pi)*sig)*np.exp(-np.power((x - mu)/sig, 2.)/2)\n\nmu = 100\nsigma = 15\nresult, error = quad(gaussian, -1000, 115, args=(mu, sigma))\nprint('Il risultato \u00e8', result, 'con errore', error)";
-                var nbb_formatted_code = "def gaussian(x, mu, sig):\n    return (\n        1.0 / (np.sqrt(2.0 * np.pi) * sig) * np.exp(-np.power((x - mu) / sig, 2.0) / 2)\n    )\n\n\nmu = 100\nsigma = 15\nresult, error = quad(gaussian, -1000, 115, args=(mu, sigma))\nprint(\"Il risultato \u00e8\", result, \"con errore\", error)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Il risultato replica quello prodotto da <code class="docutils literal notranslate"><span class="pre">.norm.cdf()</span></code>.</p>
 <p>Per trovare la proporzione di persone nella popolazione che hanno un QI maggiore di 2 deviazioni standard dalla media consideriamo l’evento complementare:</p>
@@ -1382,48 +1189,21 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.02275013194817921
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "1 - st.norm.cdf(130, 100, 15)";
-                var nbb_formatted_code = "1 - st.norm.cdf(130, 100, 15)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">130</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">130</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_29_0.png" src="_images/210_cont_rv_distr_29_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "plt.plot(x, fx)\nplt.fill_between(x, fx, where = x >= 130);";
-                var nbb_formatted_code = "plt.plot(x, fx)\nplt.fill_between(x, fx, where=x >= 130)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fb283350fa0&gt;
+</pre></div>
+</div>
+<img alt="_images/210_cont_rv_distr_29_1.png" src="_images/210_cont_rv_distr_29_1.png" />
+</div>
 </div>
 <p>In maniera equivalente, possiamo usare la <em>Survival Function</em>:</p>
 <div class="cell docutils container">
@@ -1436,22 +1216,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.022750131948179195
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 17;
-                var nbb_unformatted_code = "st.norm.sf(130, 100, 15)";
-                var nbb_formatted_code = "st.norm.sf(130, 100, 15)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>La funzione <code class="docutils literal notranslate"><span class="pre">ppf</span></code> restituisce il quantile della Normale. Ad esempio:</p>
 <div class="cell docutils container">
@@ -1464,22 +1229,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>130.0
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 18;
-                var nbb_unformatted_code = "st.norm.ppf(1-0.022750131948179195, 100, 15)";
-                var nbb_formatted_code = "st.norm.ppf(1 - 0.022750131948179195, 100, 15)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="distribuzione-normale-standard">
@@ -1503,52 +1253,25 @@ X = a + b Y \sim \mathcal{N}(\mu_X = a+b \mu_Y, \sigma_X = \left|b\right|\sigma_
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.34134474606854315
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 19;
-                var nbb_unformatted_code = "st.norm.cdf(1.8, 1.7, .1) - st.norm.cdf(1.7, 1.7, .1)";
-                var nbb_formatted_code = "st.norm.cdf(1.8, 1.7, 0.1) - st.norm.cdf(1.7, 1.7, 0.1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">1.7</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
 <span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">1.7</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.8</span><span class="p">));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">1.7</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.8</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_36_0.png" src="_images/210_cont_rv_distr_36_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 20;
-                var nbb_unformatted_code = "mu = 1.7\nsigma = 0.1\nx = np.linspace(mu-3*sigma, mu+3*sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where = (x >= 1.7) & (x <= 1.8));";
-                var nbb_formatted_code = "mu = 1.7\nsigma = 0.1\nx = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where=(x >= 1.7) & (x <= 1.8))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fb283523100&gt;
+</pre></div>
+</div>
+<img alt="_images/210_cont_rv_distr_36_1.png" src="_images/210_cont_rv_distr_36_1.png" />
+</div>
 </div>
 <p>In maniera equivalente, possiamo standardizzare i valori che delimitano l’intervallo considerato e utilizzare la funzione di ripartizione della normale standardizzata. I limiti inferiore e superiore dell’intervallo sono</p>
 <div class="math notranslate nohighlight">
@@ -1566,22 +1289,7 @@ z_{\text{inf}} = \frac{1.7 - 1.7}{0.1} = 0, \quad z_{\text{sup}} = \frac{1.8 - 1
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3413447460685429
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 21;
-                var nbb_unformatted_code = "st.norm.cdf(1.0, 0, 1) - st.norm.cdf(0, 0, 1)";
-                var nbb_formatted_code = "st.norm.cdf(1.0, 0, 1) - st.norm.cdf(0, 0, 1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Il modo più semplice per risolvere questo problema resta comunque quello di rendersi conto che la probabilità richiesta non è altro che la metà dell’area sottesa dalle distribuzioni Normali nell’intervallo <span class="math notranslate nohighlight">\([\mu - \sigma, \mu + \sigma]\)</span>, ovvero <span class="math notranslate nohighlight">\(0.683/2\)</span>.</p>
 </section>
@@ -1625,34 +1333,19 @@ f(x) = C_{\nu} x^{\nu/2-1} \exp (-x/2), \qquad \text{se } x &gt; 0,
 <span class="n">nus</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">nu</span> <span class="ow">in</span> <span class="n">nus</span><span class="p">:</span>
     <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\nu$ = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nu</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\nu$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nu</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0f83df0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2829a9b10&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_40_1.png" src="_images/210_cont_rv_distr_40_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 22;
-                var nbb_unformatted_code = "x = np.arange(0, 40, 0.1)\n\nnus = [2, 4, 8, 16]\nfor nu in nus:\n    pdf = st.chi2.pdf(x, nu)\n    plt.plot(x, pdf, label=r'$\\nu$ = {}'.format(nu))\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend(loc=1)";
-                var nbb_formatted_code = "x = np.arange(0, 40, 0.1)\n\nnus = [2, 4, 8, 16]\nfor nu in nus:\n    pdf = st.chi2.pdf(x, nu)\n    plt.plot(x, pdf, label=r\"$\\nu$ = {}\".format(nu))\nplt.xlabel(\"x\")\nplt.ylabel(\"f(x)\")\nplt.legend(loc=1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <section id="proprieta">
 <h3><span class="section-number">22.4.1. </span>Proprietà<a class="headerlink" href="#proprieta" title="Permalink to this headline">#</a></h3>
@@ -1681,35 +1374,20 @@ T = \frac{Z}{\Big( \frac{W}{\nu}\Big)^{\frac{1}{2}}}
 <span class="n">nus</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">nu</span> <span class="ow">in</span> <span class="n">nus</span><span class="p">:</span>
     <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\nu$ = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nu</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;N(μ = 0, σ = 1)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\nu$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nu</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;N(μ = 0, σ = 1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0ffc1f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb282c85cf0&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_42_1.png" src="_images/210_cont_rv_distr_42_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 23;
-                var nbb_unformatted_code = "x = np.arange(-5, 5, 0.1)\n\nnus = [1, 2, 5, 30]\nfor nu in nus:\n    pdf = st.t.pdf(x, nu)\n    plt.plot(x, pdf, label=r'$\\nu$ = {}'.format(nu))\nplt.plot(x, st.norm.pdf(x, 0, 1), label='N(\u03bc = 0, \u03c3 = 1)')\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend(loc=1)";
-                var nbb_formatted_code = "x = np.arange(-5, 5, 0.1)\n\nnus = [1, 2, 5, 30]\nfor nu in nus:\n    pdf = st.t.pdf(x, nu)\n    plt.plot(x, pdf, label=r\"$\\nu$ = {}\".format(nu))\nplt.plot(x, st.norm.pdf(x, 0, 1), label=\"N(\u03bc = 0, \u03c3 = 1)\")\nplt.xlabel(\"x\")\nplt.ylabel(\"f(x)\")\nplt.legend(loc=1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <section id="id2">
 <h3><span class="section-number">22.5.1. </span>Proprietà<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
@@ -1748,22 +1426,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 24;
-                var nbb_unformatted_code = "import scipy.special as sc\n\nalpha = 3\nbeta = 9\nsc.beta(alpha, beta)";
-                var nbb_formatted_code = "import scipy.special as sc\n\nalpha = 3\nbeta = 9\nsc.beta(alpha, beta)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Lo stesso risultato si ottiene con</p>
 <div class="cell docutils container">
@@ -1776,22 +1439,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 25;
-                var nbb_unformatted_code = "((2) * (8 * 7 * 6 * 5 * 4 * 3 * 2)) / (11 * 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2)";
-                var nbb_formatted_code = "((2) * (8 * 7 * 6 * 5 * 4 * 3 * 2)) / (11 * 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>ovvero</p>
 <div class="cell docutils container">
@@ -1806,22 +1454,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 26;
-                var nbb_unformatted_code = "alpha = 3\nbeta = 9\nsc.gamma(alpha) * sc.gamma(beta) / sc.gamma(alpha + beta)";
-                var nbb_formatted_code = "alpha = 3\nbeta = 9\nsc.gamma(alpha) * sc.gamma(beta) / sc.gamma(alpha + beta)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="distribuzione-beta">
@@ -1854,8 +1487,10 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
 
+
 <span class="k">def</span> <span class="nf">integrand</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">p</span><span class="o">**</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">p</span> <span class="o">**</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
 
 <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">9</span>
@@ -1868,22 +1503,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 27;
-                var nbb_unformatted_code = "from scipy.integrate import quad\n\ndef integrand(p, a, b):\n    return p**(a-1) * (1-p)**(b-1)\n\na = 3\nb = 9\nresult, error = quad(integrand, 0, 1, args=(a, b))\nprint(result)";
-                var nbb_formatted_code = "from scipy.integrate import quad\n\n\ndef integrand(p, a, b):\n    return p ** (a - 1) * (1 - p) ** (b - 1)\n\n\na = 3\nb = 9\nresult, error = quad(integrand, 0, 1, args=(a, b))\nprint(result)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>ovvero</p>
 <div class="cell docutils container">
@@ -1902,22 +1522,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 28;
-                var nbb_unformatted_code = "import math\n\na = 3\nb = 9\n\nresult = math.gamma(a) * math.gamma(b) / math.gamma(a + b)\nprint(result)";
-                var nbb_formatted_code = "import math\n\na = 3\nb = 9\n\nresult = math.gamma(a) * math.gamma(b) / math.gamma(a + b)\nprint(result)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>ovvero</p>
 <div class="cell docutils container">
@@ -1930,22 +1535,7 @@ B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 29;
-                var nbb_unformatted_code = "sc.beta(a, b)";
-                var nbb_formatted_code = "sc.beta(a, b)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Il valore atteso, la moda e la varianza di una distribuzione Beta sono dati dalle seguenti equazioni:</p>
 <div class="math notranslate nohighlight" id="equation-eq-beta-mean">
@@ -1965,39 +1555,24 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">5.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]</span>
-<span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">5.</span><span class="p">]</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">):</span>
     <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\alpha$ = </span><span class="si">{}</span><span class="s1">, $\beta$ = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\alpha$ = </span><span class="si">{}</span><span class="s2">, $\beta$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0df3be0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb283c206a0&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_56_1.png" src="_images/210_cont_rv_distr_56_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 30;
-                var nbb_unformatted_code = "x = np.linspace(0, 1, 200)\nalphas = [.5, 5., 1., 2., 2.]\nbetas = [.5, 1., 3., 2., 5.]\nfor a, b in zip(alphas, betas):\n    pdf = st.beta.pdf(x, a, b)\n    plt.plot(x, pdf, label=r'$\\alpha$ = {}, $\\beta$ = {}'.format(a, b))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.ylim(0, 4.5)\nplt.legend(loc=9)";
-                var nbb_formatted_code = "x = np.linspace(0, 1, 200)\nalphas = [0.5, 5.0, 1.0, 2.0, 2.0]\nbetas = [0.5, 1.0, 3.0, 2.0, 5.0]\nfor a, b in zip(alphas, betas):\n    pdf = st.beta.pdf(x, a, b)\n    plt.plot(x, pdf, label=r\"$\\alpha$ = {}, $\\beta$ = {}\".format(a, b))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.ylim(0, 4.5)\nplt.legend(loc=9)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>La funzione <code class="docutils literal notranslate"><span class="pre">beta_mean_mode_variance()</span></code> ci restituisce la media, moda e varianza della distribuzione Beta.</p>
 <div class="cell docutils container">
@@ -2005,28 +1580,11 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">beta_mean_mode_variance</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
     <span class="n">mean</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span>
     <span class="n">mode</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">variance</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">/</span> <span class="p">((</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">/</span> <span class="p">((</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">variance</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 31;
-                var nbb_unformatted_code = "def beta_mean_mode_variance(alpha, beta):\n    mean = alpha / (alpha + beta)\n    mode = (alpha - 1) / (alpha + beta - 2)\n    variance = alpha * beta / ((alpha + beta)**2 * (alpha + beta + 1))\n    return mean, mode, variance";
-                var nbb_formatted_code = "def beta_mean_mode_variance(alpha, beta):\n    mean = alpha / (alpha + beta)\n    mode = (alpha - 1) / (alpha + beta - 2)\n    variance = alpha * beta / ((alpha + beta) ** 2 * (alpha + beta + 1))\n    return mean, mode, variance";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Per esempio</p>
 <div class="cell docutils container">
@@ -2034,7 +1592,7 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">beta</span> <span class="o">=</span> <span class="mi">9</span>
 <span class="n">mean</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">variance</span> <span class="o">=</span> <span class="n">beta_mean_mode_variance</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="s1">, Mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s1">, Variance: </span><span class="si">{</span><span class="n">variance</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="s2">, Mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">, Variance: </span><span class="si">{</span><span class="n">variance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2042,22 +1600,7 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.25, Mode: 0.2, Variance: 0.014423076923076924
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 32;
-                var nbb_unformatted_code = "alpha = 3\nbeta = 9\nmean, mode, variance = beta_mean_mode_variance(alpha, beta)\nprint(f'Mean: {mean}, Mode: {mode}, Variance: {variance}')";
-                var nbb_formatted_code = "alpha = 3\nbeta = 9\nmean, mode, variance = beta_mean_mode_variance(alpha, beta)\nprint(f\"Mean: {mean}, Mode: {mode}, Variance: {variance}\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -2081,38 +1624,23 @@ f(x \mid \alpha, \beta) = \frac{1}{\pi \beta \left[1 + \left( \frac{x - \alpha}{
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">]</span>
-<span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">]</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">):</span>
     <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">cauchy</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\alpha$ = </span><span class="si">{}</span><span class="s1">, $\beta$ = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\alpha$ = </span><span class="si">{}</span><span class="s2">, $\beta$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb2d0df21d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb283c23220&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_63_1.png" src="_images/210_cont_rv_distr_63_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 33;
-                var nbb_unformatted_code = "x = np.linspace(-5, 5, 500)\nalphas = [0., 0., 0., -2.]\nbetas = [.5, 1., 2., 1.]\nfor a, b in zip(alphas, betas):\n    pdf = st.cauchy.pdf(x, loc=a, scale=b)\n    plt.plot(x, pdf, label=r'$\\alpha$ = {}, $\\beta$ = {}'.format(a, b))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.legend(loc=1)";
-                var nbb_formatted_code = "x = np.linspace(-5, 5, 500)\nalphas = [0.0, 0.0, 0.0, -2.0]\nbetas = [0.5, 1.0, 2.0, 1.0]\nfor a, b in zip(alphas, betas):\n    pdf = st.cauchy.pdf(x, loc=a, scale=b)\n    plt.plot(x, pdf, label=r\"$\\alpha$ = {}, $\\beta$ = {}\".format(a, b))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.legend(loc=1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <section id="distribuzione-log-normale">
 <h2><span class="section-number">23.1. </span>Distribuzione log-normale<a class="headerlink" href="#distribuzione-log-normale" title="Permalink to this headline">#</a></h2>
@@ -2141,35 +1669,23 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{x} \exp \left\{-\frac{(\log x -  \
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
-<span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.25</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]</span>
+<span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mus</span><span class="p">,</span> <span class="n">sigmas</span><span class="p">):</span>
     <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu$ = </span><span class="si">{}</span><span class="s1">, $\sigma$ = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\mu$ = </span><span class="si">{}</span><span class="s2">, $\sigma$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_65_0.png" src="_images/210_cont_rv_distr_65_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 34;
-                var nbb_unformatted_code = "x = np.linspace(0, 3, 100)\nmus = [0., 0., 0.]\nsigmas = [.25, .5, 1.]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.lognorm.pdf(x, sigma, scale=np.exp(mu))\n    plt.plot(x, pdf, label=r'$\\mu$ = {}, $\\sigma$ = {}'.format(mu, sigma))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.legend(loc=1);";
-                var nbb_formatted_code = "x = np.linspace(0, 3, 100)\nmus = [0.0, 0.0, 0.0]\nsigmas = [0.25, 0.5, 1.0]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.lognorm.pdf(x, sigma, scale=np.exp(mu))\n    plt.plot(x, pdf, label=r\"$\\mu$ = {}, $\\sigma$ = {}\".format(mu, sigma))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.legend(loc=1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb283e383a0&gt;
+</pre></div>
+</div>
+<img alt="_images/210_cont_rv_distr_65_1.png" src="_images/210_cont_rv_distr_65_1.png" />
+</div>
 </div>
 </section>
 <section id="commenti-e-considerazioni-finali">
@@ -2192,31 +1708,16 @@ Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
+scipy     : 1.10.0
+numpy     : 1.24.1
+pandas    : 1.5.2
 matplotlib: 3.6.2
 seaborn   : 0.12.2
-numpy     : 1.24.1
-scipy     : 1.10.0
-pandas    : 1.5.2
 
 Watermark: 2.3.1
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 35;
-                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
-                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 </section>

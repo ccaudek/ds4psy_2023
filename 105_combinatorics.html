@@ -856,7 +856,6 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">load_ext</span> nb_black
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
@@ -865,28 +864,11 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
-                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Con <code class="docutils literal notranslate"><span class="pre">itertools.permutations()</span></code> generiamo le permutazioni. Per visualizzare il risultato dobbiamo trasformarlo in una tupla:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">)</span>
 <span class="n">permutations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
 <span class="n">permutations</span>
 </pre></div>
@@ -901,22 +883,7 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
  (&#39;C&#39;, &#39;B&#39;, &#39;A&#39;))
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "permutations = it.permutations('ABC')\npermutations = tuple(permutations)\npermutations";
-                var nbb_formatted_code = "permutations = it.permutations(\"ABC\")\npermutations = tuple(permutations)\npermutations";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Possiamo ora contare quanti elementi ci sono nella tupla usando la funzione <code class="docutils literal notranslate"><span class="pre">len()</span></code>:</p>
 <div class="cell docutils container">
@@ -929,22 +896,7 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "len(permutations)";
-                var nbb_formatted_code = "len(permutations)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Oppure, applicando direttamente la formula <a class="reference internal" href="#equation-eq-permsem">(14.1)</a> possiamo usare la funzione <code class="docutils literal notranslate"><span class="pre">factorial()</span></code> contenuta nella libreria <code class="docutils literal notranslate"><span class="pre">math</span></code> di Numpy:</p>
 <div class="cell docutils container">
@@ -957,27 +909,12 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "np.math.factorial(3)";
-                var nbb_formatted_code = "np.math.factorial(3)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p><strong>Esempio 4.</strong> Un altro esempio è costituito dagli anagrammi. Gli anagrammi  sono  le permutazioni che si ottengono da una parola variando l’ordine delle lettere. Le permutazioni semplici si applicano al caso di parole costituite da lettere tutte diverse tra loro. Ad esempio, con la parola  NUMERO si ottengono <span class="math notranslate nohighlight">\(P_6 = 6! = 6\cdot5\cdot4\cdot3\cdot2\cdot1 = 720\)</span> anagrammi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;NUMERO&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;NUMERO&quot;</span><span class="p">)</span>
 <span class="n">permutations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
 <span class="n">permutations</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
@@ -991,22 +928,7 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
  (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;O&#39;, &#39;E&#39;, &#39;R&#39;))
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "permutations = it.permutations('NUMERO')\npermutations = tuple(permutations)\npermutations[0:5]";
-                var nbb_formatted_code = "permutations = it.permutations(\"NUMERO\")\npermutations = tuple(permutations)\npermutations[0:5]";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1018,22 +940,7 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>720
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "len(permutations)";
-                var nbb_formatted_code = "len(permutations)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Oppure, applichiamo direttamente la formula <a class="reference internal" href="#equation-eq-permsem">(14.1)</a>:</p>
 <div class="cell docutils container">
@@ -1046,22 +953,7 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>720
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "np.math.factorial(6)";
-                var nbb_formatted_code = "np.math.factorial(6)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p><strong>Esempio 5.</strong> Un altro esempio riguarda i giochi di carte. Ci sono 52! <span class="math notranslate nohighlight">\(\approx 8 \times 10^{67}\)</span> modi di ordinare un mazzo di carte da poker; questo numero è ``quasi’’ grande come il numero di atomi dell’universo che si stima essere uguale a circa <span class="math notranslate nohighlight">\(10^{80}\)</span>.</p>
 <div class="cell docutils container">
@@ -1074,22 +966,7 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80658175170943878571660636856403766975289505440883277824000000000000
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "np.math.factorial(52)";
-                var nbb_formatted_code = "np.math.factorial(52)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="disposizioni-semplici">
@@ -1112,7 +989,7 @@ D_{n,k} = \frac{n!}{(n-k)!} = 3 \cdot 2 = 6.
 <p>Possiamo trovare il risultato con la seguente istruzione:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1120,26 +997,11 @@ D_{n,k} = \frac{n!}{(n-k)!} = 3 \cdot 2 = 6.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;B&#39;), (&#39;A&#39;, &#39;C&#39;), (&#39;B&#39;, &#39;A&#39;), (&#39;B&#39;, &#39;C&#39;), (&#39;C&#39;, &#39;A&#39;), (&#39;C&#39;, &#39;B&#39;))
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "tuple(it.permutations('ABC', 2))";
-                var nbb_formatted_code = "tuple(it.permutations(\"ABC\", 2))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1148,28 +1010,14 @@ D_{n,k} = \frac{n!}{(n-k)!} = 3 \cdot 2 = 6.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "res = tuple(it.permutations('ABC', 2))\nlen(res)";
-                var nbb_formatted_code = "res = tuple(it.permutations(\"ABC\", 2))\nlen(res)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Oppure possiamo implementare l’eq. <a class="reference internal" href="#equation-eq-disp-simple">(14.2)</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_disp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+
 
 <span class="n">simple_disp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -1179,22 +1027,7 @@ D_{n,k} = \frac{n!}{(n-k)!} = 3 \cdot 2 = 6.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "def simple_disp(n, k):\n    return np.math.factorial(n) / np.math.factorial(n - k)\n\nsimple_disp(3, 2)";
-                var nbb_formatted_code = "def simple_disp(n, k):\n    return np.math.factorial(n) / np.math.factorial(n - k)\n\n\nsimple_disp(3, 2)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="combinazioni-semplici">
@@ -1217,7 +1050,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <p>Usiamo <code class="docutils literal notranslate"><span class="pre">itertools</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_nk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="s1">&#39;ABC&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_nk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="n">c_nk</span>
 </pre></div>
 </div>
@@ -1226,22 +1059,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;B&#39;), (&#39;A&#39;, &#39;C&#39;), (&#39;B&#39;, &#39;C&#39;))
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 14;
-                var nbb_unformatted_code = "c_nk = tuple(it.combinations('ABC', 2))\nc_nk";
-                var nbb_formatted_code = "c_nk = tuple(it.combinations(\"ABC\", 2))\nc_nk";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1253,22 +1071,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "len(c_nk)";
-                var nbb_formatted_code = "len(c_nk)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>La soluzione si trova anche usando la funzione <code class="docutils literal notranslate"><span class="pre">comb()</span></code> della libreria <code class="docutils literal notranslate"><span class="pre">math</span></code>:</p>
 <div class="cell docutils container">
@@ -1281,22 +1084,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "math.comb(3, 2)";
-                var nbb_formatted_code = "math.comb(3, 2)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p><strong>Esempio 8.</strong> Quanti gruppi di 4 si possono formare con 20 individui?</p>
 <div class="cell docutils container">
@@ -1310,22 +1098,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((0, 1, 2, 3), (0, 1, 2, 4), (0, 1, 2, 5), (0, 1, 2, 6), (0, 1, 2, 7))
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 17;
-                var nbb_unformatted_code = "c_nk = tuple(it.combinations(range(20), 4))\nc_nk[0:5]";
-                var nbb_formatted_code = "c_nk = tuple(it.combinations(range(20), 4))\nc_nk[0:5]";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1337,22 +1110,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4845
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 18;
-                var nbb_unformatted_code = "len(c_nk)";
-                var nbb_formatted_code = "len(c_nk)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>ovvero</p>
 <div class="cell docutils container">
@@ -1365,22 +1123,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4845
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 19;
-                var nbb_unformatted_code = "math.comb(20, 4)";
-                var nbb_formatted_code = "math.comb(20, 4)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="anticipazione">
@@ -1389,7 +1132,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <p><strong>Esempio 9.</strong> Consideriamo l’esperimento casuale corrispondente al lancio di un dado bilanciato a sei facce. L’insieme di tutti i risultati possibili si dice “spazio campione” dell’esperimento casuale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">dice1</span> <span class="k">for</span> <span class="n">dice1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">dice1</span> <span class="k">for</span> <span class="n">dice1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1398,22 +1141,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6]
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 20;
-                var nbb_unformatted_code = "sample = [dice1 for dice1 in range(1,7)]\nprint(sample)";
-                var nbb_formatted_code = "sample = [dice1 for dice1 in range(1, 7)]\nprint(sample)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Definisco l’evento ‘risultato minore di 4’:</p>
 <div class="cell docutils container">
@@ -1427,22 +1155,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 21;
-                var nbb_unformatted_code = "event = [roll for roll in sample if roll < 4]\nprint(event)";
-                var nbb_formatted_code = "event = [roll for roll in sample if roll < 4]\nprint(event)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Calcolo la probabilità di ottenere un numero minore di 4 quando lancio un dado bilanciato.</p>
 <div class="cell docutils container">
@@ -1455,22 +1168,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 6
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 22;
-                var nbb_unformatted_code = "print(len(event), \"/\", len(sample))";
-                var nbb_formatted_code = "print(len(event), \"/\", len(sample))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Il precedente esercizio illustra il tipo di procedura che si usa negli esercizi che chiedono di trovare la probabilità di un evento utilizzando il calcolo combinatorio. Quello che abbiamo fatto (in un caso in cui non era ovviamente necessario usare Python per trovare la soluzione) è stato di contare il numero di punti dello spazio campione (<code class="docutils literal notranslate"><span class="pre">len(sample)</span></code>) e il numero di punti dello spazio campione che soddisfano la condizione enunciata dal problema (<code class="docutils literal notranslate"><span class="pre">len(event)</span></code>). Il rapporto ci dà quello che chiamiamo <em>probabilità</em>.</p>
 <p><strong>Esempio 10.</strong> Consideriamo il lancio di due dadi bilanciati a quattro facce numerate 1, 2, 3, 4. Creo lo spazio campione di questo esperimento casuale.</p>
@@ -1500,22 +1198,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
  (4, 4)]
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 23;
-                var nbb_unformatted_code = "die_rolls = list(it.product(range(1, 5), repeat=2))\ndie_rolls";
-                var nbb_formatted_code = "die_rolls = list(it.product(range(1, 5), repeat=2))\ndie_rolls";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>In questo esperimento casuale sono interessato alla somma dei punti ottenuti dai due dadi. La somma dei punti può assumere sette valori possibili:</p>
 <div class="cell docutils container">
@@ -1529,27 +1212,12 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, 3, 4, 5, 6, 7, 8])
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 24;
-                var nbb_unformatted_code = "results = np.arange(2, 9)\nresults";
-                var nbb_formatted_code = "results = np.arange(2, 9)\nresults";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Mi pongo la seguente domanda: in quanti modi diversi posso ottenere ciascuno dei possibili sette valori elencati sopra? Il valore 2 si trova solo in un punto dello spazio campione, (1, 1); il valore 3 si trova solo in due punti dello spazio campione: (1, 2), (2, 1); eccetera. Nel caso di uno spazio campione piccolo (16 elementi nel caso presente) possiamo fare questi calcoli a mano. Ma quando lo spazio campione è più grande, questo non è possibile. Usiamo dunque Python per trovare la soluzione.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span><span class="o">==</span><span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span> <span class="o">==</span> <span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1557,22 +1225,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 4, 3, 2, 1])
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 25;
-                var nbb_unformatted_code = "sum(sum(rol)==results for rol in die_rolls)";
-                var nbb_formatted_code = "sum(sum(rol) == results for rol in die_rolls)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Esaminiamo la seguente <em>list comprehension</em>:</p>
 <div class="cell docutils container">
@@ -1600,22 +1253,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
  array([False, False, False, False, False, False,  True])]
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 26;
-                var nbb_unformatted_code = "[sum(rol) == results for rol in die_rolls]";
-                var nbb_formatted_code = "[sum(rol) == results for rol in die_rolls]";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>L’istruzione <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">rol</span> <span class="pre">in</span> <span class="pre">die_rolls</span></code> significa “considera ciascuno degli elementi (<code class="docutils literal notranslate"><span class="pre">rol</span></code>) della lista <code class="docutils literal notranslate"><span class="pre">die_rolls</span></code>”. Ciascuno dei 16 elementi di <code class="docutils literal notranslate"><span class="pre">die_rolls</span></code> è una lista di due elementi (i punti dei due dadi). La lista <code class="docutils literal notranslate"><span class="pre">die_rolls</span></code> elenca dunque tutti i risultati possibili dell’esperimento casuale, ovvero tutti i 16 punti dello  <em>spazio campione</em>.</p>
 <p>L’espressione <code class="docutils literal notranslate"><span class="pre">sum(rol)</span></code> applica il metodo <code class="docutils literal notranslate"><span class="pre">sum()</span></code> a ciascun elemento (coppia di valori) della lista <code class="docutils literal notranslate"><span class="pre">die_rolls</span></code>.</p>
@@ -1626,7 +1264,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">die_rolls</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
-<span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span><span class="o">==</span><span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span>
+<span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span> <span class="o">==</span> <span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1634,27 +1272,12 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1])
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 27;
-                var nbb_unformatted_code = "die_rolls = list(it.product(range(1, 7), repeat=2))\nresults = np.arange(2, 13)\nsum(sum(rol)==results for rol in die_rolls)";
-                var nbb_formatted_code = "die_rolls = list(it.product(range(1, 7), repeat=2))\nresults = np.arange(2, 13)\nsum(sum(rol) == results for rol in die_rolls)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>La distribuzione di probabilità si trova dividendo per 36:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span><span class="o">==</span><span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">die_rolls</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rol</span><span class="p">)</span> <span class="o">==</span> <span class="n">results</span> <span class="k">for</span> <span class="n">rol</span> <span class="ow">in</span> <span class="n">die_rolls</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">die_rolls</span><span class="p">)</span>
 <span class="n">prob</span>
 </pre></div>
 </div>
@@ -1665,51 +1288,21 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
        0.02777778])
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 28;
-                var nbb_unformatted_code = "prob = sum(sum(rol)==results for rol in die_rolls) / len(die_rolls)\nprob";
-                var nbb_formatted_code = "prob = sum(sum(rol) == results for rol in die_rolls) / len(die_rolls)\nprob";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
 <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">prob</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Somma dei lanci di due dadi&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilità&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Somma dei lanci di due dadi&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probabilità&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/105_combinatorics_56_0.png" src="_images/105_combinatorics_56_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 29;
-                var nbb_unformatted_code = "fig, ax = plt.subplots()\n_ = plt.bar(results, prob)\nplt.xlabel('Somma dei lanci di due dadi')\nplt.ylabel('Probabilit\u00e0')\nplt.show()";
-                var nbb_formatted_code = "fig, ax = plt.subplots()\n_ = plt.bar(results, prob)\nplt.xlabel(\"Somma dei lanci di due dadi\")\nplt.ylabel(\"Probabilit\u00e0\")\nplt.show()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="watermark">
@@ -1728,30 +1321,15 @@ Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
+seaborn   : 0.12.2
 numpy     : 1.24.1
 matplotlib: 3.6.2
-seaborn   : 0.12.2
 pandas    : 1.5.2
 
 Watermark: 2.3.1
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 30;
-                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
-                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 </section>

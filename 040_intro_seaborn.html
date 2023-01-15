@@ -720,8 +720,9 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -729,7 +730,6 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">load_ext</span> nb_black
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
@@ -738,101 +738,43 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
-                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 12345\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Considero nuovamente i dati Palmer penguin.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/penguins.csv&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/penguins.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "df = pd.read_csv(\"data/penguins.csv\");";
-                var nbb_formatted_code = "df = pd.read_csv(\"data/penguins.csv\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <section id="visualizzare-la-distribuzione-dei-dati">
 <h2><span class="section-number">7.1. </span>Visualizzare la distribuzione dei dati<a class="headerlink" href="#visualizzare-la-distribuzione-dei-dati" title="Permalink to this headline">#</a></h2>
 <p>Una delle rappresentazioni grafiche dei dati che si usano più spesso è l’istogramma, o l’istogramma lisciato. Come in precedenza, possiamo creare un istogramma o un kde plot direttamente da pandas:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/040_intro_seaborn_7_0.png" src="_images/040_intro_seaborn_7_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "df[\"body_mass_g\"].plot.hist();";
-                var nbb_formatted_code = "df[\"body_mass_g\"].plot.hist()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: ylabel=&#39;Frequency&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/040_intro_seaborn_7_1.png" src="_images/040_intro_seaborn_7_1.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">kde</span><span class="p">(</span><span class="n">bw_method</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">kde</span><span class="p">(</span><span class="n">bw_method</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/040_intro_seaborn_8_0.png" src="_images/040_intro_seaborn_8_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "df[\"body_mass_g\"].plot.kde(bw_method=0.3);";
-                var nbb_formatted_code = "df[\"body_mass_g\"].plot.kde(bw_method=0.3)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: ylabel=&#39;Density&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/040_intro_seaborn_8_1.png" src="_images/040_intro_seaborn_8_1.png" />
+</div>
 </div>
 <p>Oppure possiamo usare Seaborn:</p>
 <div class="cell docutils container">
@@ -843,22 +785,7 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_10_0.png" src="_images/040_intro_seaborn_10_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "_ = sns.displot(df, x=\"body_mass_g\", aspect=1.618, height=3.1)";
-                var nbb_formatted_code = "_ = sns.displot(df, x=\"body_mass_g\", aspect=1.618, height=3.1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -868,22 +795,7 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_11_0.png" src="_images/040_intro_seaborn_11_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "_ = sns.displot(df, x=\"body_mass_g\", stat=\"density\", aspect=1.618, height=3.1)";
-                var nbb_formatted_code = "_ = sns.displot(df, x=\"body_mass_g\", stat=\"density\", aspect=1.618, height=3.1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -893,48 +805,20 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_12_0.png" src="_images/040_intro_seaborn_12_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "_ = sns.displot(df, x=\"body_mass_g\", kind=\"kde\", aspect=1.618, height=3.1)";
-                var nbb_formatted_code = "_ = sns.displot(df, x=\"body_mass_g\", kind=\"kde\", aspect=1.618, height=3.1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Creaiamo l’istogramma lisciato di <code class="docutils literal notranslate"><span class="pre">body_massg</span></code> in funzione di <code class="docutils literal notranslate"><span class="pre">species</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.618</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.618</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.1</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_14_0.png" src="_images/040_intro_seaborn_14_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "_ = sns.displot(df, x=\"body_mass_g\", hue=\"species\", kind=\"kde\", aspect=1.618, height=3.1)";
-                var nbb_formatted_code = "_ = sns.displot(\n    df, x=\"body_mass_g\", hue=\"species\", kind=\"kde\", aspect=1.618, height=3.1\n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="visualizzazione-di-dati-categoriali">
@@ -942,28 +826,13 @@ title="Print to PDF"
 <p>Consideriamo ora il caso in cui si vuole rappresentare la relazione tra una variabile numerica e una variabile categoriale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;island&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;swarm&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;island&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;swarm&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_16_0.png" src="_images/040_intro_seaborn_16_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "_ = sns.catplot(data=df, x='island', y='bill_length_mm', hue='species', kind='swarm')";
-                var nbb_formatted_code = "_ = sns.catplot(data=df, x=\"island\", y=\"bill_length_mm\", hue=\"species\", kind=\"swarm\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Scopriamo che</p>
 <ul class="simple">
@@ -974,83 +843,48 @@ title="Print to PDF"
 <p>Analizziamo ora la massa del corpo in funzione della specie, distinguendo le osservazioni in base al genere. Creaiamo il grafico con dei boxplot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;body_mass_g&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;box&#39;</span><span class="p">,</span> 
-                <span class="n">aspect</span><span class="o">=</span><span class="mf">1.618</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.618</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.1</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_18_0.png" src="_images/040_intro_seaborn_18_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "_ = sns.catplot(df, x='species', y='body_mass_g', hue='sex', kind='box', \n                aspect=1.618, height=3.1)";
-                var nbb_formatted_code = "_ = sns.catplot(\n    df, x=\"species\", y=\"body_mass_g\", hue=\"sex\", kind=\"box\", aspect=1.618, height=3.1\n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Dal diagramma è evidente che i pinguini maschi pesano più delle femmine in tutte le specie e che i pinguini Gentoo pesano più di quelli Adelie e Chinstrap.</p>
 <p>In alternativa, possiamo usare la rappresentazione del violinplot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;body_mass_g&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;violin&#39;</span><span class="p">,</span> 
-                <span class="n">aspect</span><span class="o">=</span><span class="mf">1.618</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;violin&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.618</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.1</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_20_0.png" src="_images/040_intro_seaborn_20_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "_ = sns.catplot(df, x='species', y='body_mass_g', hue='sex', kind='violin', \n                aspect=1.618, height=3.1)";
-                var nbb_formatted_code = "_ = sns.catplot(\n    df, x=\"species\", y=\"body_mass_g\", hue=\"sex\", kind=\"violin\", aspect=1.618, height=3.1\n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;body_mass_g&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;violin&#39;</span><span class="p">,</span> 
-                <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.618</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;violin&quot;</span><span class="p">,</span>
+    <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="o">=</span><span class="mf">1.618</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mf">3.1</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_21_0.png" src="_images/040_intro_seaborn_21_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "_ = sns.catplot(df, x='species', y='body_mass_g', hue='sex', kind='violin', \n                split=True, aspect=1.618, height=3.1)";
-                var nbb_formatted_code = "_ = sns.catplot(\n    df,\n    x=\"species\",\n    y=\"body_mass_g\",\n    hue=\"sex\",\n    kind=\"violin\",\n    split=True,\n    aspect=1.618,\n    height=3.1,\n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="relazioni-tra-variabili">
@@ -1058,8 +892,8 @@ title="Print to PDF"
 <p>Calcoliamo la correlazione tra le variabili.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">vars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;flipper_length_mm&#39;</span><span class="p">,</span> <span class="s1">&#39;body_mass_g&#39;</span><span class="p">]</span>
-<span class="n">corr_matrix</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="nb">vars</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">vars</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;flipper_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="nb">vars</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">corr_matrix</span>
 </pre></div>
 </div>
@@ -1120,108 +954,61 @@ title="Print to PDF"
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 14;
-                var nbb_unformatted_code = "vars = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']\ncorr_matrix=df[vars].corr().round(2)\ncorr_matrix";
-                var nbb_formatted_code = "vars = [\"bill_length_mm\", \"bill_depth_mm\", \"flipper_length_mm\", \"body_mass_g\"]\ncorr_matrix = df[vars].corr().round(2)\ncorr_matrix";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>È più semplice leggere queste informazioni usando la rappresentazione seguente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;YlGnBu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/040_intro_seaborn_25_0.png" src="_images/040_intro_seaborn_25_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "sns.heatmap(corr_matrix, annot=True, linecolor='white', linewidths=5, cmap=\"YlGnBu\");";
-                var nbb_formatted_code = "sns.heatmap(corr_matrix, annot=True, linecolor=\"white\", linewidths=5, cmap=\"YlGnBu\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: &gt;
+</pre></div>
+</div>
+<img alt="_images/040_intro_seaborn_25_1.png" src="_images/040_intro_seaborn_25_1.png" />
+</div>
 </div>
 <p>La lunghezza della pinna e la massa corporea sono fortemente associati con una correlazione di 0.87. In altre parole, i pinguini con pinne più lunghe generalmente pesano di più.</p>
 <p>Vediamo qui sotto un esempio di diagramma a dispersione.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/040_intro_seaborn_27_0.png" src="_images/040_intro_seaborn_27_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "_ = sns.scatterplot(df, x='bill_length_mm', y='bill_depth_mm', hue='species')";
-                var nbb_formatted_code = "_ = sns.scatterplot(df, x=\"bill_length_mm\", y=\"bill_depth_mm\", hue=\"species\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Chiaramente le osservazioni delle tre specie si raggruppano in cluster separati. Per ciascuna specie, la lunghezza e la largezza del becco rientrano in un certo intervallo.</p>
 <p>È utile creare grafici separati in base a qualche dimensione dei dati; nell’esempio qui sotto, in base all’isola:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span>
-    <span class="n">row</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;island&#39;</span><span class="p">,</span>
-    <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">facet_kws</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">margin_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span>
+    <span class="n">row</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="s2">&quot;island&quot;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">facet_kws</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">margin_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
 <span class="p">)</span>
-<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s2">&quot;Bill length (mm)&quot;</span><span class="p">,</span> <span class="s2">&quot;Bill depth (mm)&quot;</span><span class="p">,);</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span>
+    <span class="s2">&quot;Bill length (mm)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Bill depth (mm)&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/040_intro_seaborn_29_0.png" src="_images/040_intro_seaborn_29_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 17;
-                var nbb_unformatted_code = "g = sns.relplot(\n    data=df, \n    x=\"bill_length_mm\", y=\"bill_depth_mm\", hue=\"species\",\n    row=\"sex\", col='island',\n    height=3, facet_kws=dict(margin_titles=True),\n)\ng.set_axis_labels(\"Bill length (mm)\", \"Bill depth (mm)\",);";
-                var nbb_formatted_code = "g = sns.relplot(\n    data=df,\n    x=\"bill_length_mm\",\n    y=\"bill_depth_mm\",\n    hue=\"species\",\n    row=\"sex\",\n    col=\"island\",\n    height=3,\n    facet_kws=dict(margin_titles=True),\n)\ng.set_axis_labels(\n    \"Bill length (mm)\",\n    \"Bill depth (mm)\",\n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fe7c9dc5750&gt;
+</pre></div>
+</div>
+<img alt="_images/040_intro_seaborn_29_1.png" src="_images/040_intro_seaborn_29_1.png" />
+</div>
 </div>
 </section>
 <section id="watermark">
@@ -1240,30 +1027,15 @@ Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
-numpy     : 1.24.1
 seaborn   : 0.12.2
-pandas    : 1.5.2
+numpy     : 1.24.1
 matplotlib: 3.6.2
+pandas    : 1.5.2
 
 Watermark: 2.3.1
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 18;
-                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
-                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 </section>
