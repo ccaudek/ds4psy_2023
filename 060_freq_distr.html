@@ -1170,7 +1170,8 @@ title="Print to PDF"
 <p>In <code class="docutils literal notranslate"><span class="pre">pandas.cut()</span></code>, il primo argomento <code class="docutils literal notranslate"><span class="pre">x</span></code> è un array unidimensionale (lista python,  <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> o <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code>) che contiene i dati e il secondo argomento <code class="docutils literal notranslate"><span class="pre">bins</span></code> specifica gli intervalli delle classi. La funzione restituisce un array che specifica la classe di appartenenza di ogni elemento dell’array <code class="docutils literal notranslate"><span class="pre">x</span></code>. L’argomento <code class="docutils literal notranslate"><span class="pre">include_lowest=True</span></code> specifica classi chiuse a destra (nel nostro caso è irrilevante dato che nessuna osservazione coincide con il limite di una classe).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">,</span> <span class="mf">19.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mi">63</span><span class="p">],</span> <span class="n">include_lowest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">,</span> <span class="mf">19.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mi">63</span><span class="p">],</span> <span class="n">include_lowest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1178,7 +1179,7 @@ title="Print to PDF"
 <p>Esamino il risultato ottenuto.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1221,7 +1222,8 @@ Name: bdi_class, dtype: int64
 <p>L’output di <code class="docutils literal notranslate"><span class="pre">.value_counts</span></code> è una tabella delle frequenze assolute, anche se è possibile utilizzare la funzione <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code> per ottenere una visualizzazione migliore, in quanto tale funzione restituisce un DataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abs_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Abs. freq.&quot;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abs_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+                       <span class="s2">&quot;Abs. freq.&quot;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
 <span class="n">abs_freq</span>
 </pre></div>
 </div>
@@ -1457,7 +1459,8 @@ dtype: float64
 <p>Si noti che, nel caso di stringhe, le righe del DataFrame prodotto da <code class="docutils literal notranslate"><span class="pre">pd.crosstab()</span></code> saranno ordinate alfabeticamente per i valori della prima colonna.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grp_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Abs. freq.&quot;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grp_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+                       <span class="s2">&quot;Abs. freq.&quot;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
 <span class="n">grp_freq</span>
 </pre></div>
 </div>
@@ -1764,7 +1767,8 @@ dtype: float64
 <p>Le frequenze congiunte trovate nell’esempio precedente erano frequenze assolute, ma è immediato estendere tale concetto a quello delle frequenze congiunte relative. Queste si possono calcolare dividendo le frequenze assolute per il numero totale di osservazioni, oppure utilizzando il parametro <code class="docutils literal notranslate"><span class="pre">normalize</span></code> in <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code>, che però ora ha diversi valori possibili. Specificando <code class="docutils literal notranslate"><span class="pre">all</span></code> vengono calcolate le frequenze relative:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span>
+            <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1904,7 +1908,8 @@ dtype: float64
 <p>Usando <code class="docutils literal notranslate"><span class="pre">index</span></code> si otterrà una tabella in cui i valori su ogni riga sommano a 1:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span>
+            <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2141,10 +2146,10 @@ Python implementation: CPython
 Python version       : 3.10.8
 IPython version      : 8.7.0
 
-seaborn   : 0.12.2
+pandas    : 1.5.2
 matplotlib: 3.6.2
 numpy     : 1.24.1
-pandas    : 1.5.2
+seaborn   : 0.12.2
 
 Watermark: 2.3.1
 </pre></div>

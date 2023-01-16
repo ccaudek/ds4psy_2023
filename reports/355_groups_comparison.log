@@ -32,15 +32,11 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-with pm.Model() as model_penguin_mass_all_species:
-    # Note the addition of the shape parameter
-    sigma = pm.HalfNormal("sigma", sigma=2000, shape=3)
-    mu = pm.Normal("mu", 4000, 2000, shape=3)
-    mass = pm.Normal("mass",
-                     mu=mu[all_species.codes],
-                     sigma=sigma[all_species.codes],
-                     observed=penguins["body_mass_g"])
+with pm.Model() as model_adelie_penguin_mass:
+    sigma = pm.HalfNormal("sigma", sigma=2000)
+    mu = pm.Normal("mu", 4000, 2000)
+    mass = pm.Normal("mass", mu=mu, sigma=sigma, observed=adelie_mass_obs)
 
-    idata3 = pm.sample()
+    idata2 = pm.sample(3000, chains=4)
 -------------------
 

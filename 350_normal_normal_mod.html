@@ -845,8 +845,9 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running on PyMC v</span><span class="si">{</span><span class="n">pm</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -861,7 +862,6 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">load_ext</span> nb_black
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
@@ -870,50 +870,45 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 42\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
-                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\nSEED = 42\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Per esaminare un esempio pratico, consideriamo i 30 valori BDI-II dei soggetti clinici di <span id="id1">[<a class="reference internal" href="z_biblio.html#id12" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">26.0</span><span class="p">,</span> <span class="mf">35.0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span>
-    <span class="mi">24</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span>
-    <span class="mi">36</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">22</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">26.0</span><span class="p">,</span>
+    <span class="mf">35.0</span><span class="p">,</span>
+    <span class="mi">30</span><span class="p">,</span>
+    <span class="mi">25</span><span class="p">,</span>
+    <span class="mi">44</span><span class="p">,</span>
+    <span class="mi">30</span><span class="p">,</span>
+    <span class="mi">33</span><span class="p">,</span>
+    <span class="mi">43</span><span class="p">,</span>
+    <span class="mi">22</span><span class="p">,</span>
+    <span class="mi">43</span><span class="p">,</span>
+    <span class="mi">24</span><span class="p">,</span>
+    <span class="mi">19</span><span class="p">,</span>
+    <span class="mi">39</span><span class="p">,</span>
+    <span class="mi">31</span><span class="p">,</span>
+    <span class="mi">25</span><span class="p">,</span>
+    <span class="mi">28</span><span class="p">,</span>
+    <span class="mi">35</span><span class="p">,</span>
+    <span class="mi">30</span><span class="p">,</span>
+    <span class="mi">26</span><span class="p">,</span>
+    <span class="mi">31</span><span class="p">,</span>
+    <span class="mi">41</span><span class="p">,</span>
+    <span class="mi">36</span><span class="p">,</span>
+    <span class="mi">26</span><span class="p">,</span>
+    <span class="mi">35</span><span class="p">,</span>
+    <span class="mi">33</span><span class="p">,</span>
+    <span class="mi">28</span><span class="p">,</span>
+    <span class="mi">27</span><span class="p">,</span>
+    <span class="mi">34</span><span class="p">,</span>
+    <span class="mi">27</span><span class="p">,</span>
+    <span class="mi">22</span><span class="p">,</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "y = [26.0, 35.0, 30, 25, 44, 30, 33, 43, 22, 43,\n    24, 19, 39, 31, 25, 28, 35, 30, 26, 31, 41,\n    36, 26, 35, 33, 28, 27, 34, 27, 22]";
-                var nbb_formatted_code = "y = [\n    26.0,\n    35.0,\n    30,\n    25,\n    44,\n    30,\n    33,\n    43,\n    22,\n    43,\n    24,\n    19,\n    39,\n    31,\n    25,\n    28,\n    35,\n    30,\n    26,\n    31,\n    41,\n    36,\n    26,\n    35,\n    33,\n    28,\n    27,\n    34,\n    27,\n    22,\n]";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Supponiamo che la varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span> della popolazione sia identica alla varianza del campione:</p>
 <div class="cell docutils container">
@@ -927,22 +922,7 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.495810615739622
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "sigma = np.std(y)\nsigma";
-                var nbb_formatted_code = "sigma = np.std(y)\nsigma";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Per fare un esempio, imponiamo su <span class="math notranslate nohighlight">\(\mu\)</span> una distribuzione a priori <span class="math notranslate nohighlight">\(\mathcal{N}(25, 2)\)</span>. In tali circostanze, la distribuzione a posteriori del parametro <span class="math notranslate nohighlight">\(\mu\)</span> può essere determinata per via analitica e corrisponde ad una Normale di media e varianza definite dall’eq. <code class="xref eq docutils literal notranslate"><span class="pre">eq-post-norm-mup</span></code> e dall’eq. <code class="xref eq docutils literal notranslate"><span class="pre">eq-post-norm-taup2</span></code>. La figura seguente mostra un grafico della distribuzione a priori, della verosimiglianza e della distribuzione a posteriori di <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 <div class="cell docutils container">
@@ -953,50 +933,16 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "def gaussian(y, m, s):\n    l = np.prod(norm.pdf(y, loc=m, scale=s))\n    return l";
-                var nbb_formatted_code = "def gaussian(y, m, s):\n    l = np.prod(norm.pdf(y, loc=m, scale=s))\n    return l";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="n">like</span> <span class="o">=</span> <span class="p">[</span><span class="n">gaussian</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">x_axis</span><span class="p">]</span> 
-<span class="n">l</span> <span class="o">=</span> <span class="n">like</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">like</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">like</span> <span class="o">=</span> <span class="p">[</span><span class="n">gaussian</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">x_axis</span><span class="p">]</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">like</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">like</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "x_axis = np.arange(18, 38, 0.01)\ns = np.std(y)\nlike = [gaussian(y, val, s) for val in x_axis] \nl = like / np.sum(like)*100";
-                var nbb_formatted_code = "x_axis = np.arange(18, 38, 0.01)\ns = np.std(y)\nlike = [gaussian(y, val, s) for val in x_axis]\nl = like / np.sum(like) * 100";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1008,60 +954,30 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/350_normal_normal_mod_10_0.png" src="_images/350_normal_normal_mod_10_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "plt.plot(x_axis, norm.pdf(x_axis, 25, 2))\nplt.plot(x_axis, l)\nplt.plot(x_axis, norm.pdf(x_axis, 29.35073, 1.032919))\nplt.show()";
-                var nbb_formatted_code = "plt.plot(x_axis, norm.pdf(x_axis, 25, 2))\nplt.plot(x_axis, l)\nplt.plot(x_axis, norm.pdf(x_axis, 29.35073, 1.032919))\nplt.show()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<img alt="_images/350_normal_normal_mod_11_0.png" src="_images/350_normal_normal_mod_11_0.png" />
+</div>
 </div>
 <p>Verifichiamo i risultati ottenuti sopra applicando l’eq. <code class="xref eq docutils literal notranslate"><span class="pre">eq-post-norm-mup</span></code> e l’eq. <code class="xref eq docutils literal notranslate"><span class="pre">eq-post-norm-taup2</span></code>. Definiamo una funzione che ritorna la media della distribuzione a posteriori di <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mu_post</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">mu_0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">ybar</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tau_0</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mu_0</span> <span class="o">+</span> <span class="n">n</span><span class="o">/</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ybar</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tau_0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n</span><span class="o">/</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">tau_0</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mu_0</span> <span class="o">+</span> <span class="n">n</span> <span class="o">/</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">ybar</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">/</span> <span class="n">tau_0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n</span> <span class="o">/</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "def mu_post(tau_0, mu_0, sigma, ybar, n):\n    return (1/tau_0**2 * mu_0 + n/sigma**2 * ybar) / (1/tau_0**2 + n/sigma**2)";
-                var nbb_formatted_code = "def mu_post(tau_0, mu_0, sigma, ybar, n):\n    return (1 / tau_0**2 * mu_0 + n / sigma**2 * ybar) / (\n        1 / tau_0**2 + n / sigma**2\n    )";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Troviamo la media a posteriori.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu_0</span> <span class="o">=</span> <span class="mi">25</span>  <span class="c1"># media della distribuzione a priori per mu</span>
 <span class="n">tau_0</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># sd della distribuzione a priori per mu</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1"># sd del campione (assunta essere sigma)</span>
-<span class="n">ybar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1"># media del campione</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># sd del campione (assunta essere sigma)</span>
+<span class="n">ybar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># media del campione</span>
 <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
-<span class="n">mu_post</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">mu_0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">ybar</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> 
+<span class="n">mu_post</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">mu_0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">ybar</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1069,57 +985,25 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29.389762700717927
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "mu_0 = 25  # media della distribuzione a priori per mu\ntau_0 = 2  # sd della distribuzione a priori per mu\nsigma = np.std(y) # sd del campione (assunta essere sigma)\nybar = np.mean(y) # media del campione\nn = len(y)\n\nmu_post(tau_0, mu_0, sigma, ybar, n) ";
-                var nbb_formatted_code = "mu_0 = 25  # media della distribuzione a priori per mu\ntau_0 = 2  # sd della distribuzione a priori per mu\nsigma = np.std(y)  # sd del campione (assunta essere sigma)\nybar = np.mean(y)  # media del campione\nn = len(y)\n\nmu_post(tau_0, mu_0, sigma, ybar, n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Definiamo una funzione che ritorna la deviazione standard della distribuzione a posteriori di <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tau_post</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tau_0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n</span><span class="o">/</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">tau_0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n</span> <span class="o">/</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "def tau_post(tau_0, sigma, n):\n    return np.sqrt(1 / (1/tau_0**2 + n/sigma**2))";
-                var nbb_formatted_code = "def tau_post(tau_0, sigma, n):\n    return np.sqrt(1 / (1 / tau_0**2 + n / sigma**2))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Troviamo la deviazione standard a posteriori.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tau_0</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># sd della distribuzione a priori per mu</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="c1"># sd del campione (assunta essere sigma)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># sd del campione (assunta essere sigma)</span>
 <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
-<span class="n">tau_post</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> 
+<span class="n">tau_post</span><span class="p">(</span><span class="n">tau_0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1127,22 +1011,7 @@ p(\mu \mid y) = \frac{1}{{\tau_p \sqrt {2\pi}}}\exp\left\{{-\frac{(\mu - \mu_p)^
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0201026493673773
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "tau_0 = 2  # sd della distribuzione a priori per mu\nsigma = np.std(y) # sd del campione (assunta essere sigma)\nn = len(y)\n\ntau_post(tau_0, sigma, n) ";
-                var nbb_formatted_code = "tau_0 = 2  # sd della distribuzione a priori per mu\nsigma = np.std(y)  # sd del campione (assunta essere sigma)\nn = len(y)\n\ntau_post(tau_0, sigma, n)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="il-modello-normale-con-pymc">
@@ -1166,31 +1035,14 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
 
 <span class="k">with</span> <span class="n">gauss_model</span><span class="p">:</span>
 
-    <span class="c1"># Priors </span>
+    <span class="c1"># Priors</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    
+
     <span class="c1"># Likelihood (sampling distribution) of observations</span>
     <span class="n">Y_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;Y_obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">6.606858</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "gauss_model = pm.Model()\n\nwith gauss_model:\n\n    # Priors \n    mu = pm.Normal(\"mu\", mu=25, sigma=2)\n    \n    # Likelihood (sampling distribution) of observations\n    Y_obs = pm.Normal(\"Y_obs\", mu=mu, sigma=6.606858, observed=y)";
-                var nbb_formatted_code = "gauss_model = pm.Model()\n\nwith gauss_model:\n    # Priors\n    mu = pm.Normal(\"mu\", mu=25, sigma=2)\n\n    # Likelihood (sampling distribution) of observations\n    Y_obs = pm.Normal(\"Y_obs\", mu=mu, sigma=6.606858, observed=y)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <p>Eseguo il campionamento MCMC.</p>
 <div class="cell docutils container">
@@ -1232,27 +1084,12 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
 </div><div class="output text_html">
 <div>
   <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:01&lt;00:00 Sampling 4 chains, 0 divergences]
+  100.00% [8000/8000 00:03&lt;00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 18 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 20 seconds.
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "with gauss_model:\n    idata = pm.sample()";
-                var nbb_formatted_code = "with gauss_model:\n    idata = pm.sample()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Una sintesi della distribuzione a posteriori dei parametri si ottiene nel modo seguente.</p>
 <div class="cell docutils container">
@@ -1294,34 +1131,19 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
   <tbody>
     <tr>
       <th>mu</th>
-      <td>29.34</td>
-      <td>1.06</td>
-      <td>27.38</td>
-      <td>31.3</td>
-      <td>0.03</td>
+      <td>29.35</td>
+      <td>1.01</td>
+      <td>27.43</td>
+      <td>31.17</td>
       <td>0.02</td>
-      <td>1776.51</td>
-      <td>2872.47</td>
+      <td>0.02</td>
+      <td>1815.82</td>
+      <td>2601.8</td>
       <td>1.0</td>
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 14;
-                var nbb_unformatted_code = "az.summary(idata, round_to=2)";
-                var nbb_formatted_code = "az.summary(idata, round_to=2)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>Si noti che le stime ottenute corrispondono ai valori teorici attesi, ovvero <span class="math notranslate nohighlight">\(\mu_p\)</span> = 29.39 contro un valore teorico di 29.3898 e <span class="math notranslate nohighlight">\(\tau_p\)</span> = 1.03 contro un valore teorico di 1.0201.</p>
 <p>Descriviamo la traccia (cioè il vettore dei campioni del parametro <span class="math notranslate nohighlight">\(\mu\)</span> prodotti dalla procedura di campionamento MCMC) mediante un <em>trace plot</em> .</p>
@@ -1333,23 +1155,8 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/350_normal_normal_mod_26_0.png" src="_images/350_normal_normal_mod_26_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 15;
-                var nbb_unformatted_code = "az.plot_trace(idata, combined=True)\nplt.show()";
-                var nbb_formatted_code = "az.plot_trace(idata, combined=True)\nplt.show()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<img alt="_images/350_normal_normal_mod_27_0.png" src="_images/350_normal_normal_mod_27_0.png" />
+</div>
 </div>
 <p>Trovo l’intervallo di credibilità a più alta densità a posteriori (HPD) al 95%.</p>
 <div class="cell docutils container">
@@ -1727,22 +1534,7 @@ Dimensions:  (hdi: 2)
 Coordinates:
   * hdi      (hdi) &lt;U6 &#x27;lower&#x27; &#x27;higher&#x27;
 Data variables:
-    mu       (hdi) float64 27.28 31.34</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-8ed83512-9d90-4244-9afa-9bc7513fdcd7' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-8ed83512-9d90-4244-9afa-9bc7513fdcd7' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>hdi</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-8e65394b-1ce9-45e3-9023-3a31d5f65cbd' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8e65394b-1ce9-45e3-9023-3a31d5f65cbd' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>hdi</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>&lt;U6</div><div class='xr-var-preview xr-preview'>&#x27;lower&#x27; &#x27;higher&#x27;</div><input id='attrs-e62f132d-6c44-4c14-9129-d1d3e210ce3d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-e62f132d-6c44-4c14-9129-d1d3e210ce3d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e3b2cc84-0cb1-498a-9287-70a07505c1f4' class='xr-var-data-in' type='checkbox'><label for='data-e3b2cc84-0cb1-498a-9287-70a07505c1f4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>hdi_prob :</span></dt><dd>0.95</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;&lt;U6&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-428d6efb-303e-47b7-8bd9-759672360457' class='xr-section-summary-in' type='checkbox'  checked><label for='section-428d6efb-303e-47b7-8bd9-759672360457' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>27.28 31.34</div><input id='attrs-7d6c78bc-9da5-44c6-bf12-b0837a984495' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7d6c78bc-9da5-44c6-bf12-b0837a984495' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a1889d0f-e7fa-4a5e-80f0-90f7e291c20b' class='xr-var-data-in' type='checkbox'><label for='data-a1889d0f-e7fa-4a5e-80f0-90f7e291c20b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([27.2835047, 31.3356445])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-610d77cb-49b4-470a-a8ff-ef9ec31d2bd3' class='xr-section-summary-in' type='checkbox'  ><label for='section-610d77cb-49b4-470a-a8ff-ef9ec31d2bd3' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>hdi</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-2f3090f7-1f85-419d-abed-8fafed75a1bf' class='xr-index-data-in' type='checkbox'/><label for='index-2f3090f7-1f85-419d-abed-8fafed75a1bf' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;object&#x27;, name=&#x27;hdi&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-059525ef-c73a-4a9e-b2d8-e92a6dd09ca2' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-059525ef-c73a-4a9e-b2d8-e92a6dd09ca2' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 16;
-                var nbb_unformatted_code = "az.hdi(idata, hdi_prob=0.95)";
-                var nbb_formatted_code = "az.hdi(idata, hdi_prob=0.95)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+    mu       (hdi) float64 27.31 31.18</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-20479d02-dcb2-486c-bafd-73a6d5308314' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-20479d02-dcb2-486c-bafd-73a6d5308314' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>hdi</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-6d84cb1d-bf08-47db-99ba-f3d0f6664102' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6d84cb1d-bf08-47db-99ba-f3d0f6664102' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>hdi</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>&lt;U6</div><div class='xr-var-preview xr-preview'>&#x27;lower&#x27; &#x27;higher&#x27;</div><input id='attrs-f4cc79f3-01b2-4e8a-b8bf-2169eee07743' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-f4cc79f3-01b2-4e8a-b8bf-2169eee07743' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9c134a24-e4a9-4543-b533-dacb21042bd9' class='xr-var-data-in' type='checkbox'><label for='data-9c134a24-e4a9-4543-b533-dacb21042bd9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>hdi_prob :</span></dt><dd>0.95</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;&lt;U6&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a9067967-c9d9-4d87-b8dc-07b5592775c8' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a9067967-c9d9-4d87-b8dc-07b5592775c8' class='xr-section-summary' >Data variables: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>27.31 31.18</div><input id='attrs-56150cd2-d0cc-4ef7-90ed-908306f39fe3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-56150cd2-d0cc-4ef7-90ed-908306f39fe3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-62038756-36e7-41f6-950a-966e4a1d7060' class='xr-var-data-in' type='checkbox'><label for='data-62038756-36e7-41f6-950a-966e4a1d7060' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([27.31223951, 31.18440558])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-48b42505-0185-4bcd-8ccf-2af9f6736e59' class='xr-section-summary-in' type='checkbox'  ><label for='section-48b42505-0185-4bcd-8ccf-2af9f6736e59' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>hdi</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-eeffe3a3-6840-4c3a-a886-13b9166f6240' class='xr-index-data-in' type='checkbox'/><label for='index-eeffe3a3-6840-4c3a-a886-13b9166f6240' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;object&#x27;, name=&#x27;hdi&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cf05a14f-ffff-4d04-a02c-5a00edef2e7a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-cf05a14f-ffff-4d04-a02c-5a00edef2e7a' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <p>Le stime così trovate sono molto simili ai quantili di ordine 0.025 e 0.975 della distribuzione a posteriori di <span class="math notranslate nohighlight">\(\mu\)</span> ottenuta per via analitica.</p>
 <div class="cell docutils container">
@@ -1755,22 +1547,7 @@ Data variables:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([27.32624596, 31.37521404])
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 17;
-                var nbb_unformatted_code = "norm.ppf([0.025, 0.975], loc=29.35073, scale=1.032919)";
-                var nbb_formatted_code = "norm.ppf([0.025, 0.975], loc=29.35073, scale=1.032919)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 <section id="versione-2-sigma-incognita">
@@ -1783,32 +1560,17 @@ Data variables:
 <span class="n">alpha</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">beta</span> <span class="o">=</span> <span class="mi">15</span>
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">cauchy</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\alpha$ = </span><span class="si">{}</span><span class="s1">, $\beta$ = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\alpha$ = </span><span class="si">{}</span><span class="s2">, $\beta$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/350_normal_normal_mod_32_0.png" src="_images/350_normal_normal_mod_32_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 18;
-                var nbb_unformatted_code = "x = np.linspace(0, 100, 500)\nalpha = 0\nbeta = 15\npdf = st.cauchy.pdf(x, loc=alpha, scale=beta)\nplt.plot(x, pdf, label=r'$\\alpha$ = {}, $\\beta$ = {}'.format(alpha, beta))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.legend(loc=1)\nplt.show()";
-                var nbb_formatted_code = "x = np.linspace(0, 100, 500)\nalpha = 0\nbeta = 15\npdf = st.cauchy.pdf(x, loc=alpha, scale=beta)\nplt.plot(x, pdf, label=r\"$\\alpha$ = {}, $\\beta$ = {}\".format(alpha, beta))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.legend(loc=1)\nplt.show()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<img alt="_images/350_normal_normal_mod_33_0.png" src="_images/350_normal_normal_mod_33_0.png" />
+</div>
 </div>
 <p>In questo secondo caso, più realistico, il modello diventa il seguente.</p>
 <div class="math notranslate nohighlight">
@@ -1828,32 +1590,15 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
 
 <span class="k">with</span> <span class="n">gauss2_model</span><span class="p">:</span>
 
-    <span class="c1"># Priors </span>
+    <span class="c1"># Priors</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Cauchy</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-    
+
     <span class="c1"># Likelihood (sampling distribution) of observations</span>
     <span class="n">Y_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;Y_obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 19;
-                var nbb_unformatted_code = "gauss2_model = pm.Model()\n\nwith gauss2_model:\n\n    # Priors \n    mu = pm.Normal(\"mu\", mu=25, sigma=2)\n    sigma = pm.Cauchy(\"sigma\", alpha=0, beta=15)\n    \n    # Likelihood (sampling distribution) of observations\n    Y_obs = pm.Normal(\"Y_obs\", mu=mu, sigma=sigma, observed=y)";
-                var nbb_formatted_code = "gauss2_model = pm.Model()\n\nwith gauss2_model:\n    # Priors\n    mu = pm.Normal(\"mu\", mu=25, sigma=2)\n    sigma = pm.Cauchy(\"sigma\", alpha=0, beta=15)\n\n    # Likelihood (sampling distribution) of observations\n    Y_obs = pm.Normal(\"Y_obs\", mu=mu, sigma=sigma, observed=y)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1895,27 +1640,12 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
 </div><div class="output text_html">
 <div>
   <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:02&lt;00:00 Sampling 4 chains, 0 divergences]
+  100.00% [8000/8000 00:04&lt;00:00 Sampling 4 chains, 2 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 15 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 24 seconds.
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 20;
-                var nbb_unformatted_code = "with gauss2_model:\n    # draw 1000 posterior samples\n    idata = pm.sample()";
-                var nbb_formatted_code = "with gauss2_model:\n    # draw 1000 posterior samples\n    idata = pm.sample()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Una sintesi della distribuzione a posteriori dei parametri si ottiene nel modo seguente.</p>
 <div class="cell docutils container">
@@ -1957,46 +1687,31 @@ Y_i &amp;\sim \mathcal{N}(\mu, \sigma) \notag\\
   <tbody>
     <tr>
       <th>mu</th>
-      <td>29.24</td>
-      <td>1.13</td>
-      <td>27.07</td>
-      <td>31.34</td>
+      <td>29.21</td>
+      <td>1.15</td>
+      <td>27.05</td>
+      <td>31.37</td>
       <td>0.02</td>
-      <td>0.01</td>
-      <td>2906.81</td>
-      <td>2311.14</td>
+      <td>0.02</td>
+      <td>2477.16</td>
+      <td>1903.32</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td>7.05</td>
-      <td>0.98</td>
-      <td>5.29</td>
-      <td>8.87</td>
+      <td>7.07</td>
+      <td>1.00</td>
+      <td>5.39</td>
+      <td>9.06</td>
       <td>0.02</td>
       <td>0.02</td>
-      <td>2280.91</td>
-      <td>1904.82</td>
+      <td>2447.02</td>
+      <td>2417.22</td>
       <td>1.0</td>
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 21;
-                var nbb_unformatted_code = "az.summary(idata, round_to=2)";
-                var nbb_formatted_code = "az.summary(idata, round_to=2)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>Trovo l’intervallo di credibilità a più alta densità a posteriori (HPD) al 95%.</p>
 <div class="cell docutils container">
@@ -2374,23 +2089,8 @@ Dimensions:  (hdi: 2)
 Coordinates:
   * hdi      (hdi) &lt;U6 &#x27;lower&#x27; &#x27;higher&#x27;
 Data variables:
-    mu       (hdi) float64 26.94 31.39
-    sigma    (hdi) float64 5.281 9.008</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-b42bbab9-80c6-4318-ab37-d991add98620' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b42bbab9-80c6-4318-ab37-d991add98620' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>hdi</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-ff9ef7a3-0691-43bb-92f8-91c7173010ce' class='xr-section-summary-in' type='checkbox'  checked><label for='section-ff9ef7a3-0691-43bb-92f8-91c7173010ce' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>hdi</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>&lt;U6</div><div class='xr-var-preview xr-preview'>&#x27;lower&#x27; &#x27;higher&#x27;</div><input id='attrs-592f9204-5a96-482c-a273-7b96d74478ad' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-592f9204-5a96-482c-a273-7b96d74478ad' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b2e3ced3-7c7f-4774-9082-d1c896e2aa67' class='xr-var-data-in' type='checkbox'><label for='data-b2e3ced3-7c7f-4774-9082-d1c896e2aa67' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>hdi_prob :</span></dt><dd>0.95</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;&lt;U6&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6e265322-942b-4cef-9d54-7ed1c6b3e9fb' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6e265322-942b-4cef-9d54-7ed1c6b3e9fb' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>26.94 31.39</div><input id='attrs-7d48a6c7-98dc-4b44-bd6f-0582aa7dc724' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7d48a6c7-98dc-4b44-bd6f-0582aa7dc724' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-27ac873a-151f-4e03-ad8e-9ecd45490e22' class='xr-var-data-in' type='checkbox'><label for='data-27ac873a-151f-4e03-ad8e-9ecd45490e22' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([26.94056259, 31.3852943 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sigma</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>5.281 9.008</div><input id='attrs-f6533dc7-6517-4bce-8388-7cb31f77b07d' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f6533dc7-6517-4bce-8388-7cb31f77b07d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c0c398a7-e411-4a8c-9c8b-b7dd74d5b45a' class='xr-var-data-in' type='checkbox'><label for='data-c0c398a7-e411-4a8c-9c8b-b7dd74d5b45a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([5.28102445, 9.00803483])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-dceb7b86-e158-4480-a950-4676fde11987' class='xr-section-summary-in' type='checkbox'  ><label for='section-dceb7b86-e158-4480-a950-4676fde11987' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>hdi</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-9dddaa0e-a198-4599-a2e2-f36b83d4f3bf' class='xr-index-data-in' type='checkbox'/><label for='index-9dddaa0e-a198-4599-a2e2-f36b83d4f3bf' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;object&#x27;, name=&#x27;hdi&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6ad4a17b-7cbb-4c2f-bafa-d754e45fb885' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-6ad4a17b-7cbb-4c2f-bafa-d754e45fb885' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 22;
-                var nbb_unformatted_code = "az.hdi(idata, hdi_prob=0.95)";
-                var nbb_formatted_code = "az.hdi(idata, hdi_prob=0.95)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+    mu       (hdi) float64 26.87 31.38
+    sigma    (hdi) float64 5.381 9.215</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-ba2fb090-3239-42b3-974c-2f0864a5d99f' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ba2fb090-3239-42b3-974c-2f0864a5d99f' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>hdi</span>: 2</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-f1ae4bff-1e12-4296-9119-024a9b81be17' class='xr-section-summary-in' type='checkbox'  checked><label for='section-f1ae4bff-1e12-4296-9119-024a9b81be17' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>hdi</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>&lt;U6</div><div class='xr-var-preview xr-preview'>&#x27;lower&#x27; &#x27;higher&#x27;</div><input id='attrs-57693d9d-bad7-4683-935e-9c68158ff1ac' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-57693d9d-bad7-4683-935e-9c68158ff1ac' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-231a8ebb-7d5f-497e-8b91-986f0ece4467' class='xr-var-data-in' type='checkbox'><label for='data-231a8ebb-7d5f-497e-8b91-986f0ece4467' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>hdi_prob :</span></dt><dd>0.95</dd></dl></div><div class='xr-var-data'><pre>array([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;&lt;U6&#x27;)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7c2c44b9-1da5-45e3-8098-ceedfd728f56' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7c2c44b9-1da5-45e3-8098-ceedfd728f56' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>26.87 31.38</div><input id='attrs-92a21076-4bab-4ce7-a011-87c7c2f25194' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-92a21076-4bab-4ce7-a011-87c7c2f25194' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f555b2ba-6874-478e-a131-16baf939b3ed' class='xr-var-data-in' type='checkbox'><label for='data-f555b2ba-6874-478e-a131-16baf939b3ed' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([26.87115803, 31.37849872])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>sigma</span></div><div class='xr-var-dims'>(hdi)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>5.381 9.215</div><input id='attrs-a6b68b57-19e1-4d35-be8d-c8273a13e274' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a6b68b57-19e1-4d35-be8d-c8273a13e274' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-3c47fb77-22f6-49e6-bf27-3a7c198a344f' class='xr-var-data-in' type='checkbox'><label for='data-3c47fb77-22f6-49e6-bf27-3a7c198a344f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([5.38113651, 9.21549275])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-0e40add5-b475-40d1-92de-7daf8523bb0d' class='xr-section-summary-in' type='checkbox'  ><label for='section-0e40add5-b475-40d1-92de-7daf8523bb0d' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>hdi</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-fd1da70c-2862-4766-ade5-4ce1af296014' class='xr-index-data-in' type='checkbox'/><label for='index-fd1da70c-2862-4766-ade5-4ce1af296014' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([&#x27;lower&#x27;, &#x27;higher&#x27;], dtype=&#x27;object&#x27;, name=&#x27;hdi&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-5cbcfc50-0527-4182-bbf8-6f62dc91de7c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-5cbcfc50-0527-4182-bbf8-6f62dc91de7c' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <p>Descrivo la traccia con un <em>trace plot</em> .</p>
 <div class="cell docutils container">
@@ -2406,23 +2106,8 @@ Data variables:
         &lt;AxesSubplot: title={&#39;center&#39;: &#39;sigma&#39;}&gt;]], dtype=object)
 </pre></div>
 </div>
-<img alt="_images/350_normal_normal_mod_41_1.png" src="_images/350_normal_normal_mod_41_1.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 23;
-                var nbb_unformatted_code = "az.plot_trace(idata, combined=True)";
-                var nbb_formatted_code = "az.plot_trace(idata, combined=True)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<img alt="_images/350_normal_normal_mod_42_1.png" src="_images/350_normal_normal_mod_42_1.png" />
+</div>
 </div>
 <p>Considerati i dati osservati e le mie ipotesi a priori sui parametri, posso dunque concludere, con un grado di certezza soggettiva del 95%, che la media della popolazione dei punteggi BDI-II dei pazienti clinici depressi è compresa nell’intervallo [27.04, 31.33].</p>
 </section>
@@ -2441,7 +2126,7 @@ Data variables:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jan 14 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jan 15 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
@@ -2449,33 +2134,18 @@ IPython version      : 8.7.0
 
 pytensor: 2.8.11
 
-arviz     : 0.14.0
 pymc      : 5.0.1
-seaborn   : 0.12.2
-pandas    : 1.5.2
-scipy     : 1.10.0
-numpy     : 1.24.1
 matplotlib: 3.6.2
+numpy     : 1.24.1
+pandas    : 1.5.2
+seaborn   : 0.12.2
+scipy     : 1.10.0
+arviz     : 0.14.0
 
 Watermark: 2.3.1
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 24;
-                var nbb_unformatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w -p pytensor";
-                var nbb_formatted_code = "%load_ext watermark\n%watermark -n -u -v -iv -w -p pytensor";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 </section>
 </section>

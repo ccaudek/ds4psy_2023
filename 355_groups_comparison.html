@@ -715,8 +715,9 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -724,7 +725,6 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">load_ext</span> nb_black
 
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
@@ -734,23 +734,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 2;
-                var nbb_unformatted_code = "%matplotlib inline\n%load_ext nb_black\n\nSEED = 42\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc('figure', figsize=(5.0, 5.0/golden))";
-                var nbb_formatted_code = "%matplotlib inline\n%load_ext nb_black\n\nSEED = 42\nrng = np.random.default_rng(SEED)\nsns.set_theme()\nsns.set_palette(\"colorblind\")\nplt.rc(\"figure\", figsize=(5.0, 5.0 / golden))";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <section id="stima-della-media-di-un-gruppo">
 <h2><span class="section-number">36.1. </span>Stima della media di un gruppo<a class="headerlink" href="#stima-della-media-di-un-gruppo" title="Permalink to this headline">#</a></h2>
@@ -772,29 +755,16 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(333, 8)
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 3;
-                var nbb_unformatted_code = "penguins = pd.read_csv(\"data/penguins.csv\")\n# Subset to the columns needed\nmissing_data = penguins.isnull()[\n    [\"bill_length_mm\", \"flipper_length_mm\", \"sex\", \"body_mass_g\"]\n].any(axis=1)\n# Drop rows with any missing data\npenguins = penguins.loc[~missing_data]\npenguins.shape";
-                var nbb_formatted_code = "penguins = pd.read_csv(\"data/penguins.csv\")\n# Subset to the columns needed\nmissing_data = penguins.isnull()[\n    [\"bill_length_mm\", \"flipper_length_mm\", \"sex\", \"body_mass_g\"]\n].any(axis=1)\n# Drop rows with any missing data\npenguins = penguins.loc[~missing_data]\npenguins.shape";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Ottengo in questo modo 333 righe e 8 colonne. Posso quindi calcolare la media del peso <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code> in funzione della specie:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]]</span>
-                         <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
-                         <span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">]))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]]</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;species&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">aggregate</span><span class="p">([</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">])</span>
+<span class="p">)</span>
 <span class="n">summary_stats</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -858,22 +828,7 @@ title="Print to PDF"
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 4;
-                var nbb_unformatted_code = "summary_stats = (penguins.loc[:, [\"species\", \"body_mass_g\"]]\n                         .groupby(\"species\")\n                         .aggregate([\"mean\", \"std\", \"count\"]))\nsummary_stats.round(1)";
-                var nbb_formatted_code = "summary_stats = (\n    penguins.loc[:, [\"species\", \"body_mass_g\"]]\n    .groupby(\"species\")\n    .aggregate([\"mean\", \"std\", \"count\"])\n)\nsummary_stats.round(1)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 <p>Ottengo in questo modo le stime puntuali sia per la media che per la dispersione dei dati nel campione, ma non conosco l’incertezza di queste statistiche. Ovvero, non so come questi valori varieranno se esaminerò un altro campione. Un modo per ottenere stime dell’incertezza è quello di utilizzare i metodi bayesiani. Per fare ciò abbiamo bisogno di ipotizzare una relazione tra le osservazioni e i parametri di un modello statistico. Ad esempio:</p>
 <div class="math notranslate nohighlight">
@@ -885,7 +840,7 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 <p>Seleziono unicamente i pinguini della specie Adelie e recupero i valori della variabile <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Adelie&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adelie_mask</span> <span class="o">=</span> <span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Adelie&quot;</span>
 <span class="n">adelie_mass_obs</span> <span class="o">=</span> <span class="n">penguins</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adelie_mask</span><span class="p">,</span> <span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
 </pre></div>
@@ -907,31 +862,16 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
  3700. 4000.]
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 5;
-                var nbb_unformatted_code = "adelie_mask = (penguins[\"species\"] == \"Adelie\")\nadelie_mass_obs = penguins.loc[adelie_mask, \"body_mass_g\"].values\nprint(adelie_mass_obs)";
-                var nbb_formatted_code = "adelie_mask = penguins[\"species\"] == \"Adelie\"\nadelie_mass_obs = penguins.loc[adelie_mask, \"body_mass_g\"].values\nprint(adelie_mass_obs)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Implemento il modello descritto sopra usando PyMC. Prima di effettuare il campionamento della distribuzione a posteriori, però, esamino la distribuzione predittiva a priori per verificare l’adeguatezza della assunzioni relative alle distribuzioni a priori dei parametri. Per questo uso la funzione <code class="docutils literal notranslate"><span class="pre">pm.sample_prior_predictive()</span></code>. Genero 1000 valori casuli dalle distribuzioni a priori dei due parametri.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_adelie_penguin_mass</span><span class="p">:</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
-    
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
+
     <span class="n">idata1</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample_prior_predictive</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -940,22 +880,7 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling: [mass, mu, sigma]
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 6;
-                var nbb_unformatted_code = "with pm.Model() as model_adelie_penguin_mass:\n    sigma = pm.HalfNormal('sigma', sigma=2000)\n    mu = pm.Normal('mu', 4000, 2000)\n    mass = pm.Normal('mass', mu=mu, sigma=sigma, observed=adelie_mass_obs)\n    \n    idata1 = pm.sample_prior_predictive(samples=1000, random_seed=rng)";
-                var nbb_formatted_code = "with pm.Model() as model_adelie_penguin_mass:\n    sigma = pm.HalfNormal(\"sigma\", sigma=2000)\n    mu = pm.Normal(\"mu\", 4000, 2000)\n    mass = pm.Normal(\"mass\", mu=mu, sigma=sigma, observed=adelie_mass_obs)\n\n    idata1 = pm.sample_prior_predictive(samples=1000, random_seed=rng)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Dall’oggetto inferenceData <code class="docutils literal notranslate"><span class="pre">idata1</span></code> recupero le distribuzioni a priori e le passo a <code class="docutils literal notranslate"><span class="pre">az.plot_trace()</span></code>:</p>
 <div class="cell docutils container">
@@ -967,30 +892,15 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/355_groups_comparison_13_0.png" src="_images/355_groups_comparison_13_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 7;
-                var nbb_unformatted_code = "prior = idata1.prior\n_ = az.plot_trace(prior)";
-                var nbb_formatted_code = "prior = idata1.prior\n_ = az.plot_trace(prior)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Dall’esame delle distribuzioni a priori dei due parameti è evidente che non stiamo vincolando eccessivamente il campionamento della variabile <code class="docutils literal notranslate"><span class="pre">adelie_mass_obs</span></code>. Potremmo anzi avere scelto delle distribuzioni a priori troppo larghe, considerato che la distribuzione a priori per <span class="math notranslate nohighlight">\(\mu\)</span> include anche valori negativi. Tuttavia, poiché questo è un modello semplice e abbiamo un discreto numero di osservazioni, non dobbiamo preoccuparci.  Passiamo dunque alla stima della distribuzione a posteriori.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model_adelie_penguin_mass</span><span class="p">:</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
-    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
-    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">adelie_mass_obs</span><span class="p">)</span>
 
     <span class="n">idata2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -1028,27 +938,12 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div><div class="output text_html">
 <div>
   <progress value='16000' class='' max='16000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [16000/16000 00:04&lt;00:00 Sampling 4 chains, 0 divergences]
+  100.00% [16000/16000 00:06&lt;00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 3_000 draw iterations (4_000 + 12_000 draws total) took 18 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 3_000 draw iterations (4_000 + 12_000 draws total) took 22 seconds.
 </pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 8;
-                var nbb_unformatted_code = "with pm.Model() as model_adelie_penguin_mass:\n    sigma = pm.HalfNormal('sigma', sigma=2000)\n    mu = pm.Normal('mu', 4000, 2000)\n    mass = pm.Normal('mass', mu=mu, sigma=sigma, observed=adelie_mass_obs)\n\n    idata2 = pm.sample(3000, chains=4)";
-                var nbb_formatted_code = "with pm.Model() as model_adelie_penguin_mass:\n    sigma = pm.HalfNormal(\"sigma\", sigma=2000)\n    mu = pm.Normal(\"mu\", 4000, 2000)\n    mass = pm.Normal(\"mass\", mu=mu, sigma=sigma, observed=adelie_mass_obs)\n\n    idata2 = pm.sample(3000, chains=4)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Il KDE ploy e il rank plot della distribuzione a posteriori dei parametri del modello bayesiano servono come strumenti diagnostici visivi per aiutarci a capire se ci sono stati problemi durante il campionamento. Non vi sono evidenze di alcun problema.</p>
 <div class="cell docutils container">
@@ -1059,51 +954,24 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/355_groups_comparison_17_0.png" src="_images/355_groups_comparison_17_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 9;
-                var nbb_unformatted_code = "axes = az.plot_trace(idata2, divergences=\"bottom\", kind=\"rank_bars\")";
-                var nbb_formatted_code = "axes = az.plot_trace(idata2, divergences=\"bottom\", kind=\"rank_bars\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div>
 </div>
 <p>Possiamo combinare le quattro catene. Un confronto tra la stima della distribuzione a posteriori e le stime puntuali dei due parametri che abbiamo ottenuto dal campione (linee verticali) è fornito nella figura seguente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">idata2</span><span class="p">,</span> <span class="n">hdi_prob</span><span class="o">=</span><span class="mf">.94</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">idata2</span><span class="p">,</span> <span class="n">hdi_prob</span><span class="o">=</span><span class="mf">0.94</span><span class="p">)</span>
 
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">3706.2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">458.6</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">458.6</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/355_groups_comparison_19_0.png" src="_images/355_groups_comparison_19_0.png" />
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 10;
-                var nbb_unformatted_code = "axes = az.plot_posterior(idata2, hdi_prob=.94)\n\naxes[0].axvline(3706.2, linestyle=\"--\")\naxes[1].axvline(458.6, linestyle=\"--\");";
-                var nbb_formatted_code = "axes = az.plot_posterior(idata2, hdi_prob=0.94)\n\naxes[0].axvline(3706.2, linestyle=\"--\")\naxes[1].axvline(458.6, linestyle=\"--\")";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f9391fe2be0&gt;
+</pre></div>
+</div>
+<img alt="_images/355_groups_comparison_19_1.png" src="_images/355_groups_comparison_19_1.png" />
+</div>
 </div>
 <p>Con la stima bayesiana otteniamo una distribuzione dei valori credibili dei parametri. Nelle distribuzioni a posteriori che abbiamo ottenuto per <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span>, le stime campionarie rappresentano il valore più credibile, ma abbiamo imparato qual è la gamma di valori all’interno della quale ci possiamo aspettare che si trovi il “vero” valore del parametro. L’intervallo di valori plausibili è piuttosto stretto per <span class="math notranslate nohighlight">\(\mu\)</span> (diciamo, tra 3636 a 3782), ma è piuttosto ampio per <span class="math notranslate nohighlight">\(\sigma\)</span>. Ricordiamo che la distribuzione a posteriori di <span class="math notranslate nohighlight">\(\mu\)</span> non è la distribuzione di quelli che ci aspettiamo siano i valori della massa di un campione di pinguini – quella distribuzione corrisponde alla distribuzione predittiva a posteriori. Invece, la distribuzione a posteriori di <span class="math notranslate nohighlight">\(\mu\)</span> descrive la nostra incertezza sul parametro <span class="math notranslate nohighlight">\(\mu\)</span> del <em>meccanismo generatore dei dati</em> che produce tutti gli infiniti possibili valori di massa dei pinguini.</p>
 <p>Un sommario numerico viene generato con le istruzioni seguenti:</p>
@@ -1146,46 +1014,31 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
   <tbody>
     <tr>
       <th>mu</th>
-      <td>3705.92</td>
-      <td>38.57</td>
-      <td>3635.24</td>
-      <td>3778.66</td>
-      <td>0.38</td>
-      <td>0.27</td>
-      <td>10348.0</td>
-      <td>8834.0</td>
+      <td>3706.24</td>
+      <td>39.17</td>
+      <td>3635.78</td>
+      <td>3782.02</td>
+      <td>0.36</td>
+      <td>0.25</td>
+      <td>11933.0</td>
+      <td>8522.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td>463.06</td>
-      <td>27.06</td>
-      <td>414.09</td>
-      <td>515.10</td>
-      <td>0.27</td>
-      <td>0.19</td>
-      <td>9793.0</td>
-      <td>8180.0</td>
+      <td>462.75</td>
+      <td>27.44</td>
+      <td>412.36</td>
+      <td>514.97</td>
+      <td>0.25</td>
+      <td>0.18</td>
+      <td>11724.0</td>
+      <td>8527.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
 </table>
-</div></div><script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 11;
-                var nbb_unformatted_code = "az.summary(idata2).round(2)";
-                var nbb_formatted_code = "az.summary(idata2).round(2)";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
+</div></div></div>
 </div>
 </section>
 <section id="confonto-tra-piu-gruppi">
@@ -1197,23 +1050,6 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 12;
-                var nbb_unformatted_code = "# pd.categorical makes it easy to index species below\nall_species = pd.Categorical(penguins[\"species\"])";
-                var nbb_formatted_code = "# pd.categorical makes it easy to index species below\nall_species = pd.Categorical(penguins[\"species\"])";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1221,10 +1057,12 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
     <span class="c1"># Note the addition of the shape parameter</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span>
-                     <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
-                     <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
-                     <span class="n">observed</span><span class="o">=</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">])</span>
+    <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
+        <span class="s2">&quot;mass&quot;</span><span class="p">,</span>
+        <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
+        <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
+        <span class="n">observed</span><span class="o">=</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
 
     <span class="n">idata3</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
 </pre></div>
@@ -1232,15 +1070,9 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initializing NUTS using jitter+adapt_diag...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NUTS: [sigma, mu]
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [sigma, mu]
 </pre></div>
 </div>
 <div class="output text_html">
@@ -1264,122 +1096,10 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
   <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
   100.00% [8000/8000 00:07&lt;00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 26 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 21 seconds.
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mass&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>                  <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>                  <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>                  <span class="n">observed</span><span class="o">=</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">])</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">idata3</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/pymc/sampling/mcmc.py:619,</span> in <span class="ni">sample</span><span class="nt">(draws, step, init, n_init, initvals, trace, chains, cores, tune, progressbar, model, random_seed, discard_tuned_samples, compute_convergence_checks, callback, jitter_max_retries, return_inferencedata, keep_warning_stat, idata_kwargs, mp_ctx, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">614</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">615</span>             <span class="s2">&quot;The number of samples is too small to check convergence reliably.&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">616</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">617</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">618</span>     <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">619</span>         <span class="n">convergence_warnings</span> <span class="o">=</span> <span class="n">run_convergence_checks</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">620</span>         <span class="n">mtrace</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">_add_warnings</span><span class="p">(</span><span class="n">convergence_warnings</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">return_inferencedata</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="c1"># By default we drop the &quot;warning&quot; stat which contains `SamplerWarning`</span>
-<span class="g g-Whitespace">    </span><span class="mi">624</span>     <span class="c1"># objects that can not be stored with `.to_netcdf()`.</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/pymc/stats/convergence.py:108,</span> in <span class="ni">run_convergence_checks</span><span class="nt">(idata, model)</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">warn</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span> <span class="n">warnings</span> <span class="o">+=</span> <span class="n">warn_divergences</span><span class="p">(</span><span class="n">idata</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">108</span> <span class="n">warnings</span> <span class="o">+=</span> <span class="n">warn_treedepth</span><span class="p">(</span><span class="n">idata</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span> <span class="k">return</span> <span class="n">warnings</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/pymc/stats/convergence.py:147,</span> in <span class="ni">warn_treedepth</span><span class="nt">(idata)</span>
-<span class="g g-Whitespace">    </span><span class="mi">145</span> <span class="n">warnings</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">treedepth</span><span class="o">.</span><span class="n">chain</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">147</span>     <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">treedepth</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="n">c</span><span class="p">))</span> <span class="o">/</span> <span class="n">treedepth</span><span class="o">.</span><span class="n">sizes</span><span class="p">[</span><span class="s2">&quot;draw&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">148</span>         <span class="n">warnings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">149</span>             <span class="n">SamplerWarning</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">150</span>                 <span class="n">WarningType</span><span class="o">.</span><span class="n">TREEDEPTH</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span>             <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">155</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">156</span> <span class="k">return</span> <span class="n">warnings</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/common.py:194,</span> in <span class="ni">AbstractArray._iter</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">192</span> <span class="k">def</span> <span class="nf">_iter</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">193</span>     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
-<span class="ne">--&gt; </span><span class="mi">194</span>         <span class="k">yield</span> <span class="bp">self</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/dataarray.py:819,</span> in <span class="ni">DataArray.__getitem__</span><span class="nt">(self, key)</span>
-<span class="g g-Whitespace">    </span><span class="mi">816</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_coord</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">817</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span>     <span class="c1"># xarray-style array indexing</span>
-<span class="ne">--&gt; </span><span class="mi">819</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">indexers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_item_key_to_dict</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/dataarray.py:1399,</span> in <span class="ni">DataArray.isel</span><span class="nt">(self, indexers, drop, missing_dims, **indexers_kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1395</span> <span class="c1"># Much faster algorithm for when all indexers are ints, slices, one-dimensional</span>
-<span class="g g-Whitespace">   </span><span class="mi">1396</span> <span class="c1"># lists, or zero or one-dimensional np.ndarray&#39;s</span>
-<span class="g g-Whitespace">   </span><span class="mi">1398</span> <span class="n">variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variable</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">indexers</span><span class="p">,</span> <span class="n">missing_dims</span><span class="o">=</span><span class="n">missing_dims</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1399</span> <span class="n">indexes</span><span class="p">,</span> <span class="n">index_variables</span> <span class="o">=</span> <span class="n">isel_indexes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xindexes</span><span class="p">,</span> <span class="n">indexers</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1401</span> <span class="n">coords</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="g g-Whitespace">   </span><span class="mi">1402</span> <span class="k">for</span> <span class="n">coord_name</span><span class="p">,</span> <span class="n">coord_value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/indexes.py:1460,</span> in <span class="ni">isel_indexes</span><span class="nt">(indexes, indexers)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1456</span> <span class="k">def</span> <span class="nf">isel_indexes</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1457</span>     <span class="n">indexes</span><span class="p">:</span> <span class="n">Indexes</span><span class="p">[</span><span class="n">Index</span><span class="p">],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1458</span>     <span class="n">indexers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1459</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Index</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]]:</span>
-<span class="ne">-&gt; </span><span class="mi">1460</span>     <span class="k">return</span> <span class="n">_apply_indexes</span><span class="p">(</span><span class="n">indexes</span><span class="p">,</span> <span class="n">indexers</span><span class="p">,</span> <span class="s2">&quot;isel&quot;</span><span class="p">)</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/indexes.py:1440,</span> in <span class="ni">_apply_indexes</span><span class="nt">(indexes, args, func)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1437</span> <span class="n">new_indexes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Index</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">indexes</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-<span class="g g-Whitespace">   </span><span class="mi">1438</span> <span class="n">new_index_variables</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">Variable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="ne">-&gt; </span><span class="mi">1440</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">index_vars</span> <span class="ow">in</span> <span class="n">indexes</span><span class="o">.</span><span class="n">group_by_index</span><span class="p">():</span>
-<span class="g g-Whitespace">   </span><span class="mi">1441</span>     <span class="n">index_dims</span> <span class="o">=</span> <span class="p">{</span><span class="n">d</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">index_vars</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">var</span><span class="o">.</span><span class="n">dims</span><span class="p">}</span>
-<span class="g g-Whitespace">   </span><span class="mi">1442</span>     <span class="n">index_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">index_dims</span><span class="p">}</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/indexes.py:1251,</span> in <span class="ni">Indexes.group_by_index</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1247</span> <span class="sd">&quot;&quot;&quot;Returns a list of unique indexes and their corresponding coordinates.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1249</span> <span class="n">index_coords</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="ne">-&gt; </span><span class="mi">1251</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_index</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1252</span>     <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1253</span>     <span class="n">coords</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_id_coord_names</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/indexes.py:1141,</span> in <span class="ni">Indexes._id_index</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1138</span> <span class="nd">@property</span>
-<span class="g g-Whitespace">   </span><span class="mi">1139</span> <span class="k">def</span> <span class="nf">_id_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">T_PandasOrXarrayIndex</span><span class="p">]:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1140</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__id_index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1141</span>         <span class="bp">self</span><span class="o">.</span><span class="n">__id_index</span> <span class="o">=</span> <span class="p">{</span><span class="nb">id</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_unique</span><span class="p">()}</span>
-<span class="g g-Whitespace">   </span><span class="mi">1142</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__id_index</span>
-
-<span class="nn">File ~/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/xarray/core/indexes.py:1179,</span> in <span class="ni">Indexes.get_unique</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1177</span>     <span class="n">index_id</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="k">if</span> <span class="n">index_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1179</span>         <span class="n">unique_indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1180</span>         <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">index_id</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1182</span> <span class="k">return</span> <span class="n">unique_indexes</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
 </div>
-<script type="application/javascript">
-            setTimeout(function() {
-                var nbb_cell_id = 13;
-                var nbb_unformatted_code = "with pm.Model() as model_penguin_mass_all_species:\n    # Note the addition of the shape parameter\n    sigma = pm.HalfNormal(\"sigma\", sigma=2000, shape=3)\n    mu = pm.Normal(\"mu\", 4000, 2000, shape=3)\n    mass = pm.Normal(\"mass\",\n                     mu=mu[all_species.codes],\n                     sigma=sigma[all_species.codes],\n                     observed=penguins[\"body_mass_g\"])\n\n    idata3 = pm.sample()";
-                var nbb_formatted_code = "with pm.Model() as model_penguin_mass_all_species:\n    # Note the addition of the shape parameter\n    sigma = pm.HalfNormal(\"sigma\", sigma=2000, shape=3)\n    mu = pm.Normal(\"mu\", 4000, 2000, shape=3)\n    mass = pm.Normal(\n        \"mass\",\n        mu=mu[all_species.codes],\n        sigma=sigma[all_species.codes],\n        observed=penguins[\"body_mass_g\"],\n    )\n\n    idata3 = pm.sample()";
-                var nbb_cells = Jupyter.notebook.get_cells();
-                for (var i = 0; i < nbb_cells.length; ++i) {
-                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
-                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
-                             nbb_cells[i].set_text(nbb_formatted_code);
-                        }
-                        break;
-                    }
-                }
-            }, 500);
-            </script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1506,8 +1226,7 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">idata3</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">divergences</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> 
-                     <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;rank_bars&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">idata3</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">divergences</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;rank_bars&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1517,8 +1236,11 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">(</span><span class="n">idata3</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">],)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;μ Mass Estimate: 94.0% HDI&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">(</span>
+    <span class="n">idata3</span><span class="p">,</span>
+    <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;μ Mass Estimate: 94.0% HDI&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1532,7 +1254,7 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">axes</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">plot_forest</span><span class="p">(</span><span class="n">idata3</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sigma&quot;</span><span class="p">],</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;σ Mass Estimate: 94.0% HDI&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;σ Mass Estimate: 94.0% HDI&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1545,7 +1267,7 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">idata3</span><span class="p">,</span> <span class="n">divergences</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;rank_bars&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">));</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">idata3</span><span class="p">,</span> <span class="n">divergences</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;rank_bars&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
