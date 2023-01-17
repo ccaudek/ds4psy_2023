@@ -1275,7 +1275,7 @@ a ** b is 16
 <p>Si noti la regola di precedenza: gli operatori &gt;, &lt;, &gt;=, &lt;=, ==, != hanno la precedenza più bassa (vengono valutati per ultimi), il che significa che nell’espressione precedente viene prima valutato (1 + 1) e poi (3 &gt; 2).</p>
 <section id="operatori-di-confronto">
 <h4><span class="section-number">3.4.3.1. </span>Operatori di confronto<a class="headerlink" href="#operatori-di-confronto" title="Permalink to this headline">#</a></h4>
-<p>Gli operatori di confronto restituiscono un valore booleano (True oppure False). Per esempio, l’operatore <code class="docutils literal notranslate"><span class="pre">==</span></code> confronta le espressioni su entrambi i lati e restituisce <code class="docutils literal notranslate"><span class="pre">True</span></code> se hanno gli stessi valori e <code class="docutils literal notranslate"><span class="pre">False</span></code> altrimenti. L’opposto di <code class="docutils literal notranslate"><span class="pre">==</span></code> è <code class="docutils literal notranslate"><span class="pre">!=</span></code>, che si può leggere come ‘non uguale al valore di’. Ecco una tabella di operatori di confronto che restituiscono valori booleani:</p>
+<p>Un operatore di confronto è un operatore che esegue un qualche tipo di confronto e restituisce un valore booleano (True oppure False). Per esempio, l’operatore <code class="docutils literal notranslate"><span class="pre">==</span></code> confronta le espressioni su entrambi i lati e restituisce <code class="docutils literal notranslate"><span class="pre">True</span></code> se hanno gli stessi valori e <code class="docutils literal notranslate"><span class="pre">False</span></code> altrimenti. L’opposto di <code class="docutils literal notranslate"><span class="pre">==</span></code> è <code class="docutils literal notranslate"><span class="pre">!=</span></code>, che si può leggere come ‘non uguale al valore di’. Gli operatori di confronto sono elencati qui sotto:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Confronto</p></th>
@@ -1341,50 +1341,7 @@ a &lt;= b is False
 </div>
 </div>
 </div>
-<p>L’operatore <code class="docutils literal notranslate"><span class="pre">=</span></code> è un’istruzione di <em>assegnazione</em>. Ovvero, crea un nuovo oggetto. Tutte le istruzioni Python in cui vengono creati degli oggetti (istruzioni di <em>assegnazione</em>) hanno la stessa forma:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">object_name</span> <span class="o">=</span> <span class="n">value</span>
-</pre></div>
-</div>
-<p>Quando leggiamo l’istruzione precedente possiamo pensare: “<code class="docutils literal notranslate"><span class="pre">object_name</span></code> ottiene il valore <code class="docutils literal notranslate"><span class="pre">value</span></code>”. Per esempio:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-</div>
-</div>
-<p>L’operatore <code class="docutils literal notranslate"><span class="pre">==</span></code> valuta invece una condizione logica e ritorna un valore booleano. Per esempio:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">==</span> <span class="mi">10</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
-</pre></div>
-</div>
-</div>
-</div>
-<p>È sempre possibile capire cosa contiene un oggetto già creato semplicemente digitando il nome dell’oggetto in una cella di notebook Jupiter:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-</div>
-</div>
+<p>L’operatore <code class="docutils literal notranslate"><span class="pre">=</span></code> è un’istruzione di <em>assegnazione</em>. Ovvero, crea un nuovo oggetto. L’operatore <code class="docutils literal notranslate"><span class="pre">==</span></code> valuta invece una condizione logica e ritorna un valore booleano.</p>
 <p>Un’espressione può contenere più confronti e tutti devono essere veri affinché l’intera espressione sia vera. Ad esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2067,52 +2024,43 @@ Giovanna Nero
 </section>
 <section id="list-comprehension">
 <h3><span class="section-number">3.8.3. </span>List comprehension<a class="headerlink" href="#list-comprehension" title="Permalink to this headline">#</a></h3>
-<p>Una <em>list comprehension</em> combina un ciclo <code class="docutils literal notranslate"><span class="pre">for</span></code> e (se necessario) una condizione logica in una singola riga di codice. Per fare un esempio, inziamo con un ciclo <code class="docutils literal notranslate"><span class="pre">for</span></code> che aggiunge ‘1’ a ciascun valore di una lista.</p>
+<p>Una <em>list comprehension</em> consente di generare delle liste. Una <em>list comprehension</em> combina un ciclo <code class="docutils literal notranslate"><span class="pre">for</span></code> e (se necessario) una condizione logica in una singola riga di codice. La sintassi di una <em>list comprehension</em> è la seguente:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="o">&lt;</span><span class="n">expression</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span> <span class="o">&lt;</span><span class="k">if</span> <span class="n">optional_condition</span><span class="o">&gt;</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>Per esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">primes</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;list1:&quot;</span><span class="p">,</span> <span class="n">list1</span><span class="p">)</span>
+
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;list2:&quot;</span><span class="p">,</span> <span class="n">list2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 5, 7, 11, 13]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list1: [1, 2, 3, 4, 5, 6]
+list2: [2, 3, 4, 5, 6, 7]
 </pre></div>
 </div>
 </div>
 </div>
+<p>Si noti che la parola <code class="docutils literal notranslate"><span class="pre">item</span></code> avrebbe potuto essere quasi qualsiasi parola. La possiamo immaginare con la seguente definizione: <code class="docutils literal notranslate"><span class="pre">...per</span> <span class="pre">ogni</span> <span class="pre">elemento</span> <span class="pre">in</span> <span class="pre">...</span></code>. Nel seguente esempio, sommiamo 1 agli elementi di <code class="docutils literal notranslate"><span class="pre">list1</span></code> solo se sono pari:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">prime</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list1</span> <span class="k">if</span> <span class="n">item</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list3:&#39;</span><span class="p">,</span> <span class="n">list3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-3
-4
-6
-8
-12
-14
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list3: [3, 5, 7]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Ora usiamo una <em>list comprehension</em> per ottenere lo stesso risultato:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="n">prime</span> <span class="k">for</span> <span class="n">prime</span> <span class="ow">in</span> <span class="n">primes</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 3, 4, 6, 8, 12, 14]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Si noti che la parola <code class="docutils literal notranslate"><span class="pre">prime</span></code> avrebbe potuto essere quasi qualsiasi parola. La possiamo immaginare con la seguente definizione: <code class="docutils literal notranslate"><span class="pre">...per</span> <span class="pre">ogni</span> <span class="pre">elemento</span> <span class="pre">in</span> <span class="pre">...</span></code>. Facciamo un altro esempio usando <code class="docutils literal notranslate"><span class="pre">range()</span></code>:</p>
+<p>Facciamo un altro esempio usando <code class="docutils literal notranslate"><span class="pre">range()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_list</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
@@ -2155,7 +2103,7 @@ Giovanna Nero
 </div>
 </div>
 </div>
-<p>Possiamo anche eseguire più iterazioni o delle iterazioni condizionali:</p>
+<p>Possiamo anche eseguire più iterazioni simultaneamente:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
@@ -2192,7 +2140,7 @@ Giovanna Nero
 </div>
 </div>
 </div>
-<p>Speficicando una condizione, possiamo cambiare il segno dei numeri dispari:</p>
+<p>Specificando una condizione, possiamo cambiare il segno solo dei numeri dispari nella lista:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">else</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)]</span>
@@ -2355,7 +2303,7 @@ Giovanna Nero
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Jan 16 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Jan 17 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
@@ -2363,10 +2311,10 @@ IPython version      : 8.7.0
 
 pytensor: 2.8.11
 
-seaborn   : 0.12.2
-numpy     : 1.24.1
-pandas    : 1.5.2
 matplotlib: 3.6.2
+numpy     : 1.24.1
+seaborn   : 0.12.2
+pandas    : 1.5.2
 
 Watermark: 2.3.1
 </pre></div>

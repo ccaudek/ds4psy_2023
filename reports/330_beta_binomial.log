@@ -32,7 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-with model:
-    trace = pm.sample(draws=5000, tune=1000)
+with bb_model:
+    step = pm.NUTS()
+    idata = pm.sample(2000, tune=1000, init=None, step=step, chains=4)
 -------------------
 

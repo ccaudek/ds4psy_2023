@@ -10,7 +10,7 @@
 Coming Soon – Sito in costruzione
 ```
 
-Questo è il sito web per "Data Science per psicologi". Viene qui presentato il materiale didattico dell'insegnamento di _Psicometria_ (A.A. 2022/2023) rivolto agli studenti del primo anno del Corso di Laurea in Scienze e Tecniche Psicologiche dell'Università degli Studi di Firenze.
+Questo sito web presenta il materiale didattico dell'insegnamento di [Psicometria](https://www.unifi.it/index.php?module=ofform2&mode=1&cmd=3&AA=2019&afId=523562) (A.A. 2022/2023) rivolto agli studenti del primo anno del Corso di Laurea in Scienze e Tecniche Psicologiche dell'Università degli Studi di Firenze.
 
 ## License
 
