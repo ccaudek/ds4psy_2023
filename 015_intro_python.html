@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Introduzione a Python &#8212; ds4psy</title>
+    <title>3. Introduzione a Python &#8212; ds4p23</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -100,7 +100,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">ds4psy</h1>
+      <h1 class="site-logo" id="site-title">ds4p23</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -734,6 +734,44 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#funzioni">
    3.6. Funzioni
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-funzione-lambda">
+     3.6.1. La funzione
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       lambda
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#le-funzioni-map-e-filter">
+     3.6.2. Le funzioni
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       map()
+      </span>
+     </code>
+     e
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       filter()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-funzione-zip">
+     3.6.3. La funzione
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       zip()
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#il-flusso-di-esecuzione">
@@ -912,6 +950,44 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#funzioni">
    3.6. Funzioni
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-funzione-lambda">
+     3.6.1. La funzione
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       lambda
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#le-funzioni-map-e-filter">
+     3.6.2. Le funzioni
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       map()
+      </span>
+     </code>
+     e
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       filter()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-funzione-zip">
+     3.6.3. La funzione
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       zip()
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#il-flusso-di-esecuzione">
@@ -1636,91 +1712,222 @@ a &lt;= b is False
 </section>
 <section id="funzioni">
 <h2><span class="section-number">3.6. </span>Funzioni<a class="headerlink" href="#funzioni" title="Permalink to this headline">#</a></h2>
-<p>Nella programmazione una funzione ha un input, esegue delle operazioni e restituisce un eventuale output. Python ha un gran numero di funzioni integrate. È possibile importare altre funzioni da pacchetti aggiuntivi o definire nuove funzioni. La cella seguente riporta un esempio in cui importiamo la libreria <code class="docutils literal notranslate"><span class="pre">numpy</span></code>:</p>
+<p>Nella programmazione una funzione ha un input, esegue delle operazioni e restituisce un eventuale output. Python ha un gran numero di funzioni integrate. È possibile importare altre funzioni da pacchetti aggiuntivi o definire nuove funzioni. Consideriamo la definizione di una nuova funzione. La definizione di una funzione in Python viene fatta utilizzando la parola chiave <code class="docutils literal notranslate"><span class="pre">def</span></code> seguita dal nome del metodo e dai nomi simbolici per i suoi argomenti, separati da virgole e racchiusi tra parentesi. La definizione procede con un carattere di due punti e dal corpo della funzione le cui istruzioni devono essere indentate di un livello.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myadd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Calcolo la somma degli elementi di della lista numerica <code class="docutils literal notranslate"><span class="pre">primes</span></code> usando funzione <code class="docutils literal notranslate"><span class="pre">np.sum()</span></code> contenuta nella libreria numpy che ho importato con il nome di <code class="docutils literal notranslate"><span class="pre">np</span></code>:</p>
+<p>La funzione <code class="docutils literal notranslate"><span class="pre">myadd</span></code> può essere usata per sommare due numeri, per esempio, 20 e 10:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
-<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myadd</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
 </pre></div>
 </div>
 </div>
 </div>
-<p>Applichiamo la funzione <code class="docutils literal notranslate"><span class="pre">np.mean()</span></code>:</p>
+<section id="la-funzione-lambda">
+<h3><span class="section-number">3.6.1. </span>La funzione <code class="docutils literal notranslate"><span class="pre">lambda</span></code><a class="headerlink" href="#la-funzione-lambda" title="Permalink to this headline">#</a></h3>
+<p>Python offre una sintassi alternativa, che ci permette di dichiarare semplici funzioni <em>inline</em>, ovvero in una singola linea di codice. Le funzioni che vengono create in questo modo sono chiamate anonime (non hanno bisogno di essere definite in quanto vengono utilizzate solo al momento) e richiedono la parola chiave <code class="docutils literal notranslate"><span class="pre">lambda</span></code> seguita da un elenco di argomenti, un carattere di due punti, e l’espressione per valutare gli argomenti ed infine il valore in entrata. Nell’esempio seguente sommiamo 1 al valore passato in input:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
 </div>
 </div>
-<p>È anche possibile definire nuove funzioni. La definizione di una funzione in Python viene fatta utilizzando la parola chiave <code class="docutils literal notranslate"><span class="pre">def</span></code> seguita dal nome del metodo e dai nomi simbolici per i suoi argomenti, separati da virgole e racchiusi tra parentesi. La definizione procede con un carattere di due punti e dal corpo della funzione le cui istruzioni devono essere indentate di un livello.</p>
-<p>Per fare un esempio di creazione di una funzione, scrivo la funzione della media, <span class="math notranslate nohighlight">\(n^{-1}\sum_{i=1}^n x_i\)</span>:</p>
+<p>In questo esempio sommiamo i due numeri in entrata:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_mean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">res</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_mean</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
 </pre></div>
 </div>
 </div>
 </div>
-<p>Si notino due cose. 1. È possibile, nel corpo di una funzione, usare altre funzioni. 2. Indentare il codice è una pratica comune in tutti i linguaggi, perché semplifica la lettura del codice e la compresione della sua struttura. In Python, tuttavia, l’indentazione è obbligatoria, nel senso che, nell’esempio precedente, delimita il blocco di codice che costituisce il corpo della funzione. Dunque, indentare in modo incorretto comporta la comparsa di errori.</p>
-<p>È sempre possibile usare la funzione di <code class="docutils literal notranslate"><span class="pre">help</span></code> su una funzione:</p>
+<p>È anche possibile assegnare un nome alla funzione lambda:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myadd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myadd</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function sum in module builtins:
-
-sum(iterable, /, start=0)
-    Return the sum of a &#39;start&#39; value (default: 0) plus an iterable of numbers
-    
-    When the iterable is empty, return the start value.
-    This function is intended specifically for use with numeric values and may
-    reject non-numeric types.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
 </pre></div>
 </div>
 </div>
 </div>
-<p>In Visual Studio Code è sufficiente posizionare il cursore sul nome della funzione.</p>
+<p>La sintassi seguente è valida in quanto, per l’interprete, il carattere <code class="docutils literal notranslate"><span class="pre">_</span></code> corrisponde all’ultima funzione che è stata valutata:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.&lt;lambda&gt;(x, y)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si noti abbiamo valutato la funzione <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x,</span> <span class="pre">y:</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code> in una cella precedente a quella che contiene <code class="docutils literal notranslate"><span class="pre">_(20,</span> <span class="pre">10)</span></code>; inserendo le due espressioni in una singola cella si ottiene un <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code>.</p>
+</section>
+<section id="le-funzioni-map-e-filter">
+<h3><span class="section-number">3.6.2. </span>Le funzioni <code class="docutils literal notranslate"><span class="pre">map()</span></code> e <code class="docutils literal notranslate"><span class="pre">filter()</span></code><a class="headerlink" href="#le-funzioni-map-e-filter" title="Permalink to this headline">#</a></h3>
+<p>Per gli esercizi che svolgeremo in seguito, risultano utili le funzioni <code class="docutils literal notranslate"><span class="pre">map()</span></code> e <code class="docutils literal notranslate"><span class="pre">filter()</span></code>.</p>
+<p>La funzione <code class="docutils literal notranslate"><span class="pre">map()</span></code> prende come input una funzione e una lista, e restituisce il risultato dell’applicazione della funzione a ciascun elemento della lista (è anche possibile usare qualsiasi oggetto iterabile al posto della lista). La lista stessa rimane invariata. Ad esempio, la seguente linea di codice eleva al quadrato ciascuno degli elementi della lista <code class="docutils literal notranslate"><span class="pre">a</span></code> e salva il risultato nella lista <code class="docutils literal notranslate"><span class="pre">b</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Un’altra funzione molto utile per manipolare gli oggetti iterabili è la funzione <code class="docutils literal notranslate"><span class="pre">filter()</span></code>. Questa funzione filtra un oggetto iterabile selezionando solo gli elementi che rispondono ad un determinato predicato. (Il predicato è una funzione che restituisce un booleano). Per esempio</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[64, 81, 100]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sia <code class="docutils literal notranslate"><span class="pre">map()</span></code> che <code class="docutils literal notranslate"><span class="pre">filter()</span></code> restituiscono risultati che non sono ancora stati calcolati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;filter at 0x7f9fef0d8e20&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possiamo visualizzare il risultato convertendolo in una lista:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[64, 81, 100]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-funzione-zip">
+<h3><span class="section-number">3.6.3. </span>La funzione <code class="docutils literal notranslate"><span class="pre">zip()</span></code><a class="headerlink" href="#la-funzione-zip" title="Permalink to this headline">#</a></h3>
+<p>La funzione <code class="docutils literal notranslate"><span class="pre">zip()</span></code> crea una lista di tuple dagli elementi di due contenitori. Come nel caso delle operazioni precedenti, gli elementi vengono calcolati solo quando viene richiesto. Per esempio:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4, 5, 6, 7]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;zip at 0x7f9fef128380&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 4), (1, 5), (2, 6), (3, 7)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="il-flusso-di-esecuzione">
 <h2><span class="section-number">3.7. </span>Il flusso di esecuzione<a class="headerlink" href="#il-flusso-di-esecuzione" title="Permalink to this headline">#</a></h2>
 <p>In Python il codice viene eseguito sequenzialmente, partendo dalla prima riga fino a quando non c’è più nulla da eseguire. L’ordine di esecuzione delle varie istruzioni è detto <em>flusso di esecuzione</em>.</p>
-<p>Per esempio la cella seguente crea tre liste, una con nomi di psicologia e le altre due con i corrispondenti anni di nascita e di morte, e le memorizza nelle variabili <code class="docutils literal notranslate"><span class="pre">names</span></code>, <code class="docutils literal notranslate"><span class="pre">born</span></code> e <code class="docutils literal notranslate"><span class="pre">dead</span></code>.</p>
+<p>Per esempio la cella seguente prima memorizza la lista <code class="docutils literal notranslate"><span class="pre">names</span></code>, poi la lista <code class="docutils literal notranslate"><span class="pre">born</span></code> e infine la lista <code class="docutils literal notranslate"><span class="pre">dead</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Sigmund Freud&quot;</span><span class="p">,</span> <span class="s2">&quot;Jean Piaget&quot;</span><span class="p">,</span> <span class="s2">&quot;Burrhus Frederic Skinner&quot;</span><span class="p">,</span> <span class="s2">&quot;Albert Bandura&quot;</span><span class="p">]</span>
@@ -1730,9 +1937,8 @@ sum(iterable, /, start=0)
 </div>
 </div>
 </div>
-<p>Il valore speciale <code class="docutils literal notranslate"><span class="pre">None</span></code> è stato utilizzato nel caso in cui non risulta disponibile l’anno. In queste situazioni si parla di <em>valori mancanti</em> (<em>missing values</em>) che di norma vengono indicati con la sigla NA (<em>not available</em>).</p>
-<p>Lo script include istruzioni condizionali che specificano se e quando devono essere eseguiti determinati blocchi di codice.</p>
-<p>La più semplice istruzione di controllo è l’istruzione <code class="docutils literal notranslate"><span class="pre">if</span></code>. Per esempio:</p>
+<p>Ho usato il valore speciale <code class="docutils literal notranslate"><span class="pre">None</span></code> in quanto non risulta disponibile l’anno. In queste situazioni si parla di <em>valori mancanti</em> (<em>missing values</em>) che, di norma, vengono indicati con la sigla NA (<em>not available</em>).</p>
+<p>La cella seguente include le istruzioni condizionali che specificano se e quando devono essere eseguiti determinati blocchi di codice. La più semplice istruzione di controllo è l’istruzione <code class="docutils literal notranslate"><span class="pre">if</span></code>. Per esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Maria&quot;</span>
@@ -1742,7 +1948,9 @@ sum(iterable, /, start=0)
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maria, hai ottenuto un ottimo voto all&#39;esame!&quot;</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;Giovanna&quot;</span> <span class="ow">or</span> <span class="n">grade</span> <span class="o">&gt;</span> <span class="mi">28</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tu potresti essere Giovanna o potresti avere ottenuto un ottimo voto all&#39;esame.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Tu potresti essere Giovanna oppure potresti avere ottenuto un ottimo voto all&#39;esame.&quot;</span>
+    <span class="p">)</span>
 
 <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;Giovanna&quot;</span> <span class="ow">and</span> <span class="n">grade</span> <span class="o">&gt;</span> <span class="mi">28</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tu non sei Giovanna ma hai ottenuto un ottimo voto all&#39;esame.&quot;</span><span class="p">)</span>
@@ -1751,7 +1959,7 @@ sum(iterable, /, start=0)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maria, hai ottenuto un ottimo voto all&#39;esame!
-Tu potresti essere Giovanna o potresti avere ottenuto un ottimo voto all&#39;esame.
+Tu potresti essere Giovanna oppure potresti avere ottenuto un ottimo voto all&#39;esame.
 Tu non sei Giovanna ma hai ottenuto un ottimo voto all&#39;esame.
 </pre></div>
 </div>
@@ -1914,11 +2122,11 @@ False
 </div>
 <p>Il codice <code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">+=</span> <span class="pre">1</span></code> è equivalente a <code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">=</span> <span class="pre">counter</span> <span class="pre">+</span> <span class="pre">1</span></code> e, ogni qualvolta viene eseguito il ciclo, riassegna alla variabile <code class="docutils literal notranslate"><span class="pre">counter</span></code> il valore che aveva in precedenza + 1.</p>
 <p>L’istruzione <code class="docutils literal notranslate"><span class="pre">while</span></code> controlla se alla variabile <code class="docutils literal notranslate"><span class="pre">counter</span></code> è associato un valore minore o uguale a 10. Nel primo passo del ciclo la condizione è soddisfatta, avendo noi definito <code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">=</span> <span class="pre">0</span></code>, pertanto il programma entra nel loop, stampa il valore della variabile <code class="docutils literal notranslate"><span class="pre">counter</span></code> e incrementa <code class="docutils literal notranslate"><span class="pre">counter</span></code> di un’unità.</p>
-<p>Questo comportamento si ripete finché la condizione <code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">&lt;=</span> <span class="pre">10</span></code> risulta True. Quando il contatore <code class="docutils literal notranslate"><span class="pre">counter</span></code> assume il valore 11 il ciclo <code class="docutils literal notranslate"><span class="pre">while</span></code> si interrompe e il blocco di codice del ciclo non viene più eseguito.</p>
+<p>Questo comportamento si ripete finché la condizione <code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">&lt;=</span> <span class="pre">10</span></code> risulta <code class="docutils literal notranslate"><span class="pre">True</span></code>. Quando il contatore <code class="docutils literal notranslate"><span class="pre">counter</span></code> assume il valore 11 il ciclo <code class="docutils literal notranslate"><span class="pre">while</span></code> si interrompe e il blocco di codice del ciclo non viene più eseguito.</p>
 </section>
 <section id="il-ciclo-for">
 <h3><span class="section-number">3.8.2. </span>Il ciclo <code class="docutils literal notranslate"><span class="pre">for</span></code><a class="headerlink" href="#il-ciclo-for" title="Permalink to this headline">#</a></h3>
-<p>Il ciclo <code class="docutils literal notranslate"><span class="pre">for</span></code> permette di ripetere l’esecuzione di una determinata porzione di codice più volte finché la condizione di controllo resta True:</p>
+<p>Il ciclo <code class="docutils literal notranslate"><span class="pre">for</span></code> permette di ripetere l’esecuzione di una determinata porzione di codice più volte finché la condizione di controllo resta <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
@@ -1938,6 +2146,36 @@ False
 8
 9
 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sono ovviamente possibili i cicli <code class="docutils literal notranslate"><span class="pre">for</span></code> annidati, vale a dire un ciclo posto all’interno del corpo di un altro (chiamato ciclo esterno). Al suo primo passo, il ciclo esterno mette in esecuzione quello interno che esegue il proprio blocco di codice fino alla conclusione. Quindi, al secondo passo, il ciclo esterno rimette in esecuzione quello interno. Questo si ripete finché il ciclo esterno non termina. Per esempio:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 0)
+(0, 1)
+(0, 2)
+(0, 3)
+(1, 0)
+(1, 1)
+(1, 2)
+(1, 3)
+(2, 0)
+(2, 1)
+(2, 2)
+(2, 3)
+(3, 0)
+(3, 1)
+(3, 2)
+(3, 3)
 </pre></div>
 </div>
 </div>
@@ -2170,6 +2408,37 @@ list2: [2, 3, 4, 5, 6, 7]
 </div>
 </div>
 </div>
+<p>Qui di seguito sono descritte tutte le possibilità:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import everything from library</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="c1"># call function by</span>
+<span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+
+<span class="c1">#import everything, but change name</span>
+<span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rnd</span>
+<span class="c1"># call function by</span>
+<span class="n">rnd</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+
+<span class="c1"># select what to import from library</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+<span class="c1">#call function by</span>
+<span class="n">random</span><span class="p">()</span>
+
+<span class="c1"># import everything from library</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="c1"># call function by</span>
+<span class="n">random</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6329567497995396
+</pre></div>
+</div>
+</div>
+</div>
 <p>Nella cella seguente importo <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> con il nome <code class="docutils literal notranslate"><span class="pre">sns</span></code> e uso le sue funzionalità per  impostare uno stile e una palette di colori per la visualizzazione dei grafici.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2180,6 +2449,79 @@ list2: [2, 3, 4, 5, 6, 7]
 </div>
 </div>
 </div>
+<p>Nell’esempio seguente calcolo la somma degli elementi della lista numerica <code class="docutils literal notranslate"><span class="pre">primes</span></code> usando funzione <code class="docutils literal notranslate"><span class="pre">sum()</span></code> contenuta nella libreria NumPy che ho importato con il nome di <code class="docutils literal notranslate"><span class="pre">np</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcolo la media:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Scrivo una nuova funzione per la media, <span class="math notranslate nohighlight">\(\bar{x} = n^{-1}\sum_{i=1}^n x_i\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_mean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_mean</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si notino due cose. (1) È possibile, nel corpo di una funzione, usare altre funzioni. (2) Indentare il codice è una pratica comune in tutti i linguaggi, perché semplifica la lettura del codice e la compresione della sua struttura. In Python, tuttavia, l’indentazione è obbligatoria, nel senso che, nell’esempio precedente, delimita il blocco di codice che costituisce il corpo della funzione. Dunque, indentare in modo incorretto comporta la comparsa di errori.</p>
+<p>È sempre possibile usare la funzione di <code class="docutils literal notranslate"><span class="pre">help</span></code> su una funzione:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function sum in module builtins:
+
+sum(iterable, /, start=0)
+    Return the sum of a &#39;start&#39; value (default: 0) plus an iterable of numbers
+    
+    When the iterable is empty, return the start value.
+    This function is intended specifically for use with numeric values and may
+    reject non-numeric types.
+</pre></div>
+</div>
+</div>
+</div>
+<p>In Visual Studio Code è sufficiente posizionare il cursore sul nome della funzione.</p>
 </section>
 </section>
 <section id="leggere-dati-da-file">
@@ -2303,7 +2645,7 @@ list2: [2, 3, 4, 5, 6, 7]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Jan 17 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Wed Jan 18 2023
 
 Python implementation: CPython
 Python version       : 3.10.8
@@ -2311,10 +2653,10 @@ IPython version      : 8.7.0
 
 pytensor: 2.8.11
 
-pandas    : 1.5.2
 numpy     : 1.24.1
-seaborn   : 0.12.2
+pandas    : 1.5.2
 matplotlib: 3.6.2
+seaborn   : 0.12.2
 
 Watermark: 2.3.1
 </pre></div>
