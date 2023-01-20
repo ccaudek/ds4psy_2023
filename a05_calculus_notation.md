@@ -1,4 +1,4 @@
-(sec-calculus)=
+(calculus-appendix)=
 # Per liberarvi dai terrori preliminari 
 
 Fornisco qui la traduzione del primo capitolo di [Calculus made easy](https://calculusmadeeasy.org/1.html).
