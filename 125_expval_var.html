@@ -886,6 +886,8 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">st</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">datascience</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">prob140</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 </pre></div>
 </div>
@@ -935,9 +937,9 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.02777778, 0.05555556, 0.08333333, 0.11111111, 0.13888889,
-       0.16666667, 0.13888889, 0.11111111, 0.08333333, 0.05555556,
-       0.02777778])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.02777778,  0.05555556,  0.08333333,  0.11111111,  0.13888889,
+        0.16666667,  0.13888889,  0.11111111,  0.08333333,  0.05555556,
+        0.02777778])
 </pre></div>
 </div>
 </div>
@@ -999,7 +1001,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.001
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.9989999999999997
 </pre></div>
 </div>
 </div>
@@ -1355,7 +1357,7 @@ Mo(Y) = \text{argmax}_y p(y).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.999999999999998
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.9999999999999982
 </pre></div>
 </div>
 </div>
@@ -1381,7 +1383,7 @@ Mo(Y) = \text{argmax}_y p(y).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.833333333333364
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.8333333333333641
 </pre></div>
 </div>
 </div>
@@ -1560,6 +1562,46 @@ Cov(X,Y) &amp;= \mathbb{E}(XY) - \mathbb{E}(X)\mathbb{E}(Y)\notag\\
  &amp;= 0.25.\notag
 \end{align}
 \end{split}\]</div>
+<p><a class="reference external" href="https://bookdown.org/kevin_davisross/probsim-book/randomness.html">https://bookdown.org/kevin_davisross/probsim-book/randomness.html</a>
+<a class="reference external" href="https://www.tandfonline.com/doi/full/10.1080/10691898.2019.1600387">https://www.tandfonline.com/doi/full/10.1080/10691898.2019.1600387</a></p>
+<p>Consideriamo l’esempio discusso in precedenza nel quale <span class="math notranslate nohighlight">\(X\)</span> è il numero che si ottiene dal lancio di tre monete equilibrate e <span class="math notranslate nohighlight">\(Y\)</span> è il numero di teste al primo lancio. Troviamo <span class="math notranslate nohighlight">\(Cov(X, Y)\)</span>.</p>
+<p>Creiamo il prodotto cartesiano che si ottiene per tutti i possibili valori <span class="math notranslate nohighlight">\(X\)</span> e i possibili valori <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">c1</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">c3</span><span class="p">]</span>
+<span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il primo numero di ogni coppia rappresenta il valore di <span class="math notranslate nohighlight">\(Y\)</span>, mentre il secondo numero è il valore di <span class="math notranslate nohighlight">\(X\)</span>. Come abbiamo visto in precedenza, però, quete coppie di valori <span class="math notranslate nohighlight">\(X, Y\)</span> non hanno tutte la stessa probabilità di verificarsi. Infatti, la probabilità che ciascuna coppia <span class="math notranslate nohighlight">\(X, Y\)</span> si osservi è data, in sequenza, dai valori 1/8, 2/8, 1/8, 0, 0, 1/8, 2/8, 1/8. Questi valori rappresentano la distribuzione di massa di probabilità congiunta delle variabili casuali <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>. Possiamo quindi applicare l’eq. <a class="reference internal" href="#equation-eq-cov-def-rv">(17.14)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">pmf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sample</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">pmf</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="nb">sum</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25
+</pre></div>
+</div>
+</div>
+</div>
+<p>La covarianza tra <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> è dunque uguale a 0.25.</p>
 </section>
 <section id="correlazione">
 <h2><span class="section-number">17.7. </span>Correlazione<a class="headerlink" href="#correlazione" title="Permalink to this headline">#</a></h2>
