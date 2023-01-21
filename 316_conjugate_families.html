@@ -837,7 +837,7 @@ title="Print to PDF"
 </section>
 <section id="lo-schema-beta-binomiale">
 <h2><span class="section-number">26.2. </span>Lo schema beta-binomiale<a class="headerlink" href="#lo-schema-beta-binomiale" title="Permalink to this headline">#</a></h2>
-<p>La distribuzione Beta rappresenta la distribuzione di una variabile casuale che assume valori nell’intervallo unitario [0, 1]. Ha due parametri, chiamati <span class="math notranslate nohighlight">\(\alfa\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>, che determinano la forma della distribuzione – si veda il capitolo <a class="reference internal" href="210_cont_rv_distr.html#cont-rv-distr-notebook"><span class="std std-ref">Distribuzioni di v.c. continue</span></a>. La distribuzione Beta viene usata per rappresentare le nostre credenze a priori su una proporzione. Avendo osservato un particolare valore della proporzione in un campione di dati, si pone poi il problema di eseguire l’aggiornamento bayesiano per trovare la distribuzione a posteriori. Come abbiamo fatto in precedenza, è necessario moltiplicare la distribuzione a priori per la verosimiglianza.</p>
+<p>La distribuzione Beta rappresenta la distribuzione di una variabile casuale che assume valori nell’intervallo unitario [0, 1]. Ha due parametri, chiamati <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>, che determinano la forma della distribuzione – si veda il capitolo <a class="reference internal" href="210_cont_rv_distr.html#cont-rv-distr-notebook"><span class="std std-ref">Distribuzioni di v.c. continue</span></a>. La distribuzione Beta può essere usata per rappresentare le nostre credenze a priori su una proporzione. Avendo osservato un particolare valore della proporzione in un campione di dati, si pone poi il problema di eseguire l’aggiornamento bayesiano per trovare la distribuzione a posteriori. Come abbiamo fatto in precedenza, è necessario moltiplicare la distribuzione a priori per la verosimiglianza.</p>
 <p>Se scegliamo la distribuzione Beta, la distribuzione a priori è</p>
 <div class="math notranslate nohighlight">
 \[
@@ -855,7 +855,7 @@ title="Print to PDF"
 \[
 \theta^{\alpha - 1 + y} (1 - \theta)^{\beta - 1 + n - y}.
 \]</div>
-<p>È facile riconoscere il risultato precedente come la formula della distribuzione Beta non normalizzata di parametri <span class="math notranslate nohighlight">\(\alpha + y\)</span> e <span class="math notranslate nohighlight">\(\beta + n -y\)</span>. Quindi, se osserviamo <span class="math notranslate nohighlight">\(y\)</span> successi in <span class="math notranslate nohighlight">\(n\)</span> prove Bernoulliane, avendo scelto una distribuzione a priori Beta di parametri <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>, possiamo eseguire l’aggiornamento bayesiano definendo una distribuzione a posteriori Beta di parametri <span class="math notranslate nohighlight">\(\alpha + y\)</span> e <span class="math notranslate nohighlight">\(\beta + n -y\)</span>.</p>
+<p>È facile riconoscere il risultato precedente come la formula di una distribuzione Beta non normalizzata di parametri <span class="math notranslate nohighlight">\(\alpha + y\)</span> e <span class="math notranslate nohighlight">\(\beta + n -y\)</span>. Quindi, se osserviamo <span class="math notranslate nohighlight">\(y\)</span> successi in <span class="math notranslate nohighlight">\(n\)</span> prove Bernoulliane, avendo scelto una distribuzione a priori Beta di parametri <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>, l’aggiornamento bayesiano produce una distribuzione a posteriori Beta di parametri <span class="math notranslate nohighlight">\(\alpha + y\)</span> e <span class="math notranslate nohighlight">\(\beta + n -y\)</span>.</p>
 <p>Questo è un esempio di analisi coniugata. La presente combinazione di verosimiglianza e distribuzione a priori è chiamata caso coniugato <em>beta-binomiale</em> ed è descritta dal seguente teorema.</p>
 <div class="admonition-teorema admonition">
 <p class="admonition-title">Teorema</p>
@@ -863,7 +863,7 @@ title="Print to PDF"
 </div>
 <section id="un-esempio-concreto">
 <h3><span class="section-number">26.2.1. </span>Un esempio concreto<a class="headerlink" href="#un-esempio-concreto" title="Permalink to this headline">#</a></h3>
-<p>Per fare un esempio concreto, consideriamo nuovamente i dati di <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id13" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>: nel campione di 30 partecipanti clinici le aspettative future di 23 partecipanti risultano negativamente distorte mentre quelle di 7 partecipanti risultano positivamente distorte. Nel seguito, indicheremo con <span class="math notranslate nohighlight">\(\theta\)</span> la probabilità che le aspettative di un paziente clinico siano distorte negativamente. Ci poniamo il problema di ottenere una stima a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span> avendo osservato 23 “successi” in 30 prove. I dati osservati (<span class="math notranslate nohighlight">\(y = 23\)</span>) possono essere considerati la manifestazione di una variabile casuale Bernoulliana, dunque la verosimiglianza è binomiale. In tali circostanze, se viene scelta una distribuzione a priori Beta di parametri <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>, allora anche la distribuzione a posteriori sarà una Beta di parametri <span class="math notranslate nohighlight">\(\alpha + 23\)</span> e <span class="math notranslate nohighlight">\(\beta + 30 - 23\)</span>.</p>
+<p>Per fare un esempio, consideriamo nuovamente i dati di <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id13" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>: nel campione di 30 partecipanti clinici le aspettative future di 23 partecipanti sono risultate negativamente distorte mentre quelle di 7 partecipanti sono risultate positivamente distorte. Nel seguito, indicheremo con <span class="math notranslate nohighlight">\(\theta\)</span> la probabilità che le aspettative di un paziente clinico siano distorte negativamente. Ci poniamo il problema di ottenere una stima a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span> avendo osservato 23 “successi” in 30 prove. I dati osservati (<span class="math notranslate nohighlight">\(y = 23\)</span>) possono essere considerati la realizzazione di una sequenza di variabile casuali Bernoulliane, dunque la verosimiglianza è binomiale. In tali circostanze, se viene scelta una distribuzione a priori Beta di parametri <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>, allora anche la distribuzione a posteriori sarà una Beta di parametri <span class="math notranslate nohighlight">\(\alpha + 23\)</span> e <span class="math notranslate nohighlight">\(\beta + 30 - 23\)</span>.</p>
 </section>
 <section id="la-distribuzione-a-priori">
 <h3><span class="section-number">26.2.2. </span>La distribuzione a priori<a class="headerlink" href="#la-distribuzione-a-priori" title="Permalink to this headline">#</a></h3>
@@ -1135,7 +1135,7 @@ y \mid \theta &amp; \sim \text{Bin}(n = 40, \theta) \notag\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.44784573, 0.73974889])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.44799377, 0.73938108])
 </pre></div>
 </div>
 </div>
@@ -1173,13 +1173,13 @@ Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-scipy     : 1.10.0
-matplotlib: 3.6.3
 arviz     : 0.14.0
 seaborn   : 0.12.2
-numpy     : 1.24.1
 pandas    : 1.5.3
 pymc      : 5.0.2
+numpy     : 1.24.1
+scipy     : 1.10.0
+matplotlib: 3.6.3
 
 Watermark: 2.3.1
 </pre></div>
