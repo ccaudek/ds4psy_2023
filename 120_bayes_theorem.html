@@ -670,8 +670,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-problema-dei-dadi">
+   16.5. Il problema dei dadi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
-   16.5. Commenti e considerazioni finali
+   16.6. Commenti e considerazioni finali
   </a>
  </li>
 </ul>
@@ -721,8 +726,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-problema-dei-dadi">
+   16.5. Il problema dei dadi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
-   16.5. Commenti e considerazioni finali
+   16.6. Commenti e considerazioni finali
   </a>
  </li>
 </ul>
@@ -1276,9 +1286,271 @@ P(H \mid D) = \frac{P(D \mid H) P(H)}{P(D)}
 </div></div></div>
 </div>
 </section>
+<section id="il-problema-dei-dadi">
+<h2><span class="section-number">16.5. </span>Il problema dei dadi<a class="headerlink" href="#il-problema-dei-dadi" title="Permalink to this headline">#</a></h2>
+<p>Il metodo precedente può anche essere usato quando ci sono più di due ipotesi. <span id="id1">Downey [<a class="reference internal" href="z_biblio.html#id2" title="Allen B Downey. Think Bayes. &quot; O'Reilly Media, Inc.&quot;, 2021.">Dow21</a>]</span> discute il seguente problema. Supponiamo che nell’Urna 1 ci sia un dado a 6 facce, nell’Urna 2 un dado a 8 facce e nell’Urna 3 un dado a 12 facce. Un dado viene estratto a caso da un’urna e produce il risultato 1. Qual è la probabilità che ho usato un dado a 6 facce?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+<span class="n">table2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+    </tr>
+    <tr>
+      <th>8</th>
+    </tr>
+    <tr>
+      <th>12</th>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Per evitare arrotondamenti uso la funzione <code class="docutils literal notranslate"><span class="pre">Fraction()</span></code>. Inizio a definire la distribuzione a priori.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+
+<span class="n">table2</span><span class="p">[</span><span class="s1">&#39;prior&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">table2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prior</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>1/3</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1/3</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1/3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Definisco la verosimiglianza. Se il dado è a 6 facce, la probabilità di ottenere 1 è 1/6; se il dado ha 8 facce è 1/8; se il dado ha 12 facce è 1/12.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table2</span><span class="p">[</span><span class="s1">&#39;likelihood&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">Fraction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">table2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prior</th>
+      <th>likelihood</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>1/3</td>
+      <td>1/6</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1/3</td>
+      <td>1/8</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1/3</td>
+      <td>1/12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Trovo la distribuzione a posteriori non normalizzata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table2</span><span class="p">[</span><span class="s1">&#39;unnorm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table2</span><span class="p">[</span><span class="s1">&#39;prior&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">table2</span><span class="p">[</span><span class="s1">&#39;likelihood&#39;</span><span class="p">]</span>
+<span class="n">table2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prior</th>
+      <th>likelihood</th>
+      <th>unnorm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>1/3</td>
+      <td>1/6</td>
+      <td>1/18</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1/3</td>
+      <td>1/8</td>
+      <td>1/24</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1/3</td>
+      <td>1/12</td>
+      <td>1/36</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Normalizzo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob_data</span> <span class="o">=</span> <span class="n">table2</span><span class="p">[</span><span class="s1">&#39;unnorm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">table2</span><span class="p">[</span><span class="s1">&#39;posterior&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table2</span><span class="p">[</span><span class="s1">&#39;unnorm&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">prob_data</span>
+<span class="n">table2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prior</th>
+      <th>likelihood</th>
+      <th>unnorm</th>
+      <th>posterior</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>1/3</td>
+      <td>1/6</td>
+      <td>1/18</td>
+      <td>4/9</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1/3</td>
+      <td>1/8</td>
+      <td>1/24</td>
+      <td>1/3</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>1/3</td>
+      <td>1/12</td>
+      <td>1/36</td>
+      <td>2/9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La probabilità posteriore del dado a 6 facce è 4/9, che è più grande delle probabilità degli altri dadi, 3/9 e 2/9. Intuitivamente, il dado a 6 facce è il più probabile perché ha la probabilità più grande di produrre il risultato che abbiamo osservato.</p>
+</section>
 <section id="commenti-e-considerazioni-finali">
-<h2><span class="section-number">16.5. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
-<p>La riflessione epistemologica contemporanea ha ampiamente messo in luce come la conoscenza non possa essere identificata con la certezza, ovvero con la garanzia razionale della verità. Da ciò deriva che qualunque giudizio deve necessariamente essere inteso come una decisione presa in condizioni d’incertezza. Stando così le cose, non si può più considerare la logica deduttiva, modellata sulle forme della dimostrazione matematica, come quella più adeguata al ragionamento scientifico. La ricerca scientifica ha invece bisogno di una <em>logica dell’incertezza</em> e questa viene fornita dalla teoria delle probabilità e, specialmente, da quello schema di inferenza noto come teorema di Bayes. È proprio in questi termini che può essere compresa quella rivoluzione metodologica contemporanea che, tra le altre cose, si è posta il problema di porre rimedio alla <em>crisi della replicabilità dei risultati della ricerca</em> <span id="id1">[<a class="reference internal" href="z_biblio.html#id68" title="John PA Ioannidis. Why most published research findings are false. PLoS medicine, 2(8):e124, 2005.">Ioa05</a>]</span> che sta affligendo molti ambiti della ricerca scientifica, inclusa la psicologia. Per un approfondimento a questo tema rimando nuovamente al libro <em>Bernoulli’s fallacy</em> di <span id="id2">Clayton [<a class="reference internal" href="z_biblio.html#id16" title="Aubrey Clayton. Bernoulli's Fallacy: Statistical Illogic and the Crisis of Modern Science. Columbia University Press, 2021.">Cla21</a>]</span>.</p>
+<h2><span class="section-number">16.6. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>La riflessione epistemologica contemporanea ha ampiamente messo in luce come la conoscenza non possa essere identificata con la certezza, ovvero con la garanzia razionale della verità. Da ciò deriva che qualunque giudizio deve necessariamente essere inteso come una decisione presa in condizioni d’incertezza. Stando così le cose, non si può più considerare la logica deduttiva, modellata sulle forme della dimostrazione matematica, come quella più adeguata al ragionamento scientifico. La ricerca scientifica ha invece bisogno di una <em>logica dell’incertezza</em> e questa viene fornita dalla teoria delle probabilità e, specialmente, da quello schema di inferenza noto come teorema di Bayes. È proprio in questi termini che può essere compresa quella rivoluzione metodologica contemporanea che, tra le altre cose, si è posta il problema di porre rimedio alla <em>crisi della replicabilità dei risultati della ricerca</em> <span id="id2">[<a class="reference internal" href="z_biblio.html#id68" title="John PA Ioannidis. Why most published research findings are false. PLoS medicine, 2(8):e124, 2005.">Ioa05</a>]</span> che sta affligendo molti ambiti della ricerca scientifica, inclusa la psicologia. Per un approfondimento a questo tema rimando nuovamente al libro <em>Bernoulli’s fallacy</em> di <span id="id3">Clayton [<a class="reference internal" href="z_biblio.html#id16" title="Aubrey Clayton. Bernoulli's Fallacy: Statistical Illogic and the Crisis of Modern Science. Columbia University Press, 2021.">Cla21</a>]</span>.</p>
 <p>In questo capitolo abbiamo descritto il teorema di Bayes facendo riferimento alle variabili casuali discrete. Il caso discreto, tuttavia, nonostante la sua apparente semplicità matematica, è il più contro-intuitivo. Risulta più intuitivo pensare al teorema di Bayes facendo riferimento alle variabili casuali continue. Questo sarà l’oggetto del capitolo <a class="reference internal" href="305_intro_bayes.html#bayes-workflow-notebook"><span class="std std-ref">Credibilità, modelli e parametri</span></a>.</p>
 </section>
 </section>
