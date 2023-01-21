@@ -846,7 +846,7 @@ title="Print to PDF"
 <p>I problemi posti dall’approccio definettiano riguardano l’arbitrarietà dell’assegnazione soggettività di probabilità la quale sembra negare la validità dell’intero costrutto teorico. In risposta a tale critica, i bayesiani sostengono che gli approcci oggettivisti alla probabilità nascondono scelte arbitrarie preliminari e sono basate su assunzioni implausibili. È molto più onesto esplicitare subito tutte le scelte arbitrarie effettuate nel corso dell’analisi in modo da controllarne coerenza e razionalità.</p>
 <div class="admonition-nota admonition">
 <p class="admonition-title">Nota</p>
-<p>Per chi desidera approfondire, un’introduzione molto leggibile alle tematiche della definizione della probabilità nella storia della scienza è fornita nel primo capitolo del testo <em>Bernoulli’s fallacy</em> <span id="id1">[<a class="reference internal" href="z_biblio.html#id15" title="Aubrey Clayton. Bernoulli's Fallacy: Statistical Illogic and the Crisis of Modern Science. Columbia University Press, 2021.">Cla21</a>]</span>.</p>
+<p>Per chi desidera approfondire, un’introduzione molto leggibile alle tematiche della definizione della probabilità nella storia della scienza è fornita nel primo capitolo del testo <em>Bernoulli’s fallacy</em> <span id="id1">[<a class="reference internal" href="z_biblio.html#id16" title="Aubrey Clayton. Bernoulli's Fallacy: Statistical Illogic and the Crisis of Modern Science. Columbia University Press, 2021.">Cla21</a>]</span>.</p>
 </div>
 </section>
 </section>
@@ -884,6 +884,7 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">bernoulli</span><span class="p">,</span> <span class="n">binom</span>
+<span class="kn">import</span> <span class="nn">empiricaldist</span>
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 </pre></div>
 </div>
@@ -895,7 +896,7 @@ title="Print to PDF"
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -919,7 +920,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 1 0 0 1 0 0 1 1 1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 1 0 1 0 0 0 1 1 1
 </pre></div>
 </div>
 </div>
@@ -932,7 +933,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
 </pre></div>
 </div>
 </div>
@@ -946,7 +947,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
 </pre></div>
 </div>
 </div>
@@ -960,7 +961,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.507
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.51
 </pre></div>
 </div>
 </div>
@@ -992,7 +993,7 @@ Z = Y_1 + Y_2 + Y_3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 </pre></div>
 </div>
 </div>
@@ -1002,7 +1003,7 @@ Z = Y_1 + Y_2 + Y_3.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">niter</span> <span class="o">=</span> <span class="mi">10000</span>
-<span class="n">random_samples</span> <span class="o">=</span> <span class="p">[</span><span class="k">yield</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">)]</span>
+<span class="n">random_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">)]</span>
 <span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">random_samples</span><span class="p">)</span>
 <span class="n">p_estimates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -1011,10 +1012,7 @@ Z = Y_1 + Y_2 + Y_3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-    <span class="n">random_samples</span> <span class="o">=</span> <span class="p">[</span><span class="k">yield</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">)]</span>
-                      <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000
 </pre></div>
 </div>
 </div>
@@ -1027,10 +1025,38 @@ Z = Y_1 + Y_2 + Y_3.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      p_est
+0      0.50
+1      0.50
+2      0.50
+3      0.50
+4      0.75
+...     ...
+9995   0.50
+9996   0.75
+9997   0.75
+9998   0.50
+9999   0.25
+
+[10000 rows x 1 columns]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;p_est&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="n">niter</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.50    0.3632
+0.25    0.2574
+0.75    0.2536
+1.00    0.0633
+0.00    0.0625
+Name: p_est, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -1368,6 +1394,206 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </tr>
 </tbody>
 </table>
+<p>Ora che abbiamo capito come calcolare la distribuzione di massa di probabilità, usiamo le funzioni di <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> che consentono di eseguire più facilmente le operazioni precedenti. Creiamo la distribuzione di massa di probabilità per la variabile casuale corrispondente ai punti ottenuti dal lancio di un dado bilanciato a sei facce.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="n">empiricaldist</span><span class="o">.</span><span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">d1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>probs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>0.166667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.166667</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.166667</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.166667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.166667</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.166667</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Ora generiamo la distribuzione di massa di probabilità per la somma dei punti ottenuti dal lancio di due dadi equilibrati a sei facce.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span><span class="o">.</span><span class="n">add_dist</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+<span class="n">d2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>probs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>0.027778</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.055556</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.083333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.111111</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.138889</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.166667</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.138889</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.111111</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.083333</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.055556</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.027778</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">decorate_dice</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Labels the axes.</span>
+<span class="sd">    </span>
+<span class="sd">    title: string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Risultato&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Distribuzione di massa di probabilità&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="n">decorate_dice</span><span class="p">(</span><span class="s1">&#39;Un dado&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/110_intro_prob_42_0.png" src="_images/110_intro_prob_42_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d2</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="n">decorate_dice</span><span class="p">(</span><span class="s1">&#39;Due dadi&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/110_intro_prob_43_0.png" src="_images/110_intro_prob_43_0.png" />
+</div>
+</div>
+<p>Le probabilità della distribuzione di massa si ottengono con la notazione delle parentesi quadre. Ad esempio:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.027777777777777776
+</pre></div>
+</div>
+</div>
+</div>
+<p>Replichiamo ora il risultato precedente, ovvero troviamo la probabilità di ottenere un valore dispari dalla somma dei due dadi:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d2</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">d2</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="n">d2</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">+</span> <span class="n">d2</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="n">d2</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="spazi-campione-ed-eventi-con-python">
@@ -1408,7 +1634,7 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 6
 </pre></div>
 </div>
 </div>
@@ -1506,7 +1732,31 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 / 36
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 1),
+ (1, 2),
+ (1, 3),
+ (1, 4),
+ (1, 5),
+ (2, 1),
+ (2, 2),
+ (2, 3),
+ (2, 4),
+ (2, 5),
+ (3, 1),
+ (3, 2),
+ (3, 3),
+ (3, 4),
+ (3, 5),
+ (4, 1),
+ (4, 2),
+ (4, 3),
+ (4, 4),
+ (4, 5),
+ (5, 1),
+ (5, 2),
+ (5, 3),
+ (5, 4),
+ (5, 5)]
 </pre></div>
 </div>
 </div>
@@ -1514,6 +1764,11 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 / 36
 </pre></div>
 </div>
 </div>
@@ -1527,7 +1782,7 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 36
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 3), (2, 2), (3, 1)]
 </pre></div>
 </div>
 </div>
@@ -1535,6 +1790,11 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 36
 </pre></div>
 </div>
 </div>
@@ -1626,11 +1886,6 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">product</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2598960
 </pre></div>
 </div>
 </div>

@@ -938,9 +938,9 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div><div class="output text_html">
 <div>
   <progress value='16000' class='' max='16000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [16000/16000 00:04&lt;00:00 Sampling 4 chains, 0 divergences]
+  100.00% [16000/16000 00:03&lt;00:00 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 3_000 draw iterations (4_000 + 12_000 draws total) took 17 seconds.
+</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 3_000 draw iterations (4_000 + 12_000 draws total) took 12 seconds.
 </pre></div>
 </div>
 </div>
@@ -967,7 +967,7 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f9c49947ac0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7fa841139480&gt;
 </pre></div>
 </div>
 <img alt="_images/355_groups_comparison_19_1.png" src="_images/355_groups_comparison_19_1.png" />
@@ -1014,26 +1014,26 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
   <tbody>
     <tr>
       <th>mu</th>
-      <td>3705.68</td>
-      <td>38.62</td>
-      <td>3633.87</td>
-      <td>3778.37</td>
-      <td>0.35</td>
+      <td>3705.59</td>
+      <td>38.55</td>
+      <td>3631.41</td>
+      <td>3775.42</td>
+      <td>0.36</td>
       <td>0.25</td>
-      <td>12110.0</td>
-      <td>9165.0</td>
+      <td>11822.0</td>
+      <td>8509.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td>462.60</td>
-      <td>27.54</td>
-      <td>411.62</td>
-      <td>514.57</td>
+      <td>462.84</td>
+      <td>27.01</td>
+      <td>412.75</td>
+      <td>513.26</td>
       <td>0.25</td>
       <td>0.18</td>
-      <td>12167.0</td>
-      <td>8070.0</td>
+      <td>11767.0</td>
+      <td>8946.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -1099,10 +1099,36 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </style>
 </div><div class="output text_html">
 <div>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:04&lt;00:00 Sampling 4 chains, 0 divergences]
+  <progress value='2731' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+  34.14% [2731/8000 00:02&lt;00:05 Sampling 4 chains, 0 divergences]
 </div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 16 seconds.
+</div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mi">4000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">mass</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="s2">&quot;mass&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">[</span><span class="n">all_species</span><span class="o">.</span><span class="n">codes</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">observed</span><span class="o">=</span><span class="n">penguins</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">idata3</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+
+<span class="nn">File /opt/anaconda3/envs/pymc/lib/python3.10/site-packages/pymc/sampling/mcmc.py:571,</span> in <span class="ni">sample</span><span class="nt">(draws, step, init, n_init, initvals, trace, chains, cores, tune, progressbar, model, random_seed, discard_tuned_samples, compute_convergence_checks, callback, jitter_max_retries, return_inferencedata, keep_warning_stat, idata_kwargs, mp_ctx, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">569</span> <span class="c1"># Wrap chain traces in a MultiTrace</span>
+<span class="g g-Whitespace">    </span><span class="mi">570</span> <span class="k">if</span> <span class="n">discard_tuned_samples</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">571</span>     <span class="n">traces</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">_choose_chains</span><span class="p">(</span><span class="n">traces</span><span class="p">,</span> <span class="n">tune</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">572</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span>     <span class="n">traces</span><span class="p">,</span> <span class="n">length</span> <span class="o">=</span> <span class="n">_choose_chains</span><span class="p">(</span><span class="n">traces</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nn">File /opt/anaconda3/envs/pymc/lib/python3.10/site-packages/pymc/backends/base.py:527,</span> in <span class="ni">_choose_chains</span><span class="nt">(traces, tune)</span>
+<span class="g g-Whitespace">    </span><span class="mi">525</span> <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span> <span class="o">-</span> <span class="n">tune</span><span class="p">)</span> <span class="k">for</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">traces</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">526</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lengths</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">527</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not enough samples to build a trace.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span> <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span> <span class="n">l_sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lengths</span><span class="p">)[</span><span class="n">idxs</span><span class="p">]</span>
+
+<span class="ne">ValueError</span>: Not enough samples to build a trace.
 </pre></div>
 </div>
 </div>
@@ -1156,74 +1182,74 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
   <tbody>
     <tr>
       <th>mu[0]</th>
-      <td>3706.20</td>
-      <td>38.66</td>
-      <td>3630.32</td>
-      <td>3773.99</td>
-      <td>0.54</td>
-      <td>0.38</td>
-      <td>5143.0</td>
-      <td>3213.0</td>
+      <td>3706.92</td>
+      <td>38.71</td>
+      <td>3634.98</td>
+      <td>3779.60</td>
+      <td>0.60</td>
+      <td>0.43</td>
+      <td>4107.0</td>
+      <td>2988.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu[1]</th>
-      <td>3733.43</td>
-      <td>47.73</td>
-      <td>3643.10</td>
-      <td>3823.17</td>
-      <td>0.66</td>
-      <td>0.46</td>
-      <td>5291.0</td>
-      <td>2752.0</td>
+      <td>3733.08</td>
+      <td>48.37</td>
+      <td>3646.16</td>
+      <td>3828.52</td>
+      <td>0.62</td>
+      <td>0.44</td>
+      <td>6070.0</td>
+      <td>3199.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu[2]</th>
-      <td>5092.77</td>
-      <td>46.62</td>
-      <td>4996.53</td>
-      <td>5172.81</td>
-      <td>0.65</td>
-      <td>0.46</td>
-      <td>5225.0</td>
-      <td>3164.0</td>
+      <td>5092.28</td>
+      <td>46.13</td>
+      <td>5004.85</td>
+      <td>5179.95</td>
+      <td>0.62</td>
+      <td>0.44</td>
+      <td>5599.0</td>
+      <td>3415.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma[0]</th>
-      <td>462.44</td>
-      <td>27.65</td>
-      <td>415.32</td>
-      <td>517.50</td>
+      <td>462.28</td>
+      <td>27.23</td>
+      <td>414.13</td>
+      <td>516.16</td>
       <td>0.38</td>
       <td>0.27</td>
-      <td>5309.0</td>
-      <td>3221.0</td>
+      <td>5297.0</td>
+      <td>3376.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma[1]</th>
-      <td>390.70</td>
-      <td>33.51</td>
-      <td>331.27</td>
-      <td>456.60</td>
-      <td>0.48</td>
+      <td>391.34</td>
+      <td>34.06</td>
+      <td>327.88</td>
+      <td>455.10</td>
+      <td>0.47</td>
       <td>0.34</td>
-      <td>5212.0</td>
-      <td>3367.0</td>
+      <td>5400.0</td>
+      <td>3213.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma[2]</th>
-      <td>506.32</td>
-      <td>32.79</td>
-      <td>443.34</td>
-      <td>567.26</td>
-      <td>0.46</td>
-      <td>0.33</td>
-      <td>5053.0</td>
-      <td>3454.0</td>
+      <td>506.59</td>
+      <td>33.10</td>
+      <td>443.29</td>
+      <td>566.71</td>
+      <td>0.44</td>
+      <td>0.31</td>
+      <td>5843.0</td>
+      <td>3404.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -1278,14 +1304,7 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&lt;AxesSubplot: title={&#39;center&#39;: &#39;mu&#39;}&gt;,
-        &lt;AxesSubplot: title={&#39;center&#39;: &#39;mu&#39;}, xlabel=&#39;Rank (all chains)&#39;, ylabel=&#39;Chain&#39;&gt;],
-       [&lt;AxesSubplot: title={&#39;center&#39;: &#39;sigma&#39;}&gt;,
-        &lt;AxesSubplot: title={&#39;center&#39;: &#39;sigma&#39;}, xlabel=&#39;Rank (all chains)&#39;, ylabel=&#39;Chain&#39;&gt;]],
-      dtype=object)
-</pre></div>
-</div>
-<img alt="_images/355_groups_comparison_30_1.png" src="_images/355_groups_comparison_30_1.png" />
+<img alt="_images/355_groups_comparison_30_0.png" src="_images/355_groups_comparison_30_0.png" />
 </div>
 </div>
 </section>
@@ -1295,26 +1314,6 @@ quale distribuzione a priori per <span class="math notranslate nohighlight">\(\m
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
 <span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w -p pytensor
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Jan 17 2023
-
-Python implementation: CPython
-Python version       : 3.10.8
-IPython version      : 8.7.0
-
-pytensor: 2.8.11
-
-pandas    : 1.5.2
-pymc      : 5.0.1
-arviz     : 0.14.0
-seaborn   : 0.12.2
-matplotlib: 3.6.2
-numpy     : 1.24.1
-
-Watermark: 2.3.1
 </pre></div>
 </div>
 </div>

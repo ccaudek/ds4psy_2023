@@ -670,8 +670,30 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#esercizio-di-ricapitolazione-con-python">
+   15.5. Esercizio di ricapitolazione con Python
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intersezione-di-eventi-congiunzione">
+     15.5.1. Intersezione di eventi (congiunzione)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     15.5.2. Probabilità condizionata
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#teorema-di-bayes">
+     15.5.3. Teorema di Bayes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
-   15.5. Commenti e considerazioni finali
+   15.6. Commenti e considerazioni finali
   </a>
  </li>
 </ul>
@@ -721,8 +743,30 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#esercizio-di-ricapitolazione-con-python">
+   15.5. Esercizio di ricapitolazione con Python
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intersezione-di-eventi-congiunzione">
+     15.5.1. Intersezione di eventi (congiunzione)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     15.5.2. Probabilità condizionata
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#teorema-di-bayes">
+     15.5.3. Teorema di Bayes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
-   15.5. Commenti e considerazioni finali
+   15.6. Commenti e considerazioni finali
   </a>
  </li>
 </ul>
@@ -1016,8 +1060,277 @@ P(A \cap B \cap C) &amp;= P(A) P(B) P(C). \notag
 </div>
 </div>
 </section>
+<section id="esercizio-di-ricapitolazione-con-python">
+<h2><span class="section-number">15.5. </span>Esercizio di ricapitolazione con Python<a class="headerlink" href="#esercizio-di-ricapitolazione-con-python" title="Permalink to this headline">#</a></h2>
+<p>Seguendo l’approccio di <span id="id1">Downey [<a class="reference internal" href="z_biblio.html#id2" title="Allen B Downey. Think Bayes. &quot; O'Reilly Media, Inc.&quot;, 2021.">Dow21</a>]</span>, per promuovere una comprensione più intuitiva delle leggi della probabilità che abbiamo descritto finora, utilizzeremo ora una semplice definizione di probabilità, adeguata per il presente esercizio, ovvero considereremo la probabilità come la <em>proporzione</em> di un insieme finito.</p>
+<p>Esaminiamo qui il dataset <code class="docutils literal notranslate"><span class="pre">penguins</span></code> come un insieme finito sul quale definire di vari eventi. Iniziamo ad importare i dati ed escludiamo i dati mancanti.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/penguins.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 333 entries, 0 to 343
+Data columns (total 8 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   species            333 non-null    object 
+ 1   island             333 non-null    object 
+ 2   bill_length_mm     333 non-null    float64
+ 3   bill_depth_mm      333 non-null    float64
+ 4   flipper_length_mm  333 non-null    float64
+ 5   body_mass_g        333 non-null    float64
+ 6   sex                333 non-null    object 
+ 7   year               333 non-null    int64  
+dtypes: float64(4), int64(1), object(3)
+memory usage: 23.4+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’istruzione seguente ritorna un oggetto Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> booleano che è <code class="docutils literal notranslate"><span class="pre">True</span></code> se il pinguino vive sull’isola Dream.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">on_dream</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;island&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Dream&quot;</span>
+<span class="n">on_dream</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    False
+1    False
+2    False
+4    False
+5    False
+Name: island, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>In totale ci sono 123 pinguini sull’isola Dream.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">on_dream</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>123
+</pre></div>
+</div>
+</div>
+</div>
+<p>La proporzione di pinguini sull’isola Dream, sul totale di 333 pinguini, si trova facendo la media dei valori 0 e 1 della <code class="docutils literal notranslate"><span class="pre">Series</span></code> precedente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">on_dream</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36936936936936937
+</pre></div>
+</div>
+</div>
+</div>
+<p>Circa il 36.9% di tutti i pinguini considerati vive sull’isola Dream. Quindi, se scegliamo un pinguino a caso da questo insieme, la probabilità che viva sull’isola Dream è 0.369.</p>
+<p>Possiamo inserire il codice precedente in una funzione che ritorna la probabilità, se riceve in input una <code class="docutils literal notranslate"><span class="pre">Series</span></code> di valori booleani.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the probability of a proposition, A.&quot;&quot;&quot;</span> 
+    <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Verifichiamo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36936936936936937
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo ora la probabilità che un pinguino sia di genere femminile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">female</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;female&quot;</span>
+<span class="n">prob</span><span class="p">(</span><span class="n">female</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4954954954954955
+</pre></div>
+</div>
+</div>
+</div>
+<section id="intersezione-di-eventi-congiunzione">
+<h3><span class="section-number">15.5.1. </span>Intersezione di eventi (congiunzione)<a class="headerlink" href="#intersezione-di-eventi-congiunzione" title="Permalink to this headline">#</a></h3>
+<p>L’intersezione tra insiemi corrisponde all’operazione logica della congiunzione. Date due proposizioni <span class="math notranslate nohighlight">\(p\)</span> e <span class="math notranslate nohighlight">\(q\)</span>, la loro congiunzione è vera solo se entrambe sono vere. Se abbiamo due oggetti Series booleani, possiamo usare l’operatore <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> per trovare la loro congiunzione.</p>
+<p>Defininiamo ora un nuovo evento, “small”, che identifica i pinguini la cui massa corporea è inferiore al quantile di ordine 1/3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">prob</span><span class="p">(</span><span class="n">small</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.30930930930930933
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo ora la probabilità che un pinguino sia di genere femminile e, insieme, appartenga alla categoria “small”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">female</span> <span class="o">&amp;</span> <span class="n">small</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2552552552552553
+</pre></div>
+</div>
+</div>
+</div>
+<p>Come ci possiamo aspettare la probabilità dell’intersezione è minore della probabilità di “small” dato che non tutti i pinguini più piccoli sono di genere femminile.</p>
+</section>
+<section id="id2">
+<h3><span class="section-number">15.5.2. </span>Probabilità condizionata<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>Abbiamo visto che la probabilità condizionata è la probabilità calcolata su un insieme ristretto. Per selezionare un sottoinsieme usiamo la notazione delle parentesi quadre. Nell’istruzione seguente selezioniamo solo i pinguini di genere femminile tra quelli che sono “small”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="n">small</span><span class="p">]</span>
+<span class="n">prob</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8252427184466019
+</pre></div>
+</div>
+</div>
+</div>
+<p>Scriviamo ora una funzione a cui vengono passati due oggetti Series booleani, <code class="docutils literal notranslate"><span class="pre">proposition</span></code> e <code class="docutils literal notranslate"><span class="pre">given</span></code>. La funzione ritorna la probabilità di <code class="docutils literal notranslate"><span class="pre">proposition</span></code> condizionato a <code class="docutils literal notranslate"><span class="pre">given</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conditional</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">given</span><span class="p">):</span> 
+    <span class="k">return</span> <span class="n">prob</span><span class="p">(</span><span class="n">proposition</span><span class="p">[</span><span class="n">given</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo ora la probabilità condizionata di essere di genere femminile, se consideriamo solo i pinguini “small”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional</span><span class="p">(</span><span class="n">female</span><span class="p">,</span> <span class="n">given</span><span class="o">=</span><span class="n">small</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8252427184466019
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo ora la probabilità di essere di genere femminile, se consideriamo solo i pinguini sull’isola Dream, <span class="math notranslate nohighlight">\(P(\text{female} \mid \text{Dream})\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional</span><span class="p">(</span><span class="n">female</span><span class="p">,</span> <span class="n">given</span><span class="o">=</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4959349593495935
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso risultato si ottiene applicando la definizione di probabilità condizionata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">female</span> <span class="o">&amp;</span> <span class="n">on_dream</span><span class="p">)</span> <span class="o">/</span> <span class="n">prob</span><span class="p">(</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49593495934959353
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo la probabilità che, estreanod un pinguio a caso, troviamo un pinguino di genere femminile che vive sull’isola Dream.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">female</span> <span class="o">&amp;</span> <span class="n">on_dream</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1831831831831832
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso risultato si trova usando la probabilità condizionata per trovare la probabilità dell’intersezione tra due eventi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional</span><span class="p">(</span><span class="n">female</span><span class="p">,</span> <span class="n">given</span><span class="o">=</span><span class="n">on_dream</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob</span><span class="p">(</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.18318318318318316
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="teorema-di-bayes">
+<h3><span class="section-number">15.5.3. </span>Teorema di Bayes<a class="headerlink" href="#teorema-di-bayes" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional</span><span class="p">(</span><span class="n">female</span><span class="p">,</span> <span class="n">given</span><span class="o">=</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4959349593495935
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional</span><span class="p">(</span><span class="n">on_dream</span><span class="p">,</span> <span class="n">given</span><span class="o">=</span><span class="n">female</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob</span><span class="p">(</span><span class="n">female</span><span class="p">)</span> <span class="o">/</span> <span class="n">prob</span><span class="p">(</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49593495934959353
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="commenti-e-considerazioni-finali">
-<h2><span class="section-number">15.5. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">15.6. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
 <p>La probabilità condizionata è importante perché ci fornisce uno strumento per precisare il concetto di indipendenza statistica. Una delle domande più importanti delle analisi statistiche è infatti quella che si chiede se due variabili siano associate tra loro oppure no. In questo capitolo abbiamo discusso il concetto di indipendenza (come contrapposto al concetto di associazione); in seguito vedremo come sia possibile fare inferenza sull’associazione tra variabili.</p>
 </section>
 </section>
