@@ -665,8 +665,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-problema-delle-due-urne">
+   16.4. Il problema delle due urne
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
-   16.4. Commenti e considerazioni finali
+   16.5. Commenti e considerazioni finali
   </a>
  </li>
 </ul>
@@ -711,8 +716,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-problema-delle-due-urne">
+   16.4. Il problema delle due urne
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
-   16.4. Commenti e considerazioni finali
+   16.5. Commenti e considerazioni finali
   </a>
  </li>
 </ul>
@@ -1027,8 +1037,247 @@ memory usage: 23.4+ KB
 </div>
 </div>
 </section>
+<section id="il-problema-delle-due-urne">
+<h2><span class="section-number">16.4. </span>Il problema delle due urne<a class="headerlink" href="#il-problema-delle-due-urne" title="Permalink to this headline">#</a></h2>
+<p>Supponiamo che vi siano due urne.</p>
+<ul class="simple">
+<li><p>L’urna 1 (<span class="math notranslate nohighlight">\(U_1\)</span>) contiene 30 palline bianche (B) e 10 palline nere (N).</p></li>
+<li><p>L’urna 2 (<span class="math notranslate nohighlight">\(U_2\)</span>) contiene 20 palline bianche e 20 palline nere.</p></li>
+</ul>
+<p>Supponiamo di scegliere una delle urne a caso e, senza guardare, di scegliere una pallina a caso. Se la pallina è bianca, qual è la probabilità che provenga dall’urna 1?</p>
+<p>Quello che vogliamo è la probabilità condizionata che abbiamo scelto dall’Urna 1 dato che abbiamo ottenuto una pallina bianca, <span class="math notranslate nohighlight">\(P(U_1 \mid B)\)</span>.</p>
+<p>Il problema ci fornisce le seguenti informazioni:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(B \mid U_1)\)</span> = 3/4,</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(B \mid U_2)\)</span> = 1/2.</p></li>
+</ul>
+<p>Il teorema di Bayes ci dice come le informazioni a disposizione si possono mettere in relazione con la domanda del problema:</p>
+<div class="math notranslate nohighlight">
+\[
+P(U_1 \mid B) = \frac{P(B \mid U_1) P(U_1)}{P(B)}
+\]</div>
+<p>Per calcolare la probabilità <span class="math notranslate nohighlight">\(P(B)\)</span> usiamo il teorema della probabilità totale:</p>
+<div class="math notranslate nohighlight">
+\[
+P(B) = P(B \mid U_1) P(U_1) + P(B \mid U_2) P(U_2),
+\]</div>
+<p>ovvero</p>
+<div class="math notranslate nohighlight">
+\[
+P(B) = 3/4 \cdot 1/2 + 1/2 \cdot 1/2 = 5/8.
+\]</div>
+<p>Concludiamo applicando il teorema di Bayes:</p>
+<div class="math notranslate nohighlight">
+\[
+P(U_1 \mid B) = \frac{3/4 \cdot 1/2}{5/8} = 3/5.
+\]</div>
+<p>Il processo di aggiornamento bayesiano può essere anche svolto nel modo seguente. Riscrivo il teorema di Bayes nel modo seguente:</p>
+<div class="math notranslate nohighlight">
+\[
+P(H \mid D) = \frac{P(D \mid H) P(H)}{P(D)}
+\]</div>
+<p>La probabilità <span class="math notranslate nohighlight">\(P(H)\)</span> è la probabilità delle ipotesi prima di avere osservato i dati. Nel nostro caso, le due ipotesi sono “Urna 1” e “Urna 2”, entrambe con la stessa probabilità, dato che non abbiamo ragioni a priori per dare più peso ad un’ipotesi rispetto all’altra. Costruiamo una tabella con un DataFrame in cui inseriamo la colonna <code class="docutils literal notranslate"><span class="pre">prior</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Urn 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Urn 2&#39;</span><span class="p">])</span>
+<span class="n">table</span><span class="p">[</span><span class="s1">&#39;prior&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prior</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Urn 1</th>
+      <td>0.5</td>
+    </tr>
+    <tr>
+      <th>Urn 2</th>
+      <td>0.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La probabilità <span class="math notranslate nohighlight">\(P(D \mid H)\)</span> è la probabilità dei dati, data l’ipotesi. È chiamata verosimiglianza. La probabilità di una pallina bianca dato che viene estratta dall’Urna 1 è 3/4. La probabilità di una pallina bianca dato che viene estratta dall’Urna 1 è 1/2. Aggiungo alla tabella la colonna <code class="docutils literal notranslate"><span class="pre">likelihood</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;likelihood&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prior</th>
+      <th>likelihood</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Urn 1</th>
+      <td>0.5</td>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>Urn 2</th>
+      <td>0.5</td>
+      <td>0.50</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La probabilità <span class="math notranslate nohighlight">\(P(H \mid D)\)</span> è la probabilità dell’ipotesi dopo avere osservato i dati. Si ottiene come il prodotto della verosimiglianza per la probabilità a priori, diviso per una <em>costante di normalizzazione</em>. Iniziamo a calcolare il la distribuzione a posteriori non normalizzata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;unnorm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;prior&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;likelihood&#39;</span><span class="p">]</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prior</th>
+      <th>likelihood</th>
+      <th>unnorm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Urn 1</th>
+      <td>0.5</td>
+      <td>0.75</td>
+      <td>0.375</td>
+    </tr>
+    <tr>
+      <th>Urn 2</th>
+      <td>0.5</td>
+      <td>0.50</td>
+      <td>0.250</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La probabilità dei dati, <span class="math notranslate nohighlight">\(P(D)\)</span>, ovvero il numeratore bayesiano, è dato dalla somma di tutti i valori della distribuzione a posteriori non normalizzata:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob_data</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;unnorm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possiamo ora normalizzare la distribuzione a posteriori:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;posterior&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;unnorm&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">prob_data</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>prior</th>
+      <th>likelihood</th>
+      <th>unnorm</th>
+      <th>posterior</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Urn 1</th>
+      <td>0.5</td>
+      <td>0.75</td>
+      <td>0.375</td>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <th>Urn 2</th>
+      <td>0.5</td>
+      <td>0.50</td>
+      <td>0.250</td>
+      <td>0.4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
 <section id="commenti-e-considerazioni-finali">
-<h2><span class="section-number">16.4. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">16.5. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
 <p>La riflessione epistemologica contemporanea ha ampiamente messo in luce come la conoscenza non possa essere identificata con la certezza, ovvero con la garanzia razionale della verità. Da ciò deriva che qualunque giudizio deve necessariamente essere inteso come una decisione presa in condizioni d’incertezza. Stando così le cose, non si può più considerare la logica deduttiva, modellata sulle forme della dimostrazione matematica, come quella più adeguata al ragionamento scientifico. La ricerca scientifica ha invece bisogno di una <em>logica dell’incertezza</em> e questa viene fornita dalla teoria delle probabilità e, specialmente, da quello schema di inferenza noto come teorema di Bayes. È proprio in questi termini che può essere compresa quella rivoluzione metodologica contemporanea che, tra le altre cose, si è posta il problema di porre rimedio alla <em>crisi della replicabilità dei risultati della ricerca</em> <span id="id1">[<a class="reference internal" href="z_biblio.html#id68" title="John PA Ioannidis. Why most published research findings are false. PLoS medicine, 2(8):e124, 2005.">Ioa05</a>]</span> che sta affligendo molti ambiti della ricerca scientifica, inclusa la psicologia. Per un approfondimento a questo tema rimando nuovamente al libro <em>Bernoulli’s fallacy</em> di <span id="id2">Clayton [<a class="reference internal" href="z_biblio.html#id16" title="Aubrey Clayton. Bernoulli's Fallacy: Statistical Illogic and the Crisis of Modern Science. Columbia University Press, 2021.">Cla21</a>]</span>.</p>
 <p>In questo capitolo abbiamo descritto il teorema di Bayes facendo riferimento alle variabili casuali discrete. Il caso discreto, tuttavia, nonostante la sua apparente semplicità matematica, è il più contro-intuitivo. Risulta più intuitivo pensare al teorema di Bayes facendo riferimento alle variabili casuali continue. Questo sarà l’oggetto del capitolo <a class="reference internal" href="305_intro_bayes.html#bayes-workflow-notebook"><span class="std std-ref">Credibilità, modelli e parametri</span></a>.</p>
 </section>
