@@ -727,33 +727,16 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="pensare-ad-una-proporzione-in-termini-soggettivi">
 <span id="cap-subj-prop"></span><h1><span class="section-number">25. </span>Pensare ad una proporzione in termini soggettivi<a class="headerlink" href="#pensare-ad-una-proporzione-in-termini-soggettivi" title="Permalink to this headline">#</a></h1>
-<p>Obiettivo di questo Capitolo è introdurre l’inferenza bayesiana considerando il modello binomiale. Esamineremo prima il caso di una distribuzione a priori discreta; esamineremo poi il caso di una distribuzione a priori continua. Il materiale qui presentato segue molto da vicino il capitolo 7 del testo di <span id="id1">Albert and Hu [<a class="reference internal" href="z_biblio.html#id14" title="Jim Albert and Jingchen Hu. Probability and Bayesian Modeling. Chapman and Hall/CRC, 2019.">AH19</a>]</span>.</p>
-<section id="inferenza-bayesiana-con-una-distribuzione-a-priori-discreta">
-<h2><span class="section-number">25.1. </span>Inferenza bayesiana con una distribuzione a priori discreta<a class="headerlink" href="#inferenza-bayesiana-con-una-distribuzione-a-priori-discreta" title="Permalink to this headline">#</a></h2>
-<p>Nei problemi tradizionali sulla teoria delle probabilità ci sono molti esempi che riguardano l’estrazione di palline colorate da un’urna. In questi esempi ci viene fornito il numero di palline di vari colori presenti nell’urna e ci viene chiesto di calcolare le probabilità di vari eventi. Ad esempio, in un’urna ci sono 40 palline bianche e 20 rosse. Se estrai due palline a caso, qual è la probabilità che entrambe siano bianche?</p>
-<p>L’approccio bayesiano considera uno scenario diverso, ovvero quello in cui non conosciamo le proporzioni delle palline colorate presenti nell’urna. Cioè, nell’esempio precedente, sappiamo solo che nell’urna ci sono due tipi di palline colorate, ma non sappiamo che 40 sono bianche (proporzione di bianco = <span class="math notranslate nohighlight">\(2/3\)</span>) e 20 sono rosse (proporzione di rosso = <span class="math notranslate nohighlight">\(1/3\)</span>). Ci poniamo la seguente domanda: è possibile inferire le proporzioni di palline nell’urna estraendo un campione di palline dall’urna e osservando i colori delle palline estratte? Espresso in questo modo, questo diventa un problema di inferenza statistica, perché stiamo cercando di inferire la proporzione <span class="math notranslate nohighlight">\(\theta\)</span> della popolazione sulla base di un campione casuale. Per continuare con l’esempio precedente, quello che vogliamo fare è inferire <span class="math notranslate nohighlight">\(\theta\)</span>, ad esempio, la proporzione di palline rosse nell’urna, alla luce del numero di palline rosse e bianche nel campione.</p>
-<p>Le proporzioni sono simili alle probabilità. Ricordiamo che sono state proposte tre diverse interpretazioni del concetto di probabilità.</p>
-<ul class="simple">
-<li><p>Il punto di vista classico: è necessario enumerare tutti gli eventi elementari dello spazio campione nel quale ciascun risultato è ugualmente probabile.</p></li>
-<li><p>Il punto di vista frequentista: è necessario ripetere l’esperimento esperimento casuale (cioè l’estrazione del campione) molte volte in condizioni identiche.</p></li>
-<li><p>La visione soggettiva: è necessario esprimere la propria opinione sulla probabilità di un evento unico e irripetibile.</p></li>
-</ul>
-<p>La visione classica non sembra potere funzionare qui, perché sappiamo solo che ci sono due tipi di palline colorate e che il numero totale di palline è 60. Anche se estraiamo un campione di 10 palline, possiamo solo osservare la proporzione di palline rosse nel campione. Non c’è modo per potere stabilire che, nello spazio campione, ogni risultato è ugualmente probabile.</p>
-<p>La visione frequentista potrebbe funzionare nel caso presente. Possiamo considerare il processo del campionamento (cioè l’estrazione di un campione casuale di 10 palline dall’urna) come un esperimento casuale che produce una proporzione campionaria <span class="math notranslate nohighlight">\(p\)</span>. Potremmo quindi pensare di ripetere l’esperimento casuale molte volte nelle stesse condizioni, ottenere una serie di proporzioni campionarie <span class="math notranslate nohighlight">\(p\)</span> e infine riassumere in qualche modo questa distribuzione di statistiche campionarie. Ripetendo l’esperimento casuale tante volte è possibile ottenere una stima abbastanza accurata della proporzione <span class="math notranslate nohighlight">\(\theta\)</span> di palline rosse nell’urna. Questo processo è fattibile, ma però è noioso, dispendioso in termini di tempo e soggetto ad errori.</p>
-<p>La visione soggettivista concepisce invece la probabilità sconosciuta <span class="math notranslate nohighlight">\(\theta\)</span> come un’opinione soggettiva di cui possiamo essere più o meno certi. Questa opinione soggettiva dipende da due tipi di evidenze: le nostre credenze iniziali e le nuove informazioni fornite dai dati che abbiamo osservato. Vedremo in questo capitolo come sia possibile combinare le credenze iniziali rispetto al possibile valore <span class="math notranslate nohighlight">\(\theta\)</span> con le evidenze fornite dai dati per giungere ad una nuova credenza a posteriori su <span class="math notranslate nohighlight">\(\theta\)</span>. In particolare, vedremo come si possa pensare in termini soggetti a delle quantità sconosciute (in questo caso, <span class="math notranslate nohighlight">\(\theta\)</span>) usando le distribuzioni di probabilità.</p>
-<p>Essendo una proporzione, <span class="math notranslate nohighlight">\(\theta\)</span> può assumere valori compresi tra 0 e 1. È possibile pensare che <span class="math notranslate nohighlight">\(\theta\)</span> sia uguale, ad esempio, a 0.5. Ciò significa assegnare all’evento <span class="math notranslate nohighlight">\(\theta = 0.5\)</span> la probabilità 1; in altri termini, significa dire che siamo assolutamente certi che la quantità sconosciuta <span class="math notranslate nohighlight">\(\theta\)</span> abbia il valore di 0.5. Questa posizione, però, è troppo estrema: non possiamo essere assolutamente certi che una quantità sconosciuta abbia uno specifico valore; altrimenti non sarebbe una quantità sconosciuta. Invece, sembra più sensato pensare che <span class="math notranslate nohighlight">\(\theta\)</span> può, in linea di principio, assumere diversi valori e attribuire a tali valori livelli diversi di certezza soggettiva.</p>
-<p>Consideriamo, ad esempio, 10 possibili valori <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Obiettivo di questo Capitolo è introdurre l’inferenza bayesiana considerando il modello binomiale. Esamineremo prima il caso di una distribuzione a priori discreta e poi il caso di una distribuzione a priori continua. Il materiale qui presentato segue molto da vicino quanto presentato nel capitolo 7 di <span id="id1">Albert and Hu [<a class="reference internal" href="z_biblio.html#id14" title="Jim Albert and Jingchen Hu. Probability and Bayesian Modeling. Chapman and Hall/CRC, 2019.">AH19</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
 <span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">beta</span>
 </pre></div>
 </div>
 </div>
@@ -770,12 +753,24 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<section id="inferenza-bayesiana-con-una-distribuzione-a-priori-discreta">
+<h2><span class="section-number">25.1. </span>Inferenza bayesiana con una distribuzione a priori discreta<a class="headerlink" href="#inferenza-bayesiana-con-una-distribuzione-a-priori-discreta" title="Permalink to this headline">#</a></h2>
+<p>Nei problemi tradizionali sulla teoria delle probabilità ci sono molti esempi che riguardano l’estrazione di palline colorate da un’urna. In questi esempi ci viene fornito il numero di palline di vari colori presenti nell’urna e ci viene chiesto di calcolare le probabilità di vari eventi. Ad esempio, in un’urna ci sono 40 palline bianche e 20 rosse. Se estrai due palline a caso, qual è la probabilità che entrambe siano bianche?</p>
+<p>L’approccio bayesiano considera uno scenario diverso, ovvero quello in cui non conosciamo le proporzioni delle palline colorate presenti nell’urna. Cioè, nell’esempio precedente, sappiamo solo che nell’urna ci sono due tipi di palline colorate, ma non sappiamo che 40 sono bianche (proporzione di bianco = <span class="math notranslate nohighlight">\(2/3\)</span>) e 20 sono rosse (proporzione di rosso = <span class="math notranslate nohighlight">\(1/3\)</span>). Ci poniamo la seguente domanda: è possibile inferire le proporzioni di palline presenti nell’urna estraendo un campione di palline dall’urna e osservando i colori delle palline estratte? Espresso in questo modo, questo diventa un problema di inferenza statistica, perché stiamo cercando di inferire la proporzione <span class="math notranslate nohighlight">\(\theta\)</span> della popolazione sulla base di un campione casuale.</p>
+<p>Le proporzioni sono simili alle probabilità. Ricordiamo che sono state proposte tre diverse interpretazioni del concetto di probabilità.</p>
+<ul class="simple">
+<li><p>Il punto di vista classico: è necessario enumerare tutti gli eventi elementari dello spazio campione nel quale ciascun risultato è ugualmente probabile.</p></li>
+<li><p>Il punto di vista frequentista: è necessario ripetere l’esperimento esperimento casuale (cioè l’estrazione del campione) molte volte in condizioni identiche.</p></li>
+<li><p>La visione soggettiva: è necessario esprimere la propria opinione sulla probabilità di un evento unico e irripetibile.</p></li>
+</ul>
+<p>La visione classica non sembra potere funzionare qui, perché sappiamo solo che ci sono due tipi di palline colorate e che il numero totale di palline è 60. Anche se estraiamo un campione di 10 palline, possiamo solo osservare la proporzione di palline rosse nel campione. Non c’è modo di stabilire se, nello spazio campione, ogni risultato è ugualmente probabile.</p>
+<p>La visione frequentista potrebbe funzionare nel caso presente. Possiamo considerare il processo del campionamento (cioè l’estrazione di un campione casuale di 10 palline dall’urna) come un esperimento casuale che produce una proporzione campionaria <span class="math notranslate nohighlight">\(p\)</span>. Potremmo quindi pensare di ripetere l’esperimento casuale molte volte nelle stesse condizioni, ottenendo così una serie di proporzioni campionarie <span class="math notranslate nohighlight">\(p\)</span> per infine riassumere in qualche modo questa distribuzione di statistiche campionarie. Ripetendo l’esperimento casuale tante volte è possibile ottenere una stima abbastanza accurata della proporzione <span class="math notranslate nohighlight">\(\theta\)</span> di palline rosse nell’urna. In linea di principio, la procedura descritta potrebbe essere portata a termine, ma sarebbe un procedimento noioso, dispendioso in termini di tempo e soggetto ad errori.</p>
+<p>La visione soggettivista concepisce invece la probabilità sconosciuta <span class="math notranslate nohighlight">\(\theta\)</span> come un’opinione soggettiva di cui possiamo essere più o meno sicuri. Questa opinione soggettiva dipende da due tipi di evidenze: le nostre credenze iniziali e le nuove informazioni fornite dai dati che abbiamo osservato. Vedremo in questo capitolo (in una versione solo apparentemente diversa da quella presentata nel capitolo <a class="reference internal" href="120_bayes_theorem.html#bayes-theorem-notebook"><span class="std std-ref">Il teorema di Bayes</span></a>) come sia possibile combinare le nostre credenze iniziali rispetto a <span class="math notranslate nohighlight">\(\theta\)</span> con le evidenze fornite dai dati per giungere ad una nuova credenza a posteriori su <span class="math notranslate nohighlight">\(\theta\)</span>. In particolare, vedremo come sia possibile pensare in termini soggettivi a delle quantità sconosciute (in questo caso, <span class="math notranslate nohighlight">\(\theta\)</span>) usando le distribuzioni di probabilità.</p>
+<p>Essendo una proporzione, <span class="math notranslate nohighlight">\(\theta\)</span> può assumere valori compresi tra 0 e 1. È possibile pensare che <span class="math notranslate nohighlight">\(\theta\)</span> sia uguale, ad esempio, a 0.5. Ciò significa assegnare all’evento <span class="math notranslate nohighlight">\(\theta = 0.5\)</span> la probabilità 1; in altri termini, significa dire che siamo assolutamente certi che la quantità sconosciuta <span class="math notranslate nohighlight">\(\theta\)</span> abbia il valore 0.5. Questa posizione, però, è troppo estrema: non possiamo essere assolutamente certi che una quantità sconosciuta abbia uno specifico valore – altrimenti non sarebbe sconosciuta. Invece, è più sensato pensare che <span class="math notranslate nohighlight">\(\theta\)</span> può, in linea di principio, assumere vari valori e attribuire livelli diversi di certezza soggettiva a tali valori.</p>
+<p>Consideriamo, ad esempio, 11 possibili valori <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">size</span> <span class="o">=</span> <span class="mi">11</span>
-<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -786,32 +781,18 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Se non abbiamo alcun motivo di pensare diversamente, possiamo assegnare a ciascun valore <span class="math notranslate nohighlight">\(\theta\)</span> la stessa credibilità.</p>
-<p>Le distribuzioni hanno una forma generale e una forma “frozen”. La forma generale è tale per cui i parametri della distribuzione devono essere assegnati come argomenti ad ogni chiamata. La forma ‘frozen’ crea un oggetto nel quale i parametri della distribuzione sono stati fissati usando i valori che sono stati assengati. Nel caso presente, i parametri sono <span class="math notranslate nohighlight">\(a\)</span> e <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>Se non abbiamo motivo per fare diversamente, possiamo assegnare a ciascun valore <code class="docutils literal notranslate"><span class="pre">theta</span></code> la stessa probabilità.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unif_distr</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">unif_distr</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unif_distr_pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">/</span> <span class="mi">11</span>
+<span class="n">unif_distr_pdf</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7fa32051bf40&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<p>Con i parametri fissati, per i valori che abbiamo scelto per <code class="docutils literal notranslate"><span class="pre">theta</span></code>, la distribuzione uniforme discreta diventa la seguente.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unif_distr_pdf</span> <span class="o">=</span> <span class="n">unif_distr</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">/</span> <span class="mi">11</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">unif_distr_pdf</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.09090909 0.09090909 0.09090909 0.09090909 0.09090909 0.09090909
- 0.09090909 0.09090909 0.09090909 0.09090909 0.09090909]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.09090909, 0.09090909, 0.09090909, 0.09090909, 0.09090909,
+       0.09090909, 0.09090909, 0.09090909, 0.09090909, 0.09090909,
+       0.09090909])
 </pre></div>
 </div>
 </div>
@@ -850,19 +831,17 @@ title="Print to PDF"
 <img alt="_images/310_subj_prop_10_1.png" src="_images/310_subj_prop_10_1.png" />
 </div>
 </div>
-<p>La prima distribuzione di probabilità è chiamata distribuzione discreta uniforme perché attribuisce la stessa probabilità (ovvero, 1/10) ad ogni elemento dell’insieme discreto su cui è definita (ovvero, <span class="math notranslate nohighlight">\(0.1, 0.2, \dots, 1.0\)</span>). Anche la seconda distribuzione è discreta, ma non è uniforme: riteniamo più credibile che <span class="math notranslate nohighlight">\(\theta\)</span> assuma un valore nell’insieme <span class="math notranslate nohighlight">\(\{0.4, 0.5, 0.6, 0.7\}\)</span> piuttosto che nell’insieme <span class="math notranslate nohighlight">\(\{0.1, 0.2, 0.3, 0.8, 0.9, 1.0\}\)</span>.</p>
-<p>Le credenze relative alla credibilità dei possibili valori che <span class="math notranslate nohighlight">\(\theta\)</span> possono assumere forme diverse e corrispondono a quella che viene chiamata la <em>distribuzione a priori</em>, ovvero descrivono le credenze iniziali relative alla quantità sconosciuta di interesse.</p>
-<p>La procedura di inferenza bayesiana “aggiorna” tali credenze a priori utilizzando le informazioni fornite da un campione di dati. Usando il teorema di Bayes, le informazioni fornite dai dati vengono combinate con le nostre credenze precedenti relative alla quantità sconosciuta <span class="math notranslate nohighlight">\(\theta\)</span> per giungere ad una credenza detta “a posteriori”.</p>
-<p>Supponendo che i dati corrispondano all’osservazione di 12 palline rosse in 20 estrazioni con rimessa dall’urna, usiamo ora la seconda delle distribuzioni a priori descritte sopra per ottenere la distribuzione a posteriori.</p>
-<p>Il teorema di Bayes specifica la distribuzione a posteriori come il prodotto della verosimiglianza e della distribuzione a priori, diviso per una costante di normalizzazione:</p>
+<p>La prima distribuzione di probabilità è una distribuzione discreta uniforme perché attribuisce la stessa probabilità ad ogni elemento dell’insieme discreto su cui è definita (ovvero, <span class="math notranslate nohighlight">\(0, 0.1, 0.2, \dots, 1.0\)</span>). Anche la seconda distribuzione è discreta, ma non è uniforme: riteniamo più credibile che <span class="math notranslate nohighlight">\(\theta\)</span> assuma un valore nell’insieme <span class="math notranslate nohighlight">\(\{0.4, 0.5, 0.6, 0.7\}\)</span> piuttosto che nell’insieme <span class="math notranslate nohighlight">\(\{0.1, 0.2, 0.3, 0.8, 0.9, 1.0\}\)</span>.</p>
+<p>Le credenze relative ai possibili valori <span class="math notranslate nohighlight">\(\theta\)</span> corrispondono alla <em>distribuzione a priori</em>, ovvero descrivono le credenze iniziali relative alla quantità sconosciuta di interesse. L’inferenza bayesiana “aggiorna” tali credenze a priori utilizzando le informazioni fornite dai dati. Le informazioni fornite dai dati vengono combinate con le credenze a priori relative alla quantità sconosciuta <span class="math notranslate nohighlight">\(\theta\)</span> per giungere, per mezzo del teorema di Bayes, ad una credenza a posteriori.</p>
+<p>Supponiamo che i dati corrispondano all’osservazione di 12 palline rosse in 20 estrazioni con rimessa da un’urna (ma avremmo anche potuto dire 12 risultati “testa” in 20 lanci di una moneta). Usiamo la seconda delle due distribuzioni a priori descritte sopra per ottenere la distribuzione a posteriori. Il teorema di Bayes specifica la distribuzione a posteriori come il prodotto della verosimiglianza e della distribuzione a priori, diviso per una costante di normalizzazione:</p>
 <div class="math notranslate nohighlight">
 \[
 p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 \]</div>
-<p>Per trovare la funzione di verosimiglianza, <span class="math notranslate nohighlight">\(p(y \mid \theta)\)</span>, è necessario pensare a come sono stati ottenuti i dati. I dati corrispondono ai risultati di 20 estrazioni con rimessa da un’urna. Se l’estrazione è casuale con reinserimento, allora i dati (12 successi in 20 prove) possono essere intesi come il risultato di un esperimento casuale binomiale. Usando Python, la funzione di verosimiglianza può essere generata mediante la funzione <code class="docutils literal notranslate"><span class="pre">binom.pmf()</span></code>.</p>
+<p>Per trovare la funzione di verosimiglianza, <span class="math notranslate nohighlight">\(p(y \mid \theta)\)</span>, è necessario pensare a come sono stati generati i dati. I dati corrispondono ai risultati di 20 estrazioni con rimessa da un’urna. Se l’estrazione è casuale con reinserimento, allora i dati (12 successi in 20 prove) possono essere intesi come il risultato di un esperimento casuale binomiale. Usando Python, la funzione di verosimiglianza può essere generata mediante la funzione <code class="docutils literal notranslate"><span class="pre">binom.pmf()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lk</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lk</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
 <span class="n">lk</span>
 </pre></div>
 </div>
@@ -906,7 +885,7 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 </div>
 </div>
 </div>
-<p>La distribuzione a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span> sarà dunque uguale al prodotto della distribuzione a priori per la verosimiglianza, diviso per la costante di normalizzazione (probabilità marginale dei dati).</p>
+<p>La distribuzione a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span> è data dal prodotto della distribuzione a priori per la verosimiglianza diviso per la costante di normalizzazione (probabilità marginale dei dati).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">post</span> <span class="o">=</span> <span class="p">(</span><span class="n">not_unif_distr_pdf</span> <span class="o">*</span> <span class="n">lk</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">not_unif_distr_pdf</span> <span class="o">*</span> <span class="n">lk</span><span class="p">)</span>
@@ -922,7 +901,7 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 </div>
 </div>
 </div>
-<p>Verifichiamo</p>
+<p>Verifichiamo di avere ottenuto una distribuzione di massa di probabilità:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
@@ -965,7 +944,7 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 </div>
 </div>
 </div>
-<p>Lo stesso si può dire della varianza della distribuzione a posteriori.</p>
+<p>La varianza della distribuzione a posteriori è</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theta</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">post</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theta</span> <span class="o">*</span> <span class="n">post</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
@@ -982,29 +961,46 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 </section>
 <section id="inferenza-bayesiana-con-una-distribuzione-a-priori-continua">
 <h2><span class="section-number">25.2. </span>Inferenza bayesiana con una distribuzione a priori continua<a class="headerlink" href="#inferenza-bayesiana-con-una-distribuzione-a-priori-continua" title="Permalink to this headline">#</a></h2>
-<p>Il caso di una distribuzione a priori discreta è stato discusso solo per scopi didattici. In generale, l’uso di una distribuzione a priori discreta non è una buona scelta per rappresentare le nostre credenze a priori sul parametro sconosciuto. Infatti, per definizione, una distribuzione a priori discreta può rappresentare solo alcuni dei possibili valori del parametro – nel caso discusso sopra, ad esempio, non abbiamo considerato il valore 0.55. Sembra dunque più sensato descrivere le nostre credenze a priori sul parametro utilizzando una distribuzione continua.</p>
-<p>Cerchiamo una funzione di densità con supporto in <span class="math notranslate nohighlight">\([0, 1]\)</span>. Il candidato naturale è fornito dalla funzione Beta. Ad esempio, possiamo valutare la funzione di densità <span class="math notranslate nohighlight">\(Beta(1, 1)\)</span> in corrispondenza dei valori <span class="math notranslate nohighlight">\(p = 0.5\)</span> e <span class="math notranslate nohighlight">\(p = 0.8\)</span>, che dovrebbe essere entrambi uguali a 1, e in corrispondenza di <span class="math notranslate nohighlight">\(p = 1.2\)</span>, che dovrebbe essere ugualea 0 poiché questo valore è al di fuori dell’intervallo <span class="math notranslate nohighlight">\([ 0, 1]\)</span>.</p>
+<p>Il caso di una distribuzione a priori discreta è stato discusso solo per scopi didattici. In generale, l’uso di una distribuzione a priori discreta non è una buona scelta per rappresentare le nostre credenze a priori sul parametro sconosciuto. Infatti, per definizione, una distribuzione a priori discreta può rappresentare solo alcuni dei possibili valori del parametro – nel caso discusso sopra, ad esempio, non abbiamo considerato il valore 0.55. Sembra dunque più sensato descrivere le nostre credenze a priori sul parametro sconosciuto <span class="math notranslate nohighlight">\(\theta\)</span> utilizzando una distribuzione continua.</p>
+<p>Cerchiamo una funzione di densità con supporto in <span class="math notranslate nohighlight">\([0, 1]\)</span>. Il candidato naturale è la funzione Beta. Ad esempio, consideriamo la distribuzione <span class="math notranslate nohighlight">\(Beta(2, 2)\)</span>. Possiamo valutare la distribuzione <span class="math notranslate nohighlight">\(Beta(2, 2)\)</span> in corrispondenza dei valori 0.5, 0.8 e 1.2. Dovremmo un valore maggiore di 0 nei primi due casi e 0 nel terzo caso, poiché il  valore 1.2 è al di fuori dell’intervallo <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1. 1. 0.]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.5 , 0.96, 0.  ])
 </pre></div>
 </div>
 </div>
 </div>
-<p>Valutiamo la funzione distribuzione <span class="math notranslate nohighlight">\(Beta(1, 1)\)</span> in corrispondenza dei punti 0.5 e 0.8.</p>
+<p>Creiamo un grafico della funzione di densità <span class="math notranslate nohighlight">\(Beta(2, 2)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">cdf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.5 0.8]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f8b4198a050&gt;]
+</pre></div>
+</div>
+<img alt="_images/310_subj_prop_31_1.png" src="_images/310_subj_prop_31_1.png" />
+</div>
+</div>
+<p>Valutiamo la funzione distribuzione di una <span class="math notranslate nohighlight">\(Beta(1, 1)\)</span> in corrispondenza dei punti 0.5 e 0.8.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">cdf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.5  , 0.896])
 </pre></div>
 </div>
 </div>
@@ -1012,40 +1008,51 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 <p>Calcoliamo la probabilità <span class="math notranslate nohighlight">\(P(0.5 &lt; p &lt; 0.8)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">beta</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.30000000000000004
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.396
 </pre></div>
 </div>
 </div>
 </div>
-<p>Possiamo trovare i quantili della distribuzione <span class="math notranslate nohighlight">\(Beta(1, 1)\)</span> di ordine 0.5 e 0.8.</p>
+<p>Troviamo i quantili di ordine 0.5 e 0.8.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.5 0.8]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.5       , 0.71285927])
 </pre></div>
 </div>
 </div>
 </div>
-<p>Infine, è possibile simulare dei valori casuali dalla distribuzione <span class="math notranslate nohighlight">\(Beta(a, b)\)</span>. Se vogliamo 5 valori da una <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span>, scriviamo:</p>
+<p>Infine, simuliamo cinque valori casuali dalla distribuzione <span class="math notranslate nohighlight">\(Beta(2, 2)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.05526728, 0.20733536, 0.10303988, 0.09461704, 0.20077892])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.35184838, 0.77696125, 0.71547708, 0.28058122, 0.38572415])
 </pre></div>
 </div>
+</div>
+</div>
+<p>Generiamo un istogramma di 1000 realizzazioni indipendenti di una <span class="math notranslate nohighlight">\(Beta(2, 2)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/310_subj_prop_41_0.png" src="_images/310_subj_prop_41_0.png" />
 </div>
 </div>
 <section id="quali-parametri-per-la-distribuzione-beta">
@@ -1055,10 +1062,10 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;beta pdf&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale X [0, 1]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;beta pdf&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale Beta(10, 20)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Densità&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1067,7 +1074,7 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Densità&#39;)
 </pre></div>
 </div>
-<img alt="_images/310_subj_prop_39_1.png" src="_images/310_subj_prop_39_1.png" />
+<img alt="_images/310_subj_prop_43_1.png" src="_images/310_subj_prop_43_1.png" />
 </div>
 </div>
 <p>In alternativa, potremmo specificare la distribuzione a priori definendo la mediana e un quantile della distribuzione. Per esempio, le nostre opinioni a priori sul parametro potrebbero essere tali per cui pensiamo che la mediana della distribuzione sia 0.25 e il quantile della distribuzione di ordine 0.9 sia 0.5. In questo caso potremmo usare i parametri <span class="math notranslate nohighlight">\(\alpha = 2\)</span> e <span class="math notranslate nohighlight">\(\beta = 5\)</span>.</p>
@@ -1075,10 +1082,10 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;beta pdf&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale X [0, 1]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;beta pdf&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale Beta(2, 5)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Densità&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1087,12 +1094,12 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Densità&#39;)
 </pre></div>
 </div>
-<img alt="_images/310_subj_prop_41_1.png" src="_images/310_subj_prop_41_1.png" />
+<img alt="_images/310_subj_prop_45_1.png" src="_images/310_subj_prop_45_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1104,7 +1111,7 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1130,16 +1137,17 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jan 21 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jan 22 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-arviz     : 0.14.0
-seaborn   : 0.12.2
-matplotlib: 3.6.3
 numpy     : 1.24.1
+arviz     : 0.14.0
+matplotlib: 3.6.3
+seaborn   : 0.12.2
+scipy     : 1.10.0
 
 Watermark: 2.3.1
 </pre></div>
