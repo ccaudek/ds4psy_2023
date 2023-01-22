@@ -817,8 +817,8 @@ title="Print to PDF"
 <h2><span class="section-number">5.1. </span>Introduzione<a class="headerlink" href="#introduzione" title="Permalink to this headline">#</a></h2>
 <p>La libreria <a class="reference external" href="https://Pandas.pydata.org/docs/index.html">Pandas</a> è delegata alla gestione e lettura dei dati provenienti da sorgenti eterogenee, tra cui fogli Excel, file CSV, o anche JSON e database di tipo SQL. Pandas dipenda da due strutture dati principali:</p>
 <ul class="simple">
-<li><p>il DataFrame, una sorta di tabella, strutturata su colonne dove i dati sono distribuiti per righe,</p></li>
-<li><p>la Series che viene utilizzata per rappresentare righe o colonne di un DataFrame (molto simile ad un NumPy array).</p></li>
+<li><p>il DataFrame, una sorta di tabella, strutturata su colonne dove i dati di ciascuna unità di osservazione sono distribuiti per righe,</p></li>
+<li><p>la <code class="docutils literal notranslate"><span class="pre">Series</span></code> che viene utilizzata per rappresentare righe o colonne di un DataFrame (molto simile ad un NumPy array).</p></li>
 </ul>
 <p>Lo scopo di questo capitolo è iniziare a prendere confidenza con i DataFrame ed imparare a manipolare i dati al loro interno. Iniziamo a caricare le librerie necessarie:</p>
 <div class="cell docutils container">
@@ -857,6 +857,7 @@ Length: 7, dtype: int64
 </div>
 </div>
 </div>
+<p>L’attributo <code class="docutils literal notranslate"><span class="pre">array</span></code> è di tipo <code class="docutils literal notranslate"><span class="pre">PandasArray</span></code> e costituisce un array Numpy potenziato.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grades</span><span class="o">.</span><span class="n">index</span>
@@ -869,7 +870,6 @@ Length: 7, dtype: int64
 </div>
 </div>
 </div>
-<p>L’attributo <code class="docutils literal notranslate"><span class="pre">array</span></code> è di tipo <code class="docutils literal notranslate"><span class="pre">PandasArray</span></code> e costituisce un array Numpy potenziato.</p>
 <p>Per accedere agli elementi di un oggetto <code class="docutils literal notranslate"><span class="pre">Series</span></code> si usano le parentesi quadre contenenti un indice:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -972,7 +972,7 @@ dtype: float64
 </div>
 </div>
 </div>
-<p>Gli oggetti <code class="docutils literal notranslate"><span class="pre">Series</span></code> hanno diversi metodi per svolgere comuni operazioni, per esempio per ricavare alcune statistiche descrittive:</p>
+<p>Gli oggetti <code class="docutils literal notranslate"><span class="pre">Series</span></code> hanno diversi metodi per svolgere varie operazioni, per esempio per ricavare alcune statistiche descrittive:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">grades</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">grades</span><span class="o">.</span><span class="n">sum</span><span class="p">()]</span>
@@ -1129,7 +1129,7 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>Un DataFrame può anche essere generato nel modo seguente:</p>
+<p>Un DataFrame può essere generato anche nel modo seguente:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lst1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
@@ -1693,7 +1693,7 @@ dtype: int64
 </div>
 </div>
 </div>
-<p>Rimuovo ora i dati mancanti con il metodo <code class="docutils literal notranslate"><span class="pre">.dropna()</span></code>. L’argomento <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code> specifica il DataFrame viene trasformato in maniera permanente.</p>
+<p>Rimuovo i dati mancanti con il metodo <code class="docutils literal notranslate"><span class="pre">.dropna()</span></code>. L’argomento <code class="docutils literal notranslate"><span class="pre">inplace=True</span></code> specifica il DataFrame viene trasformato in maniera permanente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1720,7 +1720,7 @@ dtype: int64
 <p>È possibile rinominare tutte le colonne passando a <code class="docutils literal notranslate"><span class="pre">.rename()</span></code> un dizionario che specifica quali colonne devono essere mappate a cosa. Nell’esempio seguente cambiamo il nome della colonna <code class="docutils literal notranslate"><span class="pre">sex</span></code> in <code class="docutils literal notranslate"><span class="pre">gender</span></code> e rinominiamo <code class="docutils literal notranslate"><span class="pre">year</span></code> come <code class="docutils literal notranslate"><span class="pre">year_of_the_study</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># rename(columns={&quot;OLD_NAME&quot;: &quot;NEW_NAME&quot;})</span>
 <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sex&quot;</span><span class="p">:</span> <span class="s2">&quot;gender&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;year_of_the_study&quot;</span><span class="p">})</span>
@@ -3530,7 +3530,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_14780/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_49668/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.aggregate(summary_stats)
 </pre></div>
 </div>
@@ -3631,7 +3631,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_14780/1526914846.py:1: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_49668/1526914846.py:1: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.groupby([&quot;species&quot;]).aggregate(summary_stats)
 </pre></div>
 </div>
@@ -4115,14 +4115,14 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Jan 19 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Jan 22 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-pandas: 1.5.3
 numpy : 1.24.1
+pandas: 1.5.3
 
 Watermark: 2.3.1
 </pre></div>
