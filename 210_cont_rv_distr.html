@@ -1024,7 +1024,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fabc17ea380&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fcc4062e380&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_16_1.png" src="_images/210_cont_rv_distr_16_1.png" />
@@ -1155,12 +1155,12 @@ V(X)={\frac {1}{12}}(b-a)^{2}.
 <p>Un’altra distribuzione di densità molto semplice è la distribuzione esponenziale. La distribuzione esponenziale viene spesso utilizzata per modellare il tempo trascorso prima che un evento si verifichi (tempo di attesa). Chiamiamo <span class="math notranslate nohighlight">\(X\)</span> il tempo di attesa. Sia <span class="math notranslate nohighlight">\(\mu = \mathbb{E}(X)\)</span> il tempo di attesa medio. La funzione di densità esponenziale è</p>
 <div class="math notranslate nohighlight" id="equation-eq-exponential-pdf">
 <span class="eqno">(21.1)<a class="headerlink" href="#equation-eq-exponential-pdf" title="Permalink to this equation">#</a></span>\[
-f(x) = \lambda \exp^{-\lambda x}, \quad \text{con} \; \lambda = 1/\mu.
+f(x) = \lambda {\rm e}^{-\lambda x}, \quad \text{con} \; \lambda = 1/\mu,\, \lambda &gt; 0,\, x &gt; 0
 \]</div>
 <p>Possiamo anche scrivere l’eq. <a class="reference internal" href="#equation-eq-exponential-pdf">(21.1)</a> come</p>
 <div class="math notranslate nohighlight">
 \[
-f(x) = \frac{1}{\mu} \exp^{-x/\mu}.
+f(x) = \frac{1}{\mu} {\rm e}^{-x/\mu}.
 \]</div>
 <p>La varianza di una distribuzione esponenziale è</p>
 <div class="math notranslate nohighlight">
@@ -1170,14 +1170,14 @@ V(X) = \frac{1}{\lambda^2}.
 <p>La deviazione standard è dunque uguale alla media:</p>
 <div class="math notranslate nohighlight">
 \[
-\sigma_X = \frac{1}{\lambda}.
+\sigma_X = \frac{1}{\lambda} = \mu.
 \]</div>
-<p>Ad esempio, il tempo di attesa prima di ricevere un il voto di un esame scritto segue una distribuzione esponenziale. Supponiamo che, in questo Corso di Laurea, il tempo di attesa medio per conoscere il risultato di un esame scritto sia 4 giorni. La funzione esponenziale diventa</p>
+<p>Ad esempio, il tempo di attesa della pubblicazione del voto di un esame scritto segue una distribuzione esponenziale. Supponiamo che, in questo Corso di Laurea, il tempo di attesa medio per conoscere il risultato di un esame scritto sia di 4 giorni. La funzione esponenziale diventa</p>
 <div class="math notranslate nohighlight">
 \[
 f(x) = \frac{1}{4} \exp^{-x/4}.
 \]</div>
-<p>Per disegnare un grafico della funzione esponenziale possiamo usare la funzione <code class="docutils literal notranslate"><span class="pre">scipy.stats.expon()</span></code>. La densità è data da <code class="docutils literal notranslate"><span class="pre">pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code>, laddove il parametro <code class="docutils literal notranslate"><span class="pre">loc</span></code> è 0 e <code class="docutils literal notranslate"><span class="pre">scale()</span></code> è la deviazione standard.  Nel caso presente abbiamo</p>
+<p>Per disegnare un grafico della funzione esponenziale possiamo usare la funzione <code class="docutils literal notranslate"><span class="pre">scipy.stats.expon()</span></code>. La densità è data da <code class="docutils literal notranslate"><span class="pre">pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code>, laddove il parametro <code class="docutils literal notranslate"><span class="pre">loc</span></code> è 0 e <code class="docutils literal notranslate"><span class="pre">scale</span></code> è la deviazione standard.  Nel caso presente abbiamo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
@@ -1188,31 +1188,25 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;f(x)&#39;)
-</pre></div>
-</div>
-<img alt="_images/210_cont_rv_distr_34_1.png" src="_images/210_cont_rv_distr_34_1.png" />
+<img alt="_images/210_cont_rv_distr_34_0.png" src="_images/210_cont_rv_distr_34_0.png" />
 </div>
 </div>
-<p>Chiediamoci, ad esempio quale sia la probabilità di dovere aspettare non più di un giorno e mezzo per conoscere il voto. La risposta a questa domanda è data dalla funzione di ripartizione in corrispondenza di <span class="math notranslate nohighlight">\(F(1.5) = P(X &lt;= 1.5)\)</span>.</p>
+<p>Chiediamoci, ad esempio quale sia la probabilità di dovere aspettare non più di un giorno e mezzo per conoscere il voto. La risposta a questa domanda è data dalla funzione di ripartizione in corrispondenza di 1.5, ovvero <span class="math notranslate nohighlight">\(F(1.5) = P(X &lt;= 1.5)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fabf17d56c0&gt;
-</pre></div>
-</div>
-<img alt="_images/210_cont_rv_distr_36_1.png" src="_images/210_cont_rv_distr_36_1.png" />
+<img alt="_images/210_cont_rv_distr_36_0.png" src="_images/210_cont_rv_distr_36_0.png" />
 </div>
 </div>
 <p>Possiamo trovare la risposta usando la funzione <code class="docutils literal notranslate"><span class="pre">cdf()</span></code>:</p>
@@ -1228,20 +1222,17 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 </div>
 </div>
 </div>
-<p>Chiediamoci, ad esempio quale sia la probabilità di conoscere il voto dopo avere aspettato un tempo compreso tra 1 e 6 giorni. Dobbiamo trovare l’area sottesa alla funzione di densità nell’intervallo [1, 6]. Usando la fuzione di ripartizione, dobbiamo calcolare <span class="math notranslate nohighlight">\(F(6) - F(1) = P(X &lt;= 6) - P(X &lt;= 1)\)</span>.</p>
+<p>Chiediamoci, ad esempio quale sia la probabilità di conoscere il voto dopo avere aspettato un tempo compreso tra 1 e 6 giorni. Dobbiamo trovare l’area sottesa alla funzione di densità nell’intervallo [1, 6]. Usando la fuzione di ripartizione, calcoliamo <span class="math notranslate nohighlight">\(F(6) - F(1) = P(X &lt;= 6) - P(X &lt;= 1)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fabf179c160&gt;
-</pre></div>
-</div>
-<img alt="_images/210_cont_rv_distr_40_1.png" src="_images/210_cont_rv_distr_40_1.png" />
+<img alt="_images/210_cont_rv_distr_40_0.png" src="_images/210_cont_rv_distr_40_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1256,20 +1247,17 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 </div>
 </div>
 </div>
-<p>Trovo ora la probabilità di dovere aspettare almeno 5 giorni e mezzo.</p>
+<p>Troviamo la probabilità di dovere aspettare almeno 5 giorni e mezzo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">5.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">21</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">5.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">21</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fac0109a740&gt;
-</pre></div>
-</div>
-<img alt="_images/210_cont_rv_distr_43_1.png" src="_images/210_cont_rv_distr_43_1.png" />
+<img alt="_images/210_cont_rv_distr_43_0.png" src="_images/210_cont_rv_distr_43_0.png" />
 </div>
 </div>
 <p>La probabilità cercata è data dalla probabilità dell’evento complementare di quello fornito dalla funzione di ripartizione.</p>
@@ -1285,7 +1273,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 </div>
 </div>
 </div>
-<p>Se la media nel Corso di Laurea fosse di 4 giorni, allora circa una volta su 4 lo studente dovrà aspettare almeno 5.5 giorni per conoscere il voto dello scritto.</p>
+<p>Se la media del tempo di attesa nel Corso di Laurea fosse di 4 giorni, allora circa una volta su 4 lo studente dovrà aspettare almeno 5.5 giorni per conoscere il voto dello scritto.</p>
 <p>La figura seguente mostra un istogramma di 1000000 valori casuali estratti dalla distribuzione esponenziale di parametro <span class="math notranslate nohighlight">\(\lambda = 1/4\)</span>. All’istogramma è sovrapposta la funzione di densità.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1296,15 +1284,12 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequenza relativa&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tempo di attesa&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tempo di attesa&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Tempo di attesa&#39;)
-</pre></div>
-</div>
-<img alt="_images/210_cont_rv_distr_48_1.png" src="_images/210_cont_rv_distr_48_1.png" />
+<img alt="_images/210_cont_rv_distr_48_0.png" src="_images/210_cont_rv_distr_48_0.png" />
 </div>
 </div>
 </section>
@@ -1465,7 +1450,7 @@ f(y; \mu, \sigma) = {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y -  \mu)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fabc1cfbb20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcc30561570&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_61_1.png" src="_images/210_cont_rv_distr_61_1.png" />
@@ -1501,7 +1486,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84.9169122663244
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>114.45180326775572
 </pre></div>
 </div>
 </div>
@@ -1515,7 +1500,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78.43234266018446 100.47207530803459 90.6034541787124 98.88681037326081 108.96357424880908 76.11065043347054 121.98310874903179 101.89086012381377 59.17706593581821 93.48373384971319
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98.62466647983061 79.16469292863611 86.88961199574291 71.98626680126083 91.52073177547004 112.45679419381138 115.00487599413373 70.93096751947053 115.00092318943925 110.42380956548175
 </pre></div>
 </div>
 </div>
@@ -1546,7 +1531,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fac02739840&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fcc40f28520&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_69_1.png" src="_images/210_cont_rv_distr_69_1.png" />
@@ -1596,7 +1581,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fac0275e410&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fcc40e63400&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_74_1.png" src="_images/210_cont_rv_distr_74_1.png" />
@@ -1664,7 +1649,7 @@ X = a + b Y \sim \mathcal{N}(\mu_X = a+b \mu_Y, \sigma_X = \left|b\right|\sigma_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fabe14b37c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fcc30e36410&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_81_1.png" src="_images/210_cont_rv_distr_81_1.png" />
@@ -1738,7 +1723,7 @@ f(x) = C_{\nu} x^{\nu/2-1} \exp (-x/2), \qquad \text{se } x &gt; 0,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fac02536620&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcc30e72c80&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_85_1.png" src="_images/210_cont_rv_distr_85_1.png" />
@@ -1780,7 +1765,7 @@ T = \frac{Z}{\Big( \frac{W}{\nu}\Big)^{\frac{1}{2}}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fabe15a6e90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcc71694640&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_87_1.png" src="_images/210_cont_rv_distr_87_1.png" />
@@ -1965,7 +1950,7 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fabb162d240&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcc7172b130&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_101_1.png" src="_images/210_cont_rv_distr_101_1.png" />
@@ -2032,7 +2017,7 @@ f(x \mid \alpha, \beta) = \frac{1}{\pi \beta \left[1 + \left( \frac{x - \alpha}{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fabb162e590&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcc7172af50&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_108_1.png" src="_images/210_cont_rv_distr_108_1.png" />
@@ -2078,7 +2063,7 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{x} \exp \left\{-\frac{(\log x -  \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fac0289f880&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcc71997640&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_110_1.png" src="_images/210_cont_rv_distr_110_1.png" />
@@ -2105,10 +2090,10 @@ Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-seaborn   : 0.12.2
-matplotlib: 3.6.3
 pandas    : 1.5.3
+matplotlib: 3.6.3
 numpy     : 1.24.1
+seaborn   : 0.12.2
 scipy     : 1.10.0
 
 Watermark: 2.3.1
