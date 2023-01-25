@@ -712,8 +712,13 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selezione-casuale-di-un-sottoinsieme-di-righe">
+   5.5. Selezione casuale di un sottoinsieme di righe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#watermark">
-   5.5. Watermark
+   5.6. Watermark
   </a>
  </li>
 </ul>
@@ -802,8 +807,13 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#selezione-casuale-di-un-sottoinsieme-di-righe">
+   5.5. Selezione casuale di un sottoinsieme di righe
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#watermark">
-   5.5. Watermark
+   5.6. Watermark
   </a>
  </li>
 </ul>
@@ -3536,7 +3546,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_2677/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_7783/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.aggregate(summary_stats)
 </pre></div>
 </div>
@@ -3639,7 +3649,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7f996160f4c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7f9dc2516ef0&gt;
 </pre></div>
 </div>
 </div>
@@ -3693,7 +3703,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_2677/1526914846.py:1: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_7783/1526914846.py:1: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.groupby([&quot;species&quot;]).aggregate(summary_stats)
 </pre></div>
 </div>
@@ -4108,8 +4118,152 @@ dtype: int64
 <p>Nell’istruzione precedente selezioniamo tutte le righe (<code class="docutils literal notranslate"><span class="pre">:</span></code>) di tre colonne di interesse: <code class="docutils literal notranslate"><span class="pre">df.loc[:,</span> <span class="pre">[&quot;island&quot;,</span> <span class="pre">&quot;species&quot;,</span> <span class="pre">&quot;body_mass_g&quot;,</span> <span class="pre">&quot;flipper_length_mm&quot;]]</span></code>. L’istruzione <code class="docutils literal notranslate"><span class="pre">.groupby([&quot;island&quot;,</span> <span class="pre">&quot;species&quot;])</span></code> ragruppa le osservazioni (righe) secondo le modalità delle variabili <code class="docutils literal notranslate"><span class="pre">island</span></code> e <code class="docutils literal notranslate"><span class="pre">species</span></code>. Infine <code class="docutils literal notranslate"><span class="pre">.aggregate([&quot;mean&quot;,</span> <span class="pre">&quot;std&quot;,</span> <span class="pre">&quot;count&quot;])</span></code> applica i metodi statistici specificati a ciascun gruppo di osservazioni. Con questa sintassi la sequenza delle operazioni da eseguire diventa molto intuitiva.</p>
 </section>
 </section>
+<section id="selezione-casuale-di-un-sottoinsieme-di-righe">
+<h2><span class="section-number">5.5. </span>Selezione casuale di un sottoinsieme di righe<a class="headerlink" href="#selezione-casuale-di-un-sottoinsieme-di-righe" title="Permalink to this headline">#</a></h2>
+<p>Il metodo <code class="docutils literal notranslate"><span class="pre">sample()</span></code> viene usato per ottenere un sottoinsieme casuale di righe del DataFrame. L’argomento <code class="docutils literal notranslate"><span class="pre">replace=False</span></code> indica l’estrazione senza rimessa (default); se specifichiamo <code class="docutils literal notranslate"><span class="pre">replace=True</span></code> otteniamo un’estrazione con rimessa. L’argomento <code class="docutils literal notranslate"><span class="pre">n</span></code> specifica il numero di righe che vogliamo ottenere. Ad esempio</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_sample</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df_sample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+      <th>flipper_length_mm</th>
+      <th>body_mass_g</th>
+      <th>sex</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>241</th>
+      <td>Gentoo</td>
+      <td>Biscoe</td>
+      <td>52.1</td>
+      <td>17.0</td>
+      <td>230.0</td>
+      <td>5550.0</td>
+      <td>male</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>Adelie</td>
+      <td>Biscoe</td>
+      <td>41.6</td>
+      <td>18.0</td>
+      <td>192.0</td>
+      <td>3950.0</td>
+      <td>male</td>
+      <td>2008</td>
+    </tr>
+    <tr>
+      <th>330</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>42.5</td>
+      <td>17.3</td>
+      <td>187.0</td>
+      <td>3350.0</td>
+      <td>female</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>93</th>
+      <td>Adelie</td>
+      <td>Dream</td>
+      <td>39.6</td>
+      <td>18.1</td>
+      <td>186.0</td>
+      <td>4450.0</td>
+      <td>male</td>
+      <td>2008</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_sample</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="s2">&quot;bill_depth_mm&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">df_sample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bill_length_mm</th>
+      <th>bill_depth_mm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>107</th>
+      <td>38.2</td>
+      <td>20.0</td>
+    </tr>
+    <tr>
+      <th>251</th>
+      <td>51.1</td>
+      <td>16.5</td>
+    </tr>
+    <tr>
+      <th>180</th>
+      <td>48.2</td>
+      <td>14.3</td>
+    </tr>
+    <tr>
+      <th>316</th>
+      <td>49.0</td>
+      <td>19.5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
 <section id="watermark">
-<h2><span class="section-number">5.5. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.6. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -4118,14 +4272,14 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Jan 24 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Wed Jan 25 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-pandas: 1.5.3
 numpy : 1.24.1
+pandas: 1.5.3
 
 Watermark: 2.3.1
 </pre></div>
