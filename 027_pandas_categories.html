@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>47. Errori di tipo m (magnitude) e di tipo s (sign) &#8212; ds4p23</title>
+    <title>7. Dati categoriali con Pandas &#8212; ds4p23</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,13 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="_static/increasing.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="48. Bibliografia" href="z_biblio.html" />
-    <link rel="prev" title="46. Limiti dell’inferenza frequentista" href="515_limiti_stat_frequentista.html" />
+    <link rel="next" title="8. Introduzione a Matplotlib" href="035_intro_matplotlib.html" />
+    <link rel="prev" title="6. Riepilogo dei dati con Pandas" href="026_pandas_aggregate.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -121,7 +119,7 @@ const thebe_selector_output = ".output, .cell_output"
   Python
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="preface.html">
    1. Prefazione
@@ -152,8 +150,8 @@ const thebe_selector_output = ".output, .cell_output"
    6. Riepilogo dei dati con Pandas
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="027_pandas_categories.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    7. Dati categoriali con Pandas
   </a>
  </li>
@@ -373,7 +371,7 @@ const thebe_selector_output = ".output, .cell_output"
   Inferenza frequentista
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="500_intro_frequentist.html">
    43. Legge dei grandi numeri
@@ -394,8 +392,8 @@ const thebe_selector_output = ".output, .cell_output"
    46. Limiti dell’inferenza frequentista
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="520_s_m_errors.html">
    47. Errori di tipo
    <em>
     m
@@ -510,7 +508,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/520_s_m_errors.ipynb"
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/027_pandas_categories.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -570,7 +568,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F520_s_m_errors.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F027_pandas_categories.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -598,7 +596,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/520_s_m_errors.ipynb"
+        <a href="_sources/027_pandas_categories.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -635,23 +633,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   7.1. Watermark
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Errori di tipo m (magnitude) e di tipo s (sign)</h1>
+                <h1>Dati categoriali con Pandas</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   7.1. Watermark
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -659,86 +694,199 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="errori-di-tipo-m-magnitude-e-di-tipo-s-sign">
-<span id="sec-errors-ms"></span><h1><span class="section-number">47. </span>Errori di tipo <em>m</em> (magnitude) e di tipo <em>s</em> (sign)<a class="headerlink" href="#errori-di-tipo-m-magnitude-e-di-tipo-s-sign" title="Permalink to this headline">#</a></h1>
-<p><span id="id1">[<a class="reference internal" href="z_biblio.html#id6" title="Eric Loken and Andrew Gelman. Measurement error and the replication crisis. Science, 355(6325):584–585, 2017.">LG17</a>]</span> hanno messo in relazione la procedura di decisione statistica dell’approccio frequentista con la crisi della replicabilità dei risultati della ricerca. Uno dei problemi che hanno messo in evidenza riguarda il fatto che, in contesti di ricerca rumorosi, la significatività statistica fornisce prove molto deboli per il segno o la grandezza di qualsiasi effetto sottostante. Questo punto è meglio chiarito con una simulazione.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="dati-categoriali-con-pandas">
+<span id="pandas-categories-notebook"></span><h1><span class="section-number">7. </span>Dati categoriali con Pandas<a class="headerlink" href="#dati-categoriali-con-pandas" title="Permalink to this headline">#</a></h1>
+<p>I dati di tipo <code class="docutils literal notranslate"><span class="pre">category</span></code> sono un tipo di dati Pandas corrispondente alle variabili categoriali statistiche. Una variabile di tipo <code class="docutils literal notranslate"><span class="pre">category</span></code> assume un numero limitato, e solitamente fisso, di possibili valori (dette <code class="docutils literal notranslate"><span class="pre">categories</span></code>). Esempi sono il genere, la classe sociale, il paese di appartenenza, o la valutazione tramite scale Likert. Contrariamente alle variabili categoriali statistiche, i dati categoriali Pandas possono avere un ordine (ad es. ‘assolutamente d’accordo’ vs ‘d’accordo’). Le operazioni numeriche (addizioni, divisioni, …) non sono possibili. Una descrizione approfondita della manipolazione di dati categoriali con Pandas si può trovare seguendo questo <a class="reference external" href="https://pandas.pydata.org/docs/user_guide/categorical.html">link</a>. Esamineremo qui solo alcuni principi di base.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Supponiamo di selezionare due campioni casuali indipendenti di ampiezza <span class="math notranslate nohighlight">\(n_1\)</span> = 20 e <span class="math notranslate nohighlight">\(n_2\)</span> = 25 dalle distribuzioni <span class="math notranslate nohighlight">\(\mathcal{N}(102, 10)\)</span> e <span class="math notranslate nohighlight">\(\mathcal{N}(100, 10)\)</span>.</p>
-<p>La vera grandezza dell’effetto per la differenza tra le medie delle due campioni è</p>
-<div class="math notranslate nohighlight">
-\[
-d = \frac{\bar{y}_1 - \bar{y}_1}{s_p}
-\]</div>
-<p>dove</p>
-<div class="math notranslate nohighlight">
-\[
-s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}
-\]</div>
-<p>Nel caso presente, il vero valore della grandezza dell’effetto è <span class="math notranslate nohighlight">\(\delta = 0.2\)</span>. Questo è un effetto estremamente piccolo per gli standard correnti e descrive una differenza che non deve essere presa in nessuna seria considerazione.</p>
-<p>Ma vediamo quali sarebbero, in queste circostanze, le conclusioni della procedura statistica di decisione statistica basata sull’approccio frequentista. Facciamo una simulazione in cui estraiamo un campione di 20 osservazioni dalla prima popolazione e un campione di 25 osservazioni dalla seconda popolazione. Eseguiamo il test <span class="math notranslate nohighlight">\(t\)</span> di Student.  Seguendo la pratica corrente dell’approccio frequentista, se il valore-<span class="math notranslate nohighlight">\(p\)</span> &gt; 0.05, i risultati vengono scartati. Se invece il risultato è <em>statisticamente significativo</em> (ovvero, valore-<span class="math notranslate nohighlight">\(p\)</span> &lt; 0.05), allora il risultato è considerato “pubblicabile”. A quali conclusioni giunge la procedura frequentista in questo caso?</p>
-<p>Per rispondere a questa domanda, eseguimo la procedura descritta sopra 50,000 volte.</p>
+<p>Per fare un esempio, consideriamo nuovamente i dati <code class="docutils literal notranslate"><span class="pre">penguins.csv</span></code>. Come in precedenza, dopo avere caricato i dati, rimuoviamo i dati mancanti.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">50000</span>
-<span class="n">mu_1</span> <span class="o">=</span> <span class="mi">102</span>
-<span class="n">mu_2</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">n1</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">n2</span> <span class="o">=</span> <span class="mi">25</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/penguins.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Si noti che le varibili non numeriche, di default, non sono del tipo <code class="docutils literal notranslate"><span class="pre">category</span></code>. Nel caso presente sono di tipo <code class="docutils literal notranslate"><span class="pre">object</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
-    <span class="c1"># Get random samples </span>
-    <span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu_1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n1</span><span class="p">)</span>
-    <span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu_2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n2</span><span class="p">)</span>
-    <span class="c1"># Compute effect size</span>
-    <span class="n">y1bar</span> <span class="o">=</span> <span class="n">y1</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="n">y2bar</span> <span class="o">=</span> <span class="n">y2</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">y2</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">n1</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">v1</span> <span class="o">+</span> <span class="p">(</span><span class="n">n2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">v2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">efsize</span> <span class="o">=</span> <span class="p">(</span><span class="n">y1bar</span> <span class="o">-</span> <span class="n">y2bar</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span>
-    <span class="c1"># Compute p-value</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">y1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">y2</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># Save effect size only for &#39;statistically significant&#39; results</span>
-    <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">pvalue</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
-        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">efsize</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Esaminiamo un istogramma dei casi nei quali il valore-<span class="math notranslate nohighlight">\(p\)</span> è stato &lt; 0.05.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/520_s_m_errors_6_0.png" src="_images/520_s_m_errors_6_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>species               object
+island                object
+bill_length_mm       float64
+bill_depth_mm        float64
+flipper_length_mm    float64
+body_mass_g          float64
+sex                   object
+year                   int64
+dtype: object
+</pre></div>
 </div>
 </div>
-<p>Come messo in evidenza da <span id="id2">[<a class="reference internal" href="z_biblio.html#id6" title="Eric Loken and Andrew Gelman. Measurement error and the replication crisis. Science, 355(6325):584–585, 2017.">LG17</a>]</span>, si verificano due tipi di errori.</p>
-<p>Il primo errore è di <em>magnitude</em> (errore <em>m</em>): in media, i risultati pubblicati sovrastimano la vera grandezza dell’effetto. Nel caso della simulazione, la vera grandezza dell’effetto è 0.2 (trascurabile) ma la media della grandezza dell’effetto dei risulati “statisticamente significativi” è circa 0.8, il che indica una grandezza dell’effetto “grande”.</p>
-<p>Il secondo errore è di <em>segno</em> (errore <em>s</em>): in un piccolo numero di casi, per effetto della varibilità campionaria, il segno dell’effetto è sbagliato – in questi casi il ricercatore conclude che <span class="math notranslate nohighlight">\(\mu_2 &gt; \mu_1\)</span> quando questo è falso. Si noti che, anche in questi casi, la grandezza dell’effetto, in termini assoluti, è sovrastimata.</p>
-<p>Qui abbiamo esaminato il test <span class="math notranslate nohighlight">\(t\)</span> di Student per la differenza tra due campioni.  Ma le conclusioni sarebbero identiche anche se avessimo considerato l’intervallo di fiducia per la differenza tra due medie.</p>
-<p>Quale conclusione si può trarre dai risultati di questa simulazione?  L’approccio frequentista è stato proposto come un metodo per decidere tra quali risultati della ricerca ci possiamo fidare e quali invece dobbiamo rifiutare. <span id="id3">[<a class="reference internal" href="z_biblio.html#id6" title="Eric Loken and Andrew Gelman. Measurement error and the replication crisis. Science, 355(6325):584–585, 2017.">LG17</a>]</span> mettonon in evidenza come questa “promessa” dell’approccio frequentista non venga mantenuta: l’approccio frequentista introduce un errore sistematico nella stima della grandezza dell’effetto (la quantità più importante che il ricercatore deve stimare) e, in alcuni casi, produce un errore anche nella stima della direzione dell’effetto.</p>
-<p>Non vedo dunque alcuno motivo per usare un tale approccio.</p>
+</div>
+<p>Possiamo trasformare le variabili <code class="docutils literal notranslate"><span class="pre">object</span></code> in variabili di tipo <code class="docutils literal notranslate"><span class="pre">category</span></code> usando la funzione <code class="docutils literal notranslate"><span class="pre">astype(&quot;category&quot;)</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>species              category
+island               category
+bill_length_mm        float64
+bill_depth_mm         float64
+flipper_length_mm     float64
+body_mass_g           float64
+sex                  category
+year                    int64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possiamo usare <code class="docutils literal notranslate"><span class="pre">unique()</span></code> per ottenere l’elenco delle classi:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Torgersen&#39;, &#39;Biscoe&#39;, &#39;Dream&#39;]
+Categories (3, object): [&#39;Biscoe&#39;, &#39;Dream&#39;, &#39;Torgersen&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>È possibile usare <code class="docutils literal notranslate"><span class="pre">value_counts()</span></code> per ottenere una distribuzione di frequenza assoluta.  L’argomento <code class="docutils literal notranslate"><span class="pre">normalize</span></code> posto a <code class="docutils literal notranslate"><span class="pre">True</span></code> fornisce le frequenze relative.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;island&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Biscoe       163
+Dream        123
+Torgersen     47
+Name: island, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Spesso vogliamo cambiare l’ordine delle categorie, specialmente quando creiamo dei grafici. Ad esempio, consideriamo un violin plot per la variabile <code class="docutils literal notranslate"><span class="pre">bill_length_mm</span></code> in funzione dell’isola. Per fare questo usiamo la funzione <code class="docutils literal notranslate"><span class="pre">violinplot</span></code> di <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> (si veda il capitolo <a class="reference internal" href="040_intro_seaborn.html#intro-seaborn-notebook"><span class="std std-ref">Introduzione a Seaborn</span></a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;island&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;island&#39;, ylabel=&#39;bill_length_mm&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/027_pandas_categories_15_1.png" src="_images/027_pandas_categories_15_1.png" />
+</div>
+</div>
+<p>Supponiamo di volere riordinare i nomi delle isole nel modo seguente: Dream, Torgersen, Biscoe. Questo risultato può essere ottenuto usando la funzione <code class="docutils literal notranslate"><span class="pre">cat.reorder_categories()</span></code> che prende in input una lista con i nomi delle categorie della variabile considerata, elencati nell’ordine desiderato. Si noti che non possiamo eseguire questa operazione <code class="docutils literal notranslate"><span class="pre">inplace</span></code> ma dobbiamo creare una nuova variabile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;island_new&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;island&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">reorder_categories</span><span class="p">([</span><span class="s1">&#39;Dream&#39;</span><span class="p">,</span> <span class="s1">&#39;Torgersen&#39;</span><span class="p">,</span> <span class="s1">&#39;Biscoe&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;island_new&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;island_new&#39;, ylabel=&#39;bill_length_mm&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/027_pandas_categories_18_1.png" src="_images/027_pandas_categories_18_1.png" />
+</div>
+</div>
+<p>È anche possibile volere cambiare le categorie esistenti. Per esempio, potremmo volere confrontare i dati dell’isola Torgersen con quelli delle altre due isole. A questo fine usiamo <code class="docutils literal notranslate"><span class="pre">map()</span></code> a cui passiamo un dizionario che specifica le nuove categorie. Un esempio è il seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">island_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Dream&quot;</span><span class="p">:</span> <span class="s2">&quot;Other&quot;</span><span class="p">,</span> <span class="s2">&quot;Torgersen&quot;</span><span class="p">:</span> <span class="s2">&quot;Torgersen&quot;</span><span class="p">,</span> <span class="s2">&quot;Biscoe&quot;</span><span class="p">:</span> <span class="s2">&quot;Other&quot;</span><span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">island_new</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;island_new&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">island_mapping</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;island_new&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Other        286
+Torgersen     47
+Name: island_new, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;island_new&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;bill_length_mm&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: xlabel=&#39;island_new&#39;, ylabel=&#39;bill_length_mm&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/027_pandas_categories_21_1.png" src="_images/027_pandas_categories_21_1.png" />
+</div>
+</div>
+<section id="watermark">
+<h2><span class="section-number">7.1. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jan 27 2023
+
+Python implementation: CPython
+Python version       : 3.10.9
+IPython version      : 8.7.0
+
+numpy  : 1.24.1
+seaborn: 0.12.2
+pandas : 1.5.3
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -768,17 +916,17 @@ s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="515_limiti_stat_frequentista.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="026_pandas_aggregate.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">46. </span>Limiti dell’inferenza frequentista</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Riepilogo dei dati con Pandas</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="z_biblio.html" title="next page">
+    <a class='right-next' id="next-link" href="035_intro_matplotlib.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">48. </span>Bibliografia</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Introduzione a Matplotlib</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
