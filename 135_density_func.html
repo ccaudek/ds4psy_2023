@@ -447,7 +447,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="a05_calculus_notation.html">
+  <a class="reference internal" href="a05_calculus.html">
    53. Per liberarvi dai terrori preliminari
   </a>
  </li>
@@ -667,36 +667,36 @@ title="Print to PDF"
      21.1.1. Distribuzione uniforme
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#il-paradosso-delle-variabili-casuali-continue">
-     21.1.2. Il paradosso delle variabili casuali continue
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-paradosso-delle-variabili-casuali-continue">
+   21.2. Il paradosso delle variabili casuali continue
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dagli-istogrammi-alle-densita">
-   21.2. Dagli istogrammi alle densità
+   21.3. Dagli istogrammi alle densità
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#funzione-di-densita-di-probabilita">
-   21.3. Funzione di densità di probabilità
+   21.4. Funzione di densità di probabilità
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#la-funzione-di-ripartizione-per-una-variabile-casuale-continua">
-   21.4. La funzione di ripartizione per una variabile casuale continua
+   21.5. La funzione di ripartizione per una variabile casuale continua
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#media-e-mediana">
-   21.5. Media e mediana
+   21.6. Media e mediana
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#watermark">
-   21.6. Watermark
+   21.7. Watermark
   </a>
  </li>
 </ul>
@@ -728,36 +728,36 @@ title="Print to PDF"
      21.1.1. Distribuzione uniforme
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#il-paradosso-delle-variabili-casuali-continue">
-     21.1.2. Il paradosso delle variabili casuali continue
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#il-paradosso-delle-variabili-casuali-continue">
+   21.2. Il paradosso delle variabili casuali continue
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dagli-istogrammi-alle-densita">
-   21.2. Dagli istogrammi alle densità
+   21.3. Dagli istogrammi alle densità
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#funzione-di-densita-di-probabilita">
-   21.3. Funzione di densità di probabilità
+   21.4. Funzione di densità di probabilità
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#la-funzione-di-ripartizione-per-una-variabile-casuale-continua">
-   21.4. La funzione di ripartizione per una variabile casuale continua
+   21.5. La funzione di ripartizione per una variabile casuale continua
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#media-e-mediana">
-   21.5. Media e mediana
+   21.6. Media e mediana
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#watermark">
-   21.6. Watermark
+   21.7. Watermark
   </a>
  </li>
 </ul>
@@ -808,17 +808,14 @@ f(x) = \frac{1}{b-a}, \quad a \leq x \leq b
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span>
+    <span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">,</span>
+    <span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span> <span class="o">/</span> <span class="n">golden</span><span class="p">)},</span>
+<span class="p">)</span>
 <span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-darkgrid&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;tableau-colorblind10&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_55882/987621960.py:4: MatplotlibDeprecationWarning: The seaborn styles shipped by Matplotlib are deprecated since 3.6, as they no longer correspond to the styles shipped by seaborn. However, they will remain available as &#39;seaborn-v0_8-&lt;style&gt;&#39;. Alternatively, directly use the seaborn API instead.
-  plt.style.use(&#39;seaborn-darkgrid&#39;)
 </pre></div>
 </div>
 </div>
@@ -905,8 +902,9 @@ p_{\Theta}(\theta) = \mathcal{U}(\theta \mid a, b),
 <p>Svolgiamo un altro semplice esercizio. Consideriamo una variabile casuale uniforme <span class="math notranslate nohighlight">\(X\)</span> definita sull’intervallo [0, 100]. Poniamoci il problema di trovare la probabilità <span class="math notranslate nohighlight">\(P(20 &lt; X &lt; 60)\)</span>.</p>
 <p>Per trovare la soluzione è sufficiente calcolare l’area di un rettangolo di base <span class="math notranslate nohighlight">\(60 - 20 = 40\)</span> e di altezza 1/100. La probabilità cercata è dunque <span class="math notranslate nohighlight">\(P(20 &lt; X &lt; 60) = 40 \cdot 0.01 = 0.4\)</span>.</p>
 </section>
+</section>
 <section id="il-paradosso-delle-variabili-casuali-continue">
-<h3><span class="section-number">21.1.2. </span>Il paradosso delle variabili casuali continue<a class="headerlink" href="#il-paradosso-delle-variabili-casuali-continue" title="Permalink to this headline">#</a></h3>
+<h2><span class="section-number">21.2. </span>Il paradosso delle variabili casuali continue<a class="headerlink" href="#il-paradosso-delle-variabili-casuali-continue" title="Permalink to this headline">#</a></h2>
 <p>Chiediamoci ora quale sia la probabilità che la v.c. continua assuma uno specifico valore. Consideriamo, ad esempio, una pendenza dello spinner <em>esattamente</em> uguale a 36 gradi (ovvero, 36.000000000000000000). Qual è la probabilità di osservare esattamente questo specifico valore? Paradossalmente, la risposta è zero:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -916,9 +914,8 @@ P(\Theta = 36) = 0.
 <p>Nel caso delle variabili casuali continue dobbiamo dunque rinunciare a qualcosa, e quel qualcosa è l’idea che, in una distribuzione continua, ciascun valore puntuale della variabile casuale possa avere una massa di probabilità maggiore di zero. Il paradosso sorge perché una realizzazione della variabile casuale continua produce sempre un qualche numero, ma ciscuno di tali numeri ha una probabilità nulla.</p>
 <p>Le variabili casuali continue, dunque non hanno una massa di probabilità. Invece, una massa di probabilità viene assegnata alla realizzazione della variabile casuale in un intervallo di valori.</p>
 </section>
-</section>
 <section id="dagli-istogrammi-alle-densita">
-<h2><span class="section-number">21.2. </span>Dagli istogrammi alle densità<a class="headerlink" href="#dagli-istogrammi-alle-densita" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">21.3. </span>Dagli istogrammi alle densità<a class="headerlink" href="#dagli-istogrammi-alle-densita" title="Permalink to this headline">#</a></h2>
 <p>Le considerazioni precedenti ci fanno capire che non esiste l’equivalente di una funzione di massa di probabilità per le variabili casuali continue. Esiste invece una <em>funzione di densità di probabilità</em> la quale, nei termini di una simulazione, può essere concepita nel modo seguente: avendo a disposizione un numero enorme di casi, quando l’intervallo <span class="math notranslate nohighlight">\(\Delta\)</span> di ciascuna classe <span class="math notranslate nohighlight">\(\rightarrow\)</span> 0, il profilo dell’istogramma delle frequenze delle classi di ampiezza <span class="math notranslate nohighlight">\(\Delta\)</span> tenderà a diventare una curva continua. Tale curva continua <span class="math notranslate nohighlight">\(f(x)\)</span> è detta funzione di densità di probabilità.</p>
 <p>In un istogramma, l’area di ciascuna barra è proporzionale alla frequenza relativa delle osservazioni in quel’intervallo. Perché tutti gli intervalli hanno la stessa ampiezza, anche l’altezza di ciascuna barra sarà proporzionale alla frequenza relativa delle osservazioni in quel’intervallo.</p>
 <p>Nella simulazione, possiamo pensare all’area di ciascuna barra dell’istogramma come alla stima della probabilità che la variabile casuale assuma un valore compreso nell’intervallo considerato. All’aumentare del numero <span class="math notranslate nohighlight">\(M\)</span> di osservazioni, le probabilità stimate si avvicinano sempre di più ai veri valori della probabilità. All’aumentare del numero degli intervalli (quando l’ampiezza <span class="math notranslate nohighlight">\(\Delta\)</span> dell’intervallo <span class="math notranslate nohighlight">\(\rightarrow\)</span> 0), il profilo dell’istogramma tende a diventare una curva continua. Tale curva continua è appunto la funzione di densità di probabilità della variabile casuale.</p>
@@ -992,7 +989,7 @@ P(\Theta = 36) = 0.
 <p>Nella statistica descrittiva abbiamo già incontrato una rappresentazione che ha lo stesso significato della funzione di densità, ovvero il <em>kernel density plot</em>. La stima della densità del kernel (KDE), infatti, è un metodo non parametrico per stimare la funzione di densità di probabilità di una variabile casuale.</p>
 </section>
 <section id="funzione-di-densita-di-probabilita">
-<h2><span class="section-number">21.3. </span>Funzione di densità di probabilità<a class="headerlink" href="#funzione-di-densita-di-probabilita" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">21.4. </span>Funzione di densità di probabilità<a class="headerlink" href="#funzione-di-densita-di-probabilita" title="Permalink to this headline">#</a></h2>
 <p>Da un punto di vista matematico, l’intuizione precedente si può esprimere nel modo seguente.</p>
 <p>Per descrivere le probabilità che possono essere associate ad una variabile casuale continua <span class="math notranslate nohighlight">\(X\)</span> è necessario definire una funzione <span class="math notranslate nohighlight">\(p(X)\)</span> che deve soddisfare le seguenti due proprietà:</p>
 <ul class="simple">
@@ -1003,7 +1000,7 @@ P(\Theta = 36) = 0.
 <p><em>Interpretazione.</em> È possibile che <span class="math notranslate nohighlight">\(p(x) &gt; 1\)</span>, quindi una densità di probabilità non può essere interpretata come una probabilità. Piuttosto, la densità <span class="math notranslate nohighlight">\(p(x)\)</span> può essere utilizzata per confrontare la credibilità relativa che può essere assegnata a diversi valori <span class="math notranslate nohighlight">\(x\)</span>. Considerata una variabile casuale <span class="math notranslate nohighlight">\(X\)</span> di cui è disponibile un insieme di realizzazioni, possiamo dire che, se consideriamo due valori <span class="math notranslate nohighlight">\(x_k\)</span> e <span class="math notranslate nohighlight">\(x_l\)</span> con <span class="math notranslate nohighlight">\(p(x_k) &gt; p(x_l)\)</span>, allora possiamo concludere che è più credibile, in termini relativi, osservare realizzazioni <span class="math notranslate nohighlight">\(X\)</span> nell’intorno di <span class="math notranslate nohighlight">\(x_k\)</span> piuttosto che nell’intorno di <span class="math notranslate nohighlight">\(x_l\)</span>.</p>
 </section>
 <section id="la-funzione-di-ripartizione-per-una-variabile-casuale-continua">
-<h2><span class="section-number">21.4. </span>La funzione di ripartizione per una variabile casuale continua<a class="headerlink" href="#la-funzione-di-ripartizione-per-una-variabile-casuale-continua" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">21.5. </span>La funzione di ripartizione per una variabile casuale continua<a class="headerlink" href="#la-funzione-di-ripartizione-per-una-variabile-casuale-continua" title="Permalink to this headline">#</a></h2>
 <p>Per le variabili casuali continue, la funzione di ripartizione (ovvero, la distribuzione cumulativa) è definita esattamente come nel caso delle variabili casuali discrete:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1013,7 +1010,7 @@ F_{\Theta}(\theta) = P(\Theta \leq \theta).
 <p>Come nel caso discreto, la funzione di ripartizione di una v.c. continua può essere utilizzata per calcolare la probabilità che la v.c. assuma valori in un certo intervallo.</p>
 </section>
 <section id="media-e-mediana">
-<h2><span class="section-number">21.5. </span>Media e mediana<a class="headerlink" href="#media-e-mediana" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">21.6. </span>Media e mediana<a class="headerlink" href="#media-e-mediana" title="Permalink to this headline">#</a></h2>
 <p>Concludiamo questo capitolo con alcune considerazioni relative al contronto tra la media (valore atteso) e la mediana, nel caso di variabili casuali continue.</p>
 <p>Per distribuzioni simmetriche, sappiamo che la media e la mediana sono uguali. Chiediamoci ora cosa succede, nel caso di variabili casuali continue, nel caso di distribuzioni asimmetriche.</p>
 <p>La mediana indica il punto in cui la “massa totale” della distribuzione è suddivisa in due porzioni uguali. Nel caso della densità di probabilità, ciascuna di queste porzioni rappresenta un’area uguale, <span class="math notranslate nohighlight">\(A_1 = A_2 = 1/2\)</span> poiché l’area totale sottesa alla funzione di densità è 1 per definizione.</p>
@@ -1031,7 +1028,7 @@ F(x_m) = \frac{1}{2}.
 <p>Tuttavia, il fatto che una parte della massa sia stata allontanata verso destra porta a uno spostamento della media della distribuzione, per compensare tale cambiamento. In altre parole, la media contiene più informazioni sulla distribuzione “spaziale” delle osservazioni, rispetto alla mediana. Ciò deriva dal fatto che la media della distribuzione (il valore atteso) è una “somma” – cioè è un integrale – di termini cha hanno la forma <span class="math notranslate nohighlight">\(x p(x) \Delta x\)</span>. Quindi la posizione lungo l’asse <span class="math notranslate nohighlight">\(x\)</span>, ovvero <span class="math notranslate nohighlight">\(x\)</span>, e non solo la “massa”, <span class="math notranslate nohighlight">\(p(x) \Delta x\)</span>, influenza il contributo che le componenti della distribuzione hanno sulla media.</p>
 </section>
 <section id="watermark">
-<h2><span class="section-number">21.6. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">21.7. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
@@ -1048,10 +1045,10 @@ IPython version      : 8.7.0
 
 pytensor: 2.9.1
 
-scipy     : 1.10.0
-seaborn   : 0.12.2
 matplotlib: 3.6.3
+scipy     : 1.10.0
 numpy     : 1.24.1
+seaborn   : 0.12.2
 
 Watermark: 2.3.1
 </pre></div>
