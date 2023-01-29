@@ -1037,7 +1037,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fa430b10be0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7f9738898cd0&gt;
 </pre></div>
 </div>
 <img alt="_images/210_cont_rv_distr_16_1.png" src="_images/210_cont_rv_distr_16_1.png" />
@@ -1059,6 +1059,20 @@ f(x)={\frac  {1}{b-a}} \quad \text{su}\; [a, b].
 \[
 V(X)={\frac {1}{12}}(b-a)^{2}.
 \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">plot_helpers</span> <span class="kn">import</span> <span class="n">plot_pdf_and_cdf</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="n">rvU</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot_pdf_and_cdf</span><span class="p">(</span><span class="n">rvU</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="n">rv_name</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/210_cont_rv_distr_18_0.png" src="_images/210_cont_rv_distr_18_0.png" />
+</div>
+</div>
 <p>In Python è possibile manipolare la distribuzione uniforme mediante la funzione <code class="docutils literal notranslate"><span class="pre">uniform</span></code> del modulo <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>.  Di default, la funzione <code class="docutils literal notranslate"><span class="pre">scipy.stats.uniform()</span></code> è un’istanziazione di <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span>. Se utilizziamo la funzione <code class="docutils literal notranslate"><span class="pre">pdf()</span></code> (<em>probability density function</em>) otteniamo l’ordinata della funzione di densità <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span> in corrispondenza dei valori <span class="math notranslate nohighlight">\(x\)</span> passati in input. Per esempio, esaminiamo la funzione di densità <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span> in corrispondenza di 0.5, 0.8 e 1.2. Per i primi due valori ci aspettiamo di ottenere 1; in corrispondenza di 1.2 ci aspettiamo di ottenere 0, poiché questo valore è al di fuori dell’intervallo <span class="math notranslate nohighlight">\([ 0, 1]\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1209,7 +1223,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;f(x)&#39;)
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_34_1.png" src="_images/210_cont_rv_distr_34_1.png" />
+<img alt="_images/210_cont_rv_distr_35_1.png" src="_images/210_cont_rv_distr_35_1.png" />
 </div>
 </div>
 <p>Chiediamoci, ad esempio quale sia la probabilità di dovere aspettare non più di un giorno e mezzo per conoscere il voto. La risposta a questa domanda è data dalla funzione di ripartizione in corrispondenza di 1.5, ovvero <span class="math notranslate nohighlight">\(F(1.5) = P(X &lt;= 1.5)\)</span>.</p>
@@ -1222,7 +1236,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_36_0.png" src="_images/210_cont_rv_distr_36_0.png" />
+<img alt="_images/210_cont_rv_distr_37_0.png" src="_images/210_cont_rv_distr_37_0.png" />
 </div>
 </div>
 <p>Possiamo trovare la risposta usando la funzione <code class="docutils literal notranslate"><span class="pre">cdf()</span></code>:</p>
@@ -1248,7 +1262,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_40_0.png" src="_images/210_cont_rv_distr_40_0.png" />
+<img alt="_images/210_cont_rv_distr_41_0.png" src="_images/210_cont_rv_distr_41_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1273,7 +1287,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_43_0.png" src="_images/210_cont_rv_distr_43_0.png" />
+<img alt="_images/210_cont_rv_distr_44_0.png" src="_images/210_cont_rv_distr_44_0.png" />
 </div>
 </div>
 <p>La probabilità cercata è data dalla probabilità dell’evento complementare di quello fornito dalla funzione di ripartizione.</p>
@@ -1308,7 +1322,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Tempo di attesa&#39;)
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_48_1.png" src="_images/210_cont_rv_distr_48_1.png" />
+<img alt="_images/210_cont_rv_distr_49_1.png" src="_images/210_cont_rv_distr_49_1.png" />
 </div>
 </div>
 </section>
@@ -1329,7 +1343,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_50_0.png" src="_images/210_cont_rv_distr_50_0.png" />
+<img alt="_images/210_cont_rv_distr_51_0.png" src="_images/210_cont_rv_distr_51_0.png" />
 </div>
 </div>
 <p>Ma se aumentiamo il numero di prove di un fattore di 100 a <em>N</em> = 1000, senza modificare la probabilità di successo di 0.9, la distribuzione assume una forma campanulare quasi simmetrica. Dunque, de Moivre scoprì che, quando <em>N</em> è grande, la funzione gaussiana (che introdurremo qui sotto), nonostante sia la densità di v.c. continue, fornisce una buona approssimazione alla funzione di massa di probabilità binomiale.</p>
@@ -1352,7 +1366,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(850.0, 950.0)
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_52_2.png" src="_images/210_cont_rv_distr_52_2.png" />
+<img alt="_images/210_cont_rv_distr_53_2.png" src="_images/210_cont_rv_distr_53_2.png" />
 </div>
 </div>
 <p>La distribuzione Normale fu scoperta da Gauss nel 1809. Il Paragrafo successivo illustra come si possa giungere alla Normale mediante una simulazione.</p>
@@ -1408,7 +1422,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &quot;Distanza dall&#39;origine&quot;)
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_58_1.png" src="_images/210_cont_rv_distr_58_1.png" />
+<img alt="_images/210_cont_rv_distr_59_1.png" src="_images/210_cont_rv_distr_59_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1435,7 +1449,7 @@ f(x) = \frac{1}{4} \exp^{-x/4}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/210_cont_rv_distr_59_0.png" src="_images/210_cont_rv_distr_59_0.png" />
+<img alt="_images/210_cont_rv_distr_60_0.png" src="_images/210_cont_rv_distr_60_0.png" />
 </div>
 </div>
 <p>Per esempio, possiamo predire in maniera accurata la proporzione di persone che si sono spostate in avanti oppure all’indietro. Oppure, possiamo predire accuratamente la proporzione di persone che si troveranno ad una certa distanza dalla linea di partenza (es., a 1.5 m dall’origine). Queste predizioni sono possibili perché tali distanze si distribuiscono secondo la legge Normale (la curva rossa nel grafico precedente).</p>
@@ -1469,10 +1483,10 @@ f(y; \mu, \sigma) = {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y -  \mu)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa42086a8f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9738bb7a00&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_61_1.png" src="_images/210_cont_rv_distr_61_1.png" />
+<img alt="_images/210_cont_rv_distr_62_1.png" src="_images/210_cont_rv_distr_62_1.png" />
 </div>
 </div>
 <section id="concentrazione">
@@ -1505,7 +1519,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>89.70616837467878
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>122.84138441614526
 </pre></div>
 </div>
 </div>
@@ -1519,7 +1533,7 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77.21822164267327 104.75802804689127 84.61856525920786 101.07939907453878 73.05599093957068 103.15388971975808 107.2240451585324 95.63703036931402 101.31157422070874 84.28787908329359
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76.40006975229508 102.15562387566055 99.74699987954887 103.36603828237953 118.38410562063264 104.41157268598 102.41809874142035 98.10440346755182 110.94794277347239 111.58205449608587
 </pre></div>
 </div>
 </div>
@@ -1550,10 +1564,28 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fa431022b00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7f9729ceb100&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_69_1.png" src="_images/210_cont_rv_distr_69_1.png" />
+<img alt="_images/210_cont_rv_distr_70_1.png" src="_images/210_cont_rv_distr_70_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">mean</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">std</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">rvN</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+
+<span class="c1"># use `quad` function to integrate rvN.pdf between 50 and 115</span>
+<span class="n">quad</span><span class="p">(</span><span class="n">rvN</span><span class="o">.</span><span class="n">pdf</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">115</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot_pdf_and_cdf</span><span class="p">(</span><span class="n">rvN</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">115</span><span class="p">,</span> <span class="n">rv_name</span><span class="o">=</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/210_cont_rv_distr_71_0.png" src="_images/210_cont_rv_distr_71_0.png" />
 </div>
 </div>
 <p>Solo per fare un esempio, qui di seguito fornisco il codice Python per calcolare l’integrale che stiamo discutendo per mezzo della funzione <code class="docutils literal notranslate"><span class="pre">quad</span></code> della libreria SciPy:</p>
@@ -1600,10 +1632,10 @@ F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fa431078b50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7f973a042260&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_74_1.png" src="_images/210_cont_rv_distr_74_1.png" />
+<img alt="_images/210_cont_rv_distr_76_1.png" src="_images/210_cont_rv_distr_76_1.png" />
 </div>
 </div>
 <p>In maniera equivalente, possiamo usare la <em>Survival Function</em>:</p>
@@ -1668,10 +1700,10 @@ X = a + b Y \sim \mathcal{N}(\mu_X = a+b \mu_Y, \sigma_X = \left|b\right|\sigma_
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fa47252dcf0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7f96f8731c60&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_81_1.png" src="_images/210_cont_rv_distr_81_1.png" />
+<img alt="_images/210_cont_rv_distr_83_1.png" src="_images/210_cont_rv_distr_83_1.png" />
 </div>
 </div>
 <p>In maniera equivalente, possiamo standardizzare i valori che delimitano l’intervallo considerato e utilizzare la funzione di ripartizione della normale standardizzata. I limiti inferiore e superiore dell’intervallo sono</p>
@@ -1742,10 +1774,10 @@ f(x) = C_{\nu} x^{\nu/2-1} \exp (-x/2), \qquad \text{se } x &gt; 0,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa472569360&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f96f8773bb0&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_85_1.png" src="_images/210_cont_rv_distr_85_1.png" />
+<img alt="_images/210_cont_rv_distr_87_1.png" src="_images/210_cont_rv_distr_87_1.png" />
 </div>
 </div>
 <section id="proprieta">
@@ -1784,10 +1816,10 @@ T = \frac{Z}{\Big( \frac{W}{\nu}\Big)^{\frac{1}{2}}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa460e85870&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f96f88cdd50&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_87_1.png" src="_images/210_cont_rv_distr_87_1.png" />
+<img alt="_images/210_cont_rv_distr_89_1.png" src="_images/210_cont_rv_distr_89_1.png" />
 </div>
 </div>
 <section id="id2">
@@ -1969,10 +2001,10 @@ Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa460e559c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f96e96d3f70&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_101_1.png" src="_images/210_cont_rv_distr_101_1.png" />
+<img alt="_images/210_cont_rv_distr_103_1.png" src="_images/210_cont_rv_distr_103_1.png" />
 </div>
 </div>
 <p>La funzione <code class="docutils literal notranslate"><span class="pre">beta_mean_mode_variance()</span></code> ci restituisce la media, moda e varianza della distribuzione Beta.</p>
@@ -2036,10 +2068,10 @@ f(x \mid \alpha, \beta) = \frac{1}{\pi \beta \left[1 + \left( \frac{x - \alpha}{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa47275ab90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f96e96d3c70&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_108_1.png" src="_images/210_cont_rv_distr_108_1.png" />
+<img alt="_images/210_cont_rv_distr_110_1.png" src="_images/210_cont_rv_distr_110_1.png" />
 </div>
 </div>
 </section>
@@ -2082,10 +2114,10 @@ f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{x} \exp \left\{-\frac{(\log x -  \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa4726f6e30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f96e9147f40&gt;
 </pre></div>
 </div>
-<img alt="_images/210_cont_rv_distr_110_1.png" src="_images/210_cont_rv_distr_110_1.png" />
+<img alt="_images/210_cont_rv_distr_112_1.png" src="_images/210_cont_rv_distr_112_1.png" />
 </div>
 </div>
 </section>
@@ -2109,10 +2141,10 @@ Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-scipy     : 1.10.0
-numpy     : 1.24.1
 pandas    : 1.5.3
 seaborn   : 0.12.2
+numpy     : 1.24.1
+scipy     : 1.10.0
 matplotlib: 3.6.3
 
 Watermark: 2.3.1
