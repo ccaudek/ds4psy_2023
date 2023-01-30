@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Benvenuti &#8212; ds4p23</title>
+    <title>54. Kernel Density plot &#8212; ds4p23</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="_static/increasing.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Prefazione" href="preface.html" />
+    <link rel="prev" title="53. Per liberarvi dai terrori preliminari" href="a05_calculus.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -107,8 +109,8 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Benvenuti
                 </a>
             </li>
@@ -422,7 +424,7 @@ const thebe_selector_output = ".output, .cell_output"
   Appendici
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="a01_math_symbols.html">
    49. Simbologia di base
@@ -448,8 +450,8 @@ const thebe_selector_output = ".output, .cell_output"
    53. Per liberarvi dai terrori preliminari
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a06_kde_plot.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    54. Kernel Density plot
   </a>
  </li>
@@ -504,6 +506,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/a06_kde_plot.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -543,7 +574,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2Fa06_kde_plot.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -571,7 +602,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/intro.md"
+        <a href="_sources/a06_kde_plot.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -582,7 +613,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -631,8 +662,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#license">
-   License
+  <a class="reference internal nav-link" href="#watermark">
+   54.1. Watermark
   </a>
  </li>
 </ul>
@@ -644,7 +675,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Benvenuti</h1>
+                <h1>Kernel Density plot</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -655,8 +686,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#license">
-   License
+  <a class="reference internal nav-link" href="#watermark">
+   54.1. Watermark
   </a>
  </li>
 </ul>
@@ -669,38 +700,175 @@ title="Print to PDF"
                 
               <div>
                 
-  <div align="center">
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/ccaudek/ds4psy_2023"><img alt="GitHub last update" src="https://img.shields.io/github/last-commit/ccaudek/ds4psy_2023?color=blue&amp;label=last%20update" /></a></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="kernel-density-plot">
+<h1><span class="section-number">54. </span>Kernel Density plot<a class="headerlink" href="#kernel-density-plot" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container" id="kde-appendix">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
+</pre></div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="benvenuti">
-<h1>Benvenuti<a class="headerlink" href="#benvenuti" title="Permalink to this headline">#</a></h1>
-<div class="admonition-work-in-progress admonition">
-<p class="admonition-title">Work in Progress</p>
-<p>Coming Soon – Sito in costruzione</p>
 </div>
-<p>Questo sito web presenta il materiale didattico dell’insegnamento di <a class="reference external" href="https://www.unifi.it/index.php?module=ofform2&amp;mode=1&amp;cmd=3&amp;AA=2019&amp;afId=523562">Psicometria</a> (A.A. 2022/2023) rivolto agli studenti del primo anno del Corso di Laurea in Scienze e Tecniche Psicologiche dell’Università degli Studi di Firenze.</p>
-<section id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">#</a></h2>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This book was created by Corrado Caudek and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span>
+    <span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">,</span>
+    <span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">)},</span>
+<span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Un istogramma divide i dati in intervalli discreti, conta il numero di punti che rientrano in ciascun contenitore e quindi visualizza i risultati in modo intuitivo. Se specifichiamo il parametro <code class="docutils literal notranslate"><span class="pre">density=True</span></code>, l’area totale delle barre dell’istogramma è pari a 1.</p>
+<p>Per fare un esempio, definisco una funzione che simula dei dati estratti da una distribuzione bimodale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_data</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">rseed</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">rseed</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rand</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span> <span class="p">:]</span> <span class="o">+=</span> <span class="mi">5</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a06_kde_plot_5_0.png" src="_images/a06_kde_plot_5_0.png" />
+</div>
+</div>
+<p>Creo un numero più piccolo di dati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">rseed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1.3315865 ,  0.71527897, -1.54540029, -0.00838385,  0.62133597,
+       -0.72008556,  5.26551159,  5.10854853,  5.00429143,  4.82539979,
+        5.43302619,  6.20303737,  4.03493433,  6.02827408,  5.22863013,
+        5.44513761,  3.86339779,  5.13513688,  6.484537  ,  3.92019511])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il primo istrogramma seguente chiarisce che si tratta di una distribuzione bimodale. Quello successivo, invece, mostra una distribuzione unimodale con una lunga coda. Senza vedere il codice seguente, probabilmente non ci verrebbe in mente che questi due istogrammi sono stati costruiti dagli stessi dati. Il problema degli istogrammi, infatti, è che, a seconda della scelta dell’ampiezza degli intervalli, il profilo dell’istogramma può anche cambiare in maniera drastica. La domanda è: come possiamo ottenere un risultato migliore?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">),</span> <span class="s2">&quot;|k&quot;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9d60575720&gt;]
+</pre></div>
+</div>
+<img alt="_images/a06_kde_plot_9_1.png" src="_images/a06_kde_plot_9_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">),</span> <span class="s2">&quot;|k&quot;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9d606b5b70&gt;]
+</pre></div>
+</div>
+<img alt="_images/a06_kde_plot_10_1.png" src="_images/a06_kde_plot_10_1.png" />
+</div>
+</div>
+<p>L’istogramma conta quante osservazioni sono contenute in ciascun intervallo. Il Kernel Density Plot (KDE) sostituisce alle frequenze assolute (o relative) un metodo diverso. Immaginiamo di posizionare la curva densità di una distribuzione gaussiana (con un’opportuna deviazione standard) in corrispondenza di ciascun punto della distribuzione. I punti sono rappresentati, nelle figure precedenti dai “ticks” evidenziati sotto l’istogramma. Per ciascun valore dell’asse <span class="math notranslate nohighlight">\(X\)</span>, le ordinate di queste funzioni di densità vengono sommate. I punti così ottenuti sono congiunti da una curva. Il processo è descritto nella cella seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">density</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_d</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">density</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.02160887, 0.02227584, 0.02296033, 0.02366267, 0.02438324,
+       0.02512238, 0.02588048, 0.02665789, 0.02745499, 0.02827215])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il risultato è il cosiddetto KDE plot, ovvero un istogramma “lisciato”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_d</span><span class="p">,</span> <span class="n">density</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">),</span> <span class="s2">&quot;|k&quot;</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-4.0, 8.0, -0.2, 5.0)
+</pre></div>
+</div>
+<img alt="_images/a06_kde_plot_14_1.png" src="_images/a06_kde_plot_14_1.png" />
+</div>
+</div>
+<p>Un risultato equivalente si ottiene con la funzione <code class="docutils literal notranslate"><span class="pre">kdeplot()</span></code> di <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>. Si noti l’argomento <code class="docutils literal notranslate"><span class="pre">bw_adjust</span></code> che determina la deviazione standard delle gaussiane che vengono sommate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bw_adjust</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a06_kde_plot_16_0.png" src="_images/a06_kde_plot_16_0.png" />
+</div>
+</div>
+<section id="watermark">
+<h2><span class="section-number">54.1. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Jan 30 2023
+
+Python implementation: CPython
+Python version       : 3.10.9
+IPython version      : 8.7.0
+
+seaborn   : 0.12.2
+matplotlib: 3.6.3
+numpy     : 1.24.1
+scipy     : 1.10.0
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -730,12 +898,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="preface.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Prefazione</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+    <a class='left-prev' id="prev-link" href="a05_calculus.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">53. </span>Per liberarvi dai terrori preliminari</p>
+        </div>
     </a>
 </div>
             </footer>

@@ -447,8 +447,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="a05_calculus_notation.html">
+  <a class="reference internal" href="a05_calculus.html">
    53. Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a06_kde_plot.html">
+   54. Kernel Density plot
   </a>
  </li>
 </ul>
@@ -871,11 +876,14 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span>
+    <span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">,</span>
+    <span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">)},</span>
+<span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">123456</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -926,7 +934,7 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 </div>
 </div>
 </div>
-<p><strong>Esempio 4.</strong> Un altro esempio è costituito dagli anagrammi. Gli anagrammi  sono  le permutazioni che si ottengono da una parola variando l’ordine delle lettere. Le permutazioni semplici si applicano al caso di parole costituite da lettere tutte diverse tra loro. Ad esempio, con la parola  NUMERO si ottengono <span class="math notranslate nohighlight">\(P_6 = 6! = 6\cdot5\cdot4\cdot3\cdot2\cdot1 = 720\)</span> anagrammi.</p>
+<p><strong>Esempio 4.</strong> Gli anagrammi  sono  le permutazioni che si ottengono da una parola variando l’ordine delle lettere. Le permutazioni semplici si applicano al caso di parole costituite da lettere tutte diverse tra loro. Ad esempio, con la parola  NUMERO si ottengono <span class="math notranslate nohighlight">\(P_6 = 6! = 6\cdot5\cdot4\cdot3\cdot2\cdot1 = 720\)</span> anagrammi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;NUMERO&quot;</span><span class="p">)</span>
@@ -957,7 +965,6 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 </div>
 </div>
 </div>
-<p>Oppure, applichiamo direttamente la formula <a class="reference internal" href="#equation-eq-permsem">(15.1)</a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
@@ -1088,7 +1095,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 </div>
 </div>
 </div>
-<p>La soluzione si trova anche usando la funzione <code class="docutils literal notranslate"><span class="pre">comb()</span></code> della libreria <code class="docutils literal notranslate"><span class="pre">math</span></code>:</p>
+<p>La soluzione si trova anche usando la funzione <code class="docutils literal notranslate"><span class="pre">comb()</span></code> della libreria <code class="docutils literal notranslate"><span class="pre">math</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -1101,16 +1108,40 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 </div>
 </div>
 </div>
-<p><strong>Esempio 8.</strong> Quanti gruppi di 4 si possono formare con 20 individui?</p>
+<p>Oppure usando la funzione <code class="docutils literal notranslate"><span class="pre">comb()</span></code> della libreria <code class="docutils literal notranslate"><span class="pre">scipy.special</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_nk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">c_nk</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.special</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="n">sp</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((0, 1, 2, 3), (0, 1, 2, 4), (0, 1, 2, 5), (0, 1, 2, 6), (0, 1, 2, 7))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Esempio 8.</strong> Quanti gruppi di 2 si possono formare con 5 individui?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_nk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">c_nk</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((0, 1),
+ (0, 2),
+ (0, 3),
+ (0, 4),
+ (1, 2),
+ (1, 3),
+ (1, 4),
+ (2, 3),
+ (2, 4),
+ (3, 4))
 </pre></div>
 </div>
 </div>
@@ -1122,7 +1153,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4845
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
 </pre></div>
 </div>
 </div>
@@ -1130,12 +1161,12 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 <p>ovvero</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4845
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
 </pre></div>
 </div>
 </div>
@@ -1316,7 +1347,7 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/105_combinatorics_56_0.png" src="_images/105_combinatorics_56_0.png" />
+<img alt="_images/105_combinatorics_57_0.png" src="_images/105_combinatorics_57_0.png" />
 </div>
 </div>
 </section>
@@ -1330,16 +1361,17 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Jan 19 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Jan 30 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-matplotlib: 3.6.3
 pandas    : 1.5.3
-numpy     : 1.24.1
 seaborn   : 0.12.2
+numpy     : 1.24.1
+matplotlib: 3.6.3
+scipy     : 1.10.0
 
 Watermark: 2.3.1
 </pre></div>
