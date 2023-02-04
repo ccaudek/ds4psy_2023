@@ -1,35 +1,41 @@
 Traceback (most recent call last):
-  File "/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+  File "/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+  File "/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+  File "/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/opt/anaconda3/envs/pymc/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
     return future.result()
-  File "/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-size = 4
-niter = 10000
-random_samples = [yield.rvs(size) for i in range(niter)]
-rs = np.array(random_samples)
-p_estimates = np.mean(rs, axis=1)
+import pandas as pd
+from matplotlib import pyplot as plt
+import seaborn as sns
+from numpy import random
+import numpy as np
+from scipy.stats import bernoulli, binom
+import empiricaldist
+from scipy.constants import golden
 
-len(p_estimates)
 ------------------
 
-[0;36m  Cell [0;32mIn[9], line 3[0;36m[0m
-[0;31m    random_samples = [yield.rvs(size) for i in range(niter)][0m
-[0m                      ^[0m
-[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 7[0m
+[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      6[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mstats[39;00m [38;5;28;01mimport[39;00m bernoulli, binom
+[0;32m----> 7[0m [38;5;28;01mimport[39;00m [38;5;21;01mempiricaldist[39;00m
+[1;32m      8[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mconstants[39;00m [38;5;28;01mimport[39;00m golden
 
-SyntaxError: invalid syntax (245151180.py, line 3)
+[0;31mModuleNotFoundError[0m: No module named 'empiricaldist'
+ModuleNotFoundError: No module named 'empiricaldist'
 
