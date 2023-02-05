@@ -386,7 +386,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="500_intro_frequentist.html">
-   45. Legge dei grandi numeri
+   45. Stima di quantità sconosciute da un campione
   </a>
  </li>
  <li class="toctree-l1">
@@ -861,12 +861,72 @@ title="Print to PDF"
 \[
 f_3 = \frac{n_3}{N},
 \]</div>
-<p>dove <span class="math notranslate nohighlight">\(n_3\)</span> è il numero di volte in cui un lancio ha prodotto 3 in un insieme di N. Chiaramente, questa è solo un’approssimazione della probabilità. Infatti, se effettuiamo una nuova serie di N lanci, è molto improbabile che si ottenga di nuovo esattamente lo stesso numero di 3, <span class="math notranslate nohighlight">\(n_3\)</span>. Tuttavia, ci aspettiamo il nuovo numero <span class="math notranslate nohighlight">\(n_3'\)</span> si avvicini a <span class="math notranslate nohighlight">\(n_3\)</span> se N è abbastanza grande. Maggiore è N, migliore è la stima. In linea di principio si può dire che la probabilità di ottenere 3, P(3), è</p>
+<p>dove <span class="math notranslate nohighlight">\(n_3\)</span> è il numero di volte in cui un lancio ha prodotto 3 in un insieme di <span class="math notranslate nohighlight">\(N\)</span> lanci. Chiaramente, questa è solo un’approssimazione della probabilità. Infatti, se effettuiamo una nuova serie di <span class="math notranslate nohighlight">\(N\)</span> lanci, è molto improbabile che si ottenga di nuovo esattamente lo stesso numero di 3, <span class="math notranslate nohighlight">\(n_3\)</span>. Tuttavia, ci aspettiamo il nuovo numero <span class="math notranslate nohighlight">\(n_3'\)</span> si avvicini a <span class="math notranslate nohighlight">\(n_3\)</span> se <span class="math notranslate nohighlight">\(N\)</span> è abbastanza grande. Maggiore è <span class="math notranslate nohighlight">\(N\)</span>, migliore è la stima. In linea di principio si può dire che la probabilità di ottenere 3, P(3), è</p>
 <div class="math notranslate nohighlight">
 \[
 𝑃(3)= \lim_{N \rightarrow \infty}\frac{n_3}{N}.
 \]</div>
-<p>Tuttavia, in questo caso, il limite non è il limite matematico ma è un limite sperimentale, ed è manifestamente impossibile eseguire un numero infinito di prove. Anche in questo caso, quindi, la definizione di probabilità non è così ovvia e dipende dagli eventi accaduti nel passato, che devono essere assunti come rappresentativi dell’intero insieme di eventi possibili, cioè devono avere la stessa probabilità degli eventi simili in futuro.</p>
+<p>Tuttavia, in questo caso, il limite non è il limite matematico ma è un limite sperimentale, ed è manifestamente impossibile eseguire un numero infinito di prove.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="k">def</span> <span class="nf">dice_roll</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+
+    <span class="n">n_targets</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">prop_target</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">prop_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">roll_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># get the result of a dice roll</span>
+        <span class="n">roll</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="c1"># is the number equal to the target?</span>
+        <span class="k">if</span> <span class="n">roll</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">is_target</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_target</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># number of targets obtained</span>
+        <span class="n">n_targets</span> <span class="o">+=</span> <span class="n">is_target</span>
+        <span class="c1"># cumulative proportion of targets obtained</span>
+        <span class="n">prop_target</span> <span class="o">=</span> <span class="n">n_targets</span> <span class="o">/</span> <span class="n">roll_index</span>
+
+        <span class="n">prop_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prop_target</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">&quot;n_rolls&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)),</span> <span class="s2">&quot;proportion_target&quot;</span><span class="p">:</span> <span class="n">prop_list</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">run1</span> <span class="o">=</span> <span class="n">dice_roll</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">run2</span> <span class="o">=</span> <span class="n">dice_roll</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">run3</span> <span class="o">=</span> <span class="n">dice_roll</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">run4</span> <span class="o">=</span> <span class="n">dice_roll</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">run1</span><span class="p">,</span> <span class="n">run2</span><span class="p">,</span> <span class="n">run3</span><span class="p">,</span> <span class="n">run4</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">runs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;run1&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;run2&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;run3&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;run4&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;runs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">runs</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;n_rolls&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;proportion_target&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;runs&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/110_intro_prob_2_0.png" src="_images/110_intro_prob_2_0.png" />
+</div>
+</div>
+<p>La figura fornisce un’illustrazione del significato della probabilità frequentista. Se lanciamo un dado bilanciato più e più volte, la proporzione di risultati “3” che si ottengono alla fine si stabilizza e converge alla probabilità reale di 1/6. Le curve mostrano il risultato di uno dei quattro diversi esperimenti simulati: in ogni caso, fingiamo di aver lanciato una dado 1000 volte e, mentre procediamo, teniamo traccia della proporzione di lanci che producono il risultato “3”. Anche se nessuna di queste sequenze si è effettivamente conclusa con l’esatto valore di 1/6, se avessimo esteso l’esperimento per un numero infinito di lanci di moneta, l’avrebbero ottenuto.</p>
+<p>Anche in questo secondo caso, quindi, la definizione di probabilità non è così ovvia e dipende dagli eventi accaduti nel passato, che devono essere assunti come rappresentativi dell’intero insieme di eventi possibili, cioè devono avere la stessa probabilità degli eventi simili in futuro.</p>
 <p>In entrambi i casi valgono le seguenti regole. Se un evento è impossibile, la sua probabilità è nulla. Se un evento è certo, la sua probabilità è 1.</p>
 <p>Un approccio più moderno consiste nella cosiddetta probabilità bayesiana, da Thomas Bayes (1701–1761). In questo approccio, la probabilità è considerata una valutazione soggettiva del grado di convinzione che qualcosa accadrà. Spesso è espresso in termini di scommessa. Questa è la caratterizzazione epistemica della probabilità.</p>
 <p>In termini epistemici, la probabilità fornisce una misura della nostra incertezza sul verificarsi di un evento, alla luce delle informazioni disponibili. Potremmo dire che c’è una “scala” naturale che ha per estremi il vero (1: evento certo), da una parte, ed il falso (0: evento impossibile), dall’altra. La probabilità è la quantificazione di questa scala: descrive lo stato della nostra incertezza rispetto al contenuto di verità di una proposizione.</p>
@@ -936,19 +996,6 @@ f_3 = \frac{n_3}{N},
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">bernoulli</span><span class="p">,</span> <span class="n">binom</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">empiricaldist</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;empiricaldist&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -980,7 +1027,7 @@ f_3 = \frac{n_3}{N},
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 0 1 0 1 0 1 0 0 0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 1 0 0 1 1 1 0 0 0
 </pre></div>
 </div>
 </div>
@@ -1021,7 +1068,7 @@ f_3 = \frac{n_3}{N},
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.525
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.519
 </pre></div>
 </div>
 </div>
@@ -1053,7 +1100,7 @@ Z = Y_1 + Y_2 + Y_3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
 </div>
@@ -1087,16 +1134,16 @@ Z = Y_1 + Y_2 + Y_3.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      p_est
-0      0.50
-1      0.50
-2      0.50
-3      0.75
-4      0.00
+0      0.25
+1      0.25
+2      0.25
+3      0.50
+4      0.50
 ...     ...
-9995   0.00
-9996   0.25
+9995   0.25
+9996   0.00
 9997   0.75
-9998   0.25
+9998   0.75
 9999   0.25
 
 [10000 rows x 1 columns]
@@ -1111,11 +1158,11 @@ Z = Y_1 + Y_2 + Y_3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.50    0.3739
-0.25    0.2528
-0.75    0.2446
-0.00    0.0689
-1.00    0.0598
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.50    0.3789
+0.25    0.2520
+0.75    0.2440
+0.00    0.0648
+1.00    0.0603
 Name: p_est, dtype: float64
 </pre></div>
 </div>
@@ -1614,7 +1661,7 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/110_intro_prob_42_0.png" src="_images/110_intro_prob_42_0.png" />
+<img alt="_images/110_intro_prob_44_0.png" src="_images/110_intro_prob_44_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1625,7 +1672,7 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/110_intro_prob_43_0.png" src="_images/110_intro_prob_43_0.png" />
+<img alt="_images/110_intro_prob_45_0.png" src="_images/110_intro_prob_45_0.png" />
 </div>
 </div>
 <p>Le probabilità della distribuzione di massa si ottengono con la notazione delle parentesi quadre. Ad esempio:</p>
@@ -1694,7 +1741,7 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 6
 </pre></div>
 </div>
 </div>
@@ -1792,7 +1839,31 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 / 36
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 1),
+ (1, 2),
+ (1, 3),
+ (1, 4),
+ (1, 5),
+ (2, 1),
+ (2, 2),
+ (2, 3),
+ (2, 4),
+ (2, 5),
+ (3, 1),
+ (3, 2),
+ (3, 3),
+ (3, 4),
+ (3, 5),
+ (4, 1),
+ (4, 2),
+ (4, 3),
+ (4, 4),
+ (4, 5),
+ (5, 1),
+ (5, 2),
+ (5, 3),
+ (5, 4),
+ (5, 5)]
 </pre></div>
 </div>
 </div>
@@ -1800,6 +1871,11 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 / 36
 </pre></div>
 </div>
 </div>
@@ -1813,7 +1889,7 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 36
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 3), (2, 2), (3, 1)]
 </pre></div>
 </div>
 </div>
@@ -1821,6 +1897,11 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 36
 </pre></div>
 </div>
 </div>
@@ -1912,11 +1993,6 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">product</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2598960
 </pre></div>
 </div>
 </div>
