@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="47. Significatività statistica" href="510_test_ipotesi.html" />
-    <link rel="prev" title="45. Stima di quantità sconosciute da un campione" href="500_intro_frequentist.html" />
+    <link rel="prev" title="45. Stima dei parametri" href="500_intro_frequentist.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -386,7 +386,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="500_intro_frequentist.html">
-   45. Stima di quantità sconosciute da un campione
+   45. Stima dei parametri
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -789,7 +789,7 @@ title="Print to PDF"
 <span id="sec-interv-conf"></span><h1><span class="section-number">46. </span>Intervallo fiduciale<a class="headerlink" href="#intervallo-fiduciale" title="Permalink to this headline">#</a></h1>
 <section id="la-variabilita-campionaria">
 <h2><span class="section-number">46.1. </span>La variabilità campionaria<a class="headerlink" href="#la-variabilita-campionaria" title="Permalink to this headline">#</a></h2>
-<p>Consideriamo, quale esempio, l’esperimento casuale che corrisponde all’estrazione casuale di un campione di <span class="math notranslate nohighlight">\(n\)</span> osservazioni da una popolazione e del calcolo della media di quel campione. Dato che si immagina che l’esperimento casuale venga ripetuto infinite volte, dobbiamo immaginare l’esistenza di infiniti campioni casuali di <span class="math notranslate nohighlight">\(n\)</span> osservazioni. Dato che ciascuno di tali campioni è costituito da osservazioni diverse, ognuno di essi avrà una media diversa. Tale fenomeno è detto <em>variabilità campionaria</em>. Se usiamo il linguaggio dell’approccio frequentista diremo che la distribuzione dei tutti gli infiniti possibili valori della statistica in questione (nel caso dell’esempio, la media del campione) nell’universo dei campioni si chiama <em>distribuzione campionaria</em>.</p>
+<p>Consideriamo, quale esempio, l’esperimento casuale che corrisponde all’estrazione casuale di un campione di <span class="math notranslate nohighlight">\(n\)</span> osservazioni da una popolazione e del calcolo della media di quel campione. Dato che, nell’approccio frequentista, si immagina che l’esperimento casuale venga ripetuto infinite volte, dobbiamo immaginare l’esistenza di infiniti campioni casuali di <span class="math notranslate nohighlight">\(n\)</span> osservazioni. Dato che ciascuno di tali campioni è costituito da osservazioni diverse, ognuno di essi avrà una media diversa. Tale fenomeno è detto <em>variabilità campionaria</em>. Se usiamo il linguaggio dell’approccio frequentista diremo che la distribuzione dei tutti gli infiniti possibili valori della statistica in questione (nel caso dell’esempio, la media del campione) nell’universo dei campioni si chiama <em>distribuzione campionaria</em> (si veda il capitolo <a class="reference internal" href="500_intro_frequentist.html#sec-law-large-numbers"><span class="std std-ref">Stima dei parametri</span></a>).</p>
 <p>Se lo psicologo usa la media del campione quale stima della media della popolazione, ovviamente commetterà un errore, dato che la statistica campionaria è sempre diversa dal parametro. Il problema dello psicologo è quello di valutare l’entità di tale errore, ovvero quello di valutare il livello di incertezza inerente alla sua stima.</p>
 <p>Per valutare l’incertezza della stima lo psicologo fa riferimento alla variabilità campionaria. Se la deviazione standard della distribuzione campionaria della statistica è piccola, questo significa che ogni campione casuale di ampiezza <span class="math notranslate nohighlight">\(n\)</span> produrrà una statistica <span class="math notranslate nohighlight">\(\bar{X}\)</span> simile al parametro <span class="math notranslate nohighlight">\(\mu\)</span> della popolazione. In tali condizioni (utilizzando i dati di un singolo campione) ci sarà una piccola incertezza relativamente al valore del parametro, perché, in media, <span class="math notranslate nohighlight">\(\bar{X}\)</span> è simile a <span class="math notranslate nohighlight">\(\mu\)</span>. Se invece la deviazione standard della distribuzione campionaria di <span class="math notranslate nohighlight">\(\bar{X}\)</span> è grande, i campioni casuali di ampiezza <span class="math notranslate nohighlight">\(n\)</span> produrranno, in media, una statistica <span class="math notranslate nohighlight">\(\bar{X}\)</span> molto lontana dal parametro <span class="math notranslate nohighlight">\(\mu\)</span>. Utilizzando i dati di un singolo campione, in tali condizioni lo psicologo sarà molto incerto relativamente al vero valore del parametro (in quanto, in media, <span class="math notranslate nohighlight">\(\bar{X}\)</span> è molto diverso da <span class="math notranslate nohighlight">\(\mu\)</span>).</p>
 <p>La deviazione standard della distribuzione campionaria, detta <em>errore standard</em>, viene dunque utilizzata per quantificare l’incertezza relativamente alla stima di un parametro. Solitamente, l’approccio frequentista quantifica l’incertezza della stima nei termini di una funzione dell’errore standard chiamata <em>intervallo fiduciale</em>. Lo scopo di questo capitolo è quello di introdurre la nozione di errore standard in modo tale da potere fornire un’interpretazione alla nozione di intervallo fiduciale.</p>
@@ -905,7 +905,7 @@ P(\theta_{min} \leq \theta \leq \theta_{max}) \geq \gamma, \qquad \forall \theta
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>172.7899911882617 167.99597781092325 169.7733253979667 179.84497578198165 168.09117175086686 180.25307144119284 170.16063333863679 181.2722430819473 174.42798668269077 188.67089172420108 172.50086778956376 176.78810826784715 181.3841605576211 181.43438573226564 181.00129545704178 176.4548317297063 185.77874792030877 167.84833105705937 174.2867304849726 181.93129946848057 176.26701720035703 169.36403664225742 180.75677264220025 182.72200381509933 171.6865159880908 173.66193082682904 183.82963516375625 173.08983464305837 176.39478097331536 174.5622681364479
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>171.14628499466897 174.29177512231306 180.12351605992302 171.69169856450245 186.44661834674213 174.17039557001132 193.5390672046869 168.54430187829706 169.48545279668048 180.88153954322752 165.55099959849724 168.693756411063 179.35930714997684 189.8513323138119 179.76293171489647 175.87778437716707 173.6584793538666 175.51073019645023 186.83627329315001 176.78216465867513 173.07452650944924 171.70980288537305 184.5415121186674 185.75083955448127 177.26930628515692 163.0838215730304 167.8054814075916 189.4040431349971 167.1605998176655 173.5165473587573
 </pre></div>
 </div>
 </div>
@@ -919,7 +919,7 @@ P(\theta_{min} \leq \theta \leq \theta_{max}) \geq \gamma, \qquad \forall \theta
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>174.40196941012127 176.5007940898316 173.06247636325057 174.25988399405915 175.50968268368416 176.52189624513494 175.98093833711795 175.18824777905718 175.49749313968587 173.42129384127483
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>173.5100823683683 176.5173629931259 175.3491054527554 175.27767929921407 176.004992709629 174.481744828273 176.15853156289273 175.17960951275927 174.14783184313947 176.76894639347347
 </pre></div>
 </div>
 </div>
@@ -958,7 +958,7 @@ P(\theta_{min} \leq \theta \leq \theta_{max}) \geq \gamma, \qquad \forall \theta
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.95
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.943
 </pre></div>
 </div>
 </div>
@@ -1041,7 +1041,7 @@ P(\theta_{min} \leq \theta \leq \theta_{max}) \geq \gamma, \qquad \forall \theta
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">45. </span>Stima di quantità sconosciute da un campione</p>
+            <p class="prev-next-title"><span class="section-number">45. </span>Stima dei parametri</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="510_test_ipotesi.html" title="next page">
