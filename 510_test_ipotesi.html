@@ -386,7 +386,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="500_intro_frequentist.html">
-   45. Stima di quantità sconosciute da un campione
+   45. Stima dei parametri
   </a>
  </li>
  <li class="toctree-l1">
@@ -775,6 +775,11 @@ title="Print to PDF"
    47.6. Metodo classico e simulazioni
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neyman-e-fisher">
+   47.7. Neyman e Fisher
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -895,6 +900,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#metodo-classico-e-simulazioni">
    47.6. Metodo classico e simulazioni
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neyman-e-fisher">
+   47.7. Neyman e Fisher
   </a>
  </li>
 </ul>
@@ -1179,12 +1189,19 @@ P(y \mid p, n) = \binom{n = 30}{y = 22} p^y (1-p)^{n-y}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0817
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0843
 </pre></div>
 </div>
 </div>
 </div>
 <p>Se assumiamo che la moneta sia bilanciata, la proababilità di osservare 22 o più risultati testa in 30 lanci è 0.008.</p>
+</section>
+<section id="neyman-e-fisher">
+<h2><span class="section-number">47.7. </span>Neyman e Fisher<a class="headerlink" href="#neyman-e-fisher" title="Permalink to this headline">#</a></h2>
+<p>La procedura di test di ipotesi statistiche che è stata descritta sopra è in realtà un miscuglio di due approcci teorici piuttosto diversi, uno proposto da Sir Ronald Fisher e l’altro proposto da Jerzy Neyman. La storia non è lineare perché Fisher e Neyman hanno cambiato opinione nel corso del tempo, e nessuno dei due ha mai offerto “l’affermazione definitiva” di come dovremmo interpretare il loro lavoro. Consideriamo in termini sintetici questi due approcci.</p>
+<p>Semplificando, si può dire che Fisher presumeva che il ricercatore avesse solo un’ipotesi (quella nulla) e quello che voleva fare è scoprire se l’ipotesi nulla fosse incoerente con i dati. Dal punto di vista di Fisher, ciò che il ricercatore deve fare è stabilire se i dati sono “sufficientemente improbabili” secondo l’ipotesi nulla. In effetti, questa è la corrente definizione del valore-<span class="math notranslate nohighlight">\(p\)</span> (la probabilità di osservare, sotto l’ipotesi nulla, il risutato ottenuto o uno ancora più estremo). Secondo Fisher, se l’ipotesi nulla è poco compatible con i dati (ovvero, se il valore <span class="math notranslate nohighlight">\(p\)</span> è piccolo), il ricercatore può rifiutarla. Ma, dal momento che non ci sono altre ipotesi con cui confrontare l’ipotesi nulla, non c’è modo di “accettare l’alternativa”, perché nessuna ipotesi alternativa è stata formulata.</p>
+<p>Al contrario, Neyman pensava che lo scopo della verifica delle ipotesi fosse un metodo per prendere delle decisioni e il suo approccio era più formale di quello di Fisher. Secondo Neyman, il problema è quello di dovere decidere se accettare l’ipotesi nulla o accettare l’alternativa e lo scopo del test è stabilire quale supporto viene fornito dai alle due alternative. Da questo punto di vista è ovviamente fondamentale specificare in maniera precisa l’ipotesi alternativa. Nell’approccio di Neyman il <span class="math notranslate nohighlight">\(p\)</span>-valore non misura la probabilità del risultato del test (o di uno più estremo) sotto l’ipotesi nulla, ma è una descrizione astratta su quali sono i “possibili test” che portano ad accettare l’ipotesi nulla e quali sono i “possibili test” che portano ad accettare l’ipotesi alternativa.</p>
+<p>Quello che abbiamo oggi è uno strano miscuglio di questi due approcci. Si distingue tra un’ipotesi nulla e un’ipotesi alternativa (Neyman), ma si definisce il valore-<span class="math notranslate nohighlight">\(p\)</span> in termini di dati estremi (Fisher) in confronto con un livello <span class="math notranslate nohighlight">\(\alpha\)</span> (Neyman). Alcuni dei test statistici specificano in maniera esplicita le ipotesi alternative (Neyman), ma altri sono piuttosto vaghi a tale riguardo (Fisher). Secondo alcuni ricercatori, non è permesso “accettare l’alternativa” (Fisher), secondo altri lo è (Neyman). Questa confusione è il “peccato originale” della procedura di verifica di ipotesi statistiche. Ma questo “peccato originale” è solo la punta dell’iceberg: vedremo nel capitolo <a class="reference internal" href="520_s_m_errors.html#sec-errors-ms"><span class="std std-ref">Errori di tipo m (magnitude) e di tipo s (sign)</span></a> quali sono le ragioni più specifiche per cui l’approccio della significatività statistica sia stato additato, da molti ricercatori, quali una delle cause principali della crisi della replicabilità dei risultati della ricerca, in psicologia e in altri campi.</p>
 </section>
 </section>
 
