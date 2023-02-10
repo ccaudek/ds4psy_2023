@@ -386,7 +386,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="500_intro_frequentist.html">
-   45. Stima di quantità sconosciute da un campione
+   45. Stima dei parametri
   </a>
  </li>
  <li class="toctree-l1">
@@ -517,6 +517,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/a03_set_theory.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -584,7 +613,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/a03_set_theory.md"
+        <a href="_sources/a03_set_theory.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -595,7 +624,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -652,6 +681,38 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#diagrammi-di-eulero-venn">
    53.2. Diagrammi di Eulero-Venn
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diagrammi-di-venn-con-python">
+     53.2.1. Diagrammi di Venn con Python
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unione">
+     53.2.2. Unione
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intersezione">
+     53.2.3. Intersezione
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#differenza">
+     53.2.4. Differenza
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#differenza-simmetrica">
+     53.2.5. Differenza simmetrica
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#insieme-complementare">
+     53.2.6. Insieme complementare
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#coppie-ordinate-e-prodotto-cartesiano">
@@ -691,6 +752,38 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#diagrammi-di-eulero-venn">
    53.2. Diagrammi di Eulero-Venn
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diagrammi-di-venn-con-python">
+     53.2.1. Diagrammi di Venn con Python
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unione">
+     53.2.2. Unione
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intersezione">
+     53.2.3. Intersezione
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#differenza">
+     53.2.4. Differenza
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#differenza-simmetrica">
+     53.2.5. Differenza simmetrica
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#insieme-complementare">
+     53.2.6. Insieme complementare
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#coppie-ordinate-e-prodotto-cartesiano">
@@ -797,9 +890,174 @@ S_i \cap S_j, \quad \text{con~} i \neq j.
 <h2><span class="section-number">53.2. </span>Diagrammi di Eulero-Venn<a class="headerlink" href="#diagrammi-di-eulero-venn" title="Permalink to this headline">#</a></h2>
 <p>In molte situazioni è utile servirsi dei cosiddetti diagrammi di Eulero-Venn per rappresentare gli insiemi e verificare le proprietà delle operazioni tra insiemi. I diagrammi di Venn sono così nominati in onore del matematico inglese del diciannovesimo secolo John Venn anche se Leibnitz e Eulero avevano già in precedenza utilizzato rappresentazioni simili. In tale rappresentazione, gli insiemi sono individuati da regioni del piano delimitate da una curva chiusa. Nel caso di insiemi finiti, è possibile evidenziare esplicitamente alcuni elementi di un insieme mediante punti, quando si possono anche evidenziare tutti gli elementi degli insiemi considerati.</p>
 <p>In tutte le seguenti figure, <span class="math notranslate nohighlight">\(S\)</span> è la regione delimitata dal rettangolo, <span class="math notranslate nohighlight">\(L\)</span> è la regione all’interno del cerchio di sinistra e <span class="math notranslate nohighlight">\(R\)</span> è la regione all’interno del cerchio di destra. La regione evidenziata mostra l’insieme indicato sotto ciascuna figura.</p>
-<p><img alt="" src="_images/sets-venn-diagrams.pdf" /></p>
+<p><img alt="Diagrammi di Venn" src="_images/sets-venn-diagrams.png" /></p>
 <p>I diagrammi di Eulero-Venn che illustrano le leggi di DeMorgan sono forniti nella figura seguente.</p>
-<p><img alt="" src="_images/demorgan.pdf" /></p>
+<p><img alt="Leggi di DeMorgan" src="_images/demorgan.png" /></p>
+<section id="diagrammi-di-venn-con-python">
+<h3><span class="section-number">53.2.1. </span>Diagrammi di Venn con Python<a class="headerlink" href="#diagrammi-di-venn-con-python" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">vennfig</span> <span class="k">as</span> <span class="nn">v</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">set_a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">set_b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="unione">
+<h3><span class="section-number">53.2.2. </span>Unione<a class="headerlink" href="#unione" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">.</span><span class="n">or_nor</span><span class="p">(</span>
+    <span class="n">subs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;#919191&quot;</span><span class="p">,</span>
+    <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#e8e8e8&quot;</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">title_a</span><span class="o">=</span><span class="s2">&quot;$A \cup B$&quot;</span><span class="p">,</span>
+    <span class="n">set_a</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="n">set_b</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a03_set_theory_5_0.png" src="_images/a03_set_theory_5_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">set_a</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1, 2, 3, 4, 5}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="intersezione">
+<h3><span class="section-number">53.2.3. </span>Intersezione<a class="headerlink" href="#intersezione" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">.</span><span class="n">and_nand</span><span class="p">(</span>
+    <span class="n">subs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;#919191&quot;</span><span class="p">,</span>
+    <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#e8e8e8&quot;</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">title_a</span><span class="o">=</span><span class="s2">&quot;$A \cap B$&quot;</span><span class="p">,</span>
+    <span class="n">set_a</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="n">set_b</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a03_set_theory_8_0.png" src="_images/a03_set_theory_8_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">set_a</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{3}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="differenza">
+<h3><span class="section-number">53.2.4. </span>Differenza<a class="headerlink" href="#differenza" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">.</span><span class="n">a_b</span><span class="p">(</span>
+    <span class="n">subs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;#919191&quot;</span><span class="p">,</span>
+    <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#e8e8e8&quot;</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">title_a</span><span class="o">=</span><span class="s2">&quot;$A - B$&quot;</span><span class="p">,</span>
+    <span class="n">set_a</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="n">set_b</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a03_set_theory_11_0.png" src="_images/a03_set_theory_11_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">set_a</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{1, 2}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="differenza-simmetrica">
+<h3><span class="section-number">53.2.5. </span>Differenza simmetrica<a class="headerlink" href="#differenza-simmetrica" title="Permalink to this headline">#</a></h3>
+<p>L’insieme costituito dagli elementi che appartengono o ad A oppure a B, ma non ad entrambi è chiamato differenza simmetrica o unione esclusiva, tra A e B. La differenza simmetrica tra due insiemi  corrisponde alla differenza semplice tra l’unione e l’intersezione tra i due insiemi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">.</span><span class="n">xor_xnor</span><span class="p">(</span>
+    <span class="n">subs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;#919191&quot;</span><span class="p">,</span>
+    <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#e8e8e8&quot;</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">title_a</span><span class="o">=</span><span class="s2">&quot;$Differenza\ simmetrica$&quot;</span><span class="p">,</span>
+    <span class="n">set_a</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="n">set_b</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a03_set_theory_14_0.png" src="_images/a03_set_theory_14_0.png" />
+</div>
+</div>
+</section>
+<section id="insieme-complementare">
+<h3><span class="section-number">53.2.6. </span>Insieme complementare<a class="headerlink" href="#insieme-complementare" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">.</span><span class="n">complement</span><span class="p">(</span>
+    <span class="n">subs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;#919191&quot;</span><span class="p">,</span>
+    <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#e8e8e8&quot;</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">title_a</span><span class="o">=</span><span class="s2">&quot;$Insieme\ complementare\ di \ A$&quot;</span><span class="p">,</span>
+    <span class="n">set_a</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="n">set_b</span><span class="o">=</span><span class="s2">&quot;A&#39;&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a03_set_theory_16_0.png" src="_images/a03_set_theory_16_0.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="coppie-ordinate-e-prodotto-cartesiano">
 <h2><span class="section-number">53.3. </span>Coppie ordinate e prodotto cartesiano<a class="headerlink" href="#coppie-ordinate-e-prodotto-cartesiano" title="Permalink to this headline">#</a></h2>
