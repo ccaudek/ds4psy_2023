@@ -742,9 +742,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Consideriamo alcuni esempi che illustrano come, generando delle liste che corrispondono a spazi campione ed eventi, sia possibile calcolare la probabilità associata agli eventi definiti sullo spazio campione di un esperimento casuale. In questo insegnamento considereremo tre esperimenti casuali che producono uno spazio campione discreto. Qui esamineremo il caso del lancio di uno o più dadi e i giochi di carte. In seguito esamineremo delle funzioni specializzate che possono essere usate per modellare l’esperimento casuale corrispondene ad una serie di lanci di una moneta.</p>
+<p>Consideriamo alcuni esempi che illustrano come, generando delle liste che corrispondono a spazi campione ed eventi, sia possibile calcolare la probabilità associata agli eventi definiti sullo spazio campione di un esperimento casuale. In questo insegnamento ci focalizzeremo su tre esperimenti casuali che producono uno spazio campione discreto: lancio di monete, lancio di dadi, estrazione di carte da un mazzo ben mescolato. Iniziamo ad esaminare il caso del lancio di uno o più dadi e i giochi di carte. In seguito esamineremo delle funzioni specializzate che possono essere usate per modellare l’esperimento casuale corrispondene ad una serie di lanci di una moneta.</p>
 <p><strong>Probabilità di ottenere un numero minore di 4 dal lancio di un dado</strong></p>
-<p>Iniziamo con un caso semplice che illustra la sintassi delle espressioni che useremo in seguito.</p>
+<p>Abbiamo già visto in precedenza come generare lo spazio campione dell’esperimento aleatorio che corrisponde al lancio di un dado equilibrato a 6 facce.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">dice1</span> <span class="k">for</span> <span class="n">dice1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
@@ -758,32 +758,35 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Su tale spazio campione definiamo un evento.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">]</span>
-<span class="nb">list</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
 </pre></div>
 </div>
 </div>
 </div>
+<p>Calcoliamo la probabilità di osservare l’evento che abbiamo definito.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;La probabilità dell&#39;evento è </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La probabilità dell&#39;evento è 3/6.
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>La probabilità di ottenere almeno un 6 dal lancio di due dadi</strong></p>
+<p>Consideriamo un caso un po’ più complesso, ma che abbiamo già incontrato in precedenza. Iniziamo nuovamente a definire lo spazio campione dell’esperimento casuale. Si noti la sintassi della <em>list comprehension</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">dice1</span><span class="p">,</span> <span class="n">dice2</span><span class="p">)</span> <span class="k">for</span> <span class="n">dice1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="k">for</span> <span class="n">dice2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
@@ -832,6 +835,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>L’evento definito dal problema si verifica se è vera la condizione <code class="docutils literal notranslate"><span class="pre">roll[0]</span> <span class="pre">==</span> <span class="pre">6</span></code> (si ottiene un 6 con il primo dado) oppure se si verifica la condizione <code class="docutils literal notranslate"><span class="pre">roll[1]</span></code> (si ottiene un 6 con il secondo dado), oppure se si verificano entrambe. Si noti il connettivo logico <code class="docutils literal notranslate"><span class="pre">or</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span> <span class="ow">or</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span>
@@ -868,6 +872,7 @@ title="Print to PDF"
 </div>
 </div>
 <p><strong>La probabilità di non ottenere neppure un 6 dal lancio di due dadi</strong></p>
+<p>La soluzione di questo problema richiede che si neghino le due condizioni definite in precedenza.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">]</span>
@@ -917,7 +922,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>In maniera equivalente, la soluzione è data dalla probabilità dell’evento complementare a quello definito dal problema precedente: 1 - 11/36.</p>
 <p><strong>La probabilità che lanciando contemporaneamente due dadi a 6 facce la somma faccia 4</strong></p>
+<p>In questo caso la condizione logica che viene definita nella <em>list comprehension</em> è <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">sum(roll)</span> <span class="pre">==</span> <span class="pre">4</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">]</span>
@@ -931,6 +938,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Troviamo la probabilità.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -944,6 +952,7 @@ title="Print to PDF"
 </div>
 </div>
 <p><strong>La probabilità che lanciando contemporaneamente tre dadi a 6 facce la somma faccia 10</strong></p>
+<p>Questo problema è solo una variante del problema precedente.  L’unica differenza di rilievo è che dobbiamo costruire uno spazio campione corrispondente al prodotto cartesiano dell’insieme dei punti di un dado elevato alla terza potenza.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
@@ -960,6 +969,7 @@ title="Print to PDF"
 </div>
 </div>
 <p><strong>La probabilità che lanciando contemporaneamente quattro dadi a 6 facce la somma faccia 13</strong></p>
+<p>La struttura logica è identica alla precedente, aumenta solo la dimensione dello spazio campione.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
@@ -976,6 +986,7 @@ title="Print to PDF"
 </div>
 </div>
 <p><strong>La probabilità di ottenere un 6 e un altro numero (diverso da 6) nel lancio di due dadi a 6 facce</strong></p>
+<p>Questo problema introduce un nuovo modo per valutare una condizione logica in riferimento allo spazio campione.  Il problema dice che dobbiamo ottenere solo un 6, con il primo o con il secondo dado, ma non con entrambi. Dobbiamo dunque esaminare ciascun punto dello spazio campione (una tupla di due elementi) e verificare se contiene un solo 6. Per fare questo definiamo la funzione <code class="docutils literal notranslate"><span class="pre">numsix()</span></code> che prende come argomento una tupla e ritorna il numero di 6 che ha trovato. Avendo definito questa funzione, la applichiamo a tutti i punti dello spazio campione e estraiamo gli elementi nei quali la funzione ritorna 1 (ovvero, i punti campione nei quali c’è un solo 6).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
@@ -986,7 +997,20 @@ title="Print to PDF"
 
 
 <span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 1), (6, 2), (6, 3), (6, 4), (6, 5)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>La probabilità cercata è dunque 10/36.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -997,6 +1021,7 @@ title="Print to PDF"
 </div>
 </div>
 <p><strong>La probabilità di ottenere un 6 e un altro numero (diverso da 6) nel lancio di quattro dadi a 6 facce</strong></p>
+<p>Questo problema è simile al precedente, ma considera uno spazio campione più grande.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
@@ -1013,6 +1038,7 @@ title="Print to PDF"
 </div>
 </div>
 <p><strong>La probabilità di ottenere tre 6 e un altro numero (diverso da 6) nel lancio di quattro dadi a 6 facce</strong></p>
+<p>Qui cambia solo la quantificazione della condizione logica usata prima.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span><span class="p">]</span>
@@ -1034,7 +1060,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Per chiarire la procedura, iniziamo a considerare un mazzo di carte più piccolo, in cui abbiamo solo due semi e tre numeri. Generiamo il mazzo di carte.</p>
+<p>Per chiarire la procedura, iniziamo a considerare un mazzo di carte molto piccolo, in cui abbiamo solo due semi e tre numeri. Generiamo il mazzo di carte.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
@@ -1049,7 +1075,20 @@ title="Print to PDF"
 </div>
 </div>
 <p>Diciamo che il primo valore di ciascuna delle precedenti coppie di numeri corrisponde al seme e il secondo valore corrisponde al numero. Se vogliamo, possiamo immaginare cuori e picche con i numeri 1, 2, 3.</p>
-<p>Iniziamo a chiederci quante mani di due carte siano possibili per questo mazzo di carte. Ci sono ovviamente 15 possibilità.</p>
+<p>Iniziamo a chiederci quante mani di due carte siano possibili per questo mazzo di carte. Ci sono 15 possibilità. Usiamo la formula delle combinazioni semplici.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Elenchiamo tutte le possibili combinazioni semplici.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">cards</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -1089,7 +1128,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Chiediamoci ora quale sia la probabilità di una coppia di assi. Ovviamente nello spazio campione precedente c’è solo un modo di ottenere una coppia di assi: (1, 1), (2, 1). Ma poniamoci il problema di trovare questa soluzione in maniera algoritmica.</p>
+<p>Chiediamoci ora quale sia la probabilità di una coppia di assi. Ovviamente nello spazio campione precedente c’è solo un modo di ottenere una coppia di assi: ((1, 1), (2, 1)). Ma poniamoci il problema di trovare questa soluzione in maniera algoritmica.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">numval</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
@@ -1111,6 +1150,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p><strong>La probabilità di un pocker d’assi</strong></p>
 <p>Ora che abbiamo capito come fare, possiamo usare la procedura descritta sopra per calcolare un evento più interessante, ovvero la probabilità di ottenere un pocker d’assi in un regolare mazzo da pocker di 52 carte. Iniziamo trovando il numero di possibili di mani di 5 carte:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1126,8 +1166,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p><strong>La probabilità di un pocker d’assi</strong></p>
-<p>Troviamo ora la probabilità di un pocker d’assi:</p>
+<p>Troviamo ora la probabilità di un pocker d’assi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">hand</span> <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numace</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">]</span>
@@ -2630,9 +2669,9 @@ Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-seaborn   : 0.12.2
 numpy     : 1.24.1
 pandas    : 1.5.3
+seaborn   : 0.12.2
 matplotlib: 3.6.3
 
 Watermark: 2.3.1
