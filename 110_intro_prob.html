@@ -843,6 +843,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">random</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">bernoulli</span><span class="p">,</span> <span class="n">binom</span>
@@ -1277,7 +1278,7 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </tr>
 </tbody>
 </table>
-<p>Ora che abbiamo capito come calcolare la distribuzione di massa di probabilità, usiamo le funzioni di <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> che consentono di eseguire più facilmente le operazioni precedenti. Creiamo la distribuzione di massa di probabilità per la variabile casuale corrispondente ai punti ottenuti dal lancio di un dado bilanciato a sei facce.</p>
+<p>Ora che abbiamo capito come calcolare la distribuzione di massa di probabilità, usiamo le funzioni di <code class="docutils literal notranslate"><span class="pre">empiricaldist</span></code> che consentono di eseguire le operazioni precedenti con maggiore facilità. Creiamo la distribuzione di massa di probabilità per la variabile casuale corrispondente ai punti ottenuti dal lancio di un dado bilanciato a sei facce.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span> <span class="o">=</span> <span class="n">empiricaldist</span><span class="o">.</span><span class="n">Pmf</span><span class="o">.</span><span class="n">from_seq</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
@@ -1494,17 +1495,17 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 </div>
-<p>Eseguo 10,000 ripetizioni dell’esperimento casuale e memorizzo i risultati ottenuti.</p>
+<p>Eseguo 100,000 ripetizioni dell’esperimento casuale e memorizzo i risultati ottenuti.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nrolls</span> <span class="o">=</span> <span class="mi">10000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nrolls</span> <span class="o">=</span> <span class="mi">100000</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">dice</span><span class="p">(</span><span class="n">nrolls</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">200</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5 5 11 9 11 11 9 7 4 7 7 10 6 3 4 9 5 8 3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 7 8 11 8 5 6 6 7 10 5 9 11 7 4 8 7 8 7 5 4 9 8 5 10 5 5 3 9 8 3 10 4 5 7 9 9 7 9 8 5 8 3 5 4 7 5 5 11 8 6 7 9 4 8 7 6 6 7 6 8 8 7 8 7 5 6 7 4 7 10 9 10 8 11 6 6 7 7 7 5 7 8 5 10 6 4 12 5 10 7 4 5 7 8 6 7 5 6 8 9 9 8 7 11 10 11 5 8 5 5 10 9 3 7 9 7 8 8 3 6 9 10 4 7 11 5 5 10 5 9 6 5 6 6 4 6 9 4 2 7 6 7 7 7 7 5 6 10 6 4 3 8 5 7 7 6 3 7 10 4 3 7 12 5 3 5 5 6 4 8 6 6 4 9 10 10 6 7 6 11 3 2 4 11 5 8 6 8 12 5 5 9 11 6 9 7 2 4
 </pre></div>
 </div>
 </div>
@@ -1528,17 +1529,17 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, 0.0279),
- (3, 0.0548),
- (4, 0.085),
- (5, 0.1113),
- (6, 0.1401),
- (7, 0.1639),
- (8, 0.1369),
- (9, 0.1078),
- (10, 0.0868),
- (11, 0.0569),
- (12, 0.0286)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, 0.02749),
+ (3, 0.05486),
+ (4, 0.08497),
+ (5, 0.11099),
+ (6, 0.13896),
+ (7, 0.16706),
+ (8, 0.13859),
+ (9, 0.11046),
+ (10, 0.08389),
+ (11, 0.05526),
+ (12, 0.02747)]
 </pre></div>
 </div>
 </div>
@@ -1550,6 +1551,43 @@ F(x_k) = P(X \leq x_k) = \sum_{x \leq x_k} P(x).
 <div class="admonition-teorema admonition">
 <p class="admonition-title">Teorema</p>
 <p>La <em>legge dei grandi numeri</em> dice che, all’aumentare del numero di ripetizioni dell’esperimento casuale, la media dei risultati ottenuti tende al valore teorico, man mano che vengono eseguite più prove.</p>
+</div>
+<p>In con il codice seguente, simuliamo una serie di lanci di un dado generando in maniera casuale dei numeri interi compresi tra 1 e 6. Teniamo traccia della somma cumulativa dei lanci e del numero di lanci. Ad ogni passaggio, calcoliamo il valore medio dividendo la somma cumulativa per il numero di lanci. Infine, visualizziamo il valore medio dopo ogni lancio, insieme a una linea orizzontale che indica il valore atteso di 3.5, che è la media dei punti per un dado a sei facce.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate_dice_rolls</span><span class="p">(</span><span class="n">num_rolls</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Simulate dice rolls and return the average value for each roll.&quot;&quot;&quot;</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">averages</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_rolls</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">roll</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">roll</span>
+        <span class="n">averages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total</span> <span class="o">/</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">averages</span>
+
+
+<span class="k">def</span> <span class="nf">plot_dice_rolls</span><span class="p">(</span><span class="n">averages</span><span class="p">,</span> <span class="n">num_rolls</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot the average value after each dice roll.&quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_rolls</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">averages</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="n">num_rolls</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Valore atteso&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Numero di lanci&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Valore medio&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Legge dei grandi numeri&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">num_rolls</span> <span class="o">=</span> <span class="mi">10000</span>
+    <span class="n">averages</span> <span class="o">=</span> <span class="n">simulate_dice_rolls</span><span class="p">(</span><span class="n">num_rolls</span><span class="p">)</span>
+    <span class="n">plot_dice_rolls</span><span class="p">(</span><span class="n">averages</span><span class="p">,</span> <span class="n">num_rolls</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/110_intro_prob_41_0.png" src="_images/110_intro_prob_41_0.png" />
+</div>
 </div>
 </section>
 </section>
@@ -1575,9 +1613,9 @@ IPython version      : 8.7.0
 
 pandas       : 1.5.3
 empiricaldist: 0.6.8
-numpy        : 1.24.1
 seaborn      : 0.12.2
 matplotlib   : 3.6.3
+numpy        : 1.24.1
 
 Watermark: 2.3.1
 </pre></div>
