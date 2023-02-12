@@ -208,7 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="100_sets.html">
-   15. Insiemistica
+   15. Insiemi
   </a>
  </li>
  <li class="toctree-l1">
@@ -452,23 +452,18 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="a03_set_theory.html">
-   54. Insiemi
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="a04_summation_notation.html">
-   55. Simbolo di somma (sommatorie)
+   54. Simbolo di somma (sommatorie)
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="a05_calculus.html">
-   56. Per liberarvi dai terrori preliminari
+   55. Per liberarvi dai terrori preliminari
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="a06_kde_plot.html">
-   57. Kernel Density plot
+   56. Kernel Density plot
   </a>
  </li>
 </ul>
@@ -655,12 +650,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   18.1. Watermark
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -672,6 +691,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   18.1. Watermark
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -686,6 +718,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
@@ -709,8 +742,426 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>In questo capitolo esamineremo alcuni esempi discussi nel secondo capitolo del testo di <span id="id1">Unpingco [<a class="reference internal" href="z_biblio.html#id2" title="José Unpingco. Python for probability, statistics, and machine learning. Volume 1. Springer, 2022.">Unp22</a>]</span>.</p>
-<p>Consideriamo l’esperimento casuale corrispondente al lancio di due dati equilibrati. Sia <span class="math notranslate nohighlight">\(X\)</span> la v.c. corrispondente alla somma dei punti prodotti dai due lanci. Poniamoci il problema di trovare la distribuzione di massa di probabilità di <span class="math notranslate nohighlight">\(X\)</span> e la probabilità associata a diversi eventi.</p>
+<p>Consideriamo alcuni esempi che illustrano come, generando delle liste che corrispondono a spazi campione ed eventi, sia possibile calcolare la probabilità associata agli eventi definiti sullo spazio campione di un esperimento casuale. In questo insegnamento considereremo tre esperimenti casuali che producono uno spazio campione discreto. Qui esamineremo il caso del lancio di uno o più dadi e i giochi di carte. In seguito esamineremo delle funzioni specializzate che possono essere usate per modellare l’esperimento casuale corrispondene ad una serie di lanci di una moneta.</p>
+<p><strong>Probabilità di ottenere un numero minore di 4 dal lancio di un dado</strong></p>
+<p>Iniziamo con un caso semplice che illustra la sintassi delle espressioni che useremo in seguito.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[</span><span class="n">dice1</span> <span class="k">for</span> <span class="n">dice1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 4, 5, 6]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">]</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 6
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità di ottenere almeno un 6 dal lancio di due dadi</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">dice1</span><span class="p">,</span> <span class="n">dice2</span><span class="p">)</span> <span class="k">for</span> <span class="n">dice1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="k">for</span> <span class="n">dice2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
+<span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 1),
+ (1, 2),
+ (1, 3),
+ (1, 4),
+ (1, 5),
+ (1, 6),
+ (2, 1),
+ (2, 2),
+ (2, 3),
+ (2, 4),
+ (2, 5),
+ (2, 6),
+ (3, 1),
+ (3, 2),
+ (3, 3),
+ (3, 4),
+ (3, 5),
+ (3, 6),
+ (4, 1),
+ (4, 2),
+ (4, 3),
+ (4, 4),
+ (4, 5),
+ (4, 6),
+ (5, 1),
+ (5, 2),
+ (5, 3),
+ (5, 4),
+ (5, 5),
+ (5, 6),
+ (6, 1),
+ (6, 2),
+ (6, 3),
+ (6, 4),
+ (6, 5),
+ (6, 6)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span> <span class="ow">or</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">event</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 6),
+ (2, 6),
+ (3, 6),
+ (4, 6),
+ (5, 6),
+ (6, 1),
+ (6, 2),
+ (6, 3),
+ (6, 4),
+ (6, 5),
+ (6, 6)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11 / 36
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità di non ottenere neppure un 6 dal lancio di due dadi</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">event</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 1),
+ (1, 2),
+ (1, 3),
+ (1, 4),
+ (1, 5),
+ (2, 1),
+ (2, 2),
+ (2, 3),
+ (2, 4),
+ (2, 5),
+ (3, 1),
+ (3, 2),
+ (3, 3),
+ (3, 4),
+ (3, 5),
+ (4, 1),
+ (4, 2),
+ (4, 3),
+ (4, 4),
+ (4, 5),
+ (5, 1),
+ (5, 2),
+ (5, 3),
+ (5, 4),
+ (5, 5)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25 / 36
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità che lanciando contemporaneamente due dadi a 6 facce la somma faccia 4</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">event</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 3), (2, 2), (3, 1)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 / 36
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità che lanciando contemporaneamente tre dadi a 6 facce la somma faccia 10</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27 / 216
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità che lanciando contemporaneamente quattro dadi a 6 facce la somma faccia 13</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">==</span> <span class="mi">13</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>140 / 1296
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità di ottenere un 6 e un altro numero (diverso da 6) nel lancio di due dadi a 6 facce</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">([</span><span class="n">dice</span> <span class="k">for</span> <span class="n">dice</span> <span class="ow">in</span> <span class="n">roll</span> <span class="k">if</span> <span class="n">dice</span> <span class="o">==</span> <span class="mi">6</span><span class="p">])</span>
+
+
+<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 / 36
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità di ottenere un 6 e un altro numero (diverso da 6) nel lancio di quattro dadi a 6 facce</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>500 / 1296
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità di ottenere tre 6 e un altro numero (diverso da 6) nel lancio di quattro dadi a 6 facce</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numsix</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20 / 1296
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esaminiamo ora alcuni esempio relativi ai giochi di carte. Per questi scopi abbiamo bisogno di generare degli spazi campione che corrispondono a selezioni di elementi nelle quali l’ordine non conta e gli elementi non possono essere ripetuti. Questa è la definizione di una combinazione semplice – si veda la sezione <a class="reference internal" href="105_combinatorics.html#combinazione-semplice-section"><span class="std std-ref">Combinazioni semplici</span></a>. Importiamo la funzione <code class="docutils literal notranslate"><span class="pre">combinations</span></code> da <code class="docutils literal notranslate"><span class="pre">itertools</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">product</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per chiarire la procedura, iniziamo a considerare un mazzo di carte più piccolo, in cui abbiamo solo due semi e tre numeri. Generiamo il mazzo di carte.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)))</span>
+<span class="n">cards</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 1), (1, 2), (1, 3), (2, 1), (2, 2), (2, 3)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Diciamo che il primo valore di ciascuna delle precedenti coppie di numeri corrisponde al seme e il secondo valore corrisponde al numero. Se vogliamo, possiamo immaginare cuori e picche con i numeri 1, 2, 3.</p>
+<p>Iniziamo a chiederci quante mani di due carte siano possibili per questo mazzo di carte. Ci sono ovviamente 15 possibilità.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">cards</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[((1, 1), (1, 2)),
+ ((1, 1), (1, 3)),
+ ((1, 1), (2, 1)),
+ ((1, 1), (2, 2)),
+ ((1, 1), (2, 3)),
+ ((1, 2), (1, 3)),
+ ((1, 2), (2, 1)),
+ ((1, 2), (2, 2)),
+ ((1, 2), (2, 3)),
+ ((1, 3), (2, 1)),
+ ((1, 3), (2, 2)),
+ ((1, 3), (2, 3)),
+ ((2, 1), (2, 2)),
+ ((2, 1), (2, 3)),
+ ((2, 2), (2, 3))]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chiediamoci ora quale sia la probabilità di una coppia di assi. Ovviamente nello spazio campione precedente c’è solo un modo di ottenere una coppia di assi: (1, 1), (2, 1). Ma poniamoci il problema di trovare questa soluzione in maniera algoritmica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">numval</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">([</span><span class="n">card</span> <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">hand</span> <span class="k">if</span> <span class="n">card</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">val</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">numace</span><span class="p">(</span><span class="n">hand</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">numval</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">hand</span> <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numace</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 / 15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ora che abbiamo capito come fare, possiamo usare la procedura descritta sopra per calcolare un evento più interessante, ovvero la probabilità di ottenere un pocker d’assi in un regolare mazzo da pocker di 52 carte. Iniziamo trovando il numero di possibili di mani di 5 carte:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">14</span><span class="p">)))</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">cards</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2598960
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità di un pocker d’assi</strong></p>
+<p>Troviamo ora la probabilità di un pocker d’assi:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">hand</span> <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numace</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48 / 2598960
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>La probabilità di una coppia d’assi e una coppia di Jack</strong></p>
+<p>In una variante di questo problema, troviamo la probabilità di una coppia d’assi e una coppia di Jack:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">numjack</span><span class="p">(</span><span class="n">hand</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">numval</span><span class="p">(</span><span class="n">hand</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+
+<span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">hand</span> <span class="k">for</span> <span class="n">hand</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">numace</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">numjack</span><span class="p">(</span><span class="n">hand</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1584 / 2598960
+</pre></div>
+</div>
+</div>
+</div>
+<p>Concludiamo con alcuni esempi discussi nel secondo capitolo del testo di <span id="id1">Unpingco [<a class="reference internal" href="z_biblio.html#id2" title="José Unpingco. Python for probability, statistics, and machine learning. Volume 1. Springer, 2022.">Unp22</a>]</span>.</p>
+<p>Consideriamo nuovamente l’esperimento casuale corrispondente al lancio di due dati equilibrati. Sia <span class="math notranslate nohighlight">\(X\)</span> la v.c. corrispondente alla somma dei punti prodotti dai due lanci. Poniamoci il problema di trovare la distribuzione di massa di probabilità di <span class="math notranslate nohighlight">\(X\)</span> e la probabilità associata a diversi eventi. Vedremo qui una procedura alternativa per risolvere questo problema rispetto quella discussa in precedenza.</p>
 <p>Per affrontare questo problema, <span id="id2">Unpingco [<a class="reference internal" href="z_biblio.html#id2" title="José Unpingco. Python for probability, statistics, and machine learning. Volume 1. Springer, 2022.">Unp22</a>]</span> inizia a costruire un dizionario Python i cui elementi sono i punti del prodotto cartesiano i cui elementi sono della forma (a,b), dove <span class="math notranslate nohighlight">\(a\)</span> appartiene ad <span class="math notranslate nohighlight">\(A\)</span> = {1, 2, 3, 4, 5, 6} (punti del primo dado) e <span class="math notranslate nohighlight">\(b\)</span> appartiene a <span class="math notranslate nohighlight">\(B\)</span> = {1, 2, 3, 4, 5, 6} (punti del secondo dado).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2163,6 +2614,33 @@ Name: p, dtype: float64
 </div>
 </div>
 </div>
+<section id="watermark">
+<h2><span class="section-number">18.1. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Feb 12 2023
+
+Python implementation: CPython
+Python version       : 3.10.9
+IPython version      : 8.7.0
+
+numpy     : 1.24.1
+seaborn   : 0.12.2
+matplotlib: 3.6.3
+pandas    : 1.5.3
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
