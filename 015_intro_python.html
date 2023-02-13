@@ -766,8 +766,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     3.6.1. Metodi
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#la-funzione-lambda">
-     3.6.1. La funzione
+     3.6.2. La funzione
      <code class="docutils literal notranslate">
       <span class="pre">
        lambda
@@ -777,7 +782,7 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#le-funzioni-map-e-filter">
-     3.6.2. Le funzioni
+     3.6.3. Le funzioni
      <code class="docutils literal notranslate">
       <span class="pre">
        map()
@@ -793,7 +798,7 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#la-funzione-zip">
-     3.6.3. La funzione
+     3.6.4. La funzione
      <code class="docutils literal notranslate">
       <span class="pre">
        zip()
@@ -982,8 +987,13 @@ title="Print to PDF"
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     3.6.1. Metodi
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#la-funzione-lambda">
-     3.6.1. La funzione
+     3.6.2. La funzione
      <code class="docutils literal notranslate">
       <span class="pre">
        lambda
@@ -993,7 +1003,7 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#le-funzioni-map-e-filter">
-     3.6.2. Le funzioni
+     3.6.3. Le funzioni
      <code class="docutils literal notranslate">
       <span class="pre">
        map()
@@ -1009,7 +1019,7 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#la-funzione-zip">
-     3.6.3. La funzione
+     3.6.4. La funzione
      <code class="docutils literal notranslate">
       <span class="pre">
        zip()
@@ -1742,7 +1752,7 @@ a &lt;= b is False
 </section>
 <section id="funzioni">
 <h2><span class="section-number">3.6. </span>Funzioni<a class="headerlink" href="#funzioni" title="Permalink to this headline">#</a></h2>
-<p>Nella programmazione una funzione ha un input, esegue delle operazioni e restituisce un eventuale output. Python ha un gran numero di funzioni integrate. È possibile importare altre funzioni da pacchetti aggiuntivi o definire nuove funzioni. Consideriamo la definizione di una nuova funzione. La definizione di una funzione in Python viene fatta utilizzando la parola chiave <code class="docutils literal notranslate"><span class="pre">def</span></code> seguita dal nome del metodo e dai nomi simbolici per i suoi argomenti, separati da virgole e racchiusi tra parentesi. La definizione procede con un carattere di due punti e dal corpo della funzione le cui istruzioni devono essere indentate di un livello.</p>
+<p>Nella programmazione una funzione ha un input, esegue delle operazioni e restituisce un eventuale output. Python ha un gran numero di funzioni integrate. È possibile importare altre funzioni da pacchetti aggiuntivi o definire nuove funzioni. Consideriamo la definizione di una nuova funzione. La definizione di una funzione in Python viene fatta utilizzando la parola chiave <code class="docutils literal notranslate"><span class="pre">def</span></code> seguita dal nome del metodo e dai nomi simbolici per i suoi argomenti, separati da virgole e racchiusi tra parentesi. La definizione procede con un carattere di due punti e dal corpo della funzione le cui istruzioni devono essere indentate di un livello. La riga che inizia con <code class="docutils literal notranslate"><span class="pre">return</span></code> specifica ciò che verrà ritornato dalla funzione (output).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myadd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -1751,7 +1761,7 @@ a &lt;= b is False
 </div>
 </div>
 </div>
-<p>La funzione <code class="docutils literal notranslate"><span class="pre">myadd</span></code> può essere usata per sommare due numeri, per esempio, 20 e 10:</p>
+<p>Una volta definita una funzione, è possibile eseguirla (operazione cui ci si riferisce spesso con la locuzione “chiamata di funzione”), passando argomenti diversi a seconda della situazione. La funzione <code class="docutils literal notranslate"><span class="pre">myadd</span></code> può essere usata per sommare due numeri, per esempio, 20 e 10:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myadd</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -1764,10 +1774,52 @@ a &lt;= b is False
 </div>
 </div>
 </div>
+<p>Consideriamo la funzione <code class="docutils literal notranslate"><span class="pre">roll_die()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="k">def</span> <span class="nf">roll_die</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;returns a random int between 1 and 6&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il corpo della funzione è costituito da un’unica riga di codice nella quale viene utilizzata la funzione <code class="docutils literal notranslate"><span class="pre">choice()</span></code>, della libreria <code class="docutils literal notranslate"><span class="pre">random</span></code> a cui è stata passata una lista. Questo significa che una funzione può utilizzare altre funzioni che sono già state definite. In questo caso, tutto quello che fa questa funzione è specificare l’argomento che viene passato a <code class="docutils literal notranslate"><span class="pre">choice()</span></code>. La funzione <code class="docutils literal notranslate"><span class="pre">choice()</span></code> ritornerà un numero a caso tra quelli specificati in input. Dunque, la funzione <code class="docutils literal notranslate"><span class="pre">roll_die()</span></code> simula il lancio di un dado:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roll_die</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roll_die</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si noti inoltre la <code class="docutils literal notranslate"><span class="pre">docstring</span></code>, cioè una stringa (in genere racchiusa tra “””…”””) che si trova come prima istruzione all’interno di una funzione. La <code class="docutils literal notranslate"><span class="pre">docstring</span></code> contiene informazioni sullo scopo e sulle modalità d’uso della funzione.</p>
+<section id="id1">
+<h3><span class="section-number">3.6.1. </span>Metodi<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>Le funzioni che sono immagazzinate all’interno di una classe sono chiamate <em>metodi</em> (<em>methods</em>). Per esempio, nel capitolo <a class="reference internal" href="025_intro_pandas.html#intro-pandas-notebook"><span class="std std-ref">Introduzione a Pandas</span></a> vedremo che i dati possono essere immagazzinati in un oggetto chiamato DataFrame. Un tale oggetto appartiene alla classe <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>. Ad un DataFrame, possono essere applicate varie funzioni specifiche per quella classe di oggetti. Ad esempio, se il DataFrame si chiama <code class="docutils literal notranslate"><span class="pre">df</span></code>, il metodo <code class="docutils literal notranslate"><span class="pre">hist()</span></code> con la seguente sintassi <code class="docutils literal notranslate"><span class="pre">df.hist(column=&quot;column_name&quot;)</span></code> produrrà un istogramma dei valori contenuti nella colonna <code class="docutils literal notranslate"><span class="pre">column_name</span></code>.</p>
 <p>I metodi sono dunque delle funzioni e vanno distinti dagli <em>attributi</em> (<em>attributes</em>). Gli attributi vengono invocati con la sintassi <code class="docutils literal notranslate"><span class="pre">object.name_of_the_attribute</span></code>, e restituiscono un valore. Ad esempio, l’attributo <code class="docutils literal notranslate"><span class="pre">.shape</span></code> applicato al DataFrame <code class="docutils literal notranslate"><span class="pre">df</span></code>, <code class="docutils literal notranslate"><span class="pre">df.shape</span></code>, ritorna il numero di righe e di colonne di <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+</section>
 <section id="la-funzione-lambda">
-<h3><span class="section-number">3.6.1. </span>La funzione <code class="docutils literal notranslate"><span class="pre">lambda</span></code><a class="headerlink" href="#la-funzione-lambda" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.6.2. </span>La funzione <code class="docutils literal notranslate"><span class="pre">lambda</span></code><a class="headerlink" href="#la-funzione-lambda" title="Permalink to this headline">#</a></h3>
 <p>Python offre una sintassi alternativa, che ci permette di dichiarare semplici funzioni <em>inline</em>, ovvero in una singola linea di codice. Le funzioni che vengono create in questo modo sono chiamate anonime (non hanno bisogno di essere definite in quanto vengono utilizzate solo al momento) e richiedono la parola chiave <code class="docutils literal notranslate"><span class="pre">lambda</span></code> seguita da un elenco di argomenti, un carattere di due punti, e l’espressione per valutare gli argomenti ed infine il valore in entrata. Nell’esempio seguente sommiamo 1 al valore passato in input:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1842,7 +1894,7 @@ a &lt;= b is False
 <p>Si noti abbiamo valutato la funzione <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x,</span> <span class="pre">y:</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">y</span></code> in una cella precedente a quella che contiene <code class="docutils literal notranslate"><span class="pre">_(20,</span> <span class="pre">10)</span></code>; inserendo le due espressioni in una singola cella si ottiene un <code class="docutils literal notranslate"><span class="pre">SyntaxError</span></code>.</p>
 </section>
 <section id="le-funzioni-map-e-filter">
-<h3><span class="section-number">3.6.2. </span>Le funzioni <code class="docutils literal notranslate"><span class="pre">map()</span></code> e <code class="docutils literal notranslate"><span class="pre">filter()</span></code><a class="headerlink" href="#le-funzioni-map-e-filter" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.6.3. </span>Le funzioni <code class="docutils literal notranslate"><span class="pre">map()</span></code> e <code class="docutils literal notranslate"><span class="pre">filter()</span></code><a class="headerlink" href="#le-funzioni-map-e-filter" title="Permalink to this headline">#</a></h3>
 <p>Per gli esercizi che svolgeremo in seguito, risultano utili le funzioni <code class="docutils literal notranslate"><span class="pre">map()</span></code> e <code class="docutils literal notranslate"><span class="pre">filter()</span></code>.</p>
 <p>La funzione <code class="docutils literal notranslate"><span class="pre">map()</span></code> prende come input una funzione e una lista, e restituisce il risultato dell’applicazione della funzione a ciascun elemento della lista (è anche possibile usare qualsiasi oggetto iterabile al posto della lista). La lista stessa rimane invariata. Ad esempio, la seguente linea di codice eleva al quadrato ciascuno degli elementi della lista <code class="docutils literal notranslate"><span class="pre">a</span></code> e salva il risultato nella lista <code class="docutils literal notranslate"><span class="pre">b</span></code>:</p>
 <div class="cell docutils container">
@@ -1881,7 +1933,7 @@ a &lt;= b is False
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;filter at 0x7fa4100b0940&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;filter at 0x7fba80dbc370&gt;
 </pre></div>
 </div>
 </div>
@@ -1901,7 +1953,7 @@ a &lt;= b is False
 </div>
 </section>
 <section id="la-funzione-zip">
-<h3><span class="section-number">3.6.3. </span>La funzione <code class="docutils literal notranslate"><span class="pre">zip()</span></code><a class="headerlink" href="#la-funzione-zip" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.6.4. </span>La funzione <code class="docutils literal notranslate"><span class="pre">zip()</span></code><a class="headerlink" href="#la-funzione-zip" title="Permalink to this headline">#</a></h3>
 <p>La funzione <code class="docutils literal notranslate"><span class="pre">zip()</span></code> crea una lista di tuple dagli elementi di due contenitori. Come nel caso delle operazioni precedenti, gli elementi vengono calcolati solo quando viene richiesto. Per esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1937,7 +1989,7 @@ a &lt;= b is False
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;zip at 0x7fa4100ddbc0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;zip at 0x7fba80dc6f00&gt;
 </pre></div>
 </div>
 </div>
@@ -2466,7 +2518,7 @@ list2: [2, 3, 4, 5, 6, 7]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2598143994720783
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0024776603346201576
 </pre></div>
 </div>
 </div>
@@ -2677,7 +2729,7 @@ sum(iterable, /, start=0)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Feb 12 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Feb 13 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
@@ -2687,8 +2739,8 @@ pytensor: 2.9.1
 
 seaborn   : 0.12.2
 pandas    : 1.5.3
-matplotlib: 3.6.3
 numpy     : 1.24.1
+matplotlib: 3.6.3
 
 Watermark: 2.3.1
 </pre></div>
