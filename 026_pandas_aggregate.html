@@ -1090,7 +1090,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_40012/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_6753/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.aggregate(summary_stats)
 </pre></div>
 </div>
@@ -1193,7 +1193,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7fbc813eb0a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7f99885137f0&gt;
 </pre></div>
 </div>
 </div>
@@ -1215,7 +1215,15 @@ Name: body_mass_g, dtype: float64
 </div>
 </div>
 </div>
-<p>È possibile applicare vari criteri di classificazione. Per esempio, contiamo il numero di pinguini presenti sulle tre isole, distinguendoli per specie e genere.</p>
+<p>È possibile applicare vari criteri di classificazione. Questa possibilità è implementata nella cosiddetta operazione <code class="docutils literal notranslate"><span class="pre">groupby</span></code>. Il nome “group by” deriva da un comando nel linguaggio del database SQL, ma forse è più semplice pensarlo nei termini coniati da Hadley Wickham: split, apply, combine. Un esempio canonico di questa operazione di split-apply-combine, in cui “apply” è un’aggregazione di sommatoria, è illustrato nella figura seguente:</p>
+<a class="reference internal image-reference" href="_images/split_apply_combine.png" id="split-apply-combine"><img alt="_images/split_apply_combine.png" id="split-apply-combine" src="_images/split_apply_combine.png" style="height: 400px;" /></a>
+<p>La figura rende chiaro ciò che si ottiene con <code class="docutils literal notranslate"><span class="pre">groupby</span></code>:</p>
+<ul class="simple">
+<li><p>la fase “split” prevede la suddivisione e il raggruppamento di un DataFrame in base al valore della chiave specificata;</p></li>
+<li><p>la fase “apply” implica il calcolo di alcune funzioni, solitamente un’aggregazione, una trasformazione o un filtro, all’interno dei singoli gruppi;</p></li>
+<li><p>la fase “combine” unisce i risultati di queste operazioni in una matrice di output.</p></li>
+</ul>
+<p>Per fare un altro esempio, contiamo il numero di pinguini presenti sulle tre isole, distinguendoli per specie e genere.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;island&quot;</span><span class="p">,</span> <span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
@@ -1242,12 +1250,13 @@ dtype: int64
 <p>Con il metodo <code class="docutils literal notranslate"><span class="pre">aggregate()</span></code> possiamo applicare diverse funzioni di aggregazione alle osservazioni ragruppate. Ad esempio</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;species&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">summary_stats</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary_stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">stdev</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;species&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">summary_stats</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_40012/1526914846.py:1: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_6753/2686510896.py:2: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.groupby([&quot;species&quot;]).aggregate(summary_stats)
 </pre></div>
 </div>
@@ -1273,49 +1282,27 @@ dtype: int64
   <thead>
     <tr>
       <th></th>
-      <th colspan="5" halign="left">bill_length_mm</th>
-      <th colspan="5" halign="left">bill_depth_mm</th>
-      <th>...</th>
-      <th colspan="5" halign="left">body_mass_g</th>
-      <th colspan="5" halign="left">year</th>
+      <th colspan="2" halign="left">bill_length_mm</th>
+      <th colspan="2" halign="left">bill_depth_mm</th>
+      <th colspan="2" halign="left">flipper_length_mm</th>
+      <th colspan="2" halign="left">body_mass_g</th>
+      <th colspan="2" halign="left">year</th>
     </tr>
     <tr>
       <th></th>
-      <th>min</th>
-      <th>median</th>
       <th>mean</th>
       <th>stdev</th>
-      <th>max</th>
-      <th>min</th>
-      <th>median</th>
       <th>mean</th>
       <th>stdev</th>
-      <th>max</th>
-      <th>...</th>
-      <th>min</th>
-      <th>median</th>
       <th>mean</th>
       <th>stdev</th>
-      <th>max</th>
-      <th>min</th>
-      <th>median</th>
       <th>mean</th>
       <th>stdev</th>
-      <th>max</th>
+      <th>mean</th>
+      <th>stdev</th>
     </tr>
     <tr>
       <th>species</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -1331,79 +1318,45 @@ dtype: int64
   <tbody>
     <tr>
       <th>Adelie</th>
-      <td>32.1</td>
-      <td>38.85</td>
       <td>38.823973</td>
       <td>2.662597</td>
-      <td>46.0</td>
-      <td>15.5</td>
-      <td>18.40</td>
       <td>18.347260</td>
       <td>1.219338</td>
-      <td>21.5</td>
-      <td>...</td>
-      <td>2850.0</td>
-      <td>3700.0</td>
+      <td>190.102740</td>
+      <td>6.521825</td>
       <td>3706.164384</td>
       <td>458.620135</td>
-      <td>4775.0</td>
-      <td>2007</td>
-      <td>2008.0</td>
       <td>2008.054795</td>
       <td>0.811816</td>
-      <td>2009</td>
     </tr>
     <tr>
       <th>Chinstrap</th>
-      <td>40.9</td>
-      <td>49.55</td>
       <td>48.833824</td>
       <td>3.339256</td>
-      <td>58.0</td>
-      <td>16.4</td>
-      <td>18.45</td>
       <td>18.420588</td>
       <td>1.135395</td>
-      <td>20.8</td>
-      <td>...</td>
-      <td>2700.0</td>
-      <td>3700.0</td>
+      <td>195.823529</td>
+      <td>7.131894</td>
       <td>3733.088235</td>
       <td>384.335081</td>
-      <td>4800.0</td>
-      <td>2007</td>
-      <td>2008.0</td>
       <td>2007.970588</td>
       <td>0.863360</td>
-      <td>2009</td>
     </tr>
     <tr>
       <th>Gentoo</th>
-      <td>40.9</td>
-      <td>47.40</td>
       <td>47.568067</td>
       <td>3.106116</td>
-      <td>59.6</td>
-      <td>13.1</td>
-      <td>15.00</td>
       <td>14.996639</td>
       <td>0.985998</td>
-      <td>17.3</td>
-      <td>...</td>
-      <td>3950.0</td>
-      <td>5050.0</td>
+      <td>217.235294</td>
+      <td>6.585431</td>
       <td>5092.436975</td>
       <td>501.476154</td>
-      <td>6300.0</td>
-      <td>2007</td>
-      <td>2008.0</td>
       <td>2008.067227</td>
       <td>0.789025</td>
-      <td>2009</td>
     </tr>
   </tbody>
 </table>
-<p>3 rows × 25 columns</p>
 </div></div></div>
 </div>
 <p>Nella cella seguente troviamo la media di <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code> e <code class="docutils literal notranslate"><span class="pre">flipper_length_mm</span></code> separatamente per ciascuna isola e ciascuna specie:</p>
@@ -1672,14 +1625,14 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Feb 12 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Feb 14 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-numpy : 1.24.1
 pandas: 1.5.3
+numpy : 1.24.1
 
 Watermark: 2.3.1
 </pre></div>
