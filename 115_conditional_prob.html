@@ -821,18 +821,19 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="probabilita-condizionata">
 <span id="cond-prob-notebook"></span><h1><span class="section-number">19. </span>Probabilità condizionata<a class="headerlink" href="#probabilita-condizionata" title="Permalink to this headline">#</a></h1>
-<p>Definiamo i seguenti concetti:</p>
+<p>In questo capitolo esploreremo i seguenti concetti probabilistici:</p>
 <ul class="simple">
-<li><p>La <em>probabilità congiunta</em> è la probabilità del verificarsi simultaneo di due eventi. È importante rendersi conto che, qui, “simultaneo” significa che gli eventi fanno parte dello stesso evento, anche se i due eventi si verificano in momenti diversi. Ad esempio, potremmo essere interessati alla probabilità congiunta di estrarre una pallina rossa e una verde.</p></li>
-<li><p>La <em>probabilità marginale</em> è definita come la probabilità di un singolo evento, indipendentemente da tutti gli altri eventi. Ad esempio, possiamo calcolare la probabilità marginale di estrarre una pallina verde da un’urna.</p></li>
-<li><p>La <em>probabilità condizionata</em> è la probabilità di un evento dato il verificarsi di un altro evento. Se, ad esempio, estraiamo una pallina verde da un’urna, possiamo chiederci quanto è grande la probabilità di estrarre una seconda pallina verde dalla stessa urna.</p></li>
+<li><p>La probabilità congiunta, ovvero la probabilità del verificarsi simultaneo di due eventi che appartengono allo stesso evento, anche se si verificano in momenti diversi. Ad esempio, potremmo essere interessati alla probabilità congiunta di estrarre una pallina rossa e una verde.</p></li>
+<li><p>La probabilità marginale, ovvero la probabilità di un singolo evento indipendentemente da tutti gli altri eventi. Ad esempio, possiamo calcolare la probabilità marginale di estrarre una pallina verde da un’urna.</p></li>
+<li><p>La probabilità condizionata, ovvero la probabilità di un evento dato il verificarsi di un altro evento. Ad esempio, se estraiamo una pallina verde da un’urna, possiamo chiederci quanto è grande la probabilità di estrarre una seconda pallina verde dalla stessa urna.</p></li>
 </ul>
-<p>In questo capitolo esamineremo la nozione di probabilità condizionata e i principali teoremi ad essa associati.</p>
+<p>Inoltre, esamineremo i principali teoremi associati alla probabilità condizionata.</p>
 <section id="il-paradosso-di-monty-hall">
 <h2><span class="section-number">19.1. </span>Il paradosso di Monty Hall<a class="headerlink" href="#il-paradosso-di-monty-hall" title="Permalink to this headline">#</a></h2>
-<p>Un’ottima introduzione alla proabilità condizionata, che dovrebbe farci capire come l’acquisizione di nuove informazioni, alle volte, ci porta ad una completa rivalutazione dei termini del problema, “condizionatamente alle informazioni acquisite”, è fornita da un famoso problema di teoria della probabilità, il paradosso di Monty Hall. Il problema è legato al gioco a premi statunitense <em>Let’s Make a Deal</em> e prende il nome da quello del conduttore dello show, Monte Halprin, noto con lo pseudonimo di Monty Hall.</p>
+<p>Il paradosso di Monty Hall è un esempio molto interessante di come la conoscenza di nuove informazioni possa portare a una rivalutazione dei termini del problema “condizionatamente alle informazioni acquisite”. Questo famoso problema di teoria della probabilità è legato al noto gioco a premi statunitense “Let’s Make a Deal”, e prende il nome dal conduttore dello show, Monte Halprin, conosciuto con lo pseudonimo di Monty Hall.</p>
 <p><img alt="Monty Hall" src="_images/monty-hall.jpg" /></p>
-<p>Nel gioco vengono mostrate al concorrente tre porte chiuse; dietro ad una si trova un’automobile, mentre ciascuna delle altre due nasconde una capra. Il giocatore può scegliere una delle tre porte, vincendo il premio corrispondente. Dopo che il giocatore ha selezionato una porta, ma non l’ha ancora aperta, il conduttore dello show – che conosce ciò che si trova dietro ogni porta – apre una delle altre due, rivelando una delle due capre, e offre al giocatore la possibilità di cambiare la propria scelta iniziale, passando all’unica porta restante. Il paradosso deriva dal fatto che cambiare la porta migliora le chance del giocatore di vincere l’automobile, portandole da 1/3 a 2/3. (da Wikipedia) Per convincervi di questo, vi invito a scrivere una simulazione in Python in cui vengono immaginati due scenari (ripetuti migliaia di volte): uno in cui il giocatore rimane con la sua scelta iniziale e uno in cui il giocatore cambia la propria scelta dopo che Monty Hall ha aperto una porta dietro di cui si nascondeva una capra.</p>
+<p>Il gioco consiste nel mostrare al concorrente tre porte chiuse, dietro una delle quali si trova un’automobile, mentre dietro le altre due porte si nasconde una capra ciascuna. Il concorrente sceglie una porta, senza aprirla, e poi Monty Hall apre una delle altre due porte, rivelando una delle due capre. A questo punto, Monty offre al concorrente la possibilità di cambiare la propria scelta iniziale, passando all’unica porta restante. Il paradosso deriva dal fatto che cambiare la porta migliora le probabilità del concorrente di vincere l’automobile, portandole da 1/3 a 2/3.</p>
+<p>Per dimostrare questo paradosso, possiamo scrivere una simulazione in Python in cui immaginiamo due scenari, ripetuti migliaia di volte: uno in cui il concorrente rimane con la sua scelta iniziale e uno in cui il concorrente cambia la propria scelta dopo che Monty Hall ha aperto una porta dietro la quale si nascondeva una capra. Vi chiedo di sviluppare la simulazione richiesta come compito da svolgere autonomamente a casa.</p>
 </section>
 <section id="probabilita-condizionata-su-altri-eventi">
 <span id="sec-bayes-cancer"></span><h2><span class="section-number">19.2. </span>Probabilità condizionata su altri eventi<a class="headerlink" href="#probabilita-condizionata-su-altri-eventi" title="Permalink to this headline">#</a></h2>
@@ -970,33 +971,20 @@ P(N_1 \cap N_2 \cap N_3) &amp;= P(N_1)P(N_2 \mid N_1)P(N_3 \mid N_1 \cap N_2)\no
 </section>
 <section id="il-teorema-della-probabilita-totale">
 <h2><span class="section-number">19.4. </span>Il teorema della probabilità totale<a class="headerlink" href="#il-teorema-della-probabilita-totale" title="Permalink to this headline">#</a></h2>
-<p>Il <em>teorema della probabilità totale</em> (detto anche teorema delle partizioni) consente di calcolare la probabilità di un evento <span class="math notranslate nohighlight">\(E\)</span> di cui sono note le probabilità condizionate rispetto ad altri eventi <span class="math notranslate nohighlight">\((H_i)_{i\geq 1}\)</span>, a condizione che essi costituiscano una partizione dell’evento certo <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
-<p>Il caso più semplice è quello di una partizione dello spazio campione in due sottoinsiemi:</p>
-<div class="math notranslate nohighlight">
-\[
-P(E) = P(E \cap H_1) + P(E \cap H_2).
+<p>Il teorema della probabilità totale (detto anche teorema delle partizioni) afferma che se abbiamo una partizione di uno spazio campionario <span class="math notranslate nohighlight">\(\Omega\)</span> in <span class="math notranslate nohighlight">\(n\)</span> eventi mutualmente esclusivi e tali che la loro unione formi <span class="math notranslate nohighlight">\(\Omega\)</span>, allora la probabilità di un qualsiasi evento in <span class="math notranslate nohighlight">\(\Omega\)</span> può essere calcolata sommando la probabilità dell’evento su ciascun sottoinsieme della partizione pesata in base alla probabilità del sottoinsieme.</p>
+<p>In altre parole, se <span class="math notranslate nohighlight">\(H_1, H_2, \dots, H_n\)</span> sono eventi mutualmente esclusivi e tali che <span class="math notranslate nohighlight">\(\bigcup_{i=1}^n H_i = \Omega\)</span>, allora per ogni evento <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span>, la probabilità di <span class="math notranslate nohighlight">\(E\)</span> è data da:</p>
+<div class="math notranslate nohighlight" id="equation-eq-prob-tot">
+<span class="eqno">(19.4)<a class="headerlink" href="#equation-eq-prob-tot" title="Permalink to this equation">#</a></span>\[
+P(E) = \sum_{i=1}^n P(H_i)P(E \mid H_i)
 \]</div>
+<p>dove <span class="math notranslate nohighlight">\(P(H_i)\)</span> è la probabilità dell’evento <span class="math notranslate nohighlight">\(H_i\)</span> e <span class="math notranslate nohighlight">\(P(E \mid H_i)\)</span> è la probabilità condizionata di <span class="math notranslate nohighlight">\(E\)</span> dato che si è verificato <span class="math notranslate nohighlight">\(H_i\)</span>.</p>
+<p>Il caso più semplice è quello di una partizione dello spazio campione in due sottoinsiemi: <span class="math notranslate nohighlight">\(P(E) = P(E \cap H_1) + P(E \cap H_2)\)</span>.</p>
 <a class="reference internal image-reference" href="_images/bayes_theorem.png" id="image-bayes-theorem"><img alt="_images/bayes_theorem.png" id="image-bayes-theorem" src="_images/bayes_theorem.png" style="height: 250px;" /></a>
 <p>In tali circostanza abbiamo che</p>
 <div class="math notranslate nohighlight">
 \[
 P(E) = P(E \mid H_1) P(H_1) + P(E \mid H_2) P(H_2).
 \]</div>
-<p>Nella sua forma generale, il risultato che abbiamo ottenuto può essere espresso nel modo seguente.</p>
-<div class="admonition-teorema admonition">
-<p class="admonition-title">Teorema</p>
-<p>Sia</p>
-<ol class="simple">
-<li><p><span class="math notranslate nohighlight">\(\bigcup_{i=1}^\infty H_i = \Omega\)</span>;</p></li>
-<li><p><span class="math notranslate nohighlight">\(H_j \cap H_j = \emptyset, i\neq j\)</span>;</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(H_i) &gt; 0, i = 1, \dots, \infty\)</span>.</p></li>
-</ol>
-<p>Per qualunque evento <span class="math notranslate nohighlight">\(E\)</span> definito in <span class="math notranslate nohighlight">\(\Omega\)</span>, abbiamo che</p>
-<div class="math notranslate nohighlight" id="equation-eq-prob-tot">
-<span class="eqno">(19.4)<a class="headerlink" href="#equation-eq-prob-tot" title="Permalink to this equation">#</a></span>\[
-P(E) = \sum_i P(E \mid H_i) P(H_i).
-\]</div>
-</div>
 <p>L’eq. <a class="reference internal" href="#equation-eq-prob-tot">(19.4)</a> è utile per calcolare <span class="math notranslate nohighlight">\(P(E)\)</span>, se <span class="math notranslate nohighlight">\(P(E \mid H_i)\)</span> e <span class="math notranslate nohighlight">\(P(H_i)\)</span> sono facili da trovare. Quale esempio, consideriamo il seguente problema. Abbiamo tre urne, ciascuna delle quali contiene 100 palline:</p>
 <ul class="simple">
 <li><p>Urna 1: 75 palline rosse e 25 palline blu,</p></li>
@@ -1021,7 +1009,7 @@ P(R) &amp;= P(R \mid U_1)P(U_1) + P(R \mid U_2)P(U_2) + P(R \mid U_3)P(U_3) \\
 </section>
 <section id="l-indipendendenza-stocastica">
 <h2><span class="section-number">19.5. </span>L’indipendendenza stocastica<a class="headerlink" href="#l-indipendendenza-stocastica" title="Permalink to this headline">#</a></h2>
-<p>Un concetto molto importante per le applicazioni statistiche della probabilità è quello dell’indipendenza stocastica. L’eq. <a class="reference internal" href="#equation-eq-probcond">(19.1)</a> consente di esprimere il concetto di indipendenza di un evento da un altro in forma intuitiva: se <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> sono eventi indipendenti, allora il verificarsi di <span class="math notranslate nohighlight">\(A\)</span> non influisce sulla probabilità del verificarsi di <span class="math notranslate nohighlight">\(B\)</span>, ovvero non la condiziona, e il verificarsi di <span class="math notranslate nohighlight">\(B\)</span> non influisce sulla probabilità del verificarsi di <span class="math notranslate nohighlight">\(A\)</span>. Infatti, per l’eq. <a class="reference internal" href="#equation-eq-probcond">(19.1)</a>, si ha che, se <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> sono due eventi indipendenti, risulta:</p>
+<p>Un concetto fondamentale per l’applicazione della probabilità in campo statistico è l’indipendenza stocastica. L’equazione <a class="reference internal" href="#equation-eq-probcond">(19.1)</a> offre un modo intuitivo per esprimere l’indipendenza tra due eventi <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span>: se <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> sono indipendenti, il verificarsi di <span class="math notranslate nohighlight">\(A\)</span> non influisce sulla probabilità del verificarsi di <span class="math notranslate nohighlight">\(B\)</span>, e viceversa. In altre parole, il verificarsi di uno dei due eventi non condiziona la probabilità dell’altro evento. Infatti, per l’eq. <a class="reference internal" href="#equation-eq-probcond">(19.1)</a>, si ha che, se <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> sono due eventi indipendenti, risulta:</p>
 <div class="math notranslate nohighlight">
 \[
 P(A \mid B) = \frac{P(A)P(B)}{P(B)} = P(A),
@@ -1114,7 +1102,7 @@ P(A \cap B \cap C) &amp;= P(A) P(B) P(C). \notag
 </section>
 <section id="esercizio-di-ricapitolazione-con-python">
 <h2><span class="section-number">19.6. </span>Esercizio di ricapitolazione con Python<a class="headerlink" href="#esercizio-di-ricapitolazione-con-python" title="Permalink to this headline">#</a></h2>
-<p>Seguendo l’approccio di <span id="id1">Downey [<a class="reference internal" href="z_biblio.html#id5" title="Allen B Downey. Think Bayes. &quot; O'Reilly Media, Inc.&quot;, 2021.">Dow21</a>]</span>, per promuovere una comprensione più intuitiva delle leggi della probabilità che abbiamo descritto finora, utilizzeremo ora una semplice definizione di probabilità, adeguata per il presente esercizio, ovvero considereremo la probabilità come la <em>proporzione</em> di un insieme finito.</p>
+<p>Seguendo l’approccio di <span id="id1">Downey [<a class="reference internal" href="z_biblio.html#id7" title="Allen B Downey. Think Bayes. &quot; O'Reilly Media, Inc.&quot;, 2021.">Dow21</a>]</span>, per rendere più intuitivi i concetti di probabilità descritti fino ad ora, utilizzeremo una definizione semplice di probabilità, che si adatta agli esercizi considerati: considereremo la probabilità come la proporzione di un insieme finito.</p>
 <p>Esaminiamo qui il dataset <code class="docutils literal notranslate"><span class="pre">penguins</span></code> come un insieme finito sul quale definire di vari eventi. Iniziamo ad importare i dati ed escludiamo i dati mancanti.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
