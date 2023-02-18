@@ -773,9 +773,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="calcolo-combinatorio">
 <span id="combinatorics-notebook"></span><h1><span class="section-number">16. </span>Calcolo combinatorio<a class="headerlink" href="#calcolo-combinatorio" title="Permalink to this headline">#</a></h1>
-<p>Il calcolo combinatorio si pone il problema di determinare il numero dei
-modi mediante i quali possono essere associati, secondo prefissate regole,
-gli elementi di uno stesso insieme o di più insiemi. Alcuni dei problemi del calcolo delle probabilità per essere risolti richiedono l’utilizzo dei metodi del calcolo combinatorio.</p>
+<p>Il calcolo combinatorio si pone il problema di determinare il numero dei modi mediante i quali gli elementi di uno stesso insieme o di più insiemi possono essere associati, seguendo regole prestabilite. Alcuni dei problemi del calcolo delle probabilità per essere risolti richiedono l’utilizzo dei metodi del calcolo combinatorio.</p>
 <p>In questo capitolo verranno discussi alcuni concetti del calcolo combinatorio. In particolare, verranno introdotti il principio del prodotto, il principio della somma e il modello dell’urna. Verranno inoltre descritte le nozioni di permutazione semplice, disposizione semplice e di combinazione semplice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -808,7 +806,7 @@ gli elementi di uno stesso insieme o di più insiemi. Alcuni dei problemi del ca
 <section id="principio-del-prodotto">
 <h2><span class="section-number">16.1. </span>Principio del prodotto<a class="headerlink" href="#principio-del-prodotto" title="Permalink to this headline">#</a></h2>
 <p>I metodi di base del calcolo combinatorio applicano due principi: la regola del prodotto e la regola della somma. Consideriamo il principio del prodotto.</p>
-<p>In generale, una scelta può essere fatta in più passi, poniamo <span class="math notranslate nohighlight">\(k\)</span>. Supponiamo che per ogni <span class="math notranslate nohighlight">\(i = 1, \dots, k\)</span> la scelta da compiere all’<span class="math notranslate nohighlight">\(i\)</span>-mo passo possa essere fatta in <span class="math notranslate nohighlight">\(n_i\)</span> modi. Il principio del prodotto dice che allora il numero totale di possibili scelte è il prodotto</p>
+<p>In generale, una scelta può essere effettuata in più fasi, ad esempio <span class="math notranslate nohighlight">\(k\)</span>. Supponiamo che per ogni <span class="math notranslate nohighlight">\(i = 1, \dots, k\)</span> la scelta da compiere al <span class="math notranslate nohighlight">\(i\)</span>-esimo stadio possa essere effettuata in <span class="math notranslate nohighlight">\(n_i\)</span> modi. Secondo il principio del prodotto, il numero totale di possibili scelte è dato dal prodotto dei singoli numeri, ovvero:</p>
 <div class="math notranslate nohighlight">
 \[
 n_{\text{tot}} = n_1 \cdot  n_2 \cdots n_{k-1} \cdot n_k.
@@ -835,21 +833,19 @@ n_{\text{tot}} = n_1 \cdot  n_2 \cdots n_{k-1} \cdot n_k.
 </section>
 <section id="principio-della-somma">
 <h2><span class="section-number">16.2. </span>Principio della somma<a class="headerlink" href="#principio-della-somma" title="Permalink to this headline">#</a></h2>
-<p>Se un evento può accadere in <span class="math notranslate nohighlight">\(\vert S_1\vert\)</span> modi, un secondo evento può accadere in <span class="math notranslate nohighlight">\(\vert S_2\vert\)</span> modi, <span class="math notranslate nohighlight">\(\dots\)</span>, un ultimo evento può accadere in  <span class="math notranslate nohighlight">\(\vert S_k\vert\)</span> modi,  vi sono <span class="math notranslate nohighlight">\(\vert S_1\vert + \vert S_2\vert + \dots + \vert S_{k-1}\vert + \vert S_k\vert\)</span> modi in cui uno dei <span class="math notranslate nohighlight">\(k\)</span> eventi può accadere. In altri termini, se i sottoinsiemi <span class="math notranslate nohighlight">\(S_1, \dots, S_k\)</span>, costituiscono una partizione di <span class="math notranslate nohighlight">\(S\)</span>, allora</p>
-<div class="math notranslate nohighlight">
-\[
-\vert S_1 \cup S_2 \cup \dots \cup S_{k-1} \cup S_k \vert = \vert S_1\vert + \vert S_2\vert + \dots + \vert S_{k-1}\vert + \vert S_k\vert.
-\]</div>
+<p>Il principio della somma afferma che se un insieme può essere suddiviso in due o più sottoinsiemi disgiunti, allora il numero totale di elementi nell’insieme è dato dalla somma dei numeri di elementi in ciascun sottoinsieme.</p>
+<p>In altre parole, se si vuole determinare il numero totale di modi in cui è possibile realizzare un certo evento, e questo evento può essere realizzato in modo esclusivo in modo A oppure B, allora il numero totale di modi in cui è possibile realizzare l’evento è dato dalla somma dei modi in cui può essere realizzato in modo A e dei modi in cui può essere realizzato in modo B.</p>
+<p>Ad esempio, se si vuole determinare il numero totale di modi in cui è possibile scegliere un dolce da una tavola con due tipi di dolci (ad esempio torta e biscotti), il principio della somma afferma che il numero totale di modi è dato dalla somma del numero di modi in cui è possibile scegliere la torta e del numero di modi in cui è possibile scegliere i biscotti.</p>
 <p><strong>Esempio 2.</strong> L’urna <span class="math notranslate nohighlight">\(A\)</span> contiene <span class="math notranslate nohighlight">\(5\)</span> palline numerate da <span class="math notranslate nohighlight">\(1\)</span> a <span class="math notranslate nohighlight">\(5\)</span>, l’urna <span class="math notranslate nohighlight">\(B\)</span> contiene <span class="math notranslate nohighlight">\(6\)</span> palline numerate da <span class="math notranslate nohighlight">\(6\)</span> a <span class="math notranslate nohighlight">\(11\)</span>, l’urna <span class="math notranslate nohighlight">\(C\)</span> contiene <span class="math notranslate nohighlight">\(3\)</span> palline numerate da <span class="math notranslate nohighlight">\(12\)</span> a <span class="math notranslate nohighlight">\(14\)</span> e l’urna <span class="math notranslate nohighlight">\(D\)</span> contiene <span class="math notranslate nohighlight">\(2\)</span> palline numerate <span class="math notranslate nohighlight">\(15\)</span> e <span class="math notranslate nohighlight">\(16\)</span>. Quanti insiemi composti da due palline, ciascuna estratta da un’urna differente, si possono formare?</p>
-<p>Per la regola del prodotto, si possono formare: <span class="math notranslate nohighlight">\(30\)</span> insiemi di tipo <span class="math notranslate nohighlight">\(AB\)</span> (una pallina estratta dall’urna <span class="math notranslate nohighlight">\(A\)</span> e una estratta dall’urna <span class="math notranslate nohighlight">\(B\)</span>), <span class="math notranslate nohighlight">\(15\)</span> di tipo <span class="math notranslate nohighlight">\(AC\)</span>, <span class="math notranslate nohighlight">\(10\)</span> di tipo <span class="math notranslate nohighlight">\(AD\)</span>, <span class="math notranslate nohighlight">\(18\)</span> di tipo <span class="math notranslate nohighlight">\(BC\)</span>, <span class="math notranslate nohighlight">\(12\)</span> di tipo <span class="math notranslate nohighlight">\(BD\)</span> e <span class="math notranslate nohighlight">\(6\)</span> di tipo <span class="math notranslate nohighlight">\(CD\)</span>. Per la regola della somma, il numero di insiemi distinti che si possono formare con due palline provenienti dalle quattro urne è <span class="math notranslate nohighlight">\(30 + 15 + 10 + 18 + 12 + 6 = 91\)</span>.</p>
+<p>Il numero di insiemi di tipo <span class="math notranslate nohighlight">\(AB\)</span> è dato dal prodotto delle palline che possono essere estratte dall’urna <span class="math notranslate nohighlight">\(A\)</span> (5) e da quelle che possono essere estratte dall’urna <span class="math notranslate nohighlight">\(B\)</span> (6), ovvero <span class="math notranslate nohighlight">\(5 \cdot 6 = 30\)</span>. In modo analogo, si ottengono 15 insiemi di tipo <span class="math notranslate nohighlight">\(AC\)</span>, 10 di tipo <span class="math notranslate nohighlight">\(AD\)</span>, 18 di tipo <span class="math notranslate nohighlight">\(BC\)</span>, 12 di tipo <span class="math notranslate nohighlight">\(BD\)</span>, 6 di tipo <span class="math notranslate nohighlight">\(CD\)</span>. Quindi, per la regola della somma, il numero totale di insiemi distinti che si possono formare con due palline provenienti dalle quattro urne è dato dalla somma di questi valori, ovvero <span class="math notranslate nohighlight">\(30 + 15 + 10 + 18 + 12 + 6 = 91\)</span>. Pertanto, ci sono 91 insiemi composti da due palline, ciascuna estratta da un’urna differente, che si possono formare.</p>
 </section>
 <section id="il-modello-dell-urna">
 <h2><span class="section-number">16.3. </span>Il modello dell’urna<a class="headerlink" href="#il-modello-dell-urna" title="Permalink to this headline">#</a></h2>
-<p>I problemi del calcolo combinatorio sono spesso assimilabili ad estrazioni di palline da urne che diventano così schemi o modelli delle corrispondenti situazioni considerate. Si definisce <em>modello dell’urna</em> la  procedura per cui, da un’urna contenente <span class="math notranslate nohighlight">\(n\)</span> palline, si estraggono a caso <span class="math notranslate nohighlight">\(k\)</span> palline. Le palline possono essere tutte diverse, oppure alcune palline possono essere tra loro indistinguibili. Fra le possibili modalità di estrazione hanno speciale interesse</p>
+<p>I problemi di combinatoria spesso coinvolgono l’estrazione di palline da urne, le quali rappresentano dei modelli delle corrispondenti situazioni considerate. Una procedura comune per rappresentare queste situazioni è il modello dell’urna, che consiste nell’estrazione di <span class="math notranslate nohighlight">\(k\)</span> palline da un’urna contenente <span class="math notranslate nohighlight">\(n\)</span> palline. Le palline possono essere tutte diverse, oppure alcune palline possono essere indistinguibili tra loro. Tra le possibili modalità di estrazione, sono particolarmente importanti:</p>
 <ul class="simple">
-<li><p>l’<em>estrazione Bernoulliana</em> di <span class="math notranslate nohighlight">\(k\)</span> palline ottenuta estraendo, una dopo l’altra, <span class="math notranslate nohighlight">\(k\)</span> palline e rimettendo ogni volta nell’urna la pallina estratta;</p></li>
-<li><p>l’<em>estrazione senza ripetizione</em> di <span class="math notranslate nohighlight">\(k\)</span> palline ottenuta estraendo, una dopo l’altra, <span class="math notranslate nohighlight">\(k\)</span> palline senza rimetterle nell’urna;</p></li>
-<li><p>l’<em>estrazione in blocco</em> di <span class="math notranslate nohighlight">\(k\)</span> palline ottenuta estraendo <span class="math notranslate nohighlight">\(k\)</span> palline simultaneamente.</p></li>
+<li><p>L’<em>estrazione Bernoulliana</em> di <span class="math notranslate nohighlight">\(k\)</span> palline, che si ottiene estraendo una pallina alla volta e rimettendola nell’urna dopo ogni estrazione;</p></li>
+<li><p>L’<em>estrazione senza ripetizione</em> di <span class="math notranslate nohighlight">\(k\)</span> palline, che si ottiene estraendo una pallina alla volta senza rimetterla nell’urna dopo l’estrazione;</p></li>
+<li><p>L’<em>estrazione in blocco</em> di <span class="math notranslate nohighlight">\(k\)</span> palline, che si ottiene estraendo <span class="math notranslate nohighlight">\(k\)</span> palline contemporaneamente.</p></li>
 </ul>
 <p>Per esempio, nel caso di campioni di ampiezza 2 estratti da un’urna con tre elementi <span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span>, abbiamo i seguenti quattro casi:</p>
 <ul class="simple">
@@ -884,7 +880,7 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;C&#39;, &#39;A&#39;, &#39;B&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;B&#39;, &#39;C&#39;, &#39;A&#39;}
 </pre></div>
 </div>
 </div>
@@ -897,12 +893,12 @@ P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;C&#39;, &#39;A&#39;, &#39;B&#39;),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;B&#39;, &#39;C&#39;, &#39;A&#39;),
+ (&#39;B&#39;, &#39;A&#39;, &#39;C&#39;),
  (&#39;C&#39;, &#39;B&#39;, &#39;A&#39;),
- (&#39;A&#39;, &#39;C&#39;, &#39;B&#39;),
+ (&#39;C&#39;, &#39;A&#39;, &#39;B&#39;),
  (&#39;A&#39;, &#39;B&#39;, &#39;C&#39;),
- (&#39;B&#39;, &#39;C&#39;, &#39;A&#39;),
- (&#39;B&#39;, &#39;A&#39;, &#39;C&#39;))
+ (&#39;A&#39;, &#39;C&#39;, &#39;B&#39;))
 </pre></div>
 </div>
 </div>
@@ -1203,17 +1199,17 @@ C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Feb 12 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Feb 18 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
+pandas    : 1.5.3
 seaborn   : 0.12.2
 numpy     : 1.24.1
-matplotlib: 3.6.3
-pandas    : 1.5.3
 scipy     : 1.10.0
+matplotlib: 3.6.3
 
 Watermark: 2.3.1
 </pre></div>
