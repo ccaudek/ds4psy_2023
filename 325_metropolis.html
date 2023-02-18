@@ -853,43 +853,36 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="approssimazione-della-distribuzione-a-posteriori">
 <span id="metropolis-notebook"></span><h1><span class="section-number">32. </span>Approssimazione della distribuzione a posteriori<a class="headerlink" href="#approssimazione-della-distribuzione-a-posteriori" title="Permalink to this headline">#</a></h1>
-<p>In generale, in un problema bayesiano i dati <span class="math notranslate nohighlight">\(y\)</span> provengono da una densità <span class="math notranslate nohighlight">\(p(y \mid \theta)\)</span> e al parametro <span class="math notranslate nohighlight">\(\theta\)</span> viene assegnata una densità a priori <span class="math notranslate nohighlight">\(p(\theta)\)</span>. Dopo avere osservato i dati <span class="math notranslate nohighlight">\(Y = y\)</span>, la funzione di verosimiglianza è uguale a <span class="math notranslate nohighlight">\(\mathcal{L}(\theta) = p(y \mid \theta)\)</span> e la densità a posteriori diventa</p>
+<p>In sintesi, in un problema bayesiano si ha una densità dei dati <span class="math notranslate nohighlight">\(y\)</span> condizionata al parametro <span class="math notranslate nohighlight">\(\theta\)</span>, cui viene assegnata una densità a priori <span class="math notranslate nohighlight">\(p(\theta)\)</span>. Dopo aver osservato i dati <span class="math notranslate nohighlight">\(Y = y\)</span>, la densità a posteriori può essere calcolata tramite il teorema di Bayes:</p>
 <div class="math notranslate nohighlight">
 \[
 p(\theta \mid y) = \frac{p(y \mid \theta) p(\theta)}{p(y)}. 
 \]</div>
-<p>È dunque necessario calcolare l’<em>evidenza</em> <span class="math notranslate nohighlight">\(p(y)\)</span>. Per fare questo è necessario risolvere il seguente integrale in cui si integra su tutti i possibili valori <span class="math notranslate nohighlight">\(\theta\)</span> dei parametri:</p>
+<p>Tuttavia, il calcolo dell’evidenza <span class="math notranslate nohighlight">\(p(y)\)</span></p>
 <div class="math notranslate nohighlight">
 \[
 p(y) = \int_{\theta} p(y \mid \theta) p(\theta) \,\operatorname {d}\! \theta. 
 \]</div>
-<p>Il problema fondamentale consiste nella difficoltà di valutare analiticamente tale integrale. Se vogliamo trovare la distribuzione a posteriori con metodi analitici, dobbiamo ricorrere all’impiego di distribuzioni a priori coniugate, come abbiamo fatto nello schema beta-binomiale. Per quanto “semplice” in termini formali, la scelta di distribuzioni a priori coniugate limita di molto le possibili scelte del ricercatore. Inoltre, non è sempre sensato, dal punto di vista teorico, utilizzare tali distribuzioni per la stima dei parametri di interesse. Il mancato ricorso all’impiego delle distribuzioni a priori coniugate richiede necessariamente il computo dell’espressione a denominatore della formula di Bayes che solo in rare occasioni può essere ottenuta per via analitica. In altre parole, è possibile ottenere analiticamenre la distribuzione a posteriori solo per alcune specifiche combinazioni di distribuzioni a priori e verosimiglianza, il che limita considerevolmente la flessibilità della modellizzazione.</p>
-<p>Per questa ragione, la strada principale che viene seguita nella modellistica bayesiana è quella che porta a determinare la distribuzione a posteriori non per via analitica, ma bensì mediante metodi di approssimazione numerica. La simulazione fornisce dunque la strategia generale del calcolo bayesiano. A questo fine vengono principalmente usati i metodi di campionamento Monte Carlo basati su Catena di Markov (MCMC). Tali metodi costituiscono una potente e praticabile alternativa per la costruzione della distribuzione a posteriori per modelli complessi e consentono di decidere quali distribuzioni a priori e quali distribuzioni di verosimiglianza usare sulla base di considerazioni teoriche soltanto, senza dovere preoccuparsi di altri vincoli.</p>
-<p>Dato che è basata su metodi computazionalmente intensivi, la stima numerica della funzione a posteriori può essere svolta soltanto mediante software. In anni recenti i metodi Bayesiani di analisi dei dati sono diventati sempre più popolari proprio perché la potenza di calcolo necessaria per svolgere tali calcoli è ora alla portata di tutti. Questo non era vero solo pochi decenni fa.</p>
-<p>In questo capitolo descriviamo due metodi che possono essere usati come mezzo per calcolare la distribuzione a posteriori quando la distribuzione a priori coniugata non è applicabile.</p>
+<p>può essere complesso e non sempre analitico. Utilizzando distribuzioni a priori coniugate, è possibile determinare la distribuzione a posteriori in modo analitico, ma tale approccio limita le scelte del ricercatore. Inoltre, non sempre è appropriato utilizzare tali distribuzioni. Per modelli più complessi, la simulazione mediante metodi di approssimazione numerica, come i metodi di campionamento Monte Carlo basati su Catena di Markov, costituisce una potente alternativa per la costruzione della distribuzione a posteriori. Questi metodi consentono di determinare la distribuzione a posteriori sulla base di considerazioni teoriche, senza vincoli sulle scelte di distribuzioni a priori o di verosimiglianza.</p>
+<p>In generale, il calcolo della distribuzione a posteriori in un problema bayesiano richiede l’impiego di metodi computazionalmente intensivi che possono essere eseguiti solo mediante l’uso di software. Negli ultimi anni, la crescente potenza di calcolo dei computer ha reso i metodi bayesiani di analisi dati sempre più popolari, poiché tali calcoli sono ora alla portata di tutti. Questo non era vero solo pochi decenni fa.</p>
+<p>Nel presente capitolo descriviamo due metodi che possono essere utilizzati per calcolare la distribuzione a posteriori quando la distribuzione a priori coniugata non è applicabile:</p>
 <ul class="simple">
-<li><p><em>metodi basati su griglia:</em> dove, sebbene non sia disponibile alcuna formula algebrica in forma chiusa, le proprietà della distribuzione a posteriori possono essere calcolate con una precisione arbitraria;</p></li>
-<li><p><em>metodi Monte Carlo:</em> dove, utilizzando appropriate funzioni di numeri casuali, viene generato un grande campione di osservazioni della distribuzione a posteriori per poi stimare empiricamente la proprietà di interesse in base al campione così ottenuto.</p></li>
+<li><p>metodi basati su griglia: in cui, anche se non è disponibile alcuna formula algebrica in forma chiusa, le proprietà della distribuzione a posteriori possono essere calcolate con una precisione arbitraria utilizzando una griglia di valori del parametro <span class="math notranslate nohighlight">\(\theta\)</span>;</p></li>
+<li><p>metodi Monte Carlo: in cui, utilizzando appropriate funzioni di numeri casuali, viene generato un grande campione di osservazioni della distribuzione a posteriori per poi stimare empiricamente la proprietà di interesse in base al campione così ottenuto.</p></li>
 </ul>
 <section id="metodo-basato-su-griglia">
 <h2><span class="section-number">32.1. </span>Metodo basato su griglia<a class="headerlink" href="#metodo-basato-su-griglia" title="Permalink to this headline">#</a></h2>
-<p>Il metodo basato su griglia (<em>grid-based</em>) è un metodo numerico esatto basato su una griglia di punti uniformemente spaziati. Anche se la maggior parte dei parametri è continua (ovvero, in linea di principio ciascun parametro può assumere un numero infinito di valori), possiamo ottenere un’eccellente approssimazione della distribuzione a posteriori considerando solo una griglia finita di valori dei parametri. Con un tale metodo, dunque, la densità di probabilità a posteriori può essere approssimata tramite le densità di probabilità calcolate in ciascuna cella della griglia.</p>
-<p>Il metodo basato su griglia si sviluppa in quattro fasi:</p>
+<p>Il metodo numerico esatto basato su griglia (<em>grid-based</em>) utilizza una griglia di punti uniformemente spaziati per approssimare la distribuzione a posteriori. Nonostante la maggior parte dei parametri siano continui, l’approssimazione della distribuzione a posteriori può essere ottenuta considerando solo una griglia finita di valori dei parametri. Il metodo si compone di quattro fasi:</p>
 <ul class="simple">
-<li><p>fissare una griglia discreta di possibili valori <span class="math notranslate nohighlight">\(\theta\)</span>;</p></li>
-<li><p>valutare la distribuzione a priori <span class="math notranslate nohighlight">\(p(\theta)\)</span> e la funzione di verosimiglianza <span class="math notranslate nohighlight">\(p(y \mid \theta)\)</span> in corrispondenza di ciascun valore <span class="math notranslate nohighlight">\(\theta\)</span> della griglia;</p></li>
-<li><p>ottenere un’approssimazione discreta della densità a posteriori:</p>
-<ul>
-<li><p>per ciascun valore <span class="math notranslate nohighlight">\(\theta\)</span> della griglia, calcolare il prodotto <span class="math notranslate nohighlight">\(p(\theta) p(y \mid \theta)\)</span>;</p></li>
-<li><p>normalizzare i prodotti così ottenuti in modo tale che la loro somma sia 1;</p></li>
+<li><p>Fissare una griglia discreta di possibili valori dei parametri.</p></li>
+<li><p>Valutare la distribuzione a priori e la funzione di verosimiglianza in corrispondenza di ciascun valore della griglia.</p></li>
+<li><p>Calcolare la densità a posteriori approssimata, calcolando il prodotto della distribuzione a priori e della funzione di verosimiglianza per ciascun valore della griglia e normalizzando i prodotti in modo che la loro somma sia uguale a 1.</p></li>
+<li><p>Selezionare <span class="math notranslate nohighlight">\(n\)</span> valori casuali della griglia per ottenere un campione casuale delle densità a posteriori normalizzate.</p></li>
 </ul>
-</li>
-<li><p>selezionare <span class="math notranslate nohighlight">\(n\)</span> valori casuali della griglia in modo tale da ottenere un campione casuale delle densità a posteriori normalizzate.</p></li>
-</ul>
-<p>È possibile migliorare l’approssimazione aumentando il numero di punti della griglia. Infatti utilizzando un numero infinito di punti si otterrebbe la descrizione esatta della distribuzione a posteriori, dovendo però pagare il costo dell’utilizzo di infinite risorse di calcolo. Il limite maggiore dell’approccio basato su griglia è proprio questo: al crescere della dimensionalità <span class="math notranslate nohighlight">\(n\)</span> dello spazio dei parametri, i punti della griglia necessari per avere una buona stima crescono esponenzialmente con <span class="math notranslate nohighlight">\(n\)</span>, rendendo questo metodo inattuabile per problemi complessi.</p>
+<p>L’approssimazione può essere migliorata aumentando il numero di punti della griglia, tuttavia, il limite principale di questo metodo è che al crescere della dimensionalità dello spazio dei parametri, i punti della griglia necessari per una buona stima aumentano esponenzialmente, rendendo il metodo impraticabile per problemi complessi.</p>
 <section id="modello-beta-binomiale">
 <h3><span class="section-number">32.1.1. </span>Modello Beta-Binomiale<a class="headerlink" href="#modello-beta-binomiale" title="Permalink to this headline">#</a></h3>
-<p>Per fare un esempio, utilizziamo il metodo basato su griglia nel caso dello schema beta-binomiale di cui conosciamo la soluzione esatta. Esaminiamo nuovamente i dati di <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id16" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>: 23 “successi” in 30 prove Bernoulliane indipendenti.</p>
+<p>Per fare un esempio, utilizziamo il metodo basato su griglia nel caso dello schema beta-binomiale di cui conosciamo la soluzione esatta. Esaminiamo nuovamente i dati di <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>: 23 “successi” in 30 prove Bernoulliane indipendenti.</p>
 <p>Imponendo alla distribuzione a priori su <span class="math notranslate nohighlight">\(\theta\)</span> (probabilità di successo in una singola prova, laddove per “successo” si intende una aspettativa distorta negativamente dell’umore futuro) una <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span> per descrivere la nostra incertezza sul parametro prima di avere osservato i dati, il modello diventa:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -985,7 +978,7 @@ Y \mid \theta &amp; \sim Bin(n = 30, \theta), \notag\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd6f2a9f8b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa220a3b880&gt;
 </pre></div>
 </div>
 <img alt="_images/325_metropolis_5_1.png" src="_images/325_metropolis_5_1.png" />
@@ -996,7 +989,7 @@ Y \mid \theta &amp; \sim Bin(n = 30, \theta), \notag\\
 </section>
 <section id="metodo-monte-carlo">
 <h2><span class="section-number">32.2. </span>Metodo Monte Carlo<a class="headerlink" href="#metodo-monte-carlo" title="Permalink to this headline">#</a></h2>
-<p>I metodi più ampiamente adottati nell’analisi bayesiana per la costruzione della distribuzione a posteriori per modelli complessi sono i metodi di campionamento MCMC. Tali metodi consentono al ricercatore di decidere quali distribuzioni a priori e quali distribuzioni di verosimiglianza usare sulla base di considerazioni teoriche soltanto, senza doversi preoccupare di altri vincoli. Dato che è basata su metodi computazionalmente intensivi, la stima numerica MCMC della funzione a posteriori può essere svolta soltanto mediante software. In anni recenti i metodi Bayesiani di analisi dei dati sono diventati sempre più popolari proprio perché la potenza di calcolo necessaria per svolgere tali calcoli è ora alla portata di tutti. Questo non era vero solo pochi decenni fa.</p>
+<p>I metodi più comuni per ottenere la distribuzione a posteriori in modelli complessi nell’analisi bayesiana sono i metodi di campionamento MCMC. Questi metodi permettono ai ricercatori di selezionare le distribuzioni a priori e di verosimiglianza in base a considerazioni teoriche, senza doversi preoccupare di altre restrizioni. Tuttavia, dal momento che questi metodi sono basati su calcoli computazionalmente intensivi, la stima numerica della funzione a posteriori MCMC può essere effettuata solo tramite software.</p>
 <section id="integrazione-di-monte-carlo">
 <h3><span class="section-number">32.2.1. </span>Integrazione di Monte Carlo<a class="headerlink" href="#integrazione-di-monte-carlo" title="Permalink to this headline">#</a></h3>
 <p>Il termine Monte Carlo si riferisce al fatto che la computazione fa ricorso ad un ripetuto campionamento casuale attraverso la generazione di sequenze di numeri casuali. Una delle sue applicazioni più potenti è il calcolo degli integrali mediante simulazione numerica. Un’illustrazione è fornita dal seguente esempio. Supponiamo di essere in grado di estrarre campioni casuali dalla distribuzione continua <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span> di media <span class="math notranslate nohighlight">\(\mu\)</span>. Se possiamo ottenere una sequenza di realizzazioni indipendenti</p>
@@ -1020,7 +1013,7 @@ Pr(l &lt; \theta &lt; u) \approx \frac{\text{numero di realizzazioni } \theta^{(
 </section>
 <section id="campionamento-dalla-distribuzione-a-posteriori">
 <h3><span class="section-number">32.2.2. </span>Campionamento dalla distribuzione a posteriori<a class="headerlink" href="#campionamento-dalla-distribuzione-a-posteriori" title="Permalink to this headline">#</a></h3>
-<p>Poniamoci ora il problema di approssimare la distribuzione a posteriori con una simulazione. Consideriamo nuovamente i dati di <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id16" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> (ovvero, 23 “successi” in 30 prove Bernoulliane) e, come in precedenza, assumiamo per <span class="math notranslate nohighlight">\(\theta\)</span> una distribuzione a priori <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span>. In tali circostanze, la distribuzione a posteriori può essere ottenuta analiticamente tramite lo schema beta-binomiale ed è una <span class="math notranslate nohighlight">\(Beta(25, 17)\)</span>. Se vogliamo conoscere il valore della media a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span>, il risultato esatto è</p>
+<p>Poniamoci ora il problema di approssimare la distribuzione a posteriori con una simulazione. Consideriamo nuovamente i dati di <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> (ovvero, 23 “successi” in 30 prove Bernoulliane) e, come in precedenza, assumiamo per <span class="math notranslate nohighlight">\(\theta\)</span> una distribuzione a priori <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span>. In tali circostanze, la distribuzione a posteriori può essere ottenuta analiticamente tramite lo schema beta-binomiale ed è una <span class="math notranslate nohighlight">\(Beta(25, 17)\)</span>. Se vogliamo conoscere il valore della media a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span>, il risultato esatto è</p>
 <div class="math notranslate nohighlight">
 \[
 \bar{\theta}_{post} = \frac{\alpha}{\alpha + \beta} = \frac{25}{25 + 17} \approx 0.5952.
@@ -1034,7 +1027,7 @@ Pr(l &lt; \theta &lt; u) \approx \frac{\text{numero di realizzazioni } \theta^{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7377247514520286 0.49332123917093873 0.47052441766166825 0.5953333452114399 0.5934485403325345 0.5467908130833844 0.6781393454022174 0.5778457832617182 0.5836893485281862 0.4305182414564262
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6759805053458033 0.6954050217161744 0.59083078783069 0.6580633314470024 0.6528005865550729 0.5595680858163422 0.47720787829258826 0.751220395794319 0.535438422502752 0.58758470898502
 </pre></div>
 </div>
 </div>
@@ -1046,7 +1039,7 @@ Pr(l &lt; \theta &lt; u) \approx \frac{\text{numero di realizzazioni } \theta^{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5707335825560543
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6184099724285763
 </pre></div>
 </div>
 </div>
@@ -1059,7 +1052,7 @@ Pr(l &lt; \theta &lt; u) \approx \frac{\text{numero di realizzazioni } \theta^{(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5953567016736113
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5952609871428425
 </pre></div>
 </div>
 </div>
@@ -1081,17 +1074,17 @@ p(\theta \mid y) = \frac{\mathrm{e}^{-(\theta - 1 / 2)^2} \theta^y (1 - \theta)^
 </section>
 <section id="l-algoritmo-di-metropolis">
 <h2><span class="section-number">32.3. </span>L’algoritmo di Metropolis<a class="headerlink" href="#l-algoritmo-di-metropolis" title="Permalink to this headline">#</a></h2>
-<p>L’idea di base dell’algoritmo <span id="id6">Metropolis <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id91" title="Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, and Edward Teller. Equation of state calculations by fast computing machines. The Journal of Chemical Physics, 21(6):1087-1092, 1953.">MRR+53</a>]</span> è campionare dalla distribuzione a posteriori combinando una “ricerca casuale” (l’aspetto Monte Carlo) con un meccanismo per “saltare” in modo intelligente, ma in un modo che alla fine non dipende da dove siamo partiti (una proprietà della Catena di Markov). Quindi i metodi Markov Chain Monte Carlo possono essere descritti come delle ricerche senza memoria (ovvero, senza distorsioni sistematiche) eseguite con dei “salti” intelligenti.</p>
-<p>L’algoritmo Metropolis segue il seguente schema.</p>
-<ul class="simple">
-<li><p>Iniziare l’algoritmo nella posizione corrente nello spazio dei parametri.</p></li>
-<li><p>Proporre un “salto” in una nuova posizione nello spazio dei parametri.</p></li>
+<p>Gli algoritmi Markov Chain Monte Carlo (MCMC) consentono di campionare dalla distribuzione a posteriori utilizzando una combinazione di “ricerca casuale” (Monte Carlo) e “salti” intelligenti che non dipendono dalla posizione di partenza (una proprietà delle Catene di Markov). In pratica, si tratta di ricerche senza memoria eseguite con salti intelligenti per evitare distorsioni sistematiche.</p>
+<p>Uno degli algoritmi MCMC più noti è l’algoritmo Metropolis <span id="id6">[<a class="reference internal" href="z_biblio.html#id93" title="Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, and Edward Teller. Equation of state calculations by fast computing machines. The Journal of Chemical Physics, 21(6):1087-1092, 1953.">MRR+53</a>]</span>, che segue il seguente schema:</p>
+<ol class="simple">
+<li><p>Iniziare l’algoritmo nella posizione corrente dello spazio dei parametri.</p></li>
+<li><p>Proporre un salto in una nuova posizione nello spazio dei parametri.</p></li>
 <li><p>Accettare o rifiutare il salto in modo probabilistico, utilizzando le informazioni precedenti e i dati disponibili.</p></li>
 <li><p>Se il salto viene accettato, spostarsi nella nuova posizione e tornare al passaggio 1.</p></li>
 <li><p>Se il salto viene rifiutato, restare nell’attuale posizione e tornare al passaggio 1.</p></li>
-<li><p>Dopo che si è verificato un determinato numero di salti, restituire tutte le posizioni accettate.</p></li>
-</ul>
-<p>Un’illustrazione visiva di come si svolge il processo di “esplorazione” dello spazio dei parametri dell’algoritmo Metropolis è fornita in questo post: <a class="reference external" href="https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/">https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/</a>. La principale differenza tra i vari algoritmi MCMC risiede nel modo in cui si salta e nel modo in cui decide se saltare.</p>
+<li><p>Dopo aver effettuato un numero sufficiente di salti, restituire tutte le posizioni accettate come campioni dalla distribuzione a posteriori.</p></li>
+</ol>
+<p>In questo post (<a class="reference external" href="https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/">https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/</a>), è possibile vedere una rappresentazione grafica del processo di “esplorazione” dello spazio dei parametri dell’algoritmo Metropolis. La principale differenza tra i vari algoritmi MCMC sta proprio nel modo in cui vengono effettuati i salti e nel modo in cui viene presa la decisione se saltare o meno.</p>
 <p>Esaminiamo più in dettaglio l’algoritmo Metropolis.</p>
 <ul class="simple">
 <li><p>Si inizia con un punto arbitrario <span class="math notranslate nohighlight">\(\theta^{(1)}\)</span>; quindi il primo valore <span class="math notranslate nohighlight">\(\theta^{(1)}\)</span> della catena di Markov può corrispondere semplicemente ad un valore a caso tra i valori possibili del parametro.</p></li>
@@ -1110,7 +1103,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 <p>L’algoritmo Metropolis prende come input il numero <span class="math notranslate nohighlight">\(T\)</span> di passi da simulare, la deviazione standard <span class="math notranslate nohighlight">\(\sigma\)</span> della distribuzione proposta e la densità a priori, e ritorna come output la sequenza <span class="math notranslate nohighlight">\(\theta^{(1)}, \theta^{(2)}, \dots, \theta^{(T)}\)</span>. La chiave del successo dell’algoritmo Metropolis è il numero di passi fino a che la catena approssima la stazionarietà. Tipicamente i primi da 1000 a 5000 elementi sono scartati. Dopo un certo periodo <span class="math notranslate nohighlight">\(k\)</span> (detto di <em>burn-in</em>), la catena di Markov converge ad una variabile casuale che è distribuita secondo la distribuzione a posteriori (stazionarietà). In altre parole, i campioni del vettore <span class="math notranslate nohighlight">\(\left(\theta^{(k+1)}, \theta^{(k+2)}, \dots, \theta^{(T)}\right)\)</span> diventano campioni di <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span>.</p>
 <section id="un-applicazione-empirica">
 <h3><span class="section-number">32.3.1. </span>Un’applicazione empirica<a class="headerlink" href="#un-applicazione-empirica" title="Permalink to this headline">#</a></h3>
-<p>Implementiamo ora l’algoritmo Metropolis per trovare la distribuzione a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span> per i dati di <span id="id7">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id16" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> (23 successi in 30 prove Bernoulliane), imponendo su <span class="math notranslate nohighlight">\(\theta\)</span> una <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span>. Nell’implementazione che verrà qui presentata, l’algoritmo Metropolis richiede l’uso delle seguenti funzioni.</p>
+<p>Implementiamo ora l’algoritmo Metropolis per trovare la distribuzione a posteriori di <span class="math notranslate nohighlight">\(\theta\)</span> per i dati di <span id="id7">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> (23 successi in 30 prove Bernoulliane), imponendo su <span class="math notranslate nohighlight">\(\theta\)</span> una <span class="math notranslate nohighlight">\(Beta(2, 10)\)</span>. Nell’implementazione che verrà qui presentata, l’algoritmo Metropolis richiede l’uso delle seguenti funzioni.</p>
 <p><strong>Verosimiglianza.</strong> Useremo una funzione di verosimiglianza binomiale.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1194,7 +1187,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2633
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2423
 </pre></div>
 </div>
 </div>
@@ -1209,7 +1202,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5900635956122223
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5916218277244851
 </pre></div>
 </div>
 </div>
@@ -1222,7 +1215,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07727232994306742
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07581113812898804
 </pre></div>
 </div>
 </div>
@@ -1293,7 +1286,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
       <td>0.59</td>
       <td>0.08</td>
       <td>0.45</td>
-      <td>0.75</td>
+      <td>0.74</td>
     </tr>
   </tbody>
 </table>
@@ -1311,7 +1304,7 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <p>L’HDI è una scelta comune nelle statistiche bayesiane e valori arrotondati come 50% o 95% sono molto popolari. Ma ArviZ utilizza il 94% come valore predefinito, come mostrato nella figura precedente. La ragione di questa scelta è che il 94% è vicino al valore ampiamente utilizzato del 95%, ma è anche diverso da questo, così da servire da “amichevole promemoria” che non c’è niente di speciale nella soglia del 5%. Idealmente sarebbe opportuno scegliere un valore che si adatti alle specifiche esigenze dell’analisi statistica che si sta svolgendo, o almeno riconoscere che si sta usando un valore arbitrario.</p>
-<p>L’algoritmo descritto in questo capitolo è di <span id="id10">Metropolis <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id91" title="Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, and Edward Teller. Equation of state calculations by fast computing machines. The Journal of Chemical Physics, 21(6):1087-1092, 1953.">MRR+53</a>]</span>. Un miglioramento di <span id="id11">Hastings [<a class="reference internal" href="z_biblio.html#id90" title="W. Keith Hastings. Monte Carlo sampling methods using Markov chains and their applications. Biometrika, 57(1):97-109, 1970.">Has70</a>]</span> ha portato all’algoritmo Metropolis-Hastings. Il campionatore di Gibbs è dovuto a <span id="id12">[<a class="reference internal" href="z_biblio.html#id89" title="Stuart Geman and Donald Geman. Stochastic relaxation, Gibbs distributions, and the Bayesian restoration of images. IEEE Transactions on pattern analysis and machine intelligence, 6:721-741, 1984.">GG84</a>]</span>. L’approccio hamiltoniano Monte Carlo è dovuto a <span id="id13">Duane <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id132" title="Simon Duane, Anthony D Kennedy, Brian J Pendleton, and Duncan Roweth. Hybrid monte carlo. Physics letters B, 195(2):216–222, 1987.">DKPR87</a>]</span> e il No-U-Turn Sampler (NUTS) è dovuto a <span id="id14">Hoffman <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id131" title="Matthew D Hoffman, Andrew Gelman, and others. The no-u-turn sampler: adaptively setting path lengths in hamiltonian monte carlo. Journal of Machine Learning Research, 15(1):1593–1623, 2014.">HG+14</a>]</span>. Un’introduzione matematicamente intuitiva all’algoritmo Metropolis è data da <span id="id15">Kruschke [<a class="reference internal" href="z_biblio.html#id94" title="John Kruschke. Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan. Academic Press, 2014.">Kru14</a>]</span>.</p>
+<p>L’algoritmo descritto in questo capitolo è di <span id="id10">Metropolis <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id93" title="Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, and Edward Teller. Equation of state calculations by fast computing machines. The Journal of Chemical Physics, 21(6):1087-1092, 1953.">MRR+53</a>]</span>. Un miglioramento di <span id="id11">Hastings [<a class="reference internal" href="z_biblio.html#id92" title="W. Keith Hastings. Monte Carlo sampling methods using Markov chains and their applications. Biometrika, 57(1):97-109, 1970.">Has70</a>]</span> ha portato all’algoritmo Metropolis-Hastings. Il campionatore di Gibbs è dovuto a <span id="id12">[<a class="reference internal" href="z_biblio.html#id91" title="Stuart Geman and Donald Geman. Stochastic relaxation, Gibbs distributions, and the Bayesian restoration of images. IEEE Transactions on pattern analysis and machine intelligence, 6:721-741, 1984.">GG84</a>]</span>. L’approccio hamiltoniano Monte Carlo è dovuto a <span id="id13">Duane <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id134" title="Simon Duane, Anthony D Kennedy, Brian J Pendleton, and Duncan Roweth. Hybrid monte carlo. Physics letters B, 195(2):216–222, 1987.">DKPR87</a>]</span> e il No-U-Turn Sampler (NUTS) è dovuto a <span id="id14">Hoffman <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id133" title="Matthew D Hoffman, Andrew Gelman, and others. The no-u-turn sampler: adaptively setting path lengths in hamiltonian monte carlo. Journal of Machine Learning Research, 15(1):1593–1623, 2014.">HG+14</a>]</span>. Un’introduzione matematicamente intuitiva all’algoritmo Metropolis è data da <span id="id15">Kruschke [<a class="reference internal" href="z_biblio.html#id96" title="John Kruschke. Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan. Academic Press, 2014.">Kru14</a>]</span>.</p>
 </section>
 </section>
 <section id="diagnostiche-della-soluzione-mcmc">
@@ -1416,19 +1409,19 @@ r = \frac{p(\theta' \mid y)}{p(\theta^{(m)} \mid y)} = \frac{\frac{p(y \mid \the
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Feb 12 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Feb 18 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
-pandas     : 1.5.3
-matplotlib : 3.6.3
-arviz      : 0.14.0
-scipy      : 1.10.0
-seaborn    : 0.12.2
 numpy      : 1.24.1
+matplotlib : 3.6.3
 statsmodels: 0.13.5
+arviz      : 0.14.0
+seaborn    : 0.12.2
+scipy      : 1.10.0
+pandas     : 1.5.3
 
 Watermark: 2.3.1
 </pre></div>
