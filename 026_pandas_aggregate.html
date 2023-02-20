@@ -988,6 +988,66 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
+<p>Se desideriamo solo le informazioni relative alle variabili qualitative, usiamo l’argomento <code class="docutils literal notranslate"><span class="pre">include='object'</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>island</th>
+      <th>sex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>333</td>
+      <td>333</td>
+      <td>333</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>3</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>Adelie</td>
+      <td>Biscoe</td>
+      <td>male</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>146</td>
+      <td>163</td>
+      <td>168</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <p>I valori NaN indicano dati mancanti. Ad esempio, la colonna <code class="docutils literal notranslate"><span class="pre">species</span></code> contiene stringhe, quindi non esiste alcun valore per <code class="docutils literal notranslate"><span class="pre">mean</span></code>; allo stesso modo, <code class="docutils literal notranslate"><span class="pre">bill_length_mm</span></code> è una variabile numerica, quindi non vengono calcolate le statistiche riassuntive per le variabili categoriali (<code class="docutils literal notranslate"><span class="pre">unique</span></code>, <code class="docutils literal notranslate"><span class="pre">top</span></code>, <code class="docutils literal notranslate"><span class="pre">freq</span></code>).</p>
 <p>Esaminimiamo le colonne singolarmente. Ad esempio, troviamo la media della colonna <code class="docutils literal notranslate"><span class="pre">bill_depth_mm</span></code>.</p>
 <div class="cell docutils container">
@@ -1090,7 +1150,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_9832/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_62090/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.aggregate(summary_stats)
 </pre></div>
 </div>
@@ -1193,7 +1253,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7f7b51113460&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x7fc8295e6890&gt;
 </pre></div>
 </div>
 </div>
@@ -1256,7 +1316,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_9832/2686510896.py:2: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/cy/4xdvhqx966nggmk95hsnyzc40000gn/T/ipykernel_62090/2686510896.py:2: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.groupby([&quot;species&quot;]).aggregate(summary_stats)
 </pre></div>
 </div>
@@ -1626,7 +1686,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Wed Feb 15 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon Feb 20 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
