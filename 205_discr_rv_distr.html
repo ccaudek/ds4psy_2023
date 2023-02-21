@@ -870,7 +870,7 @@ P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
 </div>
 </div>
 </div>
-<p><strong>scipy</strong> contiene funzioni analitiche per una vasta gamma di distribuzioni e funzioni di massa di probabilità; le potete trovare <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">qui</a>. Per la binomiale, useremo <code class="docutils literal notranslate"><span class="pre">scipy.stats.binom</span></code>.</p>
+<p><strong>scipy</strong> contiene funzioni analitiche per una vasta gamma di distribuzioni e funzioni di massa di probabilità; le potete trovare <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">qui</a>. Per la <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html">binomiale</a>, useremo <code class="docutils literal notranslate"><span class="pre">scipy.stats.binom</span></code>.</p>
 <p>Esistono due modi per usare <code class="docutils literal notranslate"><span class="pre">scipy</span></code> per la binomiale. È possibile prima dichiarare un oggetto che corrisponde ad una variabile casuale, ad esempio <code class="docutils literal notranslate"><span class="pre">rv</span> <span class="pre">=</span> <span class="pre">binom(n,</span> <span class="pre">theta)</span></code>, e poi chiamare <code class="docutils literal notranslate"><span class="pre">rv.pmf(y)</span></code>. Oppure si può usare la chiamata <code class="docutils literal notranslate"><span class="pre">binom.pmf(y,</span> <span class="pre">n,</span> <span class="pre">theta)</span></code>. Usiamo il secondo metodo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1058,7 +1058,7 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 <img alt="_images/205_discr_rv_distr_24_1.png" src="_images/205_discr_rv_distr_24_1.png" />
 </div>
 </div>
-<p>Resta da capire come generare una sequenza casuale di valori da una distribuzione Binomiale. Per fare questo, prima definiamo una variabile casuale Binomiale con determinati parametri. Per esempio, definiamo una Binomiale di ordine <span class="math notranslate nohighlight">\(n\)</span> = 5 e <span class="math notranslate nohighlight">\(p\)</span> = 0.5.</p>
+<p>Resta da capire come generare una sequenza casuale di valori da una distribuzione Binomiale. Per fare questo, prima creiamo una variabile casuale Binomiale “frozen”. Una variabile casuale <em>frozen</em> è un’istanza di una distribuzione di probabilità che è stata fissata in modo che i suoi parametri non possano essere modificati. Quando si crea una variabile casuale <em>frozen</em>, si specificano i valori dei parametri della distribuzione di probabilità (nel nostro caso, il numero di prove e la probabilità di successo). Dopo che la variabile casuale è stata creata, i suoi parametri non possono essere modificati. Invece, è possibile generare campioni dalla distribuzione di probabilità corrispondente usando il metodo <code class="docutils literal notranslate"><span class="pre">rvs()</span></code> della variabile casuale <em>frozen</em>. Per esempio, definiamo una variabile casuale Binomiale <em>frozen</em> di parametri <span class="math notranslate nohighlight">\(n\)</span> = 5 e <span class="math notranslate nohighlight">\(p\)</span> = 0.5.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
@@ -1068,7 +1068,7 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 </div>
 </div>
 </div>
-<p>Possiamo poi esaminare un certo numero di realizzazioni di questa variabile casuale mediante il metodo <code class="docutils literal notranslate"><span class="pre">rvs</span></code>. Per esempio, consideriamo 30 realizzazioni della v.c. <code class="docutils literal notranslate"><span class="pre">rv</span></code>.</p>
+<p>Generiamo poi 30 realizzazioni della v.c. <code class="docutils literal notranslate"><span class="pre">rv</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">rv</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
@@ -1077,7 +1077,21 @@ P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 2 1 2 3 2 3 5 4 2 3 0 3 5 3 5 3 1 1 3 4 2 2 5 3 4 2 4 2 4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 2 3 2 3 3 2 3 5 2 2 1 2 4 4 2 1 2 3 2 4 3 3 3 3 4 2 3 2 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso risultato si può anche ottenere mediante la funzione <code class="docutils literal notranslate"><span class="pre">random.binomial()</span></code> di NumPy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 1 1 1 3 3 3 3 3 2 2 2 3 2 0 4 4 2 3 1 3 2 1 3 2 3 2 2 2 3
 </pre></div>
 </div>
 </div>
@@ -1162,7 +1176,7 @@ BetaBinomial(y \mid N, \alpha, \beta) = \binom{N}{y} \frac{B(y + \alpha, N-y+\be
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Feb 18 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Feb 21 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
@@ -1170,11 +1184,11 @@ IPython version      : 8.7.0
 
 pytensor: 2.9.1
 
+pandas    : 1.5.3
 numpy     : 1.24.1
+seaborn   : 0.12.2
 scipy     : 1.10.0
 matplotlib: 3.6.3
-pandas    : 1.5.3
-seaborn   : 0.12.2
 
 Watermark: 2.3.1
 </pre></div>
