@@ -676,6 +676,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#il-modulo-pyplot">
    8.1. Il modulo pyplot
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sottoplot-assi">
+     8.1.1. Sottoplot (assi)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#line-plots">
+     8.1.2. Line plots
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notazione-plt-subplots">
@@ -715,6 +727,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#il-modulo-pyplot">
    8.1. Il modulo pyplot
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sottoplot-assi">
+     8.1.1. Sottoplot (assi)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#line-plots">
+     8.1.2. Line plots
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notazione-plt-subplots">
@@ -748,6 +772,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -763,7 +788,164 @@ title="Print to PDF"
 <p>La linea di codice <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span></code> fa riferimento a una caratteristica dei nootbook Juupyter: tutte le linee che iniziano con il carattere <code class="docutils literal notranslate"><span class="pre">%</span></code> vengono chiamate <em>line magic</em> e permettono di effettuare operazioni supplementari. In questo caso si tratta di una <em>matplotlib magic</em> che specifica che i grafici prodotti da matplotlib devono essere visualizzati direttamente nel notebook (senza questa operazione i grafici non verrebbero mostrati automaticamente). È sufficiente specificare la <em>matplotlib magic</em> una sola volta, all’inizio del notebook oppure prima di produrre il primo grafico da visualizzare. Da quel punto in avanti tutti i grafici verranno automaticamente mostrati nel notebook. La seconda linea di codice nella cella precedente ci permette di impostare le dimensioni dei grafici: i valori predefiniti genererebbero infatti delle figure un po’ troppo grandi.</p>
 <section id="il-modulo-pyplot">
 <h2><span class="section-number">8.1. </span>Il modulo pyplot<a class="headerlink" href="#il-modulo-pyplot" title="Permalink to this headline">#</a></h2>
-<p>La libreria matplotlib consente di disegnare grafici 2-D in vari modi – si veda la pagina web <a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/pyplot.html">Pyplot tutorial</a>. Le quantità da plottare sono <code class="docutils literal notranslate"><span class="pre">ndarrays</span></code>, ma anche una lista viene trasformata direttamente in un array quando viene passata come argomento del plot. Esempio:</p>
+<p>La libreria matplotlib consente di disegnare grafici 2-D in vari modi – si veda la pagina web <a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/pyplot.html">Pyplot tutorial</a>.</p>
+<p>La figura funge da contenitore per il grafico. Ha proprietà come la dimensione (<code class="docutils literal notranslate"><span class="pre">figsize</span></code>) e metodi come <code class="docutils literal notranslate"><span class="pre">Figure.show()</span></code> o <code class="docutils literal notranslate"><span class="pre">Figure.save_fig()</span></code>. Ogni volta che si chiama la funzione <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.figure</span></code>, verrà creata una nuova figura.</p>
+<p>La chiamata successiva crea una figura vuota chiamata <code class="docutils literal notranslate"><span class="pre">fig</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 500x200 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’istruzione seguente crea una figura vuota delle dimensioni specificate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1500x800 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>È possibile scrivere direttamente sulla figura usando i metodi di <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code>, ma di solito è più facile disegnare questi elementi all’interno di sottoplot (chiamati assi) individuali all’interno del grafico.</p>
+<section id="sottoplot-assi">
+<h3><span class="section-number">8.1.1. </span>Sottoplot (assi)<a class="headerlink" href="#sottoplot-assi" title="Permalink to this headline">#</a></h3>
+<p>L’istruzione seguente crea una griglia di dimensioni 1 x 1 di sottoplot e sceglie l’asse 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/035_intro_matplotlib_9_0.png" src="_images/035_intro_matplotlib_9_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># this would create a 2x1 grid of subplots</span>
+<span class="c1"># and choose axes #1</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># this would create a 2x1 grid of subplots</span>
+<span class="c1"># and choose axes #2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/035_intro_matplotlib_10_0.png" src="_images/035_intro_matplotlib_10_0.png" />
+</div>
+</div>
+<p>Creaiamo un oggetto Pandas chiamato DataFrame in cui inseriemo dei valori casuali.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+        <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+        <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>44</td>
+      <td>47</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>47</td>
+      <td>64</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>64</td>
+      <td>82</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>67</td>
+      <td>99</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>67</td>
+      <td>88</td>
+      <td>58</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Ora creiamo una figura con una griglia 2x2 di sottoplot.</p>
+<p>Popoliamo i grafici usando i dati contenuti in <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> 
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">])</span>  <span class="c1"># The top-left axes</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">])</span>  <span class="c1"># The top-right axes</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">])</span>  <span class="c1"># The bottom-left axes</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="s2">&quot;o&quot;</span><span class="p">)</span>  <span class="c1"># The bottom-right axes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7ff1b989b370&gt;]
+</pre></div>
+</div>
+<img alt="_images/035_intro_matplotlib_17_1.png" src="_images/035_intro_matplotlib_17_1.png" />
+</div>
+</div>
+</section>
+<section id="line-plots">
+<h3><span class="section-number">8.1.2. </span>Line plots<a class="headerlink" href="#line-plots" title="Permalink to this headline">#</a></h3>
+<p>Le quantità da plottare sono <code class="docutils literal notranslate"><span class="pre">ndarrays</span></code>, ma anche una lista viene trasformata direttamente in un array quando viene passata come argomento del plot. Esempio:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
@@ -771,19 +953,21 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/035_intro_matplotlib_5_0.png" src="_images/035_intro_matplotlib_5_0.png" />
+<img alt="_images/035_intro_matplotlib_19_0.png" src="_images/035_intro_matplotlib_19_0.png" />
 </div>
 </div>
 <p>Una lista unica viene interpretata come la funzione da plottare lungo  y, ma se ne passiamo due la prima viene interpretata come asse  x. Infine, una stringa come terzo parametro viene interpretata come un descrittore per il colore della linea, lo stile, ecc.</p>
 <p>Esempio: disegno di dati contenuti in due liste con linea continua (parametro ‘-’) e pallini rossi (parametro ‘or’)…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="s2">&quot;or-&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;or-&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/035_intro_matplotlib_7_0.png" src="_images/035_intro_matplotlib_7_0.png" />
+<img alt="_images/035_intro_matplotlib_21_0.png" src="_images/035_intro_matplotlib_21_0.png" />
 </div>
 </div>
 <p>Oppure si possono definire due o più <code class="docutils literal notranslate"><span class="pre">ndarrays</span></code>, da passare al plot. Nell’esempio seguente vengono definite due funzioni da rappresentare in un unico grafico (si noti il colore differente prima del  <code class="docutils literal notranslate"><span class="pre">-</span></code>):</p>
@@ -798,10 +982,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc9982e0220&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7ff1e8442ef0&gt;]
 </pre></div>
 </div>
-<img alt="_images/035_intro_matplotlib_9_1.png" src="_images/035_intro_matplotlib_9_1.png" />
+<img alt="_images/035_intro_matplotlib_23_1.png" src="_images/035_intro_matplotlib_23_1.png" />
 </div>
 </div>
 <p>Possiamo anche scrivere, in maniera più succinta, quanto segue</p>
@@ -812,7 +996,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/035_intro_matplotlib_11_0.png" src="_images/035_intro_matplotlib_11_0.png" />
+<img alt="_images/035_intro_matplotlib_25_0.png" src="_images/035_intro_matplotlib_25_0.png" />
 </div>
 </div>
 <p>La stringa (opzionale) che appare come terzo parametro (se non specificata, disegna una linea blu) descrive il colore, un eventuale marker e lo stile della linea in un unico parametro. È possibile definire i colori comuni con le lettere seguenti:</p>
@@ -867,10 +1051,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc9b81305e0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7ff1e859d840&gt;]
 </pre></div>
 </div>
-<img alt="_images/035_intro_matplotlib_13_1.png" src="_images/035_intro_matplotlib_13_1.png" />
+<img alt="_images/035_intro_matplotlib_27_1.png" src="_images/035_intro_matplotlib_27_1.png" />
 </div>
 </div>
 <p>È ovviamente possibile inserire nel grafico un titolo, delle labels sugli assi, una griglia, del testo in posizione arbitraria, ecc. Una delle caratteristiche di mathplotlib è quella di poter utilizzare il rendering in <span class="math notranslate nohighlight">\(\LaTeX\)</span> delle stringhe, facendole precedere da una “r” (che sta per “raw”) per indicare a Python che questo è un codice TeX. Per esempio:</p>
@@ -895,7 +1079,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.8, 1.2)
 </pre></div>
 </div>
-<img alt="_images/035_intro_matplotlib_15_1.png" src="_images/035_intro_matplotlib_15_1.png" />
+<img alt="_images/035_intro_matplotlib_29_1.png" src="_images/035_intro_matplotlib_29_1.png" />
 </div>
 </div>
 <p>È possibile cambiare lo stile del grafico e la palette di colori rispetto al default di matplotlib. Per esempio:</p>
@@ -929,9 +1113,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/035_intro_matplotlib_18_0.png" src="_images/035_intro_matplotlib_18_0.png" />
+<img alt="_images/035_intro_matplotlib_32_0.png" src="_images/035_intro_matplotlib_32_0.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="notazione-plt-subplots">
 <h2><span class="section-number">8.2. </span>Notazione <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code><a class="headerlink" href="#notazione-plt-subplots" title="Permalink to this headline">#</a></h2>
@@ -943,7 +1128,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/035_intro_matplotlib_20_0.png" src="_images/035_intro_matplotlib_20_0.png" />
+<img alt="_images/035_intro_matplotlib_34_0.png" src="_images/035_intro_matplotlib_34_0.png" />
 </div>
 </div>
 <p>L’istruzione precedente assegna una variabile separata a ciascuno dei due risultati ritornati da <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code>. Si noti non abbiamo passato alcun argomento a <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code>. La chiamata predefinita è <code class="docutils literal notranslate"><span class="pre">subplots(nrows=1,</span> <span class="pre">ncols=1)</span></code>. Di conseguenza, creiamo un singolo grafico, come indicato sopra.</p>
@@ -979,7 +1164,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$y_2$&#39;)
 </pre></div>
 </div>
-<img alt="_images/035_intro_matplotlib_24_1.png" src="_images/035_intro_matplotlib_24_1.png" />
+<img alt="_images/035_intro_matplotlib_38_1.png" src="_images/035_intro_matplotlib_38_1.png" />
 </div>
 </div>
 <p>Facciamo un altro esempio usando i dati <code class="docutils literal notranslate"><span class="pre">penguins.csv</span></code>.</p>
@@ -1015,7 +1200,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/035_intro_matplotlib_28_0.png" src="_images/035_intro_matplotlib_28_0.png" />
+<img alt="_images/035_intro_matplotlib_42_0.png" src="_images/035_intro_matplotlib_42_0.png" />
 </div>
 </div>
 </section>
@@ -1029,7 +1214,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun Feb 12 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Feb 23 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
@@ -1037,8 +1222,8 @@ IPython version      : 8.7.0
 
 matplotlib: 3.6.3
 numpy     : 1.24.1
-pandas    : 1.5.3
 seaborn   : 0.12.2
+pandas    : 1.5.3
 
 Watermark: 2.3.1
 </pre></div>
