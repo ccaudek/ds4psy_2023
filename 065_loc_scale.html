@@ -869,20 +869,10 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="indici-di-posizione-e-di-scala">
 <span id="loc-scale-notebook"></span><h1><span class="section-number">13. </span>Indici di posizione e di scala<a class="headerlink" href="#indici-di-posizione-e-di-scala" title="Permalink to this headline">#</a></h1>
-<p>L’analisi grafica esaminata in precedenza costituisce la base di
-partenza di qualsivoglia analisi quantitativa dei dati. Tramite
-opportune rappresentazioni grafiche possiamo individuare alcune
-caratteristiche importanti di una distribuzione: per esempio, è
-possibile capire se la distribuzione è simmetrica o asimmetrica; oppure
-se è unimodale o multimodale. Successivamente, è necessario calcolare
-degli indici numerici che descrivano in modo sintetico le
-caratteristiche di base dei dati. In questo capitolo verranno introdotti
-i principali indicatori della statistica descrittiva.</p>
+<p>La visualizzazione grafica dei dati costituisce il fondamento di qualsiasi analisi quantitativa. Grazie alle rappresentazioni grafiche appropriate, è possibile individuare importanti caratteristiche di una distribuzione, come la simmetria o l’asimmetria, la presenza di una o più mode. Successivamente, è necessario utilizzare degli indici numerici che descrivano in modo sintetico le caratteristiche principali dei dati. In questo capitolo verranno presentati i principali indicatori della statistica descrittiva.</p>
 <section id="indici-di-tendenza-centrale">
 <h2><span class="section-number">13.1. </span>Indici di tendenza centrale<a class="headerlink" href="#indici-di-tendenza-centrale" title="Permalink to this headline">#</a></h2>
-<p>Tra le misure di tendenza centrale, ovvero tra gli indici che ci
-informano sui valori attorno ai quali sono prevalentemente concentrati i
-dati di un campione, quella più comunemente usata è la media.</p>
+<p>Tra le misure utilizzate per indicare il valore centrale di un insieme di dati, la più diffusa è la media, che fornisce informazioni riguardo ai valori attorno ai quali i dati del campione sono concentrati.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -915,18 +905,17 @@ distribuzione statistica si segua il
 <a class="reference external" href="https://tinystats.github.io/teacups-giraffes-and-statistics/03_mean.html">link</a>.</p>
 <section id="media">
 <h3><span class="section-number">13.1.1. </span>Media<a class="headerlink" href="#media" title="Permalink to this headline">#</a></h3>
-<p>Tutti conosciamo la media aritmetica di <span class="math notranslate nohighlight">\(\{x_1, x_2, \dots, x_n\}\)</span>,
-ovvero il numero reale <span class="math notranslate nohighlight">\(\bar{x}\)</span> definito da</p>
+<p>La media aritmetica di un insieme di valori <span class="math notranslate nohighlight">\({x_1, x_2, \dots, x_n}\)</span> è il valore medio ottenuto dalla somma di tutti i valori divisa per il numero totale di valori:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mean">
 <span class="eqno">(13.1)<a class="headerlink" href="#equation-eq-mean" title="Permalink to this equation">#</a></span>\[
 \bar{x}=\frac{1}{n}\sum_{i=1}^n x_i.
 \]</div>
-<p>Nella &#64;eq-mean ho usato la notazione delle sommatorie per descrivere una
-somma di valori. Questa notazione è molto usata in statistica e viene
-descritta in Appendice.</p>
-<p>La media gode della seguente importante proprietà: la somma degli scarti
-tra ciascuna modalità <span class="math notranslate nohighlight">\(x_i\)</span> e la media aritmetica <span class="math notranslate nohighlight">\(\bar{x}\)</span> è nulla,
-cioè</p>
+<p>Questa formula è comunemente utilizzata in statistica per calcolare il valore centrale di un insieme di dati. Per esempio, se abbiamo i valori <span class="math notranslate nohighlight">\(3, 5, 7, 10\)</span> e vogliamo calcolare la media, possiamo utilizzare la formula sopra riportata:</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{x}=\frac{1}{4} (3+5+7+10) = \frac{25}{4}.
+\]</div>
+<p>La media ha una proprietà importante, ovvero la somma degli scarti tra ciascun valore <span class="math notranslate nohighlight">\(x_i\)</span> e la media aritmetica <span class="math notranslate nohighlight">\(\bar{x}\)</span> è uguale a zero, cioè:</p>
 <div class="math notranslate nohighlight" id="equation-eq-diffmeansumzero">
 <span class="eqno">(13.2)<a class="headerlink" href="#equation-eq-diffmeansumzero" title="Permalink to this equation">#</a></span>\[
 \sum_{i=1}^n (x_i - \bar{x}) = 0.\notag
@@ -940,26 +929,9 @@ cioè</p>
 &amp;= \sum_i x_i - \sum_i x_i = 0.\notag
 \end{aligned}
 \end{split}\]</div>
-<p>Ciò ci consente di pensare alla media come al baricentro della
-distribuzione.</p>
-<p>Un’altra proprietà della media è la seguente. La somma dei quadrati
-degli scarti tra ciascuna modalità <span class="math notranslate nohighlight">\(x_i\)</span> e una costante arbitraria <span class="math notranslate nohighlight">\(a\)</span>,
-cioè</p>
-<div class="math notranslate nohighlight" id="equation-eq-minsq">
-<span class="eqno">(13.3)<a class="headerlink" href="#equation-eq-minsq" title="Permalink to this equation">#</a></span>\[
-\varphi(a) = \sum_{i=1}^n (x_i - a)^2,\notag
-\]</div>
-<p>è minima per <span class="math notranslate nohighlight">\(a = \bar{x}\)</span>.</p>
-<p>Il concetto statistico di media ha suscitato molte battute. Per esempio,
-il fatto che, in media, ciascuno di noi ha un numero di gambe circa pari
-a 1.9999999. Oppure, il fatto che, in media, ciascuno di noi ha un
-testicolo. Ma la media ha altri problemi, oltre al fatto di ispirare
-battute simili alle precedenti. In particolare, dobbiamo notare che la
-media non è sempre l’indice che meglio rappresenta la tendenza centrale
-di una distribuzione. In particolare, ciò non accade quando la
-distribuzione è asimmetrica, o in presenza di valori anomali (<em>outlier</em>)
-In tali circostanze, la tendenza centrale della distribuzione è meglio
-rappresentata dalla mediana o dalla media spuntata (si veda più sotto).</p>
+<p>Questa proprietà implica che la media aritmetica rappresenta un valore attorno al quale i dati sono equamente distribuiti in positivo e in negativo rispetto alla media stessa.</p>
+<p>Un’altra proprietà della media è la seguente: la somma dei quadrati degli scarti tra ciascuna modalità <span class="math notranslate nohighlight">\(x_i\)</span> e una costante arbitraria <span class="math notranslate nohighlight">\(a\)</span>, cioè <span class="math notranslate nohighlight">\(\varphi(a) = \sum_{i=1}^n (x_i - a)^2\)</span>, è minima per <span class="math notranslate nohighlight">\(a = \bar{x}\)</span>.</p>
+<p>La definizione di media aritmetica ha spesso ispirato battute ironiche, come ad esempio la constatazione che in media ogni persona ha meno di due gambe o che ha un solo testicolo. Tuttavia, la media presenta alcune limitazioni: non sempre rappresenta l’indice che meglio descrive la tendenza centrale della distribuzione, soprattutto in presenza di asimmetria o di valori anomali (outlier). In questi casi, è preferibile utilizzare la mediana o la media spuntata (vedi oltre).</p>
 <p>Se abbiamo un piccolo numero di valori, possiamo calcolare la media in Python come su qualunque calcolatore. Supponiamo che i valori siano 12, 44, 21, 62, 24. La media è</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1137,16 +1109,8 @@ Name: bdi, dtype: float64
 </section>
 <section id="media-spuntata">
 <h3><span class="section-number">13.1.2. </span>Media spuntata<a class="headerlink" href="#media-spuntata" title="Permalink to this headline">#</a></h3>
-<p>La <em>media spuntata</em> <span class="math notranslate nohighlight">\(\bar{x}_t\)</span> (<em>trimmed mean</em>) non è altro che la
-media dei dati calcolata considerando solo il 90% (o altra percentuale)
-dei dati centrali. Per calcolare <span class="math notranslate nohighlight">\(\bar{x}_t\)</span> si ordinando i dati secondo
-una sequenza crescente, <span class="math notranslate nohighlight">\(x_1 \leq x_2 \leq x_3 \leq \dots \leq x_n\)</span>, per
-poi eliminare il primo 5% e l’ultimo 5% dei dati della serie così
-ordinata. La media spuntata è data dalla media aritmetica dei dati
-rimanenti.</p>
-<p>Per fare un esempio, calcoliamo la media spuntata dei valori BDI-II per i due gruppi di
-soggetti esaminati da <span id="id2">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> escludendo il 10% dei valori
-più estremi.</p>
+<p>La <em>media spuntata</em> <span class="math notranslate nohighlight">\(\bar{x}_t\)</span> (o <em>trimmed mean</em>) è ottenuta calcolando la media dei dati dopo aver eliminato una determinata percentuale di dati estremi. In genere, si elimina il 10% dei dati, ovvero il 5% all’inizio e alla fine della distribuzione. Per ottenere la media spuntata, i dati vengono ordinati in modo crescente, <span class="math notranslate nohighlight">\(x_1 \leq x_2 \leq x_3 \leq \dots \leq x_n\)</span>, e poi viene eliminato il primo 5% e l’ultimo 5% dei dati nella sequenza ordinata. La media spuntata è quindi calcolata come la media aritmetica dei dati rimanenti. La media spuntata è utile quando ci sono valori anomali o quando la distribuzione è asimmetrica e la media aritmetica non è rappresentativa della tendenza centrale dei dati.</p>
+<p>Per fare un esempio, calcoliamo la media spuntata dei valori BDI-II per i due gruppi di soggetti esaminati da <span id="id2">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> escludendo il 10% dei valori più estremi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_mdd</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mdd&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
@@ -1264,52 +1228,25 @@ documentazione del software.</p>
 </section>
 <section id="indici-di-dispersione">
 <h2><span class="section-number">13.2. </span>Indici di dispersione<a class="headerlink" href="#indici-di-dispersione" title="Permalink to this headline">#</a></h2>
-<p>Le medie e gli indici di posizione descritti in precedenza forniscono
-delle sintesi dei dati che mettono in evidenza la tendenza centrale
-delle osservazioni. Tali indici, tuttavia, non considerano un aspetto
-importante della distribuzione dei dati, ovvero la variabilità dei
-valori numerici della variabile statistica. È dunque necessario
-sintetizzare la distribuzione di una variabile statistica oltre che con
-le misure di posizione anche tramite l’utilizzo di indicatori che
-valutino la dispersione delle unità statistice.</p>
+<p>Le misure di posizione descritte in precedenza come le medie e gli indici di posizione, forniscono una sintesi dei dati che mettono in evidenza la tendenza centrale delle osservazioni. Tuttavia, non tengono conto di un aspetto importante della distribuzione dei dati, ovvero la variabilità dei valori numerici della variabile statistica. Pertanto, è necessario sintetizzare la distribuzione di una variabile statistica anche tramite l’utilizzo di indicatori che valutino la dispersione delle unità statistiche.</p>
 <p>Per un’introduzione “soft” al tema degli indici di dispersione si segua
 il
 <a class="reference external" href="https://tinystats.github.io/teacups-giraffes-and-statistics/04_variance.html">link</a>.</p>
 <section id="indici-basati-sullordinamento-dei-dati">
 <h3><span class="section-number">13.2.1. </span>Indici basati sull’ordinamento dei dati<a class="headerlink" href="#indici-basati-sullordinamento-dei-dati" title="Permalink to this headline">#</a></h3>
-<p>È possibile calcolare degli indici di variabilità basati
-sull’ordinamento dei dati. L’indice più ovvio è l’<em>intervallo di
-variazione</em>, ovvero la distanza tra il valore massimo e il valore minimo
-di una distribuzione di modalità, mentre in precedenza abbiamo già
-incontrato la <em>differenza interquartile</em>. Questi due indici, però, hanno
-il limite di essere calcolati sulla base di due soli valori della
-distribuzione (<span class="math notranslate nohighlight">\(x_{\text{max}}\)</span> e <span class="math notranslate nohighlight">\(x_{\text{min}}\)</span>, oppure <span class="math notranslate nohighlight">\(x_{0.25}\)</span> e
-<span class="math notranslate nohighlight">\(x_{0.75}\)</span>). Pertanto non utilizzano tutte le informazioni che sono
-disponibili. Inoltre, l’intervallo di variazione ha il limite di essere
-pesantemente influenzato dalla presenza di valori anomali.</p>
+<p>Per valutare la variabilità dei dati è possibile utilizzare indici basati sull’ordinamento dei dati. L’indice più ovvio è l’intervallo di variazione, che corrisponde alla differenza tra il valore massimo e il valore minimo di una distribuzione di modalità. Tuttavia, questo indice presenta il limite di essere calcolato sulla base di soli due valori della distribuzione, e non tiene conto di tutte le informazioni disponibili. Inoltre, l’intervallo di variazione può essere pesantemente influenzato dalla presenza di valori anomali. Un altro indice basato sull’ordinamento dei dati è la differenza interquartile, già incontrata in precedenza. Anche se questo indice utilizza più informazioni rispetto all’intervallo di variazione, presenta comunque il limite di essere calcolato sulla base di soli due valori della distribuzione (<span class="math notranslate nohighlight">\(x_{0.25}\)</span> e <span class="math notranslate nohighlight">\(x_{0.75}\)</span>). Per valutare la variabilità in modo più completo, è necessario utilizzare altri indici di variabilità che tengano conto di tutti i dati disponibili.</p>
 </section>
 <section id="varianza">
 <h3><span class="section-number">13.2.2. </span>Varianza<a class="headerlink" href="#varianza" title="Permalink to this headline">#</a></h3>
-<p>Dati i limiti delle statistiche precedenti è più comune misurare la
-variabilità di una variabile statistica come la dispersione dei dati
-attorno ad un indice di tendenza centrale. Infatti, la misura di
-variabilità di gran lunga più usata per valutare la variabilità di una
-variabile statistica è senza dubbio la varianza. La varianza</p>
+<p>Data la limitazione delle statistiche descritte in precedenza, è più comune utilizzare una misura di variabilità che tenga conto della dispersione dei dati intorno ad un indice di tendenza centrale. La varianza è la misura di variabilità più utilizzata per valutare la variabilità di una variabile statistica. Essa è definita come la media dei quadrati degli scarti <span class="math notranslate nohighlight">\(x_i - \bar{x}\)</span> tra ogni valore e la media della distribuzione, come segue:</p>
 <div class="math notranslate nohighlight" id="equation-eq-var-descr">
-<span class="eqno">(13.4)<a class="headerlink" href="#equation-eq-var-descr" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(13.3)<a class="headerlink" href="#equation-eq-var-descr" title="Permalink to this equation">#</a></span>\[
 \begin{equation}
-S^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2
+S^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2.
 \end{equation}
 \]</div>
-<p>è la media dei quadrati degli scarti <span class="math notranslate nohighlight">\(x_i - \bar{x}\)</span> tra ogni valore e
-la media della distribuzione.</p>
-<p>La varianza è una misura di dispersione più complessa di quelle
-esaminate in precedenza. È appropriata solo nel caso di distribuzioni
-simmetriche e, anch’essa, è fortemente influenzata dai valori anomali.
-Inoltre, è espressa in un’unità di misura che è il quadrato dell’unità
-di misura dei dati originari e quindi ad essa non può essere assegnata
-un’interpretazione intuitiva.</p>
-<p>Calcoliamo la varianza dei valori BDI-II per i dati di <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Applicando l’eq. <a class="reference internal" href="#equation-eq-var-descr">(13.4)</a>, per tutto il campione abbiamo</p>
+<p>La varianza è una misura di dispersione più complessa rispetto a quelle descritte in precedenza. Essa è appropriata solo nel caso di distribuzioni simmetriche e, come le altre misure di dispersione, è fortemente influenzata dai valori anomali. Inoltre, la varianza è espressa in un’unità di misura che è il quadrato dell’unità di misura dei dati originari e, pertanto, non può essere interpretata in modo intuitivo.</p>
+<p>Calcoliamo la varianza dei valori BDI-II per i dati di <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Applicando l’eq. <a class="reference internal" href="#equation-eq-var-descr">(13.3)</a>, per tutto il campione abbiamo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">])</span>
@@ -1337,13 +1274,13 @@ un’interpretazione intuitiva.</p>
 </div>
 <section id="stima-della-varianza-della-popolazione">
 <h4><span class="section-number">13.2.2.1. </span>Stima della varianza della popolazione<a class="headerlink" href="#stima-della-varianza-della-popolazione" title="Permalink to this headline">#</a></h4>
-<p>Si noti il denominatore della formula della varianza. Nell’eq.<a class="reference internal" href="#equation-eq-var-descr">(13.4)</a>
+<p>Si noti il denominatore della formula della varianza. Nell’eq.<a class="reference internal" href="#equation-eq-var-descr">(13.3)</a>
 ho usato <span class="math notranslate nohighlight">\(n\)</span> (l’ampiezza campionaria, ovvero il numero di osservazioni
 del campione). In questo modo ottengo la varianza quale <em>statistica
 descrittiva</em> del campione. In alternativa, è possibile usare <span class="math notranslate nohighlight">\(n-1\)</span> al
 denominatore:</p>
 <div class="math notranslate nohighlight" id="equation-eq-var-stimatore">
-<span class="eqno">(13.5)<a class="headerlink" href="#equation-eq-var-stimatore" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(13.4)<a class="headerlink" href="#equation-eq-var-stimatore" title="Permalink to this equation">#</a></span>\[
 \begin{equation}
 s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2
 \end{equation}
@@ -1514,7 +1451,7 @@ questa distribuzione.</p>
 </div>
 </div>
 <p>Si noti che il valore medio della stima della varianza ottenuta con
-l’eq.<a class="reference internal" href="#equation-eq-var-descr">(13.4)</a> è troppo piccolo rispetto al valore corretto di
+l’eq.<a class="reference internal" href="#equation-eq-var-descr">(13.3)</a> è troppo piccolo rispetto al valore corretto di
 <span class="math notranslate nohighlight">\(15^2 = 225\)</span>. Ripeto ora la simulazione usando la formula della varianza con <span class="math notranslate nohighlight">\(n-1\)</span> al
 denominatore.</p>
 <div class="cell docutils container">
@@ -1549,18 +1486,12 @@ trovata con <span class="math notranslate nohighlight">\(n-1\)</span> al denomin
 </section>
 <section id="precisione">
 <h3><span class="section-number">13.2.3. </span>Precisione<a class="headerlink" href="#precisione" title="Permalink to this headline">#</a></h3>
-<p>Si definisce <em>precisione</em> l’inverso della varianza:</p>
+<p>La <em>precisione</em> è definita come l’inverso della varianza:</p>
 <div class="math notranslate nohighlight" id="equation-eq-precision">
-<span class="eqno">(13.6)<a class="headerlink" href="#equation-eq-precision" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(13.5)<a class="headerlink" href="#equation-eq-precision" title="Permalink to this equation">#</a></span>\[
 \tau = \frac{1}{\sigma^2}.
 \]</div>
-<p>Alcuni ritengono che la precisione sia più “intuitiva” della varianza
-perché dice quanto sono concentrati i valori attorno alla media
-piuttosto che quanto sono dispersi. In altri termini, si potrebbe
-argomentare che siamo più interessati a quanto sia precisa una
-misurazione piuttosto che a quanto sia imprecisa. Più sono dispersi i
-valori attorno alla media (alta varianza), meno sono precisi (poca
-precisione); minore è la varianza, maggiore è la precisione.</p>
+<p>Alcuni esperti ritengono che la precisione sia una misura più “intuitiva” della varianza poiché indica quanto i valori sono concentrati attorno alla media, anziché quanto sono dispersi. In altre parole, è più importante sapere quanto una misurazione è precisa piuttosto che quanto è imprecisa. Se i valori sono molto dispersi attorno alla media (alta varianza), la precisione è bassa (poca precisione); se invece la varianza è bassa, la precisione è alta.</p>
 <p>La precisione è uno dei due parametri naturali della distribuzione
 gaussiana. Nei termini della &#64;eq-precision, la distribuzione gaussiana
 (si veda il Capitolo &#64;distr-rv-cont) può essere espressa nel modo
@@ -1577,38 +1508,21 @@ seguente</p>
 </section>
 <section id="deviazione-standard">
 <h3><span class="section-number">13.2.4. </span>Deviazione standard<a class="headerlink" href="#deviazione-standard" title="Permalink to this headline">#</a></h3>
-<p>Dato che l’unità di misura della varianza coincide con il quadrato
-dell’unità di misura dei dati, la varianza è difficile da interpretare.
-Questo problema si può risolvere prendendo la radice quadrata della
-varianza, ottenendo così una misura espressa nell’unità di misura
-originaria dei dati. Una tale misura si chiama <em>deviazione standard</em> (o
-<em>scarto quadratico medio</em>, o <em>scarto tipo</em>)[1]:</p>
+<p>Per interpretare la varianza in modo più intuitivo, si può calcolare la deviazione standard (o scarto quadratico medio o scarto tipo) prendendo la radice quadrata della varianza. La deviazione standard è espressa nell’unità di misura originaria dei dati, a differenza della varianza che è espressa nel quadrato dell’unità di misura dei dati. La deviazione standard fornisce una misura della dispersione dei dati attorno alla media, rendendo più facile la comprensione della variabilità dei dati. La <em>deviazione standard</em> (o <em>scarto quadratico medio</em>, o <em>scarto tipo</em>)[1] è definita come:</p>
 <div class="math notranslate nohighlight" id="equation-eq-sd-stimatore">
-<span class="eqno">(13.7)<a class="headerlink" href="#equation-eq-sd-stimatore" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(13.6)<a class="headerlink" href="#equation-eq-sd-stimatore" title="Permalink to this equation">#</a></span>\[
 s^2 = \sqrt{(n-1)^{-1} \sum_{i=1}^n (x_i - \bar{x})^2}
 \]</div>
 <p>Quando tutte le osservazioni sono uguali, <span class="math notranslate nohighlight">\(s = 0\)</span>, altrimenti <span class="math notranslate nohighlight">\(s &gt; 0\)</span>.</p>
 <div class="admonition-nota admonition">
 <p class="admonition-title">Nota</p>
-<p>Il termine <em>standard deviation</em> è stato introdotto in statistica da
-Pearson nel 1894 assieme alla lettera greca <span class="math notranslate nohighlight">\(\sigma\)</span> che lo rappresenta.
-Il termine italiano “deviazione standard” ne è la traduzione più
-utilizzata nel linguaggio comune; il termine dell’<a class="reference external" href="https://it.wikipedia.org/wiki/Ente_nazionale_italiano_di_unificazione">Ente Nazionale
-Italiano di
-Unificazione</a>
-è tuttavia “scarto tipo”, definito come la radice quadrata positiva
-della varianza.</p>
+<p>Il termine <em>standard deviation</em> è stato introdotto in statistica da Pearson nel 1894 assieme alla lettera greca <span class="math notranslate nohighlight">\(\sigma\)</span> che lo rappresenta. Il termine italiano “deviazione standard” ne è la traduzione più utilizzata nel linguaggio comune; il termine dell’<a class="reference external" href="https://it.wikipedia.org/wiki/Ente_nazionale_italiano_di_unificazione">Ente Nazionale Italiano di Unificazione</a>
+è tuttavia “scarto tipo”, definito come la radice quadrata positiva della varianza.</p>
 </div>
-<p>Come nel caso della varianza, anche la deviazione standard <span class="math notranslate nohighlight">\(s\)</span> dovrebbe
-essere usata soltanto quando la media è adeguata per descrivere il
-centro della distribuzione, ovvero, nel caso di distribuzioni
-simmetriche. Come nel caso della media <span class="math notranslate nohighlight">\(\bar{x}\)</span>, anche la deviazione
-standard è fortemente influenzata dai dati anomali, ovvero dalla
-presenza di uno o di pochi dati che sono molto più distanti dalla media
-rispetto agli altri valori della distribuzione.</p>
+<p>La deviazione standard <span class="math notranslate nohighlight">\(s\)</span> dovrebbe essere utilizzata solo quando la media è una misura appropriata per descrivere il centro della distribuzione, ad esempio nel caso di distribuzioni simmetriche. Come la media <span class="math notranslate nohighlight">\(\bar{x}\)</span>, infatti, anche la deviazione standard è fortemente influenzata dalla presenza di dati anomali, ovvero pochi valori che si discostano notevolmente dalla media rispetto agli altri dati della distribuzione.</p>
 <p>Per fare un esempio, calcoliamo la deviazione standard per i valori BDI-II del campione di
 <span id="id5">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
-<p>Applicando l’eq. <a class="reference internal" href="#equation-eq-sd-stimatore">(13.7)</a>, per tutto il campione abbiamo</p>
+<p>Applicando l’eq. <a class="reference internal" href="#equation-eq-sd-stimatore">(13.6)</a>, per tutto il campione abbiamo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">)</span>
@@ -1639,13 +1553,7 @@ Name: bdi, dtype: float64
 </div>
 <section id="interpretazione">
 <h4><span class="section-number">13.2.4.1. </span>Interpretazione<a class="headerlink" href="#interpretazione" title="Permalink to this headline">#</a></h4>
-<p>Alla deviazione standard può essere assegnata una semplice
-interpretazione: la deviazione standard è <em>simile</em> (ma non identica)
-allo scarto semplice medio campionario, ovvero alla media aritmetica dei
-valori assoluti degli scarti dalla media. La deviazione standard ci
-dice, dunque, quanto sono distanti, in media, le singole osservazioni
-dal centro della distribuzione. Un’interpretazione più precisa del
-significato dello scarto tipo è fornita nel paragrafo successivo.</p>
+<p>La deviazione standard può essere interpretata in modo semplice: essa è simile allo scarto semplice medio campionario, cioè alla media aritmetica dei valori assoluti degli scarti dalla media, anche se non identica. La deviazione standard ci fornisce quindi un’indicazione di quanto le singole osservazioni si discostino, in media, dal centro della distribuzione. Una spiegazione più accurata del significato della deviazione standard sarà fornita nel paragrafo successivo.</p>
 <p>Si verifichi l’interpretazione della deviazione standard fornita sopra
 usando i valori BDI-II del campione di <span id="id6">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
 <p>Per questi dati la deviazione standard è</p>
@@ -1683,7 +1591,7 @@ usando i valori BDI-II del campione di <span id="id6">Zetsche <em>et al.</em> [<
 definita come la mediana del valore assoluto delle deviazioni dei dati
 dalla mediana, ovvero:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mad-def">
-<span class="eqno">(13.8)<a class="headerlink" href="#equation-eq-mad-def" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(13.7)<a class="headerlink" href="#equation-eq-mad-def" title="Permalink to this equation">#</a></span>\[
 {\displaystyle \operatorname {MAD} =\operatorname {median} \left(\ \left|X_{i}-\operatorname {median} (X)\right|\ \right)}
 \]</div>
 <p>Nel caso di una distribuzione dei dati unimodale simmetrica di forma
@@ -1706,7 +1614,7 @@ normale. Usiamo, ad esempio, la distribuzione <span class="math notranslate nohi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.733466603771172
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.7974649892155
 </pre></div>
 </div>
 </div>
@@ -1723,7 +1631,7 @@ necessario ricorrere a particolari numeri adimensionali detti <em>indici
 relativi di variabilità</em>. Il più importante di tali indici è il
 <em>coefficiente di variazione</em>, ovvero il numero puro</p>
 <div class="math notranslate nohighlight" id="equation-eq-cv-def">
-<span class="eqno">(13.9)<a class="headerlink" href="#equation-eq-cv-def" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(13.8)<a class="headerlink" href="#equation-eq-cv-def" title="Permalink to this equation">#</a></span>\[
 C_v = \frac{\sigma}{\bar{x}}
 \]</div>
 <p>ottenuto dal rapporto tra la deviazione standard e la media dei dati.</p>
@@ -1738,15 +1646,7 @@ mediana, cioè:</p>
 </section>
 <section id="commenti-e-considerazioni-finali">
 <h2><span class="section-number">13.3. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
-<p>Le statistiche descrittive ci forniscono degli indici sintetici che
-riassumono i dati, ovvero le nostre misurazioni dell’intera popolazione
-o di un campione estratto da una popolazione. Le statistiche descrittive
-comprendono gli indici di tendenza centrale e gli indici di dispersione.
-Gli indici di tendenza centrale includono la media, la mediana e la
-moda, mentre gli indici di dispersione includono la deviazione standard,
-la varianza, la curtosi e l’asimmetria (questi ultimi due indici sono
-definiti in relazione alla distribuzione Normale e verranno dunque
-discussi in quel contesto).</p>
+<p>Le statistiche descrittive consentono di ottenere degli indici sintetici che riassumono i dati, sia per l’intera popolazione che per un campione estratto da essa. Questi indici includono le misure di tendenza centrale, come la media, la mediana e la moda, che indicano la posizione centrale dei dati. Inoltre, ci sono anche gli indici di dispersione, come la deviazione standard e la varianza, che indicano quanto i dati sono distribuiti attorno alla tendenza centrale. È importante notare che la curtosi e l’asimmetria sono indici di dispersione che si applicano solo alle distribuzioni normali e verranno approfonditi in quel contesto.</p>
 </section>
 <section id="watermark">
 <h2><span class="section-number">13.4. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
@@ -1758,7 +1658,7 @@ discussi in quel contesto).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Feb 23 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Feb 24 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
@@ -1766,11 +1666,11 @@ IPython version      : 8.7.0
 
 pytensor: 2.9.1
 
-seaborn   : 0.12.2
-scipy     : 1.10.0
-pandas    : 1.5.3
 matplotlib: 3.6.3
+scipy     : 1.10.0
 numpy     : 1.24.1
+pandas    : 1.5.3
+seaborn   : 0.12.2
 
 Watermark: 2.3.1
 </pre></div>
