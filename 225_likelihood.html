@@ -814,6 +814,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
@@ -856,22 +857,25 @@ title="Print to PDF"
 <p>Per <span class="math notranslate nohighlight">\(n\)</span> prove Bernoulliane indipendenti, le quali producono <span class="math notranslate nohighlight">\(y\)</span> successi e (<span class="math notranslate nohighlight">\(n-y\)</span>) insuccessi, la funzione nucleo di verosimiglianza (ovvero, la funzione di verosimiglianza da cui sono state escluse tutte le costanti moltiplicative che non hanno alcun effetto su <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>) è</p>
 <div class="math notranslate nohighlight" id="equation-eq-like-binomial-kernel">
 <span class="eqno">(27.1)<a class="headerlink" href="#equation-eq-like-binomial-kernel" title="Permalink to this equation">#</a></span>\[
-\mathcal{L}(p \mid y) = \theta^y (1-\theta)^{n - y}.\notag
+\mathcal{L}(\theta \mid y) = \theta^y (1-\theta)^{n - y}.\notag
 \]</div>
-<p>Per fare un esempio pratico, consideriamo la ricerca di <span id="id1">[<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Questi ricercatori hanno trovato che, su 30 pazienti clinicamente depressi, 23 manifestavano delle aspettative distorsione negativamente relativamente al loro umore futuro. Se i dati di <span id="id2">[<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> vengono riassunti mediante una proporzione (ovvero, 23/30), allora è sensato adottare un modello probabilistico binomiale quale meccanismo generatore dei dati:</p>
+<p>Per fare un esempio pratico, consideriamo la ricerca di <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Questi ricercatori hanno trovato che, su 30 pazienti clinicamente depressi, 23 manifestavano delle aspettative distorte negativamente relativamente al loro umore futuro. Se i dati di <span id="id2">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> vengono riassunti mediante una proporzione (ovvero, 23/30), allora è sensato adottare un modello probabilistico binomiale quale meccanismo generatore dei dati:</p>
 <div class="math notranslate nohighlight" id="equation-eq-binomialmodel">
 <span class="eqno">(27.2)<a class="headerlink" href="#equation-eq-binomialmodel" title="Permalink to this equation">#</a></span>\[
-y  \sim Bin(n, \theta),
+y  \sim Binomial(n, \theta),
 \]</div>
 <p>laddove <span class="math notranslate nohighlight">\(\theta\)</span> è la probabiltà che una prova Bernoulliana assuma il valore 1 e <span class="math notranslate nohighlight">\(n\)</span> corrisponde al numero di prove Bernoulliane. Questo modello assume che le prove Bernoulliane <span class="math notranslate nohighlight">\(y\)</span> che costituiscono il campione siano tra loro indipendenti e che ciascuna abbia la stessa probabilità <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span> di essere un “successo” (valore 1). In altre parole, il modello generatore dei dati avrà la seguente funzione di massa di probabilità</p>
 <div class="math notranslate nohighlight">
 \[
-p(y \mid \theta)
-\ = \
-Bin(y \mid n, \theta).
+p(y \mid \theta) = Binomial(y \mid n, \theta).
 \]</div>
-<p>Nei capitoli precedenti è stato mostrato come, sulla base del modello binomiale, sia possibile assegnare una probabilità a ciascun possibile valore <span class="math notranslate nohighlight">\(y \in \{0, 1, \dots, n\}\)</span> <em>assumendo noto il valore del parametro</em> <span class="math notranslate nohighlight">\(\theta\)</span>. Ma ora abbiamo il problema inverso, ovvero quello di fare inferenza su <span class="math notranslate nohighlight">\(\theta\)</span> alla luce dei dati campionari <span class="math notranslate nohighlight">\(y\)</span>. In altre parole, riteniamo di conoscere il modello probabilistico che ha generato i dati, ma di tale modello non conosciamo i parametri: vogliamo dunque ottenere informazioni su <span class="math notranslate nohighlight">\(\theta\)</span> avendo osservato i dati <span class="math notranslate nohighlight">\(y\)</span>. Per fare questo, in un ottica bayesiana, è innanzitutto necessario definire la funzione di verosimiglianza.</p>
-<p>Per i dati di <span id="id3">[<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>, la funzione di verosimiglianza corrisponde alla funzione binomiale di parametro <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span> sconosciuto. Abbiamo osservato <span class="math notranslate nohighlight">\(y\)</span> = 23 successi, in <span class="math notranslate nohighlight">\(n\)</span> = 30 prove.</p>
+<p>Nei capitoli precedenti è stato mostrato come, sulla base del modello binomiale, sia possibile assegnare una probabilità a ciascun possibile valore <span class="math notranslate nohighlight">\(y \in \{0, 1, \dots, n\}\)</span> <em>assumendo noto il valore del parametro</em> <span class="math notranslate nohighlight">\(\theta\)</span>. Ma ora abbiamo il problema inverso, ovvero quello di fare inferenza su <span class="math notranslate nohighlight">\(\theta\)</span> alla luce dei dati campionari <span class="math notranslate nohighlight">\(y\)</span>. In altre parole, riteniamo di conoscere il modello probabilistico che ha generato i dati, ma di tale modello non conosciamo i parametri: vogliamo dunque ottenere informazioni su <span class="math notranslate nohighlight">\(\theta\)</span> avendo osservato i dati <span class="math notranslate nohighlight">\(y\)</span>. Per fare questo, è innanzitutto necessario definire la funzione di verosimiglianza.</p>
+<p>Per i dati di <span id="id3">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>, la funzione di verosimiglianza corrisponde alla funzione binomiale di parametro <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span> sconosciuto. Avendo osservato <span class="math notranslate nohighlight">\(y\)</span> = 23 successi, in <span class="math notranslate nohighlight">\(n\)</span> = 30 prove, la funzione di verosimiglianza diventa</p>
+<div class="math notranslate nohighlight" id="equation-eq-likebino23">
+<span class="eqno">(27.3)<a class="headerlink" href="#equation-eq-likebino23" title="Permalink to this equation">#</a></span>\[
+\mathcal{L}(\theta \mid y) = \frac{(23 + 7)!}{23!7!} \theta^{23} + (1-\theta)^7.
+\]</div>
+<p>Per costruire la funzione di verosimiglianza dobbiamo applicare l’eq. <a class="reference internal" href="#equation-eq-likebino23">(27.3)</a> tante volte, cambiando ogni volta il valore <span class="math notranslate nohighlight">\(\theta\)</span>, ma tenendo sempre costante il valore dei dati. Nella seguente simulazione considereremo 100 possibili valori <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span>. Iniziamo con il definire i dati.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
@@ -880,12 +884,7 @@ Bin(y \mid n, \theta).
 </div>
 </div>
 </div>
-<p>La funzione di verosimiglianza dunque diventa</p>
-<div class="math notranslate nohighlight" id="equation-eq-likebino23">
-<span class="eqno">(27.3)<a class="headerlink" href="#equation-eq-likebino23" title="Permalink to this equation">#</a></span>\[
-\mathcal{L}(\theta \mid y) = \frac{(23 + 7)!}{23!7!} \theta^{23} + (1-\theta)^7.
-\]</div>
-<p>Per costruire la funzione di verosimiglianza dobbiamo applicare l’eq. <a class="reference internal" href="#equation-eq-likebino23">(27.3)</a> tante volte, cambiando ogni volta il valore <span class="math notranslate nohighlight">\(\theta\)</span>, ma tenendo sempre costante il valore dei dati. Nella seguente simulazione considereremo 100 possibili valori <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span>.</p>
+<p>Creiamo ora i possibili valori del parametro <span class="math notranslate nohighlight">\(\theta\)</span> per i quali calcoleremo la verosimiglianza.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -922,7 +921,7 @@ Bin(y \mid n, \theta).
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -939,7 +938,7 @@ Bin(y \mid n, \theta).
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -949,10 +948,10 @@ Bin(y \mid n, \theta).
 </div>
 </div>
 </div>
-<p>Se ripetiamo questo processo 100 volte, una volta per ciascuno dei valori <span class="math notranslate nohighlight">\(\theta\)</span> considerati, otteniamo 100 coppie di punti <span class="math notranslate nohighlight">\(\theta\)</span> e <span class="math notranslate nohighlight">\(f(\theta)\)</span>.</p>
+<p>Se ripetiamo questo processo 100 volte, una volta per ciascuno dei valori <span class="math notranslate nohighlight">\(\theta\)</span> che abbiamo elencato sopra, otteniamo 100 coppie di punti <span class="math notranslate nohighlight">\(\theta\)</span> e <span class="math notranslate nohighlight">\(f(\theta)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">like</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">like</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">theta</span><span class="o">**</span><span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -961,9 +960,7 @@ Bin(y \mid n, \theta).
 <p>La curva che interpola tali punti è la funzione di verosimiglianza. La figura successiva fornisce una rappresentazione grafica di tale funzione.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mi">23</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">like</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">like</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Funzione di verosimiglianza&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale theta [0, 1]&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Verosimiglianza&quot;</span><span class="p">)</span>
@@ -980,21 +977,16 @@ Bin(y \mid n, \theta).
 <section id="interpretazione">
 <h3><span class="section-number">27.2.1. </span>Interpretazione<a class="headerlink" href="#interpretazione" title="Permalink to this headline">#</a></h3>
 <p>Come possiamo interpretare la curva che abbiamo ottenuto? Per alcuni valori <span class="math notranslate nohighlight">\(\theta\)</span> la funzione di verosimiglianza assume valori piccoli; per altri valori <span class="math notranslate nohighlight">\(\theta\)</span> la funzione di verosimiglianza assume valori più grandi. Questi ultimi sono i valori <span class="math notranslate nohighlight">\(\theta\)</span> più credibili e il valore 23/30 = 0.767 (la moda della funzione di verosimiglianza) è il valore più credibile di tutti.</p>
+<p>Per risolvere l’esempio, dobbiamo trovare il valore di <span class="math notranslate nohighlight">\(\theta\)</span> che massimizza la funzione di verosimiglianza. Questo significa individuare l’indice nel vettore che contiene i valori della funzione di verosimiglianza in cui il valore di verosimiglianza è massimo. Questo risultato può essere ottenuto utilizzando la funzione <code class="docutils literal notranslate"><span class="pre">argmax</span></code> di NumPy. Una volta trovato l’indice, possiamo trovare il valore di <span class="math notranslate nohighlight">\(\theta\)</span> corrispondente nel vettore <code class="docutils literal notranslate"><span class="pre">theta</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_list</span> <span class="o">=</span> <span class="n">like</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
-<span class="nb">max</span> <span class="o">=</span> <span class="n">input_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)):</span>
-    <span class="k">if</span> <span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">:</span>
-        <span class="nb">max</span> <span class="o">=</span> <span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="n">i</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Index of the maximum value is: </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="n">like</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index of the maximum value is: 76
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76
 </pre></div>
 </div>
 </div>
@@ -1014,9 +1006,7 @@ Bin(y \mid n, \theta).
 <p>Si noti che, anziché usare la funzione <code class="docutils literal notranslate"><span class="pre">like()</span></code> che (per chiarezza) abbiamo definito sopra, in una maniera del tutto equivalente è possibile usare la funzione <code class="docutils literal notranslate"><span class="pre">binom.pmf()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
-<span class="n">r</span> <span class="o">=</span> <span class="mi">23</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Funzione di verosimiglianza&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale theta [0, 1]&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Verosimiglianza&quot;</span><span class="p">)</span>
@@ -1053,14 +1043,14 @@ Bin(y \mid n, \theta).
           &amp;= y \log \theta + (n - y) \log (1-\theta).\notag
 \end{aligned}
 \end{split}\]</div>
-<p>Si noti che non è necessario lavorare con i logaritmi, ma è fortemente consigliato. Il motivo è che i valori della verosimiglianza, in cui si moltiplicano valori di probabilità molto piccoli, possono diventare estremamente piccoli – qualcosa come <span class="math notranslate nohighlight">\(10^{-34}\)</span>. In tali circostanze, non è sorprendente che i programmi dei computer mostrino problemi di arrotondamento numerico. Le trasformazioni logaritmiche risolvono questo problema.</p>
+<p>È importante sottolineare che non è strettamente necessario lavorare con i logaritmi, ma è altamente raccomandato. La ragione principale è che i valori di verosimiglianza, che rappresentano il prodotto di numeri di probabilità molto piccoli, possono diventare estremamente piccoli, anche dell’ordine di <span class="math notranslate nohighlight">\(10^{-34}\)</span>. In queste circostanze, è comune che i programmi informatici incontrino problemi di arrotondamento numerico e che si verifichino errori nei calcoli. Utilizzando la trasformazione logaritmica, si evita questo problema, poiché i prodotti diventano somme e i valori diventano più gestibili in termini di scala numerica.</p>
 <p>Svolgiamo nuovamente il problema precedente usando la log-verosimiglianza per trovare il massimo della funzione di log-verosimiglianza. Ora utilizziamo la funzione <code class="docutils literal notranslate"><span class="pre">binom.logpmf()</span></code>.</p>
 <p>La funzione di log-verosimiglianza è rappresentata nella figura successiva.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">r</span> <span class="o">=</span> <span class="mi">23</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">binom</span><span class="o">.</span><span class="n">logpmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">binom</span><span class="o">.</span><span class="n">logpmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Funzione di log-verosimiglianza&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale theta [0, 1]&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Log-verosimiglianza&quot;</span><span class="p">)</span>
@@ -1077,32 +1067,20 @@ Bin(y \mid n, \theta).
 <p>Il risultato replica quello trovato in precedenza con la funzione di verosimiglianza.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_list</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">logpmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span> <span class="o">=</span> <span class="n">input_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_list</span><span class="p">)):</span>
-    <span class="k">if</span> <span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">:</span>
-        <span class="nb">max</span> <span class="o">=</span> <span class="n">input_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="n">i</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Index of the maximum value is : </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ll</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">logpmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index of the maximum value is : 76
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="p">[</span><span class="mi">76</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1121,10 +1099,10 @@ Bin(y \mid n, \theta).
 <span class="eqno">(27.5)<a class="headerlink" href="#equation-eq-gaussian-sim-like" title="Permalink to this equation">#</a></span>\[
 f(y \mid \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left\{-\frac{1}{2\sigma^2}(y-\mu)^2\right\}.
 \]</div>
-<p>Costruiamo dunque la funzione di verosimiglianza nel caso dell’equazione <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a>.</p>
+<p>Costruiamo la funzione di verosimiglianza nel caso dell’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a>.</p>
 <section id="una-singola-osservazione">
 <h3><span class="section-number">27.3.1. </span>Una singola osservazione<a class="headerlink" href="#una-singola-osservazione" title="Permalink to this headline">#</a></h3>
-<p>Esaminiamo prima il caso in cui i dati corrispondono ad una singola osservazione <span class="math notranslate nohighlight">\(y\)</span>. Poniamo</p>
+<p>Esaminiamo prima il caso in cui i dati corrispondono ad una singola osservazione <span class="math notranslate nohighlight">\(y\)</span>. Supponiamo che la nostra variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> rappresenta il quoziente di intelligenza. Poniamo</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mi">114</span>
@@ -1132,7 +1110,7 @@ f(y \mid \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left\{-\frac{1}{2\sigm
 </div>
 </div>
 </div>
-<p>L’equazione <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a> dipende dai parametri <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> e dai dati <span class="math notranslate nohighlight">\(y\)</span>. Per semplicità, ipotizziamo <span class="math notranslate nohighlight">\(\sigma\)</span> noto e uguale a 15. Nell’esercizio considereremo 1000 valori <span class="math notranslate nohighlight">\(\mu\)</span> compresi tra 70 e 160.</p>
+<p>L’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a> dipende dai parametri <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> e dai dati <span class="math notranslate nohighlight">\(y\)</span>. Per semplicità, ipotizziamo <span class="math notranslate nohighlight">\(\sigma\)</span> noto e uguale a 15. Nell’esercizio consideriamo 1000 valori <span class="math notranslate nohighlight">\(\mu\)</span> compresi tra 70 e 160.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">70.0</span><span class="p">,</span> <span class="mf">160.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
@@ -1140,13 +1118,15 @@ f(y \mid \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left\{-\frac{1}{2\sigm
 </div>
 </div>
 </div>
-<p>Dato che consideriamo 1000 possibili valori <span class="math notranslate nohighlight">\(\mu\)</span>, per costruire la funzione di verosimiglianza applicheremo 1000 volte l’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a>. In ciascun passo dell’esercizio inseriremo nell’&#64;eq-gaussian-sim-like</p>
+<p>Poiché stiamo considerando 1000 potenziali valori per il parametro <span class="math notranslate nohighlight">\(\mu\)</span>, per costruire la funzione di verosimiglianza dobbiamo applicare l’equazione <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a> 1000 volte - una volta per ciascuno dei valori <span class="math notranslate nohighlight">\(\mu\)</span> che stiamo prendendo in considerazione. In questo modo, possiamo valutare la verosimiglianza relativa di osservare i dati che abbiamo raccolto, dati i diversi valori possibili per <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>In ciascun passo dell’esercizio inseriremo nell’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a></p>
 <ul class="simple">
 <li><p>il singolo valore <span class="math notranslate nohighlight">\(y\)</span> considerato (che viene mantenuto costante),</p></li>
 <li><p>il valore <span class="math notranslate nohighlight">\(\sigma\)</span> assunto noto (anch’esso costante),</p></li>
-<li><p>uno alla volta ciascuno dei valori <span class="math notranslate nohighlight">\(\mu\)</span> che abbiamo definito sopra (quindi, nelle 1000 applicazioni dell’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a>, il valore <span class="math notranslate nohighlight">\(\mu\)</span> è l’unico che varia: <span class="math notranslate nohighlight">\(y\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> sono mantenuti costanti).</p></li>
+<li><p>uno alla volta ciascuno dei valori <span class="math notranslate nohighlight">\(\mu\)</span> che abbiamo definito.</p></li>
 </ul>
-<p>La distribuzione Gaussiana è implementata in Python mediante <code class="docutils literal notranslate"><span class="pre">norm.pdf()</span></code>. La funzione <code class="docutils literal notranslate"><span class="pre">norm.pdf()</span></code> richiede tre argomenti: il valore <span class="math notranslate nohighlight">\(y\)</span> (o il vettore <span class="math notranslate nohighlight">\(y\)</span>), la media, ovvero il parametro <span class="math notranslate nohighlight">\(\mu\)</span>, e la deviazione standard, ovvero il parametro <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>Quindi, nelle 1000 applicazioni dell’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(27.5)</a>, il valore <span class="math notranslate nohighlight">\(\mu\)</span> è l’unico che varia: <span class="math notranslate nohighlight">\(y\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> sono mantenuti costanti.</p>
+<p>In Python, la distribuzione gaussiana può essere implementata attraverso la funzione <code class="docutils literal notranslate"><span class="pre">norm.pdf()</span></code>. Tale funzione richiede tre argomenti: il valore o il vettore di valori <span class="math notranslate nohighlight">\(y\)</span> da valutare, la media <span class="math notranslate nohighlight">\(\mu\)</span> (o i valori delle medie, se si lavora con più distribuzioni gaussiane) e la deviazione standard <span class="math notranslate nohighlight">\(\sigma\)</span> (o i valori delle deviazioni standard, se si lavora con più distribuzioni gaussiane). In altre parole, la funzione <code class="docutils literal notranslate"><span class="pre">norm.pdf()</span></code> consente di calcolare la densità di probabilità gaussiana per ogni valore di <span class="math notranslate nohighlight">\(y\)</span> e per ogni coppia di valori di <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> specificati.</p>
 <p>Applicando la funzione <code class="docutils literal notranslate"><span class="pre">norm.pdf()</span></code> 1000 volte, una volta per ciascuno dei valori <span class="math notranslate nohighlight">\(\mu\)</span> che abbiamo definito (e tenendo fissi <span class="math notranslate nohighlight">\(y = 114\)</span> e <span class="math notranslate nohighlight">\(\sigma = 15\)</span>), otteniamo 1000 valori <span class="math notranslate nohighlight">\(f(\mu)\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1172,14 +1152,27 @@ f(y \mid \mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left\{-\frac{1}{2\sigm
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70.0, 160.0)
 </pre></div>
 </div>
-<img alt="_images/225_likelihood_33_1.png" src="_images/225_likelihood_33_1.png" />
+<img alt="_images/225_likelihood_32_1.png" src="_images/225_likelihood_32_1.png" />
 </div>
 </div>
 <p>La funzione di verosimiglianza così trovata ha la forma della distribuzione Gaussiana. Nel caso di una singola osservazione, <em>ma solo in questo caso</em>, ha anche un’area unitaria. Per l’esempio presente, la moda della funzione di verosimiglianza è 114.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">mu</span><span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>113.96396396396396
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="un-campione-di-osservazioni">
 <h3><span class="section-number">27.3.2. </span>Un campione di osservazioni<a class="headerlink" href="#un-campione-di-osservazioni" title="Permalink to this headline">#</a></h3>
-<p>Consideriamo ora il caso più generale, ovvero quello di un campione di <span class="math notranslate nohighlight">\(n\)</span> osservazioni. Possiamo immaginare un campione casuale <span class="math notranslate nohighlight">\(y_1, y_2, \dots, y_n\)</span> estratto da una popolazione <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma)\)</span> come una sequenza di realizzazioni indipendenti ed identicamente distribuite (di seguito, i.i.d.) della medesima variabile casuale <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(\mu, \sigma)\)</span>. I parametri sconosciuti sono <span class="math notranslate nohighlight">\(\theta = \{\mu, \sigma\}\)</span>.</p>
+<p>Consideriamo ora il caso più generale di un campione di <span class="math notranslate nohighlight">\(n\)</span> osservazioni. Possiamo pensare a questo campione come ad una sequenza di <span class="math notranslate nohighlight">\(n\)</span> realizzazioni indipendenti ed identicamente distribuite (abbreviato in i.i.d.) della stessa variabile casuale <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(\mu, \sigma)\)</span>, estratte casualmente da una popolazione <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma)\)</span>. I parametri della distribuzione normale sconosciuti sono <span class="math notranslate nohighlight">\(\theta = {\mu, \sigma}\)</span>.</p>
 <p>Se le variabili casuali <span class="math notranslate nohighlight">\(y_1, y_2, \dots, y_n\)</span> sono i.i.d., la loro densità congiunta è data da:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1195,7 +1188,7 @@ f(y \mid \theta) &amp;= f(y_1 \mid \theta) \cdot f(y_2 \mid \theta) \cdot \; \do
 \mathcal{L}(\theta \mid y) = \prod_{i=1}^n f(y_i \mid \theta).
 \end{equation}
 \]</div>
-<p>Per chiarire la formula precedente, consideriamo un esempio che utilizza come dati i valori BDI-II dei trenta soggetti del campione clinico di <span id="id4">[<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<p>Per chiarire la formula precedente, consideriamo un esempio che utilizza come dati i valori BDI-II dei trenta soggetti del campione clinico di <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span>
@@ -1248,8 +1241,6 @@ f(y \mid \theta) &amp;= f(y_1 \mid \theta) \cdot f(y_2 \mid \theta) \cdot \; \do
 </div>
 </div>
 </div>
-<p>Abbiamo visto in precedenza che, per una singola osservazione, la funzione di verosimiglianza è la densità Gaussiana espressa in funzione dei parametri (in questo caso, solo <span class="math notranslate nohighlight">\(\mu\)</span>). Per un campione di osservazioni i.i.d., ovvero <span class="math notranslate nohighlight">\(y = (y_1, y_2, \dots, y_n)\)</span>, la verosimiglianza è la funzione di densità congiunta <span class="math notranslate nohighlight">\(f(y \mid \mu, \sigma)\)</span> espressa in funzione dei parametri. Dato che le osservazioni sono i.i.d., la densità congiunta è data dal prodotto delle densità delle singole osservazioni.</p>
-<p>Poniamoci il problema di trovare l’ordinata della funzione di log-verosimiglianza per le 30 osservazioni del campione in corrispondenza di <span class="math notranslate nohighlight">\(\mu = \mu_0\)</span></p>
 <p>Per la prima osservazione del campione (<span class="math notranslate nohighlight">\(y_1 = 26\)</span>) abbiamo</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1266,7 +1257,8 @@ f(26 \mid \mu_0, \sigma=6.50) = \frac{1}{{6.50 \sqrt {2\pi}}}\exp\left\{{-\frac{
  &amp; \frac{1}{{6.61 \sqrt {2\pi}}}\exp\left\{{-\frac{(22 - \mu_0)^2}{2\cdot 6.50^2}}\right\}.
 \end{aligned}
 \end{split}\]</div>
-<p>È più conveniente svolgere i calcoli usando il logaritmo della verosimiglianza. In Python definiamo la funzione di log-verosimiglianza, <code class="docutils literal notranslate"><span class="pre">log_likelihood()</span></code>, che prende come argomenti <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">mu</span></code> e <code class="docutils literal notranslate"><span class="pre">sigma</span> <span class="pre">=</span> <span class="pre">6.50</span></code>.</p>
+<p>Il valore <span class="math notranslate nohighlight">\(\mu_0\)</span> rappresenta uno dei possibili valori del parametro <span class="math notranslate nohighlight">\(\mu\)</span>. Se stiamo considerando 1000 valori possibili per <span class="math notranslate nohighlight">\(\mu\)</span>, allora dobbiamo ripetere la procedura di calcolo della funzione di verosimiglianza 1000 volte, ovvero una volta per ciascuno dei valori di <span class="math notranslate nohighlight">\(\mu\)</span> presi in considerazione.</p>
+<p>È più conveniente svolgere i calcoli usando il logaritmo della verosimiglianza. In Python definiamo la funzione di log-verosimiglianza, <code class="docutils literal notranslate"><span class="pre">log_likelihood()</span></code>, che prende come argomenti <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">mu</span></code> e <code class="docutils literal notranslate"><span class="pre">sigma</span> <span class="pre">=</span> <span class="pre">6.50</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">true_sigma</span><span class="p">):</span>
@@ -1275,7 +1267,7 @@ f(26 \mid \mu_0, \sigma=6.50) = \frac{1}{{6.50 \sqrt {2\pi}}}\exp\left\{{-\frac{
 </div>
 </div>
 </div>
-<p>Consideriamo il valore <span class="math notranslate nohighlight">\(\mu_0 = \bar{y}\)</span>, ovvero</p>
+<p>Consideriamo, ad esempio, il valore <span class="math notranslate nohighlight">\(\mu_0 = \bar{y}\)</span>, ovvero</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bar_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -1302,10 +1294,10 @@ f(26 \mid \mu_0, \sigma=6.50) = \frac{1}{{6.50 \sqrt {2\pi}}}\exp\left\{{-\frac{
 </div>
 </div>
 </div>
-<p>Troviamo ora i valori della log-verosimiglianza per ciascuno dei 1000 valori <span class="math notranslate nohighlight">\(\mu\)</span> nell’intervallo <span class="math notranslate nohighlight">\([\bar{y} - 2 \sigma, \bar{y} + 2 \sigma]\)</span>. Iniziamo a definire <code class="docutils literal notranslate"><span class="pre">mu</span></code>.</p>
+<p>Troviamo ora i valori della log-verosimiglianza per ciascuno dei 1000 valori <span class="math notranslate nohighlight">\(\mu\)</span> nell’intervallo <span class="math notranslate nohighlight">\([\bar{y} - 2 \sigma, \bar{y} + 2 \sigma]\)</span>. Iniziamo a definire il vettore <code class="docutils literal notranslate"><span class="pre">mu</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1330,10 +1322,10 @@ f(26 \mid \mu_0, \sigma=6.50) = \frac{1}{{6.50 \sqrt {2\pi}}}\exp\left\{{-\frac{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7fd5609ef190&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x7f8742da74c0&gt;
 </pre></div>
 </div>
-<img alt="_images/225_likelihood_49_1.png" src="_images/225_likelihood_49_1.png" />
+<img alt="_images/225_likelihood_50_1.png" src="_images/225_likelihood_50_1.png" />
 </div>
 </div>
 </section>
@@ -1374,15 +1366,16 @@ f(26 \mid \mu_0, \sigma=6.50) = \frac{1}{{6.50 \sqrt {2\pi}}}\exp\left\{{-\frac{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Feb 18 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Feb 24 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
+numpy     : 1.24.1
+pandas    : 1.5.3
 matplotlib: 3.6.3
 seaborn   : 0.12.2
-numpy     : 1.24.1
 
 Watermark: 2.3.1
 </pre></div>
