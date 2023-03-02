@@ -1740,6 +1740,58 @@ a &lt;= b is False
 </div>
 </div>
 </div>
+<p>Il punto importante è che, essendo una sequenza di elementi <em>etorogenei</em> è difficile fare delle operazioni algebriche sulle liste in puro Python. Ad esempio, supponiamo di avere la seguente lista:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vogliamo calcolare una cosa semplice, per esempio, la media di <code class="docutils literal notranslate"><span class="pre">x</span></code>. Per farlo dobbiamo seguire una procedura piuttosto articolata. Per esempio:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">counter</span>  <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+    <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span>
+
+<span class="n">avg</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="n">counter</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chiaramente, sarebbe preferibile ottenere questo risultato con un approccio più semplice. Successivamente, vedremo che se utilizziamo una sequenza di elementi <em>omogenei</em>, il problema può essere risolto in modo molto più facile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="operatore-slice">
 <h3><span class="section-number">3.5.3. </span>Operatore slice<a class="headerlink" href="#operatore-slice" title="Permalink to this headline">#</a></h3>
@@ -1986,7 +2038,7 @@ a &lt;= b is False
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 </pre></div>
 </div>
 </div>
@@ -1998,7 +2050,7 @@ a &lt;= b is False
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
 </pre></div>
 </div>
 </div>
@@ -2135,7 +2187,7 @@ a &lt;= b is False
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;filter at 0x7f981033ca00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;filter at 0x7fdcf871ed70&gt;
 </pre></div>
 </div>
 </div>
@@ -2191,7 +2243,7 @@ a &lt;= b is False
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;zip at 0x7f9801492540&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;zip at 0x7fdcf8767d40&gt;
 </pre></div>
 </div>
 </div>
@@ -2813,7 +2865,7 @@ list2: [2, 3, 4, 5, 6, 7]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.650465671727171
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9277875851207739
 </pre></div>
 </div>
 </div>
@@ -3030,7 +3082,7 @@ sum(iterable, /, start=0)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Feb 23 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Mar 02 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
@@ -3038,10 +3090,10 @@ IPython version      : 8.7.0
 
 pytensor: 2.9.1
 
-matplotlib: 3.6.3
-numpy     : 1.24.1
-pandas    : 1.5.3
 seaborn   : 0.12.2
+matplotlib: 3.6.3
+pandas    : 1.5.3
+numpy     : 1.24.1
 
 Watermark: 2.3.1
 </pre></div>
