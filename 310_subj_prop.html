@@ -757,7 +757,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="inferenza-su-una-proporzione">
 <span id="cap-subj-prop"></span><h1><span class="section-number">29. </span>Inferenza su una proporzione<a class="headerlink" href="#inferenza-su-una-proporzione" title="Permalink to this headline">#</a></h1>
-<p>Obiettivo di questo capitolo è introdurre l’inferenza bayesiana considerando il modello binomiale. Esamineremo prima il caso di una distribuzione a priori discreta e poi il caso di una distribuzione a priori continua. Il materiale qui presentato segue molto da vicino il capitolo 7 di <span id="id1">Albert and Hu [<a class="reference internal" href="z_biblio.html#id19" title="Jim Albert and Jingchen Hu. Probability and Bayesian Modeling. Chapman and Hall/CRC, 2019.">AH19</a>]</span>.</p>
+<p>L’obiettivo di questo capitolo è di introdurre l’inferenza bayesiana utilizzando come esempio il modello binomiale. Inizieremo esaminando il caso in cui la distribuzione a priori è discreta e successivamente il caso in cui la distribuzione a priori è continua. Il materiale presentato è fortemente ispirato al capitolo 7 del libro di <span id="id1">Albert and Hu [<a class="reference internal" href="z_biblio.html#id19" title="Jim Albert and Jingchen Hu. Probability and Bayesian Modeling. Chapman and Hall/CRC, 2019.">AH19</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -788,10 +788,10 @@ title="Print to PDF"
 </div>
 <section id="inferenza-bayesiana-con-una-distribuzione-a-priori-discreta">
 <h2><span class="section-number">29.1. </span>Inferenza bayesiana con una distribuzione a priori discreta<a class="headerlink" href="#inferenza-bayesiana-con-una-distribuzione-a-priori-discreta" title="Permalink to this headline">#</a></h2>
-<p>Nella teoria delle probabilità tradizionale, ci sono molti esempi di problemi che riguardano l’estrazione di palline colorate da un’urna, dove ci viene fornito il numero di palline di vari colori presenti nell’urna e ci viene chiesto di calcolare le probabilità di vari eventi. Tuttavia, l’approccio bayesiano considera uno scenario diverso in cui non conosciamo le proporzioni delle palline colorate presenti nell’urna. In questo caso, ci poniamo la domanda se sia possibile inferire le proporzioni di palline presenti nell’urna estraendo un campione di palline dall’urna e osservando i colori delle palline estratte.</p>
-<p>Nel contesto bayesiano, prima di eseguire l’esperimento, assegniamo una distribuzione di probabilità a priori alle possibili proporzioni delle palline nell’urna. Dopo aver estratto un campione di palline e osservato i colori delle palline estratte, calcoliamo la probabilità delle possibili proporzioni della popolazione sulla base dei dati osservati e delle credenze a priori. Questa distribuzione di probabilità a posteriori riassume l’incertezza dell’inferenza.</p>
-<p>Le proporzioni sono simili alle probabilità, ma non possiamo utilizzare il punto di vista classico perché non conosciamo la probabilità di ogni risultato possibile. Tuttavia, il punto di vista frequentista potrebbe funzionare in questo caso. Potremmo considerare il processo del campionamento come un esperimento casuale che produce una proporzione campionaria. Ripetendo l’esperimento casuale molte volte, potremmo ottenere una stima abbastanza accurata della proporzione di palline nella popolazione. Tuttavia, questa procedura sarebbe noiosa, dispendiosa in termini di tempo e soggetta ad errori.</p>
-<p>La visione soggettivista concepisce la probabilità sconosciuta <span class="math notranslate nohighlight">\(\theta\)</span> come un’opinione soggettiva su cui possiamo avere più o meno sicurezza. Tale opinione dipende dalle nostre credenze iniziali e dalle nuove informazioni fornite dai dati che abbiamo osservato. In questo capitolo, vedremo come combinare le nostre credenze iniziali su <span class="math notranslate nohighlight">\(\theta\)</span> con le evidenze fornite dai dati per giungere a una nuova credenza a posteriori su <span class="math notranslate nohighlight">\(\theta\)</span>. Utilizzando le distribuzioni di probabilità, vedremo come sia possibile pensare in termini soggettivi a delle quantità sconosciute, come <span class="math notranslate nohighlight">\(\theta\)</span>, che può assumere valori compresi tra 0 e 1.</p>
+<p>In teoria delle probabilità tradizionale, ci sono molti esempi di problemi che riguardano l’estrazione di palline colorate da un’urna, dove le proporzioni di palline di vari colori nell’urna sono note e ci viene chiesto di calcolare le probabilità di vari eventi. Tuttavia, in un approccio bayesiano, il caso è diverso poiché le proporzioni delle palline nell’urna non sono note inizialmente. In questo caso, ci poniamo la domanda se sia possibile inferire le proporzioni di palline presenti nell’urna estraendo un campione di palline dall’urna e osservando i colori delle palline estratte.</p>
+<p>Nell’approccio bayesiano, prima di eseguire l’esperimento, assegniamo una distribuzione di probabilità a priori alle possibili proporzioni delle palline nell’urna. Dopo aver estratto un campione di palline e osservato i colori delle palline estratte, calcoliamo la probabilità delle possibili proporzioni della popolazione sulla base dei dati osservati e delle credenze a priori. Questa distribuzione di probabilità a posteriori riassume l’incertezza dell’inferenza.</p>
+<p>Le proporzioni sono simili alle probabilità, ma in questo contesto non possiamo utilizzare il punto di vista classico perché non conosciamo la probabilità di ogni risultato possibile. Tuttavia, il punto di vista frequentista potrebbe funzionare anche in questo caso. Potremmo considerare il processo del campionamento come un esperimento casuale che produce una proporzione campionaria. Ripetendo l’esperimento casuale molte volte, potremmo ottenere una stima abbastanza accurata della proporzione di palline nella popolazione. Tuttavia, questa procedura sarebbe noiosa, dispendiosa in termini di tempo e soggetta ad errori.</p>
+<p>La visione soggettivista concepisce invece la probabilità sconosciuta <span class="math notranslate nohighlight">\(\theta\)</span> come un’opinione soggettiva su cui possiamo avere più o meno sicurezza. Tale opinione dipende dalle nostre credenze iniziali e dalle nuove informazioni fornite dai dati che abbiamo osservato. In questo capitolo, vedremo come combinare le nostre credenze iniziali su <span class="math notranslate nohighlight">\(\theta\)</span> con le evidenze fornite dai dati per giungere a una nuova credenza a posteriori su <span class="math notranslate nohighlight">\(\theta\)</span>. Utilizzando le distribuzioni di probabilità, vedremo come sia possibile pensare in termini soggettivi a delle quantità sconosciute, come <span class="math notranslate nohighlight">\(\theta\)</span>, che può assumere valori compresi tra 0 e 1.</p>
 <p>Assegnare un valore preciso come 0.5 a <span class="math notranslate nohighlight">\(\theta\)</span> significa attribuire alla probabilità dell’evento <span class="math notranslate nohighlight">\(\theta = 0.5\)</span> il valore 1, ovvero siamo assolutamente certi che <span class="math notranslate nohighlight">\(\theta\)</span> abbia il valore 0.5. Tuttavia, questa posizione è troppo estrema, poiché non possiamo essere completamente certi del valore di una quantità sconosciuta. Invece, è più ragionevole pensare che <span class="math notranslate nohighlight">\(\theta\)</span> possa assumere vari valori, e assegnare livelli diversi di certezza soggettiva a tali valori.</p>
 <p>Consideriamo, ad esempio, 11 possibili valori <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <div class="cell docutils container">
@@ -1012,7 +1012,7 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fef1386d4e0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f8f197894e0&gt;]
 </pre></div>
 </div>
 <img alt="_images/310_subj_prop_31_1.png" src="_images/310_subj_prop_31_1.png" />
@@ -1163,17 +1163,17 @@ p(\theta \mid y) = \frac{p(y \mid \theta)p(\theta)}{p(y)}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Feb 21 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Feb 24 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
 IPython version      : 8.7.0
 
 arviz     : 0.14.0
-seaborn   : 0.12.2
 matplotlib: 3.6.3
-scipy     : 1.10.0
+seaborn   : 0.12.2
 numpy     : 1.24.1
+scipy     : 1.10.0
 
 Watermark: 2.3.1
 </pre></div>
