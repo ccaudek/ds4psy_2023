@@ -676,6 +676,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#gli-array-nel-modulo-numpy">
    4.1. Gli array nel modulo NumPy
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#funzioni-per-ndarray">
+     4.1.1. Funzioni per
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       ndarray
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dimensioni-dell-array">
@@ -740,6 +752,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#gli-array-nel-modulo-numpy">
    4.1. Gli array nel modulo NumPy
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#funzioni-per-ndarray">
+     4.1.1. Funzioni per
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       ndarray
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dimensioni-dell-array">
@@ -795,8 +819,8 @@ title="Print to PDF"
 <span id="intro-numpy-notebook"></span><h1><span class="section-number">4. </span>Introduzione a Numpy<a class="headerlink" href="#introduzione-a-numpy" title="Permalink to this headline">#</a></h1>
 <p>Anche se la Standard Library di Python offre molte funzioni utili per l’analisi dei dati, è conveniente utilizzare varie funzioni specifiche contenute in altri moduli. I moduli più utili per l’analisi dei dati sono:</p>
 <ul class="simple">
-<li><p>Pandas per caricare e manipolare i dati,</p></li>
 <li><p>NumPy per i calcoli numerici,</p></li>
+<li><p>Pandas per caricare e manipolare i dati,</p></li>
 <li><p>Matplotlib e Seaborn per visualizzare i dati.</p></li>
 </ul>
 <p>In questo capitolo introdurremo NumPy. NumPy è l’abbreviazione di Numerical Python: un’estensione del linguaggio pensata per il calcolo algebrico e matriciale. Numpy consente di lavorare con vettori e matrici in maniera più efficiente e veloce di quanto non si possa fare con le liste e le liste di liste (matrici) di Python. Inoltre, Numpy aggiunge una serie di funzioni matematiche di base e la possibilità di generare numeri casuali.</p>
@@ -809,7 +833,7 @@ title="Print to PDF"
 <li><p><em>forma</em>: la forma di un <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> indica le dimensioni dell’array, cioè il numero di elementi per ogni asse. Ad esempio, un array con forma (3, 4) ha 3 righe e 4 colonne;</p></li>
 <li><p><em>indicizzazione</em>: gli <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> possono essere indicizzati come gli array Python standard, ma consentono anche indicizzazioni più avanzate.</p></li>
 </ul>
-<p>Gli array numpy offrono una vasta gamma di funzioni e metodi per manipolare e analizzare i dati in essi contenuti, tra cui operazioni matematiche, statistiche, trasformazioni e manipolazioni di dati.</p>
+<p>Gli <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> offrono una vasta gamma di funzioni e metodi per manipolare e analizzare i dati in essi contenuti, tra cui operazioni matematiche, statistiche, trasformazioni e manipolazioni di dati.</p>
 <p><strong>Terminologia</strong></p>
 <ul class="simple">
 <li><p>Con <em>size</em> di un array intendiamo il numero di elementi presenti in un array;</p></li>
@@ -819,6 +843,7 @@ contenente il numero di elementi per ogni dimensione.</p></li>
 </ul>
 <a class="reference internal image-reference" href="_images/size_rank_shape.png"><img alt="_images/size_rank_shape.png" class="align-center" src="_images/size_rank_shape.png" style="height: 300px;" /></a>
 <br>
+<p><strong>Creare <code class="docutils literal notranslate"><span class="pre">ndarray</span></code></strong></p>
 <p>Il modo più semplice per creare un <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> è quello di convertire una lista Python. Per esempio, possiamo creare un array 1-D nel modo seguente:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -829,7 +854,7 @@ contenente il numero di elementi per ogni dimensione.</p></li>
 </div>
 </div>
 </div>
-<p>Questo comando ha creato un vettore, chiamato <code class="docutils literal notranslate"><span class="pre">a</span></code>, con 6 elementi che sono i numeri interi indicati in parentesi quadra:</p>
+<p>L’istruzione precedente ha creato un vettore, chiamato <code class="docutils literal notranslate"><span class="pre">a</span></code>, con 6 elementi che sono i numeri interi indicati in parentesi quadra:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
@@ -842,6 +867,7 @@ contenente il numero di elementi per ogni dimensione.</p></li>
 </div>
 </div>
 </div>
+<p><strong>Indicizzazione</strong></p>
 <p>Se voglio estrarre un singolo elemento del vettore lo indicizzo con la sua posizione (si ricordi che l’indice inizia da 0):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -883,6 +909,61 @@ contenente il numero di elementi per ogni dimensione.</p></li>
 </div>
 </div>
 </div>
+<p>Estraggo un singolo elemento dall’array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estraggo una riga dall’array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5 6 7 8]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estraggo una colonna dall’array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 2  6 10]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estraggo una sotto-matrice dall’array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[2 3]
+ [6 7]]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="funzioni-per-ndarray">
+<h3><span class="section-number">4.1.1. </span>Funzioni per <code class="docutils literal notranslate"><span class="pre">ndarray</span></code><a class="headerlink" href="#funzioni-per-ndarray" title="Permalink to this headline">#</a></h3>
 <p>Numpy offre varie funzioni per creare <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>. Per esempio, è possibile creare un array 1-D con la funzione <code class="docutils literal notranslate"><span class="pre">.arange(start,</span> <span class="pre">stop,</span> <span class="pre">incr,</span> <span class="pre">dtype=..)</span></code> che fornisce l’intervallo di numeri compreso fra <code class="docutils literal notranslate"><span class="pre">start</span></code>, <code class="docutils literal notranslate"><span class="pre">stop</span></code>, al passo <code class="docutils literal notranslate"><span class="pre">incr</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -945,6 +1026,7 @@ contenente il numero di elementi per ogni dimensione.</p></li>
 </div>
 <p>perché solo gli ultimi sei elementi di <code class="docutils literal notranslate"><span class="pre">x</span></code> rispondono <code class="docutils literal notranslate"><span class="pre">True</span></code> al criterio <span class="math notranslate nohighlight">\(x &gt; 7\)</span>.</p>
 </section>
+</section>
 <section id="dimensioni-dell-array">
 <h2><span class="section-number">4.2. </span>Dimensioni dell’array<a class="headerlink" href="#dimensioni-dell-array" title="Permalink to this headline">#</a></h2>
 <p>Un <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> è una griglia di elementi che possono essere indicizzati in vari modi. Le dimensioni dell’array sono chiamate “assi”. L’array <code class="docutils literal notranslate"><span class="pre">a</span></code> ha due assi:</p>
@@ -983,61 +1065,6 @@ contenente il numero di elementi per ogni dimensione.</p></li>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 4)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Il primo elemento dell’array <code class="docutils literal notranslate"><span class="pre">a</span></code> è</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3, 4])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Gli indici funzionano come ci possiamo aspettare, ricordando che il primo indice fa riferimento alla lista di array e il secondo indice agli elementi all’interno di ciascun array:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 6,  7],
-       [10, 11]])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Per array 1-D, possiamo scrivere, ad esempio:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.        ,  0.52631579,  1.05263158,  1.57894737,  2.10526316,
-        2.63157895,  3.15789474,  3.68421053,  4.21052632,  4.73684211,
-        5.26315789,  5.78947368,  6.31578947,  6.84210526,  7.36842105,
-        7.89473684,  8.42105263,  8.94736842,  9.47368421, 10.        ])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.        , 0.52631579, 1.05263158, 1.57894737, 2.10526316])
 </pre></div>
 </div>
 </div>
@@ -1497,26 +1524,26 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.43019369, 0.01706497, 0.62502372, 0.8677146 , 0.85093834,
-        0.13181732, 0.45233367, 0.74890148, 0.67869514, 0.49694969],
-       [0.21055715, 0.85679824, 0.18120989, 0.96038658, 0.6103348 ,
-        0.24590225, 0.07008585, 0.98254361, 0.42676903, 0.08201381],
-       [0.17400173, 0.96315013, 0.55523182, 0.40505506, 0.03224819,
-        0.9881923 , 0.66430603, 0.15500642, 0.31559973, 0.46232943],
-       [0.38850556, 0.13967995, 0.50831886, 0.35278209, 0.07976593,
-        0.02710281, 0.60014721, 0.64162646, 0.72268323, 0.5921203 ],
-       [0.80492022, 0.56435293, 0.12694976, 0.86623386, 0.64522797,
-        0.11444113, 0.88105501, 0.14631057, 0.07586883, 0.37301263],
-       [0.55793385, 0.24083803, 0.38327902, 0.17800066, 0.49475965,
-        0.21253688, 0.52331354, 0.54922523, 0.21079834, 0.47748548],
-       [0.70133492, 0.82123887, 0.34282209, 0.82353833, 0.32717589,
-        0.72147374, 0.71602568, 0.14935904, 0.61405271, 0.60330925],
-       [0.84523309, 0.17822389, 0.79462395, 0.3207498 , 0.97038561,
-        0.10806584, 0.02217748, 0.44178428, 0.88346795, 0.64145407],
-       [0.64735624, 0.10724066, 0.00530977, 0.84082175, 0.9641594 ,
-        0.28502552, 0.77761418, 0.12634484, 0.32191142, 0.74869398],
-       [0.20155417, 0.56957323, 0.94678695, 0.0498499 , 0.29309417,
-        0.30818194, 0.96747599, 0.79977309, 0.79019903, 0.18910795]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.04894698, 0.9796201 , 0.91872394, 0.62348488, 0.68808847,
+        0.97192308, 0.33109214, 0.92632781, 0.55333882, 0.72389467],
+       [0.4505653 , 0.85396417, 0.10878248, 0.99756513, 0.09555694,
+        0.18422492, 0.13885494, 0.91335165, 0.84946837, 0.9835563 ],
+       [0.17214318, 0.64008135, 0.14018066, 0.47661352, 0.91544849,
+        0.85721591, 0.72891526, 0.39957981, 0.24042836, 0.62202345],
+       [0.84701433, 0.95428079, 0.6909304 , 0.67754079, 0.58143453,
+        0.09878424, 0.03112382, 0.71174453, 0.05376786, 0.4445458 ],
+       [0.59068498, 0.69017663, 0.02697217, 0.91178311, 0.20646971,
+        0.12497784, 0.59610003, 0.11334337, 0.02777933, 0.47856452],
+       [0.6034343 , 0.29392222, 0.50535771, 0.59702189, 0.28701644,
+        0.13431982, 0.9242645 , 0.88933717, 0.61808263, 0.32760015],
+       [0.98658957, 0.89915853, 0.17905594, 0.59899356, 0.21310324,
+        0.53377413, 0.45915163, 0.88601191, 0.5459795 , 0.61649038],
+       [0.22237163, 0.23959909, 0.5751456 , 0.07989418, 0.71509978,
+        0.22395319, 0.58917268, 0.2827234 , 0.04112369, 0.35879611],
+       [0.03146446, 0.36753662, 0.67498418, 0.43883764, 0.14288745,
+        0.46628127, 0.37879764, 0.6642217 , 0.90619173, 0.6570203 ],
+       [0.44503704, 0.57366118, 0.81930707, 0.14439129, 0.96090014,
+        0.15882629, 0.59218036, 0.4552263 , 0.09598926, 0.9962797 ]])
 </pre></div>
 </div>
 </div>
@@ -1529,7 +1556,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0053097705404002715 0.988192297313087
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.02697217024073839 0.9975651348709759
 </pre></div>
 </div>
 </div>
@@ -1543,12 +1570,12 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.19458473, 0.83377574, 0.32789348, 0.31176022, 0.6967434 ,
-       0.15613686, 0.51685267, 0.57573795, 0.27986901, 0.36588916,
-       0.03461026, 0.57648064, 0.72427295, 0.69642931, 0.79916583,
-       0.4729095 , 0.08177174, 0.06104575, 0.10267095, 0.27129807,
-       0.16499609, 0.60410546, 0.82209361, 0.55293619, 0.18420469,
-       0.97546247, 0.70306167, 0.60862503, 0.12969689, 0.41656408])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.50472103, 0.5571463 , 0.63824637, 0.79807048, 0.8670208 ,
+       0.08740417, 0.29821825, 0.03990337, 0.91668627, 0.32207602,
+       0.90311605, 0.24334858, 0.65337339, 0.14353206, 0.06213784,
+       0.56019384, 0.80758795, 0.9307426 , 0.65543623, 0.54773107,
+       0.99238491, 0.29506099, 0.03378259, 0.18848468, 0.41615299,
+       0.57058937, 0.62709071, 0.28935588, 0.92199298, 0.03373197])
 </pre></div>
 </div>
 </div>
@@ -1561,7 +1588,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4413881460447024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49684399158452364
 </pre></div>
 </div>
 </div>
@@ -1604,8 +1631,8 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.42871297 0.         0.81012292 0.74475614 0.25817293 0.23513383
- 0.54641674 0.27345347 0.83078132 0.04796466]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.41770198 0.20876825 0.09028781 0.89220618 0.04731523 0.26817878
+ 0.49694353 0.         0.27723331 0.12186054]
 </pre></div>
 </div>
 </div>
@@ -1637,7 +1664,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.383498923267325
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57.61126947585726
 </pre></div>
 </div>
 </div>
@@ -1650,7 +1677,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58
 </pre></div>
 </div>
 </div>
@@ -1938,7 +1965,7 @@ Replace elements with of the said array which are greater than 8.32 with 18.32
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Feb 23 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Mar 07 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
