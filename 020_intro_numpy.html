@@ -1130,12 +1130,12 @@ BMI = \frac{kg}{m^2}.
 <p>Otteniamo così, con una sola istruzione, l’indice BMI dei quattro individui:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bmi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bmi</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([21.10958695, 24.03265306, 23.76690947, 19.65253006])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([21.1, 24. , 23.8, 19.7])
 </pre></div>
 </div>
 </div>
@@ -1337,10 +1337,11 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </section>
 <section id="slicing">
 <h2><span class="section-number">4.7. </span>Slicing<a class="headerlink" href="#slicing" title="Permalink to this headline">#</a></h2>
+<p>Per concludere, spendiamo ancora alcune parole sull’indicizzazione degli <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>.</p>
 <p>Slicing in Numpy è un meccanismo che consente di selezionare una porzione di un array multidimensionale, ovvero una sotto-matrice o un sotto-vettore. Per selezionare una porzione di un array, si utilizza la sintassi <code class="docutils literal notranslate"><span class="pre">[start:stop:step]</span></code>, dove <code class="docutils literal notranslate"><span class="pre">start</span></code> indica l’indice di partenza della porzione, <code class="docutils literal notranslate"><span class="pre">stop</span></code> indica l’indice di fine e <code class="docutils literal notranslate"><span class="pre">step</span></code> indica il passo da utilizzare per la selezione. Se uno o più di questi valori vengono omessi, vengono utilizzati dei valori di default.</p>
-<p>Ad esempio, se abbiamo un array <code class="docutils literal notranslate"><span class="pre">arr</span></code> di dimensione (3, 4) e vogliamo selezionare la seconda colonna, possiamo usare la sintassi  <code class="docutils literal notranslate"><span class="pre">arr[:,</span> <span class="pre">1]</span></code>. In questo caso, <code class="docutils literal notranslate"><span class="pre">:</span></code> indica che vogliamo selezionare tutte le righe, mentre 1 indica che vogliamo selezionare la seconda colonna.</p>
-<p>Inoltre, è possibile utilizzare il meccanismo di slicing anche per selezionare porzioni di array multidimensionali. Ad esempio, se abbiamo un array <code class="docutils literal notranslate"><span class="pre">arr</span></code> di dimensione (3, 4, 5) e vogliamo selezionare la prima riga di ciascuna matrice 4x5, possiamo usare la sintassi <code class="docutils literal notranslate"><span class="pre">arr[:,</span> <span class="pre">0,</span> <span class="pre">:]</span></code>.</p>
-<p>Per esempio, creiamo l’array <code class="docutils literal notranslate"><span class="pre">a</span></code>  di rank 2 cond shape (3, 4):</p>
+<p>Ad esempio, se abbiamo un array <code class="docutils literal notranslate"><span class="pre">arr</span></code> di dimensione (3, 4) e vogliamo selezionare la seconda colonna, possiamo usare la sintassi  <code class="docutils literal notranslate"><span class="pre">arr[:,</span> <span class="pre">1]</span></code>. In questo caso, il simbolo <code class="docutils literal notranslate"><span class="pre">:</span></code> indica che vogliamo selezionare tutte le righe, mentre il numero <code class="docutils literal notranslate"><span class="pre">1</span></code> indica che vogliamo selezionare la seconda colonna.</p>
+<p>Inoltre, possiamo utilizzare il meccanismo di slicing anche per selezionare porzioni di array multidimensionali. Ad esempio, se abbiamo un array <code class="docutils literal notranslate"><span class="pre">arr</span></code> di dimensione (3, 4, 5) e vogliamo selezionare la prima riga di ciascuna matrice 4x5, possiamo usare la sintassi <code class="docutils literal notranslate"><span class="pre">arr[:,</span> <span class="pre">0,</span> <span class="pre">:]</span></code>.</p>
+<p>Per esempio, creiamo l’array <code class="docutils literal notranslate"><span class="pre">a</span></code>  di rank 2 con shape (3, 4):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">]])</span>
@@ -1371,9 +1372,8 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 </div>
-<p>Si noti che uno slice di un array è una vista degli stessi dati, quindi modificarlo modificherà anche l’array originale. Questo significa che quando si modifica uno slice di un array, si sta modificando direttamente l’array originale e tutti gli altri riferimenti all’array vedranno la modifica.</p>
-<p>È importante tenere presente questo comportamento durante la modifica degli array in Numpy, in modo da evitare modifiche accidentali o indesiderate. In alcuni casi, è possibile utilizzare il metodo <code class="docutils literal notranslate"><span class="pre">copy()</span></code> per creare una copia indipendente di un array e quindi lavorare sulla copia senza modificare l’originale.</p>
-<p>Vediamo un esempio.</p>
+<p>È importante sapere che uno slice di un array in Numpy è una vista degli stessi dati, il che significa che modificarlo implica la modifica dell’array originale. In pratica, quando si modifica uno slice di un array, si sta modificando direttamente l’array originale e tutte le altre visualizzazioni dell’array vedranno la stessa modifica. Questo avviene perché Numpy è progettato per gestire enormi quantità di dati, pertanto cerca di evitare il più possibile di effettuare copie dei dati.</p>
+<p>Questo comportamento deve essere preso in considerazione durante la modifica degli array in Numpy, al fine di evitare modifiche accidentali o indesiderate. In alcuni casi, è possibile utilizzare il metodo <code class="docutils literal notranslate"><span class="pre">copy()</span></code> per creare una copia indipendente di un array e lavorare sulla copia senza modificare l’originale. Vediamo un esempio.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>   
@@ -1524,26 +1524,26 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.04894698, 0.9796201 , 0.91872394, 0.62348488, 0.68808847,
-        0.97192308, 0.33109214, 0.92632781, 0.55333882, 0.72389467],
-       [0.4505653 , 0.85396417, 0.10878248, 0.99756513, 0.09555694,
-        0.18422492, 0.13885494, 0.91335165, 0.84946837, 0.9835563 ],
-       [0.17214318, 0.64008135, 0.14018066, 0.47661352, 0.91544849,
-        0.85721591, 0.72891526, 0.39957981, 0.24042836, 0.62202345],
-       [0.84701433, 0.95428079, 0.6909304 , 0.67754079, 0.58143453,
-        0.09878424, 0.03112382, 0.71174453, 0.05376786, 0.4445458 ],
-       [0.59068498, 0.69017663, 0.02697217, 0.91178311, 0.20646971,
-        0.12497784, 0.59610003, 0.11334337, 0.02777933, 0.47856452],
-       [0.6034343 , 0.29392222, 0.50535771, 0.59702189, 0.28701644,
-        0.13431982, 0.9242645 , 0.88933717, 0.61808263, 0.32760015],
-       [0.98658957, 0.89915853, 0.17905594, 0.59899356, 0.21310324,
-        0.53377413, 0.45915163, 0.88601191, 0.5459795 , 0.61649038],
-       [0.22237163, 0.23959909, 0.5751456 , 0.07989418, 0.71509978,
-        0.22395319, 0.58917268, 0.2827234 , 0.04112369, 0.35879611],
-       [0.03146446, 0.36753662, 0.67498418, 0.43883764, 0.14288745,
-        0.46628127, 0.37879764, 0.6642217 , 0.90619173, 0.6570203 ],
-       [0.44503704, 0.57366118, 0.81930707, 0.14439129, 0.96090014,
-        0.15882629, 0.59218036, 0.4552263 , 0.09598926, 0.9962797 ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.32870637, 0.26952214, 0.12213956, 0.92742527, 0.55591305,
+        0.48505099, 0.35934946, 0.06940291, 0.0386275 , 0.65869127],
+       [0.21751031, 0.17959997, 0.61070365, 0.45378469, 0.32411081,
+        0.63524768, 0.42938871, 0.89920664, 0.53940687, 0.89700488],
+       [0.8213818 , 0.96619202, 0.76413752, 0.50970558, 0.83837997,
+        0.73030649, 0.44376467, 0.78680587, 0.94859466, 0.21029719],
+       [0.60495976, 0.37701658, 0.34642301, 0.19977466, 0.91913379,
+        0.58464856, 0.21445191, 0.82268963, 0.1604733 , 0.55756397],
+       [0.29833265, 0.28085354, 0.36851226, 0.40086076, 0.30094925,
+        0.89750362, 0.66368872, 0.0683827 , 0.15432037, 0.23338726],
+       [0.38395225, 0.13975681, 0.12645319, 0.88965507, 0.84265838,
+        0.82333592, 0.66410543, 0.61805771, 0.59677671, 0.6268216 ],
+       [0.06375576, 0.16753863, 0.48174152, 0.95346156, 0.15076786,
+        0.80688453, 0.3359912 , 0.01367492, 0.0103008 , 0.34924781],
+       [0.47306039, 0.42397172, 0.07593461, 0.1813123 , 0.21788149,
+        0.4052339 , 0.73277439, 0.04266974, 0.91311717, 0.45289207],
+       [0.60034894, 0.19029949, 0.29434608, 0.19245234, 0.92112258,
+        0.74761331, 0.15299937, 0.68668436, 0.54737732, 0.32809032],
+       [0.99581662, 0.56826005, 0.09756737, 0.62553655, 0.20498739,
+        0.002246  , 0.99257658, 0.02687345, 0.7579123 , 0.25606992]])
 </pre></div>
 </div>
 </div>
@@ -1556,7 +1556,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.02697217024073839 0.9975651348709759
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.002245997513419473 0.9958166163077352
 </pre></div>
 </div>
 </div>
@@ -1570,12 +1570,12 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.50472103, 0.5571463 , 0.63824637, 0.79807048, 0.8670208 ,
-       0.08740417, 0.29821825, 0.03990337, 0.91668627, 0.32207602,
-       0.90311605, 0.24334858, 0.65337339, 0.14353206, 0.06213784,
-       0.56019384, 0.80758795, 0.9307426 , 0.65543623, 0.54773107,
-       0.99238491, 0.29506099, 0.03378259, 0.18848468, 0.41615299,
-       0.57058937, 0.62709071, 0.28935588, 0.92199298, 0.03373197])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.31866884, 0.0984417 , 0.3843863 , 0.17096006, 0.36227209,
+       0.35719684, 0.49628915, 0.91066952, 0.39579014, 0.29970005,
+       0.36039076, 0.49397462, 0.25145264, 0.61006674, 0.70185248,
+       0.33052221, 0.14002497, 0.45476727, 0.71140526, 0.7959936 ,
+       0.45237947, 0.64277671, 0.12194309, 0.07756182, 0.8330284 ,
+       0.89762702, 0.22696428, 0.69864767, 0.01562146, 0.26176914])
 </pre></div>
 </div>
 </div>
@@ -1588,7 +1588,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49684399158452364
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.42910481074225576
 </pre></div>
 </div>
 </div>
@@ -1631,8 +1631,8 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.41770198 0.20876825 0.09028781 0.89220618 0.04731523 0.26817878
- 0.49694353 0.         0.27723331 0.12186054]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.55564555 0.71951447 0.         0.93424343 0.83012952 0.07887581
+ 0.11946097 0.26715061 0.46947115 0.81689848]
 </pre></div>
 </div>
 </div>
@@ -1664,7 +1664,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57.61126947585726
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55.80809949144805
 </pre></div>
 </div>
 </div>
@@ -1677,7 +1677,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56
 </pre></div>
 </div>
 </div>
@@ -1881,10 +1881,6 @@ True
 <span class="n">n</span> <span class="o">=</span> <span class="mf">8.32</span>
 <span class="n">r</span> <span class="o">=</span> <span class="mf">18.32</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nums</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">nums</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Replace elements with of the said array which are less than&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;with&quot;</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nums</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">nums</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Replace elements with of the said array which are greater than&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;with&quot;</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nums</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">nums</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1892,13 +1888,35 @@ True
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 5.54  3.38  7.99]
  [ 3.54 18.32  6.99]
  [ 1.54  2.39  9.29]]
-
-Replace elements with of the said array which are less than 8.32 with 18.32
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Replace elements with of the said array which are less than&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;with&quot;</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nums</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">nums</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Replace elements with of the said array which are less than 8.32 with 18.32
 [[18.32 18.32 18.32]
  [18.32  8.32 18.32]
  [18.32 18.32  9.29]]
-
-Replace elements with of the said array which are greater than 8.32 with 18.32
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Replace elements with of the said array which are greater than&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;with&quot;</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nums</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">nums</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Replace elements with of the said array which are greater than 8.32 with 18.32
 [[ 5.54  3.38  7.99]
  [ 3.54  8.32  6.99]
  [ 1.54  2.39 18.32]]
