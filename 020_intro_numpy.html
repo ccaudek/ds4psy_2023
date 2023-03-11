@@ -1,45 +1,35 @@
 
-
 <!DOCTYPE html>
 
-
-<html >
-
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>4. Introduzione a Numpy &#8212; ds4p23</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -47,12 +37,12 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -62,94 +52,62 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '020_intro_numpy';</script>
     <link rel="shortcut icon" href="_static/increasing.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="5. Introduzione a Pandas" href="025_intro_pandas.html" />
     <link rel="prev" title="3. Introduzione a Python" href="015_intro_python.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="intro.html">
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4p23</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -158,303 +116,695 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="027_pandas_categories.html">7. Dati categoriali con Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">8. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">9. Introduzione a Seaborn</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   1. Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="010_installation.html">
+   2. Ambiente di lavoro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_intro_python.html">
+   3. Introduzione a Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Introduzione a Numpy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_intro_pandas.html">
+   5. Introduzione a Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="026_pandas_aggregate.html">
+   6. Riepilogo dei dati con Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="027_pandas_categories.html">
+   7. Dati categoriali con Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="035_intro_matplotlib.html">
+   8. Introduzione a Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="040_intro_seaborn.html">
+   9. Introduzione a Seaborn
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Statistica descrittiva
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">10. Concetti chiave</a></li>
-<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">11. La misurazione in psicologia</a></li>
-<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">12. Dati e frequenze</a></li>
-<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">13. Indici di posizione e di scala</a></li>
-<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">14. Le relazioni tra variabili</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="051_key_notions.html">
+   10. Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="055_measurement.html">
+   11. La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="060_freq_distr.html">
+   12. Dati e frequenze
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="065_loc_scale.html">
+   13. Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="070_correlation.html">
+   14. Le relazioni tra variabili
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="100_sets.html">15. Insiemi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">16. Calcolo combinatorio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">17. Introduzione al calcolo delle probabilità</a></li>
-<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">18. Esercizi di probabilità discreta</a></li>
-<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">19. Probabilità condizionata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">20. Il teorema di Bayes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">21. Variabili casuali</a></li>
-<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">22. Probabilità congiunta</a></li>
-<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">23. La funzione di densità di probabilità</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="100_sets.html">
+   15. Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105_combinatorics.html">
+   16. Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110_intro_prob.html">
+   17. Introduzione al calcolo delle probabilità
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111_prob_tutorial.html">
+   18. Esercizi di probabilità discreta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="115_conditional_prob.html">
+   19. Probabilità condizionata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="120_bayes_theorem.html">
+   20. Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="125_expval_var.html">
+   21. Variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="130_joint_prob.html">
+   22. Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="135_density_func.html">
+   23. La funzione di densità di probabilità
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">24. Distribuzioni di v.c. discrete</a></li>
-<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">25. Distribuzioni di v.c. continue</a></li>
-<li class="toctree-l1"><a class="reference internal" href="215_rng.html">26. Generazione di numeri casuali</a></li>
-<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">27. La verosimiglianza</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205_discr_rv_distr.html">
+   24. Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210_cont_rv_distr.html">
+   25. Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215_rng.html">
+   26. Generazione di numeri casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="225_likelihood.html">
+   27. La verosimiglianza
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
-<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="320_balance_prior_post.html">31. L’influenza della distribuzione a priori</a></li>
-<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
-<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Markov Chain Monte Carlo per l’inferenza bayesiana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
-<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
-<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">36. La predizione bayesiana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">37. La predizione delle frequenze</a></li>
-<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">38. Inferenza bayesiana su una media</a></li>
-<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">39. Confronto tra due (o più) gruppi</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305_intro_bayes.html">
+   28. Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="310_subj_prop.html">
+   29. Inferenza su una proporzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="316_conjugate_families.html">
+   30. Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="320_balance_prior_post.html">
+   31. L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="325_metropolis.html">
+   32. Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="330_beta_binomial.html">
+   33. Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="335_mcmc_diagnostics.html">
+   34. Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="340_summarize_posterior.html">
+   35. Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="345_bayesian_prediction.html">
+   36. La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="346_predict_counts.html">
+   37. La predizione delle frequenze
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="350_normal_normal_mod.html">
+   38. Inferenza bayesiana su una media
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="355_groups_comparison.html">
+   39. Confronto tra due (o più) gruppi
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">40. Introduzione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">41. Regressione lineare bivariata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">42. Regressione lineare con Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">43. Regressione lineare con PyMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">44. Confronto tra le medie di due gruppi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">45. Posterior Predictive Checks</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="400_reglin_1.html">
+   40. Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405_reglin_2.html">
+   41. Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="406_reglin_python_tutorial.html">
+   42. Regressione lineare con Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="410_reglin_3.html">
+   43. Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="415_reglin_4.html">
+   44. Confronto tra le medie di due gruppi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="420_reglin_ppc.html">
+   45. Posterior Predictive Checks
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">46. Stima dei parametri</a></li>
-<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">47. Intervallo fiduciale</a></li>
-<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">48. Significatività statistica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">49. Limiti dell’inferenza frequentista</a></li>
-<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">50. Errori di tipo <em>m</em> (magnitude) e di tipo <em>s</em> (sign)</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="500_intro_frequentist.html">
+   46. Stima dei parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="505_conf_interv.html">
+   47. Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="510_test_ipotesi.html">
+   48. Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="515_limiti_stat_frequentista.html">
+   49. Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="520_s_m_errors.html">
+   50. Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">51. Bibliografia</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   51. Bibliografia
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">52. Simbologia di base</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">53. Numeri binari, interi, razionali, irrazionali e reali</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">54. Simbolo di somma (sommatorie)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">55. Per liberarvi dai terrori preliminari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">56. Kernel Density plot</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   52. Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   53. Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   54. Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus.html">
+   55. Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a06_kde_plot.html">
+   56. Kernel Density plot
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
   
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
     </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
   </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/ccaudek/ds4psy_2023" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F020_intro_numpy.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/020_intro_numpy.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
+  <div class="menu-dropdown__content">
+    <ul>
       <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/020_intro_numpy.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
 >
   
 
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
   </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
       
-  </ul>
+    </ul>
+  </div>
 </div>
-
-
-
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
   </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
-</div></div>
-      
-    </div>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
   
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduzione a Numpy</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gli-array-nel-modulo-numpy">4.1. Gli array nel modulo NumPy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funzioni-per-ndarray">4.1.1. Funzioni per <code class="docutils literal notranslate"><span class="pre">ndarray</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-sugli-array">4.2. Operazioni sugli array</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">4.3. Broadcasting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#altre-operazioni-sugli-array">4.4. Altre operazioni sugli array</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lavorare-con-formule-matematiche">4.5. Lavorare con formule matematiche</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing">4.6. Slicing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcuni-esercizi">4.7. Alcuni esercizi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">4.8. Watermark</a></li>
-</ul>
-            </nav>
-        </div>
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F020_intro_numpy.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/020_intro_numpy.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-              
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gli-array-nel-modulo-numpy">
+   4.1. Gli array nel modulo NumPy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#funzioni-per-ndarray">
+     4.1.1. Funzioni per
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       ndarray
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operazioni-sugli-array">
+   4.2. Operazioni sugli array
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#broadcasting">
+   4.3. Broadcasting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#altre-operazioni-sugli-array">
+   4.4. Altre operazioni sugli array
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lavorare-con-formule-matematiche">
+   4.5. Lavorare con formule matematiche
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#slicing">
+   4.6. Slicing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alcuni-esercizi">
+   4.7. Alcuni esercizi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   4.8. Watermark
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduzione a Numpy</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gli-array-nel-modulo-numpy">
+   4.1. Gli array nel modulo NumPy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#funzioni-per-ndarray">
+     4.1.1. Funzioni per
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       ndarray
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operazioni-sugli-array">
+   4.2. Operazioni sugli array
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#broadcasting">
+   4.3. Broadcasting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#altre-operazioni-sugli-array">
+   4.4. Altre operazioni sugli array
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lavorare-con-formule-matematiche">
+   4.5. Lavorare con formule matematiche
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#slicing">
+   4.6. Slicing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alcuni-esercizi">
+   4.7. Alcuni esercizi
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#watermark">
+   4.8. Watermark
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+              <div>
+                
   <section class="tex2jax_ignore mathjax_ignore" id="introduzione-a-numpy">
 <span id="intro-numpy-notebook"></span><h1><span class="section-number">4. </span>Introduzione a Numpy<a class="headerlink" href="#introduzione-a-numpy" title="Permalink to this headline">#</a></h1>
 <p>Anche se la Standard Library di Python offre molte funzioni utili per l’analisi dei dati, è conveniente utilizzare varie funzioni specifiche contenute in altri moduli. I moduli più utili per l’analisi dei dati sono:</p>
@@ -1161,26 +1511,26 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0612792 , 0.30451966, 0.73179357, 0.11702844, 0.79104323,
-        0.45121665, 0.37829949, 0.00384651, 0.94776026, 0.03713767],
-       [0.8146941 , 0.8773144 , 0.15041744, 0.92312914, 0.54879347,
-        0.23648146, 0.97422146, 0.99991961, 0.66632042, 0.63839478],
-       [0.64253568, 0.76888124, 0.77279557, 0.99000544, 0.35973704,
-        0.09300766, 0.42970573, 0.98663459, 0.06736268, 0.01782522],
-       [0.31227479, 0.12392991, 0.81617794, 0.1229857 , 0.09210972,
-        0.04660948, 0.52448621, 0.07908893, 0.47633746, 0.91858492],
-       [0.628301  , 0.14734833, 0.06680024, 0.80815079, 0.31413238,
-        0.04702317, 0.69770234, 0.22673715, 0.87561584, 0.80207927],
-       [0.68591682, 0.46746863, 0.02476851, 0.08139852, 0.66609576,
-        0.94290455, 0.78120843, 0.46994503, 0.962165  , 0.17346754],
-       [0.07892219, 0.42658001, 0.78201828, 0.12544426, 0.83118936,
-        0.59676683, 0.98621699, 0.94383477, 0.00487092, 0.24706   ],
-       [0.3069222 , 0.57037091, 0.66359112, 0.35168933, 0.26829819,
-        0.15845246, 0.93353356, 0.22773835, 0.64877584, 0.85895257],
-       [0.37233774, 0.89253734, 0.93174777, 0.99372137, 0.26043935,
-        0.20512144, 0.3511962 , 0.29544952, 0.33476811, 0.883536  ],
-       [0.67564447, 0.70226567, 0.0382279 , 0.63223316, 0.68516283,
-        0.48960633, 0.95644002, 0.38746835, 0.63847065, 0.76988406]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.90287897, 0.17549896, 0.12929845, 0.2156513 , 0.19111736,
+        0.67853307, 0.55225947, 0.03702664, 0.94391318, 0.23311244],
+       [0.71472784, 0.39029388, 0.01472232, 0.21444669, 0.57805369,
+        0.95474431, 0.26829352, 0.0076604 , 0.13178544, 0.59607515],
+       [0.49363392, 0.72376931, 0.17930184, 0.90673636, 0.30710239,
+        0.89324568, 0.63069537, 0.1673035 , 0.79152498, 0.44784323],
+       [0.27599833, 0.8083071 , 0.23879689, 0.71478803, 0.91350342,
+        0.8575556 , 0.90310868, 0.42165638, 0.97103556, 0.78284779],
+       [0.1037693 , 0.45865415, 0.01657793, 0.32049364, 0.28592831,
+        0.85590929, 0.34875888, 0.11900124, 0.34697618, 0.42713651],
+       [0.18182529, 0.99446338, 0.04572936, 0.06187995, 0.00725622,
+        0.00545465, 0.15000112, 0.51782639, 0.15686287, 0.80920076],
+       [0.69946698, 0.41064493, 0.05095587, 0.7027951 , 0.74299182,
+        0.99538112, 0.23834071, 0.60853565, 0.85504157, 0.75212894],
+       [0.92406283, 0.22791585, 0.19980722, 0.59561692, 0.77244235,
+        0.7700788 , 0.08282182, 0.77636938, 0.27304516, 0.20019662],
+       [0.99451926, 0.1929509 , 0.11411369, 0.89864848, 0.74334622,
+        0.61594703, 0.48742734, 0.63720647, 0.70814997, 0.82473468],
+       [0.87598956, 0.42070726, 0.42027056, 0.5278817 , 0.00342437,
+        0.68948965, 0.51981413, 0.21120741, 0.38088259, 0.47026252]])
 </pre></div>
 </div>
 </div>
@@ -1193,7 +1543,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0038465125050792803 0.9999196105626783
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.003424367471632439 0.9953811161265013
 </pre></div>
 </div>
 </div>
@@ -1207,12 +1557,12 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.22461083, 0.27634751, 0.11359977, 0.92376962, 0.39210866,
-       0.10944398, 0.37341995, 0.86197706, 0.22679632, 0.47535631,
-       0.62327792, 0.19814532, 0.00829317, 0.26189515, 0.87826366,
-       0.3383016 , 0.34219035, 0.85947652, 0.64182949, 0.89956569,
-       0.1807739 , 0.76022373, 0.65787648, 0.32868478, 0.86253423,
-       0.03481975, 0.4284969 , 0.39318028, 0.74030364, 0.75853573])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.0067631 , 0.42272479, 0.70679009, 0.08613803, 0.5071782 ,
+       0.98614474, 0.26642855, 0.10277648, 0.71750056, 0.26869954,
+       0.72719049, 0.15741043, 0.69946696, 0.9173899 , 0.09097016,
+       0.2873843 , 0.22802458, 0.7797429 , 0.79563956, 0.81590979,
+       0.4343216 , 0.56141866, 0.72868727, 0.62686027, 0.32005033,
+       0.41921596, 0.43668257, 0.64342692, 0.69454067, 0.43885944])
 </pre></div>
 </div>
 </div>
@@ -1225,7 +1575,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4724699438551812
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49581122809227524
 </pre></div>
 </div>
 </div>
@@ -1268,8 +1618,8 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.05881146 0.77088313 0.29794024 0.68123323 0.43812528 0.
- 0.3168154  0.2047641  0.60020776 0.40347423]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.19849032 0.10492297 0.26143888 0.61415439 0.50306421 0.06356763
+ 0.86900231 0.57771075 0.83480001 0.        ]
 </pre></div>
 </div>
 </div>
@@ -1301,7 +1651,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29.19998405899128
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.83919998497604
 </pre></div>
 </div>
 </div>
@@ -1314,7 +1664,7 @@ s = \sqrt{\sum_{i=1}^n\frac{(x_i - \bar{x})^2}{n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
 </pre></div>
 </div>
 </div>
@@ -1620,15 +1970,15 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Mar 11 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Thu Mar 09 2023
 
 Python implementation: CPython
-Python version       : 3.11.0
-IPython version      : 8.11.0
+Python version       : 3.10.9
+IPython version      : 8.7.0
 
-pytensor: 2.10.1
+pytensor: 2.9.1
 
-numpy: 1.24.2
+numpy: 1.24.1
 
 Watermark: 2.3.1
 </pre></div>
@@ -1650,7 +2000,7 @@ Watermark: 2.3.1
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1658,109 +2008,50 @@ Watermark: 2.3.1
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-                <footer class="bd-footer-article">
-                  <!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="015_intro_python.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Introduzione a Python</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="015_intro_python.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Introduzione a Python</p>
+        </div>
     </a>
-    <a class="right-next"
-       href="025_intro_pandas.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="025_intro_pandas.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">5. </span>Introduzione a Pandas</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gli-array-nel-modulo-numpy">4.1. Gli array nel modulo NumPy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funzioni-per-ndarray">4.1.1. Funzioni per <code class="docutils literal notranslate"><span class="pre">ndarray</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operazioni-sugli-array">4.2. Operazioni sugli array</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">4.3. Broadcasting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#altre-operazioni-sugli-array">4.4. Altre operazioni sugli array</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lavorare-con-formule-matematiche">4.5. Lavorare con formule matematiche</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing">4.6. Slicing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alcuni-esercizi">4.7. Alcuni esercizi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">4.8. Watermark</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Corrado Caudek
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2023.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div></div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>

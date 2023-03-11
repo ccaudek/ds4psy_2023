@@ -1,45 +1,35 @@
 
-
 <!DOCTYPE html>
 
-
-<html >
-
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>48. Significatività statistica &#8212; ds4p23</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -47,12 +37,12 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -62,94 +52,62 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '510_test_ipotesi';</script>
     <link rel="shortcut icon" href="_static/increasing.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="49. Limiti dell’inferenza frequentista" href="515_limiti_stat_frequentista.html" />
     <link rel="prev" title="47. Intervallo fiduciale" href="505_conf_interv.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="intro.html">
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ds4p23</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -158,320 +116,807 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="027_pandas_categories.html">7. Dati categoriali con Pandas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">8. Introduzione a Matplotlib</a></li>
-<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">9. Introduzione a Seaborn</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="preface.html">
+   1. Prefazione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="010_installation.html">
+   2. Ambiente di lavoro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="015_intro_python.html">
+   3. Introduzione a Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="020_intro_numpy.html">
+   4. Introduzione a Numpy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="025_intro_pandas.html">
+   5. Introduzione a Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="026_pandas_aggregate.html">
+   6. Riepilogo dei dati con Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="027_pandas_categories.html">
+   7. Dati categoriali con Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="035_intro_matplotlib.html">
+   8. Introduzione a Matplotlib
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="040_intro_seaborn.html">
+   9. Introduzione a Seaborn
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Statistica descrittiva
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">10. Concetti chiave</a></li>
-<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">11. La misurazione in psicologia</a></li>
-<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">12. Dati e frequenze</a></li>
-<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">13. Indici di posizione e di scala</a></li>
-<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">14. Le relazioni tra variabili</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="051_key_notions.html">
+   10. Concetti chiave
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="055_measurement.html">
+   11. La misurazione in psicologia
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="060_freq_distr.html">
+   12. Dati e frequenze
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="065_loc_scale.html">
+   13. Indici di posizione e di scala
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="070_correlation.html">
+   14. Le relazioni tra variabili
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probabilità
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="100_sets.html">15. Insiemi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">16. Calcolo combinatorio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">17. Introduzione al calcolo delle probabilità</a></li>
-<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">18. Esercizi di probabilità discreta</a></li>
-<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">19. Probabilità condizionata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">20. Il teorema di Bayes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">21. Variabili casuali</a></li>
-<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">22. Probabilità congiunta</a></li>
-<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">23. La funzione di densità di probabilità</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="100_sets.html">
+   15. Insiemi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105_combinatorics.html">
+   16. Calcolo combinatorio
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110_intro_prob.html">
+   17. Introduzione al calcolo delle probabilità
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111_prob_tutorial.html">
+   18. Esercizi di probabilità discreta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="115_conditional_prob.html">
+   19. Probabilità condizionata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="120_bayes_theorem.html">
+   20. Il teorema di Bayes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="125_expval_var.html">
+   21. Variabili casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="130_joint_prob.html">
+   22. Probabilità congiunta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="135_density_func.html">
+   23. La funzione di densità di probabilità
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Distribuzioni di v.c.
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">24. Distribuzioni di v.c. discrete</a></li>
-<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">25. Distribuzioni di v.c. continue</a></li>
-<li class="toctree-l1"><a class="reference internal" href="215_rng.html">26. Generazione di numeri casuali</a></li>
-<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">27. La verosimiglianza</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205_discr_rv_distr.html">
+   24. Distribuzioni di v.c. discrete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210_cont_rv_distr.html">
+   25. Distribuzioni di v.c. continue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215_rng.html">
+   26. Generazione di numeri casuali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="225_likelihood.html">
+   27. La verosimiglianza
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza bayesiana
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
-<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
-<li class="toctree-l1"><a class="reference internal" href="320_balance_prior_post.html">31. L’influenza della distribuzione a priori</a></li>
-<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
-<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Markov Chain Monte Carlo per l’inferenza bayesiana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
-<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
-<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">36. La predizione bayesiana</a></li>
-<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">37. La predizione delle frequenze</a></li>
-<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">38. Inferenza bayesiana su una media</a></li>
-<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">39. Confronto tra due (o più) gruppi</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305_intro_bayes.html">
+   28. Credibilità, modelli e parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="310_subj_prop.html">
+   29. Inferenza su una proporzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="316_conjugate_families.html">
+   30. Distribuzioni coniugate
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="320_balance_prior_post.html">
+   31. L’influenza della distribuzione a priori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="325_metropolis.html">
+   32. Approssimazione della distribuzione a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="330_beta_binomial.html">
+   33. Markov Chain Monte Carlo per l’inferenza bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="335_mcmc_diagnostics.html">
+   34. Diagnostica delle catene markoviane
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="340_summarize_posterior.html">
+   35. Sintesi a posteriori
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="345_bayesian_prediction.html">
+   36. La predizione bayesiana
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="346_predict_counts.html">
+   37. La predizione delle frequenze
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="350_normal_normal_mod.html">
+   38. Inferenza bayesiana su una media
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="355_groups_comparison.html">
+   39. Confronto tra due (o più) gruppi
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Regressione lineare
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">40. Introduzione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">41. Regressione lineare bivariata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">42. Regressione lineare con Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">43. Regressione lineare con PyMC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">44. Confronto tra le medie di due gruppi</a></li>
-<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">45. Posterior Predictive Checks</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="400_reglin_1.html">
+   40. Introduzione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405_reglin_2.html">
+   41. Regressione lineare bivariata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="406_reglin_python_tutorial.html">
+   42. Regressione lineare con Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="410_reglin_3.html">
+   43. Regressione lineare con PyMC
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="415_reglin_4.html">
+   44. Confronto tra le medie di due gruppi
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="420_reglin_ppc.html">
+   45. Posterior Predictive Checks
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Inferenza frequentista
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">46. Stima dei parametri</a></li>
-<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">47. Intervallo fiduciale</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">48. Significatività statistica</a></li>
-<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">49. Limiti dell’inferenza frequentista</a></li>
-<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">50. Errori di tipo <em>m</em> (magnitude) e di tipo <em>s</em> (sign)</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="500_intro_frequentist.html">
+   46. Stima dei parametri
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="505_conf_interv.html">
+   47. Intervallo fiduciale
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   48. Significatività statistica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="515_limiti_stat_frequentista.html">
+   49. Limiti dell’inferenza frequentista
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="520_s_m_errors.html">
+   50. Errori di tipo
+   <em>
+    m
+   </em>
+   (magnitude) e di tipo
+   <em>
+    s
+   </em>
+   (sign)
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Bibliografia
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">51. Bibliografia</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="z_biblio.html">
+   51. Bibliografia
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendici
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">52. Simbologia di base</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">53. Numeri binari, interi, razionali, irrazionali e reali</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">54. Simbolo di somma (sommatorie)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">55. Per liberarvi dai terrori preliminari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">56. Kernel Density plot</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a01_math_symbols.html">
+   52. Simbologia di base
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a02_number_sets.html">
+   53. Numeri binari, interi, razionali, irrazionali e reali
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a04_summation_notation.html">
+   54. Simbolo di somma (sommatorie)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a05_calculus.html">
+   55. Per liberarvi dai terrori preliminari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="a06_kde_plot.html">
+   56. Kernel Density plot
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
   
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
     </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
   </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/ccaudek/ds4psy_2023" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F510_test_ipotesi.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/510_test_ipotesi.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
+  <div class="menu-dropdown__content">
+    <ul>
       <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
+        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/510_test_ipotesi.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
 >
   
 
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
   </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
       
-  </ul>
+    </ul>
+  </div>
 </div>
-
-
-
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
   </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
-</div></div>
-      
-    </div>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
   
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Significatività statistica</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-esempio-motivante">48.1. Un esempio motivante</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-domanda-della-ricerca">48.1.1. La domanda della ricerca</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-ipotesi-statistiche">48.1.2. Le ipotesi statistiche</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domanda-della-ricerca-e-ipotesi-statistiche">48.1.3. Domanda della ricerca e ipotesi statistiche</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipotesi-nulla-e-ipotesi-alternativa">48.2. Ipotesi nulla e ipotesi alternativa</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apagogia">48.2.1. Apagogia</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-similitudine-del-processo-penale">48.2.2. La similitudine del processo penale</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-tipi-di-errori">48.3. Due tipi di errori</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-di-i-tipo-la-protezione-dei-diritti-dellimputato">48.3.1. Errore di I tipo: la protezione dei diritti dell’imputato</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-di-ii-tipo-lasimmetria-del-giudizio">48.3.2. Errore di II tipo: l’asimmetria del giudizio</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#come-si-costruisce-un-test-di-ipotesi">48.4. Come si costruisce un test di ipotesi?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-variabilita-campionaria">48.4.1. La variabilità campionaria</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-distribuzioni-delle-statistiche-test">48.4.2. Le distribuzioni delle statistiche test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regioni-di-rifiuto-e-regioni-di-non-rifiuto">48.4.3. Regioni di rifiuto e regioni di non rifiuto</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quando-rifiutare-lipotesi-nulla">48.4.4. Quando rifiutare l’ipotesi nulla</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specificazione-delle-regioni-di-rifiuto">48.4.5. Specificazione delle regioni di rifiuto</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-decisione-statistica">48.4.6. La decisione statistica</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potenza-del-test">48.5. Potenza del test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-classico-e-simulazioni">48.6. Metodo classico e simulazioni</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-e-fisher">48.7. Neyman e Fisher</a></li>
-</ul>
-            </nav>
-        </div>
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F510_test_ipotesi.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/510_test_ipotesi.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-              
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#un-esempio-motivante">
+   48.1. Un esempio motivante
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-domanda-della-ricerca">
+     48.1.1. La domanda della ricerca
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#le-ipotesi-statistiche">
+     48.1.2. Le ipotesi statistiche
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#domanda-della-ricerca-e-ipotesi-statistiche">
+     48.1.3. Domanda della ricerca e ipotesi statistiche
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ipotesi-nulla-e-ipotesi-alternativa">
+   48.2. Ipotesi nulla e ipotesi alternativa
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apagogia">
+     48.2.1. Apagogia
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-similitudine-del-processo-penale">
+     48.2.2. La similitudine del processo penale
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#due-tipi-di-errori">
+   48.3. Due tipi di errori
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#errore-di-i-tipo-la-protezione-dei-diritti-dellimputato">
+     48.3.1. Errore di I tipo: la protezione dei diritti dell’imputato
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#errore-di-ii-tipo-lasimmetria-del-giudizio">
+     48.3.2. Errore di II tipo: l’asimmetria del giudizio
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#come-si-costruisce-un-test-di-ipotesi">
+   48.4. Come si costruisce un test di ipotesi?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-variabilita-campionaria">
+     48.4.1. La variabilità campionaria
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#le-distribuzioni-delle-statistiche-test">
+     48.4.2. Le distribuzioni delle statistiche test
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regioni-di-rifiuto-e-regioni-di-non-rifiuto">
+     48.4.3. Regioni di rifiuto e regioni di non rifiuto
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quando-rifiutare-lipotesi-nulla">
+     48.4.4. Quando rifiutare l’ipotesi nulla
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specificazione-delle-regioni-di-rifiuto">
+     48.4.5. Specificazione delle regioni di rifiuto
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-decisione-statistica">
+     48.4.6. La decisione statistica
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#potenza-del-test">
+   48.5. Potenza del test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-classico-e-simulazioni">
+   48.6. Metodo classico e simulazioni
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neyman-e-fisher">
+   48.7. Neyman e Fisher
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Significatività statistica</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#un-esempio-motivante">
+   48.1. Un esempio motivante
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-domanda-della-ricerca">
+     48.1.1. La domanda della ricerca
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#le-ipotesi-statistiche">
+     48.1.2. Le ipotesi statistiche
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#domanda-della-ricerca-e-ipotesi-statistiche">
+     48.1.3. Domanda della ricerca e ipotesi statistiche
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ipotesi-nulla-e-ipotesi-alternativa">
+   48.2. Ipotesi nulla e ipotesi alternativa
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#apagogia">
+     48.2.1. Apagogia
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-similitudine-del-processo-penale">
+     48.2.2. La similitudine del processo penale
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#due-tipi-di-errori">
+   48.3. Due tipi di errori
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#errore-di-i-tipo-la-protezione-dei-diritti-dellimputato">
+     48.3.1. Errore di I tipo: la protezione dei diritti dell’imputato
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#errore-di-ii-tipo-lasimmetria-del-giudizio">
+     48.3.2. Errore di II tipo: l’asimmetria del giudizio
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#come-si-costruisce-un-test-di-ipotesi">
+   48.4. Come si costruisce un test di ipotesi?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-variabilita-campionaria">
+     48.4.1. La variabilità campionaria
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#le-distribuzioni-delle-statistiche-test">
+     48.4.2. Le distribuzioni delle statistiche test
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regioni-di-rifiuto-e-regioni-di-non-rifiuto">
+     48.4.3. Regioni di rifiuto e regioni di non rifiuto
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quando-rifiutare-lipotesi-nulla">
+     48.4.4. Quando rifiutare l’ipotesi nulla
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#specificazione-delle-regioni-di-rifiuto">
+     48.4.5. Specificazione delle regioni di rifiuto
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#la-decisione-statistica">
+     48.4.6. La decisione statistica
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#potenza-del-test">
+   48.5. Potenza del test
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-classico-e-simulazioni">
+   48.6. Metodo classico e simulazioni
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neyman-e-fisher">
+   48.7. Neyman e Fisher
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+              <div>
+                
   <section class="tex2jax_ignore mathjax_ignore" id="significativita-statistica">
 <h1><span class="section-number">48. </span>Significatività statistica<a class="headerlink" href="#significativita-statistica" title="Permalink to this headline">#</a></h1>
 <p>Una regola decisionale comunemente usata, ma che la comunità statistica fortemente sconsiglia, è quella di considerare un risultato come stabile o reale se è “statisticamente significativo” e di considerare i risultati “non significativi” come rumorosi e da trattare con scetticismo. Per i motivi discussi in questo capitolo, è preferibile non concentrarsi sulla significatività statistica, ma il concetto è abbastanza importante nella statistica applicata da meritare di essere trattato qui.</p>
@@ -486,23 +931,23 @@ document.write(`
 <p>La statistica osservata dista meno di due errori standard dall’ipotesi nulla del 50%. Di conseguenza, diciamo che il risultato non è “significativamente” diverso dal caso (ovvero, è <strong>troppo simile</strong> al risultato predetto dall’ipotesi nulla).</p>
 <section id="un-esempio-motivante">
 <h2><span class="section-number">48.1. </span>Un esempio motivante<a class="headerlink" href="#un-esempio-motivante" title="Permalink to this headline">#</a></h2>
-<p>Per introdurre in maggiore dettaglio il concetto di significatività statistica consideriamo una ricerca svolta da <span id="id1">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span>. La ricerca di <span id="id2">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> riguarda la musica. L’ascolto musicale è presente in tutte le fasi della vita e anche nell’infanzia. Tra le altre cose, la musica può trasmettere informazioni relative all’appartenenza sociale – pensiamo alle canzoni popolari, ad esempio. <span id="id3">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> si sono chiesti se la musica sia capace di trasmettere messaggi di tipo sociale anche in bambini molto piccoli. Nello specifico, <span id="id4">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> si sono chiesti se i bambini di 5 mesi mostrino una preferenza per individui sconosciuti che cantano una canzone a loro familiare, rispetto ad altri individui sconosciuti che cantano una canzone simile, con le stesse parole e lo stesso ritmo, ma con una diversa melodia. <span id="id5">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> hanno scoperto che, in effetti, le cose stanno veramente così, ma solo quando, nella fase di familiarizzazione, la canzone test veniva cantata dai genitori, ma non quando nella fase di familiarizzazione la stessa canzone veniva cantata da un estraneo. Secondo gli autori, questo mostra che il significato sociale è l’elemento cruciale della preferenza dei bambini, non semplicemente la familiarità con la canzone.</p>
+<p>Per introdurre in maggiore dettaglio il concetto di significatività statistica consideriamo una ricerca svolta da <span id="id1">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span>. La ricerca di <span id="id2">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> riguarda la musica. L’ascolto musicale è presente in tutte le fasi della vita e anche nell’infanzia. Tra le altre cose, la musica può trasmettere informazioni relative all’appartenenza sociale – pensiamo alle canzoni popolari, ad esempio. <span id="id3">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> si sono chiesti se la musica sia capace di trasmettere messaggi di tipo sociale anche in bambini molto piccoli. Nello specifico, <span id="id4">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> si sono chiesti se i bambini di 5 mesi mostrino una preferenza per individui sconosciuti che cantano una canzone a loro familiare, rispetto ad altri individui sconosciuti che cantano una canzone simile, con le stesse parole e lo stesso ritmo, ma con una diversa melodia. <span id="id5">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> hanno scoperto che, in effetti, le cose stanno veramente così, ma solo quando, nella fase di familiarizzazione, la canzone test veniva cantata dai genitori, ma non quando nella fase di familiarizzazione la stessa canzone veniva cantata da un estraneo. Secondo gli autori, questo mostra che il significato sociale è l’elemento cruciale della preferenza dei bambini, non semplicemente la familiarità con la canzone.</p>
 <section id="la-domanda-della-ricerca">
 <h3><span class="section-number">48.1.1. </span>La domanda della ricerca<a class="headerlink" href="#la-domanda-della-ricerca" title="Permalink to this headline">#</a></h3>
-<p>La domanda che <span id="id6">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> si sono posti si chiama <em>domanda della ricerca</em>. In psicologia, le domande della ricerca sono delle ipotesi che riguardano i costrutti psicologici. L’ascolto della musica certamente ha a che fare con la psicologia e il significato che attribuiamo all’ascolto della musica è certamente un fenomeno psicologico. Per cui la domanda che <span id="id7">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> si sono posti è certamente una domanda legittima nel contesto della ricerca psicologica.</p>
+<p>La domanda che <span id="id6">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> si sono posti si chiama <em>domanda della ricerca</em>. In psicologia, le domande della ricerca sono delle ipotesi che riguardano i costrutti psicologici. L’ascolto della musica certamente ha a che fare con la psicologia e il significato che attribuiamo all’ascolto della musica è certamente un fenomeno psicologico. Per cui la domanda che <span id="id7">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> si sono posti è certamente una domanda legittima nel contesto della ricerca psicologica.</p>
 <p>In psicologia, le ipotesi della ricerca sono delle proposizioni che descrivono le proprietà dei fenomeni psicologici. Tali proposizioni possono essere vere oppure false. Alcune volte le ipotesi della ricerca sono espresse in termini po’ vaghi – nel caso presente, per esempio, ci possono essere idee diverse a proposito di ciò che è musicale e di ciò che non lo è – in ultima analisi le ipotesi della ricerca vengono valutate in base alla loro utilità: si dimostrano utili solo se contribuiscono ad aggiungere qualcosa di importante rispetto a ciò che già sappiamo rispetto al fenomeno psicologico considerato.</p>
 </section>
 <section id="le-ipotesi-statistiche">
 <h3><span class="section-number">48.1.2. </span>Le ipotesi statistiche<a class="headerlink" href="#le-ipotesi-statistiche" title="Permalink to this headline">#</a></h3>
 <p>Quello che dobbiamo notare è che non è possibile verificare direttamente le ipotesi della ricerca. Le ipotesi della ricerca sono delle proposizioni relative alle caratteristiche o al funzionamento dei fenomeni psicologici. Tuttavia, in generale, le ipotesi psicologiche non sono abbastanza precise da poter essere valutate direttamente. Quello che i ricercatori possono fare, invece, è valutare delle <em>ipotesi statistiche</em>. Le ipotesi statistiche non coincidono con l’ipotesi della ricerca ma hanno il vantaggio di potere essere espresse in termini probabilistici.</p>
-<p>Nell’esperimento di <span id="id8">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span>, due settimane dopo la fase di familiarizzazione con la canzone test, i bambini che facevano parte dell’esperimento venivano esaminati in laboratorio. Ad essi venivano mostrate due video-registrazioni. Una registrazione presentava un estraneo che cantava la canzone test; l’altra registrazione presentava un secondo individuo non conosciuto dai bambini che cantava una canzone simile alla prima, ma non familiare ai bambini. I ricercatori hanno misurato i tempi di fissazione dello sguardo dei bambini nei confronti di ciascuna delle due video-registrazioni. Nel primo esperimento, la variabile dipendente era uguale alla media, calcolata su 32 casi, della proporzione del tempo di fissazione rivolta al video “familiare” rispetto al tempo di fissazione totale (ovvero la somma del tempo di fissazione del video “familiare” e del tempo di fissazione del video “non familiare”).</p>
+<p>Nell’esperimento di <span id="id8">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span>, due settimane dopo la fase di familiarizzazione con la canzone test, i bambini che facevano parte dell’esperimento venivano esaminati in laboratorio. Ad essi venivano mostrate due video-registrazioni. Una registrazione presentava un estraneo che cantava la canzone test; l’altra registrazione presentava un secondo individuo non conosciuto dai bambini che cantava una canzone simile alla prima, ma non familiare ai bambini. I ricercatori hanno misurato i tempi di fissazione dello sguardo dei bambini nei confronti di ciascuna delle due video-registrazioni. Nel primo esperimento, la variabile dipendente era uguale alla media, calcolata su 32 casi, della proporzione del tempo di fissazione rivolta al video “familiare” rispetto al tempo di fissazione totale (ovvero la somma del tempo di fissazione del video “familiare” e del tempo di fissazione del video “non familiare”).</p>
 <p>Dato che non è possibile valutare direttamente la domanda della ricerca è necessario stabilire una connessione tra l’ipotesi della ricerca e l’ipotesi statistica. Nel caso presente possiamo pensare a tre possibilità.</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Se i bambini non hanno alcuna preferenza nei confronti di uno dei due tipi di video-registrazione, allora la media delle proporzioni dei tempi di fissazione di tutti i bambini possibili (ovvero, nella popolazione) sarà uguale a <span class="math notranslate nohighlight">\(\mu = 0.5\)</span>, perché, in media, i tempi di fissazione per le due video-registazioni saranno uguali.</p></li>
-<li><p>Se <span id="id9">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> hanno ragione, allora i bambini preferiranno guardare il video con la canzone familiare piuttosto che il video con la canzone non familiare. Questa situazione si traduce nell’ipotesi statistica <span class="math notranslate nohighlight">\(\mu &gt; 0.5\)</span> (con <span class="math notranslate nohighlight">\(\mu = 0.5\)</span> che rappresenta il livello del caso).</p></li>
+<li><p>Se <span id="id9">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> hanno ragione, allora i bambini preferiranno guardare il video con la canzone familiare piuttosto che il video con la canzone non familiare. Questa situazione si traduce nell’ipotesi statistica <span class="math notranslate nohighlight">\(\mu &gt; 0.5\)</span> (con <span class="math notranslate nohighlight">\(\mu = 0.5\)</span> che rappresenta il livello del caso).</p></li>
 <li><p>Una terza possibilità è che i bambini siano maggiormente attratti da una melodia non familiare – questo è il contrario di ciò che propongono gli autori della ricerca. Tale possibilità si traduce nell’ipotesi statistica <span class="math notranslate nohighlight">\(\mu &lt; 0.5\)</span>.</p></li>
 </ol>
-<p>Le tre ipotesi precedenti sono esempi di ipotesi statistiche. Sono infatti delle proposizioni a proposito dei valori di un parametro di un modello statistico. Nel caso presente, il modello statistico è la distribuzione della proporzione dei tempi di fissazione in una popolazione virtuale di infiniti bambini di sei mesi d’età, come nell’esperiment di <span id="id10">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span>. Se consideriamo uno specifico bambino, la proporzione dei tempi di fissazione avrà un certo valore, mentre per un’altro bambino avrà un valore diverso. Il modello statistico considerato descrive la distribuzione dei possibili valori della proporzione del tempo di fissazione nei confronti del video “familiare”. Un tale modello statistico può essere messo in relazione con i dati raccolti dagli sperimentatori perché <span id="id11">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> hanno misurato proprio questo aspetto, ovvero la media della proporzione del tempo di fissazione rivolto al video “familiare”.</p>
+<p>Le tre ipotesi precedenti sono esempi di ipotesi statistiche. Sono infatti delle proposizioni a proposito dei valori di un parametro di un modello statistico. Nel caso presente, il modello statistico è la distribuzione della proporzione dei tempi di fissazione in una popolazione virtuale di infiniti bambini di sei mesi d’età, come nell’esperiment di <span id="id10">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span>. Se consideriamo uno specifico bambino, la proporzione dei tempi di fissazione avrà un certo valore, mentre per un’altro bambino avrà un valore diverso. Il modello statistico considerato descrive la distribuzione dei possibili valori della proporzione del tempo di fissazione nei confronti del video “familiare”. Un tale modello statistico può essere messo in relazione con i dati raccolti dagli sperimentatori perché <span id="id11">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> hanno misurato proprio questo aspetto, ovvero la media della proporzione del tempo di fissazione rivolto al video “familiare”.</p>
 </section>
 <section id="domanda-della-ricerca-e-ipotesi-statistiche">
 <h3><span class="section-number">48.1.3. </span>Domanda della ricerca e ipotesi statistiche<a class="headerlink" href="#domanda-della-ricerca-e-ipotesi-statistiche" title="Permalink to this headline">#</a></h3>
@@ -544,11 +989,11 @@ document.write(`
 </section>
 <section id="come-si-costruisce-un-test-di-ipotesi">
 <h2><span class="section-number">48.4. </span>Come si costruisce un test di ipotesi?<a class="headerlink" href="#come-si-costruisce-un-test-di-ipotesi" title="Permalink to this headline">#</a></h2>
-<p>Ritorniamo all’esempio relativo allo studio di <span id="id12">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span>. In questo caso, sulla base all’ipotesi della ricerca, l’ipotesi nulla può essere formulata come <span class="math notranslate nohighlight">\(H_0: \mu \leq 0.5\)</span>. Esaminando un campione di 32 bambini di età media pari a 5.6 mesi, <span id="id13">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> hanno scoperto che, in media, i bambini dirigevano lo sguardo verso il video “familiare” nel 59% del tempo totale di fissazione. Dunque, la media campionaria è <span class="math notranslate nohighlight">\(\bar{X} = 0.59\)</span> Questo è il valore campionario rilevante per il test dell’ipotesi nulla.</p>
+<p>Ritorniamo all’esempio relativo allo studio di <span id="id12">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span>. In questo caso, sulla base all’ipotesi della ricerca, l’ipotesi nulla può essere formulata come <span class="math notranslate nohighlight">\(H_0: \mu \leq 0.5\)</span>. Esaminando un campione di 32 bambini di età media pari a 5.6 mesi, <span id="id13">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> hanno scoperto che, in media, i bambini dirigevano lo sguardo verso il video “familiare” nel 59% del tempo totale di fissazione. Dunque, la media campionaria è <span class="math notranslate nohighlight">\(\bar{X} = 0.59\)</span> Questo è il valore campionario rilevante per il test dell’ipotesi nulla.</p>
 <p>Ingenuamente, potremmo pensare che, per decidere se <span class="math notranslate nohighlight">\(H_0\)</span> sia falsa o meno, sia sufficiente confrontare la proporzione calcolata nel campione con il valore <span class="math notranslate nohighlight">\(\pi\)</span> specificato dall’ipotesi nulla. Nel caso presente, l’ipotesi nulla non specifica un unico valore <span class="math notranslate nohighlight">\(\mu\)</span> ma bensì un intervallo di valori: <span class="math notranslate nohighlight">\([0, 0.5]\)</span>. I dati campionari specificano un valore <span class="math notranslate nohighlight">\(\bar{X} = 0.56\)</span>, ovvero un valore che non è incluso nell’intervallo specificato da <span class="math notranslate nohighlight">\(H_0\)</span>. Questo è incoraggiante. Se invece avessimo osservato <span class="math notranslate nohighlight">\(\bar{X} = 0.41\)</span>, per esempio, allora non ci sarebbe stato nient’altro da dire: se i dati osservati sono compatibili con <span class="math notranslate nohighlight">\(H_0\)</span> non c’è bisogno di eseguire alcun test statistico – abbiamo già trovato la risposta alla domanda della ricerca.</p>
 <section id="la-variabilita-campionaria">
 <h3><span class="section-number">48.4.1. </span>La variabilità campionaria<a class="headerlink" href="#la-variabilita-campionaria" title="Permalink to this headline">#</a></h3>
-<p>Nel caso dell’esperimento <span id="id14">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> che stiamo discutendo, <span class="math notranslate nohighlight">\(\bar{X}\)</span> non cade nell’intervallo specificato da <span class="math notranslate nohighlight">\(H_0\)</span>. Sulla base del valore osservato <span class="math notranslate nohighlight">\(\bar{X} = 0.59\)</span> possiamo dunque concludere che <span class="math notranslate nohighlight">\(H_0\)</span> è falsa? Non così presto. Non è sufficiente trovare una differenza <span class="math notranslate nohighlight">\(\bar{X} - \mu\)</span> nella direzione giusta (cioè positiva, nel nostro caso). È anche necessario tenere in considerazione il fenomeno della <em>variabilità campionaria</em>.</p>
+<p>Nel caso dell’esperimento <span id="id14">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> che stiamo discutendo, <span class="math notranslate nohighlight">\(\bar{X}\)</span> non cade nell’intervallo specificato da <span class="math notranslate nohighlight">\(H_0\)</span>. Sulla base del valore osservato <span class="math notranslate nohighlight">\(\bar{X} = 0.59\)</span> possiamo dunque concludere che <span class="math notranslate nohighlight">\(H_0\)</span> è falsa? Non così presto. Non è sufficiente trovare una differenza <span class="math notranslate nohighlight">\(\bar{X} - \mu\)</span> nella direzione giusta (cioè positiva, nel nostro caso). È anche necessario tenere in considerazione il fenomeno della <em>variabilità campionaria</em>.</p>
 <p>Infatti, la media <span class="math notranslate nohighlight">\(\bar{X}\)</span> osservata in ogni singolo campione di ampiezza <span class="math notranslate nohighlight">\(n=32\)</span> è una variabile aleatoria: in ciascun possibile campione di ampiezza 32 i bambini si comportano in maniera diversa e, di conseguenza, <span class="math notranslate nohighlight">\(\bar{X}\)</span> assumerà un valore diverso da campione a campione. Le statistiche campionarie – nel nostro caso la media <span class="math notranslate nohighlight">\(\bar{X}\)</span> – sono di necessità diverse dai parametri. Ciò a cui noi siamo interessati è la media della popolazione, ovvero <span class="math notranslate nohighlight">\(\mu\)</span>, ma sfortunatamente conosciamo solo una sua realizzazione campionaria, ovvero <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p>
 <p>Risulta dunque chiaro che la nostra decisione rispetto ad <span class="math notranslate nohighlight">\(H_0\)</span> non può essere unicamente basata sulla differenza tra <span class="math notranslate nohighlight">\(\bar{X} - \mu\)</span>. Infatti, è ragionevole pensare che, indipendentemente dal fatto che l’ipotesi nulla sia vera o meno, in alcuni campioni la differenza <span class="math notranslate nohighlight">\(\bar{X} - \mu\)</span> sarà positive mentre in altri campioni sarà negativa. Dobbiamo dunque trovare una procedura che riduca la possibilità di rifiutare <span class="math notranslate nohighlight">\(H_0\)</span> <em>per effetto del caso soltanto</em>. Possiamo (e dobbiamo) fare di meglio che considerare unicamente la differenza <span class="math notranslate nohighlight">\(\bar{X} - \mu\)</span>.</p>
 </section>
@@ -558,7 +1003,7 @@ document.write(`
 <p>È ovvio come calcolare la media delle proporzioni del tempo di fissazione in un singolo campione. Il problema è che tale media varia da campione a campione (fenomeno detto della <em>variabilità campionaria</em>). L’approccio frequentista affronta il problema di giungere ad una decisione rispetto ad <span class="math notranslate nohighlight">\(H_0\)</span> <em>tenendo in considerazione</em> la variabilità campionaria nel modo seguente. Il punto di partenza è quello di descrivere le caratteristiche della distribuzione di tutti i possibili valori che la statistica test in esame (nel nostro caso, la media del campione, ovvero <span class="math notranslate nohighlight">\(\bar{X}\)</span>) in tutti i infiniti possibili campioni di ampiezza <span class="math notranslate nohighlight">\(n\)</span> (nel nostro caso <span class="math notranslate nohighlight">\(n\)</span> = 32).</p>
 <p>È facile capire che, espresso in questi termini, il problema di stabilire quali sono le caratteristiche di tale distribuzione di medie campionarie non è risolvibile. Senza sapere nient’altro, non possiamo sapere come si distribuisce <span class="math notranslate nohighlight">\(\bar{X}\)</span> nell’universo dei campioni. Ricordiamo però che lo scopo della procedura di test statistici dell’approccio frequentista non è quello di verificare l’ipotesi alternativa: questo non è logicamente possibile. Invece, come suggerito dalla similitudine del processo penale all’ipotesi nulla, l’approccio frequentista si pone l’obiettivo di determinare se ci siano indizi sufficienti per “condannare” l’ipotesi nulla, ovvero, per rigettarla.</p>
 <p>In questa <em>reductio ad absurdum</em>, la “presunzione di innocenza” di <span class="math notranslate nohighlight">\(H_0\)</span> corrisponde all’idea che dobbiamo assumere come vera l’ipotesi nulla, <em>fino a prova contraria</em>. Nell’esempio che stiamo discutendo, assumere come vera l’ipotesi nulla significa assumere che il parametro <span class="math notranslate nohighlight">\(\mu\)</span> (la media della popolazione) sia uguale a 0.5. Sulla base di questa assunzione è possibile costruire la distribuzione delle medie dei campioni di ampiezza 32.</p>
-<p>Per fare questo, <span id="id15">[<a class="reference internal" href="z_biblio.html#id81" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> utilizzano (implicitamente) ad un famoso teorema della teoria della probabilità che possiamo descrivere nel modo seguente. Se estraiamo infiniti campioni di ampiezza 32 da una popolazione gaussiana di media <span class="math notranslate nohighlight">\(\mu = 0.5\)</span>, allora le medie standardizzate di tali campioni seguiranno la distribuzione teorica di probabilità chiamata distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student con 32 - 1 = 31 gradi di libertà. Ricordiamo che standardizzare una variabile significa sottrarre dai valori della variabile il suo valore atteso e dividere per la deviazione standard. Si può dimostrare che il valore atteso delle medie dei campioni è uguale alla media della popolazione. Nel caso presente, avremo che</p>
+<p>Per fare questo, <span id="id15">[<a class="reference internal" href="z_biblio.html#id79" title="S. A. Mehr, L. A. Song, and E. S. Spelke. For 5-month-old infants, melodies are social. Psychological Science, 27(4):486-501, 2016.">MSS16</a>]</span> utilizzano (implicitamente) ad un famoso teorema della teoria della probabilità che possiamo descrivere nel modo seguente. Se estraiamo infiniti campioni di ampiezza 32 da una popolazione gaussiana di media <span class="math notranslate nohighlight">\(\mu = 0.5\)</span>, allora le medie standardizzate di tali campioni seguiranno la distribuzione teorica di probabilità chiamata distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student con 32 - 1 = 31 gradi di libertà. Ricordiamo che standardizzare una variabile significa sottrarre dai valori della variabile il suo valore atteso e dividere per la deviazione standard. Si può dimostrare che il valore atteso delle medie dei campioni è uguale alla media della popolazione. Nel caso presente, avremo che</p>
 <div class="math notranslate nohighlight">
 \[
 \mathbb{E}(\bar{X}) = \mu_{\bar{X}} = \mu
@@ -580,7 +1025,7 @@ T = \frac{\bar{X} - \mu}{\frac{s}{\sqrt{n}}},
 <p>Supponiamo che la figura seguente rappresenti la distribuzione campionaria della statistica test <span class="math notranslate nohighlight">\(\mathcal{G}_n\)</span>.</p>
 <p><img alt="Distribuzione della statistica test condizionata all’ipotesi nulla ." src="_images/test_ipotesi_1.png" /></p>
 <p>Se i dati producono la statistica test <span class="math notranslate nohighlight">\(\mathcal{G}_n^1\)</span>, non possiamo rifiutare l’ipotesi nulla <span class="math notranslate nohighlight">\(H_0\)</span>. Se invece i dati producono <span class="math notranslate nohighlight">\(\mathcal{G}_n^2\)</span> allora possiamo rifiutare l’ipotesi nulla in favore dell’ipotesi alternativa. Ci sono varie cose da notare.</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>La regione di rifiuto è costituita da valori lontani dal centro della distribuzione campionaria della statistica test, la quale è stata costruita assumendo come vera <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
 <li><p>La regione di rifiuto è situata nelle code della distribuzione. Vedremo in seguito anche degli esempi di regioni di rifiuto unilaterali.</p></li>
 <li><p>In questa discussione, l’ipotesi alternativa non è menzionata. Rifiutiamo o non rifiutiamo <span class="math notranslate nohighlight">\(H_0\)</span> basandoci unicamente sulla distribuzione campionaria <span class="math notranslate nohighlight">\(f(\mathcal{G}_n \mid H_0)\)</span>, cioè sulla probabilità della statistica test condizionata all’ipotesi nulla <span class="math notranslate nohighlight">\(H_0\)</span>. L’ipotesi alternativa <span class="math notranslate nohighlight">\(H_1\)</span> viene presa in considerazione quando si sceglie dove posizionare la regione di rifiuto di <span class="math notranslate nohighlight">\(H_0\)</span>, ma formalmente non gioca alcun ruolo nel rigettare o meno <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
@@ -713,7 +1158,7 @@ P(y \mid p, n) = \binom{n = 30}{y = 22} p^y (1-p)^{n-y}.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;BarContainer object of 31 artists&gt;
 </pre></div>
 </div>
-<img alt="_images/0c091732e114ccb036700aa39a723a9618d6591d7d5fa35509b863a4d4cbdf4e.png" src="_images/0c091732e114ccb036700aa39a723a9618d6591d7d5fa35509b863a4d4cbdf4e.png" />
+<img alt="_images/510_test_ipotesi_9_1.png" src="_images/510_test_ipotesi_9_1.png" />
 </div>
 </div>
 <p>L’approccio frequentista si pone la seguente domanda: qual è la probabilità <span class="math notranslate nohighlight">\(P(y &gt;= 22 \mid n=30, p=0.5)\)</span>? Usando la distribuzione binomiale otteniamo 0.008.</p>
@@ -772,7 +1217,7 @@ P(y \mid p, n) = \binom{n = 30}{y = 22} p^y (1-p)^{n-y}.
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -780,126 +1225,50 @@ P(y \mid p, n) = \binom{n = 30}{y = 22} p^y (1-p)^{n-y}.
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-                <footer class="bd-footer-article">
-                  <!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="505_conf_interv.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">47. </span>Intervallo fiduciale</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="505_conf_interv.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">47. </span>Intervallo fiduciale</p>
+        </div>
     </a>
-    <a class="right-next"
-       href="515_limiti_stat_frequentista.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="515_limiti_stat_frequentista.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">49. </span>Limiti dell’inferenza frequentista</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-esempio-motivante">48.1. Un esempio motivante</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-domanda-della-ricerca">48.1.1. La domanda della ricerca</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-ipotesi-statistiche">48.1.2. Le ipotesi statistiche</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#domanda-della-ricerca-e-ipotesi-statistiche">48.1.3. Domanda della ricerca e ipotesi statistiche</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipotesi-nulla-e-ipotesi-alternativa">48.2. Ipotesi nulla e ipotesi alternativa</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apagogia">48.2.1. Apagogia</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-similitudine-del-processo-penale">48.2.2. La similitudine del processo penale</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-tipi-di-errori">48.3. Due tipi di errori</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-di-i-tipo-la-protezione-dei-diritti-dellimputato">48.3.1. Errore di I tipo: la protezione dei diritti dell’imputato</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errore-di-ii-tipo-lasimmetria-del-giudizio">48.3.2. Errore di II tipo: l’asimmetria del giudizio</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#come-si-costruisce-un-test-di-ipotesi">48.4. Come si costruisce un test di ipotesi?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-variabilita-campionaria">48.4.1. La variabilità campionaria</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#le-distribuzioni-delle-statistiche-test">48.4.2. Le distribuzioni delle statistiche test</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regioni-di-rifiuto-e-regioni-di-non-rifiuto">48.4.3. Regioni di rifiuto e regioni di non rifiuto</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quando-rifiutare-lipotesi-nulla">48.4.4. Quando rifiutare l’ipotesi nulla</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specificazione-delle-regioni-di-rifiuto">48.4.5. Specificazione delle regioni di rifiuto</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-decisione-statistica">48.4.6. La decisione statistica</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potenza-del-test">48.5. Potenza del test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-classico-e-simulazioni">48.6. Metodo classico e simulazioni</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neyman-e-fisher">48.7. Neyman e Fisher</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Corrado Caudek
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2023.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div></div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Corrado Caudek<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>
