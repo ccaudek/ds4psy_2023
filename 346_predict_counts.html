@@ -1,35 +1,45 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>37. La predizione delle frequenze &#8212; ds4p23</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -37,12 +47,12 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,62 +62,94 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '346_predict_counts';</script>
     <link rel="shortcut icon" href="_static/increasing.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="38. Inferenza bayesiana su una media" href="350_normal_normal_mod.html" />
     <link rel="prev" title="36. La predizione bayesiana" href="345_bayesian_prediction.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">ds4p23</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,611 +158,294 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Python
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   1. Prefazione
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="010_installation.html">
-   2. Ambiente di lavoro
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="015_intro_python.html">
-   3. Introduzione a Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="020_intro_numpy.html">
-   4. Introduzione a Numpy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="025_intro_pandas.html">
-   5. Introduzione a Pandas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="026_pandas_aggregate.html">
-   6. Riepilogo dei dati con Pandas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="027_pandas_categories.html">
-   7. Dati categoriali con Pandas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="035_intro_matplotlib.html">
-   8. Introduzione a Matplotlib
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="040_intro_seaborn.html">
-   9. Introduzione a Seaborn
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="027_pandas_categories.html">7. Dati categoriali con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">8. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">9. Introduzione a Seaborn</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Statistica descrittiva
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="051_key_notions.html">
-   10. Concetti chiave
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="055_measurement.html">
-   11. La misurazione in psicologia
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="060_freq_distr.html">
-   12. Dati e frequenze
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="065_loc_scale.html">
-   13. Indici di posizione e di scala
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="070_correlation.html">
-   14. Le relazioni tra variabili
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">10. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">11. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">12. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">13. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">14. Le relazioni tra variabili</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Probabilità
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="100_sets.html">
-   15. Insiemi
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="105_combinatorics.html">
-   16. Calcolo combinatorio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="110_intro_prob.html">
-   17. Introduzione al calcolo delle probabilità
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="111_prob_tutorial.html">
-   18. Esercizi di probabilità discreta
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="115_conditional_prob.html">
-   19. Probabilità condizionata
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="120_bayes_theorem.html">
-   20. Il teorema di Bayes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="125_expval_var.html">
-   21. Variabili casuali
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="130_joint_prob.html">
-   22. Probabilità congiunta
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="135_density_func.html">
-   23. La funzione di densità di probabilità
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">15. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">16. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">17. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">18. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">19. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">20. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">21. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">22. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">23. La funzione di densità di probabilità</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Distribuzioni di v.c.
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="205_discr_rv_distr.html">
-   24. Distribuzioni di v.c. discrete
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="210_cont_rv_distr.html">
-   25. Distribuzioni di v.c. continue
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="215_rng.html">
-   26. Generazione di numeri casuali
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="225_likelihood.html">
-   27. La verosimiglianza
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">24. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">25. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">26. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">27. La verosimiglianza</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Inferenza bayesiana
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="305_intro_bayes.html">
-   28. Credibilità, modelli e parametri
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="310_subj_prop.html">
-   29. Inferenza su una proporzione
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="316_conjugate_families.html">
-   30. Distribuzioni coniugate
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="320_balance_prior_post.html">
-   31. L’influenza della distribuzione a priori
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="325_metropolis.html">
-   32. Approssimazione della distribuzione a posteriori
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="330_beta_binomial.html">
-   33. Markov Chain Monte Carlo per l’inferenza bayesiana
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="335_mcmc_diagnostics.html">
-   34. Diagnostica delle catene markoviane
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="340_summarize_posterior.html">
-   35. Sintesi a posteriori
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="345_bayesian_prediction.html">
-   36. La predizione bayesiana
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   37. La predizione delle frequenze
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="350_normal_normal_mod.html">
-   38. Inferenza bayesiana su una media
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="355_groups_comparison.html">
-   39. Confronto tra due (o più) gruppi
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="320_balance_prior_post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Markov Chain Monte Carlo per l’inferenza bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">36. La predizione bayesiana</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">37. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">38. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">39. Confronto tra due (o più) gruppi</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Regressione lineare
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="400_reglin_1.html">
-   40. Introduzione
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="405_reglin_2.html">
-   41. Regressione lineare bivariata
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="406_reglin_python_tutorial.html">
-   42. Regressione lineare con Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="410_reglin_3.html">
-   43. Regressione lineare con PyMC
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="415_reglin_4.html">
-   44. Confronto tra le medie di due gruppi
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="420_reglin_ppc.html">
-   45. Posterior Predictive Checks
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">40. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">41. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">42. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">43. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">44. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">45. Posterior Predictive Checks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Inferenza frequentista
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="500_intro_frequentist.html">
-   46. Stima dei parametri
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="505_conf_interv.html">
-   47. Intervallo fiduciale
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="510_test_ipotesi.html">
-   48. Significatività statistica
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="515_limiti_stat_frequentista.html">
-   49. Limiti dell’inferenza frequentista
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="520_s_m_errors.html">
-   50. Errori di tipo
-   <em>
-    m
-   </em>
-   (magnitude) e di tipo
-   <em>
-    s
-   </em>
-   (sign)
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">46. Stima dei parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">47. Intervallo fiduciale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">48. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">49. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">50. Errori di tipo <em>m</em> (magnitude) e di tipo <em>s</em> (sign)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Bibliografia
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="z_biblio.html">
-   51. Bibliografia
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">51. Bibliografia</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendici
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a01_math_symbols.html">
-   52. Simbologia di base
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a02_number_sets.html">
-   53. Numeri binari, interi, razionali, irrazionali e reali
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a04_summation_notation.html">
-   54. Simbolo di somma (sommatorie)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a05_calculus.html">
-   55. Per liberarvi dai terrori preliminari
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a06_kde_plot.html">
-   56. Kernel Density plot
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">52. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">53. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">54. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">55. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">56. Kernel Density plot</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/346_predict_counts.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ccaudek/ds4psy_2023" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F346_predict_counts.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/346_predict_counts.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/ccaudek/ds4psy_2023"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F346_predict_counts.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/346_predict_counts.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#la-distribuzione-a-priori">
-   37.1. La distribuzione a priori
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#watermark">
-   37.2. Watermark
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>La predizione delle frequenze</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#la-distribuzione-a-priori">
-   37.1. La distribuzione a priori
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#watermark">
-   37.2. Watermark
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>La predizione delle frequenze</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-distribuzione-a-priori">37.1. La distribuzione a priori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">37.2. Watermark</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="la-predizione-delle-frequenze">
 <span id="counts-prediction-notebook"></span><h1><span class="section-number">37. </span>La predizione delle frequenze<a class="headerlink" href="#la-predizione-delle-frequenze" title="Permalink to this headline">#</a></h1>
 <p>Nella ricerca sul trauma, come in altri campi di ricerca, il risultato di interesse può essere rappresentato dalla frequenza del numero di episodi che si verificano in un dato periodo di tempo. Nel caso della ricerca sulla violenza domestica, ad esempio, potremmo esaminare il tasso di atti aggressivi durante l’intervallo tra un momento temporale di baseline e un’intervista di follow-up. Altri esempi di risultati esprimibili in termini di frequenze nalla ricerca post-traumatica includono la frequenza dell’abuso di sostanze durante un periodo di osservazione o il numero di interventi della polizia durante un dato periodo.</p>
@@ -773,10 +498,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd19a20f1c0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x15cf7b650&gt;]
 </pre></div>
 </div>
-<img alt="_images/346_predict_counts_5_1.png" src="_images/346_predict_counts_5_1.png" />
+<img alt="_images/b0510c04cefafcdef85142506ba74edf5a14a50b8b7abe243db9db11b82d9c4d.png" src="_images/b0510c04cefafcdef85142506ba74edf5a14a50b8b7abe243db9db11b82d9c4d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -787,7 +512,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.011615499655344
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10.005808002224994
 </pre></div>
 </div>
 </div>
@@ -818,10 +543,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: title={&#39;center&#39;: &#39;mu&#39;}&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;mu&#39;}&gt;
 </pre></div>
 </div>
-<img alt="_images/346_predict_counts_11_1.png" src="_images/346_predict_counts_11_1.png" />
+<img alt="_images/3f72f56c7237ed393542a4b53dd09a7a410dc47f1d28fbf3ee587d3ca41b88d7.png" src="_images/3f72f56c7237ed393542a4b53dd09a7a410dc47f1d28fbf3ee587d3ca41b88d7.png" />
 </div>
 </div>
 <p>Adesso inseriamo nel modello la verosimiglianza. La verosimiglianza di Poisson è simile a quella Binomiale, con la differenza che, nella Binomiale il numero di “successi” non può essere maggiore di <span class="math notranslate nohighlight">\(n\)</span> (il numero di prove) mentre, nella distribuzione di Poisson non c’è un limite superiore. Consideriamo uno specifico paziente – chiamiamolo Francesco.  Usando i 12 item della sottoscala relativa agli episodi di violenza fisica della <em>Conflict Tactics Scales-2</em> troviamo, per Mario, un numero di episodi violenti nei confronti del partner uguale a 4 (negli ultimi 6 mesi). Inseriamo dunque questa informazione nel modello bayesiano.</p>
@@ -847,28 +572,121 @@ title="Print to PDF"
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NUTS: [mu]
 </pre></div>
 </div>
-<div class="output text_html">
-<style>
-    /* Turns off some styling */
-    progress {
-        /* gets rid of default border in Firefox and Opera. */
-        border: none;
-        /* Needs to be in here for Safari polyfill so background images work as expected. */
-        background-size: auto;
-    }
-    progress:not([value]), progress:not([value])::-webkit-progress-bar {
-        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
-    }
-    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-        background: #F44336;
-    }
-</style>
-</div><div class="output text_html">
-<div>
-  <progress value='12000' class='' max='12000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [12000/12000 00:01&lt;00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 2_000 draw iterations (4_000 + 8_000 draws total) took 11 seconds.
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">episodes</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="s2">&quot;episodes&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">idata2</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/pymc/sampling/mcmc.py:666,</span> in <span class="ni">sample</span><span class="nt">(draws, tune, chains, cores, random_seed, progressbar, step, nuts_sampler, initvals, init, jitter_max_retries, n_init, trace, discard_tuned_samples, compute_convergence_checks, keep_warning_stat, return_inferencedata, idata_kwargs, callback, mp_ctx, model, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">664</span> <span class="n">_print_step_hierarchy</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">665</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">666</span>     <span class="n">_mp_sample</span><span class="p">(</span><span class="o">**</span><span class="n">sample_args</span><span class="p">,</span> <span class="o">**</span><span class="n">parallel_args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">667</span> <span class="k">except</span> <span class="n">pickle</span><span class="o">.</span><span class="n">PickleError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">668</span>     <span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Could not pickle model, sampling singlethreaded.&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/pymc/sampling/mcmc.py:1041,</span> in <span class="ni">_mp_sample</span><span class="nt">(draws, tune, step, chains, cores, random_seed, start, progressbar, traces, model, callback, mp_ctx, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1038</span> <span class="c1"># We did draws += tune in pm.sample</span>
+<span class="g g-Whitespace">   </span><span class="mi">1039</span> <span class="n">draws</span> <span class="o">-=</span> <span class="n">tune</span>
+<span class="ne">-&gt; </span><span class="mi">1041</span> <span class="n">sampler</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">ParallelSampler</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1042</span>     <span class="n">draws</span><span class="o">=</span><span class="n">draws</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1043</span>     <span class="n">tune</span><span class="o">=</span><span class="n">tune</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1044</span>     <span class="n">chains</span><span class="o">=</span><span class="n">chains</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1045</span>     <span class="n">cores</span><span class="o">=</span><span class="n">cores</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1046</span>     <span class="n">seeds</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1047</span>     <span class="n">start_points</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1048</span>     <span class="n">step_method</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span>     <span class="n">progressbar</span><span class="o">=</span><span class="n">progressbar</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1050</span>     <span class="n">mp_ctx</span><span class="o">=</span><span class="n">mp_ctx</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1051</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1052</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1053</span>     <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/pymc/sampling/parallel.py:402,</span> in <span class="ni">ParallelSampler.__init__</span><span class="nt">(self, draws, tune, chains, cores, seeds, start_points, step_method, progressbar, mp_ctx)</span>
+<span class="g g-Whitespace">    </span><span class="mi">399</span> <span class="k">if</span> <span class="n">mp_ctx</span><span class="o">.</span><span class="n">get_start_method</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;fork&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span>     <span class="n">step_method_pickled</span> <span class="o">=</span> <span class="n">cloudpickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">step_method</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">402</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplers</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">403</span>     <span class="n">ProcessAdapter</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span>         <span class="n">draws</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">405</span>         <span class="n">tune</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span>         <span class="n">step_method</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span>         <span class="n">step_method_pickled</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span>         <span class="n">chain</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span>         <span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span>         <span class="n">start</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span>         <span class="n">mp_ctx</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span>     <span class="p">)</span>
+<span class="nn">    413     for chain, seed, start</span> in <span class="ni">zip(range</span><span class="nt">(chains), seeds, start_points)</span>
+<span class="g g-Whitespace">    </span><span class="mi">414</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inactive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplers</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">417</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finished</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ProcessAdapter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/pymc/sampling/parallel.py:403,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">399</span> <span class="k">if</span> <span class="n">mp_ctx</span><span class="o">.</span><span class="n">get_start_method</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;fork&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span>     <span class="n">step_method_pickled</span> <span class="o">=</span> <span class="n">cloudpickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">step_method</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">402</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplers</span> <span class="o">=</span> <span class="p">[</span>
+<span class="ne">--&gt; </span><span class="mi">403</span>     <span class="n">ProcessAdapter</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span>         <span class="n">draws</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">405</span>         <span class="n">tune</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span>         <span class="n">step_method</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span>         <span class="n">step_method_pickled</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span>         <span class="n">chain</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span>         <span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span>         <span class="n">start</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span>         <span class="n">mp_ctx</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span>     <span class="p">)</span>
+<span class="nn">    413     for chain, seed, start</span> in <span class="ni">zip(range</span><span class="nt">(chains), seeds, start_points)</span>
+<span class="g g-Whitespace">    </span><span class="mi">414</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inactive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplers</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">417</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finished</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ProcessAdapter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/pymc/sampling/parallel.py:259,</span> in <span class="ni">ProcessAdapter.__init__</span><span class="nt">(self, draws, tune, step_method, step_method_pickled, chain, seed, start, mp_ctx)</span>
+<span class="g g-Whitespace">    </span><span class="mi">242</span>     <span class="n">step_method_send</span> <span class="o">=</span> <span class="n">step_method</span>
+<span class="g g-Whitespace">    </span><span class="mi">244</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process</span> <span class="o">=</span> <span class="n">mp_ctx</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">245</span>     <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="n">name</span><span class="o">=</span><span class="n">process_name</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span>     <span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">259</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">260</span> <span class="c1"># Close the remote pipe, so that we get notified if the other</span>
+<span class="g g-Whitespace">    </span><span class="mi">261</span> <span class="c1"># end is closed.</span>
+<span class="g g-Whitespace">    </span><span class="mi">262</span> <span class="n">remote_conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/multiprocessing/process.py:121,</span> in <span class="ni">BaseProcess.start</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span> <span class="k">assert</span> <span class="ow">not</span> <span class="n">_current_process</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;daemon&#39;</span><span class="p">),</span> \
+<span class="g g-Whitespace">    </span><span class="mi">119</span>        <span class="s1">&#39;daemonic processes are not allowed to have children&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span> <span class="n">_cleanup</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">121</span> <span class="bp">self</span><span class="o">.</span><span class="n">_popen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Popen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sentinel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_popen</span><span class="o">.</span><span class="n">sentinel</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="c1"># Avoid a refcycle if the target function holds an indirect</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span> <span class="c1"># reference to the process object (see bpo-30775)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/multiprocessing/context.py:300,</span> in <span class="ni">ForkServerProcess._Popen</span><span class="nt">(process_obj)</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="nd">@staticmethod</span>
+<span class="g g-Whitespace">    </span><span class="mi">298</span> <span class="k">def</span> <span class="nf">_Popen</span><span class="p">(</span><span class="n">process_obj</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="kn">from</span> <span class="nn">.popen_forkserver</span> <span class="kn">import</span> <span class="n">Popen</span>
+<span class="ne">--&gt; </span><span class="mi">300</span>     <span class="k">return</span> <span class="n">Popen</span><span class="p">(</span><span class="n">process_obj</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/multiprocessing/popen_forkserver.py:35,</span> in <span class="ni">Popen.__init__</span><span class="nt">(self, process_obj)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">process_obj</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="ne">---&gt; </span><span class="mi">35</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">process_obj</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/multiprocessing/popen_fork.py:19,</span> in <span class="ni">Popen.__init__</span><span class="nt">(self, process_obj)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="bp">self</span><span class="o">.</span><span class="n">returncode</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalizer</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">---&gt; </span><span class="mi">19</span> <span class="bp">self</span><span class="o">.</span><span class="n">_launch</span><span class="p">(</span><span class="n">process_obj</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/multiprocessing/popen_forkserver.py:58,</span> in <span class="ni">Popen._launch</span><span class="nt">(self, process_obj)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalizer</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">Finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">util</span><span class="o">.</span><span class="n">close_fds</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>                                <span class="p">(</span><span class="n">_parent_w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">,</span> <span class="n">closefd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">58</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">forkserver</span><span class="o">.</span><span class="n">read_signed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sentinel</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -887,10 +705,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: title={&#39;center&#39;: &#39;mu&#39;}&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;mu&#39;}&gt;
 </pre></div>
 </div>
-<img alt="_images/346_predict_counts_15_1.png" src="_images/346_predict_counts_15_1.png" />
+<img alt="_images/c4eec6367bdad25dad07aae965414c983cbe18444f04aa6dd1ba4815c7596471.png" src="_images/c4eec6367bdad25dad07aae965414c983cbe18444f04aa6dd1ba4815c7596471.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -905,40 +723,28 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initializing NUTS using jitter+adapt_diag...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NUTS: [mu_A, mu_B]
-</pre></div>
-</div>
 <div class="output text_html">
-<style>
-    /* Turns off some styling */
-    progress {
-        /* gets rid of default border in Firefox and Opera. */
-        border: none;
-        /* Needs to be in here for Safari polyfill so background images work as expected. */
-        background-size: auto;
-    }
-    progress:not([value]), progress:not([value])::-webkit-progress-bar {
-        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
-    }
-    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-        background: #F44336;
-    }
-</style>
-</div><div class="output text_html">
-<div>
-  <progress value='12000' class='' max='12000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [12000/12000 00:01&lt;00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 2_000 draw iterations (4_000 + 8_000 draws total) took 12 seconds.
+    <div>
+      <progress value='12000' class='' max='12000' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      100.00% [12000/12000 00:01&lt;00:00 Sampling 4 chains, 0 divergences]
+    </div>
+    </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 2_000 draw iterations (4_000 + 8_000 draws total) took 17 seconds.
+Chain &lt;xarray.DataArray &#39;chain&#39; ()&gt;
+array(0)
+Coordinates:
+    chain    int64 0 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain &lt;xarray.DataArray &#39;chain&#39; ()&gt;
+array(1)
+Coordinates:
+    chain    int64 1 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain &lt;xarray.DataArray &#39;chain&#39; ()&gt;
+array(2)
+Coordinates:
+    chain    int64 2 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
+Chain &lt;xarray.DataArray &#39;chain&#39; ()&gt;
+array(3)
+Coordinates:
+    chain    int64 3 reached the maximum tree depth. Increase `max_treedepth`, increase `target_accept` or reparameterize.
 </pre></div>
 </div>
 </div>
@@ -952,7 +758,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/346_predict_counts_17_0.png" src="_images/346_predict_counts_17_0.png" />
+<img alt="_images/d342314e1a680f283c00c6f660e68752e431313743a5193ca4618f94138b1b2f.png" src="_images/d342314e1a680f283c00c6f660e68752e431313743a5193ca4618f94138b1b2f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -965,9 +771,9 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;xarray.DataArray &#39;mu_B&#39; ()&gt;
- array(11.77686313),
+ array(11.86626402),
  &lt;xarray.DataArray &#39;mu_A&#39; ()&gt;
- array(8.18301223))
+ array(8.19263351))
 </pre></div>
 </div>
 </div>
@@ -983,8 +789,8 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: title={&#39;center&#39;: &#39;mu_B&#39;}&gt;
 </pre></div>
 </div>
-<img alt="_images/346_predict_counts_19_1.png" src="_images/346_predict_counts_19_1.png" />
-<img alt="_images/346_predict_counts_19_2.png" src="_images/346_predict_counts_19_2.png" />
+<img alt="_images/61f8e838dca2f23dd465692941e0652b0dec8fc50bb0621d6a1532ff19c8acda.png" src="_images/61f8e838dca2f23dd465692941e0652b0dec8fc50bb0621d6a1532ff19c8acda.png" />
+<img alt="_images/c196c6662c1934cfa987284a90cd885365083e306465479066cc86e811e554fd.png" src="_images/c196c6662c1934cfa987284a90cd885365083e306465479066cc86e811e554fd.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1358,7 +1164,7 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray ()&gt;
-array(0.80225)</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-cc1c5a7d-6d0e-4e66-ac65-222390206b36' class='xr-array-in' type='checkbox' checked><label for='section-cc1c5a7d-6d0e-4e66-ac65-222390206b36' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.8023</span></div><div class='xr-array-data'><pre>array(0.80225)</pre></div></div></li><li class='xr-section-item'><input id='section-61313bfe-eddb-4703-a1ee-5a9361f4854c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-61313bfe-eddb-4703-a1ee-5a9361f4854c' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-8be24a01-13aa-4725-ae91-d003bd667382' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-8be24a01-13aa-4725-ae91-d003bd667382' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-e3a311b7-7358-49ce-ae6b-6df85cef1829' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e3a311b7-7358-49ce-ae6b-6df85cef1829' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+array(0.815)</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'></div></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-79b526a9-fb51-4c7a-a1c6-c4c9b0615abe' class='xr-array-in' type='checkbox' checked><label for='section-79b526a9-fb51-4c7a-a1c6-c4c9b0615abe' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>0.815</span></div><div class='xr-array-data'><pre>array(0.815)</pre></div></div></li><li class='xr-section-item'><input id='section-490e9ab0-9f46-4d5a-ade9-e2c68bc90eee' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-490e9ab0-9f46-4d5a-ade9-e2c68bc90eee' class='xr-section-summary'  title='Expand/collapse section'>Coordinates: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-ead287e4-dc08-4bd7-b63e-3953ed76c61d' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-ead287e4-dc08-4bd7-b63e-3953ed76c61d' class='xr-section-summary'  title='Expand/collapse section'>Indexes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'></ul></div></li><li class='xr-section-item'><input id='section-01827659-23b7-443e-ad4d-15b4eaa14a74' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-01827659-23b7-443e-ad4d-15b4eaa14a74' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1367,7 +1173,7 @@ array(0.80225)</pre><div class='xr-wrap' style='display:none'><div class='xr-hea
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/346_predict_counts_21_0.png" src="_images/346_predict_counts_21_0.png" />
+<img alt="_images/6a753e1d8f00d2f2a0889646b2437348ecc7d920a239624a1a53291baf0fd7dc.png" src="_images/6a753e1d8f00d2f2a0889646b2437348ecc7d920a239624a1a53291baf0fd7dc.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1381,39 +1187,13 @@ array(0.80225)</pre><div class='xr-wrap' style='display:none'><div class='xr-hea
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [mu_A]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initializing NUTS using jitter+adapt_diag...
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NUTS: [mu_A]
-</pre></div>
-</div>
-<div class="output text_html">
-<style>
-    /* Turns off some styling */
-    progress {
-        /* gets rid of default border in Firefox and Opera. */
-        border: none;
-        /* Needs to be in here for Safari polyfill so background images work as expected. */
-        background-size: auto;
-    }
-    progress:not([value]), progress:not([value])::-webkit-progress-bar {
-        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
-    }
-    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-        background: #F44336;
-    }
-</style>
-</div><div class="output text_html">
-<div>
-  <progress value='12000' class='' max='12000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [12000/12000 00:01&lt;00:00 Sampling 4 chains, 0 divergences]
-</div>
-</div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 2_000 draw iterations (4_000 + 8_000 draws total) took 12 seconds.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling 4 chains for 1_000 tune and 2_000 draw iterations (4_000 + 8_000 draws total) took 12 seconds.
 </pre></div>
 </div>
 </div>
@@ -1425,32 +1205,6 @@ array(0.80225)</pre><div class='xr-wrap' style='display:none'><div class='xr-hea
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampling: [episodes_A, episodes_B]
-</pre></div>
-</div>
-<div class="output text_html">
-<style>
-    /* Turns off some styling */
-    progress {
-        /* gets rid of default border in Firefox and Opera. */
-        border: none;
-        /* Needs to be in here for Safari polyfill so background images work as expected. */
-        background-size: auto;
-    }
-    progress:not([value]), progress:not([value])::-webkit-progress-bar {
-        background: repeating-linear-gradient(45deg, #7e7e7e, #7e7e7e 10px, #5c5c5c 10px, #5c5c5c 20px);
-    }
-    .progress-bar-interrupted, .progress-bar-interrupted::-webkit-progress-bar {
-        background: #F44336;
-    }
-</style>
-</div><div class="output text_html">
-<div>
-  <progress value='8000' class='' max='8000' style='width:300px; height:20px; vertical-align: middle;'></progress>
-  100.00% [8000/8000 00:00&lt;00:00]
-</div>
-</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1465,10 +1219,10 @@ array(0.80225)</pre><div class='xr-wrap' style='display:none'><div class='xr-hea
                 <div class="xr-obj-type">arviz.InferenceData</div>
               </div>
               <ul class="xr-sections group-sections">
-
+              
             <li class = "xr-section-item">
-                  <input id="idata_posterior_predictivec5447296-cbf7-46f6-9488-60287e415f4c" class="xr-section-summary-in" type="checkbox">
-                  <label for="idata_posterior_predictivec5447296-cbf7-46f6-9488-60287e415f4c" class = "xr-section-summary">posterior_predictive</label>
+                  <input id="idata_posterior_predictivee87f9077-b70c-4c9e-8da9-f00c123e19de" class="xr-section-summary-in" type="checkbox">
+                  <label for="idata_posterior_predictivee87f9077-b70c-4c9e-8da9-f00c123e19de" class = "xr-section-summary">posterior_predictive</label>
                   <div class="xr-section-inline-details"></div>
                   <div class="xr-section-details">
                       <ul id="xr-dataset-coord-list" class="xr-var-list">
@@ -1844,83 +1598,83 @@ Coordinates:
   * episodes_A_dim_2  (episodes_A_dim_2) int64 0
   * episodes_B_dim_2  (episodes_B_dim_2) int64 0
 Data variables:
-    episodes_A        (chain, draw, episodes_A_dim_2) int64 5 8 6 7 ... 8 3 6 19
-    episodes_B        (chain, draw, episodes_B_dim_2) int64 6 8 9 ... 17 10 14
+    episodes_A        (chain, draw, episodes_A_dim_2) int64 8 6 10 2 ... 5 8 8 6
+    episodes_B        (chain, draw, episodes_B_dim_2) int64 19 7 6 ... 11 15 6
 Attributes:
-    created_at:                 2023-03-07T05:05:10.655315
+    created_at:                 2023-02-12T11:52:18.408136
     arviz_version:              0.14.0
     inference_library:          pymc
-    inference_library_version:  5.0.2</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-06baeacf-c036-4340-87e1-fedcbc6b64a8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-06baeacf-c036-4340-87e1-fedcbc6b64a8' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>chain</span>: 4</li><li><span class='xr-has-index'>draw</span>: 2000</li><li><span class='xr-has-index'>episodes_A_dim_2</span>: 1</li><li><span class='xr-has-index'>episodes_B_dim_2</span>: 1</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-71f25f55-93a6-4cdb-9cad-69f9acf2f943' class='xr-section-summary-in' type='checkbox'  checked><label for='section-71f25f55-93a6-4cdb-9cad-69f9acf2f943' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>chain</span></div><div class='xr-var-dims'>(chain)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3</div><input id='attrs-f7ed3680-7dbf-4a07-b80e-b4f7f32d6349' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f7ed3680-7dbf-4a07-b80e-b4f7f32d6349' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6b354995-a97e-4187-a969-1e25807b2f08' class='xr-var-data-in' type='checkbox'><label for='data-6b354995-a97e-4187-a969-1e25807b2f08' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2, 3])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>draw</span></div><div class='xr-var-dims'>(draw)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3 4 ... 1996 1997 1998 1999</div><input id='attrs-13d23e4f-7d04-49db-9544-2101f0f122b3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-13d23e4f-7d04-49db-9544-2101f0f122b3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b26ef874-6d42-49bc-9f96-21920116433b' class='xr-var-data-in' type='checkbox'><label for='data-b26ef874-6d42-49bc-9f96-21920116433b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([   0,    1,    2, ..., 1997, 1998, 1999])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>episodes_A_dim_2</span></div><div class='xr-var-dims'>(episodes_A_dim_2)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-d3eae655-ac2c-48f1-b614-446e434be8d8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d3eae655-ac2c-48f1-b614-446e434be8d8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2ce31c5e-c552-4b57-b25a-dc37d0ea2021' class='xr-var-data-in' type='checkbox'><label for='data-2ce31c5e-c552-4b57-b25a-dc37d0ea2021' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>episodes_B_dim_2</span></div><div class='xr-var-dims'>(episodes_B_dim_2)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-90a7ed3d-4dd2-4fc4-8f68-fb2ac10aa6c3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-90a7ed3d-4dd2-4fc4-8f68-fb2ac10aa6c3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-44dd9f05-ebce-48e1-90b6-672c9122b912' class='xr-var-data-in' type='checkbox'><label for='data-44dd9f05-ebce-48e1-90b6-672c9122b912' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d6c95d54-ef84-44c0-ad2c-b0ad71e33eef' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d6c95d54-ef84-44c0-ad2c-b0ad71e33eef' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>episodes_A</span></div><div class='xr-var-dims'>(chain, draw, episodes_A_dim_2)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>5 8 6 7 9 8 14 5 ... 5 6 5 8 3 6 19</div><input id='attrs-1bd6a4ac-b229-4bac-8b8a-4679d76e9d32' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1bd6a4ac-b229-4bac-8b8a-4679d76e9d32' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-bb3916b8-703b-406c-b828-9a67fa1df4e8' class='xr-var-data-in' type='checkbox'><label for='data-bb3916b8-703b-406c-b828-9a67fa1df4e8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[ 5],
-        [ 8],
+    inference_library_version:  5.0.2</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-701aac7d-41db-4f8b-9f70-9ec8bcdb1898' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-701aac7d-41db-4f8b-9f70-9ec8bcdb1898' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>chain</span>: 4</li><li><span class='xr-has-index'>draw</span>: 2000</li><li><span class='xr-has-index'>episodes_A_dim_2</span>: 1</li><li><span class='xr-has-index'>episodes_B_dim_2</span>: 1</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-2578c014-cdcd-4913-baab-30ec275ed9d7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-2578c014-cdcd-4913-baab-30ec275ed9d7' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>chain</span></div><div class='xr-var-dims'>(chain)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3</div><input id='attrs-a136ced9-ac7f-496a-8cf0-e3911a0844bc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a136ced9-ac7f-496a-8cf0-e3911a0844bc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-42194d90-32bf-4355-81e5-b49a1b895af0' class='xr-var-data-in' type='checkbox'><label for='data-42194d90-32bf-4355-81e5-b49a1b895af0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 2, 3])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>draw</span></div><div class='xr-var-dims'>(draw)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3 4 ... 1996 1997 1998 1999</div><input id='attrs-035cd499-2823-4b05-affa-d90231f05a19' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-035cd499-2823-4b05-affa-d90231f05a19' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-51296b2b-9081-4e6e-962a-3524c86b053f' class='xr-var-data-in' type='checkbox'><label for='data-51296b2b-9081-4e6e-962a-3524c86b053f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([   0,    1,    2, ..., 1997, 1998, 1999])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>episodes_A_dim_2</span></div><div class='xr-var-dims'>(episodes_A_dim_2)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-b1c0c632-3343-4c15-9229-5576f4c84db8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-b1c0c632-3343-4c15-9229-5576f4c84db8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d39c83a8-a807-4089-b605-03433e7ad9aa' class='xr-var-data-in' type='checkbox'><label for='data-d39c83a8-a807-4089-b605-03433e7ad9aa' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>episodes_B_dim_2</span></div><div class='xr-var-dims'>(episodes_B_dim_2)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-3a8a428c-b766-4e57-a128-30f82cff6ede' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3a8a428c-b766-4e57-a128-30f82cff6ede' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2c90a429-e2f4-431a-96c3-ecf5a8e44da9' class='xr-var-data-in' type='checkbox'><label for='data-2c90a429-e2f4-431a-96c3-ecf5a8e44da9' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d3a00bec-1b13-4130-a9ca-261b845365d9' class='xr-section-summary-in' type='checkbox'  checked><label for='section-d3a00bec-1b13-4130-a9ca-261b845365d9' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>episodes_A</span></div><div class='xr-var-dims'>(chain, draw, episodes_A_dim_2)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>8 6 10 2 13 14 4 ... 5 8 7 5 8 8 6</div><input id='attrs-6f6407ed-cf93-4d74-be88-3d43d08ff0d5' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6f6407ed-cf93-4d74-be88-3d43d08ff0d5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e50ca733-52c8-4183-800e-fa5946f629d1' class='xr-var-data-in' type='checkbox'><label for='data-e50ca733-52c8-4183-800e-fa5946f629d1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[ 8],
         [ 6],
-        ...,
-        [ 2],
-        [12],
-        [14]],
-
-       [[ 4],
-        [ 8],
-        [ 6],
-        ...,
         [10],
-        [ 6],
-        [ 5]],
+        ...,
+        [12],
+        [ 8],
+        [ 4]],
 
        [[11],
+        [ 4],
+        [ 7],
+        ...,
         [10],
+        [ 8],
+        [ 3]],
+
+       [[11],
+        [15],
+        [ 5],
+        ...,
+        [ 7],
+        [ 5],
+        [10]],
+
+       [[ 7],
+        [ 8],
+        [ 4],
+        ...,
+        [ 8],
+        [ 8],
+        [ 6]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>episodes_B</span></div><div class='xr-var-dims'>(chain, draw, episodes_B_dim_2)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>19 7 6 12 11 10 ... 12 11 7 11 15 6</div><input id='attrs-47565498-f53d-4441-9b49-484924e326fd' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-47565498-f53d-4441-9b49-484924e326fd' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8a4e1efe-1c7f-4c4e-8c1d-ef2264ef7a4d' class='xr-var-data-in' type='checkbox'><label for='data-8a4e1efe-1c7f-4c4e-8c1d-ef2264ef7a4d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[19],
+        [ 7],
         [ 6],
+        ...,
+        [16],
+        [10],
+        [21]],
+
+       [[12],
+        [13],
+        [13],
         ...,
         [12],
         [ 5],
-        [ 9]],
-
-       [[ 6],
-        [ 9],
-        [ 3],
-        ...,
-        [ 3],
-        [ 6],
-        [19]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>episodes_B</span></div><div class='xr-var-dims'>(chain, draw, episodes_B_dim_2)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>6 8 9 11 17 8 ... 6 8 14 17 10 14</div><input id='attrs-56278492-b1d9-44df-a2e5-1898aec0756e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-56278492-b1d9-44df-a2e5-1898aec0756e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ffc72f43-b483-4d53-b3a3-fd2601fda584' class='xr-var-data-in' type='checkbox'><label for='data-ffc72f43-b483-4d53-b3a3-fd2601fda584' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[ 6],
-        [ 8],
-        [ 9],
-        ...,
-        [18],
-        [11],
-        [13]],
-
-       [[11],
-        [18],
-        [ 6],
-        ...,
-        [ 6],
-        [ 8],
-        [21]],
-
-       [[ 7],
-        [ 9],
-        [10],
-        ...,
-        [ 6],
-        [11],
-        [12]],
+        [24]],
 
        [[13],
+        [15],
         [13],
-        [ 8],
         ...,
-        [17],
-        [10],
-        [14]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f7602778-2f9c-456d-85ff-c7a8bca24975' class='xr-section-summary-in' type='checkbox'  ><label for='section-f7602778-2f9c-456d-85ff-c7a8bca24975' class='xr-section-summary' >Indexes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>chain</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-209cf903-62f8-4080-b47a-8081c3f1082d' class='xr-index-data-in' type='checkbox'/><label for='index-209cf903-62f8-4080-b47a-8081c3f1082d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0, 1, 2, 3], dtype=&#x27;int64&#x27;, name=&#x27;chain&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>draw</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-48d43893-420a-45ff-bc20-14754b054c7f' class='xr-index-data-in' type='checkbox'/><label for='index-48d43893-420a-45ff-bc20-14754b054c7f' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([   0,    1,    2,    3,    4,    5,    6,    7,    8,    9,
+        [16],
+        [11],
+        [21]],
+
+       [[11],
+        [11],
+        [11],
+        ...,
+        [11],
+        [15],
+        [ 6]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-3e64ead5-2d05-4d55-a0ee-62e817843674' class='xr-section-summary-in' type='checkbox'  ><label for='section-3e64ead5-2d05-4d55-a0ee-62e817843674' class='xr-section-summary' >Indexes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>chain</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-8a519346-c10e-467c-ab8a-a3e7dfe41fea' class='xr-index-data-in' type='checkbox'/><label for='index-8a519346-c10e-467c-ab8a-a3e7dfe41fea' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0, 1, 2, 3], dtype=&#x27;int64&#x27;, name=&#x27;chain&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>draw</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-2a3c8a07-c2e5-4cdf-bfd9-19a73633856f' class='xr-index-data-in' type='checkbox'/><label for='index-2a3c8a07-c2e5-4cdf-bfd9-19a73633856f' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([   0,    1,    2,    3,    4,    5,    6,    7,    8,    9,
             ...
             1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
-           dtype=&#x27;int64&#x27;, name=&#x27;draw&#x27;, length=2000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>episodes_A_dim_2</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-08e869d5-f9c7-4db7-a6fa-c9179355bdb7' class='xr-index-data-in' type='checkbox'/><label for='index-08e869d5-f9c7-4db7-a6fa-c9179355bdb7' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0], dtype=&#x27;int64&#x27;, name=&#x27;episodes_A_dim_2&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>episodes_B_dim_2</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-fdbc492a-3d38-4e91-9a35-3ca69b46737d' class='xr-index-data-in' type='checkbox'/><label for='index-fdbc492a-3d38-4e91-9a35-3ca69b46737d' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0], dtype=&#x27;int64&#x27;, name=&#x27;episodes_B_dim_2&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ec9d2af1-773a-4314-83d2-0dcd32b0f01b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-ec9d2af1-773a-4314-83d2-0dcd32b0f01b' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>created_at :</span></dt><dd>2023-03-07T05:05:10.655315</dd><dt><span>arviz_version :</span></dt><dd>0.14.0</dd><dt><span>inference_library :</span></dt><dd>pymc</dd><dt><span>inference_library_version :</span></dt><dd>5.0.2</dd></dl></div></li></ul></div></div><br></div>
+           dtype=&#x27;int64&#x27;, name=&#x27;draw&#x27;, length=2000))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>episodes_A_dim_2</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-ffd07ea1-ad95-4e80-9273-5816149c0691' class='xr-index-data-in' type='checkbox'/><label for='index-ffd07ea1-ad95-4e80-9273-5816149c0691' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0], dtype=&#x27;int64&#x27;, name=&#x27;episodes_A_dim_2&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>episodes_B_dim_2</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-a7d7f5b7-ee43-4503-97a9-12fd249cdb73' class='xr-index-data-in' type='checkbox'/><label for='index-a7d7f5b7-ee43-4503-97a9-12fd249cdb73' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0], dtype=&#x27;int64&#x27;, name=&#x27;episodes_B_dim_2&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-217213a9-83da-4389-a74c-cb514b077648' class='xr-section-summary-in' type='checkbox'  checked><label for='section-217213a9-83da-4389-a74c-cb514b077648' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>created_at :</span></dt><dd>2023-02-12T11:52:18.408136</dd><dt><span>arviz_version :</span></dt><dd>0.14.0</dd><dt><span>inference_library :</span></dt><dd>pymc</dd><dt><span>inference_library_version :</span></dt><dd>5.0.2</dd></dl></div></li></ul></div></div><br></div>
                       </ul>
                   </div>
             </li>
-
+            
             <li class = "xr-section-item">
-                  <input id="idata_observed_data41d3a241-1b1a-4915-880f-ad3e0e87d6cd" class="xr-section-summary-in" type="checkbox">
-                  <label for="idata_observed_data41d3a241-1b1a-4915-880f-ad3e0e87d6cd" class = "xr-section-summary">observed_data</label>
+                  <input id="idata_observed_data96797341-5910-460b-a894-c5de035ac058" class="xr-section-summary-in" type="checkbox">
+                  <label for="idata_observed_data96797341-5910-460b-a894-c5de035ac058" class = "xr-section-summary">observed_data</label>
                   <div class="xr-section-inline-details"></div>
                   <div class="xr-section-details">
                       <ul id="xr-dataset-coord-list" class="xr-var-list">
@@ -2296,14 +2050,14 @@ Data variables:
     episodes_A        (episodes_A_dim_0) int64 8
     episodes_B        (episodes_B_dim_0) int64 12
 Attributes:
-    created_at:                 2023-03-07T05:05:10.657252
+    created_at:                 2023-02-12T11:52:18.410261
     arviz_version:              0.14.0
     inference_library:          pymc
-    inference_library_version:  5.0.2</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-473cffe1-784c-4d9d-84b8-9f59d9199a96' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-473cffe1-784c-4d9d-84b8-9f59d9199a96' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>episodes_A_dim_0</span>: 1</li><li><span class='xr-has-index'>episodes_B_dim_0</span>: 1</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-ddc56a56-4e4b-4620-86ff-6cfaaa2433d9' class='xr-section-summary-in' type='checkbox'  checked><label for='section-ddc56a56-4e4b-4620-86ff-6cfaaa2433d9' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>episodes_A_dim_0</span></div><div class='xr-var-dims'>(episodes_A_dim_0)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-99f6db84-53d4-4186-bb4e-028fd48e752b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-99f6db84-53d4-4186-bb4e-028fd48e752b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-90658262-e6d7-4289-8216-3c7362c877e6' class='xr-var-data-in' type='checkbox'><label for='data-90658262-e6d7-4289-8216-3c7362c877e6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>episodes_B_dim_0</span></div><div class='xr-var-dims'>(episodes_B_dim_0)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-3a267289-0df9-4e58-b2d1-eee03f274202' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3a267289-0df9-4e58-b2d1-eee03f274202' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-948d5a39-0caf-4c37-8179-6c316dd65a18' class='xr-var-data-in' type='checkbox'><label for='data-948d5a39-0caf-4c37-8179-6c316dd65a18' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-dbfd7a81-b80e-4085-98b4-78436f2185f7' class='xr-section-summary-in' type='checkbox'  checked><label for='section-dbfd7a81-b80e-4085-98b4-78436f2185f7' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>episodes_A</span></div><div class='xr-var-dims'>(episodes_A_dim_0)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>8</div><input id='attrs-355dd8a1-6208-4875-981c-7f3b3c6a5a7b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-355dd8a1-6208-4875-981c-7f3b3c6a5a7b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7058e779-e494-4d00-b1db-0b5670473536' class='xr-var-data-in' type='checkbox'><label for='data-7058e779-e494-4d00-b1db-0b5670473536' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([8])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>episodes_B</span></div><div class='xr-var-dims'>(episodes_B_dim_0)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>12</div><input id='attrs-5445fc86-4506-419c-8ce9-91b2210584d2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-5445fc86-4506-419c-8ce9-91b2210584d2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d842110e-8b49-4a1f-a53e-8f30529c8485' class='xr-var-data-in' type='checkbox'><label for='data-d842110e-8b49-4a1f-a53e-8f30529c8485' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([12])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-d293fa5a-334a-4957-ad21-73fa479a35c0' class='xr-section-summary-in' type='checkbox'  ><label for='section-d293fa5a-334a-4957-ad21-73fa479a35c0' class='xr-section-summary' >Indexes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>episodes_A_dim_0</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-fd257ed2-01f2-44ee-a8d4-172ef9d9357f' class='xr-index-data-in' type='checkbox'/><label for='index-fd257ed2-01f2-44ee-a8d4-172ef9d9357f' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0], dtype=&#x27;int64&#x27;, name=&#x27;episodes_A_dim_0&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>episodes_B_dim_0</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-267056c5-20dc-4bf7-8567-eb04037ca7eb' class='xr-index-data-in' type='checkbox'/><label for='index-267056c5-20dc-4bf7-8567-eb04037ca7eb' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0], dtype=&#x27;int64&#x27;, name=&#x27;episodes_B_dim_0&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-4bd4d2a7-71bf-4d07-af12-37af0088c44f' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4bd4d2a7-71bf-4d07-af12-37af0088c44f' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>created_at :</span></dt><dd>2023-03-07T05:05:10.657252</dd><dt><span>arviz_version :</span></dt><dd>0.14.0</dd><dt><span>inference_library :</span></dt><dd>pymc</dd><dt><span>inference_library_version :</span></dt><dd>5.0.2</dd></dl></div></li></ul></div></div><br></div>
+    inference_library_version:  5.0.2</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-4a3cbf59-86c2-4c16-9f3b-c0fff1ce0737' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-4a3cbf59-86c2-4c16-9f3b-c0fff1ce0737' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>episodes_A_dim_0</span>: 1</li><li><span class='xr-has-index'>episodes_B_dim_0</span>: 1</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-8ceff635-5704-482b-bc57-34412c83f073' class='xr-section-summary-in' type='checkbox'  checked><label for='section-8ceff635-5704-482b-bc57-34412c83f073' class='xr-section-summary' >Coordinates: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>episodes_A_dim_0</span></div><div class='xr-var-dims'>(episodes_A_dim_0)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-d29796da-cf6e-475e-b521-f8fe041e77ab' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-d29796da-cf6e-475e-b521-f8fe041e77ab' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-91784a7a-f01f-4a05-89bd-b6350f92fd9f' class='xr-var-data-in' type='checkbox'><label for='data-91784a7a-f01f-4a05-89bd-b6350f92fd9f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>episodes_B_dim_0</span></div><div class='xr-var-dims'>(episodes_B_dim_0)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-43ebaaa1-06d0-4757-8a9c-c5d7aa247dd7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-43ebaaa1-06d0-4757-8a9c-c5d7aa247dd7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cdd8a6d5-164b-44af-99d0-9c1d307ecec1' class='xr-var-data-in' type='checkbox'><label for='data-cdd8a6d5-164b-44af-99d0-9c1d307ecec1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b9b81332-12a5-4446-8dc1-a85a5a6128a8' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b9b81332-12a5-4446-8dc1-a85a5a6128a8' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>episodes_A</span></div><div class='xr-var-dims'>(episodes_A_dim_0)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>8</div><input id='attrs-63ee3beb-2c6a-41f6-9237-655bf54387f6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-63ee3beb-2c6a-41f6-9237-655bf54387f6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ba1714c8-93d1-4676-97ba-ca6576a066b1' class='xr-var-data-in' type='checkbox'><label for='data-ba1714c8-93d1-4676-97ba-ca6576a066b1' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([8])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>episodes_B</span></div><div class='xr-var-dims'>(episodes_B_dim_0)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>12</div><input id='attrs-7b0b8906-6f29-4c64-b360-461a1e0e9931' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7b0b8906-6f29-4c64-b360-461a1e0e9931' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c41f830f-c87e-4013-9288-e20c588b53f7' class='xr-var-data-in' type='checkbox'><label for='data-c41f830f-c87e-4013-9288-e20c588b53f7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([12])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c4ece4cc-4aa0-4f8a-bc04-bb1221c7e032' class='xr-section-summary-in' type='checkbox'  ><label for='section-c4ece4cc-4aa0-4f8a-bc04-bb1221c7e032' class='xr-section-summary' >Indexes: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>episodes_A_dim_0</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-bb8c172a-9eb7-487b-b648-44b830cfb6f0' class='xr-index-data-in' type='checkbox'/><label for='index-bb8c172a-9eb7-487b-b648-44b830cfb6f0' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0], dtype=&#x27;int64&#x27;, name=&#x27;episodes_A_dim_0&#x27;))</pre></div></li><li class='xr-var-item'><div class='xr-index-name'><div>episodes_B_dim_0</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-aa6a9005-ca12-4f42-9dce-a61143093837' class='xr-index-data-in' type='checkbox'/><label for='index-aa6a9005-ca12-4f42-9dce-a61143093837' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Int64Index([0], dtype=&#x27;int64&#x27;, name=&#x27;episodes_B_dim_0&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-b766def5-04ab-4f2d-bd6e-b9384814464f' class='xr-section-summary-in' type='checkbox'  checked><label for='section-b766def5-04ab-4f2d-bd6e-b9384814464f' class='xr-section-summary' >Attributes: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>created_at :</span></dt><dd>2023-02-12T11:52:18.410261</dd><dt><span>arviz_version :</span></dt><dd>0.14.0</dd><dt><span>inference_library :</span></dt><dd>pymc</dd><dt><span>inference_library_version :</span></dt><dd>5.0.2</dd></dl></div></li></ul></div></div><br></div>
                       </ul>
                   </div>
             </li>
-
+            
               </ul>
             </div>
             <style> /* CSS stylesheet for displaying InferenceData objects in jupyterlab.
@@ -2657,7 +2411,7 @@ dl.xr-attrs {
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: title={&#39;center&#39;: &#39;episodes_A\n0&#39;}&gt;
 </pre></div>
 </div>
-<img alt="_images/346_predict_counts_25_1.png" src="_images/346_predict_counts_25_1.png" />
+<img alt="_images/4209d8a0def6a7af2b0b41e16e5881fad07ba1e6b66eaf66e8d05e38028f4262.png" src="_images/4209d8a0def6a7af2b0b41e16e5881fad07ba1e6b66eaf66e8d05e38028f4262.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2670,7 +2424,7 @@ dl.xr-attrs {
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: title={&#39;center&#39;: &#39;episodes_B\n0&#39;}&gt;
 </pre></div>
 </div>
-<img alt="_images/346_predict_counts_26_1.png" src="_images/346_predict_counts_26_1.png" />
+<img alt="_images/629a6f23c60a693286eebd4c582c9926215f4a17aadbdb1220ac2619efea0b2f.png" src="_images/629a6f23c60a693286eebd4c582c9926215f4a17aadbdb1220ac2619efea0b2f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2688,7 +2442,7 @@ dl.xr-attrs {
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/346_predict_counts_27_0.png" src="_images/346_predict_counts_27_0.png" />
+<img alt="_images/77c8c882ab59c18d6d253826798c691550786e7523daa1704bb62eb466a8ca77.png" src="_images/77c8c882ab59c18d6d253826798c691550786e7523daa1704bb62eb466a8ca77.png" />
 </div>
 </div>
 </section>
@@ -2698,26 +2452,6 @@ dl.xr-attrs {
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
 <span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Mar 07 2023
-
-Python implementation: CPython
-Python version       : 3.10.9
-IPython version      : 8.7.0
-
-arviz     : 0.14.0
-xarray    : 2023.1.0
-numpy     : 1.24.1
-pandas    : 1.5.3
-matplotlib: 3.6.3
-seaborn   : 0.12.2
-pymc      : 5.0.2
-scipy     : 1.10.0
-
-Watermark: 2.3.1
 </pre></div>
 </div>
 </div>
@@ -2737,7 +2471,7 @@ Watermark: 2.3.1
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -2745,50 +2479,100 @@ Watermark: 2.3.1
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="345_bayesian_prediction.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">36. </span>La predizione bayesiana</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="345_bayesian_prediction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">36. </span>La predizione bayesiana</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="350_normal_normal_mod.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="350_normal_normal_mod.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">38. </span>Inferenza bayesiana su una media</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-distribuzione-a-priori">37.1. La distribuzione a priori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">37.2. Watermark</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
   
-    By Corrado Caudek<br/>
-  
-      &copy; Copyright 2023.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
-</div>
+<p class="component-author">
+By Corrado Caudek
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
 
-      </div>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
