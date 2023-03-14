@@ -692,6 +692,11 @@ title="Print to PDF"
      13.1.3. Moda e mediana
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quando-usare-media-moda-mediana">
+     13.1.4. Quando usare media, moda, mediana
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -739,8 +744,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quando-usare-la-deviazione-standard-e-mad">
+     13.2.6. Quando usare la deviazione standard e MAD
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#indici-di-variabilita-relativi">
-     13.2.6. Indici di variabilità relativi
+     13.2.7. Indici di variabilità relativi
     </a>
    </li>
   </ul>
@@ -794,6 +804,11 @@ title="Print to PDF"
      13.1.3. Moda e mediana
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quando-usare-media-moda-mediana">
+     13.1.4. Quando usare media, moda, mediana
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -841,8 +856,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quando-usare-la-deviazione-standard-e-mad">
+     13.2.6. Quando usare la deviazione standard e MAD
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#indici-di-variabilita-relativi">
-     13.2.6. Indici di variabilità relativi
+     13.2.7. Indici di variabilità relativi
     </a>
    </li>
   </ul>
@@ -880,6 +900,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
 </pre></div>
 </div>
@@ -894,7 +915,7 @@ title="Print to PDF"
     <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">,</span>
     <span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span> <span class="o">/</span> <span class="n">golden</span><span class="p">)},</span>
 <span class="p">)</span>
-<span class="n">SEED</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">123456</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1225,6 +1246,12 @@ per qualche ragione, vogliamo conoscere l’algoritmo usato per la
 determinazione dei quantili interpolati, dobbiamo leggere la
 documentazione del software.</p>
 </section>
+<section id="quando-usare-media-moda-mediana">
+<h3><span class="section-number">13.1.4. </span>Quando usare media, moda, mediana<a class="headerlink" href="#quando-usare-media-moda-mediana" title="Permalink to this headline">#</a></h3>
+<p>La moda può essere utilizzata per dati a livello nominale o ordinale, ed è l’unica tra le tre statistiche che può essere calcolata in questi casi.
+La media è una buona misura di tendenza centrale solo se la distribuzione dei dati è simmetrica, ovvero se i valori sono distribuiti uniformemente a sinistra e a destra della media. Tuttavia, se ci sono valori anomali o se la distribuzione è asimmetrica, la media può essere influenzata in modo significativo, e quindi potrebbe non essere la scelta migliore come misura di tendenza centrale.
+In questi casi, la mediana può fornire una misura migliore di tendenza centrale rispetto alla media, poiché la mediana è meno influenzata dai valori anomali e si basa esclusivamente sul valore centrale dell’insieme di dati. Pertanto, la scelta tra media e mediana dipende dal tipo di distribuzione dei dati e dallo scopo dell’analisi.</p>
+</section>
 </section>
 <section id="indici-di-dispersione">
 <h2><span class="section-number">13.2. </span>Indici di dispersione<a class="headerlink" href="#indici-di-dispersione" title="Permalink to this headline">#</a></h2>
@@ -1286,32 +1313,47 @@ s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2
 \end{equation}
 \]</div>
 <p>In questo secondo modo si trova la varianza quale <em>stimatore</em> della
-varianza della popolazione. Si può dimostrare che l’&#64;eq-var-stimatore
+varianza della popolazione. Si può dimostrare che l’eq.<a class="reference internal" href="#equation-eq-var-stimatore">(13.4)</a>
 fornisce una stima corretta (ovvero, non distorta) della varianza della
-popolazione da cui abbiamo ottenuto il campione, mentre invece la
-&#64;eq-var-descr fornisce (in media) una stima troppo piccola della
+popolazione da cui abbiamo ottenuto il campione, mentre invece l’eq.<a class="reference internal" href="#equation-eq-var-descr">(13.3)</a> fornisce (in media) una stima troppo piccola della
 varianza della popolazione. Si presti attenzione alla notazione: <span class="math notranslate nohighlight">\(S^2\)</span>
 per la varianza quale statistica descrittiva, <span class="math notranslate nohighlight">\(s^2\)</span> per la varianza
 quale stimatore.</p>
-<p>Per illustrare il punto precedente svolgiamo una simulazione.</p>
-<p>Estraggo un campione casuale di 10 osservazioni dalla popolazione del
-quoziente di intelligenza.</p>
+<p>Per illustrare questo punto svolgiamo una simulazione. Consideriamo qui la distribuzione dei punteggi del quoziente di intelligenza (QI). I valori del QI seguono una particolare distribuzione chiamata <em>distribuzione normale</em> di media 100 e deviazione standard 15. La forma di questa distribuzione è illustrata nella figura seguente.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/065_loc_scale_29_0.png" src="_images/065_loc_scale_29_0.png" />
+</div>
+</div>
+<p>Supponiamo di estrarre un campione casuale di 4 osservazioni dalla popolazione del quoziente di intelligenza – in altre parole, supponiamo di misurare il quoziente di intelligenza di 4 persone prese a caso dalla popolazione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 78.64262445 118.95592687  86.94007393  96.11240148  98.86985039
-  88.88673022  79.48310947 109.73339203 105.4158717   70.70705405]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[102.89231793  99.0173947  106.53259974 113.23538132]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Calcolo la varianza con <span class="math notranslate nohighlight">\(n\)</span> al denominatore. Si noti che la “vera”
-varianza del quoziente di intelligenza è <span class="math notranslate nohighlight">\(15^2\)</span> = 225.</p>
+<p>Calcoliamo la varianza usando <span class="math notranslate nohighlight">\(n\)</span> al denominatore. Si noti che la vera varianza del quoziente di intelligenza è <span class="math notranslate nohighlight">\(15^2\)</span> = 225.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1319,12 +1361,12 @@ varianza del quoziente di intelligenza è <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>209.00662717289683
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27.42514831964744
 </pre></div>
 </div>
 </div>
 </div>
-<p>Consideriamo ora 10 campioni casuali del QI.</p>
+<p>Consideriamo ora 10 campioni casuali del QI, ciascuno di ampiezza 4.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1348,7 +1390,7 @@ varianza del quoziente di intelligenza è <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([135.21114482, 114.52745359,  88.60919229, 113.53297411])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([105.56991769, 117.39983231, 105.67528806,  98.24221096])
 </pre></div>
 </div>
 </div>
@@ -1361,12 +1403,12 @@ varianza del quoziente di intelligenza è <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([102.03935276, 120.20616646, 100.91716031, 101.063719  ])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 92.16961529,  99.41540537, 100.41180368, 119.32697056])
 </pre></div>
 </div>
 </div>
 </div>
-<p>Stampiamo tutti e 10 i campioni.</p>
+<p>Stampiamo i valori di tutti i 10 campioni.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">random_samples</span><span class="p">)</span>
@@ -1375,22 +1417,22 @@ varianza del quoziente di intelligenza è <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[135.21114482, 114.52745359,  88.60919229, 113.53297411],
-       [ 92.9957024 ,  99.08965722, 111.83266517,  81.149978  ],
-       [108.63786272, 120.98468492, 119.83447091,  95.50452227],
-       [113.54379012,  75.67625899,  97.62716109, 106.74225898],
-       [ 79.84598391,  98.77468614, 125.87109898, 139.2723914 ],
-       [111.66042016, 112.42949793,  85.6151753 ,  81.8591757 ],
-       [ 78.8156198 , 108.12320245, 111.27909093,  90.11859521],
-       [ 81.56987522, 103.86336653, 104.69354378,  98.03782465],
-       [119.04974681,  98.60556313,  99.00773666,  83.37678299],
-       [102.03935276, 120.20616646, 100.91716031, 101.063719  ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[105.56991769, 117.39983231, 105.67528806,  98.24221096],
+       [133.12013812, 129.29867263,  91.93143382,  95.36977382],
+       [ 95.89730142, 110.74633989, 107.37582115,  96.72773772],
+       [ 97.77402137, 104.00635572, 100.21212664, 112.22076664],
+       [116.50714865, 109.19588004,  93.44257089, 118.62940801],
+       [ 75.82324116,  95.24486411,  89.77392735, 109.79488196],
+       [ 96.33405838,  83.29609758,  97.57957529, 101.95529321],
+       [ 80.49679172,  86.40348697,  73.51428872,  97.97038674],
+       [101.29390545, 109.09148951, 118.43624778, 123.57521776],
+       [ 92.16961529,  99.41540537, 100.41180368, 119.32697056]])
 </pre></div>
 </div>
 </div>
 </div>
 <p>Per ciascun campione (ovvero, per ciascuna riga della matrice
-precedente), calcoliamo la varianza usando <span class="math notranslate nohighlight">\(n\)</span> al denominatore.
+precedente), calcoliamo la varianza usando la formula con <span class="math notranslate nohighlight">\(n\)</span> al denominatore.
 Otteniamo così 10 stime della varianza della popolazione del QI.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1400,13 +1442,18 @@ Otteniamo così 10 stime della varianza della popolazione del QI.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[272.71501905 122.37076698 105.80004792 203.97333051 535.12370313
- 202.17002902 176.4037941   86.36386816 160.53821029  66.92280186]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 47.08645614 355.96911618  42.1377042   29.97343456  97.59177149
+ 148.02289092  48.40426498  80.43726576  73.41443747 100.82524156]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Ripetiamo ora la simulazione usando un numero di iterazioni maggiore.</p>
+<p>Notiamo due cose:</p>
+<ul class="simple">
+<li><p>le stime sono molto diverse tra loro; questo fenomeno è noto con il nome di <em>variabilità campionaria</em>;</p></li>
+<li><p>in media le stime sembrano troppo piccole.</p></li>
+</ul>
+<p>Per aumentare la sicurezza riguardo al secondo punto menzionato in precedenza, ripeteremo la simulazione utilizzando un numero di iterazioni maggiore.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1433,7 +1480,7 @@ Otteniamo così 10 stime della varianza della popolazione del QI.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/065_loc_scale_46_0.png" src="_images/065_loc_scale_46_0.png" />
+<img alt="_images/065_loc_scale_47_0.png" src="_images/065_loc_scale_47_0.png" />
 </div>
 </div>
 <p>La stima più verosimile della varianza del QI è dato dalla media di
@@ -1445,15 +1492,13 @@ questa distribuzione.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>167.75696842457836
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>169.20172527093553
 </pre></div>
 </div>
 </div>
 </div>
-<p>Si noti che il valore medio della stima della varianza ottenuta con
-l’eq.<a class="reference internal" href="#equation-eq-var-descr">(13.3)</a> è troppo piccolo rispetto al valore corretto di
-<span class="math notranslate nohighlight">\(15^2 = 225\)</span>. Ripeto ora la simulazione usando la formula della varianza con <span class="math notranslate nohighlight">\(n-1\)</span> al
-denominatore.</p>
+<p>Si noti che il nostro spospetto è stato confermato: il valore medio della stima della varianza ottenuta con l’eq.<a class="reference internal" href="#equation-eq-var-descr">(13.3)</a> è troppo piccolo rispetto al valore corretto di <span class="math notranslate nohighlight">\(15^2 = 225\)</span>.</p>
+<p>Ripetiamo ora la simulazione usando la formula della varianza con <span class="math notranslate nohighlight">\(n-1\)</span> al denominatore.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
@@ -1474,14 +1519,13 @@ denominatore.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>223.67075406761825
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>225.76551590621168
 </pre></div>
 </div>
 </div>
 </div>
-<p>In questo secondo caso, il <em>valore atteso</em> della stima della varianza
-trovata con <span class="math notranslate nohighlight">\(n-1\)</span> al denominatore è molto simile al valore corretto di
-225.</p>
+<p>Nel secondo caso, se si utilizza <span class="math notranslate nohighlight">\(n-1\)</span> come denominatore per calcolare la stima della varianza, il valore atteso di questa stima è molto vicino al valore corretto di 225. Se il numero di campioni fosse stato infinito, i due valori sarebbero stati identici.</p>
+<p>In conclusione, le due formule della varianza hanno scopi diversi. La formula della varianza con <span class="math notranslate nohighlight">\(n\)</span> al denominatore viene utilizzata come statistica descrittiva per descrivere la variabilità di un particolare campione di osservazioni. Al contrario, la formula della varianza con <span class="math notranslate nohighlight">\(n-1\)</span> al denominatore viene utilizzata come stimatore per ottenere la migliore stima della varianza della popolazione da cui quel campione è stato estratto.</p>
 </section>
 </section>
 <section id="precisione">
@@ -1491,11 +1535,9 @@ trovata con <span class="math notranslate nohighlight">\(n-1\)</span> al denomin
 <span class="eqno">(13.5)<a class="headerlink" href="#equation-eq-precision" title="Permalink to this equation">#</a></span>\[
 \tau = \frac{1}{\sigma^2}.
 \]</div>
-<p>Alcuni esperti ritengono che la precisione sia una misura più “intuitiva” della varianza poiché indica quanto i valori sono concentrati attorno alla media, anziché quanto sono dispersi. In altre parole, è più importante sapere quanto una misurazione è precisa piuttosto che quanto è imprecisa. Se i valori sono molto dispersi attorno alla media (alta varianza), la precisione è bassa (poca precisione); se invece la varianza è bassa, la precisione è alta.</p>
-<p>La precisione è uno dei due parametri naturali della distribuzione
-gaussiana. Nei termini della &#64;eq-precision, la distribuzione gaussiana
-(si veda il Capitolo &#64;distr-rv-cont) può essere espressa nel modo
-seguente</p>
+<p>Gli esperti ritengono che la precisione sia una misura più “intuitiva” della varianza, in quanto indica quanto i valori sono concentrati attorno alla media, piuttosto che quanto sono dispersi. In altre parole, la precisione è un’indicazione di quanto le misurazioni siano accurate. Se i valori sono molto dispersi attorno alla media (alta varianza), la precisione è bassa (poca accuratezza); se invece la varianza è bassa, la precisione è alta.</p>
+<p>La precisione è uno dei due parametri naturali della distribuzione normale, insieme alla media. Nei termini dell’eq. <a class="reference internal" href="#equation-eq-precision">(13.5)</a>, la distribuzione normale
+(si veda il Capitolo <a class="reference internal" href="210_cont_rv_distr.html#cont-rv-distr-notebook"><span class="std std-ref">Distribuzioni di v.c. continue</span></a>) può essere espressa nel modo seguente</p>
 <div class="math notranslate nohighlight">
 \[
 {\displaystyle f(y)=\sqrt{\frac{\tau}{2\pi}} e^{-{\frac {1}{2}}\tau\left({y-\mu }\right)^{2}}},
@@ -1570,18 +1612,6 @@ usando i valori BDI-II del campione di <span id="id6">Zetsche <em>et al.</em> [<
 </div>
 </div>
 <p>Lo scarto semplice medio campionario è</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.539944903581269
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 <section id="deviazione-mediana-assoluta">
@@ -1608,20 +1638,41 @@ precedente usando un campione di dati estratto da una popolazione
 normale. Usiamo, ad esempio, la distribuzione <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.539944903581269
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 <span class="mf">1.4826</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.7974649892155
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.137436333985917
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+<section id="quando-usare-la-deviazione-standard-e-mad">
+<h3><span class="section-number">13.2.6. </span>Quando usare la deviazione standard e MAD<a class="headerlink" href="#quando-usare-la-deviazione-standard-e-mad" title="Permalink to this headline">#</a></h3>
+<p>La deviazione standard e la MAD sono entrambe misure di dispersione che indicano quanto i dati in un insieme si discostano dalla tendenza centrale. Tuttavia, ci sono alcune differenze tra le due misure e situazioni in cui può essere più appropriato utilizzare una rispetto all’altra.</p>
+<ul class="simple">
+<li><p>Deviazione standard: la deviazione standard è particolarmente utile per descrivere la dispersione dei dati in una distribuzione normale. In generale, la deviazione standard è una buona scelta se si vuole sapere quanto i dati sono distribuiti intorno alla media, o se si vuole confrontare la dispersione di due o più set di dati.</p></li>
+<li><p>Deviazione mediana assoluta (MAD): la MAD è meno sensibile ai valori anomali rispetto alla deviazione standard, il che la rende una scelta migliore quando ci sono valori anomali nell’insieme di dati. Inoltre, la MAD può essere una buona scelta quando si utilizzano dati non normalmente distribuiti.</p></li>
+</ul>
+<p>In sintesi, se si lavora con dati normalmente distribuiti, la deviazione standard è la misura di dispersione più appropriata. Se si lavora con dati non normalmente distribuiti o si hanno valori anomali nell’insieme di dati, la MAD può essere una scelta migliore. In ogni caso, la scelta tra le due misure dipende dal tipo di dati che si sta analizzando e dall’obiettivo dell’analisi.</p>
+</section>
 <section id="indici-di-variabilita-relativi">
-<h3><span class="section-number">13.2.6. </span>Indici di variabilità relativi<a class="headerlink" href="#indici-di-variabilita-relativi" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">13.2.7. </span>Indici di variabilità relativi<a class="headerlink" href="#indici-di-variabilita-relativi" title="Permalink to this headline">#</a></h3>
 <p>A volte può essere interessante effettuare un confronto fra due misure
 di variabilità di grandezze incommensurabili, ovvero di caratteri
 rilevati mediante differenti unità di misura. In questi casi, le misure
@@ -1658,7 +1709,7 @@ mediana, cioè:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Feb 24 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Mar 14 2023
 
 Python implementation: CPython
 Python version       : 3.10.9
@@ -1666,11 +1717,11 @@ IPython version      : 8.7.0
 
 pytensor: 2.9.1
 
-matplotlib: 3.6.3
-scipy     : 1.10.0
-numpy     : 1.24.1
 pandas    : 1.5.3
+numpy     : 1.24.1
+matplotlib: 3.6.3
 seaborn   : 0.12.2
+scipy     : 1.10.0
 
 Watermark: 2.3.1
 </pre></div>
