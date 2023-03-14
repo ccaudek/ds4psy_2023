@@ -1,35 +1,45 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html >
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>31. L’influenza della distribuzione a priori &#8212; ds4p23</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -37,12 +47,12 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -52,62 +62,94 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '320_balance_prior_post';</script>
     <link rel="shortcut icon" href="_static/increasing.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="32. Approssimazione della distribuzione a posteriori" href="325_metropolis.html" />
     <link rel="prev" title="30. Distribuzioni coniugate" href="316_conjugate_families.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">ds4p23</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -116,661 +158,308 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Python
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="preface.html">
-   1. Prefazione
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="010_installation.html">
-   2. Ambiente di lavoro
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="015_intro_python.html">
-   3. Introduzione a Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="020_intro_numpy.html">
-   4. Introduzione a Numpy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="025_intro_pandas.html">
-   5. Introduzione a Pandas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="026_pandas_aggregate.html">
-   6. Riepilogo dei dati con Pandas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="027_pandas_categories.html">
-   7. Dati categoriali con Pandas
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="035_intro_matplotlib.html">
-   8. Introduzione a Matplotlib
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="040_intro_seaborn.html">
-   9. Introduzione a Seaborn
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="027_pandas_categories.html">7. Dati categoriali con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">8. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">9. Introduzione a Seaborn</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Statistica descrittiva
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="051_key_notions.html">
-   10. Concetti chiave
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="055_measurement.html">
-   11. La misurazione in psicologia
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="060_freq_distr.html">
-   12. Dati e frequenze
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="065_loc_scale.html">
-   13. Indici di posizione e di scala
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="070_correlation.html">
-   14. Le relazioni tra variabili
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">10. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">11. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">12. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">13. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">14. Le relazioni tra variabili</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Probabilità
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="100_sets.html">
-   15. Insiemi
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="105_combinatorics.html">
-   16. Calcolo combinatorio
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="110_intro_prob.html">
-   17. Introduzione al calcolo delle probabilità
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="111_prob_tutorial.html">
-   18. Esercizi di probabilità discreta
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="115_conditional_prob.html">
-   19. Probabilità condizionata
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="120_bayes_theorem.html">
-   20. Il teorema di Bayes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="125_expval_var.html">
-   21. Variabili casuali
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="130_joint_prob.html">
-   22. Probabilità congiunta
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="135_density_func.html">
-   23. La funzione di densità di probabilità
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">15. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">16. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">17. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">18. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">19. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">20. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">21. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">22. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">23. La funzione di densità di probabilità</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Distribuzioni di v.c.
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="205_discr_rv_distr.html">
-   24. Distribuzioni di v.c. discrete
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="210_cont_rv_distr.html">
-   25. Distribuzioni di v.c. continue
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="215_rng.html">
-   26. Generazione di numeri casuali
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="225_likelihood.html">
-   27. La verosimiglianza
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">24. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">25. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">26. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">27. La verosimiglianza</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Inferenza bayesiana
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="305_intro_bayes.html">
-   28. Credibilità, modelli e parametri
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="310_subj_prop.html">
-   29. Inferenza su una proporzione
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="316_conjugate_families.html">
-   30. Distribuzioni coniugate
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   31. L’influenza della distribuzione a priori
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="325_metropolis.html">
-   32. Approssimazione della distribuzione a posteriori
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="330_beta_binomial.html">
-   33. Markov Chain Monte Carlo per l’inferenza bayesiana
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="335_mcmc_diagnostics.html">
-   34. Diagnostica delle catene markoviane
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="340_summarize_posterior.html">
-   35. Sintesi a posteriori
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="345_bayesian_prediction.html">
-   36. La predizione bayesiana
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="346_predict_counts.html">
-   37. La predizione delle frequenze
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="350_normal_normal_mod.html">
-   38. Inferenza bayesiana su una media
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="355_groups_comparison.html">
-   39. Confronto tra due (o più) gruppi
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Markov Chain Monte Carlo per l’inferenza bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">36. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">37. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">38. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">39. Confronto tra due (o più) gruppi</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Regressione lineare
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="400_reglin_1.html">
-   40. Introduzione
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="405_reglin_2.html">
-   41. Regressione lineare bivariata
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="406_reglin_python_tutorial.html">
-   42. Regressione lineare con Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="410_reglin_3.html">
-   43. Regressione lineare con PyMC
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="415_reglin_4.html">
-   44. Confronto tra le medie di due gruppi
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="420_reglin_ppc.html">
-   45. Posterior Predictive Checks
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">40. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">41. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">42. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">43. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">44. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">45. Posterior Predictive Checks</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Inferenza frequentista
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="500_intro_frequentist.html">
-   46. Stima dei parametri
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="505_conf_interv.html">
-   47. Intervallo fiduciale
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="510_test_ipotesi.html">
-   48. Significatività statistica
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="515_limiti_stat_frequentista.html">
-   49. Limiti dell’inferenza frequentista
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="520_s_m_errors.html">
-   50. Errori di tipo
-   <em>
-    m
-   </em>
-   (magnitude) e di tipo
-   <em>
-    s
-   </em>
-   (sign)
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">46. Stima dei parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">47. Intervallo fiduciale</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">48. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">49. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">50. Errori di tipo <em>m</em> (magnitude) e di tipo <em>s</em> (sign)</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Bibliografia
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="z_biblio.html">
-   51. Bibliografia
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">51. Bibliografia</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Appendici
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="a01_math_symbols.html">
-   52. Simbologia di base
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a02_number_sets.html">
-   53. Numeri binari, interi, razionali, irrazionali e reali
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a04_summation_notation.html">
-   54. Simbolo di somma (sommatorie)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a05_calculus.html">
-   55. Per liberarvi dai terrori preliminari
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="a06_kde_plot.html">
-   56. Kernel Density plot
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">52. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">53. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">54. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">55. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">56. Kernel Density plot</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/ccaudek/ds4psy_2023/master?urlpath=tree/docs/320_balance_prior_post.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ccaudek/ds4psy_2023" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F320_balance_prior_post.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/320_balance_prior_post.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/ccaudek/ds4psy_2023"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/ccaudek/ds4psy_2023/issues/new?title=Issue%20on%20page%20%2F320_balance_prior_post.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/320_balance_prior_post.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
+  
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#il-test-di-benchdel">
-   31.1. Il test di Benchdel
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#stessi-dati-diverse-distribuzioni-a-priori">
-   31.2. Stessi dati, diverse distribuzioni a priori
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dati-diversi-stessa-distribuzione-a-priori">
-   31.3. Dati diversi, stessa distribuzione a priori
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dati-diversi-diverse-distribuzioni-a-priori">
-   31.4. Dati diversi, diverse distribuzioni a priori
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#collegare-le-intuizioni-alla-teoria">
-   31.5. Collegare le intuizioni alla teoria
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
-   31.6. Commenti e considerazioni finali
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>L’influenza della distribuzione a priori</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#il-test-di-benchdel">
-   31.1. Il test di Benchdel
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#stessi-dati-diverse-distribuzioni-a-priori">
-   31.2. Stessi dati, diverse distribuzioni a priori
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dati-diversi-stessa-distribuzione-a-priori">
-   31.3. Dati diversi, stessa distribuzione a priori
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dati-diversi-diverse-distribuzioni-a-priori">
-   31.4. Dati diversi, diverse distribuzioni a priori
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#collegare-le-intuizioni-alla-teoria">
-   31.5. Collegare le intuizioni alla teoria
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">
-   31.6. Commenti e considerazioni finali
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>L’influenza della distribuzione a priori</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-test-di-benchdel">31.1. Il test di Benchdel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stessi-dati-diverse-distribuzioni-a-priori">31.2. Stessi dati, diverse distribuzioni a priori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dati-diversi-stessa-distribuzione-a-priori">31.3. Dati diversi, stessa distribuzione a priori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dati-diversi-diverse-distribuzioni-a-priori">31.4. Dati diversi, diverse distribuzioni a priori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collegare-le-intuizioni-alla-teoria">31.5. Collegare le intuizioni alla teoria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">31.6. Commenti e considerazioni finali</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="l-influenza-della-distribuzione-a-priori">
 <span id="prior-influence-notebook"></span><h1><span class="section-number">31. </span>L’influenza della distribuzione a priori<a class="headerlink" href="#l-influenza-della-distribuzione-a-priori" title="Permalink to this headline">#</a></h1>
-<p>La notazione <span class="math notranslate nohighlight">\(p(\theta \mid y) \propto p(\theta) \ p(y \mid \theta)\)</span> rende particolarmente chiaro che la distribuzione a posteriori è un “miscuglio” della distribuzione a priori e della verosimiglianza. Prima di preoccuparci di come calcolare la distribuzione a posteriori in casi diversi dalle famiglie coniugate, cerchiamo di capire meglio cosa significa “mescolare” la distribuzione a priori e la verosimiglianza. Considereremo qui un esempio discusso da <span id="id1">[<a class="reference internal" href="z_biblio.html#id45" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span>.</p>
+<p>La notazione <span class="math notranslate nohighlight">\(p(\theta \mid y) \propto p(\theta) \ p(y \mid \theta)\)</span> rende particolarmente chiaro che la distribuzione a posteriori è un “miscuglio” della distribuzione a priori e della verosimiglianza. Prima di preoccuparci di come calcolare la distribuzione a posteriori in casi diversi dalle famiglie coniugate, cerchiamo di capire meglio cosa significa “mescolare” la distribuzione a priori e la verosimiglianza. Considereremo qui un esempio discusso da <span id="id1">[<a class="reference internal" href="z_biblio.html#id47" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span>.</p>
 <section id="il-test-di-benchdel">
 <h2><span class="section-number">31.1. </span>Il test di Benchdel<a class="headerlink" href="#il-test-di-benchdel" title="Permalink to this headline">#</a></h2>
-<p>Nel fumetto di Alison Bechdel <em>The Rule</em>, un personaggio afferma di guardare un film solo se soddisfa le seguenti tre regole <span id="id2">[<a class="reference internal" href="z_biblio.html#id46" title="Alison Bechdel. Dykes to watch out for. Firebrand Books, 1986.">Bec86</a>]</span>: almeno due caratteri nel film devono essere donne; queste due donne si parlano; parlano di qualcosa altro oltre a parlare di qualche uomo.</p>
-<p>Questi criteri costituiscono il <em>test di Bechdel</em> per la rappresentazione delle donne nei film. <span id="id3">[<a class="reference internal" href="z_biblio.html#id45" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span> pongono la seguente domanda “Quale percentuale dei film che avete visto supera il test di Bechdel?”.</p>
+<p>Nel fumetto di Alison Bechdel <em>The Rule</em>, un personaggio afferma di guardare un film solo se soddisfa le seguenti tre regole <span id="id2">[<a class="reference internal" href="z_biblio.html#id48" title="Alison Bechdel. Dykes to watch out for. Firebrand Books, 1986.">Bec86</a>]</span>: almeno due caratteri nel film devono essere donne; queste due donne si parlano; parlano di qualcosa altro oltre a parlare di qualche uomo.</p>
+<p>Questi criteri costituiscono il <em>test di Bechdel</em> per la rappresentazione delle donne nei film. <span id="id3">[<a class="reference internal" href="z_biblio.html#id47" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span> pongono la seguente domanda “Quale percentuale dei film che avete visto supera il test di Bechdel?”.</p>
 <p>Sia <span class="math notranslate nohighlight">\(\pi \in [0, 1]\)</span> una variabile casuale che indica la proporzione sconosciuta di film che superano il test di Bechdel. Tre amiche — la femminista, l’ignara e l’ottimista — hanno opionioni diverse su <span class="math notranslate nohighlight">\(\pi\)</span>. Riflettendo sui film che ha visto, la femminista capisce che nella maggioranza dei film mancano personaggi femminili forti. L’ignara non ricorda bene i film che ha visto, quindi non sa quanti film superano il test di Bechdel. Infine, l’ottimista pensa che, in generale, le donne siano ben rappresentate all’interno dei film: secondo lei quasi tutti i film superano il test di Bechdel. Le tre amiche hanno dunque tre modelli a priori diversi di <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
 <p>Abbiamo visto in precedenza come sia possibile usare la distribuzione Beta per rappresentare le credenze a priori. Ponendo la gran parte della massa della probabilità a priori su valori <span class="math notranslate nohighlight">\(\pi &lt; 0.5\)</span>, la distribuzione a priori <span class="math notranslate nohighlight">\(\text{Beta}(5, 11)\)</span> riflette il punto di vista femminista secondo il quale la maggioranza dei film non supera il test di Bechdel. Al contrario, la <span class="math notranslate nohighlight">\(\text{Beta}(14,1)\)</span> pone la gran parte della massa della distribuzione a priori su valori <span class="math notranslate nohighlight">\(\pi\)</span> prossimi a 1, e corrisponde quindi alle credenze a priori dell’amica ottimista. Infine, una <span class="math notranslate nohighlight">\(\text{Beta}(1 ,1)\)</span> o <span class="math notranslate nohighlight">\(\mbox{Unif}(0, 1)\)</span>, assegna lo stesso livello di plausibilità a tutti i valori <span class="math notranslate nohighlight">\(\pi \in [0, 1]\)</span>, e corrisponde all’incertezza a priori dell’ignara.</p>
-<p>Nell’esempio di <span id="id4">[<a class="reference internal" href="z_biblio.html#id45" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span>, le tre amiche decidono di rivedere un campione di <span class="math notranslate nohighlight">\(n\)</span> film e di registrare <span class="math notranslate nohighlight">\(y\)</span>, ovvero il numero di film che superano il test di Bechdel. Se <span class="math notranslate nohighlight">\(y\)</span> corrisponde al numero di “successi” in un numero fisso di <span class="math notranslate nohighlight">\(n\)</span> prove Bernoulliane i.i.d., allora la dipendenza di <span class="math notranslate nohighlight">\(y\)</span> da <span class="math notranslate nohighlight">\(\pi\)</span> viene specificata da un modello binomiale. Quindi, per ciascuna delle tre amiche è possibile scrivere un modello beta-binomiale</p>
+<p>Nell’esempio di <span id="id4">[<a class="reference internal" href="z_biblio.html#id47" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span>, le tre amiche decidono di rivedere un campione di <span class="math notranslate nohighlight">\(n\)</span> film e di registrare <span class="math notranslate nohighlight">\(y\)</span>, ovvero il numero di film che superano il test di Bechdel. Se <span class="math notranslate nohighlight">\(y\)</span> corrisponde al numero di “successi” in un numero fisso di <span class="math notranslate nohighlight">\(n\)</span> prove Bernoulliane i.i.d., allora la dipendenza di <span class="math notranslate nohighlight">\(y\)</span> da <span class="math notranslate nohighlight">\(\pi\)</span> viene specificata da un modello binomiale. Quindi, per ciascuna delle tre amiche è possibile scrivere un modello beta-binomiale</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -783,8 +472,8 @@ Y \mid \pi &amp; \sim \mbox{Bin}(n, \pi)  \notag\\
 \[
 \pi \mid (Y = y) \sim \mbox{Beta}(\alpha + y, \beta + n - y).
 \]</div>
-<p><span id="id5">[<a class="reference internal" href="z_biblio.html#id45" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span> si chiedono come le credenze a priori delle tre amiche influenzano le credenze a posteriori a cui esse giungono dopo avere osservato i dati. Si chiedono inoltre in che modo la dimensione del campione moduli l’influenza della distribuzione a priori sulla distribuzione a posteriori.</p>
-<p>Per rispondere a queste domande, <span id="id6">[<a class="reference internal" href="z_biblio.html#id45" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span> consideriamo tre diversi scenari:</p>
+<p><span id="id5">[<a class="reference internal" href="z_biblio.html#id47" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span> si chiedono come le credenze a priori delle tre amiche influenzano le credenze a posteriori a cui esse giungono dopo avere osservato i dati. Si chiedono inoltre in che modo la dimensione del campione moduli l’influenza della distribuzione a priori sulla distribuzione a posteriori.</p>
+<p>Per rispondere a queste domande, <span id="id6">[<a class="reference internal" href="z_biblio.html#id47" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span> consideriamo tre diversi scenari:</p>
 <ul class="simple">
 <li><p>gli stessi dati osservati, ma distribuzioni a priori diverse;</p></li>
 <li><p>dati diversi, ma la stessa distribuzione a priori;</p></li>
@@ -801,6 +490,71 @@ Y \mid \pi &amp; \sim \mbox{Bin}(n, \pi)  \notag\\
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;load_ext&#39;</span><span class="p">,</span> <span class="s1">&#39;rpy2.ipython&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="s2">&quot;InlineBackend.figure_format = &#39;retina&#39;&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/IPython/core/interactiveshell.py:2369,</span> in <span class="ni">InteractiveShell.run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2367</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2368</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2369</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2371</span> <span class="c1"># The code below prevents the output from being displayed</span>
+<span class="g g-Whitespace">   </span><span class="mi">2372</span> <span class="c1"># when using magics with decodator @output_can_be_silenced</span>
+<span class="g g-Whitespace">   </span><span class="mi">2373</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2374</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/IPython/core/magics/extension.py:33,</span> in <span class="ni">ExtensionMagics.load_ext</span><span class="nt">(self, module_str)</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">module_str</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="k">raise</span> <span class="n">UsageError</span><span class="p">(</span><span class="s1">&#39;Missing module name.&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">33</span> <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">extension_manager</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="n">module_str</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="s1">&#39;already loaded&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The </span><span class="si">%s</span><span class="s2"> extension is already loaded. To reload it, use:&quot;</span> <span class="o">%</span> <span class="n">module_str</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/IPython/core/extensions.py:76,</span> in <span class="ni">ExtensionManager.load_extension</span><span class="nt">(self, module_str)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Load an IPython extension by its module name.</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="sd"> Returns the string &quot;already loaded&quot; if the extension is already loaded,</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="sd"> &quot;no load function&quot; if the module doesn&#39;t have a load_ipython_extension</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span><span class="sd"> function, or None if it succeeded.</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">76</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_extension</span><span class="p">(</span><span class="n">module_str</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span> <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span>     <span class="k">if</span> <span class="n">module_str</span> <span class="ow">in</span> <span class="n">BUILTINS_EXTS</span><span class="p">:</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/site-packages/IPython/core/extensions.py:91,</span> in <span class="ni">ExtensionManager._load_extension</span><span class="nt">(self, module_str)</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span>     <span class="k">if</span> <span class="n">module_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">91</span>         <span class="n">mod</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">module_str</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="n">mod</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_str</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_load_ipython_extension</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_511/lib/python3.11/importlib/__init__.py:126,</span> in <span class="ni">import_module</span><span class="nt">(name, package)</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>             <span class="k">break</span>
+<span class="g g-Whitespace">    </span><span class="mi">125</span>         <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="ne">--&gt; </span><span class="mi">126</span> <span class="k">return</span> <span class="n">_bootstrap</span><span class="o">.</span><span class="n">_gcd_import</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="n">level</span><span class="p">:],</span> <span class="n">package</span><span class="p">,</span> <span class="n">level</span><span class="p">)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1206,</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1178,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1128,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:241,</span> in <span class="ni">_call_with_frames_removed</span><span class="nt">(f, *args, **kwds)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1206,</span> in <span class="ni">_gcd_import</span><span class="nt">(name, package, level)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1178,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1142,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;rpy2&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -814,6 +568,16 @@ data(bechdel, package = &quot;bayesrules&quot;)
 set.seed(84735)
 bechdel_20 &lt;- bechdel %&gt;% 
   sample_n(20)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># A tibble: 3 × 3
+   year title      binary
+  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt; 
+1  2005 King Kong  FAIL  
+2  1983 Flashdance PASS  
+3  2013 The Purge  FAIL  
 </pre></div>
 </div>
 </div>
@@ -850,7 +614,7 @@ bayesrules::plot_beta_binomial(alpha = 5, beta = 11, y = 9, n = 20)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/320_balance_prior_post_6_0.png" src="_images/320_balance_prior_post_6_0.png" />
+<img alt="_images/a0101e5af5f8f56d9d1ac3f21160ed96a59075ca7b52f4923a548fba99f3dfee.png" src="_images/a0101e5af5f8f56d9d1ac3f21160ed96a59075ca7b52f4923a548fba99f3dfee.png" />
 </div>
 </div>
 <p>Per l’ottimista usiamo una distribuzione a priori <span class="math notranslate nohighlight">\(\text{Beta}(14, 1)\)</span>.</p>
@@ -862,7 +626,7 @@ bayesrules:::plot_beta_binomial(alpha = 14, beta = 1, y = 9, n = 20)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/320_balance_prior_post_8_0.png" src="_images/320_balance_prior_post_8_0.png" />
+<img alt="_images/c680f1ca7ef999cefb054076d1198403774f334f82815e804daa8341ca19a1ae.png" src="_images/c680f1ca7ef999cefb054076d1198403774f334f82815e804daa8341ca19a1ae.png" />
 </div>
 </div>
 <p>Infine, per l’ignara usiamo una distribuzione a priori <span class="math notranslate nohighlight">\(\text{Beta}(1, 1)\)</span>.</p>
@@ -872,9 +636,6 @@ bayesrules:::plot_beta_binomial(alpha = 14, beta = 1, y = 9, n = 20)
 bayesrules:::plot_beta_binomial(alpha = 1, beta = 1, y = 9, n = 20)
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/320_balance_prior_post_10_0.png" src="_images/320_balance_prior_post_10_0.png" />
 </div>
 </div>
 <p>Per calcolare la distribuzione a posteriori, ho usato le funzioni del pacchetto <code class="docutils literal notranslate"><span class="pre">bayesrules</span></code>. Ma per lo schema beta-binomiale è facile trovare i parametri della distribuzione a posteriori. Per esempio, nel caso dell’amica femminista, la distribuzione a posteriori è una Beta di parametri</p>
@@ -916,7 +677,7 @@ p1 + p2 + p3
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/320_balance_prior_post_12_0.png" src="_images/320_balance_prior_post_12_0.png" />
+<img alt="_images/d1629f6a7ae6993453f944736a71536a0d1da381d9ed2c6e55dccb8956aef6f9.png" src="_images/d1629f6a7ae6993453f944736a71536a0d1da381d9ed2c6e55dccb8956aef6f9.png" />
 </div>
 </div>
 <p>In conclusione, dalla figura precedente notiamo due cose. Primo, all’aumentare delle informazioni disponibili (ovvero, al crescere dell’ampiezza del campione), la distribuzione a posteriori si allontana sempre di più dalla distribuzione a priori e si avvicina sempre di più alla verosimiglianza. Secondo, all’aumentare dell’ampiezza del campione la varianza della distribuzione a posteriori diminuisce sempre di più — ovvero, diminuisce l’incertezza su quelli che sono i valori <span class="math notranslate nohighlight">\(\pi\)</span> più credibili.</p>
@@ -967,9 +728,6 @@ p9 &lt;- bayesrules:::plot_beta_binomial(
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/320_balance_prior_post_14_0.png" src="_images/320_balance_prior_post_14_0.png" />
-</div>
 </div>
 <p>In conclusione, la figura precedente ci consente di concludere quanto segue: se il campione è grande, una distribuzione a priori debolmente informativa ha uno scarso effetto sulla distribuzione a posteriori; se il campione è piccolo, invece, anche una distribuzione a priori debolmente informativa ha un grande effetto sulla distribuzione a posteriori.</p>
 </section>
@@ -988,7 +746,7 @@ p9 &lt;- bayesrules:::plot_beta_binomial(
 </section>
 <section id="commenti-e-considerazioni-finali">
 <h2><span class="section-number">31.6. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
-<p>La conclusione che possiamo trarre dall’esempio discusso da <span id="id7">[<a class="reference internal" href="z_biblio.html#id45" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span> è molto chiara: l’aggiornamento bayesiano può essere paragonato ai processi di ragionamento del senso comune. Quando le nuove evidenze (i dati) sono deboli, non c’è ragione di cambiare idea (le nostre credenze “a posteriori” sono molto simili a ciò che pensavamo prima di avere osservato i dati). Quando le nuove evidenze sono irrefutabili, invece, è necessario modificare le nostre credenze sulla base di ciò che ci dicono i dati, quali che siano le nostre credenze pregresse — non farlo significherebbe vivere in un mondo di fantasia e avere scarse possibilità di sopravvivere nel mondo empirico. L’aggiornamento bayesiano, dunque, non fa altro che esprimere in maniera quantitativa e precisa ciò che ci dicono le nostre intuizioni.</p>
+<p>La conclusione che possiamo trarre dall’esempio discusso da <span id="id7">[<a class="reference internal" href="z_biblio.html#id47" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span> è molto chiara: l’aggiornamento bayesiano può essere paragonato ai processi di ragionamento del senso comune. Quando le nuove evidenze (i dati) sono deboli, non c’è ragione di cambiare idea (le nostre credenze “a posteriori” sono molto simili a ciò che pensavamo prima di avere osservato i dati). Quando le nuove evidenze sono irrefutabili, invece, è necessario modificare le nostre credenze sulla base di ciò che ci dicono i dati, quali che siano le nostre credenze pregresse — non farlo significherebbe vivere in un mondo di fantasia e avere scarse possibilità di sopravvivere nel mondo empirico. L’aggiornamento bayesiano, dunque, non fa altro che esprimere in maniera quantitativa e precisa ciò che ci dicono le nostre intuizioni.</p>
 <p>Alla luce di quanto detto sopra, è sorprendente che l’approccio frequentista neghi questa logica. I test frequentisti non tengono conto delle conoscenze pregresse. Dunque, se un test frequentista, calcolato su un piccolo campione (ovvero, quando i dati sono molto deboli), suggerisce che dovremmo farci un’opinione di un certo tipo sul fenomeno in esame, l’indicazione è quella di prendere seriamente in considerazione il risultato del test (ovvero di modificare le nostre credenze) <em>quali che siano le evidenze precedenti</em> – le quali, in generale, potrebbero mostrare che il risultato del test non ha alcun senso. Un tale modo di pensare viene preso sul serio da coloro che, nella comunità scientifica, seguono l’approccio frequentista. Dato che in questo Capitolo abbiamo parlato di fumetti, concluderei dicendo che il significato della presente discussione è catturata nella maniera più chiara possibile in questa famosa <a class="reference external" href="https://xkcd.com/1132/">striscia</a>.</p>
 </section>
 </section>
@@ -1005,7 +763,7 @@ p9 &lt;- bayesrules:::plot_beta_binomial(
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1013,50 +771,104 @@ p9 &lt;- bayesrules:::plot_beta_binomial(
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="316_conjugate_families.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">30. </span>Distribuzioni coniugate</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="316_conjugate_families.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">30. </span>Distribuzioni coniugate</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="325_metropolis.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="325_metropolis.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">32. </span>Approssimazione della distribuzione a posteriori</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-test-di-benchdel">31.1. Il test di Benchdel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stessi-dati-diverse-distribuzioni-a-priori">31.2. Stessi dati, diverse distribuzioni a priori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dati-diversi-stessa-distribuzione-a-priori">31.3. Dati diversi, stessa distribuzione a priori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dati-diversi-diverse-distribuzioni-a-priori">31.4. Dati diversi, diverse distribuzioni a priori</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collegare-le-intuizioni-alla-teoria">31.5. Collegare le intuizioni alla teoria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">31.6. Commenti e considerazioni finali</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
   
-    By Corrado Caudek<br/>
-  
-      &copy; Copyright 2023.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
-</div>
+<p class="component-author">
+By Corrado Caudek
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
 
-      </div>
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
