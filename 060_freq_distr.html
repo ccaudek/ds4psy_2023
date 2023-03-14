@@ -797,7 +797,7 @@ document.write(`
 <section id="distribuzioni-di-frequenze">
 <h2><span class="section-number">12.2. </span>Distribuzioni di frequenze<a class="headerlink" href="#distribuzioni-di-frequenze" title="Permalink to this headline">#</a></h2>
 <p>Una delle modalità per sintetizzare un insieme di dati consiste nella creazione di una distribuzione di frequenze. Questa rappresenta un conteggio delle volte in cui si verificano le diverse modalità osservate in un insieme di dati, all’interno di un intervallo di valori. In altre parole, la distribuzione di frequenze della variabile <span class="math notranslate nohighlight">\(X\)</span> riporta la frequenza associata ad ogni valore possibile di <span class="math notranslate nohighlight">\(X\)</span>.</p>
-<p>Per creare una distribuzione di frequenze, è possibile suddividere le modalità della variabile di interesse in <span class="math notranslate nohighlight">\(m\)</span> classi disgiunte tra loro (denotate con <span class="math notranslate nohighlight">\(\Delta_i\)</span>). Ogni classe <span class="math notranslate nohighlight">\(\Delta_i\)</span> coincide con un intervallo di valori aperto a destra <span class="math notranslate nohighlight">\([a_i, b_i)\)</span> o aperto a sinistra <span class="math notranslate nohighlight">\((a_i, b_i]\)</span>. A ogni classe <span class="math notranslate nohighlight">\(\Delta_i\)</span>, che ha come limiti inferiori e superiori <span class="math notranslate nohighlight">\(a_i\)</span> e <span class="math notranslate nohighlight">\(b_i\)</span>, si associano un’ampiezza <span class="math notranslate nohighlight">\(b_i - a_i\)</span> (non necessariamente uguale per ogni classe) e un valore centrale <span class="math notranslate nohighlight">\(\bar{x}_i\)</span>. La scelta delle classi è arbitraria, ma è consigliabile evitare di definirne con un numero troppo ridotto di osservazioni (&lt; 5). In quanto ogni osservazione <span class="math notranslate nohighlight">\(x_i\)</span> appartiene a una sola classe <span class="math notranslate nohighlight">\(\Delta_i\)</span>, è possibile calcolare le seguenti grandezze.</p>
+<p>Se la variabile <span class="math notranslate nohighlight">\(X\)</span> ha un numero moderato di modalità, si può seguire il metodo descritto precedentemente, ovvero è sufficiente contare quante volte ogni modalità è presente nel campione o nella popolazione. Tuttavia, se il numero di modalità è elevato, per costruire una distribuzione di frequenze, è possibile suddividere le modalità della variabile di interesse in <span class="math notranslate nohighlight">\(m\)</span> classi disgiunte tra loro (indicate con <span class="math notranslate nohighlight">\(\Delta_i\)</span>). Ogni classe <span class="math notranslate nohighlight">\(\Delta_i\)</span> coincide con un intervallo di valori aperto a destra <span class="math notranslate nohighlight">\([a_i, b_i)\)</span> o aperto a sinistra <span class="math notranslate nohighlight">\((a_i, b_i]\)</span>. A ogni classe <span class="math notranslate nohighlight">\(\Delta_i\)</span>, che ha come limiti inferiori e superiori <span class="math notranslate nohighlight">\(a_i\)</span> e <span class="math notranslate nohighlight">\(b_i\)</span>, si associano un’ampiezza <span class="math notranslate nohighlight">\(b_i - a_i\)</span> (non necessariamente uguale per ogni classe) e un valore centrale <span class="math notranslate nohighlight">\(\bar{x}_i\)</span>. La scelta delle classi è arbitraria, ma è consigliabile evitare di definirne con un numero troppo ridotto di osservazioni (&lt; 5). In quanto ogni osservazione <span class="math notranslate nohighlight">\(x_i\)</span> appartiene a una sola classe <span class="math notranslate nohighlight">\(\Delta_i\)</span>, è possibile calcolare le seguenti grandezze.</p>
 <ul class="simple">
 <li><p>La <em>frequenza assoluta</em> <span class="math notranslate nohighlight">\(n_i\)</span> di ciascuna classe, ovvero il numero di osservazioni che ricadono nella classe <span class="math notranslate nohighlight">\(\Delta_i\)</span>.</p>
 <ul>
@@ -823,8 +823,7 @@ document.write(`
 <p>In <code class="docutils literal notranslate"><span class="pre">pandas.cut()</span></code>, il primo argomento <code class="docutils literal notranslate"><span class="pre">x</span></code> è un array unidimensionale (lista python,  <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> o <code class="docutils literal notranslate"><span class="pre">pandas.Series</span></code>) che contiene i dati e il secondo argomento <code class="docutils literal notranslate"><span class="pre">bins</span></code> specifica gli intervalli delle classi. La funzione restituisce un array che specifica la classe di appartenenza di ogni elemento dell’array <code class="docutils literal notranslate"><span class="pre">x</span></code>. L’argomento <code class="docutils literal notranslate"><span class="pre">include_lowest=True</span></code> specifica classi chiuse a destra (nel nostro caso è irrilevante dato che nessuna osservazione coincide con il limite di una classe).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
-    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">,</span> <span class="mf">19.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mi">63</span><span class="p">],</span> <span class="n">include_lowest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">,</span> <span class="mf">19.5</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">,</span> <span class="mi">63</span><span class="p">],</span> <span class="n">include_lowest</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -875,8 +874,7 @@ Name: bdi_class, dtype: int64
 <p>L’output di <code class="docutils literal notranslate"><span class="pre">.value_counts</span></code> è una tabella delle frequenze assolute, anche se è possibile utilizzare la funzione <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code> per ottenere una visualizzazione migliore, in quanto tale funzione restituisce un DataFrame:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abs_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
-                       <span class="s2">&quot;Abs. freq.&quot;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abs_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Abs. freq.&quot;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
 <span class="n">abs_freq</span>
 </pre></div>
 </div>
@@ -929,7 +927,7 @@ Name: bdi_class, dtype: int64
 </div></div></div>
 </div>
 <p>L’argomento di <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code> è <code class="docutils literal notranslate"><span class="pre">index</span></code> che viene impostato alla serie di cui vanno calcolate le frequenze assolute; i due rimanenti argomenti influiscono solo sul modo in cui viene visualizzata la tabella delle frequenze: <code class="docutils literal notranslate"><span class="pre">columns</span></code> contiene una lista il cui unico elemento è l’intestazione della colonna delle frequenze, mentre <code class="docutils literal notranslate"><span class="pre">colnames</span></code> viene impostato a una lista contenente una stringa vuota al fine di non visualizzare un’ulteriore etichetta per l’intera tabella.</p>
-<p>Essendo l’output di <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code> un dataframe, esso può essere manipolato facilmente. Trasformiamo dunque la precedente tabella di frequenze assolute nella corrispondente tabella delle frequenze relative. Le frequenze relative si calcolano dividendo quelle assolute per il numero totale di casi; quest’ultimo è ovviamente uguale alla somma di tutte le frequenze assolute, quindi la tabella delle frequenze relative si può ottenere nel modo seguente:</p>
+<p>Essendo l’output di <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code> un DataFrame, esso può essere manipolato facilmente. Trasformiamo dunque la precedente tabella di frequenze assolute nella corrispondente tabella delle frequenze relative. Le frequenze relative si calcolano dividendo quelle assolute per il numero totale di casi; quest’ultimo è ovviamente uguale alla somma di tutte le frequenze assolute, quindi la tabella delle frequenze relative si può ottenere nel modo seguente:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rel_freq</span> <span class="o">=</span> <span class="n">abs_freq</span> <span class="o">/</span> <span class="n">abs_freq</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -984,7 +982,7 @@ Name: bdi_class, dtype: int64
 </table>
 </div></div></div>
 </div>
-<p>Controllo:</p>
+<p>Controlliamo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rel_freq</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -1112,8 +1110,7 @@ dtype: float64
 <p>Si noti che, nel caso di stringhe, le righe del DataFrame prodotto da <code class="docutils literal notranslate"><span class="pre">pd.crosstab()</span></code> saranno ordinate alfabeticamente per i valori della prima colonna.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grp_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
-                       <span class="s2">&quot;Abs. freq.&quot;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grp_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Abs. freq.&quot;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
 <span class="n">grp_freq</span>
 </pre></div>
 </div>
@@ -1203,15 +1200,14 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
-<p>In python, il simbolo <code class="docutils literal notranslate"><span class="pre">:</span></code> utilizzato all’interno delle parentesi quadre permette di ottenere uno <em>slicing</em> corrispondente all’intera lista.</p>
+<p>In Python, il simbolo <code class="docutils literal notranslate"><span class="pre">:</span></code> utilizzato all’interno delle parentesi quadre permette di ottenere uno <em>slicing</em> corrispondente all’intera lista.</p>
 <section id="distribuzioni-congiunte">
 <h3><span class="section-number">12.2.1. </span>Distribuzioni congiunte<a class="headerlink" href="#distribuzioni-congiunte" title="Permalink to this headline">#</a></h3>
-<p>Le variabili possono anche essere analizzate insieme tramite le <em>distribuzioni congiunte di frequenze</em>. Queste distribuzioni rappresentano l’insieme delle frequenze relative ad ogni possibile combinazione di valori delle variabili. Ad esempio, se l’insieme di variabili <span class="math notranslate nohighlight">\(V\)</span> è composto da due variabili, <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>, ciascuna delle quali può assumere due valori, 1 e 2, allora una possibile distribuzione congiunta di frequenze relative per <span class="math notranslate nohighlight">\(V\)</span> potrebbe essere espressa come <span class="math notranslate nohighlight">\(f(X = 1, Y = 1) = 0.2\)</span>, <span class="math notranslate nohighlight">\(f(X = 1, Y = 2) = 0.1\)</span>, <span class="math notranslate nohighlight">\(f(X = 2, Y = 1) = 0.5\)</span>, e <span class="math notranslate nohighlight">\(f(X = 2, Y = 2) = 0.2\)</span>. Come nel caso delle distribuzioni di frequenze relative di una singola variabile, le frequenze relative di una distribuzione congiunta devono sommare a 1.</p>
+<p>Le variabili possono anche essere analizzate insieme tramite le <em>distribuzioni congiunte di frequenze</em>. Queste distribuzioni rappresentano l’insieme delle frequenze assolute o relative ad ogni possibile combinazione di valori delle variabili. Ad esempio, se l’insieme di variabili <span class="math notranslate nohighlight">\(V\)</span> è composto da due variabili, <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>, ciascuna delle quali può assumere due valori, 1 e 2, allora una possibile distribuzione congiunta di frequenze relative per <span class="math notranslate nohighlight">\(V\)</span> potrebbe essere espressa come <span class="math notranslate nohighlight">\(f(X = 1, Y = 1) = 0.2\)</span>, <span class="math notranslate nohighlight">\(f(X = 1, Y = 2) = 0.1\)</span>, <span class="math notranslate nohighlight">\(f(X = 2, Y = 1) = 0.5\)</span>, e <span class="math notranslate nohighlight">\(f(X = 2, Y = 2) = 0.2\)</span>. Come nel caso delle distribuzioni di frequenze relative di una singola variabile, le frequenze relative di una distribuzione congiunta devono sommare a 1.</p>
 <p>Per i dati dell’esempio precedente, la funzione <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code> può essere utilizzata anche per produrre questo tipo di tabella: basta indicare le serie corrispondenti alle variabili considerate come valori degli argomenti <code class="docutils literal notranslate"><span class="pre">index</span></code> e <code class="docutils literal notranslate"><span class="pre">columns</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_group_abs_freq</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">])</span>
-
 <span class="n">bdi_group_abs_freq</span>
 </pre></div>
 </div>
@@ -1420,8 +1416,7 @@ dtype: float64
 <p>Le frequenze congiunte trovate nell’esempio precedente erano frequenze assolute, ma è immediato estendere tale concetto a quello delle frequenze congiunte relative. Queste si possono calcolare dividendo le frequenze assolute per il numero totale di osservazioni, oppure utilizzando il parametro <code class="docutils literal notranslate"><span class="pre">normalize</span></code> in <code class="docutils literal notranslate"><span class="pre">pd.crosstab</span></code>, che però ora ha diversi valori possibili. Specificando <code class="docutils literal notranslate"><span class="pre">all</span></code> vengono calcolate le frequenze relative:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span>
-            <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1561,8 +1556,7 @@ dtype: float64
 <p>Usando <code class="docutils literal notranslate"><span class="pre">index</span></code> si otterrà una tabella in cui i valori su ogni riga sommano a 1:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span>
-            <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi_class&quot;</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">],</span> <span class="n">margins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1752,7 +1746,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;BDI-II&#39;)
 </pre></div>
 </div>
-<img alt="_images/a2560e64921d203c6196a029f7a0dfcc1f64600f816fb0e4f9254338f509d8af.png" src="_images/a2560e64921d203c6196a029f7a0dfcc1f64600f816fb0e4f9254338f509d8af.png" />
+<img alt="_images/457c594a32d5f883e31e04a78030c58c1349c14e0dfbbcd6f984612a0e65fa93.png" src="_images/457c594a32d5f883e31e04a78030c58c1349c14e0dfbbcd6f984612a0e65fa93.png" />
 </div>
 </div>
 </section>
@@ -1773,7 +1767,7 @@ dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;BDI-II&#39;)
 </pre></div>
 </div>
-<img alt="_images/dfaf4ed59b542dcfad8fb43835e45630c5720542b230ee874d25d4b70a766127.png" src="_images/dfaf4ed59b542dcfad8fb43835e45630c5720542b230ee874d25d4b70a766127.png" />
+<img alt="_images/285eb39f723023b183a88f0a9c8ce52f923d8d25785f5eaa3fb3357956ecdc76.png" src="_images/285eb39f723023b183a88f0a9c8ce52f923d8d25785f5eaa3fb3357956ecdc76.png" />
 </div>
 </div>
 </section>
@@ -1792,16 +1786,16 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Mar 11 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Mar 14 2023
 
 Python implementation: CPython
 Python version       : 3.11.0
 IPython version      : 8.11.0
 
 pandas    : 1.5.3
+numpy     : 1.24.2
 matplotlib: 3.7.1
 seaborn   : 0.12.2
-numpy     : 1.24.2
 
 Watermark: 2.3.1
 </pre></div>

@@ -865,7 +865,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T/ipykernel_64362/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T/ipykernel_57256/2658124353.py:2: FutureWarning: [&#39;species&#39;, &#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.aggregate(summary_stats)
 </pre></div>
 </div>
@@ -959,6 +959,14 @@ Name: species, dtype: float64
 </div>
 <p>Si noti che Pandas ha applicato le funzioni di riepilogo a ogni colonna, ma, per alcune colonne, le statistiche riassuntive non si possono calcolare, ovvero tutte le colonne che contengono stringhe anziché numeri. Di conseguenza, vediamo che alcuni dei risultati per tali colonne sono contrassegnati con “NaN”. Questa è un’abbreviazione di “Not a Number”, talvolta utilizzata nell’analisi dei dati per rappresentare valori mancanti o non definiti.</p>
 <p>Molto spesso vogliamo calcolare le statistiche descrittive separatamente per ciascun gruppo di osservazioni – per esempio, nel caso presente, potremmo volere distinguere le statistiche descrittive in base alla specie dei pinguini. Questo risultato si ottiene con il metodo <code class="docutils literal notranslate"><span class="pre">.groupby()</span></code>.</p>
+<p>Il nome “group by” deriva da un comando nel linguaggio del database SQL, ma forse è più semplice pensarlo nei termini coniati da Hadley Wickham: split, apply, combine. Un esempio canonico di questa operazione di split-apply-combine, in cui “apply” è un’aggregazione di sommatoria, è illustrato nella figura seguente:</p>
+<a class="reference internal image-reference" href="_images/split_apply_combine.png" id="split-apply-combine"><img alt="_images/split_apply_combine.png" id="split-apply-combine" src="_images/split_apply_combine.png" style="height: 400px;" /></a>
+<p>La figura rende chiaro ciò che si ottiene con <code class="docutils literal notranslate"><span class="pre">groupby</span></code>:</p>
+<ul class="simple">
+<li><p>la fase “split” prevede la suddivisione e il raggruppamento di un DataFrame in base al valore della chiave specificata;</p></li>
+<li><p>la fase “apply” implica il calcolo di alcune funzioni, solitamente un’aggregazione, una trasformazione o un filtro, all’interno dei singoli gruppi;</p></li>
+<li><p>la fase “combine” unisce i risultati di queste operazioni in una matrice di output.</p></li>
+</ul>
 <p>Per esempio, ragruppiamo le osservazioni <code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code> in funzione delle modalità della variabile <code class="docutils literal notranslate"><span class="pre">species</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -968,7 +976,7 @@ Name: species, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x10c0c7210&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.SeriesGroupBy object at 0x10fefda90&gt;
 </pre></div>
 </div>
 </div>
@@ -990,15 +998,7 @@ Name: body_mass_g, dtype: float64
 </div>
 </div>
 </div>
-<p>È possibile applicare vari criteri di classificazione. Questa possibilità è implementata nella cosiddetta operazione <code class="docutils literal notranslate"><span class="pre">groupby</span></code>. Il nome “group by” deriva da un comando nel linguaggio del database SQL, ma forse è più semplice pensarlo nei termini coniati da Hadley Wickham: split, apply, combine. Un esempio canonico di questa operazione di split-apply-combine, in cui “apply” è un’aggregazione di sommatoria, è illustrato nella figura seguente:</p>
-<a class="reference internal image-reference" href="_images/split_apply_combine.png" id="split-apply-combine"><img alt="_images/split_apply_combine.png" id="split-apply-combine" src="_images/split_apply_combine.png" style="height: 400px;" /></a>
-<p>La figura rende chiaro ciò che si ottiene con <code class="docutils literal notranslate"><span class="pre">groupby</span></code>:</p>
-<ul class="simple">
-<li><p>la fase “split” prevede la suddivisione e il raggruppamento di un DataFrame in base al valore della chiave specificata;</p></li>
-<li><p>la fase “apply” implica il calcolo di alcune funzioni, solitamente un’aggregazione, una trasformazione o un filtro, all’interno dei singoli gruppi;</p></li>
-<li><p>la fase “combine” unisce i risultati di queste operazioni in una matrice di output.</p></li>
-</ul>
-<p>Per fare un altro esempio, contiamo il numero di pinguini presenti sulle tre isole, distinguendoli per specie e genere.</p>
+<p>È possibile applicare criteri di classificazione multipli. Per fare un altro esempio, contiamo il numero di pinguini presenti sulle tre isole, distinguendoli per specie e genere.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;island&quot;</span><span class="p">,</span> <span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
@@ -1031,7 +1031,7 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T/ipykernel_64362/2686510896.py:2: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hl/dt523djx7_q7xjrthzjpdvc40000gn/T/ipykernel_57256/2686510896.py:2: FutureWarning: [&#39;island&#39;, &#39;sex&#39;] did not aggregate successfully. If any error is raised this will raise in a future version of pandas. Drop these columns/ops to avoid this warning.
   df.groupby([&quot;species&quot;]).aggregate(summary_stats)
 </pre></div>
 </div>
@@ -1401,14 +1401,14 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Mar 11 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue Mar 14 2023
 
 Python implementation: CPython
 Python version       : 3.11.0
 IPython version      : 8.11.0
 
-numpy : 1.24.2
 pandas: 1.5.3
+numpy : 1.24.2
 
 Watermark: 2.3.1
 </pre></div>
