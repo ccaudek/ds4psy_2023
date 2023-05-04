@@ -45,7 +45,6 @@ La funzione lineare $y = a + bx$.
 
 Possiamo dunque dire che la pendenza $b$ di un retta è uguale all'incremento $\Delta y$ associato ad un incremento unitario nella $x$.
 
-
 ## Una media per ciascuna osservazione
 
 In precedenza abbiamo visto come stimare i parametri di un modello bayesiano nel quale le osservazioni sono indipendenti e identicamente distribuite secondo una densità gaussiana,
