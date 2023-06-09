@@ -1,0 +1,1060 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>31. L’influenza della distribuzione a priori &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '321_balance-prior-post';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/321_balance-prior-post.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="32. Approssimazione della distribuzione a posteriori" href="325_metropolis.html" />
+    <link rel="prev" title="30. Distribuzioni coniugate" href="316_conjugate_families.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/321_balance-prior-post.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>L’influenza della distribuzione a priori</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collegare-le-intuizioni-alla-teoria">31.1. Collegare le intuizioni alla teoria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">31.2. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">31.3. Watermark</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/ccaudek/ds4psy_2023/blob/main/321_balance-prior-post.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="l-influenza-della-distribuzione-a-priori">
+<span id="prior-influence-notebook"></span><h1><span class="section-number">31. </span>L’influenza della distribuzione a priori<a class="headerlink" href="#l-influenza-della-distribuzione-a-priori" title="Permalink to this headline">#</a></h1>
+<p>La notazione <span class="math notranslate nohighlight">\(p(\theta \mid y) \propto p(\theta) \ p(y \mid \theta)\)</span> è particolarmente utile poiché evidenzia il fatto che la distribuzione a posteriori è una combinazione della distribuzione a priori e della verosimiglianza. Questo “mescolamento” delle due distribuzioni ci permette di integrare le informazioni a priori con quelle contenute nei dati osservati, ottenendo una stima più accurata della distribuzione di probabilità a posteriori del parametro <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>In questo capitolo esamineremo alcuni esempi che aiutano a comprendere meglio come avviene questo processo di integrazione delle informazioni a priori e dei dati osservati. Considereremo qui un esempio discusso da <span id="id1">Johnson <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id48" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pymc</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span><span class="p">,</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="c1"># Initialize random number generator</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">8927</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;bmh&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;svg&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per la discussione successiva, useremo le seguenti funzioni per visualizzare la distribuzione a priori, la verosimiglianza e la distribuzione a posteriori nel caso beta-binomiale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_beta_binomial</span><span class="p">(</span>
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">likelihood</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">posterior</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a Beta-Binomial Bayesian Model</span>
+
+<span class="sd">    @param alpha,beta positive shape parameters of the prior Beta model</span>
+<span class="sd">    @param y observed number of successes</span>
+<span class="sd">    @param n observed number of trials</span>
+<span class="sd">    @param prior a logical value indicating whether the prior model should be plotted</span>
+<span class="sd">    @param likelihood a logical value indicating whether the scaled likelihood should be plotted</span>
+<span class="sd">    @param posterior a logical value indicating whether posterior model should be plotted</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: to visualize the posterior specify function parameters y and n&quot;</span><span class="p">)</span>
+
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">p_theta_given_y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">p_theta_given_y</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;prior&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">alpha_post</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="n">beta_post</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">+</span> <span class="n">n</span> <span class="o">-</span> <span class="n">y</span>
+    <span class="n">p_theta_given_y_post</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">alpha_post</span><span class="p">,</span> <span class="n">beta_post</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">p_theta_given_y_post</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;posterior&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">likelihood</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>
+    <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">simpson</span><span class="p">(</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+        <span class="n">θ</span><span class="p">,</span> <span class="n">likelihood</span> <span class="o">/</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;likelihood scaled&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\pi$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;density&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">summarize_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Summarize a Beta-Binomial Bayesian model</span>
+
+<span class="sd">    @param alpha,beta positive shape parameters of the prior Beta model</span>
+<span class="sd">    @param y number of successes</span>
+<span class="sd">    @param n number of trials</span>
+
+<span class="sd">    Return: Pandas dataframe summarizing beta binomial</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">beta_mean</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">beta_mode</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;0 and 1&quot;</span>
+        <span class="k">elif</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">beta_var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">/</span> <span class="p">((</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">prior_mean</span> <span class="o">=</span> <span class="n">beta_mean</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+    <span class="n">prior_mode</span> <span class="o">=</span> <span class="n">beta_mode</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+    <span class="n">prior_var</span> <span class="o">=</span> <span class="n">beta_var</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+    <span class="n">prior_sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">prior_var</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="n">alpha</span><span class="p">,</span>
+                <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="n">beta</span><span class="p">,</span>
+                <span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="n">prior_mean</span><span class="p">,</span>
+                <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">prior_mode</span><span class="p">,</span>
+                <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="n">prior_var</span><span class="p">,</span>
+                <span class="s2">&quot;sd&quot;</span><span class="p">:</span> <span class="n">prior_sd</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;prior&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">post_alpha</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">alpha</span>
+        <span class="n">post_beta</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="n">beta</span>
+        <span class="n">post_mean</span> <span class="o">=</span> <span class="n">beta_mean</span><span class="p">(</span><span class="n">post_alpha</span><span class="p">,</span> <span class="n">post_beta</span><span class="p">)</span>
+        <span class="n">post_mode</span> <span class="o">=</span> <span class="n">beta_mode</span><span class="p">(</span><span class="n">post_alpha</span><span class="p">,</span> <span class="n">post_beta</span><span class="p">)</span>
+        <span class="n">post_var</span> <span class="o">=</span> <span class="n">beta_var</span><span class="p">(</span><span class="n">post_alpha</span><span class="p">,</span> <span class="n">post_beta</span><span class="p">)</span>
+        <span class="n">post_sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">post_var</span><span class="p">)</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">alpha</span><span class="p">,</span> <span class="n">post_alpha</span><span class="p">],</span>
+                <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">beta</span><span class="p">,</span> <span class="n">post_beta</span><span class="p">],</span>
+                <span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">prior_mean</span><span class="p">,</span> <span class="n">post_mean</span><span class="p">],</span>
+                <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">prior_mode</span><span class="p">,</span> <span class="n">post_mode</span><span class="p">],</span>
+                <span class="s2">&quot;var&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">prior_var</span><span class="p">,</span> <span class="n">post_var</span><span class="p">],</span>
+                <span class="s2">&quot;sd&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">prior_sd</span><span class="p">,</span> <span class="n">post_sd</span><span class="p">],</span>
+            <span class="p">},</span>
+            <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;prior&quot;</span><span class="p">,</span> <span class="s2">&quot;posterior&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">summary</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se abbiamo a disposizione un campione di dati molto piccolo, ad esempio 15 successi su 20 prove nel caso di una distribuzione beta-binomiale, la distribuzione a priori può influenzare notevolmente la distribuzione a posteriori. Nel caso di una distribuzione a priori uniforme, invece, la distribuzione a posteriori sarà simile alla funzione di verosimiglianza, con l’eccezione dell’area sottesa sotto le due curve. In altre parole, per una distribuzione a priori uniforme, la distribuzione a posteriori avrà un picco nella stima di massima verosimiglianza, mentre per distribuzioni a priori diverse, la distribuzione a posteriori può essere significativamente diversa.</p>
+<p>Iniziamo a considera il caso di una distribuzione a priori uniforme.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ac81c1f6fe7b0618a2e58a33a3092653110b3b50a9213ccf489acea3bce95c80.svg" src="_images/ac81c1f6fe7b0618a2e58a33a3092653110b3b50a9213ccf489acea3bce95c80.svg" /></div>
+</div>
+<p>Consideriamo ora una distribuzione a priori poco informativa, come ad esempio una Beta(2, 2). In questo caso l’impatto di questa scelta sulla distribuzione a posteriori è modesto, ma comunque presente. Questo fenomeno può essere visto come un effetto di “regolarizzazione”, il quale ci conduce a una stima più cauta rispetto a quella ottenuta tramite il principio di massima verosimiglianza. In altre parole, la stima risultante è maggiormente “spostata” verso il valore intermedio di 0.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8e9f3d3a124aa3f4dbed54e2360b911ac7ef62f351cb64dfa5b0b599d5e4cca7.svg" src="_images/8e9f3d3a124aa3f4dbed54e2360b911ac7ef62f351cb64dfa5b0b599d5e4cca7.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alpha</th>
+      <th>beta</th>
+      <th>mean</th>
+      <th>mode</th>
+      <th>var</th>
+      <th>sd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>prior</th>
+      <td>2</td>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.050000</td>
+      <td>0.223607</td>
+    </tr>
+    <tr>
+      <th>posterior</th>
+      <td>17</td>
+      <td>7</td>
+      <td>0.708333</td>
+      <td>0.727273</td>
+      <td>0.008264</td>
+      <td>0.090906</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Se il campione è più grande, l’utilizzo di una distribuzione a priori Beta(2, 2) ha un impatto trascurabile: infatti, il valore massimo della distribuzione a posteriori risulta quasi identico alla stima di massima verosimiglianza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/258df85dc1d4dc5560700f2e457e44af66504e18a7200310b98a450351c2c09f.svg" src="_images/258df85dc1d4dc5560700f2e457e44af66504e18a7200310b98a450351c2c09f.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alpha</th>
+      <th>beta</th>
+      <th>mean</th>
+      <th>mode</th>
+      <th>var</th>
+      <th>sd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>prior</th>
+      <td>2</td>
+      <td>2</td>
+      <td>0.500000</td>
+      <td>0.500000</td>
+      <td>0.050000</td>
+      <td>0.223607</td>
+    </tr>
+    <tr>
+      <th>posterior</th>
+      <td>152</td>
+      <td>52</td>
+      <td>0.745098</td>
+      <td>0.747525</td>
+      <td>0.000926</td>
+      <td>0.030438</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Se usiamo una distribuzione a priori informativa, questa avrà un grande impatto sulla distribuzione a posteriori nel caso di un piccolo campione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b2e36d1107c9543738846e4f510fcc6b5b402c1de46db5328e542ca27195b9b7.svg" src="_images/b2e36d1107c9543738846e4f510fcc6b5b402c1de46db5328e542ca27195b9b7.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alpha</th>
+      <th>beta</th>
+      <th>mean</th>
+      <th>mode</th>
+      <th>var</th>
+      <th>sd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>prior</th>
+      <td>2</td>
+      <td>5</td>
+      <td>0.285714</td>
+      <td>0.20</td>
+      <td>0.025510</td>
+      <td>0.159719</td>
+    </tr>
+    <tr>
+      <th>posterior</th>
+      <td>17</td>
+      <td>10</td>
+      <td>0.629630</td>
+      <td>0.64</td>
+      <td>0.008328</td>
+      <td>0.091260</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Invece, la stessa distribuzione a priori ha un effetto trascurabile sulla distriuzione a posteriori se il campione è grande.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d2ce90cfa97e92937cbae8d8d0ef5084c861d404f60aba5565971341c6445458.svg" src="_images/d2ce90cfa97e92937cbae8d8d0ef5084c861d404f60aba5565971341c6445458.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alpha</th>
+      <th>beta</th>
+      <th>mean</th>
+      <th>mode</th>
+      <th>var</th>
+      <th>sd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>prior</th>
+      <td>2</td>
+      <td>5</td>
+      <td>0.285714</td>
+      <td>0.200000</td>
+      <td>0.025510</td>
+      <td>0.159719</td>
+    </tr>
+    <tr>
+      <th>posterior</th>
+      <td>152</td>
+      <td>55</td>
+      <td>0.734300</td>
+      <td>0.736585</td>
+      <td>0.000938</td>
+      <td>0.030627</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b46106f9e03c822acffc71e22cb0088f30b2c8ca006e6263c3ca8007af150198.svg" src="_images/b46106f9e03c822acffc71e22cb0088f30b2c8ca006e6263c3ca8007af150198.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summarize_beta_binomial</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alpha</th>
+      <th>beta</th>
+      <th>mean</th>
+      <th>mode</th>
+      <th>var</th>
+      <th>sd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>prior</th>
+      <td>2</td>
+      <td>5</td>
+      <td>0.285714</td>
+      <td>0.200000</td>
+      <td>0.025510</td>
+      <td>0.159719</td>
+    </tr>
+    <tr>
+      <th>posterior</th>
+      <td>1502</td>
+      <td>505</td>
+      <td>0.748381</td>
+      <td>0.748628</td>
+      <td>0.000094</td>
+      <td>0.009684</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="collegare-le-intuizioni-alla-teoria">
+<h2><span class="section-number">31.1. </span>Collegare le intuizioni alla teoria<a class="headerlink" href="#collegare-le-intuizioni-alla-teoria" title="Permalink to this headline">#</a></h2>
+<p>Il bilanciamento tra la distribuzione a priori e le evidenze dei dati, come abbiamo visto negli esempi precedenti, non solo rispecchia le nostre intuizioni ma anche una necessità matematica. Questo è evidente dalla formula del valore atteso della distribuzione a posteriori nel caso beta-binomiale, che può essere riscritta come segue:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathbb{E}_{\text{post}} &amp;[\text{Beta}(\alpha + y, \beta + n - y)] = \frac{\alpha + y}{\alpha + \beta +n}\notag\\ 
+&amp;= \frac{a+b}{a+b+n} \cdot \frac{a}{a+b} + \frac{n}{a+b+n} \cdot \frac{y}{n}.
+\end{align}
+\end{split}\]</div>
+<p>L’eq. <code class="xref eq docutils literal notranslate"><span class="pre">eq-ev-post-beta-bin</span></code> mostra che il valore atteso a posteriori è una media pesata tra il valore atteso a priori <span class="math notranslate nohighlight">\(\left( \frac{\alpha}{\alpha+\beta}\right)\)</span> e la proporzione osservata di successi <span class="math notranslate nohighlight">\(\left(\frac{y}{n}\right)\)</span>. I pesi sono <span class="math notranslate nohighlight">\(\left( \frac{\alpha+\beta}{\alpha+\beta+n}\right)\)</span> e <span class="math notranslate nohighlight">\(\left( \frac{n}{\alpha+\beta+n}\right)\)</span>. Pertanto, quando il numero di osservazioni <span class="math notranslate nohighlight">\(n\)</span> è grande rispetto alla somma dei parametri <span class="math notranslate nohighlight">\(\alpha + \beta\)</span>, la distribuzione a posteriori dipenderà principalmente dai dati osservati e meno dalle credenze a priori. Al contrario, quando <span class="math notranslate nohighlight">\(n\)</span> è piccolo rispetto a <span class="math notranslate nohighlight">\(\alpha + \beta\)</span>, i dati avranno una minore influenza rispetto alla credenza a priori.</p>
+<p>Queste osservazioni ci indicano come scegliere i parametri <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>: se vogliamo assumere una totale ignoranza rispetto al fenomeno in esame, la scelta coerente è <span class="math notranslate nohighlight">\(\alpha = \beta = 1\)</span> (ogni valore di <span class="math notranslate nohighlight">\(\theta\)</span> è ugualmente credibile). Se, invece, abbiamo delle forti credenze a priori, possiamo scegliere <span class="math notranslate nohighlight">\(\alpha\)</span> in modo che sia uguale al valore atteso a priori, mentre <span class="math notranslate nohighlight">\(\alpha + \beta\)</span> esprime l’importanza che diamo all’informazione a priori: maggiore è il valore di <span class="math notranslate nohighlight">\(\alpha + \beta\)</span>, più dati saranno necessari per allontanare la distribuzione a posteriori dalla distribuzione a priori. Infine, se <span class="math notranslate nohighlight">\(n\)</span> è grande, la distribuzione a posteriori avrà una scarsa influenza sulla distribuzione a priori, a meno di scelte estreme dei parametri a priori.</p>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2><span class="section-number">31.2. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>Possiamo trarre una conclusione molto chiara dall’esempio discusso in <span id="id2">Johnson <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id48" title="Alicia A. Johnson, Miles Ott, and Mine Dogucu. Bayes Rules! An Introduction to Bayesian Modeling with R. CRC Press, 2022.">JOD22</a>]</span>: l’aggiornamento bayesiano è simile ai processi di ragionamento del senso comune. Quando le nuove evidenze sono deboli, non c’è motivo di cambiare le nostre credenze pregresse, mentre quando le nuove evidenze sono irrefutabili, dobbiamo modificare le nostre credenze in modo da rispecchiare ciò che ci dicono i dati, indipendentemente dalle nostre credenze preesistenti. Questo approccio quantitativo e preciso esprime in termini matematici ciò che le nostre intuizioni ci suggeriscono.</p>
+<p>Ciò che è sorprendente è che l’approccio frequentista nega questa logica. I test frequentisti non considerano le conoscenze pregresse e, pertanto, se un test frequentista, basato su un piccolo campione di dati, suggerisce di modificare le nostre credenze, questo viene preso sul serio, indipendentemente dalle evidenze pregresse che potrebbero dimostrare il contrario. Questo modo di pensare è in netto contrasto con l’approccio bayesiano, il quale utilizza tutte le informazioni a nostra disposizione per aggiornare le nostre credenze.</p>
+<p>Questa discussione è ben riassunta nella celebre <a class="reference external" href="https://xkcd.com/1132/">striscia comica</a>.</p>
+</section>
+<section id="watermark">
+<h2><span class="section-number">31.3. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue May 30 2023
+
+Python implementation: CPython
+Python version       : 3.11.3
+IPython version      : 8.13.2
+
+matplotlib: 3.7.1
+scipy     : 1.10.1
+arviz     : 0.15.1
+pyreadr   : 0.4.7
+pandas    : 2.0.2
+requests  : 2.31.0
+pymc      : 5.4.0
+numpy     : 1.24.3
+seaborn   : 0.12.2
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="316_conjugate_families.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">30. </span>Distribuzioni coniugate</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="325_metropolis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">32. </span>Approssimazione della distribuzione a posteriori</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collegare-le-intuizioni-alla-teoria">31.1. Collegare le intuizioni alla teoria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">31.2. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">31.3. Watermark</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

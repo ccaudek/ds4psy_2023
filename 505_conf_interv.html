@@ -1,0 +1,1221 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>49. Intervallo di confidenza &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '505_conf_interv';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/505_conf_interv.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="50. Significatività statistica" href="510_test_ipotesi.html" />
+    <link rel="prev" title="48. Introduzione all’inferenza frequentista" href="500_intro_frequentist.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="321_balance-prior-post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/505_conf_interv.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Intervallo di confidenza</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-variabilita-campionaria">49.1. La variabilità campionaria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-intervallo-fiduciale">49.2. L’intervallo fiduciale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcolo-dell-intervallo-fiduciale">49.3. Calcolo dell’intervallo fiduciale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivazione">49.3.1. Derivazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#popolazione-con-varianza-incognita">49.3.2. Popolazione con varianza incognita</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-livello-di-copertura">49.4. Il livello di copertura</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione">49.5. Interpretazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fraintendimenti">49.5.1. Fraintendimenti</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confronto-tra-intervalli-frequentisti-e-bayesiani">49.6. Confronto tra intervalli frequentisti e bayesiani</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">49.6.1. Intervallo di confidenza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervallo-di-credibilita">49.6.2. Intervallo di credibilità</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">49.7. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">49.8. Watermark</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="intervallo-di-confidenza">
+<span id="confidence-interval-notebook"></span><h1><span class="section-number">49. </span>Intervallo di confidenza<a class="headerlink" href="#intervallo-di-confidenza" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">import</span> <span class="nn">pymc</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">from</span> <span class="nn">pymc</span> <span class="kn">import</span> <span class="n">HalfNormal</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Normal</span><span class="p">,</span> <span class="n">sample</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize random number generator</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">8927</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;bmh&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;svg&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="la-variabilita-campionaria">
+<h2><span class="section-number">49.1. </span>La variabilità campionaria<a class="headerlink" href="#la-variabilita-campionaria" title="Permalink to this headline">#</a></h2>
+<p>Quando si estrae un campione casuale da una popolazione, la statistica calcolata su quel campione sarà diversa dal parametro della popolazione a causa della variabilità campionaria. Per valutare l’errore che si commette nella stima del parametro, l’approccio frequentista descrive la variazione della stima attorno al parametro della popolazione, ovvero la dispersione della <em>distribuzione campionaria</em> dello stimatore.</p>
+<p>Come abbiamo visto in precedenza, possiamo usare la deviazione standard di una variabile casuale per misurare la dispersione della sua distribuzione. Purtroppo, nella maggior parte dei casi non possiamo calcolare direttamente la deviazione standard della distribuzione campionaria di uno stimatore. Ciò richiederebbe di estrarre molteplici campioni dalla popolazione di interesse, ma raramente abbiamo accesso a più di un campione. Invece, dobbiamo <em>stimare</em> la deviazione standard della distribuzione campionaria basandoci sul singolo campione che abbiamo estratto. La stima della deviazione standard della distribuzione campionaria di uno stimatore viene chiamata <em>errore standard</em> dello stimatore.</p>
+<p>L’errore standard è la deviazione standard della distribuzione della stima del parametro nell’universo dei campioni e quantifica l’incertezza relativa alla stima del parametro. Mediante l’errore standard, l’approccio frequentista costruisce l’intervallo fiduciale, che fornisce una stima dell’intervallo di valori in cui ci si aspetta che, <em>a lungo termine</em>, il parametro cada con una certa probabilità.</p>
+</section>
+<section id="l-intervallo-fiduciale">
+<h2><span class="section-number">49.2. </span>L’intervallo fiduciale<a class="headerlink" href="#l-intervallo-fiduciale" title="Permalink to this headline">#</a></h2>
+<p>Gli statistici frequentisti utilizzano l’errore standard per quantificare l’incertezza associata alle stime campionarie e costruire un intervallo di valori noto come “intervallo di fiducia”. I limiti dell’intervallo di fiducia, chiamati “limiti fiduciari”, possono variare da campione a campione, ma si prevede che contengano il vero valore del parametro con una probabilità <span class="math notranslate nohighlight">\(\gamma\)</span> a lungo termine. In pratica, se il livello di fiducia è del 95%, ci si aspetta che il vero valore del parametro si trovi nel 95% degli intervalli di fiducia costruiti. L’intervallo di fiducia può essere calcolato per vari parametri, come la media, la varianza o la proporzione di una popolazione.</p>
+</section>
+<section id="calcolo-dell-intervallo-fiduciale">
+<h2><span class="section-number">49.3. </span>Calcolo dell’intervallo fiduciale<a class="headerlink" href="#calcolo-dell-intervallo-fiduciale" title="Permalink to this headline">#</a></h2>
+<p>In alcune situazioni, la distribuzione delle statistiche ottenute dai campioni si approssima alla distribuzione Normale e, in questi casi, l’intervallo fiduciale al 95% è dato da:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\theta} \pm 1.96 \cdot \text{SE},
+\]</div>
+<p>ovvero, è uguale alla stima del parametro più o meno 1.96 volte l’errore standard.</p>
+<section id="derivazione">
+<h3><span class="section-number">49.3.1. </span>Derivazione<a class="headerlink" href="#derivazione" title="Permalink to this headline">#</a></h3>
+<p>Possiamo ottenere la formula precedente nel seguente modo. Supponiamo di avere una popolazione normale con media <span class="math notranslate nohighlight">\(\mu\)</span> e varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span> e di estrarre un campione casuale <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span> da essa. Per le proprietà della distribuzione normale, anche la media campionaria seguirà una distribuzione normale: <span class="math notranslate nohighlight">\(\bar{X} \sim \mathcal{N}(\mu, \sigma/n)\)</span>. Di conseguenza, la media campionaria standardizzata seguirà una distribuzione normale standard:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(0, 1).
+\]</div>
+<p>Fissato un livello di confidenza <span class="math notranslate nohighlight">\(\gamma = 1 - \alpha\)</span> (tipicamente <span class="math notranslate nohighlight">\(\gamma = 0.95\)</span>, corrispondente a <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>), possiamo trovare il valore di <span class="math notranslate nohighlight">\(z\)</span> corrispondente al quantile di ordine <span class="math notranslate nohighlight">\(1 - \alpha/2\)</span> della distribuzione normale standard (chiamato “coefficiente fiduciario”). In altre parole, <span class="math notranslate nohighlight">\(z\)</span> rappresenta il valore tale che la probabilità che una variabile casuale normale standardizzata assuma un valore compreso tra <span class="math notranslate nohighlight">\(-z\)</span> e <span class="math notranslate nohighlight">\(z\)</span> sia pari a <span class="math notranslate nohighlight">\(1 - \alpha\)</span>: <span class="math notranslate nohighlight">\(P(-z \leq Z \leq z) = 1 - \alpha\)</span>.</p>
+<p>Utilizzando questa informazione, possiamo scrivere l’intervallo di confidenza per la media popolazionale come:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+P\Bigg(-z \leq \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \leq z\Bigg) = 1 - \alpha.
+\end{equation}
+\]</div>
+<p>Questo intervallo di confidenza rappresenta l’intervallo in cui ci aspettiamo che la media popolazionale cada con una certa probabilità, basata sul campione casuale estratto. L’intervallo di confidenza per la media popolazionale può essere quindi utilizzato per inferire informazioni sulla popolazione sulla base delle proprietà del campione estratto.</p>
+<p>Applicando qualche manipolazione algebrica, la diseguaglianza precedente si può scrivere
+nel modo seguente:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P\bigg(-z \leq &amp;\frac{ \bar{X} - \mu } {\sigma} \sqrt{n} \leq z\bigg) = 1 − \alpha\notag\\
+P\bigg(-z {\frac{\sigma}{\sqrt{n}}} \leq  &amp;\bar{X} - \mu \leq z \frac{\sigma}{\sqrt{n}}\bigg) = 1 − \alpha\notag\\
+P\bigg(-\bar{X}-z {\frac{\sigma}{\sqrt{n}}} \leq &amp;-\mu \leq -\bar{X} + z \frac{\sigma}{\sqrt{n}}\bigg) = 1 − \alpha\notag\\
+P\bigg(\bar{X}+z \frac{\sigma}{\sqrt{n}} \geq &amp;\mu \geq  \bar{X} -z \frac{\sigma}{\sqrt{n}}\bigg) = 1 − \alpha.\notag
+\end{align}
+\end{split}\]</div>
+<p>Possiamo definire l’intervallo di confidenza per una stima della media al livello fiduciario <span class="math notranslate nohighlight">\(\gamma = 1 − \alpha\)</span> come l’intervallo <span class="math notranslate nohighlight">\((\hat{a}, \hat{b})\)</span> dove:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\hat{a} \triangleq \bar{X} -z \frac{\sigma}{\sqrt{n}}, 
+\quad \hat{b} \triangleq \bar{X} +z \frac{\sigma}{\sqrt{n}},
+\end{equation}
+\]</div>
+<p>e tale che <span class="math notranslate nohighlight">\(P(\hat{a} \leq \mu \leq \hat{b}) = 1 − \alpha\)</span>. In altre parole, l’intervallo di confidenza contiene il vero valore del parametro della media <span class="math notranslate nohighlight">\(\mu\)</span> con probabilità <span class="math notranslate nohighlight">\(\gamma\)</span>. Questo tipo di intervallo è comunemente utilizzato nelle applicazioni pratiche dell’inferenza frequentista.</p>
+</section>
+<section id="popolazione-con-varianza-incognita">
+<h3><span class="section-number">49.3.2. </span>Popolazione con varianza incognita<a class="headerlink" href="#popolazione-con-varianza-incognita" title="Permalink to this headline">#</a></h3>
+<p>In ogni applicazione concreta, lo sperimentatore estrae un solo campione <span class="math notranslate nohighlight">\(x_1, \dots, x_n\)</span> dalla popolazione e la varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>, in aggiunta alla media <span class="math notranslate nohighlight">\(\mu\)</span> da determinare,  è sconosciuta. In tal caso, per effettuare una stima intervallare di <span class="math notranslate nohighlight">\(\mu\)</span> ci si basa sulla densità <span class="math notranslate nohighlight">\(t\)</span>-Student.</p>
+<p>L’inferenza frequentista per il caso di <span class="math notranslate nohighlight">\(\sigma^2\)</span> ignoto si basa sul Teorema per cui</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+P\bigg(−t^{\ast} \leq \frac{\bar{X} - \mu}{s} \sqrt{n} \leq t^{\ast}\bigg) = 1 − \alpha,
+\end{equation}
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(s\)</span> è lo stimatore di <span class="math notranslate nohighlight">\(\sigma\)</span> e <span class="math notranslate nohighlight">\(t^{\ast} \triangleq t_{n−1,1−\alpha/2}\)</span> è il quantile di ordine <span class="math notranslate nohighlight">\(1 − \alpha/2\)</span> della distribuzione <span class="math notranslate nohighlight">\(t_{n−1}\)</span>. Pertanto, il limite inferiore <span class="math notranslate nohighlight">\(\hat{a}\)</span> e il limite superiore <span class="math notranslate nohighlight">\(\hat{b}\)</span> dell’intervallo di confidenza diventano, rispettivamente, uguali a:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\hat{a} \triangleq \bar{X} -t^{\ast} \frac{s}{\sqrt{n}}, 
+\quad \hat{b} \triangleq \bar{X} + t^{\ast} \frac{s}{\sqrt{n}}.
+\end{equation}
+\]</div>
+<p>Si noti che, nel caso di una popolazione con varianza sconosciuta, i limiti fiduciari si ottengono come nel caso precedente (<span class="math notranslate nohighlight">\(\sigma^2\)</span> nota) sostituendo <span class="math notranslate nohighlight">\(\sigma\)</span>, ora incognito, con <span class="math notranslate nohighlight">\(s\)</span> (per una ampiezza campionaria <span class="math notranslate nohighlight">\(n\)</span> qualsiasi), e il coefficiente <span class="math notranslate nohighlight">\(z\)</span> con <span class="math notranslate nohighlight">\(t_{n−1,1−\alpha/2}\)</span>.</p>
+<p>La presente derivazione è stata ricavata nella ipotesi che la popolazione sia normalmente distribuita e vale anche per <em>piccoli campioni</em> (<span class="math notranslate nohighlight">\(n &lt; 30\)</span>) estratti casualmente da questa. Se invece, nel caso di piccoli campioni, la popolazione non è normalmente distribuita, non sono soddisfatte le ipotesi che sono state qui presentate e l’intervallo di fiducia non può essere calcolato con la procedura presente.</p>
+<p>Per una popolazione con distribuzione diversa da quella normale, le stime intervallari per la media della popolazione si possono ancora ottenere se la numerosità del campione è sufficientemente elevata (<span class="math notranslate nohighlight">\(n \geq 30\)</span>), come conseguenza del teorema del limite centrale.</p>
+</section>
+</section>
+<section id="il-livello-di-copertura">
+<h2><span class="section-number">49.4. </span>Il livello di copertura<a class="headerlink" href="#il-livello-di-copertura" title="Permalink to this headline">#</a></h2>
+<p>Sebbene calcolare l’intervallo di fiducia per la media della popolazione sia relativamente semplice, la sua interpretazione può risultare meno intuitiva. Per comprendere correttamente l’intervallo di fiducia, è necessario considerare il concetto di <em>livello di copertura</em>. In pratica, il livello di copertura rappresenta la probabilità che l’intervallo di fiducia contenga il valore del parametro sconosciuto <em>a lungo termine</em>. Ad esempio, se il livello di copertura è del 95%, ci aspettiamo che l’intervallo di fiducia contenga il valore del parametro con una probabilità del 95%. Tuttavia, non dobbiamo confondere il livello di copertura con la probabilità che il valore del parametro cada all’interno dell’intervallo di fiducia, poiché il parametro è un valore fisso e non ha una distribuzione di probabilità. Invece, l’intervallo di fiducia è una stima intervallare che può contenere o meno il valore del parametro.</p>
+<p>Il livello di copertura di un intervallo di confidenza rappresenta la probabilità a lungo termine che la procedura di costruzione di tale intervallo produca un intervallo che contenga il vero valore del parametro di interesse. Questo concetto è fondamentale nella statistica frequentista, dove la probabilità viene definita come la proporzione di volte in cui un evento si verifica nel caso di molteplici ripetizioni dell’esperimento casuale sotto le medesime condizioni. Nel contesto della costruzione dell’intervallo di confidenza, l’esperimento casuale è l’estrazione di un campione casuale dalla popolazione e il risultato dell’esperimento casuale è l’intervallo di fiducia (che può essere diverso in ciascun campione). Il livello di copertura, solitamente indicato con <span class="math notranslate nohighlight">\(1-\alpha\)</span>, rappresenta la probabilità a lungo termine che l’intervallo di fiducia contenga il vero valore del parametro, dove <span class="math notranslate nohighlight">\(\alpha\)</span> rappresenta il livello di significatività scelto per l’intervallo di confidenza.</p>
+<p>Per aiutare a comprendere meglio questo concetto, possiamo eseguire una simulazione. Consideriamo la popolazione dell’altezza degli adulti maschi italiani, supponendo che essa segua una distribuzione normale con media di <span class="math notranslate nohighlight">\(175\)</span> cm e varianza di <span class="math notranslate nohighlight">\(49\)</span> cm<span class="math notranslate nohighlight">\(^2\)</span>. Successivamente, effettuiamo una simulazione nella quale consideriamo 1000 ripetizioni dell’esperimento casuale, che consiste nell’estrazione di un campione casuale di dimensione <span class="math notranslate nohighlight">\(n=20\)</span> dalla popolazione descritta sopra. Per ogni campione, calcoliamo l’intervallo di confidenza al 95% come segue:</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X} \pm t \frac{s}{\sqrt{n}},
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\bar{X}\)</span> è la media campionaria, <span class="math notranslate nohighlight">\(s\)</span> è la deviazione standard campionaria e <span class="math notranslate nohighlight">\(t\)</span> è il valore critico della distribuzione t di Student con <span class="math notranslate nohighlight">\(n-1\)</span> gradi di libertà e livello di significatività <span class="math notranslate nohighlight">\(\alpha/2=0.025\)</span>.</p>
+<p>Successivamente, salviamo i limiti inferiori e superiori di ogni intervallo di confidenza così calcolato. Infine, verifichiamo quanti di questi intervalli contengono effettivamente il valore reale del parametro della popolazione.</p>
+<p>Partiamo generando 1000 campioni casuali di dimensione <span class="math notranslate nohighlight">\(n=30\)</span> da una distribuzione normale con media <span class="math notranslate nohighlight">\(175\)</span> e deviazione standard <span class="math notranslate nohighlight">\(7\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">175</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)])</span>
+<span class="n">samples</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1000, 30)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il primo campione di ampiezza <span class="math notranslate nohighlight">\(n\)</span> = 30 che abbiamo ottenuto è il seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">samples</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>179.21149270553926 191.30814701941813 183.32497719155157 181.24904952598095 182.94330509791092 180.6979221973829 173.17231246067175 169.1094297981429 178.72960273201278 186.1078710992499 180.07971981484104 182.38037244497508 173.83152295471425 156.90155121794086 167.3478718205022 166.50987330269874 166.6607234986489 175.79024462459734 175.486114737506 175.05575320991431 167.3460964962875 167.37702719530972 174.09297925049142 180.49024667780645 162.84472843833993 171.3421533328131 177.5050219086424 175.46828820425668 156.23089810212713 171.0541316187418
+</pre></div>
+</div>
+</div>
+</div>
+<p>Stampiamo qui di seguito le medie dei primi dieci campioni.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xbar</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">xbar</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>175.29021581412718 174.3216476226339 176.61283185121871 172.15848817114664 174.53298716679564 174.6930059495307 175.15948910700087 174.4699389856504 174.1522530515391 174.495968461094
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo ora il valore critico della distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student con (30-1) gradi di libertà.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.045229642132703
+</pre></div>
+</div>
+</div>
+</div>
+<p>Utilizzando le informazioni precedenti, possiamo calcolare 1000 intervalli di confidenza per la media della popolazione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interval_width</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">samples</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">CI_low</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">interval_width</span>
+<span class="n">CI_high</span> <span class="o">=</span> <span class="n">samples</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">interval_width</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcoliamo ora il livello di copertura, ovvero il numero di volte in cui l’intervallo di confidenza calcolato contiene il vero valore del parametro.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coverage_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">CI_low</span> <span class="o">&lt;</span> <span class="n">mu</span><span class="p">,</span> <span class="n">mu</span> <span class="o">&lt;</span> <span class="n">CI_high</span><span class="p">))</span> <span class="o">/</span> <span class="n">samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">coverage_p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.961
+</pre></div>
+</div>
+</div>
+</div>
+<p>In conclusione, ripetendo la simulazione per 1000 volte, abbiamo ottenuto una proporzione di intervalli di confidenza del 95% che contengono il parametro (ovvero il livello di copertura) molto vicino al valore nominale di <span class="math notranslate nohighlight">\(1 - \alpha = 0.95\)</span>.</p>
+</section>
+<section id="interpretazione">
+<h2><span class="section-number">49.5. </span>Interpretazione<a class="headerlink" href="#interpretazione" title="Permalink to this headline">#</a></h2>
+<p>Gli intervalli di confidenza rappresentano un intervallo di valori che, con un determinato livello di confidenza, contiene il parametro di interesse. Tuttavia, è importante fare una distinzione tra il livello di confidenza e la probabilità che il parametro sia contenuto all’interno dell’intervallo. Il livello di confidenza si riferisce alla proporzione di volte in cui l’intervallo di confidenza copre il vero valore del parametro, e non alla probabilità che il parametro cada all’interno dell’intervallo. In altre parole, se l’esperimento venisse ripetuto molte volte, l’intervallo di confidenza conterrà il parametro di interesse nel 95% dei casi, se il livello di confidenza è del 95%.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>In termini frequentisti, l’intervallo di confidenza va interpretato come la procedura di calcolo che, se ripetuta molte volte, producirà un intervallo che coprirà il valore reale del parametro con una certa probabilità, data dal livello di confidenza scelto. Tuttavia, non possiamo affermare con certezza che un particolare intervallo di confidenza contenga il vero valore del parametro. L’importante distinzione da fare è che il livello di confidenza non è la probabilità che il parametro si trovi nell’intervallo, ma la probabilità che l’intervallo contenga il parametro se l’esperimento viene ripetuto molte volte.</p>
+</div>
+<p>L’interpretazione corretta dell’intervallo di confidenza al livello <span class="math notranslate nohighlight">\(100 (1-\alpha)\)</span>% è quella secondo cui, se ripetessimo l’esperimento di estrazione di un campione casuale e il calcolo dell’intervallo di confidenza molte volte, allora in circa <span class="math notranslate nohighlight">\(100 (1-\alpha)\)</span>% dei casi gli intervalli così calcolati conterranno il vero valore del parametro. Tuttavia, è noto che spesso i ricercatori (e non solo gli studenti) commettono l’errore di attribuire agli intervalli di confidenza un’interpretazione errata, come ad esempio: “la probabilità che la media della popolazione <span class="math notranslate nohighlight">\(\mu\)</span> sia contenuta nell’intervallo <span class="math notranslate nohighlight">\([\hat{a}, \hat{b}]\)</span> è del 95%”. La formulazione corretta sarebbe invece: “la procedura utilizzata per calcolare l’intervallo <span class="math notranslate nohighlight">\([\hat{a}, \hat{b}]\)</span> ha una probabilità del 95% di produrre un intervallo che copre il valore reale del parametro”. In sintesi, l’intervallo di confidenza non fornisce una probabilità sulla posizione del parametro, ma piuttosto una probabilità sulla capacità della procedura utilizzata per calcolare l’intervallo di produrre un intervallo che copre il valore reale del parametro.</p>
+<section id="fraintendimenti">
+<h3><span class="section-number">49.5.1. </span>Fraintendimenti<a class="headerlink" href="#fraintendimenti" title="Permalink to this headline">#</a></h3>
+<p>Nel lavoro di <span id="id1">[<a class="reference internal" href="z_biblio.html#id20" title="Rink Hoekstra, Richard D Morey, Jeffrey N Rouder, and Eric-Jan Wagenmakers. Robust misinterpretation of confidence intervals. Psychonomic Bulletin &amp; Review, 21(5):1157–1164, 2014.">HMRW14</a>]</span> si evidenzia come, dato che i limiti del test di ipotesi nulle sono ampiamente riconosciuti, spesso per l’inferenza statistica venga consigliato l’utilizzo degli intervalli di confidenza. In particolare, il Manuale di Pubblicazione dell’American Psychological Association suggerisce che gli intervalli di confidenza siano “in generale, la migliore strategia di reportistica” (APA, 2001, p. 22; APA, 2009, p. 34). Tuttavia, <span id="id2">[<a class="reference internal" href="z_biblio.html#id20" title="Rink Hoekstra, Richard D Morey, Jeffrey N Rouder, and Eric-Jan Wagenmakers. Robust misinterpretation of confidence intervals. Psychonomic Bulletin &amp; Review, 21(5):1157–1164, 2014.">HMRW14</a>]</span> mettono in evidenza che tali raccomandazioni presentano dei limiti, in quanto non tengono conto della difficoltà dei ricercatori nel fornire una corretta interpretazione degli intervalli di confidenza. A supporto di questo punto di vista, <span id="id3">[<a class="reference internal" href="z_biblio.html#id20" title="Rink Hoekstra, Richard D Morey, Jeffrey N Rouder, and Eric-Jan Wagenmakers. Robust misinterpretation of confidence intervals. Psychonomic Bulletin &amp; Review, 21(5):1157–1164, 2014.">HMRW14</a>]</span> hanno condotto uno studio in cui si pongono due domande:</p>
+<ul class="simple">
+<li><p>In che misura gli intervalli di confidenza sono interpretati in modo errato da studenti e ricercatori?</p></li>
+<li><p>Le interpretazioni errate degli intervalli di confidenza diminuiscono con l’esperienza nella ricerca?</p></li>
+</ul>
+<p>Prima di presentare lo studio, <span id="id4">[<a class="reference internal" href="z_biblio.html#id20" title="Rink Hoekstra, Richard D Morey, Jeffrey N Rouder, and Eric-Jan Wagenmakers. Robust misinterpretation of confidence intervals. Psychonomic Bulletin &amp; Review, 21(5):1157–1164, 2014.">HMRW14</a>]</span> ricordano qual è l’interpretazione corretta degli intervalli di confidenza.</p>
+<blockquote>
+<div><p>A CI is a numerical interval constructed around the estimate of a parameter. Such an interval does not, however, directly indicate a property of the parameter; instead, it indicates a property of the procedure, as is typical for a frequentist technique. Specifically, we may find that a particular procedure, when used repeatedly across a series of hypothetical data sets (i.e., the sample space), yields intervals that contain the true parameter value in 95% of the cases. When such a procedure is applied to a particular data set, the resulting interval is said to be a 95% CI. The key point is that the CIs do not provide for a statement about the parameter as it relates to the particular sample at hand; instead, they provide for a statement about the performance of the procedure of drawing such intervals in repeated use. Hence, it is incorrect to interpret a CI as the probability that the true value is within the interval (e.g., Berger &amp; Wolpert, 1988). As is the case with <span class="math notranslate nohighlight">\(p\)</span>-values, CIs do not allow one to make probability statements about parameters or hypotheses.</p>
+</div></blockquote>
+<p>Nel loro studio, <span id="id5">Hoekstra <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id20" title="Rink Hoekstra, Richard D Morey, Jeffrey N Rouder, and Eric-Jan Wagenmakers. Robust misinterpretation of confidence intervals. Psychonomic Bulletin &amp; Review, 21(5):1157–1164, 2014.">HMRW14</a>]</span> hanno sottoposto il questionario riportato di seguito ad un campione di 596 partecipanti. Il campione includeva 442 studenti di psicologia del primo anno che seguivano un corso introduttivo di statistica presso l’università di Amsterdam, 34 studenti di master e 120 ricercatori (cioè dottorandi e docenti universitari).</p>
+<blockquote>
+<div><p>Professor Bumbledorf conducts an experiment, analyzes the data, and reports: “The 95% confidence interval for the mean ranges from 0.1 to 0.4.” Please mark each of the statements below as ‘true’ or ‘false’.</p>
+</div></blockquote>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The probability that the true mean is greater than 0 is at least 95%.</p></li>
+<li><p>The probability that the true mean equals 0 is smaller than 5%.</p></li>
+<li><p>The “null hypothesis” that the true mean equals 0 is likely to be incorrect.</p></li>
+<li><p>There is a 95% probability that the true mean lies between 0.1 and 0.4.</p></li>
+<li><p>We can be 95% confident that the true mean lies between 0.1 and 0.4.</p></li>
+<li><p>If we were to repeat the experiment over and over, then 95% of the time the true mean falls between 0.1 and 0.4.</p></li>
+</ol>
+</div></blockquote>
+<p>Le sei affermazioni precedenti sono tutte errate. I risultati dello studio di <span id="id6">Hoekstra <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id20" title="Rink Hoekstra, Richard D Morey, Jeffrey N Rouder, and Eric-Jan Wagenmakers. Robust misinterpretation of confidence intervals. Psychonomic Bulletin &amp; Review, 21(5):1157–1164, 2014.">HMRW14</a>]</span> mostrano però che i partecipanti si sono dichiarati d’accordo con il seguente numero medio di item (su 6): 3.51 (99% CI = [3.35, 3.68]) per gli studenti del primo anno, 3.24 (99% CI = [2.40, 4.07]) per gli studenti di master e 3.45 (99% CI = [3.08, 3.82]) per i ricercatori. Gli intervalli di fiducia al 95% si sovrappongono per le tre categorie di rispondenti il che significa che, a tale livello di fiducia, non c’è ragione di ritenere che vi siano delle differenze tra i tre gruppi di rispondenti. In altre parole, questi dati suggeriscono che i ricercatori tendono a condividere con gli studenti di psicologia del primo anno le stesse opinioni (errate!) relativamente agli intervallo fiduciali.</p>
+<p>Le interpretazioni errate degli intervalli di fiducia sono dunque molto diffuse e l’esperienza pratica nel mondo della ricerca non contribuisce ad una comprensione migliore di tale concetto. In generale, i risultati della ricerca di <span id="id7">Hoekstra <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id20" title="Rink Hoekstra, Richard D Morey, Jeffrey N Rouder, and Eric-Jan Wagenmakers. Robust misinterpretation of confidence intervals. Psychonomic Bulletin &amp; Review, 21(5):1157–1164, 2014.">HMRW14</a>]</span>, e di altre che hanno prodotto risultati simili, mettono in discussione l’utilità degli intervalli fiduciali frequentisti (dato che poche persone hanno una comprensione adeguata di tale concetto), favorendo invece l’uso degli “intervallo di credibilità” Bayesiani ai quali è più facile fornire un’interpretazione corretta, perché tale interpretazione coincide con le nostre intuizioni.</p>
+</section>
+</section>
+<section id="confronto-tra-intervalli-frequentisti-e-bayesiani">
+<h2><span class="section-number">49.6. </span>Confronto tra intervalli frequentisti e bayesiani<a class="headerlink" href="#confronto-tra-intervalli-frequentisti-e-bayesiani" title="Permalink to this headline">#</a></h2>
+<p>Concludiamo la discussione di questo capitolo presentando un confronto tra l’intervallo di confidenza frequentista e l’intervallo di credibilità bayesiano calcolati a partire dagli stessi dati.</p>
+<section id="id8">
+<h3><span class="section-number">49.6.1. </span>Intervallo di confidenza<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>Supponiamo di disporre di un insieme di <span class="math notranslate nohighlight">\(n\)</span> = 20 osservazioni che riguardano la prestazione in un compito cognitivo e di volere stimare la media della popolazione da cui quelle osservazioni sono state estratte.  Simuliamo 20 valori a caso dalla popolazione <span class="math notranslate nohighlight">\(\mathcal{N}(50, 10)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">sample_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[39.6893478  54.57334965 38.7451471  43.93393878 50.38617837 63.40729851
+ 53.76159545 46.85577874 45.06977027 53.23566514 47.28331696 45.04942192
+ 63.92344167 55.35509851 52.9576621  48.52928523 61.23710674 51.88378753
+ 63.9614303  54.11713677 53.06043309 43.91258456 47.77251044 53.61584232
+ 55.23132176 38.11547155 58.77844134 48.202893   35.07464388 44.87564745]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5869154fdd197fae250ae4d6cbe6a787ada4377c88166f1d27b7fdebdfd8e2a2.svg" src="_images/5869154fdd197fae250ae4d6cbe6a787ada4377c88166f1d27b7fdebdfd8e2a2.svg" /></div>
+</div>
+<p>Un modo per affrontare il problema della stima di <span class="math notranslate nohighlight">\(\mu\)</span> utilizzando un approccio frequentista è attraverso la stima puntuale. La stima puntuale prevede l’utilizzo di un singolo valore, come ad esempio la media campionaria, per rappresentare il parametro della popolazione sconosciuto.</p>
+<p>La media campionaria, <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>, è una stima puntuale comunemente usata per la media della popolazione, <span class="math notranslate nohighlight">\(\mu\)</span>. Viene calcolata come la somma dei valori campionari, <span class="math notranslate nohighlight">\(x_1, x_2, ..., x_n\)</span>, divisa per la dimensione del campione, <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mu} = \frac{1}{n} \sum_{i=1}^n x_i.\]</div>
+<p>Per i dati dell’esempio, abbiamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample_data</span><span class="p">)</span>
+<span class="n">sample_mean</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50.419851564235806
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tuttavia, le stime puntuali da sole non forniscono una caratterizzazione completa dell’incertezza relativa alla stima. Per quantificare questa incertezza, l’approccio frequentista utilizza  l’intervallo di confidenza. Un intervallo di confidenza è una stima dell’intervallo probabile del vero parametro della popolazione basata sui dati osservati, e viene costruito aggiungendo e sottraendo un margine di errore dalla stima puntuale:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\mu} \pm m = [\hat{\mu} - m, \hat{\mu} + m].\]</div>
+<p>Il margine di errore è determinato dal livello di confidenza desiderato e dalla dimensione del campione, e riflette la variabilità nei dati del campione. Ad esempio, un intervallo di confidenza del 95% indica che la procedura che abbiamo usato produce un risultato corretto (ovvero il fatto che il vero parametro della popolazione si trovi all’interno dell’intervallo) nel 95% dei casi.</p>
+<p>Il margine di errore è determinato dal livello di confidenza desiderato, <span class="math notranslate nohighlight">\(1-\alpha\)</span>, e dalla dimensione del campione, <span class="math notranslate nohighlight">\(n\)</span>. Riflette la variabilità nei dati del campione ed è calcolato tipicamente utilizzando l’errore standard, <span class="math notranslate nohighlight">\(SE\)</span>, della stima puntuale:</p>
+<div class="math notranslate nohighlight">
+\[m = t_{1-\frac{\alpha}{2}, n-1} \times SE,\]</div>
+<p>dove <span class="math notranslate nohighlight">\(t_{1-\frac{\alpha}{2}, n-1}\)</span> è il valore critico della distribuzione <span class="math notranslate nohighlight">\(t\)</span> con <span class="math notranslate nohighlight">\(n-1\)</span> gradi di libertà per il livello di confidenza desiderato.</p>
+<p>L’errore standard della media del campione è calcolato come la deviazione standard del campione, <span class="math notranslate nohighlight">\(\sigma\)</span>, divisa per la radice quadrata della dimensione del campione:</p>
+<div class="math notranslate nohighlight">
+\[SE = \frac{\sigma}{\sqrt{n}}.\]</div>
+<p>Per i dati dell’esempio, la deviazione standard del campione è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_stddev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sample_stddev</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.6418507264441216
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’errore standard della media è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standard_error</span> <span class="o">=</span> <span class="n">sample_stddev</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sample_size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">standard_error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7087697698235205
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’errore standard della media rappresenta una stima della deviazione standard della distribuzione delle medie campionarie per campioni di dimensione <span class="math notranslate nohighlight">\(n\)</span> (in questo caso, <span class="math notranslate nohighlight">\(n\)</span> = 20).</p>
+<p>Supponiamo di voler avere un livello di confidenza del 95%. Per trovare il valore critico della distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student, dobbiamo trovare il valore della statistica <span class="math notranslate nohighlight">\(T\)</span> che lascia il 2.5% dell’area sotto la coda a sinistra e il 2.5% dell’area sotto la coda a destra della distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student con 19 gradi di libertà.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">degrees_of_freedom</span> <span class="o">=</span> <span class="n">sample_size</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">t_val</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.975</span><span class="p">,</span> <span class="n">degrees_of_freedom</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t_val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.093024054408263
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il margine d’errore è uguale a</p>
+<div class="math notranslate nohighlight">
+\[t \cdot SE\]</div>
+<p>ovvero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">margin_of_error</span> <span class="o">=</span> <span class="n">t_val</span> <span class="o">*</span> <span class="n">standard_error</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">margin_of_error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.576496231686299
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’intervallo di confidenza frequentista è uguale a</p>
+<div class="math notranslate nohighlight">
+\[\text{stima del parametro} \pm \text{margine d'errore}\]</div>
+<p>ovvero</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} \pm t_{\text{critico}} \frac{s}{\sqrt{n}}.\]</div>
+<p>Per i dati dell’esempio otteniamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">confidence_interval_lower</span> <span class="o">=</span> <span class="n">sample_mean</span> <span class="o">-</span> <span class="n">margin_of_error</span>
+<span class="n">confidence_interval_upper</span> <span class="o">=</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="n">margin_of_error</span>
+<span class="n">confidence_interval</span> <span class="o">=</span> <span class="p">[</span><span class="n">confidence_interval_lower</span><span class="p">,</span> <span class="n">confidence_interval_upper</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confidence_interval</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[46.84335533254951, 53.996347795922105]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Interpretiamo questo risultato dicendo che la procedura utilizzata per calcolare l’intervallo <span class="math notranslate nohighlight">\([42.99, 53.23]\)</span> include <span class="math notranslate nohighlight">\(\mu\)</span> nel 95% dei casi.</p>
+<p>La figura successiva mostra la distribuzione dei dati, la stima di <span class="math notranslate nohighlight">\(\mu\)</span> (ovvero, la media del campione) e l’intervalli di confidenza al 95%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">visualize_output</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">type_interval</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sample_mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Sample Mean&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">type_interval</span><span class="si">}</span><span class="s1"> interval&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visualize_output</span><span class="p">(</span><span class="n">sample_data</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">confidence_interval</span><span class="p">,</span> <span class="s1">&#39;confidence&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/aa34c4ca7791836e14bce1b4b075775dd9786cd774b45ec0fef6d004f761a0ca.svg" src="_images/aa34c4ca7791836e14bce1b4b075775dd9786cd774b45ec0fef6d004f761a0ca.svg" /></div>
+</div>
+</section>
+<section id="intervallo-di-credibilita">
+<h3><span class="section-number">49.6.2. </span>Intervallo di credibilità<a class="headerlink" href="#intervallo-di-credibilita" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">sample_mean</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">HalfNormal</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">Y_obs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;Y_obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">sample_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">idata</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initializing NUTS using jitter+adapt_diag...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiprocess sampling (4 chains in 4 jobs)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NUTS: [mu, sigma]
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">idata</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/site-packages/pymc/sampling/mcmc.py:677,</span> in <span class="ni">sample</span><span class="nt">(draws, tune, chains, cores, random_seed, progressbar, step, nuts_sampler, initvals, init, jitter_max_retries, n_init, trace, discard_tuned_samples, compute_convergence_checks, keep_warning_stat, return_inferencedata, idata_kwargs, nuts_sampler_kwargs, callback, mp_ctx, model, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">675</span> <span class="n">_print_step_hierarchy</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">676</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">677</span>     <span class="n">_mp_sample</span><span class="p">(</span><span class="o">**</span><span class="n">sample_args</span><span class="p">,</span> <span class="o">**</span><span class="n">parallel_args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span> <span class="k">except</span> <span class="n">pickle</span><span class="o">.</span><span class="n">PickleError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span>     <span class="n">_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Could not pickle model, sampling singlethreaded.&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/site-packages/pymc/sampling/mcmc.py:1052,</span> in <span class="ni">_mp_sample</span><span class="nt">(draws, tune, step, chains, cores, random_seed, start, progressbar, traces, model, callback, mp_ctx, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1049</span> <span class="c1"># We did draws += tune in pm.sample</span>
+<span class="g g-Whitespace">   </span><span class="mi">1050</span> <span class="n">draws</span> <span class="o">-=</span> <span class="n">tune</span>
+<span class="ne">-&gt; </span><span class="mi">1052</span> <span class="n">sampler</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">ParallelSampler</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1053</span>     <span class="n">draws</span><span class="o">=</span><span class="n">draws</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1054</span>     <span class="n">tune</span><span class="o">=</span><span class="n">tune</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1055</span>     <span class="n">chains</span><span class="o">=</span><span class="n">chains</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1056</span>     <span class="n">cores</span><span class="o">=</span><span class="n">cores</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1057</span>     <span class="n">seeds</span><span class="o">=</span><span class="n">random_seed</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1058</span>     <span class="n">start_points</span><span class="o">=</span><span class="n">start</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1059</span>     <span class="n">step_method</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1060</span>     <span class="n">progressbar</span><span class="o">=</span><span class="n">progressbar</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1061</span>     <span class="n">mp_ctx</span><span class="o">=</span><span class="n">mp_ctx</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1062</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1063</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1064</span>     <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/site-packages/pymc/sampling/parallel.py:402,</span> in <span class="ni">ParallelSampler.__init__</span><span class="nt">(self, draws, tune, chains, cores, seeds, start_points, step_method, progressbar, mp_ctx)</span>
+<span class="g g-Whitespace">    </span><span class="mi">399</span> <span class="k">if</span> <span class="n">mp_ctx</span><span class="o">.</span><span class="n">get_start_method</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;fork&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span>     <span class="n">step_method_pickled</span> <span class="o">=</span> <span class="n">cloudpickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">step_method</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">402</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplers</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">403</span>     <span class="n">ProcessAdapter</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span>         <span class="n">draws</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">405</span>         <span class="n">tune</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span>         <span class="n">step_method</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span>         <span class="n">step_method_pickled</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span>         <span class="n">chain</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span>         <span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span>         <span class="n">start</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span>         <span class="n">mp_ctx</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span>     <span class="p">)</span>
+<span class="nn">    413     for chain, seed, start</span> in <span class="ni">zip(range</span><span class="nt">(chains), seeds, start_points)</span>
+<span class="g g-Whitespace">    </span><span class="mi">414</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inactive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplers</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">417</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finished</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ProcessAdapter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/site-packages/pymc/sampling/parallel.py:403,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">399</span> <span class="k">if</span> <span class="n">mp_ctx</span><span class="o">.</span><span class="n">get_start_method</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;fork&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">400</span>     <span class="n">step_method_pickled</span> <span class="o">=</span> <span class="n">cloudpickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">step_method</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">402</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplers</span> <span class="o">=</span> <span class="p">[</span>
+<span class="ne">--&gt; </span><span class="mi">403</span>     <span class="n">ProcessAdapter</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">404</span>         <span class="n">draws</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">405</span>         <span class="n">tune</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">406</span>         <span class="n">step_method</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span>         <span class="n">step_method_pickled</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span>         <span class="n">chain</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span>         <span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span>         <span class="n">start</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span>         <span class="n">mp_ctx</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span>     <span class="p">)</span>
+<span class="nn">    413     for chain, seed, start</span> in <span class="ni">zip(range</span><span class="nt">(chains), seeds, start_points)</span>
+<span class="g g-Whitespace">    </span><span class="mi">414</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inactive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_samplers</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">417</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finished</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ProcessAdapter</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/site-packages/pymc/sampling/parallel.py:259,</span> in <span class="ni">ProcessAdapter.__init__</span><span class="nt">(self, draws, tune, step_method, step_method_pickled, chain, seed, start, mp_ctx)</span>
+<span class="g g-Whitespace">    </span><span class="mi">242</span>     <span class="n">step_method_send</span> <span class="o">=</span> <span class="n">step_method</span>
+<span class="g g-Whitespace">    </span><span class="mi">244</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process</span> <span class="o">=</span> <span class="n">mp_ctx</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">245</span>     <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="n">name</span><span class="o">=</span><span class="n">process_name</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span>     <span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span> <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">259</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">260</span> <span class="c1"># Close the remote pipe, so that we get notified if the other</span>
+<span class="g g-Whitespace">    </span><span class="mi">261</span> <span class="c1"># end is closed.</span>
+<span class="g g-Whitespace">    </span><span class="mi">262</span> <span class="n">remote_conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/multiprocessing/process.py:121,</span> in <span class="ni">BaseProcess.start</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span> <span class="k">assert</span> <span class="ow">not</span> <span class="n">_current_process</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;daemon&#39;</span><span class="p">),</span> \
+<span class="g g-Whitespace">    </span><span class="mi">119</span>        <span class="s1">&#39;daemonic processes are not allowed to have children&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span> <span class="n">_cleanup</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">121</span> <span class="bp">self</span><span class="o">.</span><span class="n">_popen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Popen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sentinel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_popen</span><span class="o">.</span><span class="n">sentinel</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="c1"># Avoid a refcycle if the target function holds an indirect</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span> <span class="c1"># reference to the process object (see bpo-30775)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/multiprocessing/context.py:300,</span> in <span class="ni">ForkServerProcess._Popen</span><span class="nt">(process_obj)</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span> <span class="nd">@staticmethod</span>
+<span class="g g-Whitespace">    </span><span class="mi">298</span> <span class="k">def</span> <span class="nf">_Popen</span><span class="p">(</span><span class="n">process_obj</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>     <span class="kn">from</span> <span class="nn">.popen_forkserver</span> <span class="kn">import</span> <span class="n">Popen</span>
+<span class="ne">--&gt; </span><span class="mi">300</span>     <span class="k">return</span> <span class="n">Popen</span><span class="p">(</span><span class="n">process_obj</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/multiprocessing/popen_forkserver.py:35,</span> in <span class="ni">Popen.__init__</span><span class="nt">(self, process_obj)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">process_obj</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_fds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="ne">---&gt; </span><span class="mi">35</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">process_obj</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/multiprocessing/popen_fork.py:19,</span> in <span class="ni">Popen.__init__</span><span class="nt">(self, process_obj)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="bp">self</span><span class="o">.</span><span class="n">returncode</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalizer</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">---&gt; </span><span class="mi">19</span> <span class="bp">self</span><span class="o">.</span><span class="n">_launch</span><span class="p">(</span><span class="n">process_obj</span><span class="p">)</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/pymc_env/lib/python3.11/multiprocessing/popen_forkserver.py:58,</span> in <span class="ni">Popen._launch</span><span class="nt">(self, process_obj)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalizer</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">Finalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">util</span><span class="o">.</span><span class="n">close_fds</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>                                <span class="p">(</span><span class="n">_parent_w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinel</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">,</span> <span class="n">closefd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">58</span>     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">forkserver</span><span class="o">.</span><span class="n">read_signed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sentinel</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="n">hdi_prob</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">round_to</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hdi_2.5%</th>
+      <th>hdi_97.5%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mu</th>
+      <td>50.52</td>
+      <td>2.26</td>
+      <td>46.15</td>
+      <td>54.84</td>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>3682.75</td>
+      <td>2387.80</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>sigma</th>
+      <td>12.01</td>
+      <td>1.67</td>
+      <td>9.02</td>
+      <td>15.28</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>3344.68</td>
+      <td>2708.95</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Si noti che, per i dati considerati e per come il modello bayesiano è stato specificato, l’intervallo di credibilità è molto simile all’intervallo di confidenza frequentista. Tuttavia, l’interpretazione è molto più semplice: con un grado di fiducia soggettivo del 95%, possiamo affermare che la media della popolazione è contenuta nell’intervallo trovato.</p>
+</section>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2><span class="section-number">49.7. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>Secondo <span id="id9">Hoekstra <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id20" title="Rink Hoekstra, Richard D Morey, Jeffrey N Rouder, and Eric-Jan Wagenmakers. Robust misinterpretation of confidence intervals. Psychonomic Bulletin &amp; Review, 21(5):1157–1164, 2014.">HMRW14</a>]</span>, gli intervalli di fiducia sono spesso mal interpretati. Il livello di confidenza del 95% si riferisce alla certezza che, a lungo termine, il 95% degli intervalli di fiducia includerà il parametro sconosciuto. Non si può dire nulla riguardo ad uno specifico intervallo di fiducia, che potrebbe includere o escludere il parametro sconosciuto, ma il ricercatore non può sapere quale delle due opzioni sia quella corretta. Inoltre, non esiste alcuna relazione tra la varianza e la media di un campione, quindi non possiamo dedurre che un intervallo di fiducia più stretto sia anche più preciso. In un contesto frequentista, la precisione si riferisce solo al livello di copertura a lungo termine fornito dalla procedura di generazione degli intervalli di fiducia e non riguarda il singolo intervallo osservato. Di conseguenza, un intervallo di fiducia molto stretto potrebbe essere anche molto lontano dal vero valore del parametro sconosciuto.</p>
+</section>
+<section id="watermark">
+<h2><span class="section-number">49.8. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="500_intro_frequentist.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">48. </span>Introduzione all’inferenza frequentista</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="510_test_ipotesi.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">50. </span>Significatività statistica</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-variabilita-campionaria">49.1. La variabilità campionaria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-intervallo-fiduciale">49.2. L’intervallo fiduciale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcolo-dell-intervallo-fiduciale">49.3. Calcolo dell’intervallo fiduciale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivazione">49.3.1. Derivazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#popolazione-con-varianza-incognita">49.3.2. Popolazione con varianza incognita</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-livello-di-copertura">49.4. Il livello di copertura</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione">49.5. Interpretazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fraintendimenti">49.5.1. Fraintendimenti</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confronto-tra-intervalli-frequentisti-e-bayesiani">49.6. Confronto tra intervalli frequentisti e bayesiani</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">49.6.1. Intervallo di confidenza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervallo-di-credibilita">49.6.2. Intervallo di credibilità</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">49.7. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">49.8. Watermark</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

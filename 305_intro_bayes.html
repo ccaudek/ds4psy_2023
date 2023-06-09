@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>28. Credibilità, modelli e parametri &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '305_intro_bayes';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/305_intro_bayes.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="29. Inferenza su una proporzione" href="310_subj_prop.html" />
+    <link rel="prev" title="27. Apprendimento per rinforzo" href="226_rescorla_wagner.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="321_balance-prior-post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/305_intro_bayes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Credibilità, modelli e parametri</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelli-generativi">28.1. Modelli generativi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fondamenti-dell-analisi-dei-dati-bayesiana">28.2. Fondamenti dell’analisi dei dati bayesiana</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prima-idea-riallocazione-della-credibilita">28.2.1. Prima idea: riallocazione della credibilità</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-dati-sono-rumorosi-e-le-inferenze-sono-probabilistiche">28.2.1.1. I dati sono rumorosi e le inferenze sono probabilistiche</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seconda-idea-le-possibilita-sono-valori-di-parametri-in-un-modello-statistico">28.2.2. Seconda idea: le possibilità sono valori di parametri in un modello statistico</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modellizzazione-bayesiana">28.3. Modellizzazione bayesiana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flusso-di-lavoro-bayesiano">28.4. Flusso di lavoro bayesiano</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notazione">28.4.1. Notazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-a-priori">28.4.2. Distribuzioni a priori</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tipologie-di-distribuzioni-a-priori">28.4.2.1. Tipologie di distribuzioni a priori</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#selezione-della-distribuzione-a-priori">28.4.2.2. Selezione della distribuzione a priori</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-funzione-di-verosimiglianza">28.4.3. La funzione di verosimiglianza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-verosimiglianza-marginale">28.4.4. La verosimiglianza marginale</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-distribuzione-a-posteriori">28.4.5. La distribuzione a posteriori</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-predittiva-a-priori">28.4.6. Distribuzione predittiva a priori</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-predittiva-a-posteriori">28.4.7. Distribuzione predittiva a posteriori</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">28.5. Commenti e considerazioni finali</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="credibilita-modelli-e-parametri">
+<span id="bayes-workflow-notebook"></span><h1><span class="section-number">28. </span>Credibilità, modelli e parametri<a class="headerlink" href="#credibilita-modelli-e-parametri" title="Permalink to this headline">#</a></h1>
+<p>L’obiettivo di questo Capitolo è di introdurre il quadro concettuale dell’analisi dei dati bayesiana.</p>
+<section id="modelli-generativi">
+<h2><span class="section-number">28.1. </span>Modelli generativi<a class="headerlink" href="#modelli-generativi" title="Permalink to this headline">#</a></h2>
+<p>Iniziamo con un semplice esempio. Immaginiamo di incontrare un amico per strada che non ci saluta e ci chiediamo il motivo di questo comportamento. Questa è una situazione che può essere analizzata utilizzando il principio della statistica bayesiana. In questo approccio, i dati che abbiamo raccolto sono rappresentati dal fatto che il nostro amico non ci ha salutato e cerchiamo di comprendere il processo sottostante che ha generato questi dati, come il fatto che non ci ha visto o che è arrabbiato con noi.</p>
+<p>Inoltre, un modello generativo è un modello che ipotizza che i dati che osserviamo siano generati da un processo che non possiamo vedere direttamente. Questo processo ha una componente di casualità, il che significa che non è deterministico. Quando estraiamo un campione di dati da una popolazione e stimiamo un parametro dal campione, stiamo essenzialmente cercando di scoprire il valore di una variabile che non possiamo vedere, come la media della popolazione, che attraverso il campionamento produce i dati che possiamo osservare, come la media del campione. Quindi, utilizzando le statistiche campionarie come la media campionaria e la deviazione standard stimata, vogliamo inferire i parametri del campione come la media e la deviazione standard della popolazione.</p>
+</section>
+<section id="fondamenti-dell-analisi-dei-dati-bayesiana">
+<h2><span class="section-number">28.2. </span>Fondamenti dell’analisi dei dati bayesiana<a class="headerlink" href="#fondamenti-dell-analisi-dei-dati-bayesiana" title="Permalink to this headline">#</a></h2>
+<p>In parole più semplici, la statistica bayesiana si basa su due idee fondamentali:</p>
+<ul class="simple">
+<li><p>La prima idea riguarda la distribuzione della credibilità tra le diverse ipotesi. Inizialmente, abbiamo delle conoscenze iniziali o “a priori” su quali ipotesi potrebbero essere plausibili. Successivamente, utilizzando i dati osservati, vogliamo aggiornare le nostre credenze in modo da ridistribuire la credibilità tra le diverse ipotesi, in base a quanto sono supportate dalle evidenze.</p></li>
+<li><p>La seconda idea è che le diverse ipotesi corrispondono ai possibili valori dei parametri di un modello statistico. In altre parole, stiamo cercando di inferire il valore dei parametri del modello che meglio descrivono il processo generativo dei dati che abbiamo osservato. In questo modo, vogliamo trovare il modello che meglio si adatta ai dati e che ci permette di fare previsioni precise.</p></li>
+</ul>
+<section id="prima-idea-riallocazione-della-credibilita">
+<h3><span class="section-number">28.2.1. </span>Prima idea: riallocazione della credibilità<a class="headerlink" href="#prima-idea-riallocazione-della-credibilita" title="Permalink to this headline">#</a></h3>
+<p>In riferimento alla prima idea dell’inferenza bayesiana, <span id="id1">Kruschke [<a class="reference internal" href="z_biblio.html#id96" title="John Kruschke. Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan. Academic Press, 2014.">Kru14</a>]</span> la esplica con un riferimento letterario. Nelle storie di Sherlock Holmes, il celebre detective immaginario di Sir Arthur Conan Doyle, Holmes spesso diceva al suo amico e compagno d’avventure, il dottor Watson, “Quante volte ti ho detto che quando hai eliminato l’impossibile, tutto ciò che rimane, per quanto improbabile, deve essere la verità?” (Doyle, 1890, cap. 6). Sebbene il ragionamento di Holmes, Watson o Doyle non sia mai stato formalmente descritto come un’inferenza bayesiana, in realtà lo è. In sostanza, Holmes elenca i vari sospetti iniziali di un crimine e attribuisce a ciascuno un certo grado di credibilità a priori. Successivamente, Holmes raccoglie e valuta sistematicamente le prove che escludono alcuni possibili sospetti. Se è possibile escludere tutti i possibili sospetti tranne uno, allora Sherlock Holmes conclude che il colpevole deve essere il sospetto rimanente, anche se all’inizio questa idea sembrava poco credibile.</p>
+<p>Nel testo, <span id="id2">Kruschke [<a class="reference internal" href="z_biblio.html#id96" title="John Kruschke. Doing Bayesian data analysis: A tutorial with R, JAGS, and Stan. Academic Press, 2014.">Kru14</a>]</span> illustra il ragionamento “bayesiano” di Sherlock Holmes attraverso la seguente figura. Supponiamo che vi siano quattro possibili ipotesi (nella figura “Possibilities”) rispetto ad un fenomeno, che potrebbero corrispondere ai quattro sospettati di un crimine.</p>
+<p><img alt="" src="_images/intro_bayes_1.png" /></p>
+<p>La prima riga mostra la credibilità a priori assegnata all’ipotesi che uno dei quattro sospettati sia il colpevole. Nella prima colonna, la credibilità a priori viene divisa equamente tra i quattro sospettati e viene assegnato il valore 1 all’intera credibilità a priori. In altre parole, se non abbiamo alcun motivo per distinguere tra i sospettati, la credibilità dell’ipotesi che uno di loro sia il colpevole è di 0.25. Se i dati disponibili ci consentono di escludere il sospettato A, allora a posteriori la credibilità viene ridistribuita tra i restanti tre sospettati come illustrato nella figura, ovvero la credibilità dell’ipotesi che uno di loro sia il colpevole sarà di 1/3.</p>
+<p>Il processo di transizione dalla distribuzione a priori a quella a posteriori è conosciuto come “aggiornamento bayesiano”. Nella prima colonna, l’aggiornamento bayesiano, ovvero la riallocazione della credibilità sulla base dei dati a disposizione, ha permesso di escludere uno dei sospettati. Nella seconda colonna, poiché si considera a priori che il sospettato A sia impossibile, la credibilità viene distribuita equamente sui restanti tre sospettati. Se i dati consentono di escludere il sospettato B, l’aggiornamento bayesiano ci porta alla distribuzione a posteriori della credibilità che si distribuisce equamente tra C e D. In questo caso, sono stati esclusi due sospettati, ma non è possibile determinare chi sia il colpevole tra C e D. Infine, nella terza colonna, a priori è possibile escludere A e B, e i dati permettono di escludere C. Quindi, a posteriori, siamo sicuri che D sia il colpevole con una credibilità pari a 1.</p>
+<p>La metodologia dell’analisi bayesiana prevede l’assegnazione di una distribuzione di credibilità a priori alle possibili ipotesi iniziali. Successivamente, vengono acquisite le informazioni provenienti dai dati disponibili e queste vengono utilizzate per rielaborare la distribuzione di credibilità tra le diverse ipotesi, attraverso l’aggiornamento bayesiano. In questo modo si ottiene una nuova distribuzione, definita a posteriori, che riflette la nostra conoscenza aggiornata delle ipotesi considerate, in base alle informazioni acquisite. In sintesi, l’analisi bayesiana prevede una costante rielaborazione delle credenze sulla base delle nuove informazioni disponibili, fino ad arrivare ad una distribuzione a posteriori che rappresenta il risultato finale dell’analisi.</p>
+<section id="i-dati-sono-rumorosi-e-le-inferenze-sono-probabilistiche">
+<h4><span class="section-number">28.2.1.1. </span>I dati sono rumorosi e le inferenze sono probabilistiche<a class="headerlink" href="#i-dati-sono-rumorosi-e-le-inferenze-sono-probabilistiche" title="Permalink to this headline">#</a></h4>
+<p>Nella figura precedente, i casi considerati presuppongono che i dati siano in relazione deterministica con le possibili cause. Ad esempio, nella figura, Sherlock Holmes potrebbe aver trovato un’impronta sulla scena del crimine e identificato con certezza la taglia e il tipo di scarpa, escludendo completamente o implicando un particolare sospettato.</p>
+<p>Nel contesto della ricerca scientifica, tuttavia, la situazione è più complessa poiché le relazioni tra i dati e le cause sottostanti sono solo probabilistiche (non deterministiche). In pratica, un investigatore potrebbe misurare l’impronta di una scarpa e i dettagli del suo battistrada, ma queste misurazioni ridurrebbero solo probabilisticamente la gamma delle scarpe possibili che potrebbero aver prodotto l’impronta. Al di fuori dei romanzi di Arthur Conan Doyle, le misurazioni non sono mai perfette e l’impronta è solo una rappresentazione imperfetta della scarpa che l’ha prodotta. La relazione tra la causa (cioè la scarpa) e l’effetto misurato (cioè l’impronta) viene complicata dalla presenza del “rumore di misura”.</p>
+<p>Nella ricerca scientifica, i dati sono spesso influenzati da fattori estranei nonostante gli sforzi per limitarne l’impatto. Ad esempio, in uno studio sull’apprendimento della statistica da parte degli studenti di psicologia, il ricercatore potrebbe suddividere gli studenti in un gruppo sperimentale e un gruppo di controllo e misurare le loro prestazioni all’esame. Tuttavia, la prestazione di ciascun singolo studente può variare notevolmente a seconda di influenze come la motivazione, l’ansia, la preparazione pregressa e molte altre. I dati risultanti saranno estremamente rumorosi, con una grande variabilità all’interno di ciascun gruppo e una sovrapposizione tra i gruppi. Pertanto, la differenza media tra i due gruppi e quanto possiamo essere certi che vi sia una differenza possono essere inferiti solo dalle distribuzioni di voti all’esame, molto disperse e sovrapposte. Inoltre, tutte le misurazioni scientifiche includono un certo grado di “rumore”. Le tecniche di analisi dei dati sono progettate per inferire le tendenze sottostanti presenti in dati rumorosi. A differenza di Sherlock Holmes, nella ricerca scientifica i dati raccolti modificano solo incrementalmente la credibilità delle possibili tendenze suggerite dai dati. L’analisi bayesiana consente di utilizzare la teoria delle probabilità per riallocare la credibilità tra le ipotesi alla luce delle informazioni fornite dai dati, in modo non arbitrario e automatico. Durante questo corso vedremo molti esempi realistici di questo processo.</p>
+</section>
+</section>
+<section id="seconda-idea-le-possibilita-sono-valori-di-parametri-in-un-modello-statistico">
+<h3><span class="section-number">28.2.2. </span>Seconda idea: le possibilità sono valori di parametri in un modello statistico<a class="headerlink" href="#seconda-idea-le-possibilita-sono-valori-di-parametri-in-un-modello-statistico" title="Permalink to this headline">#</a></h3>
+<p>Nella precedente trattazione “bayesiana” di Sherlock Holmes, le possibilità erano associate alle quattro categorie di una variabile discreta: “i sospettati del crimine” corrispondevano alle diverse categorie (A, B, C e D). Tuttavia, lavorare con variabili discrete in statistica può essere complicato. È più agevole effettuare un aggiornamento bayesiano utilizzando variabili continue e gli strumenti della teoria delle probabilità. In questo caso, le “possibilità” sono rappresentate dai valori dei parametri in un modello statistico.</p>
+<p>Ad esempio, consideriamo una distribuzione di differenze di punteggio BDI-II prima e dopo un intervento psicologico. Se l’intervento funziona, i punteggi BDI-II diminuiranno dopo l’intervento e quindi la differenza tra prima e dopo sarà positiva. Tuttavia, l’intervento non ha gli stessi effetti su tutti i partecipanti, pertanto in uno studio osserveremo una distribuzione di punteggi (prima - dopo). Supponiamo che tale distribuzione di punteggi sia rappresentata dall’istogramma illustrato nella figura seguente.</p>
+<p><img alt="" src="_images/intro_bayes_2.png" /></p>
+<p>All’istogramma è sovrapposta una distribuzione Gaussiana di parametri <span class="math notranslate nohighlight">\(\mu\)</span> = 5 e <span class="math notranslate nohighlight">\(\sigma\)</span> = 4. Questa scelta per i valori dei parametri sembra appropriata per descrivere i dati a disposizione. Qui in basso mostriamo gli stessi dati ipotetici con sovrapposta una diversa distribuzione Gaussiana, di parametri <span class="math notranslate nohighlight">\(\mu\)</span> = 3.5 e <span class="math notranslate nohighlight">\(\sigma\)</span> = 5. Anche se questa seconda distribuzione Gaussiana è plausibile, sicuramente descrive i dati in una maniera peggiore del caso precedente.</p>
+<p><img alt="" src="_images/intro_bayes_3.png" /></p>
+<p>L’inferenza bayesiana è un metodo che consente di calcolare la probabilità dei parametri candidati di un modello, tenendo conto anche delle loro probabilità a priori. Questo approccio è particolarmente utile quando i valori dei parametri possono formare un continuum infinito, come nel caso del parametro <span class="math notranslate nohighlight">\(\mu\)</span> della distribuzione normale, che può assumere qualsiasi valore da <span class="math notranslate nohighlight">\(-\infty\)</span> a <span class="math notranslate nohighlight">\(+\infty\)</span>. L’analisi bayesiana procede quindi alla riallocazione della credibilità dei valori dei parametri all’interno di uno spazio di possibilità definito dal modello statistico che è stato scelto.</p>
+<p>Per una descrizione matematica dei dati, è importante utilizzare una forma matematica comprensibile e con parametri interpretabili, come nel caso della distribuzione normale, in cui il parametro <span class="math notranslate nohighlight">\(\mu\)</span> rappresenta la media e il parametro <span class="math notranslate nohighlight">\(\sigma\)</span> la deviazione standard. Inoltre, il modello matematico deve essere descrittivamente adeguato, ovvero deve somigliare ai dati, evitando discrepanze sistematiche tra le tendenze dei dati e la forma del modello. Tuttavia, decidere se un’apparente discrepanza sia importante o meno non è sempre facile.</p>
+<p>È importante sottolineare che le descrizioni matematiche dei dati non sono necessariamente spiegazioni causali del fenomeno di interesse. Per comprendere le possibili cause di un fenomeno, sarebbe opportuno esprimere le possibili cause in termini di un modello matematico e poi utilizzare i dati e l’analisi bayesiana per stimare i parametri del modello e attribuire un “peso” alle possibili cause. Tuttavia, spesso la psicologia si accontenta di descrivere le differenze medie tra gruppi, senza un’indagine puntuale delle cause di tali differenze.</p>
+</section>
+</section>
+<section id="modellizzazione-bayesiana">
+<h2><span class="section-number">28.3. </span>Modellizzazione bayesiana<a class="headerlink" href="#modellizzazione-bayesiana" title="Permalink to this headline">#</a></h2>
+<p>La moderna statistica bayesiana si basa principalmente sull’uso di un linguaggio di programmazione probabilistico implementato su computer, il che ha rivoluzionato il modo in cui venivano eseguite le statistiche bayesiane anche solo pochi decenni fa. L’utilizzo di questi metodi computazionali ha reso più facile la formulazione di modelli statistici complessi, riducendo la barriera delle competenze matematiche e computazionali richieste, e ha semplificato il processo di modellazione iterativa. Tuttavia, nonostante la potenza dei metodi computazionali, la statistica rimane un campo complesso e pieno di sottigliezze che richiedono una buona preparazione sugli aspetti teorici, specialmente quelli rilevanti per la pratica, per applicare efficacemente i metodi statistici.</p>
+<p>Nell’approccio bayesiano all’inferenza statistica, si assume l’esistenza di una variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> di cui si conosce la distribuzione a meno di un parametro <span class="math notranslate nohighlight">\(\theta\)</span>. Per esempio, nel caso dell’esempio precedente, <span class="math notranslate nohighlight">\(Y\)</span> è la distribuzione delle differenze pre/post dei punteggi BDI-II, e si suppone che <span class="math notranslate nohighlight">\(Y\)</span> segua una distribuzione gaussiana con media <span class="math notranslate nohighlight">\(\mu\)</span> e deviazione standard <span class="math notranslate nohighlight">\(\sigma\)</span>, dove <span class="math notranslate nohighlight">\(\mu\)</span> è un parametro incognito.</p>
+<p>Secondo l’approccio bayesiano, si rappresenta l’incertezza sul valore del parametro ignoto <span class="math notranslate nohighlight">\(\mu\)</span> con una variabile casuale continua <span class="math notranslate nohighlight">\(\Theta\)</span>, che ha come supporto l’insieme dei valori ammissibili per il parametro. La funzione di densità di probabilità <span class="math notranslate nohighlight">\(p(\theta)\)</span>, chiamata distribuzione a priori, rappresenta la sintesi delle opinioni e delle informazioni che si hanno sul parametro prima dell’osservazione dei dati. Ad esempio, nel caso dell’esempio considerato, si potrebbe descrivere l’incertezza su <span class="math notranslate nohighlight">\(\mu\)</span> mediante una funzione di densità la cui massa è compresa nell’intervallo <span class="math notranslate nohighlight">\([-20, 20]\)</span> e media pari a zero, rappresentata da una distribuzione normale <span class="math notranslate nohighlight">\(\mathcal{N}(0,7)\)</span>.</p>
+<p>L’aggiornamento dell’incertezza su <span class="math notranslate nohighlight">\(\theta\)</span> avviene con l’osservazione dei risultati di un esperimento casuale, ovvero dall’evidenza <span class="math notranslate nohighlight">\(y\)</span> proveniente da un campione osservato di dimensione <span class="math notranslate nohighlight">\(n\)</span>. Le informazioni provenienti dal campione osservato <span class="math notranslate nohighlight">\(y = (y_1, \dots, y_n)\)</span> sono contenute nella funzione di verosimiglianza <span class="math notranslate nohighlight">\(p(y \mid \theta)\)</span>, che rappresenta la probabilità di osservare i dati del campione dato il valore del parametro <span class="math notranslate nohighlight">\(\theta\)</span>. Nel caso dell’esempio in discussione, la funzione di verosimiglianza potrebbe essere una distribuzione normale con media <span class="math notranslate nohighlight">\(\mu\)</span> e deviazione standard <span class="math notranslate nohighlight">\(\sigma\)</span>, dove <span class="math notranslate nohighlight">\(\sigma\)</span> è noto e <span class="math notranslate nohighlight">\(n\)</span> è la dimensione del campione.</p>
+<p>Dopo aver osservato l’evidenza empirica <span class="math notranslate nohighlight">\(y\)</span>, l’aggiornamento delle conoscenze a priori contenute nella distribuzione iniziale <span class="math notranslate nohighlight">\(p(\theta)\)</span> avviene utilizzando il teorema di Bayes. La distribuzione a posteriori <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span> è proporzionale al prodotto della probabilità a priori e della verosimiglianza, ed è chiamata distribuzione a posteriori:</p>
+<div class="math notranslate nohighlight" id="equation-eq-bayes-intro">
+<span class="eqno">(28.1)<a class="headerlink" href="#equation-eq-bayes-intro" title="Permalink to this equation">#</a></span>\[
+p(\theta \mid y) = \frac{p(y \mid \theta) p(\theta)}{\int_{\Theta}p(y \mid \theta) p(\theta) \,\operatorname {d}\!\theta} \quad \theta \in \Theta.
+\]</div>
+<p>La distribuzione a posteriori del parametro <span class="math notranslate nohighlight">\(\mu\)</span> nell’esempio in questione descrive la nostra incertezza sulla media dell’efficacia dell’intervento psicologico, basata sui dati empirici e sulle nostre conoscenze pregresse rappresentate dalla distribuzione a priori. Se la maggior parte della massa della distribuzione a posteriori si concentra su valori positivi, ciò fornisce un’indicazione che l’intervento psicologico sia stato efficace in media (cioè ha portato a una riduzione dei punteggi BDI-II). Se invece la massa della distribuzione a posteriori del parametro <span class="math notranslate nohighlight">\(\mu\)</span> è distribuita in modo bilanciato tra valori negativi e positivi, allora non ci sono prove sufficienti per affermare l’efficacia dell’intervento psicologico, in quanto alcuni pazienti potrebbero aver beneficiato dell’intervento, mentre altri no.</p>
+<p>In sintesi, la distribuzione a posteriori del parametro <span class="math notranslate nohighlight">\(\mu\)</span> rappresenta la credibilità che possiamo attribuire all’efficacia dell’intervento psicologico sulla base dei dati disponibili, insieme alle nostre conoscenze pregresse.</p>
+</section>
+<section id="flusso-di-lavoro-bayesiano">
+<h2><span class="section-number">28.4. </span>Flusso di lavoro bayesiano<a class="headerlink" href="#flusso-di-lavoro-bayesiano" title="Permalink to this headline">#</a></h2>
+<p>Secondo <span id="id3">Martin <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id31" title="Osvaldo A Martin, Ravin Kumar, and Junpeng Lao. Bayesian Modeling and Computation in Python. CRC Press, 2022.">MKL22</a>]</span>, il processo di modellazione bayesiana si compone di tre fasi.</p>
+<ul class="simple">
+<li><p>Si costruisce un modello statistico che combina e trasforma variabili casuali, basandosi sui dati disponibili e sulle ipotesi sul modo in cui questi dati sono stati generati.</p></li>
+<li><p>Si utilizza il teorema di Bayes per aggiornare le nostre conoscenze, condizionando il modello ai dati e ottenendo una distribuzione a posteriori.</p></li>
+<li><p>Si verifica se il modello ha senso, confrontandolo con diversi criteri tra cui i dati stessi e la conoscenza del dominio. Siccome spesso non si è certi del modello, si possono confrontare diverse alternative.</p></li>
+</ul>
+<p>Questi tre passaggi vengono eseguiti in modo iterativo, costituendo quello che viene definito “flusso di lavoro bayesiano” (<em>bayesian workflow</em>).</p>
+<p>Esaminiamo ora più nei dettagli le varie fasi del flusso di lavoro bayesiano.</p>
+<section id="notazione">
+<h3><span class="section-number">28.4.1. </span>Notazione<a class="headerlink" href="#notazione" title="Permalink to this headline">#</a></h3>
+<p>Per fissare la notazione, nel seguito <span class="math notranslate nohighlight">\(y\)</span> rappresenterà i dati e <span class="math notranslate nohighlight">\(\theta\)</span> rappresenterà i parametri incogniti di un modello statistico. Sia <span class="math notranslate nohighlight">\(y\)</span> che <span class="math notranslate nohighlight">\(\theta\)</span> vengono concepiti come variabili casuali. Con <span class="math notranslate nohighlight">\(x\)</span> vengono invece denotate le quantità note, come ad esempio i predittori del modello lineare. Per rappresentare in un modo conciso i modelli probabilistici viene usata una notazione particolare. Ad esempio, invece di scrivere <span class="math notranslate nohighlight">\(p(\theta) = Beta(1, 1)\)</span> scriviamo <span class="math notranslate nohighlight">\(\theta \sim Beta(1, 1)\)</span>. Il simbolo “<span class="math notranslate nohighlight">\(\sim\)</span>” viene spesso letto “è distribuito come”. Possiamo anche pensare che significhi che <span class="math notranslate nohighlight">\(\theta\)</span> costituisce un campione casuale estratto dalla distribuzione Beta(1, 1). Allo stesso modo, ad esempio, la verosimiglianza del modello binomiale può essere scritta come <span class="math notranslate nohighlight">\(y \sim \text{Bin}(n, \theta)\)</span>.</p>
+</section>
+<section id="distribuzioni-a-priori">
+<h3><span class="section-number">28.4.2. </span>Distribuzioni a priori<a class="headerlink" href="#distribuzioni-a-priori" title="Permalink to this headline">#</a></h3>
+<p>In un approccio bayesiano, i parametri della distribuzione di riferimento non sono considerati costanti incognite, ma piuttosto variabili casuali, e perciò sono descritti da una distribuzione di probabilità a priori. La scelta della distribuzione a priori dipende dalle informazioni disponibili e si cerca di assegnare una probabilità maggiore ai valori del parametro che sono considerati più plausibili. Idealmente, le credenze a priori che portano alla scelta della distribuzione a priori dovrebbero essere supportate da una qualche motivazione, come ad esempio i risultati di ricerche precedenti.</p>
+<section id="tipologie-di-distribuzioni-a-priori">
+<h4><span class="section-number">28.4.2.1. </span>Tipologie di distribuzioni a priori<a class="headerlink" href="#tipologie-di-distribuzioni-a-priori" title="Permalink to this headline">#</a></h4>
+<p>Possiamo distinguere tra diverse distribuzioni a priori in base a quanto fortemente impegnano il ricercatore a ritenere come credibile un particolare intervallo di valori dei parametri. Un caso estremo è quello che rivela una totale assenza di conoscenze a priori, il che conduce alle <em>distribuzioni a priori non informative</em>, ovvero quelle che assegnano lo stesso livello di credibilità a tutti i valori dei parametri. Le distribuzioni a priori informative, d’altra parte, possono essere <em>debolmente informative</em> o <em>fortemente informative</em>, a seconda del modo in cui lo sperimentatore distribuisce la credibilità nello spazio del parametro. Un caso estremo di credenza a priori è quello che assegna tutta la credibilità ad un singolo valore del parametro. La figura seguente mostra alcuni esempi di distribuzioni a priori per il modello Binomiale:</p>
+<ul class="simple">
+<li><p>distribuzione <em>non informativa</em>: <span class="math notranslate nohighlight">\(\theta_c \sim Beta(1,1)\)</span>;</p></li>
+<li><p>distribuzione <em>debolmente informativa</em>: <span class="math notranslate nohighlight">\(\theta_c \sim Beta(5,2)\)</span>;</p></li>
+<li><p>distribuzione <em>fortemente informativa</em>: <span class="math notranslate nohighlight">\(\theta_c \sim Beta(50,20)\)</span>;</p></li>
+<li><p><em>valore puntuale</em>: <span class="math notranslate nohighlight">\(\theta_c \sim Beta(\alpha, \beta)\)</span> con <span class="math notranslate nohighlight">\(\alpha, \beta \rightarrow \infty\)</span> e <span class="math notranslate nohighlight">\(\frac{\alpha}{\beta} = \frac{5}{2}\)</span>.</p></li>
+</ul>
+<p><img alt="" src="_images/intro_bayes_4.png" /></p>
+</section>
+<section id="selezione-della-distribuzione-a-priori">
+<h4><span class="section-number">28.4.2.2. </span>Selezione della distribuzione a priori<a class="headerlink" href="#selezione-della-distribuzione-a-priori" title="Permalink to this headline">#</a></h4>
+<p>La selezione delle distribuzioni a priori è stata spesso vista come una delle scelte più importanti che un ricercatore fa quando implementa un modello bayesiano in quanto può avere un impatto sostanziale sui risultati finali. La soggettività delle distribuzioni a priori è evidenziata dai critici come un potenziale svantaggio dei metodi bayesiani. A questa critica, <span id="id4">van de Schoot <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id75" title="Rens van de Schoot, Sarah Depaoli, Ruth King, Bianca Kramer, Kaspar Märtens, Mahlet G. Tadesse, Marina Vannucci, Andrew Gelman, Duco Veen, Joukje Willemsen, and Christopher Yau. Bayesian statistics and modelling. Nature Reviews Methods Primer, 1(1):1-26, 2021.">vdSDK+21</a>]</span> rispondono dicendo che le distribuzioni a priori svolgono due importanti ruoli statistici: quello della “regolarizzazione della stima”, ovvero, il processo che porta ad indebolire l’influenza indebita di osservazioni estreme, e quello del miglioramento dell’efficenza della stima, ovvero, la facilitazione dei processi di calcolo numerico di stima della distribuzione a posteriori. L’effetto della distribuzione a priori sulla distribuzione a posteriori verrà discusso in dettaglio nel Capitolo <a class="reference internal" href="321_balance-prior-post.html#prior-influence-notebook"><span class="std std-ref">L’influenza della distribuzione a priori</span></a>. Inoltre, <span id="id5">van de Schoot <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id75" title="Rens van de Schoot, Sarah Depaoli, Ruth King, Bianca Kramer, Kaspar Märtens, Mahlet G. Tadesse, Marina Vannucci, Andrew Gelman, Duco Veen, Joukje Willemsen, and Christopher Yau. Bayesian statistics and modelling. Nature Reviews Methods Primer, 1(1):1-26, 2021.">vdSDK+21</a>]</span> notano che, a proposito di scelte “soggettive”, al di là della scelta delle distribuzioni a priori, ci sono molti elementi del processo di inferenza statistica che risultano sicuramente “soggettivi” (cioè, arbitrari), in particolare la scelta del modello statistico e le ipotesi sulla distribuzione degli errori. Risultano inoltre “soggettivi” il modo di operazionalizzare la variabile dipendente, il tipo di confronti da esaminare e tante altre dimensioni dell’inferenza statistica. Per cui, il confronto tra statistica bayesiana e frequentista non può essere sicuramente svolto nei termini delle dimensioni oggettivo/soggettivo.</p>
+</section>
+</section>
+<section id="la-funzione-di-verosimiglianza">
+<h3><span class="section-number">28.4.3. </span>La funzione di verosimiglianza<a class="headerlink" href="#la-funzione-di-verosimiglianza" title="Permalink to this headline">#</a></h3>
+<p>La funzione di verosimiglianza per due casi tipici, quello binomiale e quello Normale, è stata descritta nel capitolo <a class="reference internal" href="225_likelihood.html#cap-likelihood"><span class="std std-ref">La verosimiglianza</span></a>.</p>
+<p>Seguendo una pratica comune, all’interno di un framework bayesiano spesso useremo la notazione <span class="math notranslate nohighlight">\(p(\cdot)\)</span> per rappresentare due quantità differenti, ovvero la funzione di verosimiglianza e la distribuzione a priori. Questo piccolo abuso di notazione riflette il seguente punto di vista: anche se la verosimiglianza non è una funzione di densità di probabilità, noi non vogliamo stressare questo aspetto, ma vogliamo piuttosto pensare alla verosimiglianza e alla distribuzione a priori come a due elementi che sono egualmente necessari per calcolare la distribuzione a posteriori. In altri termini, per così dire, questa notazione assegna lo stesso status epistemico alle due diverse quantità che si trovano al numeratore della regola di Bayes.</p>
+</section>
+<section id="la-verosimiglianza-marginale">
+<h3><span class="section-number">28.4.4. </span>La verosimiglianza marginale<a class="headerlink" href="#la-verosimiglianza-marginale" title="Permalink to this headline">#</a></h3>
+<p>Per il calcolo di <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span> è necessario dividere il prodotto tra la distribuzione a priori e la verosimiglianza per una costante di normalizzazione. Tale costante di normalizzazione, detta <em>verosimiglianza marginale</em>, ha lo scopo di fare in modo che <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span> abbia area unitaria.</p>
+<p>Si noti che la verosimiglianza marginale (ovvero, l’integrale al denominatore della eq. <a class="reference internal" href="#equation-eq-bayes-intro">(28.1)</a> è spesso di difficile risoluzione analitica per cui l’inferenza bayesiana solitamente procede attraverso metodi di ricampionamento e metodi iterativi, quali le Catene di Markov Monte Carlo (MCMC).</p>
+</section>
+<section id="la-distribuzione-a-posteriori">
+<h3><span class="section-number">28.4.5. </span>La distribuzione a posteriori<a class="headerlink" href="#la-distribuzione-a-posteriori" title="Permalink to this headline">#</a></h3>
+<p>La distribuzione a postreriori si trova applicando il teorema di Bayes:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{probabilità a posteriori} = \frac{\text{probabilità a priori} \cdot \text{verosimiglianza}}{\text{costante di normalizzazione}}
+\]</div>
+<p>Nei Capitoli successivi vedremo come calcolare la distribuzione a posteriori. Ci sono due metodi:</p>
+<ul class="simple">
+<li><p>un metodo esatto, che può essere usato nel caso delle distribuzioni a priori coniugate;</p></li>
+<li><p>un metodo approssimato, che può sempre essere usato, ma è computazionalmente intensivo.</p></li>
+</ul>
+</section>
+<section id="distribuzione-predittiva-a-priori">
+<h3><span class="section-number">28.4.6. </span>Distribuzione predittiva a priori<a class="headerlink" href="#distribuzione-predittiva-a-priori" title="Permalink to this headline">#</a></h3>
+<p>La distribuzione a posteriori è l’oggetto centrale nella statistica bayesiana, ma non è l’unico. Oltre a fare inferenze sui valori dei parametri, potremmo voler fare inferenza sui dati. Questo può essere fatto calcolando la <em>distribuzione predittiva a priori</em>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-prior-pred-distr">
+<span class="eqno">(28.2)<a class="headerlink" href="#equation-eq-prior-pred-distr" title="Permalink to this equation">#</a></span>\[
+p(y^*) = \int_\Theta p(y^* \mid \theta) p(\theta) \,\operatorname {d}\!\theta .
+\]</div>
+<p>La <a class="reference internal" href="#equation-eq-prior-pred-distr">(28.2)</a> descrive la distribuzione prevista dei dati in base al modello (che include la distribuzione a priori e la verosimiglianza), ovvero descrive i dati <span class="math notranslate nohighlight">\(y^*\)</span> che ci aspettiamo di osservare, dato il modello, prima di avere osservato i dati del campione.</p>
+<p>La distribuzione predittiva a priori è una distribuzione di (densità) di probabilità. È possibile utilizzare campioni dalla distribuzione predittiva a priori per valutare e calibrare i modelli utilizzando le nostre conoscenze dominio-specifiche. Ad esempio, ci possiamo chiedere: “È sensato che un modello dell’altezza umana preveda che un essere umano sia alto -1.5 metri?”. Già prima di misurare una singola persona, possiamo renderci conto dell’assurdità di questa domanda. Se la distribuzione prevista dei dati consente domande di questo tipo (ovvero, prevede di osservare dati che risultano insensati alla luce delle nostre conoscenze dominio-specifiche), è chiaro che il modello deve essere riformulato.</p>
+</section>
+<section id="distribuzione-predittiva-a-posteriori">
+<h3><span class="section-number">28.4.7. </span>Distribuzione predittiva a posteriori<a class="headerlink" href="#distribuzione-predittiva-a-posteriori" title="Permalink to this headline">#</a></h3>
+<p>Un’altra quantità utile da calcolare è la distribuzione predittiva a posteriori:</p>
+<div class="math notranslate nohighlight" id="equation-eq-post-pred-distrib">
+<span class="eqno">(28.3)<a class="headerlink" href="#equation-eq-post-pred-distrib" title="Permalink to this equation">#</a></span>\[
+p(\tilde{y} \mid y) = \int_\Theta p(\tilde{y} \mid \theta) p(\theta \mid y) \,\operatorname {d}\!\theta .
+\]</div>
+<p>Questa è la distribuzione dei dati attesi futuri <span class="math notranslate nohighlight">\(\tilde{y}\)</span> alla luce della distribuzione a posteriori <span class="math notranslate nohighlight">\(p(\theta \mid y)\)</span>, che a sua volta è una conseguenza del modello adottato (distribuzione a priori e verosimiglianza) e dei dati osservati. In altre parole, questi sono i dati che il modello si aspetta dopo aver osservato i dati de campione. Dall’eq. <a class="reference internal" href="#equation-eq-post-pred-distrib">(28.3)</a> possiamo vedere che le previsioni sui dati attesi futuri sono calcolate integrando (o marginalizzando) sulla distribuzione a posteriori dei parametri. Di conseguenza, le previsioni calcolate in questo modo incorporano l’incertezza relativa alla stima dei parametri del modello.</p>
+</section>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2><span class="section-number">28.5. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>Secondo l’approccio bayesiano, anziché considerare il parametro di interesse di un modello statistico come un valore vero ma sconosciuto, si assegna prima dell’esperimento una distribuzione di probabilità, chiamata stato di credenza, al vero valore del parametro. Questa distribuzione a priori può essere conosciuta, come nel caso della distribuzione normale con media 100 e deviazione standard 15 per i punteggi del QI, oppure può essere arbitraria. Successivamente, si raccolgono dei dati e si calcola la probabilità dei possibili valori del parametro in base ai dati osservati e alle credenze a priori. La nuova distribuzione di probabilità ottenuta è chiamata “distribuzione a posteriori” e rappresenta l’incertezza dell’inferenza. Questo Capitolo ha brevemente descritto i concetti fondamentali dell’inferenza statistica bayesiana.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="226_rescorla_wagner.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">27. </span>Apprendimento per rinforzo</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="310_subj_prop.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">29. </span>Inferenza su una proporzione</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelli-generativi">28.1. Modelli generativi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fondamenti-dell-analisi-dei-dati-bayesiana">28.2. Fondamenti dell’analisi dei dati bayesiana</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prima-idea-riallocazione-della-credibilita">28.2.1. Prima idea: riallocazione della credibilità</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-dati-sono-rumorosi-e-le-inferenze-sono-probabilistiche">28.2.1.1. I dati sono rumorosi e le inferenze sono probabilistiche</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seconda-idea-le-possibilita-sono-valori-di-parametri-in-un-modello-statistico">28.2.2. Seconda idea: le possibilità sono valori di parametri in un modello statistico</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modellizzazione-bayesiana">28.3. Modellizzazione bayesiana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flusso-di-lavoro-bayesiano">28.4. Flusso di lavoro bayesiano</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notazione">28.4.1. Notazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzioni-a-priori">28.4.2. Distribuzioni a priori</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tipologie-di-distribuzioni-a-priori">28.4.2.1. Tipologie di distribuzioni a priori</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#selezione-della-distribuzione-a-priori">28.4.2.2. Selezione della distribuzione a priori</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-funzione-di-verosimiglianza">28.4.3. La funzione di verosimiglianza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-verosimiglianza-marginale">28.4.4. La verosimiglianza marginale</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-distribuzione-a-posteriori">28.4.5. La distribuzione a posteriori</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-predittiva-a-priori">28.4.6. Distribuzione predittiva a priori</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-predittiva-a-posteriori">28.4.7. Distribuzione predittiva a posteriori</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">28.5. Commenti e considerazioni finali</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

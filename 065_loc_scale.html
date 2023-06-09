@@ -1,0 +1,1418 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>12. Indici di posizione e di scala &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '065_loc_scale';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/065_loc_scale.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="13. Le relazioni tra variabili" href="070_correlation.html" />
+    <link rel="prev" title="11. Dati e frequenze" href="060_freq_distr.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="321_balance-prior-post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/065_loc_scale.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Indici di posizione e di scala</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-tendenza-centrale">12.1. Indici di tendenza centrale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">12.1.1. Media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media-spuntata">12.1.2. Media spuntata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda-e-mediana">12.1.3. Moda e mediana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quando-usare-media-moda-mediana">12.1.4. Quando usare media, moda, mediana</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-dispersione">12.2. Indici di dispersione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-basati-sullordinamento-dei-dati">12.2.1. Indici basati sull’ordinamento dei dati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza">12.2.2. Varianza</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-varianza-della-popolazione">12.2.2.1. Stima della varianza della popolazione</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precisione">12.2.3. Precisione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deviazione-standard">12.2.4. Deviazione standard</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione">12.2.4.1. Interpretazione</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deviazione-mediana-assoluta">12.2.5. Deviazione mediana assoluta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quando-usare-la-deviazione-standard-e-mad">12.2.6. Quando usare la deviazione standard e MAD</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-variabilita-relativi">12.2.7. Indici di variabilità relativi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">12.3. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">12.4. Watermark</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <a target="_blank" href="https://colab.research.google.com/github/ccaudek/ds4psy_2023/blob/main/065_loc_scale.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+<section class="tex2jax_ignore mathjax_ignore" id="indici-di-posizione-e-di-scala">
+<span id="loc-scale-notebook"></span><h1><span class="section-number">12. </span>Indici di posizione e di scala<a class="headerlink" href="#indici-di-posizione-e-di-scala" title="Permalink to this headline">#</a></h1>
+<p>La visualizzazione grafica dei dati rappresenta il pilastro fondamentale di ogni analisi quantitativa. Grazie alle rappresentazioni grafiche adeguate, è possibile individuare importanti caratteristiche di una distribuzione, quali la simmetria o l’asimmetria, nonché la presenza di una o più mode. Successivamente, al fine di descrivere sinteticamente le principali caratteristiche dei dati, si rende necessario l’utilizzo di specifici indici numerici. In questo capitolo, verranno presentati i principali indicatori della statistica descrittiva.</p>
+<section id="indici-di-tendenza-centrale">
+<h2><span class="section-number">12.1. </span>Indici di tendenza centrale<a class="headerlink" href="#indici-di-tendenza-centrale" title="Permalink to this headline">#</a></h2>
+<p>Tra le misure utilizzate per indicare il valore centrale di un insieme di dati, la più diffusa è la media aritmetica. Essa fornisce informazioni riguardo ai valori intorno ai quali i dati del campione sono concentrati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="c1"># Initialize random number generator</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">8927</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;bmh&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;svg&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per un’introduzione “soft” alla nozione di tendenza centrale di una
+distribuzione statistica si segua il
+<a class="reference external" href="https://tinystats.github.io/teacups-giraffes-and-statistics/03_mean.html">link</a>.</p>
+<section id="media">
+<h3><span class="section-number">12.1.1. </span>Media<a class="headerlink" href="#media" title="Permalink to this headline">#</a></h3>
+<p>La media aritmetica di un insieme di valori <span class="math notranslate nohighlight">\({x_1, x_2, \dots, x_n}\)</span> è il valore medio ottenuto dalla somma di tutti i valori divisa per il numero totale di valori:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mean">
+<span class="eqno">(12.1)<a class="headerlink" href="#equation-eq-mean" title="Permalink to this equation">#</a></span>\[
+\bar{x}=\frac{1}{n}\sum_{i=1}^n x_i.
+\]</div>
+<p>Questa formula è comunemente utilizzata in statistica per calcolare il valore centrale di un insieme di dati. Per esempio, se abbiamo i valori <span class="math notranslate nohighlight">\(3, 5, 7, 10\)</span> e vogliamo calcolare la media, possiamo utilizzare la formula sopra riportata:</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{x}=\frac{1}{4} (3+5+7+10) = \frac{25}{4}.
+\]</div>
+<p>La media ha una proprietà importante, ovvero la somma degli scarti tra ciascun valore <span class="math notranslate nohighlight">\(x_i\)</span> e la media aritmetica <span class="math notranslate nohighlight">\(\bar{x}\)</span> è uguale a zero, cioè:</p>
+<div class="math notranslate nohighlight" id="equation-eq-diffmeansumzero">
+<span class="eqno">(12.2)<a class="headerlink" href="#equation-eq-diffmeansumzero" title="Permalink to this equation">#</a></span>\[
+\sum_{i=1}^n (x_i - \bar{x}) = 0.\notag
+\]</div>
+<p>Infatti,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\sum_{i=1}^n (x_i - \bar{x}) &amp;= \sum_i x_i - \sum_i \bar{x}\notag\\
+&amp;= \sum_i x_i - n \bar{x}\notag\\
+&amp;= \sum_i x_i - \sum_i x_i = 0.\notag
+\end{aligned}
+\end{split}\]</div>
+<p>Questa proprietà implica che la media aritmetica rappresenta un valore attorno al quale i dati sono equamente distribuiti in positivo e in negativo rispetto alla media stessa.</p>
+<p>Un’altra proprietà della media è la seguente: la somma dei quadrati degli scarti tra ciascuna modalità <span class="math notranslate nohighlight">\(x_i\)</span> e una costante arbitraria <span class="math notranslate nohighlight">\(a\)</span>, cioè <span class="math notranslate nohighlight">\(\varphi(a) = \sum_{i=1}^n (x_i - a)^2\)</span>, è minima per <span class="math notranslate nohighlight">\(a = \bar{x}\)</span>.</p>
+<p>La definizione di media aritmetica ha spesso ispirato battute ironiche, come ad esempio la constatazione che in media ogni persona ha meno di due gambe o che ha un solo testicolo. Tuttavia, la media presenta alcune limitazioni: non sempre rappresenta l’indice che meglio descrive la tendenza centrale della distribuzione, soprattutto in presenza di asimmetria o di valori anomali (outlier). In questi casi, è preferibile utilizzare la mediana o la media spuntata (vedi oltre).</p>
+<p>Se abbiamo un piccolo numero di valori, possiamo calcolare la media in Python come su qualunque calcolatore. Supponiamo che i valori siano 12, 44, 21, 62, 24. La media è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">12</span> <span class="o">+</span> <span class="mi">44</span> <span class="o">+</span> <span class="mi">21</span> <span class="o">+</span> <span class="mi">62</span> <span class="o">+</span> <span class="mi">24</span><span class="p">)</span> <span class="o">/</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.6
+</pre></div>
+</div>
+</div>
+</div>
+<p>ovvero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">12</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">24</span><span class="p">])</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([12, 44, 21, 62, 24])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32.6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Molto spesso però i nostri dati sono contenuti in file e inserire i dati manualmente non è fattibile. Per fare un esempio, poniamoci il problema di calcolare la media dei valori BDI-II separatamente per ciascuno dei due gruppi di soggetti esaminati da <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<p>Iniziamo ad importare i dati, a selezionare le colonne appropriate, a eliminare i duplicati e a rimuovere il dato mancante (come abbiamo fatto in precedenza). Otteniamo così un DataFrame di 66 righe e 3 colonne.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/data.mood.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;esm_id&quot;</span><span class="p">,</span> <span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="s2">&quot;bdi&quot;</span><span class="p">]]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s2">&quot;first&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">])]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(66, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esaminiamo la numerosità di ciascun gruppo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>group
+ctl    36
+mdd    30
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Creiamo uno stripplot per esaminare i dati grezzi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;bdi&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0c7092a892b2edb4446dd82370e76cf5714290765e2590a91833a5acc5867d50.svg" src="_images/0c7092a892b2edb4446dd82370e76cf5714290765e2590a91833a5acc5867d50.svg" /></div>
+</div>
+<p>Calcoliamo ora le medie dei valori BDI-II nei due gruppi. La funzione <code class="docutils literal notranslate"><span class="pre">round(2)</span></code> semplifica la risposta stampando solo 2 valori decimali.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>group
+ctl     1.61
+mdd    30.93
+Name: bdi, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>In alternativa, possiamo usare il metodo <code class="docutils literal notranslate"><span class="pre">.describe()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ctl</th>
+      <td>36.0</td>
+      <td>1.6</td>
+      <td>2.7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>12.0</td>
+    </tr>
+    <tr>
+      <th>mdd</th>
+      <td>30.0</td>
+      <td>30.9</td>
+      <td>6.6</td>
+      <td>19.0</td>
+      <td>26.0</td>
+      <td>30.0</td>
+      <td>35.0</td>
+      <td>44.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="media-spuntata">
+<h3><span class="section-number">12.1.2. </span>Media spuntata<a class="headerlink" href="#media-spuntata" title="Permalink to this headline">#</a></h3>
+<p>La <em>media spuntata</em> <span class="math notranslate nohighlight">\(\bar{x}_t\)</span> (o <em>trimmed mean</em>) è ottenuta calcolando la media dei dati dopo aver eliminato una determinata percentuale di dati estremi. In genere, si elimina il 10% dei dati, ovvero il 5% all’inizio e alla fine della distribuzione. Per ottenere la media spuntata, i dati vengono ordinati in modo crescente, <span class="math notranslate nohighlight">\(x_1 \leq x_2 \leq x_3 \leq \dots \leq x_n\)</span>, e poi viene eliminato il primo 5% e l’ultimo 5% dei dati nella sequenza ordinata. La media spuntata è quindi calcolata come la media aritmetica dei dati rimanenti. La media spuntata è utile quando ci sono valori anomali o quando la distribuzione è asimmetrica e la media aritmetica non è rappresentativa della tendenza centrale dei dati.</p>
+<p>Per fare un esempio, calcoliamo la media spuntata dei valori BDI-II per i due gruppi di soggetti esaminati da <span id="id2">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> escludendo il 10% dei valori più estremi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_mdd</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mdd&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">trim_mean</span><span class="p">(</span><span class="n">bdi_mdd</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.625
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bdi_ctl</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;ctl&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">bdi</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">trim_mean</span><span class="p">(</span><span class="n">bdi_ctl</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="moda-e-mediana">
+<h3><span class="section-number">12.1.3. </span>Moda e mediana<a class="headerlink" href="#moda-e-mediana" title="Permalink to this headline">#</a></h3>
+<p>In precedenza abbiamo già incontrato altri due popolari indici di
+tendenza centrale: la <em>moda</em> (<em>Mo</em>), ovvero il valore centrale della
+classe con la frequenza massima (può succedere che una distribuzione
+abbia più mode; in tal caso si dice <em>multimodale</em> e questo operatore
+perde il suo significato di indice di tendenza centrale) e la <em>mediana</em>
+<span class="math notranslate nohighlight">\(\tilde{x}\)</span>.</p>
+<p>Calcoliamo ora i quantili di ordine 0.10 e 0.90 dei valori BDI-II per
+i due gruppi di <span id="id3">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create functions to calculate 0.10 and 0.90 quantiles</span>
+<span class="k">def</span> <span class="nf">q1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.10</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">q3</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.90</span><span class="p">)</span>
+
+
+<span class="c1"># Calculate quantiles by group</span>
+<span class="n">vals</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;bdi&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">q1</span><span class="p">,</span> <span class="n">q3</span><span class="p">]}</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">bdi</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>q1</th>
+      <th>q3</th>
+    </tr>
+    <tr>
+      <th>group</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ctl</th>
+      <td>0.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>mdd</th>
+      <td>23.8</td>
+      <td>41.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Si noti che solitamente i software restituiscono un valore <em>interpolato</em>
+del <span class="math notranslate nohighlight">\(p\)</span>-esimo quantile <span class="math notranslate nohighlight">\(q_p\)</span> <span class="math notranslate nohighlight">\((0 &lt; p &lt; 1)\)</span>, il quale viene calcolato
+mediante specifiche procedure. Il risultato fornito dai software,
+dunque, non sarà identico a quello trovato utilizzando la definizione
+non interpolata di quantile che abbiamo presentato in precedenza. Se,
+per qualche ragione, vogliamo conoscere l’algoritmo usato per la
+determinazione dei quantili interpolati, dobbiamo leggere la
+documentazione del software.</p>
+</section>
+<section id="quando-usare-media-moda-mediana">
+<h3><span class="section-number">12.1.4. </span>Quando usare media, moda, mediana<a class="headerlink" href="#quando-usare-media-moda-mediana" title="Permalink to this headline">#</a></h3>
+<p>La moda può essere utilizzata per dati a livello nominale o ordinale, ed è l’unica tra le tre statistiche che può essere calcolata in questi casi.
+La media è una buona misura di tendenza centrale solo se la distribuzione dei dati è simmetrica, ovvero se i valori sono distribuiti uniformemente a sinistra e a destra della media. Tuttavia, se ci sono valori anomali o se la distribuzione è asimmetrica, la media può essere influenzata in modo significativo, e quindi potrebbe non essere la scelta migliore come misura di tendenza centrale.
+In questi casi, la mediana può fornire una misura migliore di tendenza centrale rispetto alla media, poiché la mediana è meno influenzata dai valori anomali e si basa esclusivamente sul valore centrale dell’insieme di dati. Pertanto, la scelta tra media e mediana dipende dal tipo di distribuzione dei dati e dallo scopo dell’analisi.</p>
+</section>
+</section>
+<section id="indici-di-dispersione">
+<h2><span class="section-number">12.2. </span>Indici di dispersione<a class="headerlink" href="#indici-di-dispersione" title="Permalink to this headline">#</a></h2>
+<p>Le misure di posizione descritte in precedenza come le medie e gli indici di posizione, forniscono una sintesi dei dati che mettono in evidenza la tendenza centrale delle osservazioni. Tuttavia, non tengono conto di un aspetto importante della distribuzione dei dati, ovvero la variabilità dei valori numerici della variabile statistica. Pertanto, è necessario sintetizzare la distribuzione di una variabile statistica anche tramite l’utilizzo di indicatori che valutino la dispersione delle unità statistiche.</p>
+<p>Per un’introduzione “soft” al tema degli indici di dispersione si segua
+il
+<a class="reference external" href="https://tinystats.github.io/teacups-giraffes-and-statistics/04_variance.html">link</a>.</p>
+<section id="indici-basati-sullordinamento-dei-dati">
+<h3><span class="section-number">12.2.1. </span>Indici basati sull’ordinamento dei dati<a class="headerlink" href="#indici-basati-sullordinamento-dei-dati" title="Permalink to this headline">#</a></h3>
+<p>Per valutare la variabilità dei dati è possibile utilizzare indici basati sull’ordinamento dei dati. L’indice più ovvio è l’intervallo di variazione, che corrisponde alla differenza tra il valore massimo e il valore minimo di una distribuzione di modalità. Tuttavia, questo indice presenta il limite di essere calcolato sulla base di soli due valori della distribuzione, e non tiene conto di tutte le informazioni disponibili. Inoltre, l’intervallo di variazione può essere pesantemente influenzato dalla presenza di valori anomali. Un altro indice basato sull’ordinamento dei dati è la differenza interquartile, già incontrata in precedenza. Anche se questo indice utilizza più informazioni rispetto all’intervallo di variazione, presenta comunque il limite di essere calcolato sulla base di soli due valori della distribuzione (<span class="math notranslate nohighlight">\(x_{0.25}\)</span> e <span class="math notranslate nohighlight">\(x_{0.75}\)</span>). Per valutare la variabilità in modo più completo, è necessario utilizzare altri indici di variabilità che tengano conto di tutti i dati disponibili.</p>
+</section>
+<section id="varianza">
+<h3><span class="section-number">12.2.2. </span>Varianza<a class="headerlink" href="#varianza" title="Permalink to this headline">#</a></h3>
+<p>Data la limitazione delle statistiche descritte in precedenza, è più comune utilizzare una misura di variabilità che tenga conto della dispersione dei dati intorno ad un indice di tendenza centrale. La varianza è la misura di variabilità più utilizzata per valutare la variabilità di una variabile statistica. Essa è definita come la media dei quadrati degli scarti <span class="math notranslate nohighlight">\(x_i - \bar{x}\)</span> tra ogni valore e la media della distribuzione, come segue:</p>
+<div class="math notranslate nohighlight" id="equation-eq-var-descr">
+<span class="eqno">(12.3)<a class="headerlink" href="#equation-eq-var-descr" title="Permalink to this equation">#</a></span>\[
+\begin{equation}
+S^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2.
+\end{equation}
+\]</div>
+<p>La varianza è una misura di dispersione più complessa rispetto a quelle descritte in precedenza. Essa è appropriata solo nel caso di distribuzioni simmetriche e, come le altre misure di dispersione, è fortemente influenzata dai valori anomali. Inoltre, la varianza è espressa in un’unità di misura che è il quadrato dell’unità di misura dei dati originari e, pertanto, non può essere interpretata in modo intuitivo.</p>
+<p>Calcoliamo la varianza dei valori BDI-II per i dati di <span id="id4">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Applicando l’eq. <a class="reference internal" href="#equation-eq-var-descr">(12.3)</a>, per tutto il campione abbiamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>236.23875114784224
+</pre></div>
+</div>
+</div>
+</div>
+<p>Più semplicemente, possiamo usare la funzione <code class="docutils literal notranslate"><span class="pre">np.var()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>236.23875114784224
+</pre></div>
+</div>
+</div>
+</div>
+<section id="stima-della-varianza-della-popolazione">
+<h4><span class="section-number">12.2.2.1. </span>Stima della varianza della popolazione<a class="headerlink" href="#stima-della-varianza-della-popolazione" title="Permalink to this headline">#</a></h4>
+<p>Si noti il denominatore della formula della varianza. Nell’eq.<a class="reference internal" href="#equation-eq-var-descr">(12.3)</a>
+ho usato <span class="math notranslate nohighlight">\(n\)</span> (l’ampiezza campionaria, ovvero il numero di osservazioni
+del campione). In questo modo ottengo la varianza quale <em>statistica
+descrittiva</em> del campione. In alternativa, è possibile usare <span class="math notranslate nohighlight">\(n-1\)</span> al
+denominatore:</p>
+<div class="math notranslate nohighlight" id="equation-eq-var-stimatore">
+<span class="eqno">(12.4)<a class="headerlink" href="#equation-eq-var-stimatore" title="Permalink to this equation">#</a></span>\[
+\begin{equation}
+s^2 = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2
+\end{equation}
+\]</div>
+<p>In questo secondo modo si trova la varianza quale <em>stimatore</em> della
+varianza della popolazione. Si può dimostrare che l’eq.<a class="reference internal" href="#equation-eq-var-stimatore">(12.4)</a>
+fornisce una stima corretta (ovvero, non distorta) della varianza della
+popolazione da cui abbiamo ottenuto il campione, mentre invece l’eq.<a class="reference internal" href="#equation-eq-var-descr">(12.3)</a> fornisce (in media) una stima troppo piccola della
+varianza della popolazione. Si presti attenzione alla notazione: <span class="math notranslate nohighlight">\(S^2\)</span>
+per la varianza quale statistica descrittiva, <span class="math notranslate nohighlight">\(s^2\)</span> per la varianza
+quale stimatore.</p>
+<p>Per illustrare questo punto svolgiamo una simulazione. Consideriamo qui la distribuzione dei punteggi del quoziente di intelligenza (QI). I valori del QI seguono una particolare distribuzione chiamata <em>distribuzione normale</em> di media 100 e deviazione standard 15. La forma di questa distribuzione è illustrata nella figura seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/08a40fbdb51fcffd078651d2c04bc7e45950dab9406a524f23b168e06d75b772.svg" src="_images/08a40fbdb51fcffd078651d2c04bc7e45950dab9406a524f23b168e06d75b772.svg" /></div>
+</div>
+<p>Supponiamo di estrarre un campione casuale di 4 osservazioni dalla popolazione del quoziente di intelligenza – in altre parole, supponiamo di misurare il quoziente di intelligenza di 4 persone prese a caso dalla popolazione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 96.66036673 119.88488115  91.43544977 110.02373805]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcoliamo la varianza usando <span class="math notranslate nohighlight">\(n\)</span> al denominatore. Si noti che la vera varianza del quoziente di intelligenza è <span class="math notranslate nohighlight">\(15^2\)</span> = 225.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>124.83714197459057
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consideriamo ora 10 campioni casuali del QI, ciascuno di ampiezza 4.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">niter</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">random_samples</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">):</span>
+    <span class="n">one_sample</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">random_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">one_sample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il primo campione è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_samples</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([117.18071524, 108.81016091,  99.22835071,  72.32428097])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il decimo campione è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_samples</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 84.56836494,  94.18203683,  97.52873515, 100.41911991])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Stampiamo i valori di tutti i 10 campioni.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">random_samples</span><span class="p">)</span>
+<span class="n">rs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[117.18071524, 108.81016091,  99.22835071,  72.32428097],
+       [ 95.39169462,  99.82359162, 109.53158888, 101.69933684],
+       [121.28194403, 111.99123812,  93.5863066 , 123.02032138],
+       [ 66.58961856, 104.23622977,  83.17674426, 119.51304508],
+       [107.69111686,  84.07010216,  98.52662251, 105.83838496],
+       [ 70.66964863, 105.06034379, 107.1614251 ,  83.45087842],
+       [ 92.51928633, 113.73691601,  90.51622696, 107.85154079],
+       [105.74034675, 102.67262674,  88.66272413,  87.55578622],
+       [108.18945322, 119.3681818 , 107.45218178,  81.44893886],
+       [ 84.56836494,  94.18203683,  97.52873515, 100.41911991]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per ciascun campione (ovvero, per ciascuna riga della matrice
+precedente), calcoliamo la varianza usando la formula con <span class="math notranslate nohighlight">\(n\)</span> al denominatore.
+Otteniamo così 10 stime della varianza della popolazione del QI.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># applichiamo la funzione su ciascuna riga</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_var</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[284.45704733  26.15452963 136.44568199 405.65618265  86.35524345
+ 231.95644125  97.72682684  66.1097433  193.53695841  35.63101473]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notiamo due cose:</p>
+<ul class="simple">
+<li><p>le stime sono molto diverse tra loro; questo fenomeno è noto con il nome di <em>variabilità campionaria</em>;</p></li>
+<li><p>in media le stime sembrano troppo piccole.</p></li>
+</ul>
+<p>Per aumentare la sicurezza riguardo al secondo punto menzionato in precedenza, ripeteremo la simulazione utilizzando un numero di iterazioni maggiore.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">niter</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">random_samples</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">):</span>
+    <span class="n">one_sample</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">random_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">one_sample</span><span class="p">)</span>
+
+<span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">random_samples</span><span class="p">)</span>
+<span class="n">x_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esaminiamo la distribuzione dei valori ottenuti.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x_var</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/56ed37b4d2d8c686229e9fe61d4bdd6c4e3db21b5c7c81c8a4ef67408074eedb.svg" src="_images/56ed37b4d2d8c686229e9fe61d4bdd6c4e3db21b5c7c81c8a4ef67408074eedb.svg" /></div>
+</div>
+<p>La stima più verosimile della varianza del QI è dato dalla media di
+questa distribuzione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_var</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>168.4439123438661
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si noti che il nostro spospetto è stato confermato: il valore medio della stima della varianza ottenuta con l’eq.<a class="reference internal" href="#equation-eq-var-descr">(12.3)</a> è troppo piccolo rispetto al valore corretto di <span class="math notranslate nohighlight">\(15^2 = 225\)</span>.</p>
+<p>Ripetiamo ora la simulazione usando la formula della varianza con <span class="math notranslate nohighlight">\(n-1\)</span> al denominatore.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">niter</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">random_samples</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">niter</span><span class="p">):</span>
+    <span class="n">one_sample</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">random_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">one_sample</span><span class="p">)</span>
+
+<span class="n">rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">random_samples</span><span class="p">)</span>
+<span class="n">x_var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_var</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>224.42607636282006
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nel secondo caso, se si utilizza <span class="math notranslate nohighlight">\(n-1\)</span> come denominatore per calcolare la stima della varianza, il valore atteso di questa stima è molto vicino al valore corretto di 225. Se il numero di campioni fosse stato infinito, i due valori sarebbero stati identici.</p>
+<p>In conclusione, le due formule della varianza hanno scopi diversi. La formula della varianza con <span class="math notranslate nohighlight">\(n\)</span> al denominatore viene utilizzata come statistica descrittiva per descrivere la variabilità di un particolare campione di osservazioni. Al contrario, la formula della varianza con <span class="math notranslate nohighlight">\(n-1\)</span> al denominatore viene utilizzata come stimatore per ottenere la migliore stima della varianza della popolazione da cui quel campione è stato estratto.</p>
+</section>
+</section>
+<section id="precisione">
+<h3><span class="section-number">12.2.3. </span>Precisione<a class="headerlink" href="#precisione" title="Permalink to this headline">#</a></h3>
+<p>La <em>precisione</em> è definita come l’inverso della varianza:</p>
+<div class="math notranslate nohighlight" id="equation-eq-precision">
+<span class="eqno">(12.5)<a class="headerlink" href="#equation-eq-precision" title="Permalink to this equation">#</a></span>\[
+\tau = \frac{1}{\sigma^2}.
+\]</div>
+<p>Gli esperti ritengono che la precisione sia una misura più “intuitiva” della varianza, in quanto indica quanto i valori sono concentrati attorno alla media, piuttosto che quanto sono dispersi. In altre parole, la precisione è un’indicazione di quanto le misurazioni siano accurate. Se i valori sono molto dispersi attorno alla media (alta varianza), la precisione è bassa (poca accuratezza); se invece la varianza è bassa, la precisione è alta.</p>
+<p>La precisione è uno dei due parametri naturali della distribuzione normale, insieme alla media. Nei termini dell’eq. <a class="reference internal" href="#equation-eq-precision">(12.5)</a>, la distribuzione normale
+(si veda il Capitolo <a class="reference internal" href="210_cont_rv_distr.html#cont-rv-distr-notebook"><span class="std std-ref">Distribuzioni di v.c. continue</span></a>) può essere espressa nel modo seguente</p>
+<div class="math notranslate nohighlight">
+\[
+{\displaystyle f(y)=\sqrt{\frac{\tau}{2\pi}} e^{-{\frac {1}{2}}\tau\left({y-\mu }\right)^{2}}},
+\]</div>
+<p>anziché come</p>
+<div class="math notranslate nohighlight">
+\[
+{\displaystyle f(y)={\frac {1}{\sigma {\sqrt {2\pi }}}}e^{-{\frac {1}{2}}\left({\frac {y-\mu }{\sigma }}\right)^{2}}}.
+\]</div>
+</section>
+<section id="deviazione-standard">
+<h3><span class="section-number">12.2.4. </span>Deviazione standard<a class="headerlink" href="#deviazione-standard" title="Permalink to this headline">#</a></h3>
+<p>Per interpretare la varianza in modo più intuitivo, si può calcolare la deviazione standard (o scarto quadratico medio o scarto tipo) prendendo la radice quadrata della varianza. La deviazione standard è espressa nell’unità di misura originaria dei dati, a differenza della varianza che è espressa nel quadrato dell’unità di misura dei dati. La deviazione standard fornisce una misura della dispersione dei dati attorno alla media, rendendo più facile la comprensione della variabilità dei dati. La <em>deviazione standard</em> (o <em>scarto quadratico medio</em>, o <em>scarto tipo</em>)[1] è definita come:</p>
+<div class="math notranslate nohighlight" id="equation-eq-sd-stimatore">
+<span class="eqno">(12.6)<a class="headerlink" href="#equation-eq-sd-stimatore" title="Permalink to this equation">#</a></span>\[
+s^2 = \sqrt{(n-1)^{-1} \sum_{i=1}^n (x_i - \bar{x})^2}
+\]</div>
+<p>Quando tutte le osservazioni sono uguali, <span class="math notranslate nohighlight">\(s = 0\)</span>, altrimenti <span class="math notranslate nohighlight">\(s &gt; 0\)</span>.</p>
+<div class="admonition-nota admonition">
+<p class="admonition-title">Nota</p>
+<p>Il termine <em>standard deviation</em> è stato introdotto in statistica da Pearson nel 1894 assieme alla lettera greca <span class="math notranslate nohighlight">\(\sigma\)</span> che lo rappresenta. Il termine italiano “deviazione standard” ne è la traduzione più utilizzata nel linguaggio comune; il termine dell’<a class="reference external" href="https://it.wikipedia.org/wiki/Ente_nazionale_italiano_di_unificazione">Ente Nazionale Italiano di Unificazione</a>
+è tuttavia “scarto tipo”, definito come la radice quadrata positiva della varianza.</p>
+</div>
+<p>La deviazione standard <span class="math notranslate nohighlight">\(s\)</span> dovrebbe essere utilizzata solo quando la media è una misura appropriata per descrivere il centro della distribuzione, ad esempio nel caso di distribuzioni simmetriche. Come la media <span class="math notranslate nohighlight">\(\bar{x}\)</span>, infatti, anche la deviazione standard è fortemente influenzata dalla presenza di dati anomali, ovvero pochi valori che si discostano notevolmente dalla media rispetto agli altri dati della distribuzione.</p>
+<p>Per fare un esempio, calcoliamo la deviazione standard per i valori BDI-II del campione di
+<span id="id5">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<p>Applicando l’eq. <a class="reference internal" href="#equation-eq-sd-stimatore">(12.6)</a>, per tutto il campione abbiamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.370060219395441
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per ciascun gruppo, abbiamo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;group&quot;</span><span class="p">)[</span><span class="s2">&quot;bdi&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>group
+ctl    2.707427
+mdd    6.606858
+Name: bdi, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<section id="interpretazione">
+<h4><span class="section-number">12.2.4.1. </span>Interpretazione<a class="headerlink" href="#interpretazione" title="Permalink to this headline">#</a></h4>
+<p>La deviazione standard può essere interpretata in modo semplice: essa è simile allo scarto semplice medio campionario, cioè alla media aritmetica dei valori assoluti degli scarti dalla media, anche se non identica. La deviazione standard ci fornisce quindi un’indicazione di quanto le singole osservazioni si discostino, in media, dal centro della distribuzione. Una spiegazione più accurata del significato della deviazione standard sarà fornita nel paragrafo successivo.</p>
+<p>Si verifichi l’interpretazione della deviazione standard fornita sopra
+usando i valori BDI-II del campione di <span id="id6">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<p>Per questi dati la deviazione standard è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.370060219395441
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo scarto semplice medio campionario è</p>
+</section>
+</section>
+<section id="deviazione-mediana-assoluta">
+<h3><span class="section-number">12.2.5. </span>Deviazione mediana assoluta<a class="headerlink" href="#deviazione-mediana-assoluta" title="Permalink to this headline">#</a></h3>
+<p>Una misura robusta della dispersione statistica di un campione è la
+<em>deviazione mediana assoluta</em> (<em>Median Absolute Deviation</em>, MAD)
+definita come la mediana del valore assoluto delle deviazioni dei dati
+dalla mediana, ovvero:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mad-def">
+<span class="eqno">(12.7)<a class="headerlink" href="#equation-eq-mad-def" title="Permalink to this equation">#</a></span>\[
+{\displaystyle \operatorname {MAD} =\operatorname {median} \left(\ \left|X_{i}-\operatorname {median} (X)\right|\ \right)}
+\]</div>
+<p>Nel caso di una distribuzione dei dati unimodale simmetrica di forma
+campanulare (ovvero, normale) si ha che</p>
+<div class="math notranslate nohighlight">
+\[
+{\displaystyle \text{deviazione standard} \approx 1.4826\ \operatorname {MAD} .\,}
+\]</div>
+<p>Pertanto, solitamente i software restituiscono il valore MAD
+moltiplicato per una tale costante.</p>
+<p>I dati di <span id="id7">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id18" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span> seguono una distribuzione bimodale, per cui
+il vincolo precedente non si applica. Verifichiamo dunque il principio
+precedente usando un campione di dati estratto da una popolazione
+normale. Usiamo, ad esempio, la distribuzione <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">bdi</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.539944903581269
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="mf">1.4826</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.051529196814336
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="quando-usare-la-deviazione-standard-e-mad">
+<h3><span class="section-number">12.2.6. </span>Quando usare la deviazione standard e MAD<a class="headerlink" href="#quando-usare-la-deviazione-standard-e-mad" title="Permalink to this headline">#</a></h3>
+<p>La deviazione standard e la MAD sono entrambe misure di dispersione che indicano quanto i dati in un insieme si discostano dalla tendenza centrale. Tuttavia, ci sono alcune differenze tra le due misure e situazioni in cui può essere più appropriato utilizzare una rispetto all’altra.</p>
+<ul class="simple">
+<li><p>Deviazione standard: la deviazione standard è particolarmente utile per descrivere la dispersione dei dati in una distribuzione normale. In generale, la deviazione standard è una buona scelta se si vuole sapere quanto i dati sono distribuiti intorno alla media, o se si vuole confrontare la dispersione di due o più set di dati.</p></li>
+<li><p>Deviazione mediana assoluta (MAD): la MAD è meno sensibile ai valori anomali rispetto alla deviazione standard, il che la rende una scelta migliore quando ci sono valori anomali nell’insieme di dati. Inoltre, la MAD può essere una buona scelta quando si utilizzano dati non normalmente distribuiti.</p></li>
+</ul>
+<p>In sintesi, se si lavora con dati normalmente distribuiti, la deviazione standard è la misura di dispersione più appropriata. Se si lavora con dati non normalmente distribuiti o si hanno valori anomali nell’insieme di dati, la MAD può essere una scelta migliore. In ogni caso, la scelta tra le due misure dipende dal tipo di dati che si sta analizzando e dall’obiettivo dell’analisi.</p>
+</section>
+<section id="indici-di-variabilita-relativi">
+<h3><span class="section-number">12.2.7. </span>Indici di variabilità relativi<a class="headerlink" href="#indici-di-variabilita-relativi" title="Permalink to this headline">#</a></h3>
+<p>A volte può essere interessante effettuare un confronto fra due misure
+di variabilità di grandezze incommensurabili, ovvero di caratteri
+rilevati mediante differenti unità di misura. In questi casi, le misure
+di variabilità precedentemente descritte si rivelano inadeguate in
+quanto dipendono dall’unità di misura adottata. Diventa dunque
+necessario ricorrere a particolari numeri adimensionali detti <em>indici
+relativi di variabilità</em>. Il più importante di tali indici è il
+<em>coefficiente di variazione</em>, ovvero il numero puro</p>
+<div class="math notranslate nohighlight" id="equation-eq-cv-def">
+<span class="eqno">(12.8)<a class="headerlink" href="#equation-eq-cv-def" title="Permalink to this equation">#</a></span>\[
+C_v = \frac{\sigma}{\bar{x}}
+\]</div>
+<p>ottenuto dal rapporto tra la deviazione standard e la media dei dati.</p>
+<p>Un altro indice relativo di variabilità è la differenza interquartile
+rapportata al primo quartile, oppure al terzo quartile, oppure alla
+mediana, cioè:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{x_{0.75} - x_{0.25}}{x_{0.25}}, \qquad \frac{x_{0.75} - x_{0.25}}{x_{0.75}}, \qquad \frac{x_{0.75} - x_{0.25}}{x_{0.50}}.
+\]</div>
+</section>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2><span class="section-number">12.3. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>Le statistiche descrittive consentono di ottenere degli indici sintetici che riassumono i dati, sia per l’intera popolazione che per un campione estratto da essa. Questi indici includono le misure di tendenza centrale, come la media, la mediana e la moda, che indicano la posizione centrale dei dati. Inoltre, ci sono anche gli indici di dispersione, come la deviazione standard e la varianza, che indicano quanto i dati sono distribuiti attorno alla tendenza centrale. È importante notare che la curtosi e l’asimmetria sono indici di dispersione che si applicano solo alle distribuzioni normali e verranno approfonditi in quel contesto.</p>
+</section>
+<section id="watermark">
+<h2><span class="section-number">12.4. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Mon May 29 2023
+
+Python implementation: CPython
+Python version       : 3.11.3
+IPython version      : 8.13.2
+
+scipy     : 1.10.1
+matplotlib: 3.7.1
+arviz     : 0.15.1
+seaborn   : 0.12.2
+numpy     : 1.23.5
+pandas    : 1.5.3
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="060_freq_distr.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Dati e frequenze</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="070_correlation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Le relazioni tra variabili</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-tendenza-centrale">12.1. Indici di tendenza centrale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media">12.1.1. Media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media-spuntata">12.1.2. Media spuntata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda-e-mediana">12.1.3. Moda e mediana</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quando-usare-media-moda-mediana">12.1.4. Quando usare media, moda, mediana</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-dispersione">12.2. Indici di dispersione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-basati-sullordinamento-dei-dati">12.2.1. Indici basati sull’ordinamento dei dati</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza">12.2.2. Varianza</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stima-della-varianza-della-popolazione">12.2.2.1. Stima della varianza della popolazione</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precisione">12.2.3. Precisione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deviazione-standard">12.2.4. Deviazione standard</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione">12.2.4.1. Interpretazione</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deviazione-mediana-assoluta">12.2.5. Deviazione mediana assoluta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quando-usare-la-deviazione-standard-e-mad">12.2.6. Quando usare la deviazione standard e MAD</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indici-di-variabilita-relativi">12.2.7. Indici di variabilità relativi</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">12.3. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">12.4. Watermark</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1127 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>18. Probabilità condizionata &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '115_conditional_prob';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/115_conditional_prob.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="19. Il teorema di Bayes" href="120_bayes_theorem.html" />
+    <link rel="prev" title="17. Esercizi di probabilità discreta" href="111_prob_tutorial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="321_balance-prior-post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/115_conditional_prob.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probabilità condizionata</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-paradosso-di-monty-hall">18.1. Il paradosso di Monty Hall</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilita-condizionata-su-altri-eventi">18.2. Probabilità condizionata su altri eventi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mammografia-e-cancro-al-seno">18.2.1. Mammografia e cancro al seno</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-della-probabilita-composta">18.3. Teorema della probabilità composta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-teorema-della-probabilita-totale">18.4. Il teorema della probabilità totale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-indipendendenza-stocastica">18.5. L’indipendendenza stocastica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-di-ricapitolazione-con-python">18.6. Esercizio di ricapitolazione con Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intersezione-di-eventi-congiunzione">18.6.1. Intersezione di eventi (congiunzione)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.6.2. Probabilità condizionata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">18.7. Commenti e considerazioni finali</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/ccaudek/ds4psy_2023/blob/main/115_conditional_prob.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="probabilita-condizionata">
+<span id="cond-prob-notebook"></span><h1><span class="section-number">18. </span>Probabilità condizionata<a class="headerlink" href="#probabilita-condizionata" title="Permalink to this headline">#</a></h1>
+<p>In questo capitolo esploreremo i seguenti concetti probabilistici:</p>
+<ul class="simple">
+<li><p>La probabilità congiunta, ovvero la probabilità del verificarsi simultaneo di due eventi che appartengono allo stesso evento, anche se si verificano in momenti diversi. Ad esempio, potremmo essere interessati alla probabilità congiunta di estrarre una pallina rossa e una verde.</p></li>
+<li><p>La probabilità marginale, ovvero la probabilità di un singolo evento indipendentemente da tutti gli altri eventi. Ad esempio, possiamo calcolare la probabilità marginale di estrarre una pallina verde da un’urna.</p></li>
+<li><p>La probabilità condizionata, ovvero la probabilità di un evento dato il verificarsi di un altro evento. Ad esempio, se estraiamo una pallina verde da un’urna, possiamo chiederci quanto è grande la probabilità di estrarre una seconda pallina verde dalla stessa urna.</p></li>
+</ul>
+<p>Inoltre, esamineremo i principali teoremi associati alla probabilità condizionata.</p>
+<section id="il-paradosso-di-monty-hall">
+<h2><span class="section-number">18.1. </span>Il paradosso di Monty Hall<a class="headerlink" href="#il-paradosso-di-monty-hall" title="Permalink to this headline">#</a></h2>
+<p>Il paradosso di Monty Hall è un esempio molto interessante di come la conoscenza di nuove informazioni possa portare a una rivalutazione dei termini del problema “condizionatamente alle informazioni acquisite”. Questo famoso problema di teoria della probabilità è legato al noto gioco a premi statunitense “Let’s Make a Deal”, e prende il nome dal conduttore dello show, Monte Halprin, conosciuto con lo pseudonimo di Monty Hall.</p>
+<p><img alt="Monty Hall" src="_images/monty-hall.jpg" /></p>
+<p>Il gioco consiste nel mostrare al concorrente tre porte chiuse, dietro una delle quali si trova un’automobile, mentre dietro le altre due porte si nasconde una capra ciascuna. Il concorrente sceglie una porta, senza aprirla, e poi Monty Hall apre una delle altre due porte, rivelando una delle due capre. A questo punto, Monty offre al concorrente la possibilità di cambiare la propria scelta iniziale, passando all’unica porta restante. Il paradosso deriva dal fatto che cambiare la porta migliora le probabilità del concorrente di vincere l’automobile, portandole da 1/3 a 2/3.</p>
+<p>Per dimostrare questo paradosso, possiamo scrivere una simulazione in Python in cui immaginiamo due scenari, ripetuti migliaia di volte: uno in cui il concorrente rimane con la sua scelta iniziale e uno in cui il concorrente cambia la propria scelta dopo che Monty Hall ha aperto una porta dietro la quale si nascondeva una capra.</p>
+<p>Riporto qui sotto lo script della simulazione eseguita da un gruppo di studenti di Psicometria A.A. 2022-2023.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">porte</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;capra1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;capra2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;macchina&quot;</span><span class="p">,</span>
+<span class="p">]</span>  <span class="c1"># definisco il gioco, scelgo una porta a caso per n volte</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">contatore_cambio</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">porta_vincente</span> <span class="o">=</span> <span class="s2">&quot;macchina&quot;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">scelta_casuale</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">porte</span><span class="p">)</span>
+    <span class="n">porte_rimaste</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">porte</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">scelta_casuale</span><span class="p">]</span>
+    <span class="n">porta_rivelata</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">porte_rimaste</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">porta_vincente</span><span class="p">])</span>
+    <span class="n">porta_alternativa</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">porte</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">scelta_casuale</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">porta_rivelata</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="s2">&quot;macchina&quot;</span> <span class="ow">in</span> <span class="n">porta_alternativa</span><span class="p">:</span>
+        <span class="n">contatore_cambio</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">scelta_casuale</span> <span class="o">==</span> <span class="s2">&quot;macchina&quot;</span><span class="p">:</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">counter</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># quante volte vinco non cambiando porta</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">contatore_cambio</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># quante volte vinco cambiando porta</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3316
+0.6684
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="probabilita-condizionata-su-altri-eventi">
+<span id="sec-bayes-cancer"></span><h2><span class="section-number">18.2. </span>Probabilità condizionata su altri eventi<a class="headerlink" href="#probabilita-condizionata-su-altri-eventi" title="Permalink to this headline">#</a></h2>
+<p>L’attribuzione di una probabilità ad un evento è sempre condizionata dalle conoscenze che abbiamo a disposizione. Per un determinato stato di conoscenze, attribuiamo ad un dato evento una certa probabilità di verificarsi; ma se il nostro stato di conoscenze cambia, allora cambierà anche la probabilità che attribuiremo all’evento in questione. Infatti, si può pensare che tutte le probabilità siano probabilità condizionate, anche se l’evento condizionante non è sempre esplicitamente menzionato. Arriviamo così alla seguente definizione.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Siano <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> due eventi definiti sullo spazio campione <span class="math notranslate nohighlight">\(S\)</span>. Supponiamo di sapere che l’evento <span class="math notranslate nohighlight">\(B\)</span> si è verificato. Si chiama <em>probabilità condizionata</em> di <span class="math notranslate nohighlight">\(A\)</span> dato <span class="math notranslate nohighlight">\(B\)</span> il numero</p>
+<div class="math notranslate nohighlight" id="equation-eq-probcond">
+<span class="eqno">(18.1)<a class="headerlink" href="#equation-eq-probcond" title="Permalink to this equation">#</a></span>\[
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \quad \text{con}\, P(B) &gt; 0,
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(P(A\cap B)\)</span> è la <em>probabilità congiunta</em> dei due eventi, ovvero la probabilità che si verifichino entrambi.</p>
+</div>
+<p>Si noti che <span class="math notranslate nohighlight">\(P(A \mid B)\)</span> non è definita se <span class="math notranslate nohighlight">\(P(B) = 0\)</span>.</p>
+<p>Possiamo pensare alla probabilità condizionata come a un cambiamento dello spazio campionario da
+<span class="math notranslate nohighlight">\(S\)</span> a <span class="math notranslate nohighlight">\(B\)</span>. Per semplici spazi campione abbiamo dunque</p>
+<div class="math notranslate nohighlight">
+\[
+P(A \mid B) = \frac{\mid A \cap B \mid}{\mid B \mid}.
+\]</div>
+<p>Consideriamo un esempio. Sappiamo che la somma del lancio di due dadi ha prodotto un risultato dispari. Qual è la probabilità che la somma sia minore di 8?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+<span class="n">sample_odd</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">sample_odd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 2),
+ (1, 4),
+ (1, 6),
+ (2, 1),
+ (2, 3),
+ (2, 5),
+ (3, 2),
+ (3, 4),
+ (3, 6),
+ (4, 1),
+ (4, 3),
+ (4, 5),
+ (5, 2),
+ (5, 4),
+ (5, 6),
+ (6, 1),
+ (6, 3),
+ (6, 5)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample_odd</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">roll</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">event</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample_odd</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12 / 18
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se applichiamo l’eq. <a class="reference internal" href="#equation-eq-probcond">(18.1)</a>, abbiamo: <span class="math notranslate nohighlight">\(P(A \cap B)\)</span> = 12/36, <span class="math notranslate nohighlight">\(P(B)\)</span> = 18/36 e</p>
+<div class="math notranslate nohighlight">
+\[
+P(A \mid B) = \frac{12}{18}.
+\]</div>
+<section id="mammografia-e-cancro-al-seno">
+<span id="sec-mammografia"></span><h3><span class="section-number">18.2.1. </span>Mammografia e cancro al seno<a class="headerlink" href="#mammografia-e-cancro-al-seno" title="Permalink to this headline">#</a></h3>
+<p>Consideriamo un altro esempio. Supponiamo che lo screening per la diagnosi precoce del tumore mammario si avvalga di un test che è accurato al 90%, nel senso che classifica correttamente il 90% delle donne colpite dal cancro e il 90% delle donne che non hanno il cancro al seno. Supponiamo che l’1% delle donne sottoposte allo screening abbia effettivamente il cancro al seno (e d’altra parte, il 99% non lo ha). Ci chiediamo: (1) qual è la probabilità che una donna scelta a caso ottenga una mammografia positiva, e (2) se la mammografia è positiva, qual è la probabilità che vi sia effettivamente un tumore al seno?</p>
+<p>Per risolvere questo problema, supponiamo che il test in questione venga somministrato ad un grande campione di donne, diciamo a 1000 donne. Di queste 1000 donne, 10 (ovvero, l’1%) hanno il cancro al seno. Per queste 10 donne, il test darà un risultato positivo in 9 casi (ovvero, nel 90% dei casi). Per le rimanenti 990 donne che non hanno il cancro al seno, il test darà un risultato positivo in 99 casi (se la probabilità di un vero positivo è del 90%, la probabilità di un falso positivo è del 10%). Questa situazione è rappresentata nella figura seguente.</p>
+<a class="reference internal image-reference" href="_images/mammografia.png" id="mammografia"><img alt="_images/mammografia.png" id="mammografia" src="_images/mammografia.png" style="height: 165px;" /></a>
+<p>Combinando i due risultati precedenti, vediamo che il test dà un risultato positivo per 9 donne che hanno effettivamente il cancro al seno e per 99 donne che non ce l’hanno, per un totale di 108 risultati positivi. Dunque, la probabilità di ottenere un risultato positivo al test è <span class="math notranslate nohighlight">\(\frac{108}{1000}\)</span> = 11%. Ma delle 108 donne che hanno ottenuto un risultato positivo al test, solo 9 hanno il cancro al seno. Dunque, la probabilità di avere il cancro al seno, dato un risultato positivo al test (che ha le proprietà descritte sopra), è pari a <span class="math notranslate nohighlight">\(\frac{9}{108}\)</span> = 8%.</p>
+<p>In questo esercizio, la probabilità dell’evento “ottenere un risultato positivo al test” è una probabilità non condizionata, mentre la probabilità dell’evento “avere il cancro al seno, dato che il test ha prodotto un risultato positivo” è una probabilità condizionata.</p>
+</section>
+</section>
+<section id="teorema-della-probabilita-composta">
+<h2><span class="section-number">18.3. </span>Teorema della probabilità composta<a class="headerlink" href="#teorema-della-probabilita-composta" title="Permalink to this headline">#</a></h2>
+<p>È possibile scrivere l’eq. <a class="reference internal" href="#equation-eq-probcond">(18.1)</a> nella forma:</p>
+<div class="math notranslate nohighlight" id="equation-eq-probcondinv">
+<span class="eqno">(18.2)<a class="headerlink" href="#equation-eq-probcondinv" title="Permalink to this equation">#</a></span>\[
+P(A \cap B) = P(B)P(A \mid B) = P(A)P(B \mid A).
+\]</div>
+<p>Questo secondo modo di scrivere l’eq. <a class="reference internal" href="#equation-eq-probcond">(18.1)</a> è chiamato <em>teorema della probabilità composta</em> (o regola moltiplicativa, o regola della catena). La legge della probabilità composta ci dice che la probabilità che si verifichino due eventi <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> è pari alla probabilità di uno dei due eventi moltiplicato con la probabilità dell’altro evento condizionato al verificarsi del primo.</p>
+<p>L’eq. <a class="reference internal" href="#equation-eq-probcondinv">(18.2)</a> si estende al caso di <span class="math notranslate nohighlight">\(n\)</span> eventi <span class="math notranslate nohighlight">\(A_1, \dots, A_n\)</span> nella forma seguente:</p>
+<div class="math notranslate nohighlight" id="equation-eq-probcomposte">
+<span class="eqno">(18.3)<a class="headerlink" href="#equation-eq-probcomposte" title="Permalink to this equation">#</a></span>\[
+P\left( \bigcap_{k=1}^n A_k \right) = \prod_{k=1}^n P\left(  A_k  \ \Biggl\lvert \ \bigcap_{j=1}^{k-1} A_j \right)
+\]</div>
+<p>Per esempio, nel caso di quattro eventi abbiamo</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+P(&amp;A_1 \cap A_2 \cap A_3 \cap A_4) =  \\
+ &amp; P(A_1) \cdot P(A_2 \mid A_1) \cdot  P(A_3 \mid A_1 \cap A_2) \cdot P(A_4 \mid A_1 \cap A_2 \cap A_{3}).\notag
+\end{split}
+\end{split}\]</div>
+<p>Per fare un esempio, consideriamo il problema seguente. Da un’urna contenente 6 palline bianche e 4 nere si estrae una pallina per volta, senza reintrodurla nell’urna. Indichiamo con <span class="math notranslate nohighlight">\(B_i\)</span> l’evento: “esce una pallina bianca alla <span class="math notranslate nohighlight">\(i\)</span>-esima estrazione” e con <span class="math notranslate nohighlight">\(N_i\)</span> l’estrazione di una pallina nera. L’evento: “escono due palline bianche nelle prime due estrazioni” è rappresentato dalla intersezione <span class="math notranslate nohighlight">\(\{B_1 \cap B_2\}\)</span> e, per l’eq. <a class="reference internal" href="#equation-eq-probcondinv">(18.2)</a>, la sua probabilità vale</p>
+<div class="math notranslate nohighlight">
+\[
+P(B_1 \cap B_2) = P(B_1)P(B_2 \mid B_1).
+\]</div>
+<p><span class="math notranslate nohighlight">\(P(B_1)\)</span> vale 6/10, perché nella prima estrazione <span class="math notranslate nohighlight">\(\Omega\)</span> è costituito da 10 elementi: 6 palline bianche e 4 nere. La probabilità condizionata <span class="math notranslate nohighlight">\(P(B_2 \mid B_1)\)</span> vale 5/9, perché nella seconda estrazione, se è verificato l’evento <span class="math notranslate nohighlight">\(B_1\)</span>, lo spazio campionario consiste di 5 palline bianche e 4 nere. Si ricava pertanto:</p>
+<div class="math notranslate nohighlight">
+\[
+P(B_1 \cap B_2) = \frac{6}{10} \cdot \frac{5}{9} = \frac{1}{3}.
+\]</div>
+<p>In modo analogo si ha che</p>
+<div class="math notranslate nohighlight">
+\[
+P(N_1 \cap N_2) = P(N_1)P(N_2 \mid N_1) = \frac{4}{10} \cdot \frac{3}{9} = \frac{4}{30}.
+\]</div>
+<p>Se l’esperimento consiste nell’estrazione successiva di 3 palline, la probabilità che queste siano tutte bianche, per l’eq. <a class="reference internal" href="#equation-eq-probcomposte">(18.3)</a>, vale</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P(B_1 \cap B_2 \cap B_3) &amp;=P(B_1)P(B_2 \mid B_1)P(B_3 \mid B_1 \cap B_2) \notag\\ 
+&amp;=\frac{6}{10}\cdot\frac{5}{9} \cdot\frac{4}{8} \notag\\ 
+&amp;= \frac{1}{6}.
+\end{aligned}
+\end{split}\]</div>
+<p>La probabilità dell’estrazione di tre palline nere è invece:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P(N_1 \cap N_2 \cap N_3) &amp;= P(N_1)P(N_2 \mid N_1)P(N_3 \mid N_1 \cap N_2)\notag\\ 
+&amp;= \frac{4}{10} \cdot \frac{3}{9} \cdot \frac{2}{8} \notag\\ 
+&amp;= \frac{1}{30}.\notag
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="il-teorema-della-probabilita-totale">
+<h2><span class="section-number">18.4. </span>Il teorema della probabilità totale<a class="headerlink" href="#il-teorema-della-probabilita-totale" title="Permalink to this headline">#</a></h2>
+<p>Il teorema della probabilità totale (detto anche teorema delle partizioni) afferma che se abbiamo una partizione di uno spazio campionario <span class="math notranslate nohighlight">\(\Omega\)</span> in <span class="math notranslate nohighlight">\(n\)</span> eventi mutualmente esclusivi e tali che la loro unione formi <span class="math notranslate nohighlight">\(\Omega\)</span>, allora la probabilità di un qualsiasi evento in <span class="math notranslate nohighlight">\(\Omega\)</span> può essere calcolata sommando la probabilità dell’evento su ciascun sottoinsieme della partizione pesata in base alla probabilità del sottoinsieme.</p>
+<p>In altre parole, se <span class="math notranslate nohighlight">\(H_1, H_2, \dots, H_n\)</span> sono eventi mutualmente esclusivi e tali che <span class="math notranslate nohighlight">\(\bigcup_{i=1}^n H_i = \Omega\)</span>, allora per ogni evento <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span>, la probabilità di <span class="math notranslate nohighlight">\(E\)</span> è data da:</p>
+<div class="math notranslate nohighlight" id="equation-eq-prob-tot">
+<span class="eqno">(18.4)<a class="headerlink" href="#equation-eq-prob-tot" title="Permalink to this equation">#</a></span>\[
+P(E) = \sum_{i=1}^n P(E \mid H_i)P(H_i)
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(P(E \mid H_i)\)</span> è la probabilità condizionata di <span class="math notranslate nohighlight">\(E\)</span> dato che si è verificato <span class="math notranslate nohighlight">\(H_i\)</span> r <span class="math notranslate nohighlight">\(P(H_i)\)</span> è la probabilità dell’evento <span class="math notranslate nohighlight">\(H_i\)</span>.</p>
+<p>Il caso più semplice è quello di una partizione dello spazio campione in due sottoinsiemi: <span class="math notranslate nohighlight">\(P(E) = P(E \cap H_1) + P(E \cap H_2)\)</span>.</p>
+<a class="reference internal image-reference" href="_images/bayes_theorem.png" id="image-bayes-theorem"><img alt="_images/bayes_theorem.png" class="align-center" id="image-bayes-theorem" src="_images/bayes_theorem.png" style="height: 230px;" /></a>
+<p>In tali circostanza abbiamo che</p>
+<div class="math notranslate nohighlight">
+\[
+P(E) = P(E \mid H_1) P(H_1) + P(E \mid H_2) P(H_2).
+\]</div>
+<p>L’eq. <a class="reference internal" href="#equation-eq-prob-tot">(18.4)</a> è utile per calcolare <span class="math notranslate nohighlight">\(P(E)\)</span>, se <span class="math notranslate nohighlight">\(P(E \mid H_i)\)</span> e <span class="math notranslate nohighlight">\(P(H_i)\)</span> sono facili da trovare. Quale esempio, consideriamo il seguente problema. Abbiamo tre urne, ciascuna delle quali contiene 100 palline:</p>
+<ul class="simple">
+<li><p>Urna 1: 75 palline rosse e 25 palline blu,</p></li>
+<li><p>Urna 2: 60 palline rosse e 40 palline blu,</p></li>
+<li><p>Urna 3: 45 palline rosse e 55 palline blu.</p></li>
+</ul>
+<p>Una pallina viene estratta a caso da un’urna anch’essa scelta a caso. Qual è la probabilità che la pallina estratta sia di colore rosso?</p>
+<p>Sia <span class="math notranslate nohighlight">\(R\)</span> l’evento “la pallina estratta è rossa” e sia <span class="math notranslate nohighlight">\(U_i\)</span> l’evento che corrisponde alla scelta dell’<span class="math notranslate nohighlight">\(i\)</span>-esima urna. Sappiamo che</p>
+<div class="math notranslate nohighlight">
+\[
+P(R \mid U_1) = 0.75, \quad P(R \mid U_2) = 0.60, \quad P(R \mid U_3) = 0.45.
+\]</div>
+<p>Gli eventi <span class="math notranslate nohighlight">\(U_1\)</span>, <span class="math notranslate nohighlight">\(U_2\)</span> e <span class="math notranslate nohighlight">\(U_3\)</span> costituiscono una partizione dello spazio campione in quanto <span class="math notranslate nohighlight">\(U_1\)</span>, <span class="math notranslate nohighlight">\(U_2\)</span> e <span class="math notranslate nohighlight">\(U_3\)</span> sono eventi mutualmente esclusivi ed esaustivi, ovvero <span class="math notranslate nohighlight">\(P(U_1 \cup U_2 \cup U_3) = 1.0\)</span>. In base al teorema della probabilità totale, la probabilità di estrarre una pallina rossa è dunque</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+P(R) &amp;= P(R \mid U_1)P(U_1) + P(R \mid U_2)P(U_2) + P(R \mid U_3)P(U_3) \\
+&amp;= 0.75 \cdot \frac{1}{3}+0.60 \cdot \frac{1}{3}+0.45 \cdot \frac{1}{3} \\
+&amp;=0.60.
+\end{split}
+\end{split}\]</div>
+</section>
+<section id="l-indipendendenza-stocastica">
+<h2><span class="section-number">18.5. </span>L’indipendendenza stocastica<a class="headerlink" href="#l-indipendendenza-stocastica" title="Permalink to this headline">#</a></h2>
+<p>Un concetto fondamentale per l’applicazione della probabilità in campo statistico è l’indipendenza stocastica. L’equazione <a class="reference internal" href="#equation-eq-probcond">(18.1)</a> offre un modo intuitivo per esprimere l’indipendenza tra due eventi <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span>: se <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> sono indipendenti, il verificarsi di <span class="math notranslate nohighlight">\(A\)</span> non influisce sulla probabilità del verificarsi di <span class="math notranslate nohighlight">\(B\)</span>, e viceversa. In altre parole, il verificarsi di uno dei due eventi non condiziona la probabilità dell’altro evento. Infatti, per l’eq. <a class="reference internal" href="#equation-eq-probcond">(18.1)</a>, si ha che, se <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> sono due eventi indipendenti, risulta:</p>
+<div class="math notranslate nohighlight">
+\[
+P(A \mid B) = \frac{P(A)P(B)}{P(B)} = P(A),
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P(B \mid A) = \frac{P(A)P(B)}{P(A)} = P(B).
+\]</div>
+<p>Possiamo dunque dire che due eventi <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> sono indipendenti se</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+P(A \mid B) &amp;= P(A), \\
+P(B \mid A) &amp;= P(B).
+\end{split}
+\end{split}\]</div>
+<p>Tre eventi, <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span> e <span class="math notranslate nohighlight">\(C\)</span> sono indipendenti se venongno soddisfatte le seguenti condizioni:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P(A \cap B) &amp;= P(A) P(B) \notag\\
+P(A \cap C) &amp;= P(A) P(C) \notag\\
+P(B \cap C) &amp;= P(B) P(C) \notag\\
+P(A \cap B \cap C) &amp;= P(A) P(B) P(C). \notag
+\end{align}
+\end{split}\]</div>
+<p>Se solo le prime tre condizioni vengono soddisfatte, allora gli eventi si dicono indipendenti a due a due.</p>
+<p>Consideriamo il seguente problema. Nel lancio di due dadi non truccati, si considerino gli eventi: <span class="math notranslate nohighlight">\(A\)</span> = “esce un 1 o un 2 nel primo lancio” e <span class="math notranslate nohighlight">\(B\)</span> = “il punteggio totale è 8”. Gli eventi <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> sono indipendenti?</p>
+<p>Calcoliamo <span class="math notranslate nohighlight">\(P(A)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6)]
+12 / 36
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcoliamo <span class="math notranslate nohighlight">\(P(B)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="n">roll</span> <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span> <span class="k">if</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">8</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, 6), (3, 5), (4, 4), (5, 3), (6, 2)]
+5 / 36
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcoliamo <span class="math notranslate nohighlight">\(P(A \cap B)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">roll</span>
+    <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="n">sample</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">roll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">roll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(2, 6)]
+1 / 36
+</pre></div>
+</div>
+</div>
+</div>
+<p>Gli eventi <span class="math notranslate nohighlight">\(A\)</span> e <span class="math notranslate nohighlight">\(B\)</span> non sono statisticamente indipendenti dato che <span class="math notranslate nohighlight">\(P(A \cap B) \neq P(A)P(B)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">12</span><span class="o">/</span><span class="mi">36</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">36</span> <span class="o">==</span> <span class="mi">1</span><span class="o">/</span><span class="mi">36</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="esercizio-di-ricapitolazione-con-python">
+<h2><span class="section-number">18.6. </span>Esercizio di ricapitolazione con Python<a class="headerlink" href="#esercizio-di-ricapitolazione-con-python" title="Permalink to this headline">#</a></h2>
+<p>Seguendo il metodo descritto nel libro “Think Bayes” di <span id="id1">Downey [<a class="reference internal" href="z_biblio.html#id8" title="Allen B Downey. Think Bayes. &quot; O'Reilly Media, Inc.&quot;, 2021.">Dow21</a>]</span>, utilizzeremo una definizione di probabilità semplice e intuitiva per facilitare la comprensione dei concetti fino ad ora descritti. In particolare, la nostra definizione di probabilità si adatta a esercizi che coinvolgono insiemi finiti, e considereremo la probabilità come la frazione di elementi che soddisfano un certo criterio rispetto al totale degli elementi dell’insieme. In altre parole, per calcolare la probabilità di un evento, conteremo quanti elementi dell’insieme rientrano in quell’evento e divideremo questo numero per il totale degli elementi dell’insieme. Questo rende più facile comprendere come funzionano i calcoli di probabilità e applicarli a situazioni pratiche.</p>
+<p>Considereremo qui il dataset <code class="docutils literal notranslate"><span class="pre">penguins</span></code> inteso come un insieme finito sul quale definire vari eventi. Iniziamo ad importare i dati ed escludiamo i dati mancanti.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/penguins.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 333 entries, 0 to 343
+Data columns (total 8 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   species            333 non-null    object 
+ 1   island             333 non-null    object 
+ 2   bill_length_mm     333 non-null    float64
+ 3   bill_depth_mm      333 non-null    float64
+ 4   flipper_length_mm  333 non-null    float64
+ 5   body_mass_g        333 non-null    float64
+ 6   sex                333 non-null    object 
+ 7   year               333 non-null    int64  
+dtypes: float64(4), int64(1), object(3)
+memory usage: 23.4+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ora, poniamoci la domanda se ciascun pinguino viva o meno sull’isola Dream. Per fare ciò, useremo una funzione che ci restituirà un oggetto Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> contenente valori booleani. In particolare, ogni valore sarà <code class="docutils literal notranslate"><span class="pre">True</span></code> se il pinguino associato vive sull’isola Dream, altrimenti sarà <code class="docutils literal notranslate"><span class="pre">False</span></code>. In questo modo, avremo un elenco di valori che ci indicheranno per ciascun pinguino se vive o meno sull’isola Dream, utilizzando la potenza di Pandas per effettuare rapidamente questo tipo di calcoli.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">on_dream</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;island&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Dream&quot;</span>
+<span class="n">on_dream</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    False
+1    False
+2    False
+4    False
+5    False
+Name: island, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>Essendo che il valore <code class="docutils literal notranslate"><span class="pre">True</span></code> corrisponde a 1 e il valore <code class="docutils literal notranslate"><span class="pre">False</span></code> corrisponde a 0, possiamo utilizzare la funzione <code class="docutils literal notranslate"><span class="pre">.sum()</span></code> per contare il numero di pinguini che vivono sull’isola Dream. In altre parole, sommando tutti i valori True nell’oggetto Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> ottenuto prima, otterremo il numero totale di pinguini che vivono sull’isola Dream nel nostro campione di dati. Con questa operazione scopriamo che ci sono 123 pinguini che sono stati osservati sull’isola Dream.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">on_dream</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>123
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per ottenere la proporzione di pinguini che vivono sull’isola Dream, dobbiamo calcolare la frequenza assoluta dei pinguini sull’isola Dream e dividere questo valore per il numero totale di pinguini del nostro campione di dati. Possiamo calcolare questo valore utilizzando il metodo <code class="docutils literal notranslate"><span class="pre">.mean()</span></code> applicato all’oggetto Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> contenente i valori booleani <code class="docutils literal notranslate"><span class="pre">True</span></code> e <code class="docutils literal notranslate"><span class="pre">False</span></code>, ottenuto in precedenza. Questo metodo calcola la media aritmetica di tutti i valori nella serie, dove il valore <code class="docutils literal notranslate"><span class="pre">True</span></code> viene considerato come 1 e il valore <code class="docutils literal notranslate"><span class="pre">False</span></code> come 0. In questo modo, il risultato finale ci darà la proporzione di pinguini che vivono sull’isola Dream rispetto al totale dei pinguini del nostro campione di dati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">on_dream</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36936936936936937
+</pre></div>
+</div>
+</div>
+</div>
+<p>Circa il 36.9% di tutti i pinguini del nostro campione di dati vivono sull’isola Dream. Questo significa che, se scegliamo un pinguino a caso da questo insieme, la probabilità che viva sull’isola Dream è del 36.9%, ovvero 0.369.</p>
+<p>Per automatizzare il calcolo della probabilità, possiamo inserire il codice precedente in una funzione. Questa funzione prenderà in input un oggetto Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> contenente valori booleani, rappresentanti la presenza o meno di un certo attributo, e calcolerà la probabilità come la media aritmetica di tutti i valori nella serie, dove il valore <code class="docutils literal notranslate"><span class="pre">True</span></code> viene considerato come 1 e il valore <code class="docutils literal notranslate"><span class="pre">False</span></code> come 0. In questo modo, la funzione calcolerà la proporzione di <code class="docutils literal notranslate"><span class="pre">True</span></code> rispetto al totale dei valori nella serie e restituirà il valore corrispondente alla probabilità cercata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prob</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the probability of a proposition, A.&quot;&quot;&quot;</span> 
+    <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Verifichiamo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36936936936936937
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo ora la probabilità che un pinguino sia di genere femminile.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">female</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;female&quot;</span>
+<span class="n">prob</span><span class="p">(</span><span class="n">female</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4954954954954955
+</pre></div>
+</div>
+</div>
+</div>
+<section id="intersezione-di-eventi-congiunzione">
+<h3><span class="section-number">18.6.1. </span>Intersezione di eventi (congiunzione)<a class="headerlink" href="#intersezione-di-eventi-congiunzione" title="Permalink to this headline">#</a></h3>
+<p>L’intersezione tra due insiemi corrisponde all’operazione logica della congiunzione. In altre parole, date due proposizioni <span class="math notranslate nohighlight">\(p\)</span> e <span class="math notranslate nohighlight">\(q\)</span>, la loro congiunzione è vera solo se entrambe sono vere. Se abbiamo due oggetti Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> contenenti valori booleani, possiamo utilizzare l’operatore <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> per trovare la loro congiunzione. Questo operatore restituisce un nuovo oggetto <code class="docutils literal notranslate"><span class="pre">Series</span></code> in cui i valori sono <code class="docutils literal notranslate"><span class="pre">True</span></code> solo se entrambi i corrispondenti valori nelle due serie sono <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>Definiamo ora un nuovo evento, chiamato “small”, che identifica i pinguini la cui massa corporea è inferiore al quantile di ordine 1/3. In altre parole, consideriamo la distribuzione dei pesi dei pinguini nel nostro campione di dati e identifichiamo i pinguini il cui peso è inferiore al valore corrispondente al quantile di ordine 1/3 della distribuzione. Questo evento è rappresentato da un oggetto Pandas <code class="docutils literal notranslate"><span class="pre">Series</span></code> booleano, in cui i valori sono <code class="docutils literal notranslate"><span class="pre">True</span></code> se il peso del pinguino è inferiore al quantile di ordine 1/3 e <code class="docutils literal notranslate"><span class="pre">False</span></code> altrimenti.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;body_mass_g&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">prob</span><span class="p">(</span><span class="n">small</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.30930930930930933
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcoliamo ora la probabilità che un pinguino sia di sesso femminile e, allo stesso tempo, appartenga alla categoria “small”. In altre parole, vogliamo calcolare la probabilità che si verifichino contemporaneamente due eventi: che un pinguino sia di sesso femminile e che appartenga alla categoria “small”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">female</span> <span class="o">&amp;</span> <span class="n">small</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2552552552552553
+</pre></div>
+</div>
+</div>
+</div>
+<p>Come ci possiamo aspettare la probabilità dell’intersezione è minore della probabilità di “small” dato che non tutti i pinguini più piccoli sono di genere femminile.</p>
+</section>
+<section id="id2">
+<h3><span class="section-number">18.6.2. </span>Probabilità condizionata<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>Come abbiamo visto in precedenza, la probabilità condizionata è la probabilità calcolata su un sottoinsieme di eventi. Per selezionare un sottoinsieme di dati in un oggetto Pandas, utilizziamo la notazione delle parentesi quadre. Nell’istruzione seguente, selezioniamo solo i pinguini di sesso femminile tra quelli che appartengono alla categoria “small”, ovvero quelli il cui peso corporeo è inferiore al quantile di ordine 1/3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected</span> <span class="o">=</span> <span class="n">female</span><span class="p">[</span><span class="n">small</span><span class="p">]</span>
+<span class="n">prob</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8252427184466019
+</pre></div>
+</div>
+</div>
+</div>
+<p>È importante notare la sintassi utilizzata in questo passaggio: quando inseriamo un oggetto Series booleano (in questo caso chiamato <code class="docutils literal notranslate"><span class="pre">small</span></code>) tra le parentesi quadre che seguono un oggetto Series (in questo caso chiamato <code class="docutils literal notranslate"><span class="pre">female</span></code>), stiamo selezionando solo le righe di <code class="docutils literal notranslate"><span class="pre">female</span></code> per le quali <code class="docutils literal notranslate"><span class="pre">small</span></code> ha il valore <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>Definiamo ora una funzione che prende in input due oggetti <code class="docutils literal notranslate"><span class="pre">Series</span></code> booleani, <code class="docutils literal notranslate"><span class="pre">proposition</span></code> e <code class="docutils literal notranslate"><span class="pre">given</span></code>, e restituisce la probabilità condizionata di <code class="docutils literal notranslate"><span class="pre">proposition</span></code> rispetto a <code class="docutils literal notranslate"><span class="pre">given</span></code>. In altre parole, la funzione calcola la probabilità che <code class="docutils literal notranslate"><span class="pre">proposition</span></code> si verifichi, sapendo che <code class="docutils literal notranslate"><span class="pre">given</span></code> si è verificato.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conditional</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">given</span><span class="p">):</span> 
+    <span class="k">return</span> <span class="n">prob</span><span class="p">(</span><span class="n">proposition</span><span class="p">[</span><span class="n">given</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcoliamo ora la probabilità condizionata che un pinguino sia di sesso femminile, dato che appartiene alla categoria “small”, ovvero il sottoinsieme di pinguini il cui peso corporeo è inferiore al quantile di ordine 1/3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional</span><span class="p">(</span><span class="n">female</span><span class="p">,</span> <span class="n">given</span><span class="o">=</span><span class="n">small</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8252427184466019
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo ora la probabilità di essere di genere femminile, se consideriamo solo i pinguini sull’isola Dream, <span class="math notranslate nohighlight">\(P(\text{female} \mid \text{Dream})\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional</span><span class="p">(</span><span class="n">female</span><span class="p">,</span> <span class="n">given</span><span class="o">=</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4959349593495935
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso risultato si ottiene applicando la definizione di probabilità condizionata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">female</span> <span class="o">&amp;</span> <span class="n">on_dream</span><span class="p">)</span> <span class="o">/</span> <span class="n">prob</span><span class="p">(</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49593495934959353
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcoliamo la probabilità di estrarre a caso un pinguino di sesso femminile che vive sull’isola Dream.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prob</span><span class="p">(</span><span class="n">female</span> <span class="o">&amp;</span> <span class="n">on_dream</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1831831831831832
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possiamo ottenere lo stesso risultato del calcolo precedente, ovvero la probabilità di estrarre a caso un pinguino di sesso femminile che vive sull’isola Dream, usando la probabilità condizionata per calcolare l’intersezione tra i due eventi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conditional</span><span class="p">(</span><span class="n">female</span><span class="p">,</span> <span class="n">given</span><span class="o">=</span><span class="n">on_dream</span><span class="p">)</span> <span class="o">*</span> <span class="n">prob</span><span class="p">(</span><span class="n">on_dream</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.18318318318318316
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2><span class="section-number">18.7. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>La probabilità condizionata riveste un ruolo fondamentale poiché ci permette di definire in modo preciso il concetto di indipendenza statistica. Uno degli aspetti cruciali dell’analisi statistica riguarda la valutazione dell’associazione tra due variabili. Nel presente capitolo abbiamo esaminato il concetto di indipendenza, inteso come contrario all’associazione, mentre in seguito esploreremo come effettuare inferenze sulla correlazione tra variabili.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="111_prob_tutorial.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Esercizi di probabilità discreta</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="120_bayes_theorem.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Il teorema di Bayes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-paradosso-di-monty-hall">18.1. Il paradosso di Monty Hall</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilita-condizionata-su-altri-eventi">18.2. Probabilità condizionata su altri eventi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mammografia-e-cancro-al-seno">18.2.1. Mammografia e cancro al seno</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-della-probabilita-composta">18.3. Teorema della probabilità composta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-teorema-della-probabilita-totale">18.4. Il teorema della probabilità totale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#l-indipendendenza-stocastica">18.5. L’indipendendenza stocastica</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizio-di-ricapitolazione-con-python">18.6. Esercizio di ricapitolazione con Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intersezione-di-eventi-congiunzione">18.6.1. Intersezione di eventi (congiunzione)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">18.6.2. Probabilità condizionata</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">18.7. Commenti e considerazioni finali</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

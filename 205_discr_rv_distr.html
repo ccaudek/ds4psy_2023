@@ -1,0 +1,1018 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>23. Distribuzioni di v.c. discrete &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '205_discr_rv_distr';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/205_discr_rv_distr.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="24. Distribuzioni di v.c. continue" href="210_cont_rv_distr.html" />
+    <link rel="prev" title="22. La funzione di densità di probabilità" href="135_density_func.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="321_balance-prior-post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/205_discr_rv_distr.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Distribuzioni di v.c. discrete</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-prova-bernoulliana">23.1. Una prova Bernoulliana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-sequenza-di-prove-bernoulliane">23.2. Una sequenza di prove Bernoulliane</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valore-atteso-e-deviazione-standard">23.2.1. Valore atteso e deviazione standard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-discreta-uniforme">23.3. Distribuzione discreta uniforme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-beta-binomiale">23.4. Distribuzione beta-binomiale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">23.5. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">23.6. Watermark</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/ccaudek/ds4psy_2023/blob/main/205_discr_rv_distr.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="distribuzioni-di-v-c-discrete">
+<span id="discr-distr-notebook"></span><h1><span class="section-number">23. </span>Distribuzioni di v.c. discrete<a class="headerlink" href="#distribuzioni-di-v-c-discrete" title="Permalink to this headline">#</a></h1>
+<p>In questo capitolo, esamineremo le principali distribuzioni di probabilità delle variabili casuali discrete. Per esempio, un esperimento casuale che può dare luogo a solo due possibili esiti (successo, insuccesso) è modellabile con una variabile casuale di Bernoulli. Una sequenza di prove di Bernoulli costituisce un processo Bernoulliano. Il numero di successi dopo <span class="math notranslate nohighlight">\(n\)</span> prove di Bernoulli corrisponde a una variabile casuale che segue la legge binomiale. La distribuzione binomiale risulta da un insieme di prove di Bernoulli solo se il numero totale <span class="math notranslate nohighlight">\(n\)</span> è fisso per disegno. Se il numero di prove è esso stesso una variabile casuale, allora il numero di successi nella corrispondente sequenza di prove bernoulliane segue la distribuzione di Poisson. Concluderemo questo capitolo con la distribuzione discreta uniforme, che assegna la stessa probabilità a ciascun valore in un intervallo finito.</p>
+<section id="una-prova-bernoulliana">
+<h2><span class="section-number">23.1. </span>Una prova Bernoulliana<a class="headerlink" href="#una-prova-bernoulliana" title="Permalink to this headline">#</a></h2>
+<p>Se un esperimento casuale ha solo due esiti possibili, allora le repliche indipendenti di questo esperimento sono chiamate “prove Bernoulliane” (il lancio di una moneta è il tipico esempio).</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Viene detta variabile di Bernoulli una variabile casuale discreta <span class="math notranslate nohighlight">\(Y = \{0, 1\}\)</span> con la seguente distribuzione di probabilità:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P(Y \mid \theta) =
+  \begin{cases}
+    \theta     &amp; \text{se $Y = 1$}, \\
+    1 - \theta &amp; \text{se $Y = 0$},
+  \end{cases}
+\end{split}\]</div>
+<p>con <span class="math notranslate nohighlight">\(0 \leq \theta \leq 1\)</span>. Convenzionalmente l’evento <span class="math notranslate nohighlight">\(\{Y = 1\}\)</span> con probabilità <span class="math notranslate nohighlight">\(\theta\)</span> viene chiamato “successo” mentre l’evento <span class="math notranslate nohighlight">\(\{Y = 0\}\)</span> con probabilità <span class="math notranslate nohighlight">\(1-\theta\)</span> viene chiamato “insuccesso”.</p>
+</div>
+<p>Applicando l’operatore di valore atteso e di varianza, otteniamo</p>
+<div class="math notranslate nohighlight" id="equation-eq-ev-var-bern">
+<span class="eqno">(23.1)<a class="headerlink" href="#equation-eq-ev-var-bern" title="Permalink to this equation">#</a></span>\[\begin{split}
+\begin{align}
+\mathbb{E}(Y) &amp;= 0 \cdot P(Y=0) + 1 \cdot P(Y=1) = \theta, \\
+\mathbb{V}(Y) &amp;= (0 - \theta)^2 \cdot P(Y=0) + (1 - \theta)^2 \cdot P(Y=1) = \theta(1-\theta).
+\end{align}
+\end{split}\]</div>
+<p>Scriviamo <span class="math notranslate nohighlight">\(Y \sim Bernoulli(\theta)\)</span> per indicare che la variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> ha una distribuzione Bernoulliana di parametro <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Nel caso del lancio di una moneta equilibrata la variabile casuale di Bernoulli assume i valori <span class="math notranslate nohighlight">\(0\)</span> e <span class="math notranslate nohighlight">\(1\)</span>. La distribuzione di massa di probabilità è pari a <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> in corrispondenza di entrambi i valori. La funzione di distribuzione vale <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> per <span class="math notranslate nohighlight">\(Y = 0\)</span> e <span class="math notranslate nohighlight">\(1\)</span> per <span class="math notranslate nohighlight">\(Y = 1\)</span>.</p>
+</section>
+<section id="una-sequenza-di-prove-bernoulliane">
+<h2><span class="section-number">23.2. </span>Una sequenza di prove Bernoulliane<a class="headerlink" href="#una-sequenza-di-prove-bernoulliane" title="Permalink to this headline">#</a></h2>
+<p>La distribuzione binomiale rappresenta la distribuzione di probabilità discreta degli eventi in cui una variabile casuale di Bernoulli viene ripetuta per un numero fisso di volte <span class="math notranslate nohighlight">\(n\)</span>, ciascuna con la stessa probabilità di successo <span class="math notranslate nohighlight">\(\theta\)</span>. La distribuzione binomiale è quindi caratterizzata dall’elenco di tutti i possibili numeri di successi <span class="math notranslate nohighlight">\(Y = {0, 1, 2, \dots, n}\)</span> che possono essere osservati in queste <span class="math notranslate nohighlight">\(n\)</span> prove indipendenti, a ciascuno dei quali è associata una relativa probabilità.</p>
+<p>La distribuzione binomiale è utilizzata per modellare diversi esperimenti, come ad esempio il risultato di una serie di lanci di una stessa moneta o il numero di successi in una serie di estrazioni da un’urna con reintroduzione. È importante notare che la distribuzione binomiale è in realtà una famiglia di distribuzioni, in quanto le probabilità variano al variare dei parametri <span class="math notranslate nohighlight">\(\theta\)</span> e <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>La probabilità di ottenere <span class="math notranslate nohighlight">\(y\)</span> successi e <span class="math notranslate nohighlight">\(n-y\)</span> insuccessi in <span class="math notranslate nohighlight">\(n\)</span> prove Bernoulliane è data dalla distribuzione binomiale:</p>
+<div class="math notranslate nohighlight" id="equation-eq-binomialdistribution">
+<span class="eqno">(23.2)<a class="headerlink" href="#equation-eq-binomialdistribution" title="Permalink to this equation">#</a></span>\[\begin{split}
+\begin{align}
+P(Y=y) &amp;= \binom{n}{y} \theta^{y} (1-\theta)^{n-y} \notag \\
+&amp;= \frac{n!}{y!(n-y)!} \theta^{y} (1-\theta)^{n-y}, 
+\end{align}
+\end{split}\]</div>
+<p>dove <span class="math notranslate nohighlight">\(n\)</span> = numero di prove Bernoulliane, <span class="math notranslate nohighlight">\(\theta\)</span> = probabilità di successo in ciascuna prova e <span class="math notranslate nohighlight">\(y\)</span> = numero di successi.</p>
+</div>
+<p>L’eq. <a class="reference internal" href="#equation-eq-binomialdistribution">(23.2)</a> può essere derivata nel modo seguente. Indichiamo con <span class="math notranslate nohighlight">\(S\)</span> il successo e con <span class="math notranslate nohighlight">\(I\)</span> l’insuccesso di ciascuna prova. Una sequenza di <span class="math notranslate nohighlight">\(n\)</span> prove Bernoulliane darà come esito una sequenza di <span class="math notranslate nohighlight">\(n\)</span> elementi <span class="math notranslate nohighlight">\(S\)</span> e <span class="math notranslate nohighlight">\(I\)</span>. Ad esempio, una sequenza che contiene <span class="math notranslate nohighlight">\(y\)</span> successi è la seguente:</p>
+<div class="math notranslate nohighlight">
+\[
+\overbrace{SS\dots S}^\text{$y$ volte} \overbrace{II\dots I}^\text{$n-y$ volte}
+\]</div>
+<p>Essendo <span class="math notranslate nohighlight">\(\theta\)</span> la probabilità di <span class="math notranslate nohighlight">\(S\)</span> e <span class="math notranslate nohighlight">\(1-\theta\)</span> la probabilità di <span class="math notranslate nohighlight">\(I\)</span>, la probabilità di ottenere la specifica sequenza riportata sopra è</p>
+<div class="math notranslate nohighlight" id="equation-eq-demo-bino-kernel">
+<span class="eqno">(23.3)<a class="headerlink" href="#equation-eq-demo-bino-kernel" title="Permalink to this equation">#</a></span>\[
+\begin{equation}
+\overbrace{\theta \theta\dots \theta}^\text{$y$ volte} \overbrace{(1-\theta)(1-\theta)\dots (1-\theta)}^\text{$n-y$ volte} = \theta^y \cdot (1-\theta)^{n-y}.
+\end{equation}
+\]</div>
+<p>Non siamo però interessati alla probabilità di una <em>specifica</em> sequenza di <span class="math notranslate nohighlight">\(S\)</span> e <span class="math notranslate nohighlight">\(I\)</span> ma, bensì, alla probabilità di osservare una <em>qualsiasi</em> sequenza di <span class="math notranslate nohighlight">\(y\)</span> successi in <span class="math notranslate nohighlight">\(n\)</span> prove. In altre parole, vogliamo la probabilità dell’unione di tutti gli eventi corrispondenti a <span class="math notranslate nohighlight">\(y\)</span> successi in <span class="math notranslate nohighlight">\(n\)</span> prove.</p>
+<p>È immediato notare che una qualsiasi altra sequenza contenente esattamente <span class="math notranslate nohighlight">\(y\)</span> successi avrà sempre come probabilità <span class="math notranslate nohighlight">\(\theta^y \cdot (1-\theta)^{n-y}\)</span>: il prodotto infatti resta costante anche se cambia l’ordine dei fattori.<a class="footnote-reference brackets" href="#discr-rv-distr-1" id="id1">1</a> Per trovare il risultato cercato dobbiamo moltiplicare l’eq. <a class="reference internal" href="#equation-eq-demo-bino-kernel">(23.3)</a> per il numero di sequenze possibili di <span class="math notranslate nohighlight">\(y\)</span> successi in <span class="math notranslate nohighlight">\(n\)</span> prove.</p>
+<p>Il numero di sequenze che contengono esattamente <span class="math notranslate nohighlight">\(y\)</span> successi in <span class="math notranslate nohighlight">\(n\)</span> prove è fornito dal coefficiente binomiale</p>
+<div class="math notranslate nohighlight" id="equation-eq-binomial-coefficient">
+<span class="eqno">(23.4)<a class="headerlink" href="#equation-eq-binomial-coefficient" title="Permalink to this equation">#</a></span>\[
+\binom{n}{y} = \frac{n!}{y!(n-y)!},
+\]</div>
+<p>dove il simbolo <span class="math notranslate nohighlight">\(n!\)</span> si legge <span class="math notranslate nohighlight">\(n\)</span> fattoriale ed è uguale al prodotto di <span class="math notranslate nohighlight">\(n\)</span> numeri interi decrescenti a partire da <span class="math notranslate nohighlight">\(n\)</span>. Per definizione <span class="math notranslate nohighlight">\(0! = 1\)</span>.</p>
+<p>Essendo la probabilità dell’unione di <span class="math notranslate nohighlight">\(K\)</span> elementi incompatibili uguale alla somma delle loro rispettive probabilità, e dato che le sequenze di <span class="math notranslate nohighlight">\(y\)</span> successi in <span class="math notranslate nohighlight">\(n\)</span> prove hanno tutte la stessa probabilità, per trovare la formula della distributione binomiale <a class="reference internal" href="#equation-eq-binomialdistribution">(23.2)</a> è sufficiente moltiplicare l’eq. <a class="reference internal" href="#equation-eq-demo-bino-kernel">(23.3)</a> per la <a class="reference internal" href="#equation-eq-binomial-coefficient">(23.4)</a>.</p>
+<p>Esaminiamo un esempio numerico. Importiamo i pacchetti che ci servono.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="c1"># Initialize random number generator</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">8927</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;bmh&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;svg&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Supponiamo di avere osservato 2 successi in 4 prove bernoulliane con probabilità di successo <span class="math notranslate nohighlight">\(\theta\)</span> = 0.2. Qual è la probabilità di ottenere questo risultato?</p>
+<p>La risposta è fornita dall’eq. <a class="reference internal" href="#equation-eq-binomialdistribution">(23.2)</a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P(Y=2) &amp;= \frac{4!}{2!(4-2)!} 0.2^{2} (1-0.2)^{4-2} \notag  \\
+ &amp;= \frac{4 \cdot 3 \cdot 2 \cdot 1}{(2 \cdot 1)(2 \cdot 1)}
+0.2^{2} 0.8^{2} = 0.1536. \notag
+\end{aligned}
+\end{split}\]</div>
+<p>Svolgiamo lo stesso calcolo usando Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">theta</span><span class="o">**</span><span class="n">y</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.15360000000000007
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso risultato si può trovare usando una funzione dedicata in Python. La libreria SciPy contiene funzioni analitiche per una vasta gamma di distribuzioni e funzioni di massa di probabilità; le potete trovare <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">qui</a>. Per la <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binom.html">binomiale</a>, si usa <code class="docutils literal notranslate"><span class="pre">scipy.stats.binom</span></code>.</p>
+<p>Per trovare i valori di massa di probabilità binomiali usiamo <code class="docutils literal notranslate"><span class="pre">st.binom.pmf(y,</span> <span class="pre">n,</span> <span class="pre">p)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1535999999999999
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ripetendo i calcoli per i valori <span class="math notranslate nohighlight">\(y = 0, \dots, 4\)</span> troviamo la distribuzione binomiale di parametri <span class="math notranslate nohighlight">\(n = 4\)</span> e <span class="math notranslate nohighlight">\(\theta = 0.2\)</span>:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-center head"><p>y</p></th>
+<th class="text-center head"><p>P(Y = y)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0.4096</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0.4096</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>0.1536</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>0.0256</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>0.0016</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>sum</p></td>
+<td class="text-center"><p>1.0</p></td>
+</tr>
+</tbody>
+</table>
+<p>Lo stesso risultato si trova usando <code class="docutils literal notranslate"><span class="pre">st.binom.pmf</span></code>. Per fare questo definisco <code class="docutils literal notranslate"><span class="pre">y</span></code> come un array NumPy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 1 2 3 4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Posso ora trovare le probabilità associate a ciascuno dei possibili valori che la variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> può assumere.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.4096, 0.4096, 0.1536, 0.0256, 0.0016])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Rappresentiamo graficamente la distribuzione di massa di probabilità.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;bo&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Funzione di massa binomiale: $n$=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">, $</span><span class="se">\\</span><span class="s2">theta$=</span><span class="si">{</span><span class="n">theta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probabilità&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">4</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 0.4300800000000001)
+</pre></div>
+</div>
+<img alt="_images/591d4660c0ba92878092b9c475dfdb0b44efd57377cfecc4a203f62389fb4087.svg" src="_images/591d4660c0ba92878092b9c475dfdb0b44efd57377cfecc4a203f62389fb4087.svg" /></div>
+</div>
+<p>Esistono due modi per usare <code class="docutils literal notranslate"><span class="pre">scipy</span></code> per la binomiale. È possibile prima dichiarare un oggetto che corrisponde ad una variabile casuale, ad esempio <code class="docutils literal notranslate"><span class="pre">rv</span> <span class="pre">=</span> <span class="pre">binom(n,</span> <span class="pre">theta)</span></code>, e poi chiamare <code class="docutils literal notranslate"><span class="pre">rv.pmf(y)</span></code>. Oppure si può usare la chiamata <code class="docutils literal notranslate"><span class="pre">binom.pmf(y,</span> <span class="pre">n,</span> <span class="pre">theta)</span></code>. Nel caso presente stiamo usando il secondo metodo.</p>
+<p>Per fare un altro esempio, mostriamo qui la distribuzione di probabilità di alcune distribuzioni binomiali, per due valori di <span class="math notranslate nohighlight">\(n\)</span> e <span class="math notranslate nohighlight">\(\theta\)</span>, è fornita nella figura seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+    <span class="n">binom</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">binom</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;theta = </span><span class="si">{:f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">0.1</span><span class="o">*</span><span class="n">theta</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Numero y di successi&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilità&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribuzione binomiale al variare di $</span><span class="se">\\</span><span class="s2">theta$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3d5a2cc66a9a807be7501adbe4f1becea7d3ebd5686006910005f86f1a712814.svg" src="_images/3d5a2cc66a9a807be7501adbe4f1becea7d3ebd5686006910005f86f1a712814.svg" /></div>
+</div>
+<p>Consideriamo un altro esempio. Lanciando <span class="math notranslate nohighlight">\(5\)</span> volte una moneta onesta, qual è la probabilità che esca testa almeno tre volte?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span>  <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49999999999999983
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49999999999999983
+</pre></div>
+</div>
+</div>
+</div>
+<p>Più facilmente, si trova la risposta usando la funzione di ripartizione <code class="docutils literal notranslate"><span class="pre">binom.cdf</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Rappresentiamo graficamente la funzione di distribuzione per una Binomiale di ordine <span class="math notranslate nohighlight">\(n\)</span> = 5 e <span class="math notranslate nohighlight">\(\theta\)</span> = 0.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">theta</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">theta</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-.&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Funzione di ripartizione binomiale: $n$=</span><span class="si">{</span><span class="mi">5</span><span class="si">}</span><span class="s2">, $</span><span class="se">\\</span><span class="s2">theta$=</span><span class="si">{</span><span class="n">theta</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probabilità&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Probabilità&#39;)
+</pre></div>
+</div>
+<img alt="_images/f40672c9e47c75f978d404290777df6898b3c296257f5bd1def30bf363dd87c5.svg" src="_images/f40672c9e47c75f978d404290777df6898b3c296257f5bd1def30bf363dd87c5.svg" /></div>
+</div>
+<p>Resta da capire come generare una sequenza casuale di valori da una distribuzione Binomiale. Per fare questo, prima creiamo una variabile casuale Binomiale “frozen”. Una variabile casuale <em>frozen</em> è un’istanza di una distribuzione di probabilità che è stata fissata in modo che i suoi parametri non possano essere modificati. Quando si crea una variabile casuale <em>frozen</em>, si specificano i valori dei parametri della distribuzione di probabilità (nel nostro caso, il numero di prove e la probabilità di successo). Dopo che la variabile casuale è stata creata, i suoi parametri non possono essere modificati. Invece, è possibile generare campioni dalla distribuzione di probabilità corrispondente usando il metodo <code class="docutils literal notranslate"><span class="pre">rvs()</span></code> della variabile casuale <em>frozen</em>. Per esempio, definiamo una variabile casuale Binomiale <em>frozen</em> di parametri <span class="math notranslate nohighlight">\(n\)</span> = 5 e <span class="math notranslate nohighlight">\(p\)</span> = 0.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">rv</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generiamo poi 30 realizzazioni della v.c. <code class="docutils literal notranslate"><span class="pre">rv</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">rv</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 2 2 1 3 3 3 2 3 2 2 1 3 3 3 3 3 2 2 0 2 1 2 3 2 3 2 2 3 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso risultato si può anche ottenere mediante la funzione <code class="docutils literal notranslate"><span class="pre">random.binomial()</span></code> di NumPy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 1 2 4 4 2 4 3 3 3 2 3 3 1 2 2 1 2 2 2 2 1 3 3 5 4 3 4 1 2
+</pre></div>
+</div>
+</div>
+</div>
+<section id="valore-atteso-e-deviazione-standard">
+<h3><span class="section-number">23.2.1. </span>Valore atteso e deviazione standard<a class="headerlink" href="#valore-atteso-e-deviazione-standard" title="Permalink to this headline">#</a></h3>
+<p>La media (numero atteso di successi in <span class="math notranslate nohighlight">\(n\)</span> prove) e la deviazione standard di una distribuzione binomiale si trovano nel modo seguente:</p>
+<div class="math notranslate nohighlight" id="equation-eq-mean-var-binomial">
+<span class="eqno">(23.5)<a class="headerlink" href="#equation-eq-mean-var-binomial" title="Permalink to this equation">#</a></span>\[\begin{split}
+\begin{align}
+\mu    &amp;= n\theta,  \notag \\
+\sigma &amp;= \sqrt{n\theta(1-\theta)}.
+\end{align}
+\end{split}\]</div>
+<div class="admonition-dimostrazione admonition">
+<p class="admonition-title">Dimostrazione</p>
+<p>Essendo <span class="math notranslate nohighlight">\(Y\)</span> la somma di <span class="math notranslate nohighlight">\(n\)</span> prove Bernoulliane indipendenti <span class="math notranslate nohighlight">\(Y_i\)</span>, è facile vedere che</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\mathbb{E}(Y) &amp;= \mathbb{E}\left( \sum_{i=1}^n Y_i \right) = \sum_{i=1}^n \mathbb{E}(Y_i) = n\theta, \\
+\mathbb{V}(Y) &amp;= \mathbb{V} \left( \sum_{i=1}^n Y_i \right) = \sum_{i=1}^n \mathbb{V}(Y_i) = n \theta (1-\theta).
+\end{align}
+\end{split}\]</div>
+</div>
+<p>Si trovino il valore atteso e la varianza del lancio di quattro monete con probabilità di successo pari a <span class="math notranslate nohighlight">\(\theta = 0.2\)</span>.</p>
+<p>Il valore atteso è <span class="math notranslate nohighlight">\(\mu = n \theta = 4 \cdot 0.2 = 0.8.\)</span> La varianza è <span class="math notranslate nohighlight">\(n \theta (1-\theta) = 4 \cdot 0.2 \cdot (1 - 0.2) = 0.64\)</span>.</p>
+<p>Ciò significa che, se l’esperimento casuale venisse ripetuto infinite volte, l’esito testa verrebbe osservato un numero medio di volte pari a 0.8, con una varianza di 0.64.</p>
+<p>Verifichiamo questi risultati con una simulazione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">rv</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">rv</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.80123
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6433404871000001
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="distribuzione-discreta-uniforme">
+<h2><span class="section-number">23.3. </span>Distribuzione discreta uniforme<a class="headerlink" href="#distribuzione-discreta-uniforme" title="Permalink to this headline">#</a></h2>
+<p>Abbiamo già introdotto la distribuzione uniforme in precedenza. Ricordiamo che una distribuzione discreta uniforme è una distribuzione di probabilità discreta che è uniforme su un insieme, ovvero che attribuisce ad ogni elemento dell’insieme discreto e finito <span class="math notranslate nohighlight">\(S\)</span> su cui è definita la stessa probabilità <span class="math notranslate nohighlight">\(p\)</span> di verificarsi.</p>
+<p>Si consideri una variabile casuale discreta <span class="math notranslate nohighlight">\(X\)</span> con supporto <span class="math notranslate nohighlight">\(1, 2, \dots, N\)</span>. Un esperimento casuale in cui si verifica questa distribuzione è la scelta casuale di un intero compreso tra 1 e <span class="math notranslate nohighlight">\(N\)</span> inclusi. Sia <span class="math notranslate nohighlight">\(X\)</span> il numero scelto. La condizione di normalizzazione implica che</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^N P(X_i) = \sum_{i=1}^N P = Np = 1.
+\]</div>
+<p>Allora</p>
+<div class="math notranslate nohighlight">
+\[
+P(X = x) = \frac{1}{N}, 
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(N\)</span> è il numero dei possibili eventi.</p>
+<p>Il valore atteso di <span class="math notranslate nohighlight">\(X\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(X) = \sum_{x=1}^N x f_X(x) = \sum_{x=1}^N x \frac{1}{N} = \frac{1}{N} (1 + 2 + \dots + N) = \frac{N+1}{2},
+\]</div>
+<p>dove abbiamo utilizzato l’identità <span class="math notranslate nohighlight">\(1+2+···+N = N(N+1)/2\)</span>.</p>
+<p>Per trovare la varianza, prima calcoliamo</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(X^2) = \frac{1}{N} \sum_{x=1}^N x^2,
+\]</div>
+<p>e poi troviamo</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{V}(X) = \mathbb{E}(X^2) - \left[\mathbb{E}(X)\right]^2.
+\]</div>
+</section>
+<section id="distribuzione-beta-binomiale">
+<h2><span class="section-number">23.4. </span>Distribuzione beta-binomiale<a class="headerlink" href="#distribuzione-beta-binomiale" title="Permalink to this headline">#</a></h2>
+<p>La distribuzione beta-binomiale di parametri <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span> è una distribuzione discreta con una funzione di massa di probabilità uguale a</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-binom-formula">
+<span class="eqno">(23.6)<a class="headerlink" href="#equation-eq-beta-binom-formula" title="Permalink to this equation">#</a></span>\[
+BetaBinomial(y \mid N, \alpha, \beta) = \binom{N}{y} \frac{B(y + \alpha, N-y+\beta)}{B(\alpha, \beta)},
+\]</div>
+<p>dove la funzione beta è <span class="math notranslate nohighlight">\(B(u, v) = \frac{\Gamma(u)\Gamma(v)}{\Gamma(u+v)}\)</span>.</p>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2><span class="section-number">23.5. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>La distribuzione binomiale è una distribuzione di probabilità discreta che descrive il numero di successi in un processo di Bernoulli, ovvero la variabile aleatoria <span class="math notranslate nohighlight">\(Y = Y_1 + \dots + Y_n\)</span> che somma <span class="math notranslate nohighlight">\(n\)</span> variabili casuali indipendenti di uguale distribuzione di Bernoulli <span class="math notranslate nohighlight">\(\mathcal{B}(\theta)\)</span>, ognuna delle quali può fornire due soli risultati: il successo con probabilità <span class="math notranslate nohighlight">\(\theta\)</span> e l’insuccesso con probabilità <span class="math notranslate nohighlight">\(1 - \theta\)</span>.</p>
+<p>La distribuzione binomiale è molto importante per le sue molte applicazioni. Nelle presenti dispense dedicate all’analisi bayesiana, è importante perché costituisce il fondamento del caso più semplice dell’<em>aggiornamento bayesiano</em>, ovvero il caso Beta-Binomiale. Il modello Beta-Binomiale fornisce un esempio paradigmatico dell’approccio bayesiano all’inferenza e sarà trattato in maniera analitica nei capitoli successivi. È dunque importante che le proprietà della distribuzione binomiale risultino ben chiare.</p>
+</section>
+<section id="watermark">
+<h2><span class="section-number">23.6. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w -p pytensor
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sun May 28 2023
+
+Python implementation: CPython
+Python version       : 3.11.3
+IPython version      : 8.13.2
+
+pytensor: 2.11.1
+
+pandas    : 1.5.3
+arviz     : 0.15.1
+matplotlib: 3.7.1
+seaborn   : 0.12.2
+numpy     : 1.23.5
+scipy     : 1.10.1
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="discr-rv-distr-1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Viene detta <em>scambiabilità</em> la proprietà per cui l’ordine con cui compiamo le osservazioni è irrilevante per l’assegnazione delle probabilità.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="135_density_func.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">22. </span>La funzione di densità di probabilità</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="210_cont_rv_distr.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">24. </span>Distribuzioni di v.c. continue</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-prova-bernoulliana">23.1. Una prova Bernoulliana</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-sequenza-di-prove-bernoulliane">23.2. Una sequenza di prove Bernoulliane</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#valore-atteso-e-deviazione-standard">23.2.1. Valore atteso e deviazione standard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-discreta-uniforme">23.3. Distribuzione discreta uniforme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-beta-binomiale">23.4. Distribuzione beta-binomiale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">23.5. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">23.6. Watermark</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

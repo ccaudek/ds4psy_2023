@@ -1,0 +1,1146 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>26. La verosimiglianza &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '225_likelihood';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/225_likelihood.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="27. Apprendimento per rinforzo" href="226_rescorla_wagner.html" />
+    <link rel="prev" title="25. Generazione di numeri casuali" href="215_rng.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="321_balance-prior-post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/225_likelihood.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>La verosimiglianza</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-funzione-di-verosimiglianza">26.1. La funzione di verosimiglianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-binomiale">26.2. Modello binomiale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione">26.2.1. Interpretazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-log-verosimiglianza">26.2.2. La log-verosimiglianza</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-gaussiano">26.3. Modello gaussiano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivazione-formale">26.4. Derivazione formale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">26.5. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">26.6. Watermark</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/ccaudek/ds4psy_2023/blob/main/225_likelihood.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="la-verosimiglianza">
+<span id="cap-likelihood"></span><h1><span class="section-number">26. </span>La verosimiglianza<a class="headerlink" href="#la-verosimiglianza" title="Permalink to this headline">#</a></h1>
+<p><strong>Obiettivi di apprendimento</strong></p>
+<p>Dopo aver completato questo capitolo, sarai in grado di:</p>
+<ul class="simple">
+<li><p>Comprendere il concetto di funzione di verosimiglianza e il suo ruolo nell’estimazione dei parametri.</p></li>
+<li><p>Generare grafici della funzione di verosimiglianza binomiale per esperimenti ripetuti.</p></li>
+<li><p>Generare grafici della funzione di verosimiglianza del modello gaussiano per una singola osservazione.</p></li>
+<li><p>Generare grafici della funzione di verosimiglianza del modello gaussiano per un campione di osservazioni.</p></li>
+<li><p>Interpretare i grafici della funzione di verosimiglianza per estrarre informazioni sui possibili valori dei parametri.</p></li>
+<li><p>Comprendere il concetto di stima di massima verosimiglianza e il suo utilizzo nella determinazione dei valori dei parametri.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="c1"># from scipy.stats import binom</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="c1"># Initialize random number generator</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">8927</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;bmh&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;svg&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="la-funzione-di-verosimiglianza">
+<h2><span class="section-number">26.1. </span>La funzione di verosimiglianza<a class="headerlink" href="#la-funzione-di-verosimiglianza" title="Permalink to this headline">#</a></h2>
+<p>Come spesso accade in statistica, il nostro obiettivo è stimare un parametro del modello utilizzando i dati a nostra disposizione. Nel contesto frequentista, una delle metodologie più comuni per stimare i parametri è la stima di massima verosimiglianza. Questo approccio si basa sulla definizione della funzione di verosimiglianza, che indica quanto i nostri dati siano verosimili per un determinato valore del parametro. La funzione di verosimiglianza è utilizzata sia nel paradigma bayesiano che in quello frequentista.</p>
+<p>La funzione di probabilità (o densità) e la funzione di verosimiglianza sono formalmente identiche ma hanno scopi diversi. Nella funzione di probabilità, i parametri <span class="math notranslate nohighlight">\(\theta\)</span> sono noti e la funzione viene utilizzata per calcolare la probabilità (o densità di probabilità) dei dati <span class="math notranslate nohighlight">\(x\)</span>. Nella funzione di verosimiglianza, invece, i dati <span class="math notranslate nohighlight">\(x\)</span> sono noti e la funzione viene utilizzata per determinare quale valore del parametro <span class="math notranslate nohighlight">\(\theta\)</span> sia più verosimile alla luce dei dati osservati.</p>
+<p>La funzione di probabilità è indicata come <span class="math notranslate nohighlight">\(P(x \mid \theta)\)</span>, dove <span class="math notranslate nohighlight">\(x\)</span> rappresenta il valore della variabile casuale e <span class="math notranslate nohighlight">\(\theta\)</span> rappresenta il parametro che descrive la distribuzione di probabilità. Ad esempio, <span class="math notranslate nohighlight">\(P(x \mid \theta)\)</span> potrebbe rappresentare la probabilità di ottenere il valore <span class="math notranslate nohighlight">\(x\)</span> da una distribuzione con parametro <span class="math notranslate nohighlight">\(\theta\)</span>. In alternativa, nel caso di una densità di probabilità, si utilizza la notazione <span class="math notranslate nohighlight">\(p(x \mid \theta)\)</span>.</p>
+<p>Per la funzione di verosimiglianza, è consuetudine utilizzare la lettera <span class="math notranslate nohighlight">\(L\)</span>. Quindi, possiamo scrivere:</p>
+<div class="math notranslate nohighlight">
+\[
+L(x_1, \ldots, x_n \mid \theta) = P(x_1, \ldots, x_n | \theta).
+\]</div>
+<p>In questa formula, <span class="math notranslate nohighlight">\(L(x_1, \ldots, x_n \mid \theta)\)</span> rappresenta la funzione di verosimiglianza, che dipende dai dati osservati <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>, mentre <span class="math notranslate nohighlight">\(P(x_1, \ldots, x_n \mid \theta)\)</span> rappresenta la densità di probabilità congiunta dei dati.</p>
+<p>La funzione di verosimiglianza, a differenza di una funzione di densità di probabilità, non è normalizzata per avere un’area unitaria. Ciò significa che la funzione di verosimiglianza fornisce solo informazioni relative sulla plausibilità dei diversi valori del parametro <span class="math notranslate nohighlight">\(\theta\)</span> e non fornisce una misura di probabilità assoluta. In altre parole, la funzione di verosimiglianza ci indica quale valore del parametro <span class="math notranslate nohighlight">\(\theta\)</span> sia più plausibile alla luce dei dati osservati, ma non ci fornisce una stima diretta della probabilità assoluta di tale valore.</p>
+</section>
+<section id="modello-binomiale">
+<h2><span class="section-number">26.2. </span>Modello binomiale<a class="headerlink" href="#modello-binomiale" title="Permalink to this headline">#</a></h2>
+<p>Facciamo un esempio relativo alla distribuzione binomiale. Consideriamo un esperimento ripetuto <span class="math notranslate nohighlight">\(n\)</span> volte, in cui ogni prova può avere due risultati possibili, successo o fallimento (ad esempio, lanciare una moneta). Supponiamo di aver ottenuto <span class="math notranslate nohighlight">\(y\)</span> successi e <span class="math notranslate nohighlight">\(n-y\)</span> fallimenti. La funzione binomiale che descrive la probabilità di ottenere esattamente <span class="math notranslate nohighlight">\(y\)</span> successi è definita come:</p>
+<div class="math notranslate nohighlight">
+\[
+P(Y=y) = \binom{n}{y} \theta^y (1-\theta)^{n-y},
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\theta\)</span> rappresenta la probabilità di successo in ogni singola prova bernoulliana, <span class="math notranslate nohighlight">\(y\)</span> è il numero di successi e <span class="math notranslate nohighlight">\(n\)</span> è il numero totale di prove indipendenti considerate.</p>
+<p>La funzione di verosimiglianza rappresenta la plausibilità relativa di osservare i dati <span class="math notranslate nohighlight">\(y\)</span> al variare dei possibili valori di <span class="math notranslate nohighlight">\(\theta\)</span>. Concettualmente, consideriamo diversi valori possibili per il nostro parametro, <span class="math notranslate nohighlight">\(\theta\)</span>, e determiniamo quanto sarebbe plausibile osservare i nostri dati in ciascun caso. La funzione di verosimiglianza è data dalla seguente formula:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\theta \mid y) = \binom{n}{y} \theta^y (1-\theta)^{n-y} = \theta^y (1-\theta)^{n - y},
+\]</div>
+<p>dove possiamo trascurare il coefficiente binomiale in quanto non dipende da <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Per fare un esempio pratico, consideriamo la ricerca di <span id="id1">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id19" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Questi ricercatori hanno trovato che, su 30 pazienti clinicamente depressi, 23 manifestavano delle aspettative distorte negativamente relativamente al loro umore futuro. Per i dati di <span id="id2">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id19" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>, la funzione di verosimiglianza corrisponde dunque alla funzione binomiale di parametro <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span> sconosciuto. Avendo osservato <span class="math notranslate nohighlight">\(y\)</span> = 23 successi, in <span class="math notranslate nohighlight">\(n\)</span> = 30 prove, la funzione di verosimiglianza diventa</p>
+<div class="math notranslate nohighlight" id="equation-eq-likebino23">
+<span class="eqno">(26.1)<a class="headerlink" href="#equation-eq-likebino23" title="Permalink to this equation">#</a></span>\[
+\mathcal{L}(\theta \mid y) = \frac{(23 + 7)!}{23!7!} \theta^{23} + (1-\theta)^7.
+\]</div>
+<p>Per costruire la funzione di verosimiglianza, è necessario applicare l’eq. <a class="reference internal" href="#equation-eq-likebino23">(26.1)</a> diverse volte, variando ogni volta il valore di <span class="math notranslate nohighlight">\(\theta\)</span>, ma mantenendo costanti i valori dei dati. Nella simulazione seguente, considereremo 100 valori possibili per <span class="math notranslate nohighlight">\(\theta\)</span> nell’intervallo [0, 1]. Iniziamo definendo i dati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">23</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Creiamo ora i possibili valori del parametro <span class="math notranslate nohighlight">\(\theta\)</span> per i quali calcoleremo la verosimiglianza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.         0.01010101 0.02020202 0.03030303 0.04040404 0.05050505
+ 0.06060606 0.07070707 0.08080808 0.09090909 0.1010101  0.11111111
+ 0.12121212 0.13131313 0.14141414 0.15151515 0.16161616 0.17171717
+ 0.18181818 0.19191919 0.2020202  0.21212121 0.22222222 0.23232323
+ 0.24242424 0.25252525 0.26262626 0.27272727 0.28282828 0.29292929
+ 0.3030303  0.31313131 0.32323232 0.33333333 0.34343434 0.35353535
+ 0.36363636 0.37373737 0.38383838 0.39393939 0.4040404  0.41414141
+ 0.42424242 0.43434343 0.44444444 0.45454545 0.46464646 0.47474747
+ 0.48484848 0.49494949 0.50505051 0.51515152 0.52525253 0.53535354
+ 0.54545455 0.55555556 0.56565657 0.57575758 0.58585859 0.5959596
+ 0.60606061 0.61616162 0.62626263 0.63636364 0.64646465 0.65656566
+ 0.66666667 0.67676768 0.68686869 0.6969697  0.70707071 0.71717172
+ 0.72727273 0.73737374 0.74747475 0.75757576 0.76767677 0.77777778
+ 0.78787879 0.7979798  0.80808081 0.81818182 0.82828283 0.83838384
+ 0.84848485 0.85858586 0.86868687 0.87878788 0.88888889 0.8989899
+ 0.90909091 0.91919192 0.92929293 0.93939394 0.94949495 0.95959596
+ 0.96969697 0.97979798 0.98989899 1.        ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per esempio, ponendo <span class="math notranslate nohighlight">\(\theta = 0.1\)</span> otteniamo il seguente valore dell’ordinata della funzione di verosimiglianza:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\theta \mid y) = \frac{(23 + 7)!}{23!7!} 0.1^{23} + (1-0.1)^7.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.7371682902e-18
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ponendo <span class="math notranslate nohighlight">\(\theta = 0.2\)</span> otteniamo il seguente valore dell’ordinata della funzione di verosimiglianza:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}(\theta \mid y) = \frac{(23 + 7)!}{23!7!} 0.2^{23} + (1-0.2)^7.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.58141723492221e-11
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se ripetiamo questo processo 100 volte, una volta per ciascuno dei valori <span class="math notranslate nohighlight">\(\theta\)</span> che abbiamo elencato sopra, otteniamo 100 coppie di punti <span class="math notranslate nohighlight">\(\theta\)</span> e <span class="math notranslate nohighlight">\(f(\theta)\)</span>. A tale fine, definiamo la seguente funzione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">like</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">theta</span><span class="o">**</span><span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La curva che interpola i punti ottenuti è la funzione di verosimiglianza, come indicato dalla figura seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">like</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Funzione di verosimiglianza&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale theta [0, 1]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Verosimiglianza&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Verosimiglianza&#39;)
+</pre></div>
+</div>
+<img alt="_images/7026d429c0d96b7d95540d0acf5422e025851f901783b8852ab9ad82f70a9e6e.svg" src="_images/7026d429c0d96b7d95540d0acf5422e025851f901783b8852ab9ad82f70a9e6e.svg" /></div>
+</div>
+<section id="interpretazione">
+<h3><span class="section-number">26.2.1. </span>Interpretazione<a class="headerlink" href="#interpretazione" title="Permalink to this headline">#</a></h3>
+<p>Come possiamo interpretare la curva di verosimiglianza che abbiamo ottenuto? Per diversi valori di <span class="math notranslate nohighlight">\(\theta\)</span>, la funzione di verosimiglianza assume valori diversi: per alcuni valori di <span class="math notranslate nohighlight">\(\theta\)</span> la funzione assume valori bassi, mentre per altri valori assume valori più alti. I valori di <span class="math notranslate nohighlight">\(\theta\)</span> per cui la funzione di verosimiglianza assume valori più alti sono quelli che appaiono più plausibili alla luce dei dati che abbiamo raccolto. In questo caso, il valore 23/30 = 0.767 (che corrisponde alla moda della funzione di verosimiglianza) rappresenta il valore di <span class="math notranslate nohighlight">\(\theta\)</span> più plausibile tra tutti quelli che abbiamo preso in considerazione.</p>
+<p>Per trovare il valore di <span class="math notranslate nohighlight">\(\theta\)</span> che massimizza la funzione di verosimiglianza, dobbiamo individuare l’indice nel vettore che contiene i valori della funzione di verosimiglianza in cui il valore di verosimiglianza è massimo. Possiamo ottenere questo risultato utilizzando la funzione <code class="docutils literal notranslate"><span class="pre">argmax</span></code> di NumPy. Una volta individuato l’indice, possiamo trovare il valore di <span class="math notranslate nohighlight">\(\theta\)</span> corrispondente nel vettore <code class="docutils literal notranslate"><span class="pre">theta</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="n">like</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="p">[</span><span class="mi">76</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7676767676767677
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si noti che, anziché usare la funzione <code class="docutils literal notranslate"><span class="pre">like()</span></code> che (per motivi didattici) abbiamo definito sopra, in una maniera del tutto equivalente è possibile usare la funzione <code class="docutils literal notranslate"><span class="pre">binom.pmf()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Funzione di verosimiglianza&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale theta [0, 1]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Verosimiglianza&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Verosimiglianza&#39;)
+</pre></div>
+</div>
+<img alt="_images/600f35f93b014c43996d83752a817c4519862c0c90e7d4c5c10d1192166a2b7c.svg" src="_images/600f35f93b014c43996d83752a817c4519862c0c90e7d4c5c10d1192166a2b7c.svg" /></div>
+</div>
+</section>
+<section id="la-log-verosimiglianza">
+<h3><span class="section-number">26.2.2. </span>La log-verosimiglianza<a class="headerlink" href="#la-log-verosimiglianza" title="Permalink to this headline">#</a></h3>
+<p>Dal punto di vista pratico risulta più conveniente utilizzare, al posto della funzione di verosimiglianza, il suo logaritmo naturale, ovvero la funzione di log-verosimiglianza:</p>
+<div class="math notranslate nohighlight" id="equation-eq-loglike-definition">
+<span class="eqno">(26.2)<a class="headerlink" href="#equation-eq-loglike-definition" title="Permalink to this equation">#</a></span>\[
+\ell(\theta) = \log \mathcal{L}(\theta).
+\]</div>
+<p>Poiché il logaritmo è una funzione strettamente crescente (usualmente si considera il logaritmo naturale), allora <span class="math notranslate nohighlight">\(\mathcal{L}(\theta)\)</span> e <span class="math notranslate nohighlight">\(\ell(\theta)\)</span> assumono il massimo (o i punti di massimo) in corrispondenza degli stessi valori di <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\theta} = argmax_{\theta \in \Theta} \ell(\theta) = argmax_{\theta \in \Theta} \mathcal{L}(\theta).
+\]</div>
+<p>Per le proprietà del logaritmo, la funzione nucleo di log-verosimiglianza della binomiale è</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\ell(\theta \mid y) &amp;= \log \mathcal{L}(\theta \mid y) \notag\\
+          &amp;= \log \left(\theta^y (1-\theta)^{n - y} \right) \notag\\
+          &amp;= \log \theta^y + \log \left( (1-\theta)^{n - y} \right) \notag\\
+          &amp;= y \log \theta + (n - y) \log (1-\theta).\notag
+\end{aligned}
+\end{split}\]</div>
+<p>È importante sottolineare che non è strettamente necessario lavorare con i logaritmi, ma è altamente raccomandato. La ragione principale è che i valori di verosimiglianza, che rappresentano il prodotto di numeri di probabilità molto piccoli, possono diventare estremamente piccoli, anche dell’ordine di <span class="math notranslate nohighlight">\(10^{-34}\)</span>. In queste circostanze, è comune che i programmi informatici incontrino problemi di arrotondamento numerico e che si verifichino errori nei calcoli. Utilizzando la trasformazione logaritmica, si evita questo problema, poiché i prodotti diventano somme e i valori diventano più gestibili in termini di scala numerica.</p>
+<p>Svolgiamo nuovamente il problema precedente usando la log-verosimiglianza per trovare il massimo della funzione di log-verosimiglianza. Ora utilizziamo la funzione <code class="docutils literal notranslate"><span class="pre">binom.logpmf()</span></code>.</p>
+<p>La funzione di log-verosimiglianza è rappresentata nella figura successiva.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mi">23</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">logpmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Funzione di log-verosimiglianza&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale theta [0, 1]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Log-verosimiglianza&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Log-verosimiglianza&#39;)
+</pre></div>
+</div>
+<img alt="_images/94bcade60593dfb0cc76f95c00b5ff935b8cf64abf44f7b8dfcd486b0a47fc73.svg" src="_images/94bcade60593dfb0cc76f95c00b5ff935b8cf64abf44f7b8dfcd486b0a47fc73.svg" /></div>
+</div>
+<p>Il risultato replica quello trovato in precedenza con la funzione di verosimiglianza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ll</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">logpmf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<span class="n">ll</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="p">[</span><span class="mi">76</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7676767676767677
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modello-gaussiano">
+<h2><span class="section-number">26.3. </span>Modello gaussiano<a class="headerlink" href="#modello-gaussiano" title="Permalink to this headline">#</a></h2>
+<p>Definiamo ora la funzione di verosimiglianza per la distribuzione gaussiana di parametri <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-gaussian-sim-like">
+<span class="eqno">(26.3)<a class="headerlink" href="#equation-eq-gaussian-sim-like" title="Permalink to this equation">#</a></span>\[\begin{split}
+\begin{aligned}
+L = f(X|\theta) &amp;= f(x_1|\theta) f(x_2|\theta),..., f(x_n|\theta) \\
+&amp;= \prod^n_{j=1}f(X| \mu,\sigma^2) \\
+&amp;= (2\pi\sigma^2)^{-n/2} \exp{\big(-\frac{1}{2\sigma^2} \sum^n_{j=1}(x_i-\mu)^2\big)}
+\end{aligned}
+\end{split}\]</div>
+<p>Per generare la funzione di verosimiglianza dell’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(26.3)</a>, esaminiamo prima il caso in cui i dati corrispondono ad una singola osservazione <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Supponiamo che la variabile casuale <span class="math notranslate nohighlight">\(Y\)</span> rappresenti il quoziente di intelligenza. Poniamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mi">114</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(26.3)</a> dipende dai parametri <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> e dai dati <span class="math notranslate nohighlight">\(y\)</span>. Per semplicità, ipotizziamo <span class="math notranslate nohighlight">\(\sigma\)</span> noto e uguale a 15. Nell’esercizio considereremo 1000 valori <span class="math notranslate nohighlight">\(\mu\)</span> compresi tra 70 e 160.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">70.0</span><span class="p">,</span> <span class="mf">160.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Poiché stiamo esaminando 1000 potenziali valori per il parametro <span class="math notranslate nohighlight">\(\mu\)</span>, per costruire la funzione di verosimiglianza dobbiamo applicare l’equazione <a class="reference internal" href="#equation-eq-gaussian-sim-like">(26.3)</a> 1000 volte - una volta per ciascuno dei valori <span class="math notranslate nohighlight">\(\mu\)</span> che stiamo prendendo in considerazione. In questo modo, possiamo valutare la verosimiglianza relativa di osservare i dati che abbiamo raccolto, dati i diversi valori possibili per <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>In ciascun passo dell’esercizio inseriremo nell’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(26.3)</a></p>
+<ul class="simple">
+<li><p>il singolo valore <span class="math notranslate nohighlight">\(y\)</span> considerato (che viene mantenuto costante),</p></li>
+<li><p>il valore <span class="math notranslate nohighlight">\(\sigma\)</span> assunto noto (anch’esso costante),</p></li>
+<li><p>uno alla volta ciascuno dei valori <span class="math notranslate nohighlight">\(\mu\)</span> che abbiamo definito.</p></li>
+</ul>
+<p>Quindi, nelle 1000 applicazioni dell’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(26.3)</a>, il valore <span class="math notranslate nohighlight">\(\mu\)</span> è l’unico che varia: <span class="math notranslate nohighlight">\(y\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> sono mantenuti costanti.</p>
+<p>In Python, la distribuzione gaussiana può essere implementata attraverso la funzione <code class="docutils literal notranslate"><span class="pre">norm.pdf()</span></code>. Tale funzione richiede tre argomenti: il valore o il vettore di valori <span class="math notranslate nohighlight">\(y\)</span> da valutare, la media <span class="math notranslate nohighlight">\(\mu\)</span> (o i valori delle medie, se si lavora con più distribuzioni gaussiane) e la deviazione standard <span class="math notranslate nohighlight">\(\sigma\)</span> (o i valori delle deviazioni standard, se si lavora con più distribuzioni gaussiane). In altre parole, la funzione <code class="docutils literal notranslate"><span class="pre">norm.pdf()</span></code> consente di calcolare la densità di probabilità gaussiana per ogni valore di <span class="math notranslate nohighlight">\(y\)</span> e per ogni coppia di valori di <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> specificati.</p>
+<p>Applicando la funzione <code class="docutils literal notranslate"><span class="pre">norm.pdf()</span></code> 1000 volte, una volta per ciascuno dei valori <span class="math notranslate nohighlight">\(\mu\)</span> che abbiamo definito (e tenendo fissi <span class="math notranslate nohighlight">\(y = 114\)</span> e <span class="math notranslate nohighlight">\(\sigma = 15\)</span>), otteniamo 1000 valori <span class="math notranslate nohighlight">\(f(\mu)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_mu</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La funzione di verosimiglianza è la curva che interpola i punti <span class="math notranslate nohighlight">\(\big(\mu, f(\mu)\big)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">f_mu</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Funzione di verosimiglianza&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale mu [70, 160]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Verosimiglianza&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">70</span><span class="p">,</span> <span class="mi">160</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70.0, 160.0)
+</pre></div>
+</div>
+<img alt="_images/be0c0c9fafec25fb4e6539b3403899c2f9ad102a0b0adb1f96f128d3329a8b8c.svg" src="_images/be0c0c9fafec25fb4e6539b3403899c2f9ad102a0b0adb1f96f128d3329a8b8c.svg" /></div>
+</div>
+<p>La funzione di verosimiglianza così trovata ha la forma della distribuzione Gaussiana. Nel caso di una singola osservazione, <em>ma solo in questo caso</em>, ha anche un’area unitaria. Per l’esempio presente, la moda della funzione di verosimiglianza è 114.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">mu</span><span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>113.96396396396396
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consideriamo ora il caso più generale di un campione di <span class="math notranslate nohighlight">\(n\)</span> osservazioni. Possiamo pensare a questo campione come ad una sequenza di <span class="math notranslate nohighlight">\(n\)</span> realizzazioni indipendenti ed identicamente distribuite (abbreviato in i.i.d.) della stessa variabile casuale <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(\mu, \sigma)\)</span>, estratte casualmente da una popolazione <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma)\)</span>. I parametri della distribuzione normale sconosciuti sono <span class="math notranslate nohighlight">\(\theta = {\mu, \sigma}\)</span>.</p>
+<p>Se le variabili casuali <span class="math notranslate nohighlight">\(y_1, y_2, \dots, y_n\)</span> sono i.i.d., la loro densità congiunta è data da:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+f(y \mid \theta) &amp;= f(y_1 \mid \theta) \cdot f(y_2 \mid \theta) \cdot \; \dots \; \cdot f(y_n \mid \theta)\notag\\
+                 &amp;= \prod_{i=1}^n f(y_i \mid \theta),
+\end{align}
+\end{split}\]</div>
+<p>laddove <span class="math notranslate nohighlight">\(f(\cdot)\)</span> è la densità Gaussiana di parametri <span class="math notranslate nohighlight">\(\mu, \sigma\)</span>. Tenendo costanti i dati <span class="math notranslate nohighlight">\(y\)</span>, la funzione di verosimiglianza diventa l’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(26.3)</a>.</p>
+<!-- $$
+\begin{equation}
+\mathcal{L}(\theta \mid y) = \prod_{i=1}^n f(y_i \mid \theta).
+\end{equation}
+$$ -->
+<p>Per chiarire l’eq. <a class="reference internal" href="#equation-eq-gaussian-sim-like">(26.3)</a>, consideriamo un esempio che utilizza come dati i valori BDI-II dei trenta soggetti del campione clinico di <span id="id3">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id19" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">26</span><span class="p">,</span>
+    <span class="mi">35</span><span class="p">,</span>
+    <span class="mi">30</span><span class="p">,</span>
+    <span class="mi">25</span><span class="p">,</span>
+    <span class="mi">44</span><span class="p">,</span>
+    <span class="mi">30</span><span class="p">,</span>
+    <span class="mi">33</span><span class="p">,</span>
+    <span class="mi">43</span><span class="p">,</span>
+    <span class="mi">22</span><span class="p">,</span>
+    <span class="mi">43</span><span class="p">,</span>
+    <span class="mi">24</span><span class="p">,</span>
+    <span class="mi">19</span><span class="p">,</span>
+    <span class="mi">39</span><span class="p">,</span>
+    <span class="mi">31</span><span class="p">,</span>
+    <span class="mi">25</span><span class="p">,</span>
+    <span class="mi">28</span><span class="p">,</span>
+    <span class="mi">35</span><span class="p">,</span>
+    <span class="mi">30</span><span class="p">,</span>
+    <span class="mi">26</span><span class="p">,</span>
+    <span class="mi">31</span><span class="p">,</span>
+    <span class="mi">41</span><span class="p">,</span>
+    <span class="mi">36</span><span class="p">,</span>
+    <span class="mi">26</span><span class="p">,</span>
+    <span class="mi">35</span><span class="p">,</span>
+    <span class="mi">33</span><span class="p">,</span>
+    <span class="mi">28</span><span class="p">,</span>
+    <span class="mi">27</span><span class="p">,</span>
+    <span class="mi">34</span><span class="p">,</span>
+    <span class="mi">27</span><span class="p">,</span>
+    <span class="mi">22</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ci poniamo l’obiettivo di creare la funzione di verosimiglianza per questi dati, supponendo di sapere (in base ai risultati di ricerche precedenti) che i punteggi BDI-II si distribuiscono secondo la legge Normale e supponendo <span class="math notranslate nohighlight">\(\sigma\)</span> noto e uguale alla deviazione standard del campione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">true_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">true_sigma</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.495810615739622
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per la prima osservazione del campione (<span class="math notranslate nohighlight">\(y_1 = 26\)</span>) abbiamo</p>
+<div class="math notranslate nohighlight">
+\[
+f(26 \mid \mu_0, \sigma=6.50) = \frac{1}{{6.50 \sqrt {2\pi}}}\exp\left\{{-\frac{(26 - \mu_0)^2}{2\cdot 6.50^2}}\right\}.
+\]</div>
+<p>Se consideriamo tutte le osservazioni del campione, la densità congiunta è il prodotto delle densità delle singole osservazioni:</p>
+<div class="math notranslate nohighlight">
+\[f(y \mid \mu, \sigma = 6.50) = \, \prod_{i=1}^n f(y_i \mid \mu, \sigma = 6.50).\]</div>
+<p>Utilizzando i dati del campione e assumendo <span class="math notranslate nohighlight">\(\sigma=6.50\)</span>, l’ordinata della funzione di verosimiglianza in corrispondenza di <span class="math notranslate nohighlight">\(\mu_0\)</span> è data dal prodotto delle densità di ogni singola osservazione:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathcal{L}(\mu_0, \sigma=6.50 \mid y) =&amp; \, \prod_{i=1}^{30} f(y_i \mid \mu_0, \sigma = 6.50) = \notag\\
+&amp; \frac{1}{{6.50 \sqrt {2\pi}}}\exp\left\{{-\frac{(26 - \mu_0)^2}{2\cdot 6.50^2}}\right\} \times \notag\\
+ &amp; \frac{1}{{6.61 \sqrt {2\pi}}}\exp\left\{{-\frac{(35 - \mu_0)^2}{2\cdot 6.50^2}}\right\} \times  \notag\\
+&amp; \vdots \notag\\
+ &amp; \frac{1}{{6.61 \sqrt {2\pi}}}\exp\left\{{-\frac{(22 - \mu_0)^2}{2\cdot 6.50^2}}\right\}.
+\end{aligned}
+\end{split}\]</div>
+<p>Il valore <span class="math notranslate nohighlight">\(\mu_0\)</span> rappresenta uno dei possibili valori del parametro <span class="math notranslate nohighlight">\(\mu\)</span>. Se prendiamo in considerazione 1000 valori possibili per <span class="math notranslate nohighlight">\(\mu\)</span>, allora dobbiamo ripetere i calcoli precedenti 1000 volte, ovvero una volta per ciascuno dei 1000 valori <span class="math notranslate nohighlight">\(\mu\)</span> considerati.</p>
+<p>È più conveniente svolgere i calcoli usando il logaritmo della verosimiglianza. In Python definiamo la funzione di log-verosimiglianza, <code class="docutils literal notranslate"><span class="pre">log_likelihood()</span></code>, che prende come argomenti <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">mu</span></code> e <code class="docutils literal notranslate"><span class="pre">sigma</span> <span class="pre">=</span> <span class="pre">6.50</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">true_sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">true_sigma</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consideriamo, ad esempio, il valore <span class="math notranslate nohighlight">\(\mu_0 = \bar{y}\)</span>, ovvero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bar_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bar_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.933333333333334
+</pre></div>
+</div>
+</div>
+</div>
+<p>L’ordinata della funzione di log-verosimiglianza in corrispondenza di <span class="math notranslate nohighlight">\(\mu = 30.93\)</span> è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mf">30.93</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">true_sigma</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-98.70288339960591
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo ora i valori della log-verosimiglianza per ciascuno dei 1000 valori <span class="math notranslate nohighlight">\(\mu\)</span> nell’intervallo <span class="math notranslate nohighlight">\([\bar{y} - 2 \sigma, \bar{y} + 2 \sigma]\)</span>. Iniziamo a definire il vettore <code class="docutils literal notranslate"><span class="pre">mu</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo il valore dell’ordinata della funzione di log-verosimiglianza in corrispondenza di ciascuno dei 1000 valori <code class="docutils literal notranslate"><span class="pre">mu</span></code> che abbiamo definito.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ll</span> <span class="o">=</span> <span class="p">[</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mu_val</span><span class="p">,</span> <span class="n">true_sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">mu_val</span> <span class="ow">in</span> <span class="n">mu</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nel caso di un solo parametro sconosciuto (nel caso presente, <span class="math notranslate nohighlight">\(\mu\)</span>) è possibile rappresentare la log-verosimiglianza con una curva che interpola i punti (<code class="docutils literal notranslate"><span class="pre">mu</span></code>, <code class="docutils literal notranslate"><span class="pre">ll</span></code>). Tale funzione descrive la <em>credibilità relativa</em> che può essere attribuita ai valori del parametro <span class="math notranslate nohighlight">\(\mu\)</span> alla luce dei dati osservati.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">ll</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Funzione di log-verosimiglianza&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Valore della variabile casuale mu&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Log-verosimiglianza&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x1659bed50&gt;
+</pre></div>
+</div>
+<img alt="_images/7330ee70166576d2a0662ddd0cfcbed578a375f8aad75f52078632b4df59fdef.svg" src="_images/7330ee70166576d2a0662ddd0cfcbed578a375f8aad75f52078632b4df59fdef.svg" /></div>
+</div>
+<p>Il valore <span class="math notranslate nohighlight">\(\mu\)</span> più credibile corrisponde al massimo della funzione di log-verosimiglinza e viene detto <em>stima di massima verosimiglianza</em>.</p>
+<p>Il massimo della funzione di log-verosimiglianza, ovvero 30.93 per l’esempio in discussione, è identico alla media dei dati campionari.</p>
+</section>
+<section id="derivazione-formale">
+<h2><span class="section-number">26.4. </span>Derivazione formale<a class="headerlink" href="#derivazione-formale" title="Permalink to this headline">#</a></h2>
+<p>Le stime di massima verosimiglianza per i parametri <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> possono essere trovate attraverso il calcolo differenziale. Iniziamo con la trasformazione logaritmica della funzione di verosimiglianza:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\log(L(X|\theta)) &amp;= \log\big((2\pi\sigma^2)^{-n/2} \exp{\big(-\frac{1}{2\sigma^2} \sum^n_{j=1}(y_i-\mu)^2\big)\big)} \\
+&amp;= -\frac{n}{2}\log(2\pi)-\frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{j=1}^{n}(y_i-\mu)^2
+\end{aligned}
+\end{split}\]</div>
+<p>La massimizzazione della probabilità dei nostri dati può essere scritta come:</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{\mu,\sigma^2}\log(L(X|\theta))
+\]</div>
+<p>Espandendo i nostri parametri, abbiamo <span class="math notranslate nohighlight">\(\log(L(X|\mu, \sigma))\)</span>. Per trovare la stima di massima verosimiglianza, utilizziamo le derivate parziali, poiché ci sono due variabili incognite: <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span>. Concentriamoci sulla stima di <span class="math notranslate nohighlight">\(\mu\)</span>; lo calcoliamo come segue:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; \quad \frac{\partial}{\partial \mu} \log(L(Y|\mu, \sigma)) \\
+&amp;= \frac{\partial}{\partial \mu} \big(-\frac{n}{2}\log(2\pi)-\frac{n}{2}\log(\sigma^2)-\frac{1}{2\sigma^2}\sum_{j=1}^{n}(x_i-\mu)^2\big)
+\\
+&amp;= \sum^n_{j=1} \frac{(x_i - \mu)}{\sigma^2}
+\end{aligned}
+\end{split}\]</div>
+<p>Impostando l’espressione sopra uguale a zero, otteniamo</p>
+<div class="math notranslate nohighlight">
+\[
+\sum^n_{j=1} \frac{(x_i - \mu)}{\sigma^2} = 0.
+\]</div>
+<p>Quindi</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\hat\mu &amp;= \frac{\sum^n_{j=1}x_i}{n} \\
+\hat\mu &amp;= \bar x
+\end{aligned}
+\end{split}\]</div>
+<p>In altre parole, la stima di massima verosimiglianza del parametro <span class="math notranslate nohighlight">\(\mu\)</span> è la media campionaria. In modo corrispondente, si può dimostrare che la stima di massima verosimiglianza del parametro <span class="math notranslate nohighlight">\(\sigma\)</span> è la deviazione standard campionaria.</p>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2><span class="section-number">26.5. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>La funzione di verosimiglianza rappresenta una funzione dei parametri del modello statistico che genera i dati, dati i dati osservati. In altre parole, quando si osserva un set di dati, la verosimiglianza rappresenta una funzione dei parametri del modello che descrive come i dati sono stati generati. Questa funzione si basa su tre elementi: un modello statistico che genera i dati, un insieme di valori possibili per i parametri del modello e i dati osservati <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Nella statistica frequentista, ci si concentra solo sui dati osservati, senza considerare le informazioni pregresse. L’obiettivo dell’inferenza frequentista è di massimizzare la funzione di verosimiglianza in relazione alle variabili casuali campionarie. Questo è uno dei fondamenti dell’inferenza frequentista. Invece, nella statistica bayesiana, si combina la funzione di verosimiglianza con le distribuzioni a priori dei parametri incogniti <span class="math notranslate nohighlight">\(\theta\)</span>. In questo modo, i parametri incogniti sono trattati come variabili casuali, consentendo di quantificare il grado di incertezza probabilistica associato al loro valore.</p>
+<p>La differenza principale tra l’inferenza bayesiana e quella frequentista è che i frequentisti considerano i parametri incogniti come valori fissi ma sconosciuti, mentre i bayesiani li trattano come variabili casuali con distribuzioni di probabilità a priori. Questo permette ai bayesiani di valutare l’incertezza associata ai parametri del modello statistico e di ottenere stime di probabilità per i valori di questi parametri. Questi concetti saranno ulteriormente discussi nei capitoli successivi.</p>
+</section>
+<section id="watermark">
+<h2><span class="section-number">26.6. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jun 09 2023
+
+Python implementation: CPython
+Python version       : 3.11.3
+IPython version      : 8.13.2
+
+scipy     : 1.10.1
+matplotlib: 3.7.1
+numpy     : 1.24.3
+arviz     : 0.15.1
+pandas    : 2.0.2
+seaborn   : 0.12.2
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="215_rng.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">25. </span>Generazione di numeri casuali</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="226_rescorla_wagner.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">27. </span>Apprendimento per rinforzo</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-funzione-di-verosimiglianza">26.1. La funzione di verosimiglianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-binomiale">26.2. Modello binomiale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretazione">26.2.1. Interpretazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-log-verosimiglianza">26.2.2. La log-verosimiglianza</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modello-gaussiano">26.3. Modello gaussiano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivazione-formale">26.4. Derivazione formale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">26.5. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">26.6. Watermark</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1131 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>15. Calcolo combinatorio &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '105_combinatorics';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/105_combinatorics.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="16. Introduzione al calcolo delle probabilità" href="110_intro_prob.html" />
+    <link rel="prev" title="14. Insiemi" href="100_sets.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="210_cont_rv_distr.html">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="321_balance-prior-post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/105_combinatorics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Calcolo combinatorio</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principio-del-prodotto">15.1. Principio del prodotto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principio-della-somma">15.2. Principio della somma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-modello-dell-urna">15.3. Il modello dell’urna</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutazioni-semplici">15.4. Permutazioni semplici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disposizioni-semplici">15.5. Disposizioni semplici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinazioni-semplici">15.6. Combinazioni semplici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">15.7. Watermark</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/ccaudek/ds4psy_2023/blob/main/105_combinatorics.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="calcolo-combinatorio">
+<span id="combinatorics-notebook"></span><h1><span class="section-number">15. </span>Calcolo combinatorio<a class="headerlink" href="#calcolo-combinatorio" title="Permalink to this headline">#</a></h1>
+<p>Il calcolo combinatorio si pone il problema di determinare il numero dei modi mediante i quali gli elementi di uno stesso insieme o di più insiemi possono essere associati, seguendo regole prestabilite. Alcuni dei problemi del calcolo delle probabilità per essere risolti richiedono l’utilizzo dei metodi del calcolo combinatorio.</p>
+<p>In questo capitolo verranno discussi alcuni concetti del calcolo combinatorio. In particolare, verranno introdotti il principio del prodotto, il principio della somma e il modello dell’urna. Verranno inoltre descritte le nozioni di permutazione semplice, disposizione semplice e di combinazione semplice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span>
+    <span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">,</span>
+    <span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="o">/</span><span class="n">golden</span><span class="p">)},</span>
+<span class="p">)</span>
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">123456</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="principio-del-prodotto">
+<h2><span class="section-number">15.1. </span>Principio del prodotto<a class="headerlink" href="#principio-del-prodotto" title="Permalink to this headline">#</a></h2>
+<p>I metodi di base del calcolo combinatorio applicano due principi: la regola del prodotto e la regola della somma. Consideriamo il principio del prodotto.</p>
+<p>In generale, una scelta può essere effettuata in più fasi, ad esempio <span class="math notranslate nohighlight">\(k\)</span>. Supponiamo che per ogni <span class="math notranslate nohighlight">\(i = 1, \dots, k\)</span> la scelta da compiere al <span class="math notranslate nohighlight">\(i\)</span>-esimo stadio possa essere effettuata in <span class="math notranslate nohighlight">\(n_i\)</span> modi. Secondo il principio del prodotto, il numero totale di possibili scelte è dato dal prodotto dei singoli numeri, ovvero:</p>
+<div class="math notranslate nohighlight">
+\[
+n_{\text{tot}} = n_1 \cdot  n_2 \cdots n_{k-1} \cdot n_k.
+\]</div>
+<p><strong>Esempio 1.</strong> Ho a disposizione 2 paia di scarpe, 3 paia di pantaloni e 5 magliette. In quanti modi diversi mi
+posso vestire?</p>
+<div class="math notranslate nohighlight">
+\[
+2 \cdot 3 \cdot 5 = 30
+\]</div>
+<p><strong>Esempio 2.</strong> In Minnesota le targhe delle automobili sono costituite da tre lettere (da A a Z) seguite da tre numeri (da 0 a 9). Qual è la proporzione di targhe che iniziano con GZN?</p>
+<p>La soluzione è data dal numero di targhe che iniziano con GZN diviso per il numero totale di targhe possibili.</p>
+<p>Il numero totale di targe è <span class="math notranslate nohighlight">\(26 \cdot 26 \cdot 26 \cdot 10 \cdot 10 \cdot 10 = 17,576,000\)</span>. Per calcolare il numero di targhe che iniziano con GZN, consideriamo le targhe che hanno la forma GZN _ _ _. Per i tre simboli mancanti ci sono <span class="math notranslate nohighlight">\(10 \cdot 10 \cdot 10\)</span> possibilità. Dunque la proporzione cercata è</p>
+<div class="math notranslate nohighlight">
+\[
+10^3/(26^3 \cdot 10^3) = 1/26^3 = 0.0000569.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="p">(</span><span class="mi">26</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.689576695493855e-05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="principio-della-somma">
+<h2><span class="section-number">15.2. </span>Principio della somma<a class="headerlink" href="#principio-della-somma" title="Permalink to this headline">#</a></h2>
+<p>Il principio della somma afferma che se un insieme può essere suddiviso in due o più sottoinsiemi disgiunti, allora il numero totale di elementi nell’insieme è dato dalla somma dei numeri di elementi in ciascun sottoinsieme.</p>
+<p>In altre parole, se si vuole determinare il numero totale di modi in cui è possibile realizzare un certo evento, e questo evento può essere realizzato in modo esclusivo in modo A oppure B, allora il numero totale di modi in cui è possibile realizzare l’evento è dato dalla somma dei modi in cui può essere realizzato in modo A e dei modi in cui può essere realizzato in modo B.</p>
+<p>Ad esempio, se si vuole determinare il numero totale di modi in cui è possibile scegliere un dolce da una tavola con due tipi di dolci (ad esempio torta e biscotti), il principio della somma afferma che il numero totale di modi è dato dalla somma del numero di modi in cui è possibile scegliere la torta e del numero di modi in cui è possibile scegliere i biscotti.</p>
+<p><strong>Esempio 3.</strong> L’urna <span class="math notranslate nohighlight">\(A\)</span> contiene <span class="math notranslate nohighlight">\(5\)</span> palline numerate da <span class="math notranslate nohighlight">\(1\)</span> a <span class="math notranslate nohighlight">\(5\)</span>, l’urna <span class="math notranslate nohighlight">\(B\)</span> contiene <span class="math notranslate nohighlight">\(6\)</span> palline numerate da <span class="math notranslate nohighlight">\(6\)</span> a <span class="math notranslate nohighlight">\(11\)</span>, l’urna <span class="math notranslate nohighlight">\(C\)</span> contiene <span class="math notranslate nohighlight">\(3\)</span> palline numerate da <span class="math notranslate nohighlight">\(12\)</span> a <span class="math notranslate nohighlight">\(14\)</span> e l’urna <span class="math notranslate nohighlight">\(D\)</span> contiene <span class="math notranslate nohighlight">\(2\)</span> palline numerate <span class="math notranslate nohighlight">\(15\)</span> e <span class="math notranslate nohighlight">\(16\)</span>. Quanti insiemi composti da due palline, ciascuna estratta da un’urna differente, si possono formare?</p>
+<p>Il numero di insiemi di tipo <span class="math notranslate nohighlight">\(AB\)</span> è dato dal prodotto delle palline che possono essere estratte dall’urna <span class="math notranslate nohighlight">\(A\)</span> (5) e da quelle che possono essere estratte dall’urna <span class="math notranslate nohighlight">\(B\)</span> (6), ovvero <span class="math notranslate nohighlight">\(5 \cdot 6 = 30\)</span>. In modo analogo, si ottengono 15 insiemi di tipo <span class="math notranslate nohighlight">\(AC\)</span>, 10 di tipo <span class="math notranslate nohighlight">\(AD\)</span>, 18 di tipo <span class="math notranslate nohighlight">\(BC\)</span>, 12 di tipo <span class="math notranslate nohighlight">\(BD\)</span>, 6 di tipo <span class="math notranslate nohighlight">\(CD\)</span>. Quindi, per la regola della somma, il numero totale di insiemi distinti che si possono formare con due palline provenienti dalle quattro urne è dato dalla somma di questi valori, ovvero <span class="math notranslate nohighlight">\(30 + 15 + 10 + 18 + 12 + 6 = 91\)</span>. Pertanto, ci sono 91 insiemi composti da due palline, ciascuna estratta da un’urna differente, che si possono formare.</p>
+<p>In conclusione, il principio del prodotto e il principio della somma sono due concetti fondamentali del calcolo combinatorio. In generale, il principio del prodotto si applica quando si tratta di eventi <em>indipendenti che si verificano in successione</em>, mentre il principio della somma si applica quando si tratta di eventi <em>mutuamente esclusivi</em> (cioè non possono accadere contemporaneamente) e si cerca di calcolare il numero totale di possibili risultati.</p>
+</section>
+<section id="il-modello-dell-urna">
+<h2><span class="section-number">15.3. </span>Il modello dell’urna<a class="headerlink" href="#il-modello-dell-urna" title="Permalink to this headline">#</a></h2>
+<p>I problemi di combinatoria spesso coinvolgono l’estrazione di palline da urne, le quali rappresentano dei modelli delle corrispondenti situazioni considerate. Una procedura comune per rappresentare queste situazioni è il modello dell’urna, che consiste nell’estrazione di <span class="math notranslate nohighlight">\(k\)</span> palline da un’urna contenente <span class="math notranslate nohighlight">\(n\)</span> palline. Le palline possono essere tutte diverse, oppure alcune palline possono essere indistinguibili tra loro. Tra le possibili modalità di estrazione, sono particolarmente importanti:</p>
+<ul class="simple">
+<li><p>L’<em>estrazione Bernoulliana</em> di <span class="math notranslate nohighlight">\(k\)</span> palline, che si ottiene estraendo una pallina alla volta e rimettendola nell’urna dopo ogni estrazione;</p></li>
+<li><p>L’<em>estrazione senza ripetizione</em> di <span class="math notranslate nohighlight">\(k\)</span> palline, che si ottiene estraendo una pallina alla volta senza rimetterla nell’urna dopo l’estrazione;</p></li>
+<li><p>L’<em>estrazione in blocco</em> di <span class="math notranslate nohighlight">\(k\)</span> palline, che si ottiene estraendo <span class="math notranslate nohighlight">\(k\)</span> palline contemporaneamente.</p></li>
+</ul>
+<p>Per esempio, nel caso di campioni di ampiezza 2 estratti da un’urna con tre elementi <span class="math notranslate nohighlight">\(\{1, 2, 3\}\)</span>, abbiamo i seguenti quattro casi:</p>
+<ul class="simple">
+<li><p>campionamento con reimmissione tenendo conto dell’ordine di estrazione: <span class="math notranslate nohighlight">\(\{1,  1\}, \{2,  1\}, \{3,  1\}, \{1,  2\}, \{2,  2\}, \{3,  2\}, \{1,  3\}, \{2,  3\}, \{3,  3\}\)</span>;</p></li>
+<li><p>campionamento con reimmissione senza tenere conto dell’ordine di estrazione: <span class="math notranslate nohighlight">\(\{1,  1\}, \{1,  2\}, \{1,  3\}, \{2,  2\}, \{2,  3\}, \{3,  3\}\)</span>;</p></li>
+<li><p>campionamento senza reimmissione tenendo conto dell’ordine di estrazione:
+<span class="math notranslate nohighlight">\(\{1,  2\}, \{2,  1\}, \{1,  3\}, \{3,  1\}, \{2,  3\}, \{3,  2\}\)</span>;</p></li>
+<li><p>campionamento senza reimmissione e senza tenere conto dell’ordine di estrazione: <span class="math notranslate nohighlight">\(\{1 , 2\}, \{1,  3\}, \{2, 3\}\)</span>.</p></li>
+</ul>
+</section>
+<section id="permutazioni-semplici">
+<h2><span class="section-number">15.4. </span>Permutazioni semplici<a class="headerlink" href="#permutazioni-semplici" title="Permalink to this headline">#</a></h2>
+<p>Le permutazioni semplici sono il risultato di uno scambio dell’ordine degli elementi di un insieme che contiene elementi distinti tra loro. Queste permutazioni sono indicate con il simbolo <span class="math notranslate nohighlight">\(P_n\)</span>, e il numero di permutazioni semplici di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti è pari al fattoriale di <span class="math notranslate nohighlight">\(n\)</span>, cioè <span class="math notranslate nohighlight">\(n!\)</span>, come espresso dall’eq. <a class="reference internal" href="#equation-eq-permsem">(15.1)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-permsem">
+<span class="eqno">(15.1)<a class="headerlink" href="#equation-eq-permsem" title="Permalink to this equation">#</a></span>\[
+P_n = n!
+\]</div>
+<p>dove il simbolo <span class="math notranslate nohighlight">\(n!\)</span> si legge <span class="math notranslate nohighlight">\(n\)</span> fattoriale ed è uguale al prodotto di <span class="math notranslate nohighlight">\(n\)</span> numeri interi decrescenti da <span class="math notranslate nohighlight">\(n\)</span> fino a 1. Per definizione, il fattoriale di 0 è 1.</p>
+<p>Il numero di permutazioni di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti può essere visto come l’estrazione senza rimessa di <span class="math notranslate nohighlight">\(n\)</span> elementi diversi da un’urna contenente gli <span class="math notranslate nohighlight">\(n\)</span> oggetti. Questo ci consente di applicare il principio del prodotto, il quale afferma che il numero di modi in cui è possibile combinare o disporre un insieme di oggetti è dato dal prodotto del numero di scelte possibili per ciascuna categoria di oggetti. Nel caso delle permutazioni, il principio del prodotto si applica nel seguente modo: se abbiamo <span class="math notranslate nohighlight">\(n\)</span> oggetti distinti da disporre in un ordine particolare, il numero di permutazioni possibili è dato dal prodotto del numero di scelte possibili per la prima posizione, per la seconda posizione, per la terza posizione, e così via, fino alla <span class="math notranslate nohighlight">\(n\)</span>-esima posizione.</p>
+<p><strong>Esempio 4.</strong> Consideriamo l’insieme: <span class="math notranslate nohighlight">\(A = \{a, b, c\}\)</span>. Calcoliamo il numero di permutazioni semplici.</p>
+<p>Le permutazioni semplici di <span class="math notranslate nohighlight">\(A\)</span> sono: <span class="math notranslate nohighlight">\(\{a, b, c\}\)</span>, <span class="math notranslate nohighlight">\(\{a, c, b\}\)</span>, <span class="math notranslate nohighlight">\(\{b, c, a\}\)</span>, <span class="math notranslate nohighlight">\(\{b, a, c\}\)</span>, <span class="math notranslate nohighlight">\(\{c, a, b\}\)</span>, <span class="math notranslate nohighlight">\(\{c, b, a\}\)</span>, ovvero 6. Applichiamo l’eq. <span class="xref std std-ref">eq-permsem</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+P_n = P_3 = 3! = 3 \cdot 2 \cdot 1 = 6.
+\]</div>
+<p>Lo strumento principale che usiamo in Python per trovare le permutazioni di un insieme è una libreria specificamente progettata per iterare sugli oggetti in modi diversi, ovvero <code class="docutils literal notranslate"><span class="pre">itertools</span></code>. Con <code class="docutils literal notranslate"><span class="pre">itertools.permutations()</span></code> generiamo le permutazioni.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;A&#39;, &#39;C&#39;, &#39;B&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per visualizzare il risultato dobbiamo trasformarlo in una tupla:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;C&#39;, &#39;B&#39;),
+ (&#39;A&#39;, &#39;B&#39;, &#39;C&#39;),
+ (&#39;C&#39;, &#39;A&#39;, &#39;B&#39;),
+ (&#39;C&#39;, &#39;B&#39;, &#39;A&#39;),
+ (&#39;B&#39;, &#39;A&#39;, &#39;C&#39;),
+ (&#39;B&#39;, &#39;C&#39;, &#39;A&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso risultato si ottiene con</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">)</span>
+<span class="n">permutations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+<span class="n">permutations</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;B&#39;, &#39;C&#39;),
+ (&#39;A&#39;, &#39;C&#39;, &#39;B&#39;),
+ (&#39;B&#39;, &#39;A&#39;, &#39;C&#39;),
+ (&#39;B&#39;, &#39;C&#39;, &#39;A&#39;),
+ (&#39;C&#39;, &#39;A&#39;, &#39;B&#39;),
+ (&#39;C&#39;, &#39;B&#39;, &#39;A&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possiamo ora contare quanti elementi ci sono nella tupla usando la funzione <code class="docutils literal notranslate"><span class="pre">len()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oppure, possiamo appliare la formula <a class="reference internal" href="#equation-eq-permsem">(15.1)</a> mediante la funzione <code class="docutils literal notranslate"><span class="pre">factorial()</span></code> contenuta nella libreria <code class="docutils literal notranslate"><span class="pre">math</span></code> di Numpy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Esempio 5.</strong> Gli anagrammi  sono  le permutazioni che si ottengono da una parola variando l’ordine delle lettere. Le permutazioni semplici si applicano al caso di parole costituite da lettere tutte diverse tra loro. Ad esempio, con la parola  NUMERO si ottengono <span class="math notranslate nohighlight">\(P_6 = 6! = 6\cdot5\cdot4\cdot3\cdot2\cdot1 = 720\)</span> anagrammi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;NUMERO&quot;</span><span class="p">)</span>
+<span class="n">permutations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+<span class="n">permutations</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;E&#39;, &#39;O&#39;, &#39;R&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;R&#39;, &#39;E&#39;, &#39;O&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;R&#39;, &#39;O&#39;, &#39;E&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;O&#39;, &#39;E&#39;, &#39;R&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;M&#39;, &#39;O&#39;, &#39;R&#39;, &#39;E&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;E&#39;, &#39;M&#39;, &#39;R&#39;, &#39;O&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;E&#39;, &#39;M&#39;, &#39;O&#39;, &#39;R&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;E&#39;, &#39;R&#39;, &#39;M&#39;, &#39;O&#39;),
+ (&#39;N&#39;, &#39;U&#39;, &#39;E&#39;, &#39;R&#39;, &#39;O&#39;, &#39;M&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>720
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>720
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Esempio 6.</strong> Un altro esempio riguarda i giochi di carte. Ci sono 52! <span class="math notranslate nohighlight">\(\approx 8 \times 10^{67}\)</span> modi di ordinare un mazzo di carte da poker; questo numero è “quasi” grande come il numero di atomi dell’universo che si stima essere uguale a circa <span class="math notranslate nohighlight">\(10^{80}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">52</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80658175170943878571660636856403766975289505440883277824000000000000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.2e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">52</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.07e+67
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Esempio 7.</strong> Le cifre 1, 2, 3, 4 e 5 sono disposte in ordine casuale per formare un numero di cinque cifre.</p>
+<ul class="simple">
+<li><p>Quanti diversi numeri di cinque cifre possono essere formati?</p></li>
+<li><p>Quanti diversi numeri di cinque cifre sono dispari?</p></li>
+</ul>
+<p>Iniziamo a creare una tupla con le cinque cifre:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2, 3, 4, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Come in precedenza, possiamo usare <code class="docutils literal notranslate"><span class="pre">it.permutations()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">permutations</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">permutations</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+<span class="n">permutations</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((1, 2, 3, 5, 4),
+ (1, 2, 4, 3, 5),
+ (1, 2, 4, 5, 3),
+ (1, 2, 5, 3, 4),
+ (1, 2, 5, 4, 3),
+ (1, 3, 2, 4, 5),
+ (1, 3, 2, 5, 4),
+ (1, 3, 4, 2, 5),
+ (1, 3, 4, 5, 2))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ci sono 120 permutazioni.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>120
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per trovare i numeri dispari tra queste 120 permutazioni utilizziamo la funzione <code class="docutils literal notranslate"><span class="pre">sum()</span></code> in Python abbinato alle espressioni <code class="docutils literal notranslate"><span class="pre">for</span></code> e <code class="docutils literal notranslate"><span class="pre">in</span></code>. Accediamo al quinto elemento di una permutazione utilizzando la notazione <code class="docutils literal notranslate"><span class="pre">[4]</span></code> (il primo elemento è indicato con 0, quindi il quinto è 4):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">permutation</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">permutation</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72
+</pre></div>
+</div>
+</div>
+</div>
+<p>Possiamo controllare questo teoricamente: nel caso presente, ci sono tre possibili cifre dispari per l’ultima posizione di un numero di cinque cifre: 1, 3 e 5. Dopo aver scelto una di queste, le cifre rimanenti nelle prime quattro posizioni possono essere formate in 4! modi. Pertanto:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="disposizioni-semplici">
+<h2><span class="section-number">15.5. </span>Disposizioni semplici<a class="headerlink" href="#disposizioni-semplici" title="Permalink to this headline">#</a></h2>
+<p>Le disposizioni semplici rappresentano tutti i modi in cui un insieme di oggetti può essere disposto in sequenza, tenendo conto dell’ordine in cui gli oggetti vengono scelti e senza permettere la scelta di un oggetto più di una volta.</p>
+<p>Quindi, se abbiamo un insieme di <span class="math notranslate nohighlight">\(n\)</span> oggetti distinti e vogliamo selezionarne <span class="math notranslate nohighlight">\(k\)</span> per formare una sequenza, le disposizioni semplici rappresentano tutti i sottoinsiemi di <span class="math notranslate nohighlight">\(k\)</span> oggetti distinti che possono essere selezionati dall’insieme di <span class="math notranslate nohighlight">\(n\)</span> oggetti distinti in modo tale che l’ordine in cui vengono selezionati sia importante.</p>
+<p>Ad esempio, se abbiamo l’insieme di oggetti <span class="math notranslate nohighlight">\({a,b,c}\)</span> e vogliamo selezionare due oggetti per formare una sequenza, le disposizioni semplici sarebbero: <span class="math notranslate nohighlight">\(ab\)</span>, <span class="math notranslate nohighlight">\(ba\)</span>, <span class="math notranslate nohighlight">\(ac\)</span>, <span class="math notranslate nohighlight">\(ca\)</span>, <span class="math notranslate nohighlight">\(bc\)</span>, <span class="math notranslate nohighlight">\(cb\)</span>. Nota che, in questo caso, l’ordine in cui gli oggetti vengono scelti è importante e ogni oggetto viene scelto una sola volta.</p>
+<p>Il numero di disposizioni semplici di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti della classe <span class="math notranslate nohighlight">\(k\)</span> è indicato con <span class="math notranslate nohighlight">\(D_{n,k}\)</span> e può essere calcolato dividendo il numero di permutazioni di <span class="math notranslate nohighlight">\(n\)</span> oggetti distinti per il numero di permutazioni dei restanti <span class="math notranslate nohighlight">\(n-k\)</span> oggetti distinti, poiché ogni disposizione semplice può essere ottenuta come una permutazione di un sottoinsieme di <span class="math notranslate nohighlight">\(k\)</span> oggetti distinti.</p>
+<p>Quindi, il numero di disposizioni semplici di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti della classe <span class="math notranslate nohighlight">\(k\)</span> è dato da</p>
+<div class="math notranslate nohighlight" id="equation-eq-disp-simple">
+<span class="eqno">(15.2)<a class="headerlink" href="#equation-eq-disp-simple" title="Permalink to this equation">#</a></span>\[
+D_{n,k} = \frac{n!}{(n-k)!},
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(n!\)</span> rappresenta il numero di permutazioni di <span class="math notranslate nohighlight">\(n\)</span> oggetti distinti e <span class="math notranslate nohighlight">\((n-k)!\)</span> rappresenta il numero di permutazioni dei restanti <span class="math notranslate nohighlight">\(n-k\)</span> oggetti distinti.</p>
+<p><strong>Esempio 8.</strong> Consideriamo l’insieme: <span class="math notranslate nohighlight">\(A = \{a, b, c\}\)</span>. Qual è il numero di disposizioni semplici di classe 2? Come abbiamo visto sopra, le disposizioni semplici di classe 2 sono <span class="math notranslate nohighlight">\(\{a, b\}\)</span>, <span class="math notranslate nohighlight">\(\{b, a\}\)</span>, <span class="math notranslate nohighlight">\(\{a, c\}\)</span>, <span class="math notranslate nohighlight">\(\{c, a\}\)</span>, <span class="math notranslate nohighlight">\(\{b, c\}\)</span>, <span class="math notranslate nohighlight">\(\{c, b\}\)</span>, ovvero 6.</p>
+<p>Applichiamo l’eq. <a class="reference internal" href="#equation-eq-disp-simple">(15.2)</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+D_{n,k} = \frac{n!}{(n-k)!} = 3 \cdot 2 = 6.
+\]</div>
+<p>In maniera equivalente possiamo trovare il risultato usando <code class="docutils literal notranslate"><span class="pre">itertools.permutations(iterable,</span> <span class="pre">k)</span></code>. Tale istruzione ci consente di trovare il numero di permutazioni possibili di tutti i sottoinsiemi di <span class="math notranslate nohighlight">\(k\)</span> elementi distinti, ovvero il numero di diverse sequenze ordinate che possiamo ottenere scegliendo <span class="math notranslate nohighlight">\(k\)</span> oggetti dall’insieme.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;B&#39;), (&#39;A&#39;, &#39;C&#39;), (&#39;B&#39;, &#39;A&#39;), (&#39;B&#39;, &#39;C&#39;), (&#39;C&#39;, &#39;A&#39;), (&#39;C&#39;, &#39;B&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oppure possiamo implementare l’eq. <a class="reference internal" href="#equation-eq-disp-simple">(15.2)</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_disp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+
+
+<span class="n">simple_disp</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="combinazioni-semplici">
+<span id="combinazione-semplice-section"></span><h2><span class="section-number">15.6. </span>Combinazioni semplici<a class="headerlink" href="#combinazioni-semplici" title="Permalink to this headline">#</a></h2>
+<p>Le combinazioni semplici rappresentano il numero di modi in cui <span class="math notranslate nohighlight">\(k\)</span> oggetti diversi possono essere scelti tra <span class="math notranslate nohighlight">\(n\)</span> oggetti distinti, ma a differenza delle disposizioni semplici, non tiene conto dell’ordine in cui vengono scelti. In altre parole, le combinazioni semplici rappresentano tutti i possibili sottoinsiemi di <span class="math notranslate nohighlight">\(k\)</span> elementi distinti scelti tra <span class="math notranslate nohighlight">\(n\)</span> elementi distinti, senza considerare l’ordine di estrazione.</p>
+<p>Questo concetto può essere modellato attraverso l’estrazione senza reimmissione di <span class="math notranslate nohighlight">\(k\)</span> oggetti da un’urna contenente <span class="math notranslate nohighlight">\(n\)</span> oggetti differenti. Tuttavia, a differenza delle disposizioni semplici, le combinazioni semplici considerano distinti solo i raggruppamenti che differiscono almeno per un elemento.</p>
+<p>Gli elementi di ciascuna combinazione di <span class="math notranslate nohighlight">\(k\)</span> oggetti possono essere ordinati tra loro in <span class="math notranslate nohighlight">\(k!\)</span> modi diversi. Pertanto, il numero di combinazioni semplici è dato dal numero di disposizioni semplici <span class="math notranslate nohighlight">\(D_{n,k}\)</span> diviso per il numero di permutazioni <span class="math notranslate nohighlight">\(P_k\)</span> dei <span class="math notranslate nohighlight">\(k\)</span> elementi.</p>
+<p>Il numero di combinazioni semplici <span class="math notranslate nohighlight">\(C_{n,k}\)</span> è espresso dall’equazione</p>
+<div class="math notranslate nohighlight" id="equation-eq-combsemp">
+<span class="eqno">(15.3)<a class="headerlink" href="#equation-eq-combsemp" title="Permalink to this equation">#</a></span>\[
+C_{n,k} = \frac{D_{n,k}}{P_k} = \frac{n!}{k!(n-k)!},
+\]</div>
+<p>che è spesso indicata con il simbolo <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> e viene chiamato “coefficiente binomiale”. In sintesi, le combinazioni semplici rappresentano il numero di sottoinsiemi di <span class="math notranslate nohighlight">\(k\)</span> elementi distinti scelti da un insieme di <span class="math notranslate nohighlight">\(n\)</span> elementi distinti senza considerare l’ordine di estrazione, e il numero di combinazioni semplici è dato dalla formula <span class="math notranslate nohighlight">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span>.</p>
+<p><strong>Esempio 9.</strong> Per l’insieme <span class="math notranslate nohighlight">\(A = \{a, b, c\}\)</span> si trovino le combinazioni semplici di classe 2.</p>
+<p>Le combinazioni semplici dell’insieme <span class="math notranslate nohighlight">\(A\)</span> sono
+<span class="math notranslate nohighlight">\(\{a, b\}\)</span>, <span class="math notranslate nohighlight">\(\{a, c\}\)</span>, <span class="math notranslate nohighlight">\(\{b, c\}\)</span>, ovvero 3. Applichiamo l’eq. <a class="reference internal" href="#equation-eq-combsemp">(15.3)</a>:</p>
+<div class="math notranslate nohighlight">
+\[
+C_{n,k} = \binom{n}{k} = \binom{3}{2} = 3.
+\]</div>
+<p>Usiamo <code class="docutils literal notranslate"><span class="pre">itertools</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_nk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">c_nk</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&#39;A&#39;, &#39;B&#39;), (&#39;A&#39;, &#39;C&#39;), (&#39;B&#39;, &#39;C&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">c_nk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>La soluzione si trova anche usando la funzione <code class="docutils literal notranslate"><span class="pre">comb()</span></code> della libreria <code class="docutils literal notranslate"><span class="pre">math</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oppure usando la funzione <code class="docutils literal notranslate"><span class="pre">comb()</span></code> della libreria <code class="docutils literal notranslate"><span class="pre">scipy.special</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.special</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="n">sp</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Esempio 10.</strong> Quanti gruppi di 2 si possono formare con 5 individui?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_nk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">c_nk</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((0, 1),
+ (0, 2),
+ (0, 3),
+ (0, 4),
+ (1, 2),
+ (1, 3),
+ (1, 4),
+ (2, 3),
+ (2, 4),
+ (3, 4))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">c_nk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>ovvero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Esempio 11.</strong> Ho un’associazione con 50 soci. Devo scegliere 5 membri che compongano il comitato direttivo.
+Quante possibili scelte?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2118760
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Esempio 12.</strong> Una gelateria offre 15 gusti di gelato differenti. Quante coppe diverse posso formare se ognuna
+contiene 3 gusti di gelato differenti tra loro?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>455
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Esempio 13.</strong> Uno studente deve rispondere a 5 domande su 10. Solo 5 su 10. Quante possibili scelte ha?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>252
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="watermark">
+<h2><span class="section-number">15.7. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Tue May 30 2023
+
+Python implementation: CPython
+Python version       : 3.11.3
+IPython version      : 8.13.2
+
+numpy     : 1.24.3
+matplotlib: 3.7.1
+pandas    : 2.0.2
+scipy     : 1.10.1
+seaborn   : 0.12.2
+
+Watermark: 2.3.1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="100_sets.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Insiemi</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="110_intro_prob.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Introduzione al calcolo delle probabilità</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principio-del-prodotto">15.1. Principio del prodotto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principio-della-somma">15.2. Principio della somma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#il-modello-dell-urna">15.3. Il modello dell’urna</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutazioni-semplici">15.4. Permutazioni semplici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disposizioni-semplici">15.5. Disposizioni semplici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinazioni-semplici">15.6. Combinazioni semplici</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">15.7. Watermark</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

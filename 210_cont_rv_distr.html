@@ -1,0 +1,2108 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>24. Distribuzioni di v.c. continue &#8212; ds4p23</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '210_cont_rv_distr';</script>
+    <link rel="canonical" href="https://ccaudek.github.io/ds4psy_2023/210_cont_rv_distr.html" />
+    <link rel="shortcut icon" href="_static/increasing.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="25. Generazione di numeri casuali" href="215_rng.html" />
+    <link rel="prev" title="23. Distribuzioni di v.c. discrete" href="205_discr_rv_distr.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="preface.html">1. Prefazione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_installation.html">2. Ambiente di lavoro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="015_intro_python.html">3. Introduzione a Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_intro_numpy.html">4. Introduzione a Numpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="025_intro_pandas.html">5. Introduzione a Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="026_pandas_aggregate.html">6. Riepilogo dei dati con Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="035_intro_matplotlib.html">7. Introduzione a Matplotlib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_intro_seaborn.html">8. Introduzione a Seaborn</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistica descrittiva</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="051_key_notions.html">9. Concetti chiave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="055_measurement.html">10. La misurazione in psicologia</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_freq_distr.html">11. Dati e frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="065_loc_scale.html">12. Indici di posizione e di scala</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_correlation.html">13. Le relazioni tra variabili</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probabilità</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="100_sets.html">14. Insiemi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="105_combinatorics.html">15. Calcolo combinatorio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_intro_prob.html">16. Introduzione al calcolo delle probabilità</a></li>
+<li class="toctree-l1"><a class="reference internal" href="111_prob_tutorial.html">17. Esercizi di probabilità discreta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="115_conditional_prob.html">18. Probabilità condizionata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_bayes_theorem.html">19. Il teorema di Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="125_expval_var.html">20. Variabili casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_joint_prob.html">21. Probabilità congiunta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="135_density_func.html">22. La funzione di densità di probabilità</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Distribuzioni di v.c.</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="205_discr_rv_distr.html">23. Distribuzioni di v.c. discrete</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">24. Distribuzioni di v.c. continue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="215_rng.html">25. Generazione di numeri casuali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="225_likelihood.html">26. La verosimiglianza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="226_rescorla_wagner.html">27. Apprendimento per rinforzo</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="305_intro_bayes.html">28. Credibilità, modelli e parametri</a></li>
+<li class="toctree-l1"><a class="reference internal" href="310_subj_prop.html">29. Inferenza su una proporzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="316_conjugate_families.html">30. Distribuzioni coniugate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="321_balance-prior-post.html">31. L’influenza della distribuzione a priori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="325_metropolis.html">32. Approssimazione della distribuzione a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="330_beta_binomial.html">33. Inferenza bayesiana con MCMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="335_mcmc_diagnostics.html">34. Diagnostica delle catene markoviane</a></li>
+<li class="toctree-l1"><a class="reference internal" href="340_summarize_posterior.html">35. Sintesi a posteriori</a></li>
+<li class="toctree-l1"><a class="reference internal" href="341_example_prop.html">36. Analisi bayesiana dell’odds-ratio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="345_bayesian_prediction.html">37. La predizione bayesiana</a></li>
+<li class="toctree-l1"><a class="reference internal" href="346_predict_counts.html">38. La predizione delle frequenze</a></li>
+<li class="toctree-l1"><a class="reference internal" href="350_normal_normal_mod.html">39. Inferenza bayesiana su una media</a></li>
+<li class="toctree-l1"><a class="reference internal" href="355_groups_comparison.html">40. Confronto tra gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="356_repeated_measures.html">41. Misure ripetute</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regressione lineare</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="400_reglin_1.html">42. Introduzione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="405_reglin_2.html">43. Regressione lineare bivariata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="406_reglin_python_tutorial.html">44. Regressione lineare con Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="410_reglin_3.html">45. Regressione lineare con PyMC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="415_reglin_4.html">46. Confronto tra le medie di due gruppi</a></li>
+<li class="toctree-l1"><a class="reference internal" href="420_reglin_ppc.html">47. Posterior Predictive Checks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Inferenza frequentista</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="500_intro_frequentist.html">48. Introduzione all’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="505_conf_interv.html">49. Intervallo di confidenza</a></li>
+<li class="toctree-l1"><a class="reference internal" href="510_test_ipotesi.html">50. Significatività statistica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="514_two_ind_samples.html">51. Test t di Student per campioni indipendenti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="516_ttest_exercises.html">52. Esercizi sull’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="515_limiti_stat_frequentista.html">53. Limiti dell’inferenza frequentista</a></li>
+<li class="toctree-l1"><a class="reference internal" href="520_s_m_errors.html">54. Errori di tipo <em>m</em> e <em>s</em></a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bibliografia</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="z_biblio.html">55. Bibliografia</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendici</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="a01_math_symbols.html">56. Simbologia di base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a02_number_sets.html">57. Numeri binari, interi, razionali, irrazionali e reali</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a04_summation_notation.html">58. Simbolo di somma (sommatorie)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a05_calculus.html">59. Per liberarvi dai terrori preliminari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="a06_kde_plot.html">60. Kernel Density plot</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/210_cont_rv_distr.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Distribuzioni di v.c. continue</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-uniforme">24.1. Distribuzione uniforme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-esponenziale">24.2. Distribuzione esponenziale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-gaussiana">24.3. Distribuzione Gaussiana</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limite-delle-distribuzioni-binomiali">24.3.1. Limite delle distribuzioni binomiali</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-normale-prodotta-con-una-simulazione">24.4. La Normale prodotta con una simulazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concentrazione">24.4.1. Concentrazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funzione-di-ripartizione">24.4.2. Funzione di ripartizione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-normale-standard">24.4.3. Distribuzione Normale standard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-chi-quadrato">24.5. Distribuzione Chi-quadrato</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proprieta">24.5.1. Proprietà</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-t-di-student">24.6. Distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">24.6.1. Proprietà</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funzione-beta-di-eulero">24.7. Funzione beta di Eulero</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-beta">24.8. Distribuzione Beta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-di-cauchy">24.9. Distribuzione di Cauchy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-log-normale">24.10. Distribuzione log-normale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">24.11. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">24.12. Watermark</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/ccaudek/ds4psy_2023/blob/main/210_cont_rv_distr.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="distribuzioni-di-v-c-continue">
+<span id="cont-rv-distr-notebook"></span><h1><span class="section-number">24. </span>Distribuzioni di v.c. continue<a class="headerlink" href="#distribuzioni-di-v-c-continue" title="Permalink to this headline">#</a></h1>
+<p>Dopo avere introdotto con una simulazione il concetto di funzione di densità nel capitolo <a class="reference internal" href="135_density_func.html#density-function-notebook"><span class="std std-ref">La funzione di densità di probabilità</span></a>, prendiamo ora in esame alcune delle densità di probabilità più note. Iniziamo con la distribuzione continua uniforme.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="kn">import</span> <span class="nn">scipy.special</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">golden</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="c1"># Initialize random number generator</span>
+<span class="n">RANDOM_SEED</span> <span class="o">=</span> <span class="mi">8927</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">RANDOM_SEED</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;bmh&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;svg&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="distribuzione-uniforme">
+<h2><span class="section-number">24.1. </span>Distribuzione uniforme<a class="headerlink" href="#distribuzione-uniforme" title="Permalink to this headline">#</a></h2>
+<p>La distribuzione uniforme è la più sempilce funzione di densità di probabilità. Consideriamo nuovamente l’esperimento con lo spinner che abbiamo introdotto nel capitolo <a class="reference internal" href="135_density_func.html#density-function-notebook"><span class="std std-ref">La funzione di densità di probabilità</span></a>. Simuliamo 20 valori che potrebbero essere ottenuti facendo ruotare lo spinner e li rappresentiamo con un istogramma.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">360</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([244.66713975, 261.8771923 , 193.15080797, 103.23493471,
+       252.08706815, 265.87004463, 278.08928508, 262.73540513,
+       236.28504985,  45.72951678, 325.35688032,  48.84068948,
+       304.14082486,  63.49437464, 170.03782308, 121.38784407,
+       345.18787841,   6.76648991, 261.54488083,  38.12773535])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Risultato dello spinner&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequenza relativa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Frequenza relativa&#39;)
+</pre></div>
+</div>
+<img alt="_images/11b1dfe41a35b10d4a1bcb3394b9d476b08c2105306e82faab1fbe36d3d41906.svg" src="_images/11b1dfe41a35b10d4a1bcb3394b9d476b08c2105306e82faab1fbe36d3d41906.svg" /></div>
+</div>
+<p>Sebbene possiamo pensare che sia ugualmente probabile che si verifichi qualsiasi risultato tra 0 e 360, l’istogramma non sembra suggerire questo. Ma lo spinner è stato fatto ruotare solo 20 volte. Proviamo con 100,000 ripetizioni.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100000</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">36</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Risultato dello spinner&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequenza relativa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Frequenza relativa&#39;)
+</pre></div>
+</div>
+<img alt="_images/f443d355955cac06242a26bad22aeadb0dea420038a171f8f9b1fc648b847dab.svg" src="_images/f443d355955cac06242a26bad22aeadb0dea420038a171f8f9b1fc648b847dab.svg" /></div>
+</div>
+<p>In questo caso, anche se c’è una variazione nelle altezze delle barre (con <span class="math notranslate nohighlight">\(\Delta\)</span> = 10), la forma generale dell’istogramma sembra essere piuttosto piatta, ovvero uniforme, nell’intero intervallo dei valori possibili di <span class="math notranslate nohighlight">\(X\)</span>, ovvero <span class="math notranslate nohighlight">\(0 &lt;= X &lt;= 360\)</span>. Se potessimo ottenere un numero enorme di risultati dello spinner, il profilo dell’istogramma assumerebbe la forma della <em>funzione di densità uniforme</em> mostratra nella figura seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;uniform pdf&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;p(x)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;p(x)&#39;)
+</pre></div>
+</div>
+<img alt="_images/da66a2d674f8bc58de45a098bb93ee5b020aa64d5ce0a30e116364642392ce14.svg" src="_images/da66a2d674f8bc58de45a098bb93ee5b020aa64d5ce0a30e116364642392ce14.svg" /></div>
+</div>
+<p>Quando la variabile casuale <span class="math notranslate nohighlight">\(X\)</span> è continua, come nel caso del risultato della rotazione dello spinner, allora per rappresentare le probabilità usiamo una curva chiamata funzione di densità di probabilità. Poiché la scala dello spinner va da 0 a 360, sappiamo che tutti i risultati possibili devono cadere in questo intervallo, quindi la probabilità che <span class="math notranslate nohighlight">\(X\)</span> assuma un valore nell’intervallo [0, 360] è 1.0. Questa probabilità è rappresentata dall’area totale sotto la funzione di densità della figura precedente tra 0 e 360. Poiché l’area di questo rettangolo è data dall’altezza per la base e la base è uguale a 360, l’altezza di questa curva di densità deve essere 1/360 = 0.00278. L’ordinata della funzione di densità (qui 0.00278 nell’intervallo [0, 360] e 0 altrove) è chiamata <em>densità</em>.</p>
+<p>Le probabilità corrispondono alle aree sottese alla curva di densità nell’intervallo di valori <span class="math notranslate nohighlight">\(X\)</span> specificato. Per esempio, nell’esperimento dello spinner possiamo chiederci quale sia la probabilità di ottenere un numero compreso tra 150 e 250, ovvero <span class="math notranslate nohighlight">\(P(150 &lt; X &lt; 250)\)</span>. Per trovare la risposta dobbiamo calcolare l’area di un rettangolo. La base è 250 - 150 = 100.  L’altezza è 0.00278. Dunque, la probabilità è</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">100</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="mi">360</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2777777777777778
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per svolgere questo calcolo i software utilizzano la funzione di ripartizione, <span class="math notranslate nohighlight">\(P(X &lt; x)\)</span>. Per trovare l’area in un intervallo è necessario sottrarre due aree. Nel caso presente abbiamo <span class="math notranslate nohighlight">\(P(x &lt; 250) - P(x &lt; 150)\)</span>, ovvero:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.27777777777777773
+</pre></div>
+</div>
+</div>
+</div>
+<p>La probabilità cercata è rappresentata dal rettangolo indicato nella figura seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">150</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">250</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x15d435210&gt;
+</pre></div>
+</div>
+<img alt="_images/48779bd77adcaa854aa3df5a57f69cc17f117696e7a125d4214ba76a6db9846c.svg" src="_images/48779bd77adcaa854aa3df5a57f69cc17f117696e7a125d4214ba76a6db9846c.svg" /></div>
+</div>
+<p>In maniera più formale possiamo dire che la distribuzione continua uniforme è una distribuzione di probabilità continua che assegna lo stesso grado di fiducia a tutti i possibili valori di una variabile definita in un certo intervallo <span class="math notranslate nohighlight">\(S=[a,b]\subset {\mathbb  {R}}\)</span>. La distribuzione continua uniforme viene indicata con <span class="math notranslate nohighlight">\({\mathcal  {U}}(a,b)={\mathcal  {U}}([a,b])\)</span>. Come intervallo <span class="math notranslate nohighlight">\([a,b]\)</span> viene spesso preso l’intervallo unitario <span class="math notranslate nohighlight">\(I=[0,1]\)</span>.</p>
+<p>La densità di probabilità di una variabile casuale continua uniforme <span class="math notranslate nohighlight">\({\mathcal  {U}}(a,b)\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+f(x)={\frac  {1}{b-a}} \quad \text{su}\; [a, b].
+\]</div>
+<p>Il suo valore attesto è</p>
+<div class="math notranslate nohighlight">
+\[
+\displaystyle E(X)={\frac {1}{2}}(b+a).
+\]</div>
+<p>La sua varianza è</p>
+<div class="math notranslate nohighlight">
+\[
+V(X)={\frac {1}{12}}(b-a)^{2}.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">plot_helpers</span> <span class="kn">import</span> <span class="n">plot_pdf_and_cdf</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="n">rvU</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot_pdf_and_cdf</span><span class="p">(</span><span class="n">rvU</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span> <span class="n">rv_name</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">plot_helpers</span> <span class="kn">import</span> <span class="n">plot_pdf_and_cdf</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">rvU</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;plot_helpers&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In Python è possibile manipolare la distribuzione uniforme mediante la funzione <code class="docutils literal notranslate"><span class="pre">uniform</span></code> del modulo <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>.  Di default, la funzione <code class="docutils literal notranslate"><span class="pre">scipy.stats.uniform()</span></code> è un’istanziazione di <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span>. Se utilizziamo la funzione <code class="docutils literal notranslate"><span class="pre">pdf()</span></code> (<em>probability density function</em>) otteniamo l’ordinata della funzione di densità <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span> in corrispondenza dei valori <span class="math notranslate nohighlight">\(x\)</span> passati in input. Per esempio, esaminiamo la funzione di densità <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span> in corrispondenza di 0.5, 0.8 e 1.2. Per i primi due valori ci aspettiamo di ottenere 1; in corrispondenza di 1.2 ci aspettiamo di ottenere 0, poiché questo valore è al di fuori dell’intervallo <span class="math notranslate nohighlight">\([ 0, 1]\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">pdf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 1., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Con la funzione <code class="docutils literal notranslate"><span class="pre">cdf()</span></code> (<em>cumulative density function</em>) otteniamo la funzione di ripartizione. Per esempio, per <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span> in corrispondenza dei punti 0.5 e 0.8 otteniamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.5, 0.8])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Usando la funzione di ripartizione è possibile calcolare la probabilità che la variabile casuale continua assuma un valore nell’intervallo specificato. Per esempio, per <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span> troviamo <span class="math notranslate nohighlight">\(P(0.5 &lt; x &lt; 0.8)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.30000000000000004
+</pre></div>
+</div>
+</div>
+</div>
+<p>I quantili di una funzione di densità (ovvero, il valore della variabile casuale <span class="math notranslate nohighlight">\(X\)</span> in corrispondenza del valore della funzione di ripartizione fornito in input) si ottengono con la funzione <code class="docutils literal notranslate"><span class="pre">ppf()</span></code> (<em>probability point function</em>). Per esempio, troviamo i quantili di ordine 0.5 e 0.8 di una <span class="math notranslate nohighlight">\({\mathcal  {U}}(0,1)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.5, 0.8])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Infine, è possibile simulare dei valori casuali della distribuzione <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span> usando la funzione <code class="docutils literal notranslate"><span class="pre">rng.uniform()</span></code>. Se vogliamo 5 valori da una <span class="math notranslate nohighlight">\({\mathcal{U}}(0,1)\)</span>, scriviamo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.27425475, 0.4095329 , 0.71841224, 0.33137031, 0.09797437])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Verifico il valore atteso di 100,000 realizzazioni di <span class="math notranslate nohighlight">\({\mathcal {U}}(0,1)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.49982873261286714
+</pre></div>
+</div>
+</div>
+</div>
+<p>Verifico la varianza di 100,000 realizzazioni di <span class="math notranslate nohighlight">\({\mathcal  {U}}(0,1)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0835667072228961
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">/</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.08333333333333333
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="distribuzione-esponenziale">
+<h2><span class="section-number">24.2. </span>Distribuzione esponenziale<a class="headerlink" href="#distribuzione-esponenziale" title="Permalink to this headline">#</a></h2>
+<p>Un’altra distribuzione di densità molto semplice è la distribuzione esponenziale. La distribuzione esponenziale viene spesso utilizzata per modellare il tempo trascorso prima che un evento si verifichi (tempo di attesa). Chiamiamo <span class="math notranslate nohighlight">\(X\)</span> il tempo di attesa. Sia <span class="math notranslate nohighlight">\(\mu = \mathbb{E}(X)\)</span> il tempo di attesa medio. La funzione di densità esponenziale è</p>
+<div class="math notranslate nohighlight" id="equation-eq-exponential-pdf">
+<span class="eqno">(24.1)<a class="headerlink" href="#equation-eq-exponential-pdf" title="Permalink to this equation">#</a></span>\[
+f(x) = \lambda {\rm e}^{-\lambda x}, \quad \text{con} \; \lambda = 1/\mu,\, \lambda &gt; 0,\, x &gt; 0
+\]</div>
+<p>Possiamo anche scrivere l’eq. <a class="reference internal" href="#equation-eq-exponential-pdf">(24.1)</a> come</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{\mu} {\rm e}^{-x/\mu}.
+\]</div>
+<p>La varianza di una distribuzione esponenziale è</p>
+<div class="math notranslate nohighlight">
+\[
+V(X) = \frac{1}{\lambda^2}.
+\]</div>
+<p>La deviazione standard è dunque uguale alla media:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_X = \frac{1}{\lambda} = \mu.
+\]</div>
+<p>Ad esempio, il tempo di attesa della pubblicazione del voto di un esame scritto segue una distribuzione esponenziale. Supponiamo che, in questo Corso di Laurea, il tempo di attesa medio per conoscere il risultato di un esame scritto sia di 4 giorni. La funzione esponenziale diventa</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \frac{1}{4} \exp^{-x/4}.
+\]</div>
+<p>Per disegnare un grafico della funzione esponenziale possiamo usare la funzione <code class="docutils literal notranslate"><span class="pre">scipy.stats.expon()</span></code>. La densità è data da <code class="docutils literal notranslate"><span class="pre">pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code>, laddove il parametro <code class="docutils literal notranslate"><span class="pre">loc</span></code> è 0 e <code class="docutils literal notranslate"><span class="pre">scale</span></code> è la deviazione standard.  Nel caso presente abbiamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">decay_par</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">mu</span>
+<span class="n">stdev</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">decay_par</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;f(x)&#39;)
+</pre></div>
+</div>
+<img alt="_images/2cfa7cdc3c69501c00d0d3ca61e4118067e935af1714be6b18eb9eed00d32dd5.png" src="_images/2cfa7cdc3c69501c00d0d3ca61e4118067e935af1714be6b18eb9eed00d32dd5.png" />
+</div>
+</div>
+<p>Chiediamoci, ad esempio quale sia la probabilità di dovere aspettare non più di un giorno e mezzo per conoscere il voto. La risposta a questa domanda è data dalla funzione di ripartizione in corrispondenza di 1.5, ovvero <span class="math notranslate nohighlight">\(F(1.5) = P(X \leq 1.5)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fe7b97376d0&gt;
+</pre></div>
+</div>
+<img alt="_images/4e3a1d09e98466383fa89475b8a4e7056d9a2014b4192133205d985baa219eca.png" src="_images/4e3a1d09e98466383fa89475b8a4e7056d9a2014b4192133205d985baa219eca.png" />
+</div>
+</div>
+<p>Possiamo trovare la risposta usando la funzione <code class="docutils literal notranslate"><span class="pre">cdf()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3127107212090278
+</pre></div>
+</div>
+</div>
+</div>
+<p>Chiediamoci, ad esempio quale sia la probabilità di conoscere il voto dopo avere aspettato un tempo compreso tra 1 e 6 giorni. Dobbiamo trovare l’area sottesa alla funzione di densità nell’intervallo [1, 6]. Usando la fuzione di ripartizione, calcoliamo <span class="math notranslate nohighlight">\(F(6) - F(1) = P(X &lt;= 6) - P(X &lt;= 1)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fe7b97b5de0&gt;
+</pre></div>
+</div>
+<img alt="_images/3d76462bf868c933dbb5160ac8e598e9087ff463323d3c5737b9bb0d7b187e3e.png" src="_images/3d76462bf868c933dbb5160ac8e598e9087ff463323d3c5737b9bb0d7b187e3e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5556706229229751
+</pre></div>
+</div>
+</div>
+</div>
+<p>Troviamo la probabilità di dovere aspettare almeno 5 giorni e mezzo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">5.5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">21</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PolyCollection at 0x7fe8095ee470&gt;
+</pre></div>
+</div>
+<img alt="_images/ec06091dc7087ffe72ba8886931e5e9a6ae18a92efe6dd5fcbb230e179a47f28.png" src="_images/ec06091dc7087ffe72ba8886931e5e9a6ae18a92efe6dd5fcbb230e179a47f28.png" />
+</div>
+</div>
+<p>La probabilità cercata è data dalla probabilità dell’evento complementare di quello fornito dalla funzione di ripartizione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.25283959580474646
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se la media del tempo di attesa nel Corso di Laurea fosse di 4 giorni, allora circa una volta su 4 lo studente dovrà aspettare almeno 5.5 giorni per conoscere il voto dello scritto.</p>
+<p>La figura seguente mostra un istogramma di 1000000 valori casuali estratti dalla distribuzione esponenziale di parametro <span class="math notranslate nohighlight">\(\lambda = 1/4\)</span>. All’istogramma è sovrapposta la funzione di densità.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sexpon</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">expon</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stdev</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="n">samps</span> <span class="o">=</span> <span class="n">sexpon</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="n">count</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">ignored</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samps</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequenza relativa&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tempo di attesa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Tempo di attesa&#39;)
+</pre></div>
+</div>
+<img alt="_images/7307e068e4f4f7211a8c4e734fadb55c4b4f12092d5f5cde87b0c5533743a616.png" src="_images/7307e068e4f4f7211a8c4e734fadb55c4b4f12092d5f5cde87b0c5533743a616.png" />
+</div>
+</div>
+</section>
+<section id="distribuzione-gaussiana">
+<h2><span class="section-number">24.3. </span>Distribuzione Gaussiana<a class="headerlink" href="#distribuzione-gaussiana" title="Permalink to this headline">#</a></h2>
+<p>La più importante distribuzione di densità è la Gaussiana. Non c’è un’unica distribuzione gaussiana (o Normale): la distribuzione gaussiana è una famiglia di distribuzioni. Tali distribuzioni sono dette “gaussiane” in onore di Carl Friedrich Gauss (uno dei più grandi matematici della storia il quale, tra le altre cose, scoprì l’utilità di tale funzione di densità per descrivere gli errori di misurazione). Adolphe Quetelet, il padre delle scienze sociali quantitative, fu il primo ad applicare tale funzione di densità alle misurazioni dell’uomo. Karl Pearson usò per primo il termine “distribuzione normale” anche se ammise che questa espressione “ha lo svantaggio di indurre le persone a credere che le altre distribuzioni, in un senso o nell’altro, non siano normali.”</p>
+<section id="limite-delle-distribuzioni-binomiali">
+<h3><span class="section-number">24.3.1. </span>Limite delle distribuzioni binomiali<a class="headerlink" href="#limite-delle-distribuzioni-binomiali" title="Permalink to this headline">#</a></h3>
+<p>Iniziamo con un un breve excursus storico. Nel 1733, Abraham de Moivre notò che, aumentando il numero di prove di una distribuzione binomiale, la distribuzione risultante diventava quasi simmetrica e a forma campanulare. Con 10 prove e una probabilità di successo di 0.9, la distribuzione è chiaramente asimmetrica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">r_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_values</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">r_values</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f8652fefc7c69dbee8be8526f4c631ff3d2de3154ab7e932a5f5b18c8fe15259.png" src="_images/f8652fefc7c69dbee8be8526f4c631ff3d2de3154ab7e932a5f5b18c8fe15259.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 3;
+                var nbb_unformatted_code = "n = 10\np = 0.9\nr_values = list(range(n + 1))\ndist = [st.binom.pmf(r, n, p) for r in r_values ]\n_ = plt.bar(r_values, dist)";
+                var nbb_formatted_code = "n = 10\np = 0.9\nr_values = list(range(n + 1))\ndist = [st.binom.pmf(r, n, p) for r in r_values]\n_ = plt.bar(r_values, dist)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Ma se aumentiamo il numero di prove di un fattore di 100 a <em>N</em> = 1000, senza modificare la probabilità di successo di 0.9, la distribuzione assume una forma campanulare quasi simmetrica. Dunque, de Moivre scoprì che, quando <em>N</em> è grande, la funzione gaussiana (che introdurremo qui sotto), nonostante sia la densità di v.c. continue, fornisce una buona approssimazione alla funzione di massa di probabilità binomiale.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">r_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">st</span><span class="o">.</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">r_values</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">r_values</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">850</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/corrado/opt/anaconda3/envs/pymc/lib/python3.10/site-packages/scipy/stats/_discrete_distns.py:77: RuntimeWarning: divide by zero encountered in _binom_pdf
+  return _boost._binom_pdf(x, n, p)
+</pre></div>
+</div>
+<img alt="_images/d35b8eb660bea07f45d52cbeb7fd4b3689e204565e72bc1c0bd1d569aeeb4769.png" src="_images/d35b8eb660bea07f45d52cbeb7fd4b3689e204565e72bc1c0bd1d569aeeb4769.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 4;
+                var nbb_unformatted_code = "n = 1000\np = 0.9\nr_values = list(range(n + 1))\ndist = [st.binom.pmf(r, n, p) for r in r_values ]\n_ = plt.bar(r_values, dist)\nplt.xlim(850, 950);";
+                var nbb_formatted_code = "n = 1000\np = 0.9\nr_values = list(range(n + 1))\ndist = [st.binom.pmf(r, n, p) for r in r_values]\n_ = plt.bar(r_values, dist)\nplt.xlim(850, 950)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>La distribuzione Normale fu scoperta da Gauss nel 1809. Il Paragrafo successivo illustra come si possa giungere alla Normale mediante una simulazione.</p>
+</section>
+</section>
+<section id="la-normale-prodotta-con-una-simulazione">
+<h2><span class="section-number">24.4. </span>La Normale prodotta con una simulazione<a class="headerlink" href="#la-normale-prodotta-con-una-simulazione" title="Permalink to this headline">#</a></h2>
+<p>Il libro “Rethinking Statistics” di <span id="id1">McElreath [<a class="reference internal" href="z_biblio.html#id68" title="Richard McElreath. Statistical rethinking: A Bayesian course with examples in R and Stan. CRC Press, Boca Raton, Florida, 2nd edition edition, 2020.">McE20</a>]</span> spiega come sia possibile ottenere la distribuzione normale attraverso una simulazione. Immaginiamo di avere duemila persone che si trovano allineate su una linea di partenza. Quando viene dato il segnale di partenza, ogni persona lancia una moneta e compie un passo avanti o indietro a seconda del risultato del lancio. La lunghezza di ogni passo può variare da 0 a 1 metro. Ogni persona lancia la moneta 16 volte e quindi compie 16 passi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">randomwalk</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">rand</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rand</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">walk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">walk</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 5;
+                var nbb_unformatted_code = "def randomwalk(n):\n    steps = []\n    for i in range(n):\n        rand = rng.integers(1, 3)\n        if rand == 1:\n            steps.append(-rng.uniform(0, 1))\n        else:\n            steps.append(rng.uniform(0, 1))\n    walk = np.cumsum(steps)\n    return walk";
+                var nbb_formatted_code = "def randomwalk(n):\n    steps = []\n    for i in range(n):\n        rand = rng.integers(1, 3)\n        if rand == 1:\n            steps.append(-rng.uniform(0, 1))\n        else:\n            steps.append(rng.uniform(0, 1))\n    walk = np.cumsum(steps)\n    return walk";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>I valori ottenuti da una singola passeggiata casuale consistono nella distanza dall’origine (punto di partenza, indicato come 0) dopo un determinato numero di passi. Questi valori sono rappresentati da numeri. Per esempio:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">particularWalk</span> <span class="o">=</span> <span class="n">randomwalk</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">particularWalk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alla conclusione di queste passeggiate casuali (<em>random walk</em>) non possiamo sapere con esattezza dove si troverà ciascuna persona, ma possiamo conoscere con certezza le caratteristiche della distribuzione delle 2000 distanze dall’origine.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="n">particularWalk</span> <span class="o">=</span> <span class="n">randomwalk</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">particularWalk</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;royalblue&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="n">particularWalk</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Numero di passi&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Distanza dall&#39;origine&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c95aa6b7805b9e43b5487fc0602417bce14aabb497d180f4eb0a257edef47464.png" src="_images/c95aa6b7805b9e43b5487fc0602417bce14aabb497d180f4eb0a257edef47464.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 7;
+                var nbb_unformatted_code = "for k in range(2000):\n    particularWalk = randomwalk(16)\n    plt.plot(np.arange(16), particularWalk, color='royalblue', linewidth=0.4, alpha=0.1)\n\nplt.plot(np.arange(16), particularWalk, color='black', linewidth=0.4);\nplt.xlabel('Numero di passi')\nplt.ylabel(\"Distanza dall'origine\");";
+                var nbb_formatted_code = "for k in range(2000):\n    particularWalk = randomwalk(16)\n    plt.plot(np.arange(16), particularWalk, color=\"royalblue\", linewidth=0.4, alpha=0.1)\n\nplt.plot(np.arange(16), particularWalk, color=\"black\", linewidth=0.4)\nplt.xlabel(\"Numero di passi\")\nplt.ylabel(\"Distanza dall'origine\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Per esempio, possiamo predire in maniera accurata la proporzione di persone che si sono spostate in avanti oppure all’indietro. Oppure, possiamo predire accuratamente la proporzione di persone che si troveranno ad una certa distanza dalla linea di partenza (es., a 1.5 m dall’origine). Queste predizioni sono possibili perché tali distanze si distribuiscono secondo la legge Normale (la curva rossa nel grafico seguente).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">randomwalk</span><span class="p">(</span><span class="mi">16</span><span class="p">)[</span><span class="mi">15</span><span class="p">])</span>
+
+<span class="n">avg_distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+<span class="n">std_distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+    <span class="n">distances</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;distanze&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;royalblue&quot;</span>
+<span class="p">)</span>
+<span class="c1"># calculate the pdf</span>
+<span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>  <span class="c1"># extract the endpoints for the x-axis</span>
+<span class="n">x_pdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_pdf</span><span class="p">,</span> <span class="n">avg_distances</span><span class="p">,</span> <span class="n">std_distances</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pdf</span><span class="p">,</span> <span class="n">y_pdf</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Distanza percorsa (m)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Densità&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/29f0be6314f4241ba8d5608050bc169d944052e0ab628d148ae82723ca190f5b.png" src="_images/29f0be6314f4241ba8d5608050bc169d944052e0ab628d148ae82723ca190f5b.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 8;
+                var nbb_unformatted_code = "distances = []\nfor k in range(2000):\n    distances.append(randomwalk(16)[15])\n\navg_distances = np.mean(distances)\nstd_distances = np.std(distances)\n\nax = sns.histplot(distances, kde=False, stat='density', \n                  label='distanze', color='royalblue')\n# calculate the pdf\nx0, x1 = ax.get_xlim()  # extract the endpoints for the x-axis\nx_pdf = np.linspace(x0, x1, 100)\ny_pdf = st.norm.pdf(x_pdf, avg_distances, std_distances)\nax.plot(x_pdf, y_pdf, 'r', lw=2, label='pdf')                                                   \nax.legend();\nax.set(xlabel='Distanza percorsa (m)', ylabel='Densit\u00e0')\nplt.show()";
+                var nbb_formatted_code = "distances = []\nfor k in range(2000):\n    distances.append(randomwalk(16)[15])\n\navg_distances = np.mean(distances)\nstd_distances = np.std(distances)\n\nax = sns.histplot(\n    distances, kde=False, stat=\"density\", label=\"distanze\", color=\"royalblue\"\n)\n# calculate the pdf\nx0, x1 = ax.get_xlim()  # extract the endpoints for the x-axis\nx_pdf = np.linspace(x0, x1, 100)\ny_pdf = st.norm.pdf(x_pdf, avg_distances, std_distances)\nax.plot(x_pdf, y_pdf, \"r\", lw=2, label=\"pdf\")\nax.legend()\nax.set(xlabel=\"Distanza percorsa (m)\", ylabel=\"Densit\u00e0\")\nplt.show()";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>Questa simulazione dimostra che qualsiasi processo che prevede la somma di un certo numero di valori casuali, tutti provenienti dalla stessa distribuzione, alla fine converge ad una distribuzione normale. Non importa quale sia la forma della distribuzione di partenza, che può essere uniforme come nell’esempio mostrato o di qualsiasi altro tipo. La forma della distribuzione da cui viene realizzato il campionamento determina la velocità di convergenza alla distribuzione normale. In alcuni casi, la convergenza può essere lenta, mentre in altri casi, come nell’esempio mostrato, la convergenza può essere molto rapida. È possibile osservare lo stesso principio tramite la <a class="reference external" href="https://en.wikipedia.org/wiki/Galton_board">Galton box</a>.</p>
+<p>Dal punto di vista formale, possiamo definire una variabile casuale continua <span class="math notranslate nohighlight">\(Y\)</span> come avente una distribuzione normale se la sua densità di probabilità è distribuita secondo la seguente equazione</p>
+<div class="math notranslate nohighlight" id="equation-eq-normal-formula">
+<span class="eqno">(24.2)<a class="headerlink" href="#equation-eq-normal-formula" title="Permalink to this equation">#</a></span>\[
+f(y; \mu, \sigma) = {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y -  \mu)^2}{2 \sigma^2} \right\},
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\mu \in \mathbb{R}\)</span> e <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span> sono i parametri della distribuzione.</p>
+<p>La densità normale è unimodale e simmetrica con una caratteristica forma a campana e con il punto di massima densità in corrispondenza di <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>Il significato dei parametri <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> che appaiono nell’eq. <a class="reference internal" href="#equation-eq-normal-formula">(24.2)</a> viene chiarito dalla dimostrazione che</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(Y) = \mu, \qquad \mathbb{V}(Y) = \sigma^2.
+\]</div>
+<p>La rappresentazione grafica di quattro densità Normali con medie -1, -0.5, 0, 1 e con deviazioni standard 0.25, 0.5, 1 e 2 è fornita nella figura seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+
+<span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mus</span><span class="p">,</span> <span class="n">sigmas</span><span class="p">):</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\mu$ = </span><span class="si">{}</span><span class="s2">, $\sigma$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fed245591e0&gt;
+</pre></div>
+</div>
+<img alt="_images/bcbebaab69c1529f47ff80d4eaf2d4e7b88d5114e778b863200537970b4c3461.png" src="_images/bcbebaab69c1529f47ff80d4eaf2d4e7b88d5114e778b863200537970b4c3461.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 9;
+                var nbb_unformatted_code = "x = np.arange(-5, 6, 0.001)\n\nmus = [-1., -0.5, 0., 1.]\nsigmas = [0.25, 0.5, 1, 2]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.norm.pdf(x, mu, sigma)\n    plt.plot(x, pdf, label=r'$\\mu$ = {}, $\\sigma$ = {}'.format(mu, sigma))\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend(loc=1)";
+                var nbb_formatted_code = "x = np.arange(-5, 6, 0.001)\n\nmus = [-1.0, -0.5, 0.0, 1.0]\nsigmas = [0.25, 0.5, 1, 2]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.norm.pdf(x, mu, sigma)\n    plt.plot(x, pdf, label=r\"$\\mu$ = {}, $\\sigma$ = {}\".format(mu, sigma))\nplt.xlabel(\"x\")\nplt.ylabel(\"f(x)\")\nplt.legend(loc=1)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<section id="concentrazione">
+<h3><span class="section-number">24.4.1. </span>Concentrazione<a class="headerlink" href="#concentrazione" title="Permalink to this headline">#</a></h3>
+<p>È istruttivo osservare il grado di concentrazione della distribuzione Normale attorno alla media:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+P(\mu - \sigma &lt; Y &lt; \mu + \sigma) &amp;= P (-1 &lt; Z &lt; 1) \simeq 0.683, \notag\\
+P(\mu - 2\sigma &lt; Y &lt; \mu + 2\sigma) &amp;= P (-2 &lt; Z &lt; 2) \simeq 0.956, \notag\\
+P(\mu - 3\sigma &lt; Y &lt; \mu + 3\sigma) &amp;= P (-3 &lt; Z &lt; 3) \simeq 0.997. \notag
+\end{align}
+\end{split}\]</div>
+<p>Si noti come un dato la cui distanza dalla media è superiore a 3 volte la deviazione standard presenti un carattere di eccezionalità perché meno del 0.3% dei dati della distribuzione Normale presentano questa caratteristica.</p>
+<p>Per indicare la distribuzione Normale si usa la notazione <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma)\)</span>.</p>
+</section>
+<section id="funzione-di-ripartizione">
+<h3><span class="section-number">24.4.2. </span>Funzione di ripartizione<a class="headerlink" href="#funzione-di-ripartizione" title="Permalink to this headline">#</a></h3>
+<p>Il valore della funzione di ripartizione di <span class="math notranslate nohighlight">\(Y\)</span> nel punto <span class="math notranslate nohighlight">\(y\)</span> è l’area sottesa alla curva di densità <span class="math notranslate nohighlight">\(f(y)\)</span> nella semiretta <span class="math notranslate nohighlight">\((-\infty, y]\)</span>. Non esiste alcuna funzione elementare per la funzione di ripartizione</p>
+<div class="math notranslate nohighlight" id="equation-eq-gaussian-rip-formula">
+<span class="eqno">(24.3)<a class="headerlink" href="#equation-eq-gaussian-rip-formula" title="Permalink to this equation">#</a></span>\[
+F(y) = \int_{-\infty}^y {1 \over {\sigma\sqrt{2\pi} }} \exp \left\{-\frac{(y - \mu)^2}{2\sigma^2} \right\} dy, 
+\]</div>
+<p>pertanto le probabilità <span class="math notranslate nohighlight">\(P(Y &lt; y)\)</span> vengono calcolate mediante integrazione numerica approssimata. I valori della funzione di ripartizione di una variabile casuale Normale sono dunque forniti da un software.</p>
+<p>Esaminiamo le funzioni fornite da <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> per la densità Normale. Il metodo <code class="docutils literal notranslate"><span class="pre">.norm.rvs()</span></code> produce un valore casuale estratto dalla distribuzione Normale specificata. Per esempio, un valore casuale dalla <span class="math notranslate nohighlight">\(\mathcal{N}(\mu = 100, \sigma = 15)\)</span> è:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>101.02786073753111
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estraiamo ora 10 valori a caso dalla <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qi</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">qi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75.05705567433097 91.27489415447812 109.68768721861458 102.0271340052463 127.65930939997654 101.42094568514196 114.98838314393396 93.42405828328144 91.30533995037935 100.35195291353871
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per trovare la probabilità che un’osservazione estratta a caso dalla <span class="math notranslate nohighlight">\(\mathcal{N}(100, 15)\)</span> abbia un valore minore o uguale a, diciamo, 115, troviamo il valore della funzione di ripartizione (o funzione cumulativa di densità) nel punto 115.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">115</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8413447460685429
+</pre></div>
+</div>
+</div>
+</div>
+<p>Questa è l’area sottesa alla funzione di densità nell’intervallo <span class="math notranslate nohighlight">\([-\infty, 115]\)</span>, come indicato nella figura seguente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">115</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/24afcae4727acce1d87b0cf2778b634a31a44f342c9e5d20573c44e906d4d3d0.png" src="_images/24afcae4727acce1d87b0cf2778b634a31a44f342c9e5d20573c44e906d4d3d0.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 27;
+                var nbb_unformatted_code = "mu = 100\nsigma = 15\nx = np.linspace(mu-3*sigma, mu+3*sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where = x<=115, color='0.75');";
+                var nbb_formatted_code = "mu = 100\nsigma = 15\nx = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where=x <= 115, color=\"0.75\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">mean</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">std</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">rvN</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+
+<span class="c1"># use `quad` function to integrate rvN.pdf between 50 and 115</span>
+<span class="n">quad</span><span class="p">(</span><span class="n">rvN</span><span class="o">.</span><span class="n">pdf</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">115</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plot_pdf_and_cdf</span><span class="p">(</span><span class="n">rvN</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">115</span><span class="p">,</span> <span class="n">rv_name</span><span class="o">=</span><span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Solo per fare un esempio, qui di seguito fornisco il codice Python per calcolare l’integrale che stiamo discutendo per mezzo della funzione <code class="docutils literal notranslate"><span class="pre">quad</span></code> della libreria SciPy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sig</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sig</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">sig</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">gaussian</span><span class="p">,</span> <span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Il risultato è&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="s2">&quot;con errore&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Il risultato è 0.841344746068543 con errore 4.0191205799653545e-10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il risultato replica quello prodotto da <code class="docutils literal notranslate"><span class="pre">.norm.cdf()</span></code>.</p>
+<p>Per trovare la proporzione di persone nella popolazione che hanno un QI maggiore di 2 deviazioni standard dalla media consideriamo l’evento complementare:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.02275013194817921
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">130</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/64a1c4145f35e339bc723242dab17b784c94427623886ee8c7738a9dcb697ff2.png" src="_images/64a1c4145f35e339bc723242dab17b784c94427623886ee8c7738a9dcb697ff2.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 28;
+                var nbb_unformatted_code = "plt.plot(x, fx)\nplt.fill_between(x, fx, where = x >= 130, color='0.75');";
+                var nbb_formatted_code = "plt.plot(x, fx)\nplt.fill_between(x, fx, where=x >= 130, color=\"0.75\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>In maniera equivalente, possiamo usare la <em>Survival Function</em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.022750131948179195
+</pre></div>
+</div>
+</div>
+</div>
+<p>La funzione <code class="docutils literal notranslate"><span class="pre">ppf</span></code> restituisce il quantile della Normale. Ad esempio:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.022750131948179195</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>130.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="distribuzione-normale-standard">
+<h3><span class="section-number">24.4.3. </span>Distribuzione Normale standard<a class="headerlink" href="#distribuzione-normale-standard" title="Permalink to this headline">#</a></h3>
+<p>La distribuzione Normale di parametri <span class="math notranslate nohighlight">\(\mu = 0\)</span> e <span class="math notranslate nohighlight">\(\sigma = 1\)</span> viene detta <em>distribuzione Normale standard</em>. La famiglia Normale è l’insieme avente come elementi tutte le distribuzioni Normali con parametri <span class="math notranslate nohighlight">\(\mu\)</span> e <span class="math notranslate nohighlight">\(\sigma\)</span> diversi. Tutte le distribuzioni Normali si ottengono dalla Normale standard mediante una trasformazione lineare: se <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(\mu_Y, \sigma_Y)\)</span> allora</p>
+<div class="math notranslate nohighlight">
+\[
+X = a + b Y \sim \mathcal{N}(\mu_X = a+b \mu_Y, \sigma_X = \left|b\right|\sigma_Y).
+\]</div>
+<p>L’area sottesa alla curva di densità di <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma)\)</span> nella semiretta <span class="math notranslate nohighlight">\((-\infty, y]\)</span> è uguale all’area sottesa alla densità Normale standard nella semiretta <span class="math notranslate nohighlight">\((-\infty, z]\)</span>, in cui <span class="math notranslate nohighlight">\(z = (y -\mu_Y )/\sigma_Y\)</span> è il punteggio standard di <span class="math notranslate nohighlight">\(Y\)</span>. Per la simmetria della distribuzione, l’area sottesa nella semiretta <span class="math notranslate nohighlight">\([1, \infty)\)</span> è uguale all’area sottesa nella semiretta <span class="math notranslate nohighlight">\((-\infty, 1]\)</span> e quest’ultima coincide con <span class="math notranslate nohighlight">\(F(-1)\)</span>. Analogamente, l’area sottesa nell’intervallo <span class="math notranslate nohighlight">\([y_a, y_b]\)</span>, con <span class="math notranslate nohighlight">\(y_a &lt; y_b\)</span>, è pari a <span class="math notranslate nohighlight">\(F(z_b) - F(z_a)\)</span>, dove <span class="math notranslate nohighlight">\(z_a\)</span> e <span class="math notranslate nohighlight">\(z_b\)</span> sono i punteggi standard di <span class="math notranslate nohighlight">\(y_a\)</span> e <span class="math notranslate nohighlight">\(y_b\)</span>.</p>
+<p>Si ha anche il problema inverso rispetto a quello del calcolo delle aree: dato un numero <span class="math notranslate nohighlight">\(0 \leq p \leq 1\)</span>, il problema è quello di determinare un numero <span class="math notranslate nohighlight">\(z \in \mathbb{R}\)</span> tale che <span class="math notranslate nohighlight">\(P(Z &lt; z) = p\)</span>. Il valore <span class="math notranslate nohighlight">\(z\)</span> cercato è detto <em>quantile</em> di ordine <span class="math notranslate nohighlight">\(p\)</span> della Normale standard e può essere trovato mediante un software.</p>
+<p>Supponiamo che l’altezza degli individui adulti segua la distribuzione Normale di media <span class="math notranslate nohighlight">\(\mu = 1.7\)</span> m e deviazione standard <span class="math notranslate nohighlight">\(\sigma = 0.1\)</span> m. Vogliamo sapere la proporzione di individui adulti con un’altezza compresa tra <span class="math notranslate nohighlight">\(1.7\)</span> e <span class="math notranslate nohighlight">\(1.8\)</span> m.</p>
+<p>Il problema ci chiede di trovare l’area sottesa alla distribuzione <span class="math notranslate nohighlight">\(\mathcal{N}(\mu = 1.7, \sigma = 0.1)\)</span> nell’intervallo <span class="math notranslate nohighlight">\([1.7, 1.8]\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.34134474606854315
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">1.7</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">mu</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">1.7</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">1.8</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0b285c799fb07f8e240562a49e7e97394e8cc7bd894b1b48ae98e67d7c847d06.png" src="_images/0b285c799fb07f8e240562a49e7e97394e8cc7bd894b1b48ae98e67d7c847d06.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 37;
+                var nbb_unformatted_code = "mu = 1.7\nsigma = 0.1\nx = np.linspace(mu-3*sigma, mu+3*sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where = (x >= 1.7) & (x <= 1.8), color='0.75');";
+                var nbb_formatted_code = "mu = 1.7\nsigma = 0.1\nx = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 10000)\nfx = st.norm.pdf(x, mu, sigma)\nplt.plot(x, fx)\nplt.fill_between(x, fx, where=(x >= 1.7) & (x <= 1.8), color=\"0.75\")";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>In maniera equivalente, possiamo standardizzare i valori che delimitano l’intervallo considerato e utilizzare la funzione di ripartizione della normale standardizzata. I limiti inferiore e superiore dell’intervallo sono</p>
+<div class="math notranslate nohighlight">
+\[
+z_{\text{inf}} = \frac{1.7 - 1.7}{0.1} = 0, \quad z_{\text{sup}} = \frac{1.8 - 1.7}{0.1} = 1.0,
+\]</div>
+<p>quindi otteniamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3413447460685429
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il modo più semplice per risolvere questo problema resta comunque quello di rendersi conto che la probabilità richiesta non è altro che la metà dell’area sottesa dalle distribuzioni Normali nell’intervallo <span class="math notranslate nohighlight">\([\mu - \sigma, \mu + \sigma]\)</span>, ovvero <span class="math notranslate nohighlight">\(0.683/2\)</span>.</p>
+</section>
+</section>
+<section id="distribuzione-chi-quadrato">
+<h2><span class="section-number">24.5. </span>Distribuzione Chi-quadrato<a class="headerlink" href="#distribuzione-chi-quadrato" title="Permalink to this headline">#</a></h2>
+<p>Dalla Normale deriva la distribuzione <span class="math notranslate nohighlight">\(\chi^2\)</span>. La distribuzione <span class="math notranslate nohighlight">\(\chi^2_{~k}\)</span> con <span class="math notranslate nohighlight">\(k\)</span> gradi di libertà descrive la variabile casuale</p>
+<div class="math notranslate nohighlight">
+\[
+Z_1^2 + Z_2^2 + \dots + Z_k^2,
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(Z_1, Z_2, \dots, Z_k\)</span> sono variabili casuali i.i.d. che seguono la distribuzione Normale standard <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span>. La variabile casuale chi-quadrato dipende dal parametro intero positivo <span class="math notranslate nohighlight">\(\nu = k\)</span> che ne identifica il numero di gradi di libertà. La densità di probabilità di <span class="math notranslate nohighlight">\(\chi^2_{~\nu}\)</span> è</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = C_{\nu} x^{\nu/2-1} \exp (-x/2), \qquad \text{se } x &gt; 0,
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(C_{\nu}\)</span> è una costante positiva.</p>
+<p>La figura seguente mostra alcune distribuzioni Chi-quadrato variando il parametro <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">nus</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">nu</span> <span class="ow">in</span> <span class="n">nus</span><span class="p">:</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\nu$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nu</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fed26bad000&gt;
+</pre></div>
+</div>
+<img alt="_images/5292f4fddebcb8f773553f6723803ec8f9150f99051322e3233575fd955d7dc4.png" src="_images/5292f4fddebcb8f773553f6723803ec8f9150f99051322e3233575fd955d7dc4.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 30;
+                var nbb_unformatted_code = "x = np.arange(0, 40, 0.1)\n\nnus = [2, 4, 8, 16]\nfor nu in nus:\n    pdf = st.chi2.pdf(x, nu)\n    plt.plot(x, pdf, label=r'$\\nu$ = {}'.format(nu))\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend(loc=1)";
+                var nbb_formatted_code = "x = np.arange(0, 40, 0.1)\n\nnus = [2, 4, 8, 16]\nfor nu in nus:\n    pdf = st.chi2.pdf(x, nu)\n    plt.plot(x, pdf, label=r\"$\\nu$ = {}\".format(nu))\nplt.xlabel(\"x\")\nplt.ylabel(\"f(x)\")\nplt.legend(loc=1)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<section id="proprieta">
+<h3><span class="section-number">24.5.1. </span>Proprietà<a class="headerlink" href="#proprieta" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>La distribuzione di densità <span class="math notranslate nohighlight">\(\chi^2_{~\nu}\)</span> è asimmetrica.</p></li>
+<li><p>Il valore atteso di una variabile <span class="math notranslate nohighlight">\(\chi^2_{~\nu}\)</span> è uguale a <span class="math notranslate nohighlight">\(\nu\)</span>.</p></li>
+<li><p>La varianza di una variabile <span class="math notranslate nohighlight">\(\chi^2_{~\nu}\)</span> è uguale a <span class="math notranslate nohighlight">\(2\nu\)</span>.</p></li>
+<li><p>Per <span class="math notranslate nohighlight">\(k \rightarrow \infty\)</span>, la <span class="math notranslate nohighlight">\(\chi^2_{~\nu} \rightarrow \mathcal{N}\)</span>.</p></li>
+<li><p>Se <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> sono due variabili casuali chi-quadrato indipendenti con <span class="math notranslate nohighlight">\(\nu_1\)</span> e <span class="math notranslate nohighlight">\(\nu_2\)</span> gradi di libertà, ne segue che <span class="math notranslate nohighlight">\(X + Y \sim \chi^2_m\)</span>, con <span class="math notranslate nohighlight">\(m = \nu_1 + \nu_2\)</span>. Tale principio si estende a qualunque numero finito di variabili casuali chi-quadrato indipendenti.</p></li>
+</ul>
+<p>Per fare un esempio, consideriamo la v.c. <span class="math notranslate nohighlight">\(\chi^2_5\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the degrees of freedom</span>
+<span class="n">df</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Create a chi-square distribution object</span>
+<span class="n">chi2_dist</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">chi2</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Generate x values for the plot</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># Calculate the probability density function (PDF) of the chi-square distribution for x values</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">chi2_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Plot the PDF</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Chi-Square Distribution (df=5)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8f3a7eff697c8f86875b16cbc96121d3113e89b60ccbace80ecb7c400117c1ae.png" src="_images/8f3a7eff697c8f86875b16cbc96121d3113e89b60ccbace80ecb7c400117c1ae.png" />
+</div>
+</div>
+<p>Generiamo 1000000 valori da questa distribuzione.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">chi2_dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 6.39415672,  6.79548174,  5.55757926, 11.97360145,  5.47851441,
+        2.53488157,  3.23297718,  3.53335387,  4.08264301,  5.16829439,
+        3.27085865,  3.0803455 ,  4.35794583,  2.29173125, 10.78444656,
+        6.6934051 ,  7.28002782,  8.50074847,  4.11266781,  3.9019652 ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcoliamo la media di questi valori.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.003788977920302
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcolo la varianza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.998441233170656
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="distribuzione-t-di-student">
+<h2><span class="section-number">24.6. </span>Distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student<a class="headerlink" href="#distribuzione-t-di-student" title="Permalink to this headline">#</a></h2>
+<p>Dalle distribuzioni Normale e Chi-quadrato deriva un’altra distribuzione molto nota, la <span class="math notranslate nohighlight">\(t\)</span> di Student. Se <span class="math notranslate nohighlight">\(Z \sim \mathcal{N}\)</span> e <span class="math notranslate nohighlight">\(W \sim \chi^2_{~\nu}\)</span> sono due variabili casuali indipendenti, allora il rapporto</p>
+<div class="math notranslate nohighlight" id="equation-eq-student-t-distr">
+<span class="eqno">(24.4)<a class="headerlink" href="#equation-eq-student-t-distr" title="Permalink to this equation">#</a></span>\[
+T = \frac{Z}{\Big( \frac{W}{\nu}\Big)^{\frac{1}{2}}}
+\]</div>
+<p>definisce la distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student con <span class="math notranslate nohighlight">\(\nu\)</span> gradi di libertà. Si usa scrivere <span class="math notranslate nohighlight">\(T \sim t_{\nu}\)</span>. L’andamento della distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student è simile a quello della distribuzione Normale, ma ha una dispersione maggiore (ha le code più pesanti di una Normale, ovvero ha una varianza maggiore di 1).</p>
+<p>La seguente mostra alcune distribuzioni <span class="math notranslate nohighlight">\(t\)</span> di Student variando il parametro <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">nus</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">nu</span> <span class="ow">in</span> <span class="n">nus</span><span class="p">:</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\nu$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nu</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;N(μ = 0, σ = 1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fed2545d990&gt;
+</pre></div>
+</div>
+<img alt="_images/52e9ea0ddf7309f896e68feed93a5ec145f70b33ce448fae9255d02494820479.png" src="_images/52e9ea0ddf7309f896e68feed93a5ec145f70b33ce448fae9255d02494820479.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 31;
+                var nbb_unformatted_code = "x = np.arange(-5, 5, 0.1)\n\nnus = [1, 2, 5, 30]\nfor nu in nus:\n    pdf = st.t.pdf(x, nu)\n    plt.plot(x, pdf, label=r'$\\nu$ = {}'.format(nu))\nplt.plot(x, st.norm.pdf(x, 0, 1), label='N(\u03bc = 0, \u03c3 = 1)')\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.legend(loc=1)";
+                var nbb_formatted_code = "x = np.arange(-5, 5, 0.1)\n\nnus = [1, 2, 5, 30]\nfor nu in nus:\n    pdf = st.t.pdf(x, nu)\n    plt.plot(x, pdf, label=r\"$\\nu$ = {}\".format(nu))\nplt.plot(x, st.norm.pdf(x, 0, 1), label=\"N(\u03bc = 0, \u03c3 = 1)\")\nplt.xlabel(\"x\")\nplt.ylabel(\"f(x)\")\nplt.legend(loc=1)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<section id="id2">
+<h3><span class="section-number">24.6.1. </span>Proprietà<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>La variabile casuale <span class="math notranslate nohighlight">\(t\)</span> di Student soddisfa le seguenti proprietà:</p>
+<ol class="arabic simple">
+<li><p>Per <span class="math notranslate nohighlight">\(\nu \rightarrow \infty\)</span>, <span class="math notranslate nohighlight">\(t_{\nu}\)</span> tende alla normale standard <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span>.</p></li>
+<li><p>La densità della <span class="math notranslate nohighlight">\(t_{\nu}\)</span> è una funzione simmetrica con valore atteso nullo.</p></li>
+<li><p>Per <span class="math notranslate nohighlight">\(\nu &gt; 2\)</span>, la varianza della <span class="math notranslate nohighlight">\(t_{\nu}\)</span> vale <span class="math notranslate nohighlight">\(\nu/(\nu - 2)\)</span>; pertanto è sempre maggiore di 1 e tende a 1 per <span class="math notranslate nohighlight">\(\nu \rightarrow \infty\)</span>.</p></li>
+</ol>
+<p>Per esempio, calcoliamo il valore della funzione di ripartizione di ordine 0.025 nel caso di una <span class="math notranslate nohighlight">\(t_{30}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.025</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.042272456301238
+</pre></div>
+</div>
+</div>
+</div>
+<p>Aumentiamo i gradi di libertà: <span class="math notranslate nohighlight">\(\nu\)</span> = 1000.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.025</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.9623390808264078
+</pre></div>
+</div>
+</div>
+</div>
+<p>Questo valore è quasi identico a quello della Normale stanardizzata.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.025</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.9599639845400545
+</pre></div>
+</div>
+</div>
+</div>
+<p>La ragione per cui il quantile della distribuzione <span class="math notranslate nohighlight">\(t\)</span> con <span class="math notranslate nohighlight">\(\nu=30\)</span> è maggiore (in valore assoluto) del quantile omotetico della distribuzione Normale Standard è che la distribuzione <span class="math notranslate nohighlight">\(t\)</span> ha una varianza maggiore rispetto alla distribuzione Normale Standard.</p>
+</section>
+</section>
+<section id="funzione-beta-di-eulero">
+<h2><span class="section-number">24.7. </span>Funzione beta di Eulero<a class="headerlink" href="#funzione-beta-di-eulero" title="Permalink to this headline">#</a></h2>
+<p>La funzione beta di Eulero è una funzione matematica, <em>non</em> una densità di probabilità. La menzioniamo qui perché viene utilizzata nella distribuzione Beta. La funzione beta di Eulero si può scrivere in molti modi diversi; per i nostri scopi la presentiamo così:</p>
+<div class="math notranslate nohighlight" id="equation-eq-eulero-function">
+<span class="eqno">(24.5)<a class="headerlink" href="#equation-eq-eulero-function" title="Permalink to this equation">#</a></span>\[
+B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha + \beta)}\,,
+\]</div>
+<p>dove <span class="math notranslate nohighlight">\(\Gamma(x)\)</span> è la funzione Gamma, ovvero il fattoriale discendente, cioè</p>
+<div class="math notranslate nohighlight">
+\[
+(x-1)(x-2)\ldots (x-n+1)\notag\,.
+\]</div>
+<p>Per esempio, posti <span class="math notranslate nohighlight">\(\alpha = 3\)</span> e <span class="math notranslate nohighlight">\(\beta = 9\)</span>, la funzione beta assume il valore</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lo stesso risultato si ottiene con</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">((</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">11</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">9</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
+</pre></div>
+</div>
+</div>
+</div>
+<p>ovvero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span> <span class="o">/</span> <span class="n">sc</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="distribuzione-beta">
+<h2><span class="section-number">24.8. </span>Distribuzione Beta<a class="headerlink" href="#distribuzione-beta" title="Permalink to this headline">#</a></h2>
+<p>La distribuzione Beta viene utilizzata per modellare percentuali e proporzioni in quanto la sua definizione è limitata all’intervallo <span class="math notranslate nohighlight">\((0, 1)\)</span>. È importante notare che il supporto della funzione è l’intervallo aperto a destra e a sinistra <span class="math notranslate nohighlight">\((0, 1)\)</span>, il che significa che non include i valori 0 o 1.</p>
+<div class="admonition-definizione admonition">
+<p class="admonition-title">Definizione</p>
+<p>Sia <span class="math notranslate nohighlight">\(\pi\)</span> una variabile casuale che può assumere qualsiasi valore compreso tra 0 e 1, cioè <span class="math notranslate nohighlight">\(\pi \in (0, 1)\)</span>. Diremo che <span class="math notranslate nohighlight">\(\pi\)</span> segue la distribuzione Beta di parametri <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>, <span class="math notranslate nohighlight">\(\pi \sim \text{Beta}(\alpha, \beta)\)</span>, se la sua densità è</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-distr-formula">
+<span class="eqno">(24.6)<a class="headerlink" href="#equation-eq-beta-distr-formula" title="Permalink to this equation">#</a></span>\[\begin{split}
+\begin{align}
+\text{Beta}(\pi \mid \alpha, \beta) &amp;= \frac{1}{B(\alpha, \beta)}\pi^{\alpha-1} (1-\pi)^{\beta-1}\notag\\ 
+&amp;=  \frac{\Gamma(\alpha+ \beta)}{\Gamma(\alpha)\Gamma(\beta)}\pi^{\alpha-1} (1-\pi)^{\beta-1} \quad \text{per } \pi \in (0, 1)\,,
+\end{align}
+\end{split}\]</div>
+<p>laddove <span class="math notranslate nohighlight">\(B(\alpha, \beta)\)</span> è la funzione beta di Eulero.</p>
+</div>
+<p>I termini <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span> sono i parametri della distribuzione Beta e devono essere entrambi positivi. Tali parametri possono essere interpretati come l’espressione delle nostre credenze a priori relative ad una sequenza di prove Bernoulliane. Il parametro <span class="math notranslate nohighlight">\(\alpha\)</span> rappresenta il numero di “successi” e il parametro <span class="math notranslate nohighlight">\(\beta\)</span> il numero di “insuccessi”:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\text{Numero di successi}}{\text{Numero di successi} + \text{Numero di insuccessi}} = \frac{\alpha}{\alpha + \beta}\notag\,.
+\]</div>
+<p>Il rapporto <span class="math notranslate nohighlight">\(\frac{1}{B(\alpha, \beta)} = \frac{\Gamma(\alpha+b)}{\Gamma(\alpha)\Gamma(\beta)}\)</span> è una costante di normalizzazione:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_0^1 \pi^{\alpha-1} (1-\pi)^{\beta-1} = \frac{\Gamma(\alpha+b)}{\Gamma(\alpha)\Gamma(\beta)}\,.
+\]</div>
+<p>Ad esempio, con <span class="math notranslate nohighlight">\(\alpha = 3\)</span> e <span class="math notranslate nohighlight">\(\beta = 9\)</span> abbiamo</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+
+
+<span class="k">def</span> <span class="nf">integrand</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">p</span> <span class="o">**</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">result</span><span class="p">,</span> <span class="n">error</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
+</pre></div>
+</div>
+</div>
+</div>
+<p>ovvero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">9</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
+</pre></div>
+</div>
+</div>
+</div>
+<p>ovvero</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00202020202020202
+</pre></div>
+</div>
+</div>
+</div>
+<p>Il valore atteso, la moda e la varianza di una distribuzione Beta sono dati dalle seguenti equazioni:</p>
+<div class="math notranslate nohighlight" id="equation-eq-beta-mean">
+<span class="eqno">(24.7)<a class="headerlink" href="#equation-eq-beta-mean" title="Permalink to this equation">#</a></span>\[
+\mathbb{E}(\pi) = \frac{\alpha}{\alpha+\beta}\,,
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-beta-mode">
+<span class="eqno">(24.8)<a class="headerlink" href="#equation-eq-beta-mode" title="Permalink to this equation">#</a></span>\[
+Mo(\pi) = \frac{\alpha-1}{\alpha+\beta-2}\,,
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-beta-var">
+<span class="eqno">(24.9)<a class="headerlink" href="#equation-eq-beta-var" title="Permalink to this equation">#</a></span>\[
+\mathbb{V}(\pi) = \frac{\alpha \beta}{(\alpha+\beta)^2 (\alpha+\beta+1)}\,.
+\]</div>
+<p>Al variare di <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span> si ottengono molte distribuzioni di forma diversa; un’illustrazione è fornita dalla seguente <a class="reference external" href="https://en.wikipedia.org/wiki/File:PDF_of_the_Beta_distribution.gif">GIF animata</a>.</p>
+<p>La figura seguente mostra la distribuzione <span class="math notranslate nohighlight">\(Beta(x \mid \alpha, \beta)\)</span> per <span class="math notranslate nohighlight">\(\alpha\)</span> = 0.5, 5.0, 1.0, 2.0, 2.0 e <span class="math notranslate nohighlight">\(\beta\)</span> = 5, 1.0, 3.0, 2.0, 5.0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">):</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\alpha$ = </span><span class="si">{}</span><span class="s2">, $\beta$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fed269618d0&gt;
+</pre></div>
+</div>
+<img alt="_images/16cc26b9bdfca17b3b08140c7f82634f95384a2a813edb351428f48647d4d492.png" src="_images/16cc26b9bdfca17b3b08140c7f82634f95384a2a813edb351428f48647d4d492.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 32;
+                var nbb_unformatted_code = "x = np.linspace(0, 1, 200)\nalphas = [.5, 5., 1., 2., 2.]\nbetas = [.5, 1., 3., 2., 5.]\nfor a, b in zip(alphas, betas):\n    pdf = st.beta.pdf(x, a, b)\n    plt.plot(x, pdf, label=r'$\\alpha$ = {}, $\\beta$ = {}'.format(a, b))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.ylim(0, 4.5)\nplt.legend(loc=9)";
+                var nbb_formatted_code = "x = np.linspace(0, 1, 200)\nalphas = [0.5, 5.0, 1.0, 2.0, 2.0]\nbetas = [0.5, 1.0, 3.0, 2.0, 5.0]\nfor a, b in zip(alphas, betas):\n    pdf = st.beta.pdf(x, a, b)\n    plt.plot(x, pdf, label=r\"$\\alpha$ = {}, $\\beta$ = {}\".format(a, b))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.ylim(0, 4.5)\nplt.legend(loc=9)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+<p>La funzione <code class="docutils literal notranslate"><span class="pre">beta_mean_mode_variance()</span></code> ci restituisce la media, moda e varianza della distribuzione Beta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">beta_mean_mode_variance</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">/</span> <span class="p">((</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">variance</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Per esempio</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">mean</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">variance</span> <span class="o">=</span> <span class="n">beta_mean_mode_variance</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="s2">, Mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">, Variance: </span><span class="si">{</span><span class="n">variance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.25, Mode: 0.2, Variance: 0.014423076923076924
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Attenzione alle parole: in questo contesto, il termine “beta” viene utilizzato con tre significati diversi:</p>
+<ul class="simple">
+<li><p>la distribuzione di densità Beta,</p></li>
+<li><p>la funzione matematica beta,</p></li>
+<li><p>il parametro <span class="math notranslate nohighlight">\(\beta\)</span>.</p></li>
+</ul>
+</div>
+</section>
+<section id="distribuzione-di-cauchy">
+<h2><span class="section-number">24.9. </span>Distribuzione di Cauchy<a class="headerlink" href="#distribuzione-di-cauchy" title="Permalink to this headline">#</a></h2>
+<p>La distribuzione di Cauchy è un caso speciale della distribuzione di <span class="math notranslate nohighlight">\(t\)</span> di Student con 1 grado di libertà. È definita da una densità di probabilità che corrisponde alla seguente funzione, dipendente da due parametri <span class="math notranslate nohighlight">\(\alpha\)</span> e <span class="math notranslate nohighlight">\(\beta\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-eq-cauchy-formula">
+<span class="eqno">(24.10)<a class="headerlink" href="#equation-eq-cauchy-formula" title="Permalink to this equation">#</a></span>\[
+f(x \mid \alpha, \beta) = \frac{1}{\pi \beta \left[1 + \left( \frac{x - \alpha}{\beta} \right)^2\right]}.
+\]</div>
+<p>Il grafico mostra alcune distribuzioni di Cauchy con <span class="math notranslate nohighlight">\(\alpha\)</span> = 0., 0., 0., -2.0 e <span class="math notranslate nohighlight">\(\beta\)</span> = .5, 1., 2., 1.0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">]</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">):</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">cauchy</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\alpha$ = </span><span class="si">{}</span><span class="s2">, $\beta$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fed266a8a30&gt;
+</pre></div>
+</div>
+<img alt="_images/9c585ec44946800ecd16e3ab4fb1d600ae852cd0c2781f26b92de96c0c758f76.png" src="_images/9c585ec44946800ecd16e3ab4fb1d600ae852cd0c2781f26b92de96c0c758f76.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 33;
+                var nbb_unformatted_code = "x = np.linspace(-5, 5, 500)\nalphas = [0., 0., 0., -2.]\nbetas = [.5, 1., 2., 1.]\nfor a, b in zip(alphas, betas):\n    pdf = st.cauchy.pdf(x, loc=a, scale=b)\n    plt.plot(x, pdf, label=r'$\\alpha$ = {}, $\\beta$ = {}'.format(a, b))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.legend(loc=1)";
+                var nbb_formatted_code = "x = np.linspace(-5, 5, 500)\nalphas = [0.0, 0.0, 0.0, -2.0]\nbetas = [0.5, 1.0, 2.0, 1.0]\nfor a, b in zip(alphas, betas):\n    pdf = st.cauchy.pdf(x, loc=a, scale=b)\n    plt.plot(x, pdf, label=r\"$\\alpha$ = {}, $\\beta$ = {}\".format(a, b))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.legend(loc=1)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+</section>
+<section id="distribuzione-log-normale">
+<h2><span class="section-number">24.10. </span>Distribuzione log-normale<a class="headerlink" href="#distribuzione-log-normale" title="Permalink to this headline">#</a></h2>
+<p>Sia <span class="math notranslate nohighlight">\(y\)</span> una variabile casuale avente distribuzione normale con media <span class="math notranslate nohighlight">\(\mu\)</span> e varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Definiamo poi una nuova variabile casuale <span class="math notranslate nohighlight">\(x\)</span> attraverso la relazione</p>
+<div class="math notranslate nohighlight">
+\[
+x = e^y \quad \Longleftrightarrow \quad y = \log x.
+\]</div>
+<p>Il dominio di definizione della <span class="math notranslate nohighlight">\(x\)</span> è il semiasse <span class="math notranslate nohighlight">\(x &gt; 0\)</span> e la densità di probabilità <span class="math notranslate nohighlight">\(f(x)\)</span> è data da</p>
+<div class="math notranslate nohighlight" id="equation-eq-lognormal-formula">
+<span class="eqno">(24.11)<a class="headerlink" href="#equation-eq-lognormal-formula" title="Permalink to this equation">#</a></span>\[
+f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \frac{1}{x} \exp \left\{-\frac{(\log x -  \mu)^2}{2 \sigma^2} \right\}.
+\]</div>
+<p>Questa funzione di densità è chiamata log-normale.</p>
+<p>Il valore atteso e la varianza di una distribuzione log-normale sono dati dalle seguenti equazioni:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}(x) = \exp \left\{\mu + \frac{\sigma^2}{2} \right\}.
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{V}(x) = \exp \left\{2 \mu + \sigma^2 \right\} \left(\exp \left\{\sigma^2 \right\}  -1\right).
+\]</div>
+<p>Si può dimostrare che il prodotto di variabili casuali log-normali ed indipendenti segue una distribuzione log-normale.</p>
+<p>La figura mostra tre distribuzioni log-normali con <span class="math notranslate nohighlight">\(\mu\)</span> = 0.0 e <span class="math notranslate nohighlight">\(\sigma\)</span> = .25, .5, 1.0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">mus</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">sigmas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mus</span><span class="p">,</span> <span class="n">sigmas</span><span class="p">):</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\mu$ = </span><span class="si">{}</span><span class="s2">, $\sigma$ = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5f811e30b1b614e2b3b4d7b3967780f1b06a576fcae775134a3040ccf4496915.png" src="_images/5f811e30b1b614e2b3b4d7b3967780f1b06a576fcae775134a3040ccf4496915.png" />
+<script type="application/javascript">
+            setTimeout(function() {
+                var nbb_cell_id = 34;
+                var nbb_unformatted_code = "x = np.linspace(0, 3, 100)\nmus = [0., 0., 0.]\nsigmas = [.25, .5, 1.]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.lognorm.pdf(x, sigma, scale=np.exp(mu))\n    plt.plot(x, pdf, label=r'$\\mu$ = {}, $\\sigma$ = {}'.format(mu, sigma))\nplt.xlabel('x', fontsize=12)\nplt.ylabel('f(x)', fontsize=12)\nplt.legend(loc=1);";
+                var nbb_formatted_code = "x = np.linspace(0, 3, 100)\nmus = [0.0, 0.0, 0.0]\nsigmas = [0.25, 0.5, 1.0]\nfor mu, sigma in zip(mus, sigmas):\n    pdf = st.lognorm.pdf(x, sigma, scale=np.exp(mu))\n    plt.plot(x, pdf, label=r\"$\\mu$ = {}, $\\sigma$ = {}\".format(mu, sigma))\nplt.xlabel(\"x\", fontsize=12)\nplt.ylabel(\"f(x)\", fontsize=12)\nplt.legend(loc=1)";
+                var nbb_cells = Jupyter.notebook.get_cells();
+                for (var i = 0; i < nbb_cells.length; ++i) {
+                    if (nbb_cells[i].input_prompt_number == nbb_cell_id) {
+                        if (nbb_cells[i].get_text() == nbb_unformatted_code) {
+                             nbb_cells[i].set_text(nbb_formatted_code);
+                        }
+                        break;
+                    }
+                }
+            }, 500);
+            </script></div>
+</div>
+</section>
+<section id="commenti-e-considerazioni-finali">
+<h2><span class="section-number">24.11. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
+<p>In questa dispensa le densità continue che useremo più spesso sono la distribuzione Normale e la distribuzione Beta. Faremo un uso limitato della distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student e della distribuzione di Cauchy. Le altre distribuzioni qui descritte sono state presentate a puro titolo esemplificativo.</p>
+</section>
+<section id="watermark">
+<h2><span class="section-number">24.12. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> watermark
+<span class="o">%</span><span class="k">watermark</span> -n -u -v -iv -w
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="205_discr_rv_distr.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">23. </span>Distribuzioni di v.c. discrete</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="215_rng.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">25. </span>Generazione di numeri casuali</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-uniforme">24.1. Distribuzione uniforme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-esponenziale">24.2. Distribuzione esponenziale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-gaussiana">24.3. Distribuzione Gaussiana</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limite-delle-distribuzioni-binomiali">24.3.1. Limite delle distribuzioni binomiali</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-normale-prodotta-con-una-simulazione">24.4. La Normale prodotta con una simulazione</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concentrazione">24.4.1. Concentrazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funzione-di-ripartizione">24.4.2. Funzione di ripartizione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-normale-standard">24.4.3. Distribuzione Normale standard</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-chi-quadrato">24.5. Distribuzione Chi-quadrato</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proprieta">24.5.1. Proprietà</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-t-di-student">24.6. Distribuzione <span class="math notranslate nohighlight">\(t\)</span> di Student</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">24.6.1. Proprietà</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funzione-beta-di-eulero">24.7. Funzione beta di Eulero</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-beta">24.8. Distribuzione Beta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-di-cauchy">24.9. Distribuzione di Cauchy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribuzione-log-normale">24.10. Distribuzione log-normale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenti-e-considerazioni-finali">24.11. Commenti e considerazioni finali</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#watermark">24.12. Watermark</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Corrado Caudek
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
