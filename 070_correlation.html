@@ -418,11 +418,15 @@ document.write(`
 </a>
 <section class="tex2jax_ignore mathjax_ignore" id="le-relazioni-tra-variabili">
 <span id="associations-notebook"></span><h1><span class="section-number">13. </span>Le relazioni tra variabili<a class="headerlink" href="#le-relazioni-tra-variabili" title="Permalink to this headline">#</a></h1>
-<p>In questo capitolo esploreremo come visualizzare e quantificare la relazione tra due variabili quantitative. Inizieremo presentando uno strumento grafico, il diagramma a dispersione, che permette di visualizzare l’associazione tra le due variabili. Successivamente, esamineremo due indici statistici: la covarianza e la correlazione. Questi indici ci aiuteranno a quantificare la forza e la direzione dell’associazione lineare tra le due variabili quantitative.</p>
-<section id="diagramma-a-dispersione">
-<span id="sec-zetsche-scatter"></span><h2><span class="section-number">13.1. </span>Diagramma a dispersione<a class="headerlink" href="#diagramma-a-dispersione" title="Permalink to this headline">#</a></h2>
-<p>Il diagramma a dispersione è un grafico che rappresenta le coppie di punti individuate da due variabili, solitamente rappresentate sull’asse delle ascisse e sulle ordinate. Un esempio concreto di utilizzo del diagramma a dispersione si trova nella ricerca condotta da Zetsche et al. (2019), in cui i ricercatori hanno utilizzato due scale psicometriche, il Beck Depression Inventory II (BDI-II) e la Center for Epidemiologic Studies Depression Scale (CES-D), per misurare il livello di depressione dei soggetti. l BDI-II è uno strumento self-report che valutare la presenza e l’intensità di sintomi depressivi in pazienti adulti e adolescenti di almeno 13 anni di età con diagnosi psichiatrica mentre la CES-D è una scala self-report progettata per misurare i sintomi depressivi che sono stati vissuti nella settimana precedente nella popolazione generale, specialmente quella degli adolescenti/giovani adulti. Ponendo i valori BDI-II sull’asse delle ascisse e quelli del CES-D sull’asse delle ordinate, ogni punto sul grafico rappresenta un individuo del quale si conosce il livello di depressione misurato dalle due scale.</p>
-<p>È evidente che i valori delle scale BDI-II e CES-D non possono essere gli stessi per due ragioni: (1) la presenza degli errori di misurazione e (2) l’uso di unità di misura arbitrarie per le due variabili. L’errore di misurazione è un fattore che compromette sempre, almeno in parte, qualsiasi misurazione, ed è particolarmente rilevante in psicologia dove la precisione degli strumenti di misurazione è generalmente inferiore rispetto ad altre discipline, come la fisica. Il secondo motivo per cui i valori delle scale BDI-II e CES-D non possono essere uguali è che l’unità di misura della depressione è una questione arbitraria e non standardizzata. Tuttavia, nonostante le differenze derivanti dall’errore di misurazione e dall’uso di unità di misura diverse, ci si aspetta che, se le due scale misurano lo stesso costrutto (la depressione), i valori prodotti dalle due scale dovrebbero essere linearmente associati tra di loro. Per comprendere meglio il concetto di “associazione lineare”, è possibile esaminare i dati attraverso l’utilizzo di un diagramma a dispersione.</p>
+<p><strong>Obiettivi di apprendimento</strong></p>
+<p>Dopo aver completato questo capitolo, sarai in grado di:</p>
+<ul class="simple">
+<li><p>Generare grafici per visualizzare la distribuzione congiunta di due variabili.</p></li>
+<li><p>Comprendere i concetti di covarianza e correlazione.</p></li>
+<li><p>Calcolare la covarianza e la correlazione usando Python.</p></li>
+<li><p>Comprendere che la correlazione non implica una relazione di causa-effetto.</p></li>
+<li><p>Comprendere il concetto di correlazione per variabili ordinali.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -458,7 +462,12 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Leggo i dati di <a class="reference internal" href="#sec-zetsche-scatter"><span class="std std-ref">Diagramma a dispersione</span></a>.</p>
+<p>In questo capitolo, esploreremo i metodi per visualizzare e misurare la relazione tra due variabili quantitative. Introdurremo inizialmente un diagramma a dispersione, un utile strumento grafico per rappresentare l’associazione tra le due variabili. Successivamente, esamineremo due indici statistici fondamentali: la covarianza e la correlazione. Questi indici ci permetteranno di quantificare la forza e la direzione dell’associazione lineare tra le due variabili quantitative.</p>
+<section id="diagramma-a-dispersione">
+<span id="sec-zetsche-scatter"></span><h2><span class="section-number">13.1. </span>Diagramma a dispersione<a class="headerlink" href="#diagramma-a-dispersione" title="Permalink to this headline">#</a></h2>
+<p>Il diagramma a dispersione è un grafico che rappresenta le coppie di punti individuate da due variabili, solitamente rappresentate sull’asse delle ascisse e sulle ordinate. Un esempio concreto di utilizzo del diagramma a dispersione si trova nella ricerca condotta da Zetsche et al. (2019), in cui i ricercatori hanno utilizzato due scale psicometriche, il Beck Depression Inventory II (BDI-II) e la Center for Epidemiologic Studies Depression Scale (CES-D), per misurare il livello di depressione dei soggetti. l BDI-II è uno strumento self-report che valutare la presenza e l’intensità di sintomi depressivi in pazienti adulti e adolescenti di almeno 13 anni di età con diagnosi psichiatrica mentre la CES-D è una scala self-report progettata per misurare i sintomi depressivi che sono stati vissuti nella settimana precedente nella popolazione generale, specialmente quella degli adolescenti/giovani adulti. Ponendo i valori BDI-II sull’asse delle ascisse e quelli del CES-D sull’asse delle ordinate, ogni punto sul grafico rappresenta un individuo del quale si conosce il livello di depressione misurato dalle due scale.</p>
+<p>È evidente che i valori delle scale BDI-II e CES-D non possono essere gli stessi per due ragioni: (1) la presenza degli errori di misurazione e (2) l’uso di unità di misura arbitrarie per le due variabili. L’errore di misurazione è un fattore che compromette sempre, almeno in parte, qualsiasi misurazione, ed è particolarmente rilevante in psicologia dove la precisione degli strumenti di misurazione è generalmente inferiore rispetto ad altre discipline, come la fisica. Il secondo motivo per cui i valori delle scale BDI-II e CES-D non possono essere uguali è che l’unità di misura della depressione è una questione arbitraria e non standardizzata. Tuttavia, nonostante le differenze derivanti dall’errore di misurazione e dall’uso di unità di misura diverse, ci si aspetta che, se le due scale misurano lo stesso costrutto (la depressione), i valori prodotti dalle due scale dovrebbero essere linearmente associati tra di loro. Per comprendere meglio il concetto di “associazione lineare”, è possibile esaminare i dati attraverso l’utilizzo di un diagramma a dispersione.</p>
+<p>Leggiamo i dati di <a class="reference internal" href="#sec-zetsche-scatter"><span class="std std-ref">Diagramma a dispersione</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/data.mood.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -469,7 +478,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Considero la relazione tra i punteggi BDI-II e CESD.</p>
+<p>Consideriamo la relazione tra i punteggi BDI-II e CESD.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;bdi&quot;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;cesd_sum&quot;</span><span class="p">])</span>
@@ -482,10 +491,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x165582550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x16636d750&gt;
 </pre></div>
 </div>
-<img alt="_images/a52d52b50ef4fc171d508744c3d95fcf04d4a358ebb5e569a95059048940ef26.svg" src="_images/a52d52b50ef4fc171d508744c3d95fcf04d4a358ebb5e569a95059048940ef26.svg" /></div>
+<img alt="_images/441a359268502b2d4b3f33e25387e222dc2aa702a50baa0f1e86cb8727c7b263.svg" src="_images/441a359268502b2d4b3f33e25387e222dc2aa702a50baa0f1e86cb8727c7b263.svg" /></div>
 </div>
 <p>Dall’osservazione del diagramma a dispersione, possiamo notare che i dati mostrano una tendenza a distribuirsi intorno ad una retta. In termini statistici, ciò significa che i punteggi CES-D e BDI-II sono linearmente associati. Tuttavia, la relazione lineare tra le due variabili è lontana dall’essere perfetta, poiché se fosse perfetta, tutti i punti nel diagramma sarebbero allineati perfettamente lungo una retta. Pertanto, sorge la necessità di trovare un indice numerico che descriva la forza e la direzione della relazione lineare tra le due variabili e che misuri la deviazione della nube di punti da una relazione lineare perfetta. Ci sono diversi indici statistici disponibili per questo scopo.</p>
 </section>
@@ -649,12 +658,11 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </section>
 <section id="correlazione-e-causazione">
 <h2><span class="section-number">13.4. </span>Correlazione e causazione<a class="headerlink" href="#correlazione-e-causazione" title="Permalink to this headline">#</a></h2>
-<p>Facendo riferimento nuovamente al diagramma di dispersione della sezione <a class="reference internal" href="#sec-zetsche-scatter"><span class="std std-ref">Diagramma a dispersione</span></a>, possiamo dire che, in molte applicazioni (ma non nel caso presente!) l’asse <span class="math notranslate nohighlight">\(x\)</span> rappresenta una quantità nota come <em>variabile indipendente</em> e l’interesse si concentra sulla sua influenza sulla <em>variabile dipendente</em> tracciata sull’asse <span class="math notranslate nohighlight">\(y\)</span>. Ciò presuppone che sia nota la direzione in cui l’influenza causale potrebbe risiedere (<span class="math notranslate nohighlight">\(x \rightarrow y\)</span>, vs. <span class="math notranslate nohighlight">\(y \rightarrow x\)</span>).</p>
-<p>È importante però tenere bene a mente che la correlazione è soltanto un indice descrittivo della relazione lineare tra due variabili e <em>in nessun caso</em> può essere usata per inferire alcunché sulle relazioni <em>causali</em> che legano le variabili. È ben nota l’espressione: “correlazione non significa causazione” – si veda il sito <a class="reference external" href="https://tylervigen.com/spurious-correlations">spurious correlations</a>.</p>
+<p>È fondamentale ricordare che la correlazione rappresenta solo un indice descrittivo della relazione lineare tra due variabili e <em>non può in alcun modo</em> essere utilizzata per trarre conclusioni sulle relazioni <em>causali</em> tra le variabili. L’espressione ben nota “correlazione non implica causalità” sottolinea questo concetto importante. Un esempio illustrativo delle correlazioni spurie può essere trovato sul sito <a class="reference external" href="https://tylervigen.com/spurious-correlations">spurious correlations</a>.</p>
 <section id="confounding">
 <h3><span class="section-number">13.4.1. </span>Confounding<a class="headerlink" href="#confounding" title="Permalink to this headline">#</a></h3>
-<p>Quando si parla di correlazione, è importante ricordare che essa non implica una relazione causale. Il seguente semplice esempio aiuta a chiarire questo punto.</p>
-<p><code class="docutils literal notranslate"><span class="pre">b</span></code> rappresenta la variabile di confondimento.</p>
+<p>Il seguente semplice esempio aiuta a chiarire che la correlazione non può informarci sulle relazioni causali.</p>
+<p>Supponiamo che <code class="docutils literal notranslate"><span class="pre">b</span></code> rappresenti una variabile di confondimento.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -662,7 +670,7 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">a</span></code> e <code class="docutils literal notranslate"><span class="pre">c</span></code> sono causalmente indipendenti gli uni dagli altri, ma sono entrambi causati da <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p>Nella simulazione, le variabili <code class="docutils literal notranslate"><span class="pre">a</span></code> e <code class="docutils literal notranslate"><span class="pre">c</span></code> sono indipendenti tra di loro dal punto di vista causale, ma entrambe sono influenzate dalla variabile <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="mf">.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -671,7 +679,7 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </div>
 </div>
 </div>
-<p>Esaminiamo la correlazione tra <code class="docutils literal notranslate"><span class="pre">a</span></code> e <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
+<p>Esaminiamo ora la correlazione tra <code class="docutils literal notranslate"><span class="pre">a</span></code> e <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coef</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
@@ -680,11 +688,12 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9541258300710602
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9576173256831998
 </pre></div>
 </div>
 </div>
 </div>
+<p>In altre parole, anche se le variabili <code class="docutils literal notranslate"><span class="pre">a</span></code> e <code class="docutils literal notranslate"><span class="pre">c</span></code>  sono causalmente indipendenti, la presenza di una terza variabile <code class="docutils literal notranslate"><span class="pre">b</span></code> (variabile di confondimento) che le influenza entrambe fa sì che <code class="docutils literal notranslate"><span class="pre">a</span></code> e <code class="docutils literal notranslate"><span class="pre">c</span></code> siano correlate tra di loro.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Il codice è tratto da A. Molak (2023) &quot;Causal Inference and Discovery in Python&quot;.</span>
@@ -714,22 +723,22 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0285bfaac7474cba6fd3560128d5304fa025d5867cfa933a40ade5c160aa87cf.svg" src="_images/0285bfaac7474cba6fd3560128d5304fa025d5867cfa933a40ade5c160aa87cf.svg" /></div>
+<img alt="_images/038985bfb53b662ebeff6b70c221fca41069ededbbb4850348de8c1a57844d69.svg" src="_images/038985bfb53b662ebeff6b70c221fca41069ededbbb4850348de8c1a57844d69.svg" /></div>
 </div>
 </section>
 </section>
 <section id="usi-della-correlazione">
 <h2><span class="section-number">13.5. </span>Usi della correlazione<a class="headerlink" href="#usi-della-correlazione" title="Permalink to this headline">#</a></h2>
-<p>Anche se non può essere usata per studiare le relazioni causali, la correlazione viene usata per molti altri scopi tra i quali, per esempio, quello di misurare la <em>validità concorrente</em> di un test psiologico. Se un test psicologico misura effettivamente ciò che ci si aspetta che misuri (nel caso dell’esempio presente, la depressione), allora dovremo aspettarci che fornisca una correlazione alta con i risultati di altri test che misurano lo stesso costrutto – come nel caso dei dati di <span id="id2">[<a class="reference internal" href="z_biblio.html#id19" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Un’altra proprietà desiderabile di un test psicometrico è la <em>validità divergente</em>: i risultati di test psicometrici che misurano costrutti diversi dovrebbero essere poco associati tra loro. In altre parole, in questo secondo caso dovremmo aspettarci una bassa correlazione.</p>
+<p>Pur non essendo adatta per stabilire relazioni causali, la correlazione trova ampio utilizzo nel contesto psicometrico, ad esempio nella valutazione della <em>validità concorrente</em> di un test psicologico. Se un test psicologico misura in modo accurato ciò che si prefigge di misurare (come ad esempio la depressione nel caso specifico), ci aspettiamo che esso mostri una forte correlazione con i risultati di altri test che misurano lo stesso costrutto, come evidenziato dai dati di <span id="id2">Zetsche <em>et al.</em> [<a class="reference internal" href="z_biblio.html#id19" title="Ulrike Zetsche, Paul-Christian Buerkner, and Babette Renneberg. Future expectations in clinical depression: biased or realistic? Journal of Abnormal Psychology, 128(7):678, 2019.">ZBR19</a>]</span>. Un’altra proprietà importante di un test psicometrico è la <em>validità divergente</em>, ossia la mancanza di associazione tra i risultati di test che misurano costrutti diversi. Pertanto, in tale contesto, ci aspettiamo una bassa correlazione tra i risultati di test che misurano costrutti differenti.</p>
 </section>
 <section id="correlazione-di-spearman">
 <h2><span class="section-number">13.6. </span>Correlazione di Spearman<a class="headerlink" href="#correlazione-di-spearman" title="Permalink to this headline">#</a></h2>
-<p>Una misura alternativa della relazione lineare tra due variabili è fornita dal coefficiente di correlazione di Spearman e dipende soltanto dalla relazione d’ordine dei dati, non dagli specifici valori dei dati. Tale misura di associazione è appropriata quando, del fenomeno in esame, gli psicologi sono stati in grado di misurare soltanto le relazioni d’ordine tra le diverse modalità della risposta dei soggetti, non l’intensità della risposta. Le variabili psicologiche che hanno questa proprietà si dicono <em>ordinali</em>.</p>
+<p>Un’alternativa per valutare la relazione lineare tra due variabili è il coefficiente di correlazione di Spearman, che si basa esclusivamente sull’ordine dei dati e non sugli specifici valori. Questo indice di associazione è particolarmente adatto quando gli psicologi sono in grado di misurare solo le relazioni di ordine tra diverse modalità di risposta dei soggetti, ma non l’intensità della risposta stessa. Tali variabili psicologiche che presentano questa caratteristica sono definite come “ordinali”.</p>
 <div class="admonition-nota admonition">
 <p class="admonition-title">Nota</p>
-<p>Si ricordi che, nel caso di una variabile ordinale, non è possibile sintetizzare le osservazioni mediante le statistiche descrittive che abbiamo descritto in precedenza, quali ad esempio la media e la varianza. È invece possibile riassumere le ossservazioni su una variabile ordinale mediante una distribuzione di frequenze per le varie modalità della risposta. Come abbiamo visto or ora, è anche possibile descrivere la direzione e la forza dell’associazione tra due variabili ordinali mediante la correlazione di Spearman.</p>
+<p>È importante ricordare che, nel caso di una variabile ordinale, non è possibile utilizzare le statistiche descrittive convenzionali come la media e la varianza per sintetizzare le osservazioni. Tuttavia, è possibile riassumere le osservazioni attraverso una distribuzione di frequenze delle diverse modalità di risposta. Come abbiamo appena visto, la direzione e l’intensità dell’associazione tra due variabili ordinali possono essere descritte utilizzando il coefficiente di correlazione di Spearman.</p>
 </div>
-<p>Per fare un esempio, per due variabili arbitrarie di livello di scala ordinale, troviamo la correlazione di Spearman.</p>
+<p>Per fornire un esempio, consideriamo due variabili di scala ordinale e calcoliamo la correlazione di Spearman tra di esse.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
@@ -745,7 +754,7 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </section>
 <section id="correlazione-nulla">
 <h2><span class="section-number">13.7. </span>Correlazione nulla<a class="headerlink" href="#correlazione-nulla" title="Permalink to this headline">#</a></h2>
-<p>Un ultimo aspetto da mettere in evidenza a proposito della correlazione riguarda il fatto che la correlazione descrive la direzione e l’intensità della relazione lineare tra due variabili. Relazioni non lineari tra le variabili, anche se sono molto forti, non vengono catturate dalla correlazione. È importante rendersi conto che una correlazione pari a zero non significa che non c’è relazione tra le due variabili, ma solo che tra esse non c’è una relazione <em>lineare</em>.</p>
+<p>Un aspetto finale da sottolineare riguardo alla correlazione è che essa descrive la direzione e l’intensità della <em>relazione lineare</em> tra due variabili. Tuttavia, la correlazione non cattura relazioni non lineari tra le variabili, anche se possono essere molto forti. È fondamentale comprendere che una correlazione pari a zero non implica l’assenza di una relazione tra le due variabili, ma indica solamente l’assenza di una relazione lineare tra di esse.</p>
 <p>La figura seguente fornisce tredici esempi di correlazione nulla in presenza di una chiara relazione (non lineare) tra due variabili. In questi tredici insiemi di dati i coefficienti di correlazione di Pearson sono sempre uguali a 0. Ma questo non significa che non vi sia alcuna relazione tra le variabili.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -930,12 +939,12 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/462215e70744e9ae7c8e1ea42eb4960356babfb39ebb96b153f203f5d909479e.svg" src="_images/462215e70744e9ae7c8e1ea42eb4960356babfb39ebb96b153f203f5d909479e.svg" /></div>
+<img alt="_images/cddaae0e3f0b4bfb50c2545917e06a2f75df202142706b09662ae40b30cdf71d.svg" src="_images/cddaae0e3f0b4bfb50c2545917e06a2f75df202142706b09662ae40b30cdf71d.svg" /></div>
 </div>
 </section>
 <section id="commenti-e-considerazioni-finali">
 <h2><span class="section-number">13.8. </span>Commenti e considerazioni finali<a class="headerlink" href="#commenti-e-considerazioni-finali" title="Permalink to this headline">#</a></h2>
-<p>La prima fase dell’analisi dati consiste nell’utilizzo degli strumenti della statistica descrittiva per riassumere i dati. In questa fase, si cerca di rispondere a domande come: quale è la distribuzione delle variabili di interesse? Ci sono relazioni tra coppie di variabili nel campione? Ci sono osservazioni anomale, ovvero valori che si discostano notevolmente dagli altri dati, sia a livello univariato che bivariato? Prima di procedere con qualsiasi procedura statistica inferenziale, è fondamentale avere una chiara comprensione di questi aspetti. Per ottenere queste informazioni, è utile utilizzare rappresentazioni grafiche dei dati.</p>
+<p>La fase iniziale dell’analisi dei dati comporta l’utilizzo della statistica descrittiva per riassumere le informazioni raccolte. Durante questa fase, ci si pone domande come: qual è la distribuzione delle variabili di interesse? Esistono relazioni tra le coppie di variabili nel campione? Sono presenti valori anomali, ovvero osservazioni che si discostano notevolmente dagli altri dati, sia in forma univariata che bivariata? È fondamentale acquisire una comprensione chiara di questi aspetti prima di procedere con qualsiasi procedura statistica inferenziale. Per ottenere queste informazioni, l’utilizzo di rappresentazioni grafiche dei dati risulta essere molto utile.</p>
 </section>
 <section id="watermark">
 <h2><span class="section-number">13.9. </span>Watermark<a class="headerlink" href="#watermark" title="Permalink to this headline">#</a></h2>
@@ -947,17 +956,17 @@ r_{XY} = \frac{S_{XY}}{S_X S_Y}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Fri Jun 09 2023
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Last updated: Sat Jun 10 2023
 
 Python implementation: CPython
 Python version       : 3.11.3
 IPython version      : 8.13.2
 
 seaborn   : 0.12.2
+scipy     : 1.10.1
+matplotlib: 3.7.1
 arviz     : 0.15.1
 pandas    : 2.0.2
-matplotlib: 3.7.1
-scipy     : 1.10.1
 numpy     : 1.24.3
 
 Watermark: 2.3.1
